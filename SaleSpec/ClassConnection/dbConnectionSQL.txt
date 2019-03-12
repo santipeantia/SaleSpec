@@ -1,0 +1,1 @@
+﻿server=ITMANAGER-IT;database=DB_SaleSpec;uid=sa;pwd=sa1234; 

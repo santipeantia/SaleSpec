@@ -1,0 +1,416 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SaleSpec.master.cs" Inherits="SaleSpec.SaleSpec" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <%--<meta charset="tis-620" />--%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AMPS</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="../../bower_components/select2/dist/css/select2.min.css">
+
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="../../bower_components/morris.js/morris.css">
+
+    <link rel="stylesheet" href="../../bower_components/jvectormap/jquery-jvectormap.css">
+
+    <link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+    <link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet">
+
+    <style>
+        .txtLabel {
+            font-family: 'Athiti', sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .table-condensed {
+            font-size: 12px;
+        }
+
+        .loadingMessageFrame {
+            background-color: #dcdcdc; /*#ffffff;*/
+            filter: alpha(opacity=40);
+            opacity: 0.4;
+            position: relative;
+            z-index: 500;
+            top: 0px;
+            left: 0px;
+            border-top: dashed 1px black;
+            border-bottom: dashed 1px black;
+            border-left: dashed 1px black;
+            border-right: dashed 1px black;
+        }
+
+        .Loading_Message {
+            font-size: medium;
+            font-weight: normal;
+            color: Maroon;
+        }
+    </style>
+</head>
+<body onselect="return true" class="hold-transition skin-blue-light sidebar-mini fixed ">
+    <div id="dvMain" runat="server">
+
+        <div class="wrapper">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="../../default" class="logo">
+                    <span class="logo-mini"><b>SSP</b>S</span>
+                    <span class="logo-lg"><b>SALE SPEC</b></span>
+                </a>
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="../../dist/img/user1-128x128.jpg" class="user-image" alt="User Image" width="160" />
+                                    <span class="hidden-xs">
+                                        <label id="label2"></label>
+                                        Santi Peantia</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <img src="../../dist/img/user1-128x128.jpg" class="img-circle" alt="User Image" width="160" />
+                                        <p>
+                                            Santi Peantia
+                                        <small>IT Manager,Member since Dec. 2018</small>
+                                        </p>
+                                    </li>
+
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="../../pages/users/login" class="btn btn-default btn-flat">Sign out</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header" style="text-align:center">
+                            <img src="../../image/Logo-ampel-Big.png" class="user-image" alt="User Image" width="120" /></li>
+                        
+
+                        <li id="mnuDashboard" runat="server" class="<%= strActiveDashboard.ToString() %>" style="border-top: 1px solid #dddddd;">
+                            <%--<a href="../../pages/dashboard?opt=dashboard">--%> 
+                            <a href="../../pages/"> 
+                                <i class="fa fa-dashboard"></i>
+                                <span class="txtLabel <%= strTextRedDashboard.ToString() %>">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="<%= strActiveMasterSetup.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-gear treeview"></i><span class="txtLabel">Enterprise Master</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/customergrade?opt=cusg"><i class="fa fa-angle-right <%= strTextCustomerGrade.ToString() %>"></i><span class="txtLabel <%= strTextCustomerGrade.ToString() %>">Customer Grade</span></a> 
+                                </li> 
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/customertype?opt=cus"><i class="fa fa-angle-right <%= strTextCustomerType.ToString() %>"></i><span class="txtLabel <%= strTextCustomerType.ToString() %>">Customer Type</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/productgroup?opt=prdg"><i class="fa fa-angle-right <%= strTextProductGroup.ToString() %>"></i><span class="txtLabel <%= strTextProductGroup.ToString() %>">Product Group</span></a> 
+                                </li>
+                                
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/specifier?opt=spc"><i class="fa fa-angle-right <%= strTextSpecifier.ToString() %>"></i><span class="txtLabel <%= strTextSpecifier.ToString() %>">Specifier Setup</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/architect?opt=sarc"><i class="fa fa-angle-right <%= strTextArchitect.ToString() %>"></i><span class="txtLabel <%= strTextArchitect.ToString() %>">Architect Setup</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/customer?opt=scus"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Customer Setup</span></a> 
+                                </li>
+                                                             
+                            </ul>
+                        </li>
+
+                        <li class="<%= strActiveTransaction.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview"></i><span class="txtLabel">Transaction Entry</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/masters/customergrade?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Request Form</span></a> 
+                                </li> 
+
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/masters/customertype?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Architect Center</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/masters/productgroup?opt=pjc"><i class="fa fa-line-chart <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Center</span></a> 
+                                </li>
+                                
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/masters/specifier?opt=wkr"><i class="fa fa-male <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a> 
+                                </li>
+                                                             
+                            </ul>
+                        </li>
+
+            
+                        <li style="border-top: 1px solid #dddddd;">
+                            <a href="../../pages/users/logout">
+                                <i class="fa fa-power-off"></i>
+                                <span class="txtLabel">Sign Out</span>
+                            </a>
+                        </li>
+                        <li style="border-top: 1px solid #dddddd;"></li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <form id="form1" runat="server">
+                    <div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </form>
+            </div>
+            <div class="control-sidebar-bg"></div>
+        </div>
+
+        <div id="dvLoading" runat="server" class="loadingMessageFrame" style="height: 270px; display: none;">
+            <table style="height: 100%; width: 100%; table-layout: fixed;">
+                <tr>
+                    <td style="height: 100%;">
+                        <asp:Label ID="lblLoadingMessage" runat="server" Text="Loading..." CssClass="Loading_Message"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!-- ./wrapper -->
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="../../bower_components/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/select2/dist/js/select2.full.min.js"></script>
+        <script src="../../bower_components/raphael/raphael.min.js"></script>
+        <script src="../../bower_components/morris.js/morris.min.js"></script>
+        <script src="../../bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+        <script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="../../bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+        <script src="../../bower_components/moment/min/moment.min.js"></script>
+        <script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <script src="../../dist/js/pages/dashboard.js"></script>
+        <script src="../../dist/js/demo.js"></script>
+        <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="../../bower_components/moment/min/moment.min.js"></script>
+        <script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+        <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../../plugins/iCheck/icheck.min.js"></script>
+
+        <script>
+            $(function () {
+                $('#example1').DataTable({
+                    'iDisplayLength': 25
+                })
+                $('#example2').DataTable({
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+            })
+</script>
+        <script>
+            $(function () {
+                $('#table1').DataTable({
+                    'iDisplayLength': 25
+                })
+                $('#table2').DataTable({
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+                $('#tableActive').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+            })
+</script>
+        <script>
+            $(function () {
+                //Initialize Select2 Elements
+                function formatResultMulti(data) {
+                    var city = $(data.element).data('city');
+                    var classAttr = $(data.element).attr('class');
+                    var hasClass = typeof classAttr != 'undefined';
+                    classAttr = hasClass ? ' ' + classAttr : '';
+
+                    var $result = $(
+                      '<div class="row">' +
+                      '<div class="col-md-6 col-xs-6' + classAttr + '">' + data.text + '</div>' +
+                      '<div class="col-md-6 col-xs-6' + classAttr + '">' + city + '</div>' +
+                      '</div>'
+                    );
+                    return $result;
+                }
+
+                $('.select2').select2({
+                    width: '100%',
+                    formatResult: formatResultMulti
+                })
+
+                //Datemask dd/mm/yyyy
+                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+                //Datemask2 mm/dd/yyyy
+                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+                //Money Euro
+                $('[data-mask]').inputmask()
+
+                //Date range picker
+                $('#reservation').daterangepicker()
+                //Date range picker with time picker
+                $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+                //Date range as a button
+                $('#daterange-btn').daterangepicker(
+                  {
+                      ranges: {
+                          'Today': [moment(), moment()],
+                          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                          'This Month': [moment().startOf('month'), moment().endOf('month')],
+                          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                      },
+                      startDate: moment().subtract(29, 'days'),
+                      endDate: moment()
+                  },
+                  function (start, end) {
+                      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                  }
+                )
+                //Date picker
+                $('#datepicker').datepicker({
+                    autoclose: true
+                })
+                //Date picker
+                $('#addIndentDatepicker').datepicker({
+                    autoclose: true
+                })
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                })
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                })
+                //Flat red color scheme for iCheck
+                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                    checkboxClass: 'icheckbox_flat-green',
+                    radioClass: 'iradio_flat-green'
+                })
+                //Colorpicker
+                $('.my-colorpicker1').colorpicker()
+                //color picker with addon
+                $('.my-colorpicker2').colorpicker()
+                //Timepicker
+                $('.timepicker').timepicker({
+                    showInputs: false
+                })
+                $('select:not(.normal)').each(function () {
+                    $(this).select2({
+                        dropdownParent: $(this).parent()
+                    });
+                });
+                function openModal() {
+                    function openModal() { $('#myModal').modal({ show: true }); }
+                }
+            })
+</script>
+    </div>
+</body>
+</html>

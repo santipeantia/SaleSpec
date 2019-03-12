@@ -1,0 +1,15 @@
+D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\bin\SaleSpec.dll.config
+D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\bin\SaleSpec.dll
+D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\bin\SaleSpec.pdb
+D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.dll
+D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.pdb
+D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.csprojResolveAssemblyReference.cache
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.Properties.Resources.resources
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.csproj.GenerateResource.Cache
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\bin\SaleSpec.dll.config
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\bin\SaleSpec.dll
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\bin\SaleSpec.pdb
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.dll
+D:\Ampelite_Wut\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.pdb
