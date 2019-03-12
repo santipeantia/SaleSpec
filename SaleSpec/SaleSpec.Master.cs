@@ -33,6 +33,12 @@ namespace SaleSpec
         public string strTextProjectCenter = "";
         public string strTextWeeklyReport = "";
 
+        public string strFullName = "";
+        public string strDept = "";
+
+        public string strActiveReporting = "";
+        public string strTextSaleWeeklyReport = "";
+
 
 
         //public string strTextProductGroup = "";
@@ -110,9 +116,19 @@ namespace SaleSpec
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("pages/users/login.aspx");
+            }
+
+            strFullName = Session["sEmpEngFirstName"].ToString() + "  "  + Session["sEmpEngLastName"].ToString();
+            strDept =  Session["sEngName"].ToString();
+
             try
             {
                 strOpt = Request.Params["opt"].ToString();
+
+                ssql = "Query String";
 
                 //if (strOpt == "vendors") { strActiveSettingGroup = "active"; strActiveVendors = "active"; strTextItemsVendor = "text-red"; } else { strTextItemsVendor = ""; }
                 if (strOpt == "cus") { strActiveMasterSetup = "active"; strTextCustomerType = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomerType = ""; }
@@ -121,13 +137,16 @@ namespace SaleSpec
                 if (strOpt == "spc") { strActiveMasterSetup = "active"; strTextSpecifier = "text-red"; return; } else { strActiveMasterSetup = ""; strTextSpecifier = ""; }
                 if (strOpt == "sarc") { strActiveMasterSetup = "active"; strTextArchitect = "text-red"; return; } else { strActiveMasterSetup = ""; strTextArchitect = ""; }
                 if (strOpt == "scus") { strActiveMasterSetup = "active"; strTextCustomers = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomers = ""; }
-                
+                if (strOpt == "comp") { strActiveMasterSetup = "active"; strTextCustomers = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomers = ""; }
 
                 if (strOpt == "reqf") { strActiveTransaction = "active"; strTextRequestForm = "text-red"; return; } else { strActiveTransaction = ""; strTextRequestForm = ""; }
                 if (strOpt == "arc") { strActiveTransaction = "active"; strTextArchitectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextArchitectCenter = ""; }
                 if (strOpt == "pjc") { strActiveTransaction = "active"; strTextProjectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextProjectCenter = ""; }
                 if (strOpt == "wkr") { strActiveTransaction = "active"; strTextWeeklyReport = "text-red"; return; } else { strActiveTransaction = ""; strTextWeeklyReport = ""; }
-            
+
+                if (strOpt == "rptswr") { strActiveReporting = "active"; strTextSaleWeeklyReport = "text-red"; return; } else { strActiveReporting = ""; strTextSaleWeeklyReport = ""; }
+                
+
             }
             catch
             {

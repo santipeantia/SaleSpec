@@ -9,6 +9,67 @@
             <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
             <li class="active">Dashboard</li>
         </ol>
+        <hr />
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Projects</span>
+                        <span class="info-box-number">2,090<small> Tasks</small></span>
+                        <span class="info-box-more"><small>Active 50 <i class="fa fa-circle text-green small"></i></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Customers</span>
+                        <span class="info-box-number">1,410</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Sales Spec</span>
+                        <span class="info-box-number">20</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Architect</span>
+                        <span class="info-box-number">976 people</span>
+                        <span class="info-box-more"><small>976 people <i class="fa fa-circle text-red"></i></small></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
     </section>
 
     <!-- Main content -->
@@ -20,7 +81,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Architect Details</h3>
+                        <h3 class="box-title">Charts</h3>
                         <div class="pull-right">
                             <button type="button" class="btn btn-default btn-sm checkbox-toggle" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
                                 <i class="fa fa-plus"></i>
@@ -32,42 +93,87 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
-                            <%--pagination pagination-sm--%>
-                            <thead>
-                                <tr>
-                                          <td> ID </td> 
-                                             <td> Specifier </td> 
-                                             <td> Grade </td> 
-                                             <td> CustID </td> 
-                                             <td> CustomerName </td> 
-                                             <td class="hidden"> CustomerName2 </td> 
-                                             <td class="hidden"> Address </td> 
-                                             <td class="hidden"> Province </td> 
-                                             <td> Contact </td> 
-                                             <td> Phone </td> 
-                                             <td> Mobile </td> 
-                                             <td class="hidden"> Email </td> 
-                                             <td> ArchitecID </td> 
-                                             <td> ArchitecName </td> 
-                                             <td class="hidden"> Position </td> 
-                                             <td class="hidden"> Status </td> 
-                                             <td> Spec </td> 
-                                    <th style="width: 20px; text-align: center;">#</th>
-                                    <th style="width: 20px; text-align: center;">#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="col-md-6">
+                            <!-- LINE CHART -->
+                            <div class="box box-warning">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Line Chart</h3>
 
-                                <%= strTblDetail %>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="chart">
+                                        <%--<canvas id="myChart" style="height: 250px"></canvas>--%>
+                                        <h3>Chart in here</h3>
+                                    </div>
+                                </div>
+                            </div>
 
-                            </tbody>
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Donut Chart</h3>
 
-                        </table>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <%--<canvas id="pieChart" style="height: 250px"></canvas>--%>
+                                    <h3>Chart in here</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- LINE CHART -->
+                            <div class="box box-success">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Line Chart</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="chart">
+                                        <%--<canvas id="lineChart2" style="height: 250px"></canvas>--%>
+                                        <h3>Chart in here</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box box-danger">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Donut Chart</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <%--<canvas id="pieChart2" style="height: 250px"></canvas>--%>
+                                    <h3>Chart in here</h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.box-body -->
                 </div>
             </div>
         </div>
@@ -284,154 +390,5 @@
             </div>
         </div>
 
-        <script>
-            function openModal() {
-
-                $("#myModalNew").modal({ backdrop: false });
-                $('[id=myModalNew]').modal('show');
-            }
-
-            var table = document.getElementById("example1"), rIndex;
-            for (var i = 1; i < table.rows.length; i++) {
-                for (var j = 0; j < table.rows[i].cells.length; j++) {
-                    table.rows[i].cells[j].onclick = function () {
-                        rIndex = this.parentElement.rowIndex;
-                        cIndex = this.cellIndex;
-                        console.log(rIndex + "  :  " + cIndex);
-
-                        if (this.cellIndex == 3) {
-                            var strID = table.rows[rIndex].cells[0].innerHTML;
-                            var strDesc = table.rows[rIndex].cells[1].innerHTML;
-                            var strDetail = table.rows[rIndex].cells[2].innerHTML;
-
-                            //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
-
-                            document.getElementById("txtGradeIDEdit").value = strID;
-                            document.getElementById("txtGradeDescEdit").value = strDesc;
-                            document.getElementById("txtGradeDetailEdit").value = strDetail;
-
-                            $("#myModalEdit").modal({ backdrop: false });
-                            $("#myModalEdit").modal("show");
-
-                        }
-
-                        if (this.cellIndex == 4) {
-                            var strGradeIDDelete = table.rows[rIndex].cells[0].innerHTML;
-                            var stGradeDescDelete = table.rows[rIndex].cells[1].innerHTML;
-                            var strGradeDetailDelete = table.rows[rIndex].cells[2].innerHTML;
-
-                            //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
-
-                            document.getElementById("txtGradeIDDelete").value = strGradeIDDelete;
-                            document.getElementById("txtGradeDescDelete").value = stGradeDescDelete;
-                            document.getElementById("txtGradeDetailDelete").value = strGradeDetailDelete;
-
-
-                            $("#myModalDelete").modal({ backdrop: false });
-                            $("#myModalDelete").modal("show");
-
-                        }
-                    }
-                }
-            }
-
-
-
-            var tableActive = document.getElementById("tableActive"), rIndex;
-            for (var i = 1; i < tableActive.rows.length; i++) {
-                for (var j = 0; j < tableActive.rows[i].cells.length; j++) {
-                    tableActive.rows[i].cells[j].onclick = function () {
-                        rIndex = this.parentElement.rowIndex;
-                        cIndex = this.cellIndex;
-                        console.log(rIndex + "  :  " + cIndex);
-
-                        if (this.cellIndex == 3) {
-                            var strStatusID= tableActive.rows[rIndex].cells[0].innerHTML;
-                            var strStatusDesc = tableActive.rows[rIndex].cells[1].innerHTML;
-                            var strDetail = tableActive.rows[rIndex].cells[2].innerHTML;
-
-                            document.getElementById("txtStatusID").value = strStatusID;
-                            document.getElementById("txtStatusEdit").value = strStatusDesc;
-                            $("#myModalActive").modal("hide");
-
-                            //alert(strStatusID);
-                        }
-
-                    }
-                }
-            }
-
-            var tableActiveNew = document.getElementById("tableActiveNew"), rIndex;
-            for (var i = 1; i < tableActiveNew.rows.length; i++) {
-                for (var j = 0; j < tableActiveNew.rows[i].cells.length; j++) {
-                    tableActiveNew.rows[i].cells[j].onclick = function () {
-                        rIndex = this.parentElement.rowIndex;
-                        cIndex = this.cellIndex;
-                        console.log(rIndex + "  :  " + cIndex);
-
-                        if (this.cellIndex == 3) {
-                            var strStatusID = tableActiveNew.rows[rIndex].cells[0].innerHTML;
-                            var strStatusDesc = tableActiveNew.rows[rIndex].cells[1].innerHTML;
-                            var strDetail = tableActiveNew.rows[rIndex].cells[2].innerHTML;
-
-                            document.getElementById("txtStatusIDNew").value = strStatusID;
-                            document.getElementById("txtStatusNew").value = strStatusDesc;
-                            $("#myModalActiveNew").modal("hide");
-
-                            //alert(strStatusID);
-                        }
-
-                    }
-                }
-            }
-
-            $(function () {
-
-                $("#myModalEdit").validate({
-                    rules: {
-                        txtCustTypeDesc: {
-                            required: true,
-                            minlength: 8
-                        },
-                        action: "required"
-                    },
-                    messages: {
-                        txtCustTypeDesc: {
-                            required: "Please enter some data",
-                            minlength: "Your data must be at least 8 characters"
-                        },
-                        action: "Please provide some data"
-                    }
-                });
-            });
-
-            function ValidateSave() {
-                var str1 = document.getElementById("txtGradeID").value;
-                var str2 = document.getElementById("txtGradeDesc").value;
-                var str3 = document.getElementById("txtGradeDetail").value;
-                if (str1 != '' && str2 != '' && str3 !='') {
-                    document.getElementById("<%=  btnSaveNewData.ClientID %>").click();
-                }
-            }
-
-            function ValidateUpdate() {
-                var str1 = document.getElementById("txtGradeIDEdit").value;
-                var str2 = document.getElementById("txtGradeDescEdit").value;
-                //var str3 = document.getElementById("txtGradeDetailEdit").value;
-                if (str1 != '' && str2 != '') {
-                    {
-                        document.getElementById("<%= btnUpdateData.ClientID %>").click();
-                    }
-                }
-            }
-
-
-            function ValidateDelete() {
-                var str = document.getElementById("txtGradeIDDelete").value;
-                if (str != '') {
-                    document.getElementById("<%= btnDeleteData.ClientID %>").click();
-                    }
-                }
-        </script>
     </section>
 </asp:Content>

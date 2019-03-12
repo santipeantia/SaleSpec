@@ -45,8 +45,7 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                
-                ssql = "SELECT ArchitecID, CompanyID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
+                ssql = "SELECT ArchitecID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
@@ -66,9 +65,10 @@ namespace SaleSpec.pages.masters
 
                         strTblDetail += "<tr> " +
                                         "     <td>" + strArchitecID + "</td> " +
+                                        //"     <td>" + strArchitecName + "</td> " +
                                         "     <td>" + strFirstName + "</td> " +
                                         "     <td>" + strLastName + "</td> " +
-                                         "     <td>" + strNickName + "</td> " +
+                                        "     <td>" + strNickName + "</td> " +
                                         "     <td>" + strPosition + "</td> " +
                                         "     <td>" + strAddress + "</td> " +
                                         "     <td>" + strPhone + "</td> " +
@@ -154,24 +154,37 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeIDEdit = Request.Form["txtGradeIDEdit"];
-                string strGradeDescEdit = Request.Form["txtGradeDescEdit"];
-                string strGradeDetailEdit = Request.Form["txtGradeDetailEdit"];
+                string strArchitecID = Request.Form["txtArchitectIDEdit"];
+                string strFirstName = Request.Form["txtFirstNameEdit"];
+                string strLastName = Request.Form["txtLastNameEdit"];
+                string strNickName = Request.Form["txtNickNameEdit"];
+                string strPosition = Request.Form["txtPositionEdit"];
+                string strAddress = Request.Form["txtAddressEdit"];
+                string strPhone = Request.Form["txtPhoneEdit"];
+                string strMobile = Request.Form["txtMobileEdit"];
+                string strEmail = Request.Form["txtEmailEdit"];
 
-                if (strGradeIDEdit != "" && strGradeDescEdit != "")
+                if (strArchitecID != "")
                 {
-                    ssql = "update adGrade set  GradeID=@GradeID, GradeDesc=@GradeDesc, GradeDetail=@GradeDetail " +
-                           "where    GradeID=@GradeID  ";
+                    ssql = "update adArchitecture set  ArchitecID=@ArchitecID, FirstName=@FirstName, LastName=@LastName, NickName=@NickName, " +
+                           "       Position=@Position, Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email " +
+                           "where    ArchitecID=@ArchitecID  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeIDEdit;
-                    Comm.Parameters.Add("@GradeDesc", SqlDbType.NVarChar).Value = strGradeDescEdit;
-                    Comm.Parameters.Add("@GradeDetail", SqlDbType.NVarChar).Value = strGradeDetailEdit;
-
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitecID;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = "";
+                    Comm.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = strFirstName;
+                    Comm.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = strLastName;
+                    Comm.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = strNickName;
+                    Comm.Parameters.Add("@Position", SqlDbType.NVarChar).Value = strPosition;
+                    Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
+                    Comm.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = strPhone;
+                    Comm.Parameters.Add("@Mobile", SqlDbType.NVarChar).Value = strMobile;
+                    Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
                     Comm.ExecuteNonQuery();
 
                 }
@@ -207,21 +220,19 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeIDDelete = Request.Form["txtGradeIDDelete"];
-                //string strGradeDescEdit = Request.Form["txtGradeDescDelete"];
-                //string strGradeDetailEdit = Request.Form["txtGradeDetailDelete"];
+                string strArchitecID = Request.Form["txtArchitectIDDel"];
 
-                if (strGradeIDDelete != "")
+                if (strArchitecID != "")
                 {
-                    ssql = "delete from adGrade " +
-                           "where    GradeID=@GradeID  ";
+                    ssql = "delete from adArchitecture " +
+                           "where    ArchitecID=@ArchitecID  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeIDDelete;
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitecID;
                     Comm.ExecuteNonQuery();
 
                 }
@@ -253,11 +264,13 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT ArchitecID, ArchitecName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
+                ssql = "SELECT ID, ArchitecID, CompanyID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
                 GridView GridviewExport = new GridView();
+
+                string strExportDate = DateTime.Now.ToString("yyyyMMddHHmmss");
 
                 if (dt.Rows.Count != 0)
                 {
@@ -266,7 +279,7 @@ namespace SaleSpec.pages.masters
                     GridviewExport.DataBind();
 
                     Response.Clear();
-                    Response.AddHeader("content-disposition", "attachment;filename=ArchitectExport.xls");
+                    Response.AddHeader("content-disposition", "attachment;filename=ArchitectExport" + strExportDate + ".xls");
                     Response.ContentType = "application/ms-excel";
                     Response.ContentEncoding = System.Text.Encoding.Unicode;
                     Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
@@ -275,6 +288,9 @@ namespace SaleSpec.pages.masters
                     System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
 
                     GridviewExport.RenderControl(hw);
+                    
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
                     Response.Write(sw.ToString());
                     Response.End();
 
@@ -282,7 +298,9 @@ namespace SaleSpec.pages.masters
             }
             catch (Exception ex)
             {
-
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
             }
         }
     }

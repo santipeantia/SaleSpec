@@ -32,30 +32,34 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="container-fluid">
-                            <div class="col-sm-2">
-                                <label class="txtLabel">txtLabel</label>
 
+                        <div class="row">
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4">
+                                <div class="form-group">
+                                    <label class="txtLabel">Please select a transaction</label>
+                                    <span class="txtLabel">
+                                        <select id="selectTrans" name="selectTrans" runat="server" class="form-control select2 " style="width: 100%">
+                                            <option value="" selected>Please select a item..</option>
+                                            <option value="0">New Project</option>
+                                            <option value="1">Update Project Status</option>
+                                            <option value="2">New Architect</option>
+                                            <option value="3">Event Update</option>
+                                            <option value="4">Weekly Report</option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" name="btnSelect" id="btnSelect" class="btn btn-primary btn-flat btn-block" value="Click to Go..!" runat="server" onserverclick="btnSelect_Click" />
+                                </div>
                             </div>
                         </div>
 
-                        <asp:Button ID="btnClosePage" runat="server" Text="ClosePage"/>
-
-                        <br />
-                        <br />
-
-                        <%--<a href="#" onclick="window.open('webform1.aspx', '_blank', 'height=200, width=200, top=200, left=300'); return false;"> content </a>--%>
-                        <a href="#" onclick="popupwindow('webform1.aspx', 'OpenSearch', 600, 500)"  >OpenWindow</a>
-
-                        <input class="form-control input-sm" type="text" id="txtName" name="txtName" value="" />
                         
-                        <br />
-                        <br />
-
-                        <a href="#" onclick="ShowModalWindow();"> Click </a>
-
-
-                        <a href="javascript:CloseWindow();">Close Window</a>
 
                     </div>
                     <!-- /.box-body -->

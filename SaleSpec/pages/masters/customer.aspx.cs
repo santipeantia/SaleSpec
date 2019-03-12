@@ -45,8 +45,8 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT CustomerID, CustomerName, CustomerName2, Address, ProvinceID, ContactPerson, Phone, Mobile, Email " +
-                       "FROM    adCustomers ";
+                ssql = "SELECT CompanyID, CompanyName, CompanyName2, Address, ProvinceID, ContactPerson, Phone, Mobile, Email " +
+                       "FROM    adCompany ";
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
@@ -54,9 +54,9 @@ namespace SaleSpec.pages.masters
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        string strCustomerID = dt.Rows[i]["CustomerID"].ToString();
-                        string strCustomerName = dt.Rows[i]["CustomerName"].ToString();
-                        string strCustomerName2 = dt.Rows[i]["CustomerName2"].ToString();
+                        string strCompanyID = dt.Rows[i]["CompanyID"].ToString();
+                        string strCompanyName = dt.Rows[i]["CompanyName"].ToString();
+                        string strCompanyName2 = dt.Rows[i]["CompanyName2"].ToString();
                         string strAddress = dt.Rows[i]["Address"].ToString();
                         string strProvinceID = dt.Rows[i]["ProvinceID"].ToString();
                         string strContactPerson = dt.Rows[i]["ContactPerson"].ToString();
@@ -65,9 +65,9 @@ namespace SaleSpec.pages.masters
                         string strEmail = dt.Rows[i]["Email"].ToString();
 
                         strTblDetail += "<tr> " +
-                                        "     <td>" + strCustomerID + "</td> " +
-                                        "     <td>" + strCustomerName + "</td> " +
-                                        "     <td>" + strCustomerName2 + "</td> " +
+                                        "     <td>" + strCompanyID + "</td> " +
+                                        "     <td>" + strCompanyName + "</td> " +
+                                        "     <td>" + strCompanyName2 + "</td> " +
                                         "     <td>" + strAddress + "</td> " +
                                         "     <td class=\"hidden\">" + strProvinceID + "</td> " +
                                         "     <td>" + strContactPerson + "</td> " +
@@ -276,6 +276,8 @@ namespace SaleSpec.pages.masters
                     System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
 
                     GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
                     Response.Write(sw.ToString());
                     Response.End();
 
@@ -283,7 +285,9 @@ namespace SaleSpec.pages.masters
             }
             catch (Exception ex)
             {
-
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
             }
         }
     }

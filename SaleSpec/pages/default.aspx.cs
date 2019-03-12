@@ -30,6 +30,25 @@ namespace SaleSpec
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string strUserID = Session["UserID"].ToString();
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../pages/users/login");
+            }
+
+            //Session["EmpCode"] ;
+            //Session["Password"] ;
+            //Session["id"];
+            //Session["sEmpID"] ;
+            //Session["sEmpOrgLevel2"];
+            //Session["sEmpNamePrefix"];
+            //Session["sEmpFirstName"];
+            //Session["sEmpLastName"];
+            //Session["sEmpEngNamePrefix"] ;
+            //Session["sEmpEngFirstName"];
+            //Session["sEmpEngLastName"];
+            //Session["sEmpNickName"] ;
+
             if (!IsPostBack)
             {
                 GetInitialData();
@@ -303,8 +322,12 @@ namespace SaleSpec
             }
             catch (Exception ex)
             {
-
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
             }
         }
+
+      
     }
 }

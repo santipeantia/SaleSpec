@@ -331,14 +331,18 @@ namespace SaleSpec.pages.masters
                     System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
 
                     GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
                     Response.Write(sw.ToString());
                     Response.End();
 
                 }
             }
             catch (Exception ex)
-            { 
-            
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
             }
         }
     }

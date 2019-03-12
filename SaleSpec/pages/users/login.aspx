@@ -61,11 +61,12 @@
                 <img src="../../image/Logo-ampel-Big.png" width="200" /></p>
             <%--<p class="login-box-msg">Sign in to start your session</p>--%>
 
-            <form id="frmLogin" runat="server">
-               <%-- <div id="divWraning" runat="server" class="fad fad-in alert alert-danger input-sm">
-                    <strong>Warning!</strong> Incorrect username or password <br/> <%= strErorConn %>
-                </div>--%>
+           
 
+
+            <form id="frmLogin" runat="server">
+                <%= strErorConn %>
+                
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control txtLabel" id="inpUserName" name="UserName" runat="server" placeholder="Username">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -76,6 +77,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
+                        <%--<a href="#" >Register</a>--%>
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">

@@ -46,6 +46,80 @@
                             <tbody>
 
                                 <%= strTblDetail %>
+
+                               <%-- <tr>
+                                    <td>C1</td>
+                                    <td>ARCHITECT</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C2</td>
+                                    <td>TurnKeyThai</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C3</td>
+                                    <td>TurnKeyNonThai</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C4</td>
+                                    <td>Owner</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C5</td>
+                                    <td>Government/University</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C6</td>
+                                    <td>Developer</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C7</td>
+                                    <td>Home Builder</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C8</td>
+                                    <td>Factory Builder</td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></>                             </td>
+                                    <td style="width: 20px; text-align: center;">
+                                        <a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></>
+                                    </td>
+                                </tr>--%>
+
                             </tbody>
 
                         </table>
@@ -85,7 +159,6 @@
                             </div>
 
                             <div class="row">
-
                                 <div class="col-md-4">Status</div>
                                 <div class="input-group col-md-8">
                                     <div class="col-md-12">
@@ -95,7 +168,6 @@
                                         </span>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

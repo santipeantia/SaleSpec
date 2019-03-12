@@ -34,6 +34,8 @@
 
     <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
+
+
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet">
@@ -68,11 +70,45 @@
             font-weight: normal;
             color: Maroon;
         }
+
+        #loading {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            display: block;
+            opacity: 0.7;
+            background-color: #fff;
+            z-index: 99;
+            text-align: center;
+        }
+
+
+        div#spinner
+{
+    display: none;
+    width:100px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background:url(spinner.gif) no-repeat center #fff;
+    text-align:center;
+    padding:10px;
+    font:normal 16px Tahoma, Geneva, sans-serif;
+    border:1px solid #666;
+    margin-left: -50px;
+    margin-top: -50px;
+    z-index:2;
+    overflow: auto;
+}
     </style>
 </head>
 <body onselect="return true" class="hold-transition skin-blue-light sidebar-mini fixed ">
-    <div id="dvMain" runat="server">
 
+
+    <div id="dvMain" runat="server">
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
@@ -89,17 +125,17 @@
                         <ul class="nav navbar-nav">
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user1-128x128.jpg" class="user-image" alt="User Image" width="160" />
+                                    <img src="../../dist/img/User_96px.png" class="user-image" alt="User Image" width="160" />
                                     <span class="hidden-xs">
                                         <label id="label2"></label>
-                                        Santi Peantia</span>
+                                        <%= strFullName %></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="user-header">
-                                        <img src="../../dist/img/user1-128x128.jpg" class="img-circle" alt="User Image" width="160" />
+                                        <img src="../../dist/img/User_96px.png" class="img-circle" alt="User Image" width="160" />
                                         <p>
-                                            Santi Peantia
-                                        <small>IT Manager,Member since Dec. 2018</small>
+                                            <%= strFullName %>
+                                        <small>Department of : <%= strDept %></small>
                                         </p>
                                     </li>
 
@@ -168,7 +204,7 @@
                                 </li>
 
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/customer?opt=scus"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Customer Setup</span></a> 
+                                    <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a> 
                                 </li>
                                                              
                             </ul>
@@ -176,28 +212,58 @@
 
                         <li class="<%= strActiveTransaction.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
                             <a href="#">
-                                <i class="fa fa-table treeview"></i><span class="txtLabel">Transaction Entry</span>
+                                <i class="fa fa-group treeview"></i><span class="txtLabel">Transaction Entry</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/masters/customergrade?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Request Form</span></a> 
+                                    <a href="../../pages/trans/weeklyreport?opt=wkr"><i class="fa fa-angle-right <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a> 
+                                </li>                    
+                               
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Center</span></a> 
+                                </li>
+
+                                 <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a> 
+                                 </li> 
+         
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Architect Center</span></a> 
+                                </li>
+                               
+                          
+                            </ul>
+                        </li>
+
+                        <li class="<%= strActiveReporting.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview"></i><span class="txtLabel">Reporting</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/saleweeklyreport?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Sale Weekly Report</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Company Report</span></a> 
                                 </li> 
 
-                                <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/masters/customertype?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Architect Center</span></a> 
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/masters/customertype?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Architect Report</span></a> 
                                 </li>
 
-                                <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/masters/productgroup?opt=pjc"><i class="fa fa-line-chart <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Center</span></a> 
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/masters/productgroup?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Report</span></a> 
                                 </li>
-                                
-                                <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/masters/specifier?opt=wkr"><i class="fa fa-male <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a> 
-                                </li>
-                                                             
+
+                          
                             </ul>
                         </li>
 
@@ -227,7 +293,6 @@
             </div>
             <div class="control-sidebar-bg"></div>
         </div>
-
         <div id="dvLoading" runat="server" class="loadingMessageFrame" style="height: 270px; display: none;">
             <table style="height: 100%; width: 100%; table-layout: fixed;">
                 <tr>
@@ -278,6 +343,10 @@
         <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
         <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
         <script src="../../plugins/iCheck/icheck.min.js"></script>
+        <%--<script src="../../../../dist/2.7.3/Chart.bundle.js"></script>--%>
+        <script src="../../bower_components/Chart.js/Chart.js"></script>
+        <%--<script src="../../bower_components/chart.js/Chart.bundle.js"></script>
+	    <script src="../../bower_components/chart.js/utils.js"></script>--%>
 
         <script>
             $(function () {
@@ -316,6 +385,16 @@
                     'info': true,
                     'autoWidth': false
                 })
+                $('#tableArchitect').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+                
             })
 </script>
         <script>
@@ -352,6 +431,10 @@
                 $('#reservation').daterangepicker()
                 //Date range picker with time picker
                 $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+
+                //$('#dateStartTime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+                //$('#dateStartTime').daterangepicker()
+
                 //Date range as a button
                 $('#daterange-btn').daterangepicker(
                   {
@@ -410,7 +493,51 @@
                     function openModal() { $('#myModal').modal({ show: true }); }
                 }
             })
+            $('#datepickertrans').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datepickerstart').datepicker({
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datepickerend').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy'
+            });
+            $('#datevisit').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+
+            
 </script>
+        <script type="text/javascript">
+            var spinnerVisible = false;
+            function showProgress() {
+                if (!spinnerVisible) {
+                    $("div#spinner").fadeIn("fast");
+                    spinnerVisible = true;
+                }
+            };
+            function hideProgress() {
+                if (spinnerVisible) {
+                    var spinner = $("div#spinner");
+                    spinner.stop();
+                    spinner.fadeOut("fast");
+                    spinnerVisible = false;
+                }
+            };
+        </script>
+
+         
+
     </div>
 </body>
 </html>

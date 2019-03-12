@@ -43,12 +43,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\AjaxControlToolkit.dll" />
@@ -378,6 +388,7 @@
     <Content Include="bower_components\bootstrap\js\tooltip.js" />
     <Content Include="bower_components\bootstrap\js\transition.js" />
     <Content Include="bower_components\bootstrap\package.js" />
+    <Content Include="bower_components\chart.js\Chart.bundle.js" />
     <Content Include="bower_components\chart.js\Chart.js" />
     <Content Include="bower_components\chart.js\Chart.min.js" />
     <Content Include="bower_components\chart.js\gulpfile.js" />
@@ -395,6 +406,7 @@
     <Content Include="bower_components\chart.js\src\Chart.Line.js" />
     <Content Include="bower_components\chart.js\src\Chart.PolarArea.js" />
     <Content Include="bower_components\chart.js\src\Chart.Radar.js" />
+    <Content Include="bower_components\chart.js\utils.js" />
     <Content Include="bower_components\ckeditor\adapters\jquery.js" />
     <Content Include="bower_components\ckeditor\ckeditor.js" />
     <Content Include="bower_components\ckeditor\config.js" />
@@ -6474,6 +6486,21 @@
     <Content Include="CSS\ui.progressbar.css" />
     <Content Include="CSS\ui.theme.css" />
     <Content Include="ClassConnection\dbConnectionSQL.txt" />
+    <Content Include="dist\img\architect_person.png" />
+    <Content Include="dist\img\blue_box.png" />
+    <Content Include="dist\img\docs.png" />
+    <Content Include="dist\img\document.png" />
+    <Content Include="dist\img\e_mail.png" />
+    <Content Include="dist\img\handshake.png" />
+    <Content Include="dist\img\info.png" />
+    <Content Include="dist\img\price-control.png" />
+    <Content Include="dist\img\User_96px.png" />
+    <Content Include="dist\img\weekly-update.png" />
+    <Content Include="dist\img\weekly.png" />
+    <Content Include="pages\charts\chartjs.aspx" />
+    <Content Include="pages\charts\chartjs.html" />
+    <Content Include="pages\dashboard.aspx" />
+    <Content Include="pages\dashboardxx.aspx" />
     <Content Include="pages\default.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
@@ -6567,7 +6594,6 @@
     <Content Include="image\loading_bar.gif" />
     <Content Include="image\Logo-ampel-Big.png" />
     <Content Include="image\warning.png" />
-    <Content Include="pages\charts\chartjs.html" />
     <Content Include="pages\charts\flot.html" />
     <Content Include="pages\charts\inline.html" />
     <Content Include="pages\charts\morris.html" />
@@ -6592,13 +6618,24 @@
     <Content Include="pages\mailbox\mailbox.html" />
     <Content Include="pages\mailbox\read-mail.html" />
     <Content Include="pages\masters\architect.aspx" />
+    <Content Include="pages\masters\company.aspx" />
     <Content Include="pages\masters\customer.aspx" />
     <Content Include="pages\masters\customergrade.aspx" />
     <Content Include="pages\masters\customertype.aspx" />
     <Content Include="pages\masters\productgroup.aspx" />
     <Content Include="pages\masters\specifier.aspx" />
+    <Content Include="pages\report\saleweeklyreport.aspx" />
     <Content Include="pages\tables\data.html" />
     <Content Include="pages\tables\simple.html" />
+    <Content Include="pages\trans\apprequest-new.aspx" />
+    <Content Include="pages\trans\apprequest.aspx" />
+    <Content Include="pages\trans\projects-update-status.aspx" />
+    <Content Include="pages\trans\projects-update.aspx" />
+    <Content Include="pages\trans\projects.aspx" />
+    <Content Include="pages\trans\WebForm1.aspx" />
+    <Content Include="pages\trans\weeklyreport-update.aspx" />
+    <Content Include="pages\trans\weeklyreport_backup.aspx" />
+    <Content Include="pages\trans\weeklyreport.aspx" />
     <Content Include="pages\UI\buttons.html" />
     <Content Include="pages\UI\general.html" />
     <Content Include="pages\UI\icons.html" />
@@ -6762,11 +6799,24 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\ui.core.js" />
     <Content Include="Scripts\ui.progressbar.js" />
-    <Content Include="test.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
+    <Compile Include="pages\charts\chartjs.aspx.cs">
+      <DependentUpon>chartjs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\charts\chartjs.aspx.designer.cs">
+      <DependentUpon>chartjs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -6780,6 +6830,13 @@
     </Compile>
     <Compile Include="pages\masters\architect.aspx.designer.cs">
       <DependentUpon>architect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\masters\company.aspx.cs">
+      <DependentUpon>company.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\masters\company.aspx.designer.cs">
+      <DependentUpon>company.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\masters\customer.aspx.cs">
       <DependentUpon>customer.aspx</DependentUpon>
@@ -6816,6 +6873,76 @@
     <Compile Include="pages\masters\specifier.aspx.designer.cs">
       <DependentUpon>specifier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\report\saleweeklyreport.aspx.cs">
+      <DependentUpon>saleweeklyreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\saleweeklyreport.aspx.designer.cs">
+      <DependentUpon>saleweeklyreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\apprequest-new.aspx.cs">
+      <DependentUpon>apprequest-new.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\apprequest-new.aspx.designer.cs">
+      <DependentUpon>apprequest-new.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\apprequest.aspx.cs">
+      <DependentUpon>apprequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\apprequest.aspx.designer.cs">
+      <DependentUpon>apprequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\projects-update-status.aspx.cs">
+      <DependentUpon>projects-update-status.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\projects-update-status.aspx.designer.cs">
+      <DependentUpon>projects-update-status.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\projects-update.aspx.cs">
+      <DependentUpon>projects-update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\projects-update.aspx.designer.cs">
+      <DependentUpon>projects-update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\projects.aspx.cs">
+      <DependentUpon>projects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\projects.aspx.designer.cs">
+      <DependentUpon>projects.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\weeklyreport-update.aspx.cs">
+      <DependentUpon>weeklyreport-update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\weeklyreport-update.aspx.designer.cs">
+      <DependentUpon>weeklyreport-update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\weeklyreport_backup.aspx.cs">
+      <DependentUpon>weeklyreport_backup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\weeklyreport_backup.aspx.designer.cs">
+      <DependentUpon>weeklyreport_backup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\weeklyreport.aspx.cs">
+      <DependentUpon>weeklyreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\weeklyreport.aspx.designer.cs">
+      <DependentUpon>weeklyreport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\users\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -6825,11 +6952,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="SaleSpec.Master.cs">
       <DependentUpon>SaleSpec.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7470,12 +7592,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="aspnet_client\system_web\4_0_30319\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

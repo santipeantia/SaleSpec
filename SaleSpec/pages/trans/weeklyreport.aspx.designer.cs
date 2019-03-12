@@ -22,12 +22,21 @@ namespace SaleSpec.pages.trans {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
         
         /// <summary>
-        /// btnClosePage control.
+        /// selectTrans control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClosePage;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectTrans;
+        
+        /// <summary>
+        /// btnSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnSelect;
     }
 }

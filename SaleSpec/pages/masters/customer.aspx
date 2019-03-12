@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <!-- Header content -->
     <section class="content-header">
-        <h1>Customer Setup
+        <h1>Company Setup
             <small>Control panel</small>
         </h1>
     </section>
@@ -16,7 +16,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Customer Details</h3>
+                        <h3 class="box-title">Company Details</h3>
                         <div class="pull-right">
                             <button type="button" class="btn btn-default btn-sm checkbox-toggle" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
                                 <i class="fa fa-plus"></i>
@@ -34,9 +34,9 @@
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
-                                    <td>CustomerID</td>
-                                    <td>CustomerName</td>
-                                    <td>CustomerName2</td>
+                                    <td>CompanyID</td>
+                                    <td>CompanyName</td>
+                                    <td>CompanyName2</td>
                                     <td>Address</td>
                                     <td class="hidden">ProvinceID</td>
                                     <td>ContactPerson</td>
@@ -66,7 +66,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">New Customer Type</h4>
+                        <h4 class="modal-title">New Grade</h4>
                     </div>
 
                     <div class="modal-body">

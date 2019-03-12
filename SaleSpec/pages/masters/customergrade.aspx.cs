@@ -41,6 +41,51 @@ namespace SaleSpec.pages.masters
         protected void GetInitialData()
         {
             GetCustTypeDataBind();
+            GetStatusDataBind();
+        }
+
+        protected void GetStatusDataBind()
+        {
+            try
+            {
+                ssql = "sp_adCustomerTypeStatus";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        string strCustStatusID = dt.Rows[i]["CustStatusID"].ToString();
+                        string strStatusDesc = dt.Rows[i]["StatusDesc"].ToString();
+                        string strStatusDetails = dt.Rows[i]["StatusDetails"].ToString();
+
+                        strTblActive += "<tr> " +
+                                        "     <td>" + strCustStatusID + "</td> " +
+                                        "     <td>" + strStatusDesc + "</td> " +
+                                        "     <td>" + strStatusDetails + "</td> " +
+                                        "<td style=\"width: 20px; text-align: center;\"> " +
+                                        "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
+                                        "</tr>";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                             "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                             "</div>";
+                return;
+            }
+
         }
 
         protected void GetCustTypeDataBind()
@@ -264,6 +309,8 @@ namespace SaleSpec.pages.masters
                     System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
 
                     GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
                     Response.Write(sw.ToString());
                     Response.End();
 
@@ -271,7 +318,9 @@ namespace SaleSpec.pages.masters
             }
             catch (Exception ex)
             {
-
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
             }
         }
     }

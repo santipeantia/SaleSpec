@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <label for="inputDocno" class="col-sm-4 txtLabel">เลขที่เอกสาร</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control input-sm" id="inputDocno" placeholder="กำหนดเลขที่เอกสาร">
+                                                <input type="text" class="form-control input-sm" id="inputDocno" value="PJ190001" placeholder="กำหนดเลขที่เอกสาร">
                                             </div>
                                         </div>
                                     </div>
@@ -94,18 +94,14 @@
                                             <div class="col-sm-8">
                                                 <%--<input type="text" class="form-control input-sm" id="datepicker" placeholder="ระบุวันที่ทำรายการ">--%>
                                                 <div class="input-group date">
-                                                
-                                                <input type="text" class="form-control input-sm pull-left" id="datepickertrans">
-                                                <div class="input-group-addon input-sm">
-                                                    <i class="fa fa-calendar"></i>
+
+                                                    <input type="text" class="form-control input-sm pull-left" id="datepickertrans" value="2019-03-15">
+                                                    <div class="input-group-addon input-sm">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>
-
-                                            
                                         </div>
-
-                                        
                                     </div>
                                    
                                     <div class="col-sm-4">
@@ -126,18 +122,27 @@
                                 <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="inpuCust" class="col-sm-4 txtLabel">รหัสลูกค้า</label>
+                                            <label for="inpuCust" class="col-sm-4 txtLabel">รหัสสถาปนิก</label>
                                             <div class="col-sm-8">
                                                 <%--<input type="text" class="form-control input-sm" id="inpuCust" placeholder="รหัสลูกค้า">--%>
                                                 <div class="input-group">
-                                                    <input type="text" name="search" class="form-control input input-sm" placeholder="รหัสลูกค้า">
+                                                    <input type="text" name="search" class="form-control input input-sm" placeholder="รหัสสถาปนิก" value="0008">
                                                     <div class="input-group-btn">
-                                                        <button type="button" name="submit" class="btn btn-primary btn-sm btn-flat">
+                                                        <button type="button" name="submit" onclick="openArchitectModal()" class="btn btn-info btn-sm btn-flat">
                                                             <%--<i class="fa fa-search"></i>--%>
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </div>
                                                 </div>
+
+
+                                               <%-- <div class="input-group input-group-sm">
+                                                    <input type="text" class="form-control">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-info btn-flat">Go!</button>
+                                                    </span>
+                                                </div>--%>
+
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +177,7 @@
                                         <div class="form-group">
                                             <label for="inputFirstName" class="col-sm-4 txtLabel">ชื่อลูกค้า</label>
                                             <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputCustName" placeholder="ชื่อลูกค้า">
+                                                <input type="email" class="form-control input-sm" id="inputCustName" placeholder="ชื่อลูกค้า" value="Asrin">
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +186,7 @@
                                         <div class="form-group">
                                             <label for="inputFirstName" class="col-sm-4 txtLabel">นามสกุล</label>
                                             <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputLastName" placeholder="นามสกุล">
+                                                <input type="email" class="form-control input-sm" id="inputLastName" placeholder="นามสกุล" value="Sanguanwongwan">
                                             </div>
                                         </div>
                                     </div>
@@ -190,7 +195,7 @@
                                         <div class="form-group">
                                             <label for="inputPhoneNo" class="col-sm-4 txtLabel">เบอร์โทรศัพท์</label>
                                             <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputPhoneNo" placeholder="เบอร์โทรศัพท์">
+                                                <input type="email" class="form-control input-sm" id="inputPhoneNo" placeholder="เบอร์โทรศัพท์" value="02-390-2934">
                                             </div>
                                         </div>
                                     </div>
@@ -201,7 +206,7 @@
                                         <div class="form-group">
                                             <label for="inputPosition" class="col-sm-4 txtLabel">ตำแหน่ง</label>
                                             <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputPosition" placeholder="ตำแหน่ง">
+                                                <input type="email" class="form-control input-sm" id="inputPosition" placeholder="ตำแหน่ง" value="Architect / Designer">
                                             </div>
                                         </div>
                                     </div>
@@ -231,9 +236,9 @@
                                             <label for="inputCompany" class="col-sm-4 txtLabel">ชื่อบริษัทลูกค้า</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <input type="text" name="search" class="form-control input input-sm" placeholder="รหัสบริษัทลูกค้า">
+                                                    <input type="text" name="search" class="form-control input input-sm" placeholder="รหัสบริษัทลูกค้า" value="1041">
                                                     <div class="input-group-btn">
-                                                        <button type="button" name="buttonComapny" class="btn btn-primary btn-sm btn-flat">
+                                                        <button type="button" name="buttonComapny" class="btn btn-info btn-sm btn-flat">
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </div>
@@ -244,13 +249,13 @@
 
                                      <div class="col-sm-4">
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control input-sm" id="inputCompanyTH" placeholder="ชื่อเรียกบริษัท ภาษาไทย">
+                                            <input type="text" class="form-control input-sm" id="inputCompanyTH" placeholder="ชื่อเรียกบริษัท ภาษาไทย" value="ออลโซน ดีไซน์ บจก.">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control input-sm" id="inputCompanyEN" placeholder="ชื่อเรียกบริษัท ภาษาอังกฤษ">
+                                            <input type="text" class="form-control input-sm" id="inputCompanyEN" placeholder="ชื่อเรียกบริษัท ภาษาอังกฤษ" value="All Zone design Co.,Ltd.">
                                         </div>
                                     </div>
                                 </div>
@@ -365,7 +370,6 @@
                                     </div>
                                 </div>
                                 
-
                                 <br />
                             </div>
                             <!-- /.post -->
@@ -431,7 +435,7 @@
                                             <div class="checkbox">
                                                 <label>
                                                     <input type="checkbox">
-                                                    Amperam
+                                                    AmpelFlow
                                                 </label>
                                             </div>
                                         </div>
@@ -453,7 +457,75 @@
                                     </div>
 
                                 </div>
-                                <br />
+
+                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
+                                    <div class="col-sm-2">
+                                        <label for="inputTaxId" class="col-sm-12 txtLabel">หมวดสินค้า</label>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-bottom: 5px;">
+                                        <%--<input type="text" class="form-control input-sm" id="inputPresident" placeholder="ชื่อโครงการ">--%>
+                                        <span class="txtLabel">
+                                            <select class="form-control input-sm">
+                                                <option value="01">Sealex Duragel</option>
+                                                <option value="02">Cool Lite</option>
+                                                <option value="03">WonderCOOL IR</option>
+                                                <option value="04">Sealex Duragel</option>
+                                                <option value="05">Sealex Duragel</option>
+                                            </select>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label for="inputTaxId" class="col-sm-12 txtLabel">ประเภทสินค้า</label>
+                                    </div>
+
+                                    <div class="col-sm-3" style="margin-bottom: 5px;">
+                                        <%--<input type="text" class="form-control input-sm" id="inputPresident" placeholder="ชื่อโครงการ">--%>
+                                        <span class="txtLabel input-xs">
+                                            <select id="selectCategory" class="form-control input-small">
+                                                <option value="01">PF0001 AC Louvre</option>
+                                                <option value="01">PF0002 Ajiya Mega Rib 35</option>
+                                                <option value="01">PF0003 AR 364</option>
+                                                <option value="01">PF0004 AS 760</option>
+                                                <option value="01">PF0005 AS 780-56</option>
+                                                <option value="01">PF0006 BBC-750</option>
+                                                <option value="01">PF0007 BBC-800</option>
+                                                <option value="01">PF0008 BBC-940</option>
+                                                <option value="01">PF0009 BBC-U760</option>
+                                                <option value="01">PF0010 BBC-U760 (SW)</option>
+                                                <option value="01">PF0011 BK 1000</option>
+                                                <option value="01">PF0012 BK 760 A</option>
+                                                <option value="01">PF0013 BK 762</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
+                                     <div class="col-sm-2">
+                                            <label for="inputTaxId" class="col-sm-12 txtLabel">สถานที่จัดส่ง</label>
+                                    </div>
+                                    <div class="col-sm-8" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="สถานที่จัดส่ง">
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
+                                    <div class="col-sm-2">
+                                        <label for="inputTaxId" class="col-sm-12 txtLabel">จำนวน</label>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input-append input-sm txtLabel" id="inputQuantity" placeholder="0.00" value="" />
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label for="inputTaxId" class="col-sm-12 txtLabel">มูลค่าโครงการ</label>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input-append input-sm txtLabel" id="inputQuantity" placeholder="0.00" value="" />
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- /.post -->
 
@@ -485,7 +557,7 @@
                                         <div class="form-group">
                                             <div class="checkbox txtLabel">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" >
                                                     Architect
                                                 </label>
                                             </div>
@@ -531,27 +603,27 @@
                                     <div class="col-sm-2">
                                         <label for="inputTaxId" class="col-sm-12 txtLabel">ระบุจำนวน</label>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
                                 </div>
 
                                 <br />
 
-                                 <div class="row" style="margin-left: 20px;">
+                                <div class="row" style="margin-left: 20px;">
                                     <div class="col-sm-2">
                                         <label for="inputTaxId" class="col-sm-12 txtLabel">ราคาขาย</label>
                                     </div>
@@ -614,20 +686,20 @@
                                     <div class="col-sm-2">
                                         <label for="inputTaxId" class="col-sm-12 txtLabel">ระบุจำนวน</label>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="">
+                                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="inputPresident" placeholder="0.00">
                                     </div>
 
                                 </div>
@@ -941,12 +1013,69 @@
             </div>
         </div>
 
+        <div class="modal modal-default fade" id="myArchitectModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Selected Architect</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="tableArchitect" class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descript</th>
+                                    <th>Details</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%--<%= strTblActive %>--%>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+
         <script>
+            var myinput = document.getElementById('inputQuantity');
+            myinput.addEventListener('keyup', function () {
+                var val = this.value;
+                val = val.replace(/[^0-9\.]/g, '');
+
+                if (val != "") {
+                    valArr = val.split('.');
+                    valArr[0] = (parseInt(valArr[0], 10)).toLocaleString();
+                    val = valArr.join('.');
+                }
+
+                this.value = val;
+            });
+
+
+            function setDecimal(input) {
+                input.value = parseFloat(input.value).toFixed(2);
+            }
+
             function openModal() {
 
                 $("#myModalNew").modal({ backdrop: false });
                 $('[id=myModalNew]').modal('show');
             }
+
+            function openArchitectModal() {
+                $("#myArchitectModal").modal({ backdrop: false });
+                $('[id=myArchitectModal]').modal('show');
+            }
+            
+
 
             var table = document.getElementById("example1"), rIndex;
             for (var i = 1; i < table.rows.length; i++) {
@@ -1090,6 +1219,8 @@
                 }
             }
         </script>
+
+       
     </section>
 
 </asp:Content>

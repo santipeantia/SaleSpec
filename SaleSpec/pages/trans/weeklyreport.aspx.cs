@@ -11,18 +11,48 @@ namespace SaleSpec.pages.trans
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string display = "Your dispaly";
+            //string strUserID = Session["UserID"].ToString();
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../pages/users/login");
+            }
 
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + display + "');", true);//this will dispaly the alert box
 
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Close_Window", "self.close();", true);//this will close the page on button click
+
         }
 
-        protected void ContineButton_Click(object sender, EventArgs e)
+        protected void btnSelect_Click(object sender, EventArgs e)
         {
-            //this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
-            Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
+            string strSelect = selectTrans.Value;
+
+            if (strSelect == "0")
+            {
+                //Response.Redirect("../../pages/trans/projects-update?opt=wkr");
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+            }
+            else if (strSelect == "1")
+            {
+                Response.Redirect("../../pages/trans/projects-update?opt=wkr");
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+            }
+            else if (strSelect == "2")
+            {
+                //Response.Redirect("../../pages/trans/projects-update?opt=wkr");
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+            }
+            else if (strSelect == "3")
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+            }
+            else
+            {
+                Response.Redirect("../../pages/trans/weeklyreport-update?opt=wkr");
+                //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+            }
+
+
+           
         }
     }
 }
