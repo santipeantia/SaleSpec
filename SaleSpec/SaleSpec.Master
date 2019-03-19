@@ -199,12 +199,16 @@
                                     <a href="../../pages/masters/specifier?opt=spc"><i class="fa fa-angle-right <%= strTextSpecifier.ToString() %>"></i><span class="txtLabel <%= strTextSpecifier.ToString() %>">Specifier Setup</span></a> 
                                 </li>
 
+                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a> 
+                                </li>
+
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/architect?opt=sarc"><i class="fa fa-angle-right <%= strTextArchitect.ToString() %>"></i><span class="txtLabel <%= strTextArchitect.ToString() %>">Architect Setup</span></a> 
                                 </li>
 
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a> 
+                                    <a href="../../pages/masters/projectsetup?opt=prjs"><i class="fa fa-angle-right <%= strTextProjectsetup.ToString() %>"></i><span class="txtLabel <%= strTextProjectsetup.ToString() %>">Projects Setup</span></a> 
                                 </li>
                                                              
                             </ul>
@@ -221,10 +225,10 @@
 
                                 <li class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/weeklyreport?opt=wkr"><i class="fa fa-angle-right <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a> 
-                                </li>                    
+                                </li>
                                
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Center</span></a> 
+                                    <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a> 
                                 </li>
 
                                  <li class="<%= strActiveTransaction.ToString() %> ">

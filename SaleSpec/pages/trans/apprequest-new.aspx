@@ -11,11 +11,10 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-     <%--   <%= strMsgAlert %>--%>
+        <%--   <%= strMsgAlert %>--%>
 
-
-         <%-- Application Forms--%>
-        <div class="row hidden">
+        <%-- Application Forms--%>
+        <div class="row">
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
@@ -45,7 +44,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="row">
             <div class="col-md-12">
@@ -809,9 +807,7 @@
                         </div>
                         <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-content -->
                 </div>
-                <!-- /.nav-tabs-custom -->
             </div>
         </div>
 

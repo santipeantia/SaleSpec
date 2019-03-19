@@ -28,18 +28,18 @@ namespace SaleSpec.pages.trans
 
             if (strSelect == "0")
             {
-                //Response.Redirect("../../pages/trans/projects-update?opt=wkr");
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+                Response.Redirect("../../pages/trans/apprequest-new?opt=reqf");
+                //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
             }
             else if (strSelect == "1")
             {
                 Response.Redirect("../../pages/trans/projects-update?opt=wkr");
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
             }
             else if (strSelect == "2")
             {
-                //Response.Redirect("../../pages/trans/projects-update?opt=wkr");
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
+                Response.Redirect("../../pages/master/architect?opt=sarc");
+                //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Redirect to page " + strSelect + "');", true);
             }
             else if (strSelect == "3")
             {

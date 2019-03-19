@@ -33,7 +33,7 @@ namespace SaleSpec.pages.trans
         {
             if (!IsPostBack)
             {
-                //GetInitialData();
+                GetInitialData();
             }
         }
 
@@ -46,13 +46,13 @@ namespace SaleSpec.pages.trans
         {
             try
             {
-                int sYear = 2019; // int.Parse(Convert.ToDateTime(datepickerstart.Value).ToString("yyyy"));
+                int sYear = 2014; // int.Parse(Convert.ToDateTime(datepickerstart.Value).ToString("yyyy"));
                 int sMonth = 01; // int.Parse(Convert.ToDateTime(datepickerstart.Value).ToString("MM"));
 
                 int eYear = 2019; // int.Parse(Convert.ToDateTime(datepickerend.Value).ToString("yyyy"));
                 int eMonth = 12; // int.Parse(Convert.ToDateTime(datepickerend.Value).ToString("MM"));
 
-                ssql = "SELECT  ProjectID, ProjectYear, ProjectMonth, ProjectName, CompanyName, Location, MainCons, RefRfDf, " +
+                ssql = "SELECT top(20) ProjectID, ProjectYear, ProjectMonth, ProjectName, CompanyName, Location, MainCons, RefRfDf, " +
                        "        ProjStep, ProductType, RefProfile, Quantity, RefType, DeliveryDate, Drawing, Status, TypeID, SaleSpec " +
                        "FROM    adProjects " +
                        "WHERE (ProjectYear >='" + sYear + "' and ProjectMonth >= '" + sMonth + "') and  (ProjectYear <='" + eYear + "' and ProjectMonth <= '" + eMonth + "') ";
@@ -75,9 +75,9 @@ namespace SaleSpec.pages.trans
                         string strStatus = dt.Rows[i]["Status"].ToString();
 
                         strTblDetail += "<tr> " +
-                                        "     <td> </td> " +
-                                        "     <td> </td> " +
-                                        "     <td> </td> " +
+                                        "     <td> "+ strProjectID + "-"+ i + " </td> " +
+                                        "     <td> FirstName - "+ i +"</td> " +
+                                        "     <td> LastName - " + i + " </td> " +
                                         "     <td>" + strProjectID + "</td> " +
                                         "     <td>" + strProjectYear + "</td> " +
                                         "     <td>" + strProjectMonth + "</td> " +

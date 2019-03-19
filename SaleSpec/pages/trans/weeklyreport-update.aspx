@@ -23,8 +23,12 @@
                             <span class="username">
                                 <a href="#">Weekly Report Update</a>
                                 <%--<a href="#" class="pull-right btn btn-default btn-sm"><i class="fa fa-plus"></i></a>--%>
+                                <span class="pull-right">
+                                <a href="apprequest-new?opt=reqf" target="_blank" class="btn btn-success btn-flat btn-sm" title="Create new project entry">New Project</a>
+                            </span>
                             </span>
                             <span class="description">Details for weekly report</span>
+                            
                         </div>
                         <br />
 

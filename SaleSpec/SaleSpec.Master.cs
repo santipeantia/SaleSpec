@@ -25,6 +25,7 @@ namespace SaleSpec
         public string strTextSpecifier = "";
         public string strTextArchitect = "";
         public string strTextCustomers = "";
+        public string strTextProjectsetup = "";
 
 
         public string strActiveTransaction = "";
@@ -118,7 +119,7 @@ namespace SaleSpec
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("pages/users/login.aspx");
+                Response.Redirect("../../pages/users/login.aspx");
             }
 
             strFullName = Session["sEmpEngFirstName"].ToString() + "  "  + Session["sEmpEngLastName"].ToString();
@@ -138,6 +139,10 @@ namespace SaleSpec
                 if (strOpt == "sarc") { strActiveMasterSetup = "active"; strTextArchitect = "text-red"; return; } else { strActiveMasterSetup = ""; strTextArchitect = ""; }
                 if (strOpt == "scus") { strActiveMasterSetup = "active"; strTextCustomers = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomers = ""; }
                 if (strOpt == "comp") { strActiveMasterSetup = "active"; strTextCustomers = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomers = ""; }
+                if (strOpt == "prjs") { strActiveMasterSetup = "active"; strTextProjectsetup = "text-red"; return; } else { strActiveMasterSetup = ""; strTextProjectsetup = ""; }
+
+                
+
 
                 if (strOpt == "reqf") { strActiveTransaction = "active"; strTextRequestForm = "text-red"; return; } else { strActiveTransaction = ""; strTextRequestForm = ""; }
                 if (strOpt == "arc") { strActiveTransaction = "active"; strTextArchitectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextArchitectCenter = ""; }

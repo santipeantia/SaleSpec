@@ -1,5 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="weeklyreport.aspx.cs" Inherits="SaleSpec.pages.trans.weeklyreport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style>
+        .select2-container .select2-selection--multiple {
+            font-family: 'Arial', Verdana;
+            font-size: 12px;
+            box-sizing: border-box;
+            display: block;
+            height: 27px;
+        }
+    </style>
+
      <!-- Header content -->
     <section class="content-header">
         <h1>Weekly Report
@@ -16,59 +26,587 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Weekly Report</h3>
-                        <div class="pull-right">
-                            <%--<button type="button" class="btn btn-default btn-sm checkbox-toggle" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
-                                <i class="fa fa-plus"></i>
-                            </button>--%>
-                            <a class="btn btn-default btn-sm checkbox-toggle" href="../../pages/masters/architect?opt=sarc"  data-toggle="tooltip" title="List View"><i class="fa fa-reply"></i></a>
 
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" ><i class="fa fa-table"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-
-                        <div class="row">
-
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-4">
-                                <div class="form-group">
-                                    <label class="txtLabel">Please select a transaction</label>
-                                    <span class="txtLabel">
-                                        <select id="selectTrans" name="selectTrans" runat="server" class="form-control select2 " style="width: 100%">
-                                            <option value="" selected>Please select a item..</option>
-                                            <option value="0">New Project</option>
-                                            <option value="1">Update Project Status</option>
-                                            <option value="2">New Architect</option>
-                                            <option value="3">Event Update</option>
-                                            <option value="4">Weekly Report</option>
-                                        </select>
+                        <div class="box-body">
+                            <div class="post clearfix">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="../../dist/img/handshake.png" alt="User Image">
+                                    <span class="username">
+                                        <a href="#">Weekly Report</a>
                                     </span>
+                                    <span class="description">Details for weekly report</span>
                                 </div>
-                                <div class="form-group">
-                                    <input type="button" name="btnSelect" id="btnSelect" class="btn btn-primary btn-flat btn-block" value="Click to Go..!" runat="server" onserverclick="btnSelect_Click" />
+
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-2">
+                                        <label class="txtLabel">Visit Date</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control input-sm pull-left" id="datepickertrans" value="" autocomplete="off">
+                                            <div class="input-group-addon input-sm">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                       <%-- <label class="txtLabel">Time</label>--%>
+                                        <%--<div class="input-group date">
+                                            <input type="text" class="form-control input-sm pull-left" id="inputtime" value="" autocomplete="off">
+                                            <div class="input-group-addon input-sm">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>--%>
+
+                                        <div class="bootstrap-timepicker">
+                                            <div class="input-group">
+                                                <label class="txtLabel">Time</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control input-sm timepicker">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-1 input-group">
+                                        <label class="txtLabel">Event</label>
+                                        <div class="">
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm">Event View</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-6 col-md-offset-2">
+                                        <label class="txtLabel">Company</label>
+                                        <div class="input-group col-md-12">
+                                            <span class="txtLabel">
+                                                <select id="selectCustomer" class="form-control input input-sm " style="width: 100%;">
+                                                    <option value=""></option>
+                                                    <option value="1675">Vortech Architek Co.,Ltd</option>
+                                                    <option value="1676">Weapons Decoration Co.,Ltd</option>
+                                                    <option value="1677">Wirach & Associate Co.,Ltd</option>
+                                                    <option value="1678">Wise Line Co.,Ltd</option>
+                                                    <option value="1679">Wolves Design Co.,Ltd</option>
+                                                    <option value="1680">Work- aholic architect Co.,Ltd</option>
+                                                    <option value="1681">Work Of Work Co.,Ltd</option>
+                                                    <option value="1682">Workspace Architecture Studio Co.,Ltd</option>
+                                                    <option value="1683">Xayaburi Power Co.,Ltd</option>
+                                                    <option value="1684">Zamil Steel Co.,Ltd</option>
+                                                    <option value="1685">Zpacez Co.,Ltd</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 input-group">
+                                        <label class="txtLabel">Company</label>
+                                        <div class="">
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openCompany()">New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-6 col-md-offset-2">
+                                        <label class="txtLabel">Architect</label>
+                                        <div class="input-group col-md-12">
+                                            <span class="txtLabel">
+                                                <select id="selectArchitect" class="form-control input input-sm " style="width: 100%;">
+                                                    <option value=""></option>
+                                                    <option value="1556">Kittaphol	 Onsri</option>
+                                                    <option value="1668">Kittipat	Sirijumpar</option>
+                                                    <option value="1523">Kittiphop	Watthong</option>
+                                                    <option value="1665">Kritsada	 Pengwantana</option>
+                                                    <option value="1536">Laddawan	Panta</option>
+                                                    <option value="1233">Napasawan	Bhongbhibhat</option>
+                                                    <option value="1651">Nares	unphikul</option>
+                                                    <option value="1182">Narin	 Bunjun</option>
+                                                    <option value="1349">Narongrit	Veerakul</option>
+
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 input-group">
+                                        <label class="txtLabel">Architect</label>
+                                        <div class="">
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openArchitect()">New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-6 col-md-offset-2">
+                                        <label class="txtLabel">Project</label>
+                                        <div class="input-group col-md-12">
+                                            <span class="txtLabel">
+                                                <select id="selectProject" class="form-control input input-sm " style="width: 100%;">
+                                                    <option value=""></option>
+                                                    <option value="PJ0190">โรงงานสยามคาคิฮาระ</option>
+                                                    <option value="PJ0191">Renovate Showa</option>
+                                                    <option value="PJ0192">Sankyu </option>
+                                                    <option value="PJ0193">Hino สมุทรสาคร</option>
+                                                    <option value="PJ0194">SHL พาราวูด แคราย</option>
+                                                    <option value="PJ0195">Thai sanei นิคมเวลโก</option>
+                                                    <option value="PJ0196">NEW TEMPORARY MIXING ROOM</option>
+                                                    <option value="PJ0197">Sumitomo missing</option>
+                                                    <option value="PJ0198">โรงงานเออิโย</option>
+                                                    <option value="PJ0199">โรงงานเค ไลน์</option>
+                                                    <option value="PJ0200">โรงงานมโนยนต์ชัย</option>
+
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 input-group">
+                                        <label class="txtLabel">Project</label>
+                                        <div class="">
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openProject()">New</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                     <div class="col-md-4 col-md-offset-2">
+                                        <label class="txtLabel">Contact</label>
+                                        <div class="">
+                                            <input type="text" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">Mobile</label>
+                                        <div class="">
+                                            <input type="text" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                     <div class="col-md-6 col-md-offset-2">
+                                        <label class="txtLabel">Reason</label>
+                                        <div class="">
+                                            <%--<input type="text" class="form-control input-sm" />--%>
+                                            <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-2 col-md-offset-2">
+                                        <label class="txtLabel">Save Entry</label>
+                                        <div class="">
+                                            <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="post clearfix">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" src="../../dist/img/document.png" alt="User Image">
+                                <span class="username">
+                                    <a href="#">Visit History</a>
+                                    <div class="btn-group pull-right ">
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server"><i class="fa fa-print"></i></button>
+                                    </div>
+                                </span>
+                                <span class="description">Please attach your document support</span>
+                            </div>
+                            <!-- /.user-block -->
+
+                            <div class="container-fluid">
+                                <table id="tableDetails" class="table table-bordered table-striped table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Copany</th>
+                                            <th>Architect</th>
+                                            <th>Project</th>
+                                            <th>Contact</th>
+                                            <th>Mobile</th>
+                                            <th>Reason</th>
+                                            <th>Updated</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2018-12-25</td>
+                                            <td>10:00</td>
+                                            <td>Planet Studio Co.,Ltd.</td>
+                                            <td>Amornrat	Eursirirattanaphisan</td>
+                                            <td>ปรับปรุงอาคาร บจก.ปัจจพล ไฟเบอร์</td>
+                                            <td>K.Somchai</td>
+                                            <td>0899999959</td>
+                                            <td>Make Relationship</td>
+                                            <td>
+                                                2018-12-28 09:45:25 AM
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-12-28</td>
+                                            <td>14:00</td>
+                                            <td>Planet Studio Co.,Ltd.</td>
+                                            <td>Amornrat	Eursirirattanaphisan</td>
+                                            <td>คลังสินค้า บ.หาดทิพย์</td>
+                                            <td>K.Somchai</td>
+                                            <td>0899999959</td>
+                                            <td>Make Relationship</td>
+                                            <td>
+                                                2018-12-18 11:49:15 AM
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2019-01-10</td>
+                                            <td>09:00</td>
+                                            <td>Planet Studio Co.,Ltd.</td>
+                                            <td>Amornrat	Eursirirattanaphisan</td>
+                                            <td>รถไฟฟ้าความเร็วสูง หัวหิน</td>
+                                            <td>K.Somchai</td>
+                                            <td>0899999959</td>
+                                            <td>Make Relationship</td>
+                                            <td>
+                                                2018-12-15 11:30:20 AM
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2019-01-15</td>
+                                            <td>11:00</td>
+                                            <td>Amornrat	Eursirirattanaphisan</td>
+                                            <td>Planet Studio Co.,Ltd.</td>
+                                            <td>กาฬสินธุ์</td>
+                                            <td>K.Somchai</td>
+                                            <td>0899999959</td>
+                                            <td>Make Relationship</td>
+                                            <td>
+                                                2018-12-10 08:30:30 AM
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <br />
+                        </div>
+
+                            <div class="row hidden">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <div class="form-group">
+                                        <label class="txtLabel">Please select a transaction</label>
+                                        <span class="txtLabel">
+                                            <select id="selectTrans" name="selectTrans" runat="server" class="form-control select2 " style="width: 100%">
+                                                <option value="" selected>Please select a item..</option>
+                                                <option value="0">New Project</option>
+                                                <option value="1">Update Project Status</option>
+                                                <option value="2">New Architect</option>
+                                                <option value="3">Event Update</option>
+                                                <option value="4">Weekly Report</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" name="btnSelect" id="btnSelect" class="btn btn-primary btn-flat btn-block" value="Click to Go..!" runat="server" onserverclick="btnSelect_Click" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        
-
+                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box-body -->
                 </div>
             </div>
         </div>
 
-       
+        <!-- /.modal myModalCompany -->
+        <div class="modal modal-default fade" id="myModalCompany">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">New Company</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4">CompanyID</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm" id="txtCompanyID" name="txtCompanyID" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4">CompanyName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm" id="txtCompanyName" name="txtCompanyName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4">CompanyName2</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm" id="txtCompanyName2" name="txtCompanyName2" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4">Address	</div>
+                                <div class="col-md-8">
+                                    <textarea cols="40" rows="3" id="txtAddress" name="txtAddress" class="form-control input input-sm"></textarea>
+                                    <%--<input type="text" class="form-control input input-sm" id="txtGradeDetailEdit" name="txtGradeDetailEdit" placeholder="" value="" required>--%>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4">ContactPerson</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm" id="txtContactPerson" name="txtContactPerson" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4">Phone</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm" id="txtPhone" name="txtPhone" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">Status</div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" id="txtStatusNew" name="txtStatusNew" class="form-control input input-sm txtLabel" value="" required readonly>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-warning btn-flat btn-sm" data-toggle="modal" data-target="#myModalActiveNew"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="btnSaveNewData" runat="server">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.modal myModalArchitect -->
+        <div class="modal modal-default fade" id="myModalArchitect">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">New Architect</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Architect ID</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectID" name="txtArchitectID" placeholder="" value="" readonly required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">FirstName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtFirstName" name="txtFirstName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">LastName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtLastName" name="txtLastName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">NickName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtNickName" name="txtNickName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Position</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPosition" name="txtPosition" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Address</div>
+                                <div class="col-md-8">
+                                    <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
+                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Phone</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhone" name="txtPhone" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Mobile</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobile" name="txtMobile" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Email</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmail" name="txtEmail" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="Button2" runat="server">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- /.modal myModalProject -->
+        <div class="modal modal-default fade" id="myModalProject">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">New Project</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">ProjectID</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="projectID" name="projectID" placeholder="" value="" readonly required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">ProjectName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="projectName" name="projectName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">CompanyName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="CompanyName" name="CompanyName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Location</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="Location" name="Location" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">ProductGroup</div>
+                                <div class="col-md-8">
+                                    <span class="txtLabel">
+                                        <select class="form-control input-sm" style="width:  100%;">
+                                            <option value="01">Sealex Duragel</option>
+                                            <option value="02">Cool Lite</option>
+                                            <option value="03">WonderCOOL IR</option>
+                                            <option value="04">Sealex Duragel</option>
+                                            <option value="05">Sealex Duragel</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">ProductCategory</div>
+                                <div class="col-md-8">
+                                    <span class="txtLabel input-xs">
+                                        <select id="selectCategory" class="form-control input-small" style="width:  100%;">
+                                            <option value="01">PF0001 AC Louvre</option>
+                                            <option value="01">PF0002 Ajiya Mega Rib 35</option>
+                                            <option value="01">PF0003 AR 364</option>
+                                            <option value="01">PF0004 AS 760</option>
+                                            <option value="01">PF0005 AS 780-56</option>
+                                            <option value="01">PF0006 BBC-750</option>
+                                            <option value="01">PF0007 BBC-800</option>
+                                            <option value="01">PF0008 BBC-940</option>
+                                            <option value="01">PF0009 BBC-U760</option>
+                                            <option value="01">PF0010 BBC-U760 (SW)</option>
+                                            <option value="01">PF0011 BK 1000</option>
+                                            <option value="01">PF0012 BK 760 A</option>
+                                            <option value="01">PF0013 BK 762</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Quantity</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="quantity" name="quantity" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Remark</div>
+                                <div class="col-md-8">
+                                    <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
+                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="Remark" name="Remark"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="Button3" runat="server">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <script>
+            function openCompany() {
+
+                $("#myModalCompany").modal({ backdrop: false });
+                $('[id=myModalCompany]').modal('show');
+            }
+
+            function openArchitect() {
+
+                $("#myModalArchitect").modal({ backdrop: false });
+                $('[id=myModalArchitect]').modal('show');
+            }
+            
+            function openProject() {
+
+                $("#myModalProject").modal({ backdrop: false });
+                $('[id=myModalProject]').modal('show');
+            }
+
             function ShowModalWindow() {
                 // true to refresh the parent after popup closed
                 RefreshParent(false);
@@ -91,7 +629,7 @@
                 var url2 = url + param;
                 return window.open(url2, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
             }
-</script>
+        </script>
 
         
 

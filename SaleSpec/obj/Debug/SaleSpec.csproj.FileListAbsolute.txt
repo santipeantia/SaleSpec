@@ -5,3 +5,10 @@ D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.dll
 D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.pdb
 D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
 D:\Ampel_Jobs\Projects\SaleSpec\SaleSpec\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\SaleSpec.dll.config
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\SaleSpec.dll
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\SaleSpec.pdb
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.dll
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.pdb

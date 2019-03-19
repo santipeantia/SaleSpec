@@ -45,7 +45,12 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT ArchitecID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
+                //ssql = "SELECT ArchitecID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email, Status='Confirmed' FROM adArchitecture ";
+
+                ssql = "SELECT a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
+                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
+                       "FROM adArchitecture AS a LEFT OUTER JOIN " + 
+                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
@@ -62,7 +67,21 @@ namespace SaleSpec.pages.masters
                         string strPhone = dt.Rows[i]["Phone"].ToString();
                         string strMobile = dt.Rows[i]["Mobile"].ToString();
                         string strEmail = dt.Rows[i]["Email"].ToString();
+                        string strStatusConID = dt.Rows[i]["StatusConID"].ToString();
+                        string strStatus = dt.Rows[i]["ConDesc2"].ToString();
 
+                        if (strStatusConID == "0")
+                        {
+                            strStatus = "<span class=\"text-orange\">" + strStatus + "</span>";
+                        }
+                        else if (strStatusConID == "1")
+                        {
+                            strStatus = "<span class=\"text-green\">" + strStatus + "</span>";
+                        }
+                        else
+                        {
+                            strStatus = "<span class=\"text-red\">" + strStatus + "</span>";
+                        }
                         strTblDetail += "<tr> " +
                                         "     <td>" + strArchitecID + "</td> " +
                                         //"     <td>" + strArchitecName + "</td> " +
@@ -74,6 +93,7 @@ namespace SaleSpec.pages.masters
                                         "     <td>" + strPhone + "</td> " +
                                         "     <td>" + strMobile + "</td> " +
                                         "     <td>" + strEmail + "</td> " +
+                                        "     <td>" + strStatus + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +

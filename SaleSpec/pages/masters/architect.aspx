@@ -18,10 +18,10 @@
                     <div class="box-header">
                         <h3 class="box-title">Architect Details</h3>
                         <div class="pull-right">
-                            <a class="btn btn-default btn-sm checkbox-toggle" href="../../pages/trans/apprequest-new?opt=sarc"><i class="fa fa-plus"></i></a>
-                           <%-- <button type="button" class="btn btn-default btn-sm checkbox-toggle" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
+                            <%--<a class="btn btn-default btn-sm checkbox-toggle" href="../../pages/trans/apprequest-new?opt=sarc"><i class="fa fa-plus"></i></a>--%>
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
                                 <i class="fa fa-plus"></i>
-                            </button>--%>
+                            </button>
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
@@ -46,6 +46,7 @@
                                     <td>Phone</td>
                                     <td>Mobile</td>
                                     <td>Email</td>
+                                    <td>Status</td>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                 </tr>
@@ -75,23 +76,69 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">GradeID</div>
+                                <div class="col-md-4 txtLabel">Architect ID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtGradeID" name="txtGradeID" placeholder="" value=""  required></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectID" name="txtArchitectID" placeholder="" value="" readonly required></div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">Description</div>
+                                <div class="col-md-4 txtLabel">FirstName</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtGradeDesc" name="txtGradeDesc" placeholder="" value="" required></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtFirstName" name="txtFirstName" placeholder="" value="" required>
+                                </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">Details</div>
+                                <div class="col-md-4 txtLabel">LastName</div>
                                 <div class="col-md-8">
-                                    <textarea cols="40" rows="3" id="txtGradeDetail" name="txtGradeDetail" class="form-control input input-sm"></textarea>
-                                    <%--<input type="text" class="form-control input input-sm" id="txtGradeDetailEdit" name="txtGradeDetailEdit" placeholder="" value="" required>--%></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtLastName" name="txtLastName" placeholder="" value="" required>
+                                </div>
                             </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">NickName</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtNickName" name="txtNickName" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Position</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPosition" name="txtPosition" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Address</div>
+                                <div class="col-md-8">
+                                    <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
+                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Phone</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhone" name="txtPhone" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Mobile</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobile" name="txtMobile" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Email</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmail" name="txtEmail" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 

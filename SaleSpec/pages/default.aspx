@@ -4,6 +4,7 @@
     <section class="content-header">
         <h1>Dashboard
                     <small>Control panel</small>
+             <asp:TextBox ID="txtMacAddress" runat="server" CssClass="hidden"></asp:TextBox>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -100,7 +101,7 @@
                             <!-- LINE CHART -->
                             <div class="box box-warning">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Line Chart</h3>
+                                    <h3 class="box-title">Projects Chart</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -112,14 +113,16 @@
                                 <div class="box-body">
                                     <div class="chart">
                                         <%--<canvas id="myChart" style="height: 250px"></canvas>--%>
-                                        <h3>Chart in here</h3>
+                                       
+                                        <img src="../dist/img/chart_doubleline.png" />
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Donut Chart</h3>
+                                    <h3 class="box-title">Chart No.2</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -130,7 +133,8 @@
                                 </div>
                                 <div class="box-body">
                                     <%--<canvas id="pieChart" style="height: 250px"></canvas>--%>
-                                    <h3>Chart in here</h3>
+                                    
+                                    <img src="../dist/img/chart_gant.png" />
                                 </div>
                             </div>
                         </div>
@@ -139,7 +143,7 @@
                             <!-- LINE CHART -->
                             <div class="box box-success">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Line Chart</h3>
+                                    <h3 class="box-title">Chart No.3</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -151,14 +155,14 @@
                                 <div class="box-body">
                                     <div class="chart">
                                         <%--<canvas id="lineChart2" style="height: 250px"></canvas>--%>
-                                        <h3>Chart in here</h3>
+                                        <img src="../dist/img/chart_doublegant.png" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="box box-danger">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Donut Chart</h3>
+                                    <h3 class="box-title">Chart No.4</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -169,7 +173,7 @@
                                 </div>
                                 <div class="box-body">
                                     <%--<canvas id="pieChart2" style="height: 250px"></canvas>--%>
-                                    <h3>Chart in here</h3>
+                                    <img src="../dist/img/chart_line.png" />
                                 </div>
                             </div>
                         </div>

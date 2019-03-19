@@ -6488,6 +6488,10 @@
     <Content Include="ClassConnection\dbConnectionSQL.txt" />
     <Content Include="dist\img\architect_person.png" />
     <Content Include="dist\img\blue_box.png" />
+    <Content Include="dist\img\chart_doublegant.png" />
+    <Content Include="dist\img\chart_doubleline.png" />
+    <Content Include="dist\img\chart_gant.png" />
+    <Content Include="dist\img\chart_line.png" />
     <Content Include="dist\img\docs.png" />
     <Content Include="dist\img\document.png" />
     <Content Include="dist\img\e_mail.png" />
@@ -6623,6 +6627,7 @@
     <Content Include="pages\masters\customergrade.aspx" />
     <Content Include="pages\masters\customertype.aspx" />
     <Content Include="pages\masters\productgroup.aspx" />
+    <Content Include="pages\masters\projectsetup.aspx" />
     <Content Include="pages\masters\specifier.aspx" />
     <Content Include="pages\report\saleweeklyreport.aspx" />
     <Content Include="pages\tables\data.html" />
@@ -6866,6 +6871,13 @@
     </Compile>
     <Compile Include="pages\masters\productgroup.aspx.designer.cs">
       <DependentUpon>productgroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\masters\projectsetup.aspx.cs">
+      <DependentUpon>projectsetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\masters\projectsetup.aspx.designer.cs">
+      <DependentUpon>projectsetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\masters\specifier.aspx.cs">
       <DependentUpon>specifier.aspx</DependentUpon>

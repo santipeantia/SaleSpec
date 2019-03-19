@@ -24,6 +24,8 @@
         routes.MapPageRoute("pages/masters/architect", "pages/masters/architect", "~/pages/masters/architect.aspx");
         routes.MapPageRoute("pages/masters/customer", "pages/masters/customer", "~/pages/masters/customer.aspx");
         routes.MapPageRoute("pages/masters/company", "pages/masters/company", "~/pages/masters/company.aspx");
+        routes.MapPageRoute("pages/masters/projectsetup", "pages/masters/projectsetup", "~/pages/masters/projectsetup.aspx");
+        
         routes.MapPageRoute("pages/trans/apprequest", "pages/trans/apprequest", "~/pages/trans/apprequest.aspx");
 
         routes.MapPageRoute("pages/trans/apprequest-new", "pages/trans/apprequest-new", "~/pages/trans/apprequest-new.aspx");
