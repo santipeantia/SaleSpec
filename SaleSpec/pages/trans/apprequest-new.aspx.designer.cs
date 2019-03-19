@@ -13,15 +13,6 @@ namespace SaleSpec.pages.trans {
     public partial class apprequest_new {
         
         /// <summary>
-        /// btnExportExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
-        
-        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>

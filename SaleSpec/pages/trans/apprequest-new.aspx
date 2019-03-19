@@ -12,39 +12,6 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <%--   <%= strMsgAlert %>--%>
-
-        <%-- Application Forms--%>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Application Forms</h3>
-                        <div class="pull-right">
-                            <%--<button type="button" class="btn btn-default btn-sm checkbox-toggle" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
-                                <i class="fa fa-plus"></i>
-                            </button>--%>
-                            <a class="btn btn-default btn-sm checkbox-toggle" href="../../pages/masters/architect?opt=sarc"  data-toggle="tooltip" title="List View"><i class="fa fa-reply"></i></a>
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" ><i class="fa fa-table"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        
-
-
-
-
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
@@ -260,29 +227,6 @@
 
                                 <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
                                     <div class="col-sm-4">
-                                        <label for="inputBranch" class="col-sm-8 txtLabel  pull-right">บริษัทในเครือ / สาขาของบริษัท</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control  input-sm" id="inputBranch" placeholder="สาขาของบริษัท">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                    <div class="col-sm-4">
-                                        <label for="inputAddress" class="col-sm-8 txtLabel  pull-right">ที่ตั้งสำนักงาน</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="col-sm-12">
-                                            <%--<input type="text" class="form-control  input-sm" id="inputAddress" placeholder="ที่ตั้งสำนักงาน">--%>
-                                            <textarea cols="10" rows="5" class="form-control  input-sm" id="inputAddress"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="inputPhone" class="col-sm-4 txtLabel">โทรศัพท์</label>
                                             <div class="col-sm-8">
@@ -305,64 +249,6 @@
                                             <label for="inputEmail" class="col-sm-4 txtLabel">อีเมล์</label>
                                             <div class="col-sm-8">
                                                 <input type="email" class="form-control input-sm" id="inputEmail" placeholder="อีเมล์">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="inputSetup" class="col-sm-4 txtLabel">ปีที่ก่อตั้ง</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputSetup" placeholder="ปีที่ก่อตั้ง">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="inputCostRegis" class="col-sm-4 txtLabel">ทุนจดทะเบียน</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputCostRegis" placeholder="ทุนจดทะเบียน">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="inputPresident" class="col-sm-4 txtLabel">ชื่อกรรมการ</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputPresident" placeholder="ชื่อกรรมการ">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="inputTaxId" class="col-sm-4 txtLabel">เลขที่เสียภาษี</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputTaxId" placeholder="เลขที่เสียภาษี">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                     <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="inputPersonId" class="col-sm-4 txtLabel">บัตรประชาชน</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputPersonId" placeholder="บัตรประชาชน">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                       <div class="form-group">
-                                            <label for="inputSourceNew" class="col-sm-4 txtLabel">แหล่งข้อมูล</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control input-sm" id="inputSourceNew" placeholder="ที่มาแหล่งข้อมูล">
                                             </div>
                                         </div>
                                     </div>
@@ -455,75 +341,6 @@
                                     </div>
 
                                 </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                    <div class="col-sm-2">
-                                        <label for="inputTaxId" class="col-sm-12 txtLabel">หมวดสินค้า</label>
-                                    </div>
-                                    <div class="col-sm-3" style="margin-bottom: 5px;">
-                                        <%--<input type="text" class="form-control input-sm" id="inputPresident" placeholder="ชื่อโครงการ">--%>
-                                        <span class="txtLabel">
-                                            <select class="form-control input-sm">
-                                                <option value="01">Sealex Duragel</option>
-                                                <option value="02">Cool Lite</option>
-                                                <option value="03">WonderCOOL IR</option>
-                                                <option value="04">Sealex Duragel</option>
-                                                <option value="05">Sealex Duragel</option>
-                                            </select>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-sm-2">
-                                        <label for="inputTaxId" class="col-sm-12 txtLabel">ประเภทสินค้า</label>
-                                    </div>
-
-                                    <div class="col-sm-3" style="margin-bottom: 5px;">
-                                        <%--<input type="text" class="form-control input-sm" id="inputPresident" placeholder="ชื่อโครงการ">--%>
-                                        <span class="txtLabel input-xs">
-                                            <select id="selectCategory" class="form-control input-small">
-                                                <option value="01">PF0001 AC Louvre</option>
-                                                <option value="01">PF0002 Ajiya Mega Rib 35</option>
-                                                <option value="01">PF0003 AR 364</option>
-                                                <option value="01">PF0004 AS 760</option>
-                                                <option value="01">PF0005 AS 780-56</option>
-                                                <option value="01">PF0006 BBC-750</option>
-                                                <option value="01">PF0007 BBC-800</option>
-                                                <option value="01">PF0008 BBC-940</option>
-                                                <option value="01">PF0009 BBC-U760</option>
-                                                <option value="01">PF0010 BBC-U760 (SW)</option>
-                                                <option value="01">PF0011 BK 1000</option>
-                                                <option value="01">PF0012 BK 760 A</option>
-                                                <option value="01">PF0013 BK 762</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                     <div class="col-sm-2">
-                                            <label for="inputTaxId" class="col-sm-12 txtLabel">สถานที่จัดส่ง</label>
-                                    </div>
-                                    <div class="col-sm-8" style="margin-bottom: 5px;">
-                                        <input type="text" class="form-control input-sm" id="inputPresident" placeholder="สถานที่จัดส่ง">
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-left: 20px; margin-bottom: 5px;">
-                                    <div class="col-sm-2">
-                                        <label for="inputTaxId" class="col-sm-12 txtLabel">จำนวน</label>
-                                    </div>
-                                    <div class="col-sm-3" style="margin-bottom: 5px;">
-                                        <input type="text" class="form-control input-append input-sm txtLabel" id="inputQuantity" placeholder="0.00" value="" />
-                                    </div>
-
-                                    <div class="col-sm-2">
-                                        <label for="inputTaxId" class="col-sm-12 txtLabel">มูลค่าโครงการ</label>
-                                    </div>
-                                    <div class="col-sm-3" style="margin-bottom: 5px;">
-                                        <input type="text" class="form-control input-append input-sm txtLabel" id="inputQuantity" placeholder="0.00" value="" />
-                                    </div>
-                                </div>
-
                             </div>
                             <!-- /.post -->
 

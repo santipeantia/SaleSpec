@@ -231,15 +231,14 @@
                                     <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a> 
                                 </li>
 
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a> 
+                                </li>
+
                                  <li class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a> 
                                  </li> 
-         
-                                <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Architect Center</span></a> 
-                                </li>
-                               
-                          
+        
                             </ul>
                         </li>
 
