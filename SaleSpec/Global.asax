@@ -36,7 +36,7 @@
         routes.MapPageRoute("pages/trans/projects", "pages/trans/projects", "~/pages/trans/projects.aspx");
         routes.MapPageRoute("pages/trans/projects-update", "pages/trans/projects-update", "~/pages/trans/projects-update.aspx");
         routes.MapPageRoute("pages/trans/projects-update-status", "pages/trans/projects-update-status", "~/pages/trans/projects-update-status.aspx");
-
+        routes.MapPageRoute("pages/trans/saleonspec", "pages/trans/saleonspec", "~/pages/trans/saleonspec.aspx");
 
         routes.MapPageRoute("pages/report/saleweeklyreport", "pages/report/saleweeklyreport", "~/pages/report/saleweeklyreport.aspx");
 

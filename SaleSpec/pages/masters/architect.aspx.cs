@@ -28,6 +28,7 @@ namespace SaleSpec.pages.masters
         public string strTblActive = "";
 
         dbConnection dbConn = new dbConnection();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

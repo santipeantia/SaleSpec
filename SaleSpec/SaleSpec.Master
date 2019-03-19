@@ -222,23 +222,21 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/weeklyreport?opt=wkr"><i class="fa fa-angle-right <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a> 
+                                    <a href="../../pages/trans/weeklyreport?opt=wkr"><i class="fa fa-angle-right <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a>
                                 </li>
-                               
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a> 
+                                    <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a>
                                 </li>
-
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a> 
+                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a>
                                 </li>
-
-                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a> 
-                                 </li> 
-        
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a>
+                                </li>
+                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale On Spec</span></a>
+                                </li>
                             </ul>
                         </li>
 
@@ -266,10 +264,39 @@
                                     <a href="../../pages/masters/productgroup?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Report</span></a> 
                                 </li>
 
-                          
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/forecasting?opt=rfoc"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Forecasting Report</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/specintake?opt=itk"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Spec Intake Report</span></a> 
+                                </li>
+                        
                             </ul>
                         </li>
 
+                        <li class="<%= strActiveActivity.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview"></i><span class="txtLabel">Activities</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<%= strActiveActivity.ToString() %> ">
+                                    <a href="../../pages/report/eventactivity?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Event / Activity</span></a> 
+                                </li>
+
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/trans/premiumgift?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Gift / Premium</span></a> 
+                                </li> 
+
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/masters/specintake?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Surprise Gift</span></a> 
+                                </li>
+
+                            </ul>
+                        </li>
             
                         <li style="border-top: 1px solid #dddddd;">
                             <a href="../../pages/users/logout">

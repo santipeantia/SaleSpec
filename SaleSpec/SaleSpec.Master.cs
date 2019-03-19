@@ -26,6 +26,7 @@ namespace SaleSpec
         public string strTextArchitect = "";
         public string strTextCustomers = "";
         public string strTextProjectsetup = "";
+        public string strTextSaleOnspec = "";
 
 
         public string strActiveTransaction = "";
@@ -39,6 +40,8 @@ namespace SaleSpec
 
         public string strActiveReporting = "";
         public string strTextSaleWeeklyReport = "";
+
+        public string strActiveActivity = "";
 
 
 
@@ -58,7 +61,7 @@ namespace SaleSpec
         //public string strTextVendorList = "";
 
         //public string strActiveCustomer = "";
-       
+
         //public string strTextCustomerLevel = "";
         //public string strTextCustomerList = "";
 
@@ -105,7 +108,7 @@ namespace SaleSpec
         //public string strPurchaseGroup = "";
         //public string strActivePurchase = "";
         //public string strTextReqPR = "";
-        
+
         string ssql;
         string strOpt = "";
 
@@ -140,14 +143,17 @@ namespace SaleSpec
                 if (strOpt == "scus") { strActiveMasterSetup = "active"; strTextCustomers = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomers = ""; }
                 if (strOpt == "comp") { strActiveMasterSetup = "active"; strTextCustomers = "text-red"; return; } else { strActiveMasterSetup = ""; strTextCustomers = ""; }
                 if (strOpt == "prjs") { strActiveMasterSetup = "active"; strTextProjectsetup = "text-red"; return; } else { strActiveMasterSetup = ""; strTextProjectsetup = ""; }
-
                 
-
 
                 if (strOpt == "reqf") { strActiveTransaction = "active"; strTextRequestForm = "text-red"; return; } else { strActiveTransaction = ""; strTextRequestForm = ""; }
                 if (strOpt == "arc") { strActiveTransaction = "active"; strTextArchitectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextArchitectCenter = ""; }
                 if (strOpt == "pjc") { strActiveTransaction = "active"; strTextProjectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextProjectCenter = ""; }
                 if (strOpt == "wkr") { strActiveTransaction = "active"; strTextWeeklyReport = "text-red"; return; } else { strActiveTransaction = ""; strTextWeeklyReport = ""; }
+                if (strOpt == "sos") { strActiveTransaction = "active"; strTextSaleOnspec = "text-red"; return; } else { strActiveTransaction = ""; strTextSaleOnspec = ""; }
+
+
+                if (strOpt == "sos") { strActiveActivity = "active"; strTextSaleOnspec = "text-red"; return; } else { strActiveActivity = ""; strTextSaleOnspec = ""; }
+                
 
                 if (strOpt == "rptswr") { strActiveReporting = "active"; strTextSaleWeeklyReport = "text-red"; return; } else { strActiveReporting = ""; strTextSaleWeeklyReport = ""; }
                 

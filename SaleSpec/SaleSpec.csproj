@@ -6637,6 +6637,7 @@
     <Content Include="pages\trans\projects-update-status.aspx" />
     <Content Include="pages\trans\projects-update.aspx" />
     <Content Include="pages\trans\projects.aspx" />
+    <Content Include="pages\trans\saleonspec.aspx" />
     <Content Include="pages\trans\WebForm1.aspx" />
     <Content Include="pages\trans\weeklyreport-update.aspx" />
     <Content Include="pages\trans\weeklyreport_backup.aspx" />
@@ -6927,6 +6928,13 @@
     </Compile>
     <Compile Include="pages\trans\projects.aspx.designer.cs">
       <DependentUpon>projects.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\saleonspec.aspx.cs">
+      <DependentUpon>saleonspec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\saleonspec.aspx.designer.cs">
+      <DependentUpon>saleonspec.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

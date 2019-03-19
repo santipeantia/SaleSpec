@@ -38,7 +38,7 @@ namespace SaleSpec.pages.masters
 
         protected void GetInitialData()
         {
-            GetCompanyDataBind();
+            GetProjectDataBind();
             GetStatusDataBind();
         }
 
@@ -91,7 +91,7 @@ namespace SaleSpec.pages.masters
 
         }
 
-        protected void GetCompanyDataBind()
+        protected void GetProjectDataBind()
         {
             try
             {
