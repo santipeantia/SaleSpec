@@ -40,8 +40,16 @@ namespace SaleSpec
 
         public string strActiveReporting = "";
         public string strTextSaleWeeklyReport = "";
+        public string strTextReportForecasting = "";
+        public string strTextSaleIntake = "";
+        public string strTextCompanyReport = "";
+        public string strTextArchitectReport = "";
+        public string strTextProjectReport = "";
 
         public string strActiveActivity = "";
+        public string strTextEventActivity = "";
+        public string strTextPremiumGift = "";
+        public string strTextSurprise = "";
 
 
 
@@ -122,7 +130,7 @@ namespace SaleSpec
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("../../pages/users/login.aspx");
+                Response.Redirect("../users/login.aspx");
             }
 
             strFullName = Session["sEmpEngFirstName"].ToString() + "  "  + Session["sEmpEngLastName"].ToString();
@@ -151,12 +159,24 @@ namespace SaleSpec
                 if (strOpt == "wkr") { strActiveTransaction = "active"; strTextWeeklyReport = "text-red"; return; } else { strActiveTransaction = ""; strTextWeeklyReport = ""; }
                 if (strOpt == "sos") { strActiveTransaction = "active"; strTextSaleOnspec = "text-red"; return; } else { strActiveTransaction = ""; strTextSaleOnspec = ""; }
 
+                if (strOpt == "evt") { strActiveActivity = "active"; strTextEventActivity = "text-red"; return; } else { strActiveActivity = ""; strTextEventActivity = ""; }
+                if (strOpt == "preg") { strActiveActivity = "active"; strTextPremiumGift = "text-red"; return; } else { strActiveActivity = ""; strTextPremiumGift = ""; }
+                if (strOpt == "spg") { strActiveActivity = "active"; strTextSurprise = "text-red"; return; } else { strActiveActivity = ""; strTextSurprise = ""; }
 
-                if (strOpt == "sos") { strActiveActivity = "active"; strTextSaleOnspec = "text-red"; return; } else { strActiveActivity = ""; strTextSaleOnspec = ""; }
                 
+
 
                 if (strOpt == "rptswr") { strActiveReporting = "active"; strTextSaleWeeklyReport = "text-red"; return; } else { strActiveReporting = ""; strTextSaleWeeklyReport = ""; }
+                if (strOpt == "rcom") { strActiveReporting = "active"; strTextCompanyReport = "text-red"; return; } else { strActiveReporting = ""; strTextCompanyReport = ""; }
+                if (strOpt == "rarc") { strActiveReporting = "active"; strTextArchitectReport = "text-red"; return; } else { strActiveReporting = ""; strTextArchitectReport = ""; }
+                if (strOpt == "rpjc") { strActiveReporting = "active"; strTextProjectReport = "text-red"; return; } else { strActiveReporting = ""; strTextProjectReport = ""; }
+
+                if (strOpt == "rfoc") { strActiveReporting = "active"; strTextReportForecasting = "text-red"; return; } else { strActiveReporting = ""; strTextReportForecasting = ""; }
+                if (strOpt == "itk") { strActiveReporting = "active"; strTextSaleIntake = "text-red"; return; } else { strActiveReporting = ""; strTextSaleIntake = ""; }
+
                 
+                
+
 
             }
             catch

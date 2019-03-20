@@ -25,7 +25,7 @@
                         <div class="form-group col-sm-3">
                             <label class="txtLabel">จากวันที่</label>
                             <div class="col-sm-12 input-group date">
-                                <input type="text" class="form-control input-sm pull-left" id="datepickerstart" name="datepickerstart" runat="server" clientidmode="Static">
+                                <input type="text" class="form-control input-sm pull-left" id="datepickerstart" name="datepickerstart"  runat="server" clientidmode="Static" autocomplete="off">
                                 <div class="input-group-addon input-sm">
                                     <i class="fa fa-calendar"></i>
                                 </div>
@@ -35,7 +35,7 @@
                         <div class="form-group col-sm-3">
                             <label class="txtLabel">ถึงวันที่</label>
                             <div class="col-sm-12 input-group date">
-                                <input type="text" class="form-control input-sm pull-left" id="datepickerend" name="datepickerend" runat="server" clientidmode="Static">
+                                <input type="text" class="form-control input-sm pull-left" id="datepickerend" name="datepickerend" data-date-format="yyyy-mm-dd" runat="server" clientidmode="Static" autocomplete="off">
                                 <div class="input-group-addon input-sm">
                                     <i class="fa fa-calendar"></i>
                                 </div>

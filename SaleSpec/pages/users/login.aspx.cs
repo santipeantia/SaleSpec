@@ -29,8 +29,6 @@ public partial class pages_users_login : System.Web.UI.Page
     public string strTblDetail = "";
     public string strTblActive = "";
 
-    
-
     protected void Page_Load(object sender, EventArgs e)
     {
 

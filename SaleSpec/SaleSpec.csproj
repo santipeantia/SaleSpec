@@ -6497,10 +6497,14 @@
     <Content Include="dist\img\e_mail.png" />
     <Content Include="dist\img\handshake.png" />
     <Content Include="dist\img\info.png" />
+    <Content Include="dist\img\passwordreset.png" />
     <Content Include="dist\img\price-control.png" />
     <Content Include="dist\img\User_96px.png" />
     <Content Include="dist\img\weekly-update.png" />
     <Content Include="dist\img\weekly.png" />
+    <Content Include="pages\activity\eventactivity.aspx" />
+    <Content Include="pages\activity\premiumgift.aspx" />
+    <Content Include="pages\activity\surprisegift.aspx" />
     <Content Include="pages\charts\chartjs.aspx" />
     <Content Include="pages\charts\chartjs.html" />
     <Content Include="pages\dashboard.aspx" />
@@ -6629,11 +6633,16 @@
     <Content Include="pages\masters\productgroup.aspx" />
     <Content Include="pages\masters\projectsetup.aspx" />
     <Content Include="pages\masters\specifier.aspx" />
+    <Content Include="pages\report\architectreport.aspx" />
+    <Content Include="pages\report\forecastingreport.aspx" />
+    <Content Include="pages\report\projectreport.aspx" />
     <Content Include="pages\report\saleweeklyreport.aspx" />
+    <Content Include="pages\report\specintakereport.aspx" />
     <Content Include="pages\tables\data.html" />
     <Content Include="pages\tables\simple.html" />
     <Content Include="pages\trans\apprequest-new.aspx" />
     <Content Include="pages\trans\apprequest.aspx" />
+    <Content Include="pages\report\companyreport.aspx" />
     <Content Include="pages\trans\projects-update-status.aspx" />
     <Content Include="pages\trans\projects-update.aspx" />
     <Content Include="pages\trans\projects.aspx" />
@@ -6648,6 +6657,7 @@
     <Content Include="pages\UI\modals.html" />
     <Content Include="pages\UI\sliders.html" />
     <Content Include="pages\UI\timeline.html" />
+    <Content Include="pages\users\changepassword.aspx" />
     <Content Include="pages\users\login.aspx" />
     <Content Include="pages\users\login.html" />
     <Content Include="pages\users\logout.aspx" />
@@ -6810,6 +6820,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
+    <Compile Include="pages\activity\eventactivity.aspx.cs">
+      <DependentUpon>eventactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\activity\eventactivity.aspx.designer.cs">
+      <DependentUpon>eventactivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\activity\premiumgift.aspx.cs">
+      <DependentUpon>premiumgift.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\activity\premiumgift.aspx.designer.cs">
+      <DependentUpon>premiumgift.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\activity\surprisegift.aspx.cs">
+      <DependentUpon>surprisegift.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\activity\surprisegift.aspx.designer.cs">
+      <DependentUpon>surprisegift.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\charts\chartjs.aspx.cs">
       <DependentUpon>chartjs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -6887,12 +6918,40 @@
     <Compile Include="pages\masters\specifier.aspx.designer.cs">
       <DependentUpon>specifier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\report\architectreport.aspx.cs">
+      <DependentUpon>architectreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\architectreport.aspx.designer.cs">
+      <DependentUpon>architectreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\forecastingreport.aspx.cs">
+      <DependentUpon>forecastingreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\forecastingreport.aspx.designer.cs">
+      <DependentUpon>forecastingreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\projectreport.aspx.cs">
+      <DependentUpon>projectreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\projectreport.aspx.designer.cs">
+      <DependentUpon>projectreport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\report\saleweeklyreport.aspx.cs">
       <DependentUpon>saleweeklyreport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages\report\saleweeklyreport.aspx.designer.cs">
       <DependentUpon>saleweeklyreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\specintakereport.aspx.cs">
+      <DependentUpon>specintakereport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\specintakereport.aspx.designer.cs">
+      <DependentUpon>specintakereport.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\apprequest-new.aspx.cs">
       <DependentUpon>apprequest-new.aspx</DependentUpon>
@@ -6907,6 +6966,13 @@
     </Compile>
     <Compile Include="pages\trans\apprequest.aspx.designer.cs">
       <DependentUpon>apprequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\companyreport.aspx.cs">
+      <DependentUpon>companyreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\companyreport.aspx.designer.cs">
+      <DependentUpon>companyreport.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\projects-update-status.aspx.cs">
       <DependentUpon>projects-update-status.aspx</DependentUpon>
@@ -6963,6 +7029,13 @@
     </Compile>
     <Compile Include="pages\trans\weeklyreport.aspx.designer.cs">
       <DependentUpon>weeklyreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\users\changepassword.aspx.cs">
+      <DependentUpon>changepassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\users\changepassword.aspx.designer.cs">
+      <DependentUpon>changepassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\users\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

@@ -16,6 +16,7 @@
         routes.MapPageRoute("pages/default", "pages/default", "~/pages/default.aspx");
         routes.MapPageRoute("pages/users/login", "pages/users/login", "~/pages/users/login.aspx");
         routes.MapPageRoute("pages/users/logout", "pages/users/logout", "~/pages/users/logout.aspx");
+        routes.MapPageRoute("pages/users/changepassword", "pages/users/changepassword", "~/pages/users/changepassword.aspx");
 
         routes.MapPageRoute("pages/masters/customertype", "pages/masters/customertype", "~/pages/masters/customertype.aspx");
         routes.MapPageRoute("pages/masters/customergrade", "pages/masters/customergrade", "~/pages/masters/customergrade.aspx");
@@ -39,7 +40,15 @@
         routes.MapPageRoute("pages/trans/saleonspec", "pages/trans/saleonspec", "~/pages/trans/saleonspec.aspx");
 
         routes.MapPageRoute("pages/report/saleweeklyreport", "pages/report/saleweeklyreport", "~/pages/report/saleweeklyreport.aspx");
-
+        routes.MapPageRoute("pages/report/companyreport", "pages/report/companyreport", "~/pages/report/companyreport.aspx");
+        routes.MapPageRoute("pages/report/architectreport", "pages/report/architectreport", "~/pages/report/architectreport.aspx");
+        routes.MapPageRoute("pages/report/projectreport", "pages/report/projectreport", "~/pages/report/projectreport.aspx");
+        routes.MapPageRoute("pages/report/forecastingreport", "pages/report/forecastingreport", "~/pages/report/forecastingreport.aspx");
+        routes.MapPageRoute("pages/report/specintakereport", "pages/report/specintakereport", "~/pages/report/specintakereport.aspx");
+            
+        routes.MapPageRoute("pages/activity/eventactivity", "pages/activity/eventactivity", "~/pages/activity/eventactivity.aspx");
+        routes.MapPageRoute("pages/activity/premiumgift", "pages/activity/premiumgift", "~/pages/activity/premiumgift.aspx");
+        routes.MapPageRoute("pages/activity/surprisegift", "pages/activity/surprisegift", "~/pages/activity/surprisegift.aspx");
 
 
     }

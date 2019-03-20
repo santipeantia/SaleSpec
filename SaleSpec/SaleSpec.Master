@@ -142,7 +142,7 @@
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            <a href="../../pages/users/changepassword" class="btn btn-default btn-flat">Change Password</a>
                                         </div>
                                         <div class="pull-right">
                                             <a href="../../pages/users/login" class="btn btn-default btn-flat">Sign out</a>
@@ -229,10 +229,10 @@
                                     <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a>
                                 </li>
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a>
+                                    <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a>
                                 </li>
                                 <li class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a>
+                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a>
                                 </li>
                                 <li class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale On Spec</span></a>
@@ -253,23 +253,23 @@
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/trans/apprequest?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Company Report</span></a> 
+                                    <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a> 
                                 </li> 
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/masters/customertype?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Architect Report</span></a> 
+                                    <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Report</span></a> 
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/masters/productgroup?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Report</span></a> 
+                                    <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Report</span></a> 
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/forecasting?opt=rfoc"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Forecasting Report</span></a> 
+                                    <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a> 
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/specintake?opt=itk"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Spec Intake Report</span></a> 
+                                    <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a> 
                                 </li>
                         
                             </ul>
@@ -277,22 +277,22 @@
 
                         <li class="<%= strActiveActivity.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
                             <a href="#">
-                                <i class="fa fa-table treeview"></i><span class="txtLabel">Activities</span>
+                                <i class="fa fa-coffee treeview"></i><span class="txtLabel">Activities</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
                                 <li class="<%= strActiveActivity.ToString() %> ">
-                                    <a href="../../pages/report/eventactivity?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Event / Activity</span></a> 
+                                    <a href="../../pages/activity/eventactivity?opt=evt"><i class="fa fa-angle-right <%= strTextEventActivity.ToString() %>"></i><span class="txtLabel <%= strTextEventActivity.ToString() %>">Event / Activity</span></a> 
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/trans/premiumgift?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Gift / Premium</span></a> 
+                                    <a href="../../pages/activity/premiumgift?opt=preg"><i class="fa fa-angle-right <%= strTextPremiumGift.ToString() %>"></i><span class="txtLabel <%= strTextPremiumGift.ToString() %>">Gift / Premium</span></a> 
                                 </li> 
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/masters/specintake?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Surprise Gift</span></a> 
+                                    <a href="../../pages/activity/surprisegift?opt=spg"><i class="fa fa-angle-right <%= strTextSurprise.ToString() %>"></i><span class="txtLabel <%= strTextSurprise.ToString() %>">Surprise Gift</span></a> 
                                 </li>
 
                             </ul>
@@ -537,8 +537,7 @@
             });
             $('#datepickerend').datepicker({
                 autoclose: true,
-                todayHighlight: true,
-                format: 'dd/mm/yyyy'
+                todayHighlight: true
             });
             $('#datevisit').datepicker({
                 autoclose: true,

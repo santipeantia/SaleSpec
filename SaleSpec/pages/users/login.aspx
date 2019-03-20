@@ -68,7 +68,7 @@
                 <%= strErorConn %>
                 
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control txtLabel" id="inpUserName" name="UserName" runat="server" placeholder="Username">
+                    <input type="text" class="form-control txtLabel" id="inpUserName" name="UserName" runat="server" onkeyup="this.value = this.value.toUpperCase();" placeholder="Username">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
