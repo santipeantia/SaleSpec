@@ -528,6 +528,12 @@
                 todayHighlight: true,
                 format: 'yyyy-mm-dd'
             });
+            
+            $('#datepickerdelivery').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
             $('#datepickerstart').datepicker({
                 autoclose: true,
                 changeMonth: true,

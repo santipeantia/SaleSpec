@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3 col-md-offset-2">
+                                    <div class="col-md-2 col-md-offset-2">
                                         <label class="txtLabel">Visit Date</label>
                                         <div class="input-group date">
                                             <input type="text" class="form-control input-sm pull-left" id="datepickertrans" value="" autocomplete="off">
@@ -49,17 +49,9 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                       <%-- <label class="txtLabel">Time</label>--%>
-                                        <%--<div class="input-group date">
-                                            <input type="text" class="form-control input-sm pull-left" id="inputtime" value="" autocomplete="off">
-                                            <div class="input-group-addon input-sm">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                        </div>--%>
-
                                         <div class="bootstrap-timepicker">
                                             <div class="input-group">
-                                                <label class="txtLabel">Time</label>
+                                                <label class="txtLabel">StartTime</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control input-sm timepicker">
                                                     <div class="input-group-addon">
@@ -68,229 +60,605 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
 
-                                    <div class="col-md-1 input-group">
+                                    <div class="col-md-2">
+                                        <div class="bootstrap-timepicker">
+                                            <div class="input-group">
+                                                <label class="txtLabel">ToTime</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control input-sm timepicker">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%--<div class="col-md-1 input-group">
                                         <label class="txtLabel">Event</label>
                                         <div class="">
                                             <button type="button" class="btn btn-info btn-block btn-flat btn-sm">Event View</button>
                                         </div>
-                                    </div>
+                                    </div>--%>
                                 </div>
+                               
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Company</label>
+                                            <div class="input-group col-md-12">
+                                                <span class="txtLabel">
+                                                    <select id="selectCustomer" class="form-control input input-sm " style="width: 100%;">
+                                                        <option value=""></option>
+                                                        <option value="1675">Vortech Architek Co.,Ltd</option>
+                                                        <option value="1676">Weapons Decoration Co.,Ltd</option>
+                                                        <option value="1677">Wirach & Associate Co.,Ltd</option>
+                                                        <option value="1678">Wise Line Co.,Ltd</option>
+                                                        <option value="1679">Wolves Design Co.,Ltd</option>
+                                                        <option value="1680">Work- aholic architect Co.,Ltd</option>
+                                                        <option value="1681">Work Of Work Co.,Ltd</option>
+                                                        <option value="1682">Workspace Architecture Studio Co.,Ltd</option>
+                                                        <option value="1683">Xayaburi Power Co.,Ltd</option>
+                                                        <option value="1684">Zamil Steel Co.,Ltd</option>
+                                                        <option value="1685">Zpacez Co.,Ltd</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 input-group">
+                                            <label class="txtLabel">Company</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openCompany()">New</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Architect</label>
+                                            <div class="input-group col-md-12">
+                                                <span class="txtLabel">
+                                                    <select id="selectArchitect" class="form-control input input-sm " style="width: 100%;">
+                                                        <option value=""></option>
+                                                        <option value="1556">Kittaphol	 Onsri</option>
+                                                        <option value="1668">Kittipat	Sirijumpar</option>
+                                                        <option value="1523">Kittiphop	Watthong</option>
+                                                        <option value="1665">Kritsada	 Pengwantana</option>
+                                                        <option value="1536">Laddawan	Panta</option>
+                                                        <option value="1233">Napasawan	Bhongbhibhat</option>
+                                                        <option value="1651">Nares	unphikul</option>
+                                                        <option value="1182">Narin	 Bunjun</option>
+                                                        <option value="1349">Narongrit	Veerakul</option>
+
+                                                    </select>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 input-group">
+                                            <label class="txtLabel">Architect</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openArchitect()">New</button>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-6 col-md-offset-2">
-                                        <label class="txtLabel">Company</label>
+                                        <label class="txtLabel">What do you do...</label>
                                         <div class="input-group col-md-12">
                                             <span class="txtLabel">
-                                                <select id="selectCustomer" class="form-control input input-sm " style="width: 100%;">
+                                                <select id="selectTransEntry" class="form-control input input-sm " style="width: 100%;">
                                                     <option value=""></option>
-                                                    <option value="1675">Vortech Architek Co.,Ltd</option>
-                                                    <option value="1676">Weapons Decoration Co.,Ltd</option>
-                                                    <option value="1677">Wirach & Associate Co.,Ltd</option>
-                                                    <option value="1678">Wise Line Co.,Ltd</option>
-                                                    <option value="1679">Wolves Design Co.,Ltd</option>
-                                                    <option value="1680">Work- aholic architect Co.,Ltd</option>
-                                                    <option value="1681">Work Of Work Co.,Ltd</option>
-                                                    <option value="1682">Workspace Architecture Studio Co.,Ltd</option>
-                                                    <option value="1683">Xayaburi Power Co.,Ltd</option>
-                                                    <option value="1684">Zamil Steel Co.,Ltd</option>
-                                                    <option value="1685">Zpacez Co.,Ltd</option>
+                                                    <option value="1">New Project</option>
+                                                    <option value="2">Update Project</option>
+                                                    <option value="3">New Architect </option>
+                                                    <option value="4">Spec Intake</option>
+                                                    <option value="5">ผลการปฏิบัติงานอื่นๆ</option>
                                                 </select>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="col-md-1 input-group">
-                                        <label class="txtLabel">Company</label>
+                                        <label class="txtLabel">Entry</label>
                                         <div class="">
-                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openCompany()">New</button>
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="myFunction()">Entry</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top: 5px;">
-                                    <div class="col-md-6 col-md-offset-2">
-                                        <label class="txtLabel">Architect</label>
-                                        <div class="input-group col-md-12">
-                                            <span class="txtLabel">
-                                                <select id="selectArchitect" class="form-control input input-sm " style="width: 100%;">
-                                                    <option value=""></option>
-                                                    <option value="1556">Kittaphol	 Onsri</option>
-                                                    <option value="1668">Kittipat	Sirijumpar</option>
-                                                    <option value="1523">Kittiphop	Watthong</option>
-                                                    <option value="1665">Kritsada	 Pengwantana</option>
-                                                    <option value="1536">Laddawan	Panta</option>
-                                                    <option value="1233">Napasawan	Bhongbhibhat</option>
-                                                    <option value="1651">Nares	unphikul</option>
-                                                    <option value="1182">Narin	 Bunjun</option>
-                                                    <option value="1349">Narongrit	Veerakul</option>
+                                <hr />
 
+                                <div id="divNewProject"  style="display: none;"  >
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">New Project</label>
+                                            <div class="input-group col-md-12">
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Locations</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea cols="40" rows="3" class="form-control input-sm"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Process</label>
+                                            <div class="txtLabel">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <select id="selectProcess" class="form-control input-sm" style="width: 100%">
+                                                    <option value="value">Process 1</option>
+                                                    <option value="value">Process 2</option>
+                                                    <option value="value">Process 3</option>
                                                 </select>
-                                            </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-1 input-group">
-                                        <label class="txtLabel">Architect</label>
-                                        <div class="">
-                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openArchitect()">New</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top: 5px;">
-                                    <div class="col-md-6 col-md-offset-2">
-                                        <label class="txtLabel">Project</label>
-                                        <div class="input-group col-md-12">
-                                            <span class="txtLabel">
-                                                <select id="selectProject" class="form-control input input-sm " style="width: 100%;">
-                                                    <option value=""></option>
-                                                    <option value="PJ0190">โรงงานสยามคาคิฮาระ</option>
-                                                    <option value="PJ0191">Renovate Showa</option>
-                                                    <option value="PJ0192">Sankyu </option>
-                                                    <option value="PJ0193">Hino สมุทรสาคร</option>
-                                                    <option value="PJ0194">SHL พาราวูด แคราย</option>
-                                                    <option value="PJ0195">Thai sanei นิคมเวลโก</option>
-                                                    <option value="PJ0196">NEW TEMPORARY MIXING ROOM</option>
-                                                    <option value="PJ0197">Sumitomo missing</option>
-                                                    <option value="PJ0198">โรงงานเออิโย</option>
-                                                    <option value="PJ0199">โรงงานเค ไลน์</option>
-                                                    <option value="PJ0200">โรงงานมโนยนต์ชัย</option>
-
+                                        <div class="col-md-3">
+                                            <label class="txtLabel">Step</label>
+                                            <div class="txtLabel">
+                                                <select id="selectStep" class="form-control input-sm"  style="width: 100%">
+                                                    <option value="value">Step 1</option>
+                                                    <option value="value">Step 2</option>
+                                                    <option value="value">Step 3</option>
                                                 </select>
-                                            </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-1 input-group">
-                                        <label class="txtLabel">Project</label>
-                                        <div class="">
-                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openProject()">New</button>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Product</label>
+                                            <div class="txtLabel">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <select id="selectProduct" class="form-control input-sm" style="width: 100%">
+                                                    <option value="value">Product 1</option>
+                                                    <option value="value">Product 2</option>
+                                                    <option value="value">Product 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="txtLabel">Profile</label>
+                                            <div class="txtLabel">
+                                                <select id="selectProfile" class="form-control input-sm"  style="width: 100%">
+                                                    <option value="value">Profile 1</option>
+                                                    <option value="value">Profile 2</option>
+                                                    <option value="value">Profile 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Quantity</label>
+                                            <div class="txtLabel">
+                                                <input type="text" class="form-control input-sm" />                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="txtLabel">Delivery Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdelivery" value="" autocomplete="off">
+                                                <div class="input-group-addon input-sm">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Reason</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Status</label>
+                                            <div class="txtLabel">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <select id="selectStatus" class="form-control input-sm" style="width: 100%">
+                                                    <option value="value">Status 1</option>
+                                                    <option value="value">Status 2</option>
+                                                    <option value="value">Status 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2  col-md-offset-1">
+                                            <label class="txtLabel">Save Entry</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row" style="margin-top: 5px;">
-                                     <div class="col-md-4 col-md-offset-2">
-                                        <label class="txtLabel">Contact</label>
-                                        <div class="">
-                                            <input type="text" class="form-control input-sm" />
+                                <div id="divUpdate" style="display: none;">
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Update Project</label>
+                                            <div class="input-group col-md-12">
+                                                <span class="txtLabel">
+                                                    <select id="selectProject" class="form-control input input-sm " style="width: 100%;">
+                                                        <option value=""></option>
+                                                        <option value="PJ0190">โรงงานสยามคาคิฮาระ</option>
+                                                        <option value="PJ0191">Renovate Showa</option>
+                                                        <option value="PJ0192">Sankyu </option>
+                                                        <option value="PJ0193">Hino สมุทรสาคร</option>
+                                                        <option value="PJ0194">SHL พาราวูด แคราย</option>
+                                                        <option value="PJ0195">Thai sanei นิคมเวลโก</option>
+                                                        <option value="PJ0196">NEW TEMPORARY MIXING ROOM</option>
+                                                        <option value="PJ0197">Sumitomo missing</option>
+                                                        <option value="PJ0198">โรงงานเออิโย</option>
+                                                        <option value="PJ0199">โรงงานเค ไลน์</option>
+                                                        <option value="PJ0200">โรงงานมโนยนต์ชัย</option>
+
+                                                    </select>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <label class="txtLabel">Mobile</label>
-                                        <div class="">
-                                            <input type="text" class="form-control input-sm" />
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Locations</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea cols="40" rows="3" class="form-control input-sm"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">MainCon</label>
+                                            <div class="">
+                                                <input type="text" class="form-control input-sm" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Process</label>
+                                            <div class="txtLabel">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <select id="selectProcess" class="form-control input-sm" style="width: 100%">
+                                                    <option value="value">Process 1</option>
+                                                    <option value="value">Process 2</option>
+                                                    <option value="value">Process 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="txtLabel">Step</label>
+                                            <div class="txtLabel">
+                                                <select id="selectStep" class="form-control input-sm"  style="width: 100%">
+                                                    <option value="value">Step 1</option>
+                                                    <option value="value">Step 2</option>
+                                                    <option value="value">Step 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Product</label>
+                                            <div class="txtLabel">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <select id="selectProduct" class="form-control input-sm" style="width: 100%">
+                                                    <option value="value">Product 1</option>
+                                                    <option value="value">Product 2</option>
+                                                    <option value="value">Product 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="txtLabel">Profile</label>
+                                            <div class="txtLabel">
+                                                <select id="selectProfile" class="form-control input-sm"  style="width: 100%">
+                                                    <option value="value">Profile 1</option>
+                                                    <option value="value">Profile 2</option>
+                                                    <option value="value">Profile 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Quantity</label>
+                                            <div class="txtLabel">
+                                                <input type="text" class="form-control input-sm" />                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="txtLabel">Delivery Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdelivery1" value="" autocomplete="off">
+                                                <div class="input-group-addon input-sm">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Reason</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-3 col-md-offset-2">
+                                            <label class="txtLabel">Status</label>
+                                            <div class="txtLabel">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <select id="selectStatus2" class="form-control input-sm" style="width: 100%">
+                                                    <option value="value">Status 1</option>
+                                                    <option value="value">Status 2</option>
+                                                    <option value="value">Status 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2  col-md-offset-1">
+                                            <label class="txtLabel">Save Entry</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row" style="margin-top: 5px;">
-                                     <div class="col-md-6 col-md-offset-2">
-                                        <label class="txtLabel">Reason</label>
-                                        <div class="">
-                                            <%--<input type="text" class="form-control input-sm" />--%>
-                                            <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+                                <div id="divNewArchitect"  style="display: none;"  >
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">New Architect</label>
+                                            <div class="input-group col-md-12">
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Reason</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-2  col-md-offset-2">
+                                            <label class="txtLabel">Save Entry</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row" style="margin-top: 5px;">
-                                    <div class="col-md-2 col-md-offset-2">
-                                        <label class="txtLabel">Save Entry</label>
-                                        <div class="">
-                                            <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                <div id="divSpecIntake"  style="display: none;"  >
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-2 col-md-offset-2">
+                                            <div class="radio txtLabel">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                                    มีไฟล์เอกสารแนบ
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 ">
+                                            <div class="radio txtLabel">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" >
+                                                    ไม่มีไฟล์แนบ
+                                                </label>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-2 ">
+                                            <button class="btn btn-info btn-block btn-flat btn-sm">Browse</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <table id="tableAttach" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Descript</th>
+                                                        <th>Details</th>
+                                                        <th>#</th>
+                                                        <th>#</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>document support no.1</td>
+                                                        <td>Details document support no.1</td>
+                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
+                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>document support no.2</td>
+                                                        <td>Details document support no.2</td>
+                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
+                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>document support no.3</td>
+                                                        <td>Details document support no.3</td>
+                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
+                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Reason</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-2  col-md-offset-2">
+                                            <label class="txtLabel">Save Entry</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="divOther"  style="display: none;"  >
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Other</label>
+                                            <div class="input-group col-md-12">
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Reason</label>
+                                            <div class="">
+                                                <%--<input type="text" class="form-control input-sm" />--%>
+                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-2  col-md-offset-2">
+                                            <label class="txtLabel">Save Entry</label>
+                                            <div class="">
+                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="post clearfix">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/document.png" alt="User Image">
-                                <span class="username">
-                                    <a href="#">Visit History</a>
-                                    <div class="btn-group pull-right ">
-                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server"><i class="fa fa-print"></i></button>
-                                    </div>
-                                </span>
-                                <span class="description">Please attach your document support</span>
-                            </div>
-                            <!-- /.user-block -->
+                            <div class="post clearfix hidden">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="../../dist/img/document.png" alt="User Image">
+                                    <span class="username">
+                                        <a href="#">Visit History</a>
+                                        <div class="btn-group pull-right ">
+                                            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server"><i class="fa fa-print"></i></button>
+                                        </div>
+                                    </span>
+                                    <span class="description">Please attach your document support</span>
+                                </div>
+                                <!-- /.user-block -->
 
-                            <div class="container-fluid">
-                                <table id="tableDetails" class="table table-bordered table-striped table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Copany</th>
-                                            <th>Architect</th>
-                                            <th>Project</th>
-                                            <th>Contact</th>
-                                            <th>Mobile</th>
-                                            <th>Reason</th>
-                                            <th>Updated</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2018-12-25</td>
-                                            <td>10:00</td>
-                                            <td>Planet Studio Co.,Ltd.</td>
-                                            <td>Amornrat	Eursirirattanaphisan</td>
-                                            <td>ปรับปรุงอาคาร บจก.ปัจจพล ไฟเบอร์</td>
-                                            <td>K.Somchai</td>
-                                            <td>0899999959</td>
-                                            <td>Make Relationship</td>
-                                            <td>
-                                                2018-12-28 09:45:25 AM
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2018-12-28</td>
-                                            <td>14:00</td>
-                                            <td>Planet Studio Co.,Ltd.</td>
-                                            <td>Amornrat	Eursirirattanaphisan</td>
-                                            <td>คลังสินค้า บ.หาดทิพย์</td>
-                                            <td>K.Somchai</td>
-                                            <td>0899999959</td>
-                                            <td>Make Relationship</td>
-                                            <td>
-                                                2018-12-18 11:49:15 AM
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2019-01-10</td>
-                                            <td>09:00</td>
-                                            <td>Planet Studio Co.,Ltd.</td>
-                                            <td>Amornrat	Eursirirattanaphisan</td>
-                                            <td>รถไฟฟ้าความเร็วสูง หัวหิน</td>
-                                            <td>K.Somchai</td>
-                                            <td>0899999959</td>
-                                            <td>Make Relationship</td>
-                                            <td>
-                                                2018-12-15 11:30:20 AM
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2019-01-15</td>
-                                            <td>11:00</td>
-                                            <td>Amornrat	Eursirirattanaphisan</td>
-                                            <td>Planet Studio Co.,Ltd.</td>
-                                            <td>กาฬสินธุ์</td>
-                                            <td>K.Somchai</td>
-                                            <td>0899999959</td>
-                                            <td>Make Relationship</td>
-                                            <td>
-                                                2018-12-10 08:30:30 AM
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div class="container-fluid">
+                                    <table id="tableDetails" class="table table-bordered table-striped table-hover table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Copany</th>
+                                                <th>Architect</th>
+                                                <th>Project</th>
+                                                <th>Contact</th>
+                                                <th>Mobile</th>
+                                                <th>Reason</th>
+                                                <th>Updated</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2018-12-25</td>
+                                                <td>10:00</td>
+                                                <td>Planet Studio Co.,Ltd.</td>
+                                                <td>Amornrat	Eursirirattanaphisan</td>
+                                                <td>ปรับปรุงอาคาร บจก.ปัจจพล ไฟเบอร์</td>
+                                                <td>K.Somchai</td>
+                                                <td>0899999959</td>
+                                                <td>Make Relationship</td>
+                                                <td>2018-12-28 09:45:25 AM
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-12-28</td>
+                                                <td>14:00</td>
+                                                <td>Planet Studio Co.,Ltd.</td>
+                                                <td>Amornrat	Eursirirattanaphisan</td>
+                                                <td>คลังสินค้า บ.หาดทิพย์</td>
+                                                <td>K.Somchai</td>
+                                                <td>0899999959</td>
+                                                <td>Make Relationship</td>
+                                                <td>2018-12-18 11:49:15 AM
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2019-01-10</td>
+                                                <td>09:00</td>
+                                                <td>Planet Studio Co.,Ltd.</td>
+                                                <td>Amornrat	Eursirirattanaphisan</td>
+                                                <td>รถไฟฟ้าความเร็วสูง หัวหิน</td>
+                                                <td>K.Somchai</td>
+                                                <td>0899999959</td>
+                                                <td>Make Relationship</td>
+                                                <td>2018-12-15 11:30:20 AM
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2019-01-15</td>
+                                                <td>11:00</td>
+                                                <td>Amornrat	Eursirirattanaphisan</td>
+                                                <td>Planet Studio Co.,Ltd.</td>
+                                                <td>กาฬสินธุ์</td>
+                                                <td>K.Somchai</td>
+                                                <td>0899999959</td>
+                                                <td>Make Relationship</td>
+                                                <td>2018-12-10 08:30:30 AM
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                            <br />
-                        </div>
+                                <br />
+                            </div>
 
                             <div class="row hidden">
                                 <div class="col-md-4 col-md-offset-4">
@@ -390,8 +758,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnSaveNewData" runat="server">Save Changes</button>
+                        <button type="submit" id="btnSubmitNew" class="btn btn-primary hidden" onclick="ValidateSave()">Save Changes</button>
+                        <button type="button" class="btn btn-primary " id="btnSaveNewData" runat="server">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -589,6 +957,36 @@
 
 
         <script>
+
+            function myFunction() {
+                
+                var s = document.getElementById("selectTransEntry");
+                var div1 = document.getElementById("divNewProject");
+                var div2 = document.getElementById("divUpdate");
+                var div3 = document.getElementById("divNewArchitect");
+                var div4 = document.getElementById("divSpecIntake");
+                var div5 = document.getElementById("divOther");
+
+                //if (x.style.display === "none") {
+                //    x.style.display = "block";
+                //} else {
+                //    x.style.display = "none";
+                //}
+
+                //alert(s.value);
+
+                if (s.value == "1") { div1.style.display = "block"; } else { div1.style.display = "none"; }
+                if (s.value == "2") { div2.style.display = "block"; } else { div2.style.display = "none"; }
+                if (s.value == "3") { div3.style.display = "block"; } else { div3.style.display = "none"; }
+                if (s.value == "4") { div4.style.display = "block"; } else { div4.style.display = "none"; }
+                if (s.value == "5") { div5.style.display = "block"; } else { div5.style.display = "none"; }
+
+            }
+
+            function onChangeClick() {
+                document.getElementById("button").click();
+            }
+
             function openCompany() {
 
                 $("#myModalCompany").modal({ backdrop: false });
