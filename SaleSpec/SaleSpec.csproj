@@ -6497,6 +6497,7 @@
     <Content Include="dist\img\e_mail.png" />
     <Content Include="dist\img\handshake.png" />
     <Content Include="dist\img\info.png" />
+    <Content Include="dist\img\loader3.gif" />
     <Content Include="dist\img\passwordreset.png" />
     <Content Include="dist\img\price-control.png" />
     <Content Include="dist\img\User_96px.png" />
