@@ -142,6 +142,7 @@
     <div class="loader">
         <img src="../../dist/img/loader3.gif" alt="Loading..." />
     </div>
+
     <div id="dvMain" runat="server">
         <div class="wrapper">
             <header class="main-header">
@@ -169,7 +170,7 @@
                                         <img src="../../dist/img/User_96px.png" class="img-circle" alt="User Image" width="160" />
                                         <p>
                                             <%= strFullName %>
-                                        <small>Department of : <%= strDept %></small>
+                                            <small>Department of : <%= strDept %></small>
                                         </p>
                                     </li>
 
@@ -197,13 +198,13 @@
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header" style="text-align:center">
+                        <li class="header" style="text-align: center">
                             <img src="../../image/Logo-ampel-Big.png" class="user-image" alt="User Image" width="120" /></li>
-                        
+
 
                         <li id="mnuDashboard" runat="server" class="<%= strActiveDashboard.ToString() %>" style="border-top: 1px solid #dddddd;">
-                            <%--<a href="../../pages/dashboard?opt=dashboard">--%> 
-                            <a href="../../pages/"> 
+                            <%--<a href="../../pages/dashboard?opt=dashboard">--%>
+                            <a href="../../pages/">
                                 <i class="fa fa-dashboard"></i>
                                 <span class="txtLabel <%= strTextRedDashboard.ToString() %>">Dashboard</span>
                             </a>
@@ -218,33 +219,33 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/customergrade?opt=cusg"><i class="fa fa-angle-right <%= strTextCustomerGrade.ToString() %>"></i><span class="txtLabel <%= strTextCustomerGrade.ToString() %>">Customer Grade</span></a> 
-                                </li> 
-
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/customertype?opt=cus"><i class="fa fa-angle-right <%= strTextCustomerType.ToString() %>"></i><span class="txtLabel <%= strTextCustomerType.ToString() %>">Customer Type</span></a> 
+                                    <a href="../../pages/masters/customergrade?opt=cusg"><i class="fa fa-angle-right <%= strTextCustomerGrade.ToString() %>"></i><span class="txtLabel <%= strTextCustomerGrade.ToString() %>">Customer Grade</span></a>
                                 </li>
 
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/productgroup?opt=prdg"><i class="fa fa-angle-right <%= strTextProductGroup.ToString() %>"></i><span class="txtLabel <%= strTextProductGroup.ToString() %>">Product Group</span></a> 
-                                </li>
-                                
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/specifier?opt=spc"><i class="fa fa-angle-right <%= strTextSpecifier.ToString() %>"></i><span class="txtLabel <%= strTextSpecifier.ToString() %>">Specifier Setup</span></a> 
-                                </li>
-
-                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a> 
+                                    <a href="../../pages/masters/customertype?opt=cus"><i class="fa fa-angle-right <%= strTextCustomerType.ToString() %>"></i><span class="txtLabel <%= strTextCustomerType.ToString() %>">Customer Type</span></a>
                                 </li>
 
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/architect?opt=sarc"><i class="fa fa-angle-right <%= strTextArchitect.ToString() %>"></i><span class="txtLabel <%= strTextArchitect.ToString() %>">Architect Setup</span></a> 
+                                    <a href="../../pages/masters/productgroup?opt=prdg"><i class="fa fa-angle-right <%= strTextProductGroup.ToString() %>"></i><span class="txtLabel <%= strTextProductGroup.ToString() %>">Product Group</span></a>
                                 </li>
 
                                 <li class="<%= strActiveMasterSetup.ToString() %> ">
-                                    <a href="../../pages/masters/projectsetup?opt=prjs"><i class="fa fa-angle-right <%= strTextProjectsetup.ToString() %>"></i><span class="txtLabel <%= strTextProjectsetup.ToString() %>">Projects Setup</span></a> 
+                                    <a href="../../pages/masters/specifier?opt=spc"><i class="fa fa-angle-right <%= strTextSpecifier.ToString() %>"></i><span class="txtLabel <%= strTextSpecifier.ToString() %>">Specifier Setup</span></a>
                                 </li>
-                                                             
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a>
+                                </li>
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/architect?opt=sarc"><i class="fa fa-angle-right <%= strTextArchitect.ToString() %>"></i><span class="txtLabel <%= strTextArchitect.ToString() %>">Architect Setup</span></a>
+                                </li>
+
+                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/projectsetup?opt=prjs"><i class="fa fa-angle-right <%= strTextProjectsetup.ToString() %>"></i><span class="txtLabel <%= strTextProjectsetup.ToString() %>">Projects Setup</span></a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -283,29 +284,29 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/saleweeklyreport?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Sale Weekly Report</span></a> 
+                                    <a href="../../pages/report/saleweeklyreport?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Sale Weekly Report</span></a>
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a> 
-                                </li> 
-
-                                <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Report</span></a> 
+                                    <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a>
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Report</span></a> 
+                                    <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Report</span></a>
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a> 
+                                    <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Report</span></a>
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a> 
+                                    <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a>
                                 </li>
-                        
+
+                                <li class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -318,20 +319,20 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li class="<%= strActiveActivity.ToString() %> ">
-                                    <a href="../../pages/activity/eventactivity?opt=evt"><i class="fa fa-angle-right <%= strTextEventActivity.ToString() %>"></i><span class="txtLabel <%= strTextEventActivity.ToString() %>">Event / Activity</span></a> 
+                                    <a href="../../pages/activity/eventactivity?opt=evt"><i class="fa fa-angle-right <%= strTextEventActivity.ToString() %>"></i><span class="txtLabel <%= strTextEventActivity.ToString() %>">Event / Activity</span></a>
                                 </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/activity/premiumgift?opt=preg"><i class="fa fa-angle-right <%= strTextPremiumGift.ToString() %>"></i><span class="txtLabel <%= strTextPremiumGift.ToString() %>">Gift / Premium</span></a> 
-                                </li> 
+                                    <a href="../../pages/activity/premiumgift?opt=preg"><i class="fa fa-angle-right <%= strTextPremiumGift.ToString() %>"></i><span class="txtLabel <%= strTextPremiumGift.ToString() %>">Gift / Premium</span></a>
+                                </li>
 
                                 <li class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/activity/surprisegift?opt=spg"><i class="fa fa-angle-right <%= strTextSurprise.ToString() %>"></i><span class="txtLabel <%= strTextSurprise.ToString() %>">Surprise Gift</span></a> 
+                                    <a href="../../pages/activity/surprisegift?opt=spg"><i class="fa fa-angle-right <%= strTextSurprise.ToString() %>"></i><span class="txtLabel <%= strTextSurprise.ToString() %>">Surprise Gift</span></a>
                                 </li>
 
                             </ul>
                         </li>
-            
+
                         <li style="border-top: 1px solid #dddddd;">
                             <a href="../../pages/users/logout">
                                 <i class="fa fa-power-off"></i>
@@ -349,8 +350,6 @@
                 <form id="form1" runat="server">
                     <div>
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-
-
                         </asp:ContentPlaceHolder>
                     </div>
                 </form>
@@ -434,6 +433,7 @@
                 })
             })
     </script>
+
         <script>
             $(function () {
                 $('#table1').DataTable({
@@ -465,135 +465,135 @@
                     'info': true,
                     'autoWidth': false
                 })
-                
+
             })
 </script>
+
         <script>
-            $(function () {
-                //Initialize Select2 Elements
-                function formatResultMulti(data) {
-                    var city = $(data.element).data('city');
-                    var classAttr = $(data.element).attr('class');
-                    var hasClass = typeof classAttr != 'undefined';
-                    classAttr = hasClass ? ' ' + classAttr : '';
+                $(function () {
+                    //Initialize Select2 Elements
+                    function formatResultMulti(data) {
+                        var city = $(data.element).data('city');
+                        var classAttr = $(data.element).attr('class');
+                        var hasClass = typeof classAttr != 'undefined';
+                        classAttr = hasClass ? ' ' + classAttr : '';
 
-                    var $result = $(
-                      '<div class="row">' +
-                      '<div class="col-md-6 col-xs-6' + classAttr + '">' + data.text + '</div>' +
-                      '<div class="col-md-6 col-xs-6' + classAttr + '">' + city + '</div>' +
-                      '</div>'
-                    );
-                    return $result;
-                }
+                        var $result = $(
+                            '<div class="row">' +
+                            '<div class="col-md-6 col-xs-6' + classAttr + '">' + data.text + '</div>' +
+                            '<div class="col-md-6 col-xs-6' + classAttr + '">' + city + '</div>' +
+                            '</div>'
+                        );
+                        return $result;
+                    }
 
-                $('.select2').select2({
-                    width: '100%',
-                    formatResult: formatResultMulti
-                })
+                    $('.select2').select2({
+                        width: '100%',
+                        formatResult: formatResultMulti
+                    })
 
-                //Datemask dd/mm/yyyy
-                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-                //Datemask2 mm/dd/yyyy
-                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-                //Money Euro
-                $('[data-mask]').inputmask()
+                    //Datemask dd/mm/yyyy
+                    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+                    //Datemask2 mm/dd/yyyy
+                    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+                    //Money Euro
+                    $('[data-mask]').inputmask()
 
-                //Date range picker
-                $('#reservation').daterangepicker()
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+                    //Date range picker
+                    $('#reservation').daterangepicker()
+                    //Date range picker with time picker
+                    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
 
-                //$('#dateStartTime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-                //$('#dateStartTime').daterangepicker()
+                    //$('#dateStartTime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+                    //$('#dateStartTime').daterangepicker()
 
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                  {
-                      ranges: {
-                          'Today': [moment(), moment()],
-                          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                          'This Month': [moment().startOf('month'), moment().endOf('month')],
-                          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                      },
-                      startDate: moment().subtract(29, 'days'),
-                      endDate: moment()
-                  },
-                  function (start, end) {
-                      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-                  }
-                )
-                //Date picker
-                $('#datepicker').datepicker({
-                    autoclose: true
-                })
-                //Date picker
-                $('#addIndentDatepicker').datepicker({
-                    autoclose: true
-                })
-                //iCheck for checkbox and radio inputs
-                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                })
-                //Red color scheme for iCheck
-                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-                    checkboxClass: 'icheckbox_minimal-red',
-                    radioClass: 'iradio_minimal-red'
-                })
-                //Flat red color scheme for iCheck
-                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                    checkboxClass: 'icheckbox_flat-green',
-                    radioClass: 'iradio_flat-green'
-                })
-                //Colorpicker
-                $('.my-colorpicker1').colorpicker()
-                //color picker with addon
-                $('.my-colorpicker2').colorpicker()
-                //Timepicker
-                $('.timepicker').timepicker({
-                    showInputs: false
-                })
-                $('select:not(.normal)').each(function () {
-                    $(this).select2({
-                        dropdownParent: $(this).parent()
+                    //Date range as a button
+                    $('#daterange-btn').daterangepicker(
+                        {
+                            ranges: {
+                                'Today': [moment(), moment()],
+                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                            },
+                            startDate: moment().subtract(29, 'days'),
+                            endDate: moment()
+                        },
+                        function (start, end) {
+                            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                        }
+                    )
+                    //Date picker
+                    $('#datepicker').datepicker({
+                        autoclose: true
+                    })
+                    //Date picker
+                    $('#addIndentDatepicker').datepicker({
+                        autoclose: true
+                    })
+                    //iCheck for checkbox and radio inputs
+                    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                        checkboxClass: 'icheckbox_minimal-blue',
+                        radioClass: 'iradio_minimal-blue'
+                    })
+                    //Red color scheme for iCheck
+                    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                        checkboxClass: 'icheckbox_minimal-red',
+                        radioClass: 'iradio_minimal-red'
+                    })
+                    //Flat red color scheme for iCheck
+                    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                        checkboxClass: 'icheckbox_flat-green',
+                        radioClass: 'iradio_flat-green'
+                    })
+                    //Colorpicker
+                    $('.my-colorpicker1').colorpicker()
+                    //color picker with addon
+                    $('.my-colorpicker2').colorpicker()
+                    //Timepicker
+                    $('.timepicker').timepicker({
+                        showInputs: false
+                    })
+                    $('select:not(.normal)').each(function () {
+                        $(this).select2({
+                            dropdownParent: $(this).parent()
+                        });
                     });
+                    function openModal() {
+                        function openModal() { $('#myModal').modal({ show: true }); }
+                    }
+                })
+                $('#datepickertrans').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
                 });
-                function openModal() {
-                    function openModal() { $('#myModal').modal({ show: true }); }
-                }
-            })
-            $('#datepickertrans').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
-            });
-            
-            $('#datepickerdelivery').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
-            });
-            $('#datepickerstart').datepicker({
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
-            });
-            $('#datepickerend').datepicker({
-                autoclose: true,
-                todayHighlight: true
-            });
-            $('#datevisit').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: 'yyyy-mm-dd'
-            });
 
-            
-</script>
+                $('#datepickerdelivery').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+                });
+                $('#datepickerstart').datepicker({
+                    autoclose: true,
+                    changeMonth: true,
+                    changeYear: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+                });
+                $('#datepickerend').datepicker({
+                    autoclose: true,
+                    todayHighlight: true
+                });
+                $('#datevisit').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+                });
+        </script>
+
         <script type="text/javascript">
             var spinnerVisible = false;
             function showProgress() {
@@ -611,9 +611,6 @@
                 }
             };
         </script>
-
-         
-
     </div>
 </body>
 </html>

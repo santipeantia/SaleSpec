@@ -16,10 +16,6 @@ namespace SaleSpec.pages.trans
             {
                 Response.Redirect("../pages/users/login");
             }
-
-
-
-
         }
 
         protected void btnSelect_Click(object sender, EventArgs e)
@@ -52,7 +48,8 @@ namespace SaleSpec.pages.trans
             }
 
 
-           
+
         }
+
     }
 }

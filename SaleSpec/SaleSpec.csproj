@@ -6821,6 +6821,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
+    <Compile Include="Class\GetCompany.cs" />
     <Compile Include="pages\activity\eventactivity.aspx.cs">
       <DependentUpon>eventactivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
