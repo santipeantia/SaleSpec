@@ -6480,6 +6480,8 @@
     <Content Include="build\js\PushMenu.js" />
     <Content Include="build\js\TodoList.js" />
     <Content Include="build\js\Tree.js" />
+    <Content Include="pages\trans\DataServices.asmx" />
+    <Content Include="pages\trans\jquery-1.11.2.min.js" />
     <Content Include="CSS\ui.all.css" />
     <Content Include="CSS\ui.base.css" />
     <Content Include="CSS\ui.core.css" />
@@ -6649,6 +6651,8 @@
     <Content Include="pages\trans\projects.aspx" />
     <Content Include="pages\trans\saleonspec.aspx" />
     <Content Include="pages\trans\WebForm1.aspx" />
+    <Content Include="pages\trans\WebForm2.aspx" />
+    <Content Include="pages\trans\WebForm3.aspx" />
     <Content Include="pages\trans\weeklyreport-update.aspx" />
     <Content Include="pages\trans\weeklyreport_backup.aspx" />
     <Content Include="pages\trans\weeklyreport.aspx" />
@@ -6821,7 +6825,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
-    <Compile Include="Class\GetCompany.cs" />
+    <Compile Include="pages\trans\DataServices.asmx.cs">
+      <DependentUpon>DataServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\trans\GetCompany.cs" />
     <Compile Include="pages\activity\eventactivity.aspx.cs">
       <DependentUpon>eventactivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7010,6 +7018,20 @@
     </Compile>
     <Compile Include="pages\trans\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\WebForm3.aspx.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\WebForm3.aspx.designer.cs">
+      <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\weeklyreport-update.aspx.cs">
       <DependentUpon>weeklyreport-update.aspx</DependentUpon>
@@ -7688,6 +7710,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="aspnet_client\system_web\4_0_30319\" />
+    <Folder Include="Class\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

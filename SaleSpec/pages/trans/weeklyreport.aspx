@@ -1,6 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="weeklyreport.aspx.cs" Inherits="SaleSpec.pages.trans.weeklyreport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <script src="jquery-1.11.2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var selectCompanyDDL = $('#selectCompany');
+
+                $.ajax({
+                    url: 'DataServices.asmx/GetDataCompany',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                        $(data).each(function (index, item) {
+                            selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameTH }));
+                        });
+                    }
+                });
+            });
+        </script>
+    
     <style>
         .select2-container .select2-selection--multiple {
             font-family: 'Arial', Verdana;
@@ -124,18 +143,6 @@
                                         <div class="input-group col-md-12">
                                             <span class="txtLabel">
                                                 <select id="selectCompany" class="form-control input input-sm " style="width: 100%;">
-                                                    <option value=""></option>
-                                                    <option value="1675">Vortech Architek Co.,Ltd</option>
-                                                    <option value="1676">Weapons Decoration Co.,Ltd</option>
-                                                    <option value="1677">Wirach & Associate Co.,Ltd</option>
-                                                    <option value="1678">Wise Line Co.,Ltd</option>
-                                                    <option value="1679">Wolves Design Co.,Ltd</option>
-                                                    <option value="1680">Work- aholic architect Co.,Ltd</option>
-                                                    <option value="1681">Work Of Work Co.,Ltd</option>
-                                                    <option value="1682">Workspace Architecture Studio Co.,Ltd</option>
-                                                    <option value="1683">Xayaburi Power Co.,Ltd</option>
-                                                    <option value="1684">Zamil Steel Co.,Ltd</option>
-                                                    <option value="1685">Zpacez Co.,Ltd</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -1231,16 +1238,9 @@
                 </div>
             </div>
 
-            </div>
+            </div>  
 
-            <script>
-                $(document).ready(function () {
-                    var selectCompanyDDL = $('selectCompany');
-
-
-
-                });
-
+        <script>
 
                 function getTransEntry(trans) {
                     var t = trans.value;
@@ -1362,5 +1362,8 @@
                     return window.open(url2, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
                 }
             </script>
+
+
+        
     </section>
 </asp:Content>
