@@ -40,15 +40,6 @@ namespace SaleSpec.pages.trans {
         protected global::System.Web.UI.HtmlControls.HtmlInputButton btnSelect;
         
         /// <summary>
-        /// btnSaveNewData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaveNewData;
-        
-        /// <summary>
         /// Button2 control.
         /// </summary>
         /// <remarks>

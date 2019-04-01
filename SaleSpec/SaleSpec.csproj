@@ -6825,6 +6825,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
+    <Compile Include="pages\trans\GetInsertCompany.cs" />
+    <Compile Include="pages\trans\GetArchitects.cs" />
     <Compile Include="pages\trans\DataServices.asmx.cs">
       <DependentUpon>DataServices.asmx</DependentUpon>
       <SubType>Component</SubType>

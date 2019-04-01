@@ -4,7 +4,9 @@
         <script src="jquery-1.11.2.min.js"></script>
         <script>
             $(document).ready(function () {
+                //Get data company from table
                 var selectCompanyDDL = $('#selectCompany');
+                var selectArchitectDDL = $('#selectArchitect');
 
                 $.ajax({
                     url: 'DataServices.asmx/GetDataCompany',
@@ -12,8 +14,91 @@
                     dataType: 'json',
                     success: function (data) {
                         selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
                         $(data).each(function (index, item) {
-                            selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameTH }));
+                            selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                        });
+                    }
+                });
+
+                //When company select index change set cascade to architect
+                selectCompanyDDL.change(function () {
+                    if ($(this).val() == "-1") {
+                        selectArchitectDDL.empty();
+                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                        selectArchitectDDL.val('-1');
+                        selectArchitectDDL.prop('disable', true);
+                    }
+                    else
+                    {
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataArchitect',
+                            method: 'post',
+                            data: {CompanyID: $(this).val()},
+                            dataType: 'json',
+                            success: function (data) {
+                                selectArchitectDDL.empty();
+                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                                $(data).each(function (index, item) {
+                                    selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                                });
+                            }
+                        });
+                    }
+                });
+
+                //client click add new company insert into data to table
+                var btnNewCompany = $('#btnNewCompany');
+                var CompanyName = $('#CompanyName');
+                btnNewCompany.click(function () {
+                    if (CompanyName.val() == "") {
+                        //todo something you coding
+                    }
+                    else {
+                        $.ajax({
+                            url: 'DataServices.asmx/GetInsertCompanies',
+                            method: 'POST',
+                            data: {
+                                CompanyName: $('#CompanyName').val(),
+                                CompanyName2: $('#CompanyName2').val(),
+                                Address: $('#comAddress').val(),
+                                ProvinceID: $('#ProvinceID').val(),
+                                ContactName: $('#ContactPerson').val(),
+                                Phone: $('#comPhone').val(),
+                                Mobile: $('#comMobile').val(),
+                                Email: $('#Email').val(),
+                                StatusConID: "0"
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                            }
+                        });
+                        //alert message show successfully
+                        alert("Data saved successfully");
+                        $('#myModalCompany').modal('hide');
+
+                        //clear all data input
+                        $('#CompanyName').val('');
+                        $('#CompanyName2').val('');
+                        $('#comAddress').val('');
+                        $('#ProvinceID').val('');
+                        $('#ContactPerson').val('');
+                        $('#comPhone').val('');
+                        $('#comMobile').val('');
+                        $('#Email').val('');
+
+                        //calling function for refresh data update again
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataCompany',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                                $(data).each(function (index, item) {
+                                    selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                                });
+                            }
                         });
                     }
                 });
@@ -161,16 +246,6 @@
                                         <div class="input-group col-md-12">
                                             <span class="txtLabel">
                                                 <select id="selectArchitect" class="form-control input input-sm " style="width: 100%;">
-                                                    <option value=""></option>
-                                                    <option value="1556">Kittaphol	 Onsri</option>
-                                                    <option value="1668">Kittipat	Sirijumpar</option>
-                                                    <option value="1523">Kittiphop	Watthong</option>
-                                                    <option value="1665">Kritsada	 Pengwantana</option>
-                                                    <option value="1536">Laddawan	Panta</option>
-                                                    <option value="1233">Napasawan	Bhongbhibhat</option>
-                                                    <option value="1651">Nares	unphikul</option>
-                                                    <option value="1182">Narin	 Bunjun</option>
-                                                    <option value="1349">Narongrit	Veerakul</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -981,58 +1056,67 @@
 
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <div class="row" style="margin-bottom: 5px">
+                                <div class="row hidden" style="margin-bottom: 5px">
                                     <div class="col-md-4">CompanyID</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm" id="txtCompanyID" name="txtCompanyID" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm" id="CompanyID" name="CompanyID" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
-                                    <div class="col-md-4">CompanyName</div>
+                                    <div class="col-md-4">CompanyNameTH</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm" id="txtCompanyName" name="txtCompanyName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm" id="CompanyName" name="CompanyName" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
-                                    <div class="col-md-4">CompanyName2</div>
+                                    <div class="col-md-4">CompanyNameEN</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm" id="txtCompanyName2" name="txtCompanyName2" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm" id="CompanyName2" name="CompanyName2" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
-                                    <div class="col-md-4">Address	</div>
+                                    <div class="col-md-4">Address</div>
                                     <div class="col-md-8">
-                                        <textarea cols="40" rows="3" id="txtAddress" name="txtAddress" class="form-control input input-sm"></textarea>
+                                        <textarea cols="40" rows="3" id="comAddress" name="comAddress" class="form-control input input-sm"></textarea>
                                         <%--<input type="text" class="form-control input input-sm" id="txtGradeDetailEdit" name="txtGradeDetailEdit" placeholder="" value="" required>--%>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4">ProvinceID</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm" id="ProvinceID" name="ProvinceID" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4">ContactPerson</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm" id="txtContactPerson" name="txtContactPerson" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm" id="ContactPerson" name="ContactPerson" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4">Phone</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm" id="txtPhone" name="txtPhone" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm" id="comPhone" name="comPhone" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">Status</div>
+                                 <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4">Mobile</div>
                                     <div class="col-md-8">
-                                        <div class="input-group">
-                                            <input type="text" id="txtStatusNew" name="txtStatusNew" class="form-control input input-sm txtLabel" value="" required readonly>
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-warning btn-flat btn-sm" data-toggle="modal" data-target="#myModalActiveNew"><i class="fa fa-search"></i></button>
-                                            </span>
-                                        </div>
+                                        <input type="text" class="form-control input input-sm" id="comMobile" name="comMobile" placeholder="" value="" autocomplete="off" required>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4">Email</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm" id="Email" name="Email" placeholder="" value="" autocomplete="off" required>
                                     </div>
                                 </div>
 
@@ -1041,8 +1125,9 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" id="btnSubmitNew" class="btn btn-primary hidden" onclick="ValidateSave()">Save Changes</button>
-                            <button type="button" class="btn btn-primary " id="btnSaveNewData" runat="server">Save Changes</button>
+                            <%--<button type="submit" id="btnSubmitNew" class="btn btn-primary hidden" onclick="ValidateSave()">Save Changes</button>
+                            <button type="button" class="btn btn-primary " id="btnSaveNewData" runat="server">Save Changes</button>--%>
+                            <button type="submit" id="btnNewCompany" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -1060,45 +1145,52 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row" style="margin-bottom: 5px">
+                                    , , Name, , , , , , Phone, Mobile, Email, StatusConID
                                     <div class="col-md-4 txtLabel">Architect ID</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectID" name="txtArchitectID" placeholder="" value="" readonly required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ArchitecID" name="ArchitecID" placeholder="" value="" readonly required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">FirstName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtFirstName" name="txtFirstName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="FirstName" name="FirstName" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">LastName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtLastName" name="txtLastName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="LastName" name="LastName" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">CompanyID</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcCompanyID" name="arcCompanyID" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">NickName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtNickName" name="txtNickName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="NickName" name="NickName" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Position</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtPosition" name="txtPosition" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="Position" name="Position" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Address</div>
                                     <div class="col-md-8">
-                                        <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                        <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress"></textarea>
+                                        <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="Address" name="Address"></textarea>
                                     </div>
                                 </div>
 
@@ -1164,7 +1256,7 @@
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">CompanyName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="CompanyName" name="CompanyName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="projCompanyName" name="projCompanyName" placeholder="" value="" required>
                                     </div>
                                 </div>
 
