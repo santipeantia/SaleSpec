@@ -6825,6 +6825,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
+    <Compile Include="Class\GetCountArchitect.cs" />
+    <Compile Include="Class\GetDataPosition.cs" />
+    <Compile Include="Class\GetInsertArchitect.cs" />
     <Compile Include="pages\trans\GetInsertCompany.cs" />
     <Compile Include="pages\trans\GetArchitects.cs" />
     <Compile Include="pages\trans\DataServices.asmx.cs">
@@ -7712,7 +7715,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="aspnet_client\system_web\4_0_30319\" />
-    <Folder Include="Class\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

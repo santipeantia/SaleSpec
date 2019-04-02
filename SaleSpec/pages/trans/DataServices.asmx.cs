@@ -81,7 +81,33 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
-        public void GetInsertCompanies(string CompanyName, string CompanyName2, string Address, string ProvinceID, string ContactName, string Phone, string Mobile, string Email, string StatusConID)
+        public void GetPositions()
+        {
+            List<GetDataPosition> positions = new List<GetDataPosition>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetPositions", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataPosition position = new GetDataPosition();
+                    position.PositionID = rdr["PositionID"].ToString();
+                    position.PositionNameTH = rdr["PositionNameTH"].ToString();
+                    position.PositionNameEN = rdr["PositionNameEN"].ToString();
+                    positions.Add(position);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(positions));
+        }
+
+        [WebMethod]
+        public void GetInsertCompanies(string CompanyName, string CompanyName2, string Address, string ProvinceID, string ContactName, 
+                                        string Phone, string Mobile, string Email, string StatusConID)
         {
             List<GetInsertCompany> companies = new List<GetInsertCompany>();
             using (SqlConnection conn = new SqlConnection(cs))
@@ -121,5 +147,57 @@ namespace SaleSpec.Class
             //Context.Response.ContentType = "application/json";
             //Context.Response.Write(js.Serialize(architects));
         }
+
+        
+        [WebMethod]
+        public void GetDataCountArchitect()
+        {
+            List<GetCountArchitect> countarchitects = new List<GetCountArchitect>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetCountArchitect", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetCountArchitect countarchitect = new GetCountArchitect();
+                    countarchitect.ArchitecID = rdr["ArchitecID"].ToString();
+                    countarchitects.Add(countarchitect);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(countarchitects));
+        }
+
+        [WebMethod]
+        public void GetDataInsertArchitect(string ArchitecID, string CompanyID, string Name, string FirstName, string LastName, 
+                                            string NickName, string Position, string Address, string Phone, string Mobile, string Email, string StatusConID)
+        {
+            List<GetInsertArchitect> companies = new List<GetInsertArchitect>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertArchitect", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@FirstName", FirstName);
+                comm.Parameters.AddWithValue("@LastName", LastName);
+                comm.Parameters.AddWithValue("@NickName", NickName);
+                comm.Parameters.AddWithValue("@Position", Position);
+                comm.Parameters.AddWithValue("@Address", Address);
+                comm.Parameters.AddWithValue("@Phone", Phone);
+                comm.Parameters.AddWithValue("@Mobile", Mobile);
+                comm.Parameters.AddWithValue("@Email", Email);
+                comm.Parameters.AddWithValue("@StatusConID", StatusConID);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }  
     }
 }

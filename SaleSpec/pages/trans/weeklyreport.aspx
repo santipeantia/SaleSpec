@@ -4,10 +4,14 @@
         <script src="jquery-1.11.2.min.js"></script>
         <script>
             $(document).ready(function () {
-                //Get data company from table
+                //declare variable 
                 var selectCompanyDDL = $('#selectCompany');
                 var selectArchitectDDL = $('#selectArchitect');
+                var selectArcCompanyDDL = $('#selectArcCompany');
+                var selectArcPositionDDL = $('#selectArcPosition');
+                var arcArchitecIDtxt = $('#arcArchitecID');
 
+                //Get data company from table
                 $.ajax({
                     url: 'DataServices.asmx/GetDataCompany',
                     method: 'post',
@@ -21,7 +25,33 @@
                     }
                 });
 
-                //When company select index change set cascade to architect
+                //Get data position from position table
+                $.ajax({
+                    url: 'DataServices.asmx/GetPositions',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectArcPositionDDL.append($('<option/>', { value: -1, text: 'Select Position' }));
+                        $(data).each(function (index, item) {
+                            selectArcPositionDDL.append($('<option/>', { value: item.PositionID, text: item.PositionNameEN }));
+                        });
+                    }
+                });
+
+                //Get data company from adcompany table for update architect
+                $.ajax({
+                    url: 'DataServices.asmx/GetDataCompany',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectArcCompanyDDL.append($('<option/>', { value: -1, text: 'Select Company' }));
+                        $(data).each(function (index, item) {
+                            selectArcCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                        });
+                    }
+                });
+
+                //When company select index change set cascading to architect
                 selectCompanyDDL.change(function () {
                     if ($(this).val() == "-1") {
                         selectArchitectDDL.empty();
@@ -100,8 +130,135 @@
                                 });
                             }
                         });
+
+                        //calling function get company for add new architect
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataCompany',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectArcCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                                $(data).each(function (index, item) {
+                                    selectArcCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                                });
+                            }
+                        });
                     }
                 });
+
+                var btnNewArchitect = $('#btnNewArchitect');
+                btnNewArchitect.click(function () {
+                    var arcFirstName = $('#arcFirstName');
+                    var arcLastName = $('#arcLastName');
+                    var selectArcCompany = $('#selectArcCompany');
+                    var selectArcPosition = $('#selectArcPosition');
+                    var arcPhone = $('#arcMobile');
+                    var arcMobile = $('#arcMobile');
+                    var arcEmail = $('#arcEmail');
+
+                    //alert(arcFirstName.val() + ' ' + arcLastName.val() + ' ' + selectArcCompany.val());
+                    if (arcFirstName.val() == '') {
+                        alert('Please enter architect name..!');
+                        arcFirstName.focus();
+                        return;
+                    } else if (arcLastName.val() == '') {
+                        alert('Please enter architect surname..!');
+                        arcLastName.focus();
+                        return;
+                    } else if (selectArcCompany.val() == "-1") {
+                        alert('Please select company');
+                        selectArcCompany.focus();
+                        return;
+                    } else if (selectArcPosition.val() == "-1") {
+                        alert('Please select architect position');
+                        selectArcPosition.focus();
+                        return;
+                    } else if (arcPhone.val() == '') {
+                        alert('Please enter phone number..!');
+                        arcPhone.focus();
+                        return;
+                    } else if (arcMobile.val() == '') {
+                        alert('Please enter mobile number..!');
+                        arcMobile.focus();
+                        return;
+                    } else if (arcEmail.val() == '') {
+                        alert('Please enter contact email..!');
+                        arcEmail.focus();
+                        return;
+                    } else {
+                        //validate all passed into data to table
+
+                        //Get last update running architect number
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataCountArchitect',
+                            method: 'POST',
+                            dataType: 'json',
+                            success: function (data) {
+                                var obj = jQuery.parseJSON(JSON.stringify(data));
+                                if (obj != '') {
+                                    $.each(obj, function (key, inval) {
+                                        $("#arcArchitecID").val(inval["ArchitecID"]);
+
+                                        //Get insert new architech
+                                        $.ajax({
+                                            url: 'DataServices.asmx/GetDataInsertArchitect',
+                                            method: 'POST',
+                                            data: {
+                                                ArchitecID: $('#arcArchitecID').val(),
+                                                CompanyID: $('#selectArcCompany').val(),
+                                                Name: $('#arcFirstName').val() + ' ' + $('#arcLastName').val(),
+                                                FirstName: $('#arcFirstName').val(),
+                                                LastName: $('#arcLastName').val(),
+                                                NickName: $('#arcNickName').val(),
+                                                Position: $('#selectArcPosition').val(),
+                                                Address: $('#arcAddress').val(),
+                                                Phone: $('#arcPhone').val(),
+                                                Mobile: $('#arcMobile').val(),
+                                                Email: $('#arcEmail').val(),
+                                                StatusConID: "0"
+                                            },
+                                            dataType: 'json',
+                                            success: function (data) {
+
+                                            }
+                                        });
+                                        alert('Data saved successfully..!');
+                                        $('#myModalArchitect').modal('hide');
+
+                                        $('#arcArchitecID').val('');
+                                        $('#selectArcCompany').val('-1');
+                                        $('#arcFirstName').val('');
+                                        $('#arcLastName').val('');
+                                        $('#arcNickName').val('');
+                                        $('#selectArcPosition').val('-1');
+                                        $('#arcAddress').val('');
+                                        $('#arcPhone').val('');
+                                        $('#arcMobile').val('');
+                                        $('#arcEmail').val('');
+                                    });
+                                }
+                            }
+                        });
+
+                        /// to do here
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataArchitect',
+                            method: 'post',
+                            data: {CompanyID: $('#selectCompany').val()},
+                            dataType: 'json',
+                            success: function (data) {
+                                selectArchitectDDL.empty();
+                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                                $(data).each(function (index, item) {
+                                    selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                                });
+                            }
+                        });
+
+
+                    }
+                });
+
             });
         </script>
     
@@ -1144,74 +1301,79 @@
 
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <div class="row" style="margin-bottom: 5px">
-                                    , , Name, , , , , , Phone, Mobile, Email, StatusConID
+                                <div class="row hidden" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Architect ID</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="ArchitecID" name="ArchitecID" placeholder="" value="" readonly required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcArchitecID" name="arcArchitecID" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">FirstName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="FirstName" name="FirstName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcFirstName" name="arcFirstName" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">LastName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="LastName" name="LastName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcLastName" name="arcLastName" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
-                                    <div class="col-md-4 txtLabel">CompanyID</div>
+                                    <div class="col-md-4 txtLabel">Company</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="arcCompanyID" name="arcCompanyID" placeholder="" value="" required>
+                                        <span class="txtLabel">
+                                            <select id="selectArcCompany" class="form-control input input-sm " style="width: 100%;">
+                                            </select>
+                                        </span>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">NickName</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="NickName" name="NickName" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcNickName" name="arcNickName" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Position</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="Position" name="Position" placeholder="" value="" required>
+                                        <span class="txtLabel">
+                                            <select id="selectArcPosition" class="form-control input input-sm " style="width: 100%;">
+                                            </select>
+                                        </span>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Address</div>
                                     <div class="col-md-8">
-                                        <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="Address" name="Address"></textarea>
+                                        <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="arcAddress" name="arcAddress"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Phone</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtPhone" name="txtPhone" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcPhone" name="arcPhone" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Mobile</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtMobile" name="txtMobile" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcMobile" name="arcMobile" placeholder="" value="" required>
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Email</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtEmail" name="txtEmail" placeholder="" value="" required>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="arcEmail" name="arcEmail" placeholder="" value="" required>
                                     </div>
                                 </div>
 
@@ -1221,8 +1383,9 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
-                            <button type="button" class="btn btn-primary hidden" id="Button2" runat="server">Save Changes</button>
+                            <%--<button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
+                            <button type="button" class="btn btn-primary hidden" id="Button2" runat="server">Save Changes</button>--%>
+                            <button type="button" id="btnNewArchitect" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </div>

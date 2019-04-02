@@ -130,7 +130,7 @@ namespace SaleSpec
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("users/login.aspx");
+                Response.Redirect("../../../users/login.aspx");
             }
 
             strFullName = Session["sEmpEngFirstName"].ToString() + "  "  + Session["sEmpEngLastName"].ToString();
