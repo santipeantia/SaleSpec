@@ -14,7 +14,7 @@ namespace SaleSpec.pages.trans
             //string strUserID = Session["UserID"].ToString();
             if (Session["UserID"] == null)
             {
-                Response.Redirect("../pages/users/login");
+                Response.Redirect("../../pages/users/login");
             }
         }
 

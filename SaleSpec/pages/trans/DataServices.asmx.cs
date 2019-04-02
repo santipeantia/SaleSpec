@@ -105,6 +105,83 @@ namespace SaleSpec.Class
             Context.Response.Write(js.Serialize(positions));
         }
 
+        
+        [WebMethod]
+        public void GetStepSpec()
+        {
+            List<GetDataStepSpec> stepspecs = new List<GetDataStepSpec>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetStep", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataStepSpec stepspec = new GetDataStepSpec();
+                    stepspec.StepID = rdr["StepID"].ToString();
+                    stepspec.StepNameTh = rdr["StepNameTh"].ToString();
+                    stepspec.StepNameEn = rdr["StepNameEn"].ToString();
+                    stepspecs.Add(stepspec);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(stepspecs));
+        }
+
+        [WebMethod]
+        public void GetProductType()
+        {
+            List<GetDataProductType> producttypes = new List<GetDataProductType>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProductType", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProductType producttype = new GetDataProductType();
+                    producttype.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    producttype.ProdTypeNameTH = rdr["ProdTypeNameTH"].ToString();
+                    producttype.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    producttypes.Add(producttype);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(producttypes));
+        }
+
+        [WebMethod]
+        public void GetProducts()
+        {
+            List<GetDataProducts> products = new List<GetDataProducts>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProducts", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProducts product = new GetDataProducts();
+                    product.ProdID = rdr["ProdID"].ToString();
+                    product.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    product.ProdNameTH = rdr["ProdNameTH"].ToString();
+                    product.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    products.Add(product);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(products));
+        }
+
         [WebMethod]
         public void GetInsertCompanies(string CompanyName, string CompanyName2, string Address, string ProvinceID, string ContactName, 
                                         string Phone, string Mobile, string Email, string StatusConID)
@@ -147,8 +224,7 @@ namespace SaleSpec.Class
             //Context.Response.ContentType = "application/json";
             //Context.Response.Write(js.Serialize(architects));
         }
-
-        
+                
         [WebMethod]
         public void GetDataCountArchitect()
         {
