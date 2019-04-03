@@ -5,13 +5,26 @@
         <script>
             $(document).ready(function () {
                 //declare variable 
+                var datepickertrans = ('#datepickertrans');
                 var selectCompanyDDL = $('#selectCompany');
                 var selectArchitectDDL = $('#selectArchitect');
+                var selectTransEntryDDL = $('#selectTransEntry');
                 var selectArcCompanyDDL = $('#selectArcCompany');
                 var selectArcPositionDDL = $('#selectArcPosition');
                 var arcArchitecIDtxt = $('#arcArchitecID');
                 var selectProjectStepDDL = $('#selectProjectStep');
                 var selectProductTypeDDL = $('#selectProductType');
+                var selectProductDDL = $('#selectProduct');
+                var selectProfileDDL = $('#selectProfile');
+                var selectStatusDDL = $('#selectStatus');
+                var btnCompany = $('#btnCompany');
+                var btnArchitect = $('#btnArchitect');
+
+                selectCompanyDDL.prop('disabled', true);
+                selectArchitectDDL.prop('disabled', true);
+                selectTransEntryDDL.prop('disabled', true);
+                btnCompany.prop('disabled', true);
+                btnArchitect.prop('disabled', true);
 
                 //Get data company from table
                 $.ajax({
@@ -21,6 +34,7 @@
                     success: function (data) {
                         selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
                         selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                        selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
                         $(data).each(function (index, item) {
                             selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
                         });
@@ -53,6 +67,7 @@
                     }
                 });
 
+                //Get data step of sale spec project
                 $.ajax({
                     url: 'DataServices.asmx/GetStepSpec',
                     method: 'post',
@@ -65,15 +80,44 @@
                     }
                 });
 
-                
+                //Get Product type such as Ampelite, Ampelram
                 $.ajax({
                     url: 'DataServices.asmx/GetProductType',
                     method: 'post',
                     dataType: 'json',
                     success: function (data) {
                         selectProductTypeDDL.append($('<option/>', { value: -1, text: 'Select product type of project' }));
+                        selectProductDDL.append($('<option/>', { value: -1, text: "Please select product" }));
+                        selectProductDDL.prop('disabled', true);
+                        selectProfileDDL.prop('disabled', true);
                         $(data).each(function (index, item) {
                             selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                        });
+                    }
+                });
+
+                //Get data profile of products
+                $.ajax({
+                    url: 'DataServices.asmx/GetProfile',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectProfileDDL.append($('<option/>', { value: -1, text: 'Select product profile' }));
+                        $(data).each(function (index, item) {
+                            selectProfileDDL.append($('<option/>', { value: item.ProfID, text: item.ProfNameEN }));
+                        });
+                    }
+                });
+
+                //Get project status
+                $.ajax({
+                    url: 'DataServices.asmx/GetStatus',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectStatusDDL.append($('<option/>', { value: -1, text: 'Select status' }));
+                        $(data).each(function (index, item) {
+                            selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
                         });
                     }
                 });
@@ -81,13 +125,17 @@
                 //When company select index change set cascading to architect
                 selectCompanyDDL.change(function () {
                     if ($(this).val() == "-1") {
+                        btnArchitect.prop('disabled', true);
+
                         selectArchitectDDL.empty();
                         selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
                         selectArchitectDDL.val('-1');
-                        selectArchitectDDL.prop('disable', true);
+                        selectArchitectDDL.prop('disabled', true);
                     }
                     else
                     {
+                        btnArchitect.prop('disabled', false);
+
                         $.ajax({
                             url: 'DataServices.asmx/GetDataArchitect',
                             method: 'post',
@@ -96,8 +144,62 @@
                             success: function (data) {
                                 selectArchitectDDL.empty();
                                 selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                                selectArchitectDDL.prop('disabled', false);
                                 $(data).each(function (index, item) {
                                     selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                                });
+                            }
+                        });
+                    }
+                });
+
+                //When select architect changed enable trransaction options
+                selectArchitectDDL.change(function () {
+                    if ($(this).val() == '-1') {
+                        selectTransEntryDDL.empty();
+                        selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                        selectTransEntryDDL.val('-1');
+                        selectTransEntryDDL.prop('disabled', true);
+                    }
+                    else
+                    {
+                        $.ajax({
+                            url: 'DataServices.asmx/GetTransEntry',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectTransEntryDDL.empty();
+                                selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                                selectTransEntryDDL.prop('disabled', false);
+                                $(data).each(function (index, item) {
+                                    selectTransEntryDDL.append($('<option/>', { value: item.TransID, text: item.TransNameEN }));
+                                });
+                            }
+                        });
+                    }
+                });
+
+                //When product type changed cascading of product
+                selectProductTypeDDL.change(function () {
+                    if ($(this).val() == "-1") {
+                        selectProductDDL.empty();
+                        selectProductDDL.append($('<option/>', { value: -1, text: "Please select product" }));
+                        selectProductDDL.val('-1');
+                        selectProductDDL.prop('disabled', true);
+                        selectProfileDDL.prop('disabled', true);
+                    } else {
+                        $.ajax({
+                            url: 'DataServices.asmx/GetProducts',
+                            method: 'post',
+                            data: {ProdTypeID: $(this).val()},
+                            dataType: 'json',
+                            success: function (data) {
+                                selectProductDDL.prop('disabled', false);
+                                selectProfileDDL.prop('disabled', false);
+                                selectProductDDL.empty();
+                                selectProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                                $(data).each(function (index, item) {
+                                    selectProductDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
                                 });
                             }
                         });
@@ -173,6 +275,7 @@
                     }
                 });
 
+                //client click add new architect insert into data to table
                 var btnNewArchitect = $('#btnNewArchitect');
                 btnNewArchitect.click(function () {
                     var arcFirstName = $('#arcFirstName');
@@ -287,6 +390,248 @@
                     }
                 });
 
+                //Validate option not allow when transaction date is empty
+                $('#datepickertrans').change(function () {
+                    //alert($('#datepickertrans').val());
+                    var strval = $('#datepickertrans').val();
+                    if (strval == '') {
+                        btnCompany.prop('disabled', true);
+
+                        selectCompanyDDL.empty();
+                        selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                        selectCompanyDDL.prop('disabled', true);
+                        selectArchitectDDL.empty();
+                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                        selectArchitectDDL.prop('disabled', true);
+                        selectTransEntryDDL.empty();
+                        selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                        selectTransEntryDDL.prop('disabled', true);
+
+                        document.getElementById("divNewProject").style.display = 'none';
+
+                    } else {
+                        btnCompany.prop('disabled', false);
+
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataCompany',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectCompanyDDL.empty();
+                                selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                                selectCompanyDDL.prop('disabled', false);
+                                $(data).each(function (index, item) {
+                                    selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                                });
+                            }
+                        });
+                    }
+                });
+
+                var btnSaveHistoryNewProject = $('#btnSaveHistoryNewProject');
+                btnSaveHistoryNewProject.click(function () {
+                    var chkValidate = 'false';
+                    var ProjName = $('#ProjName');
+                    var newLocation = $('#newLocation');
+                    var selectProjectStep = $('#selectProjectStep');
+                    var selectProduct = $('#selectProduct');
+                    var selectProfile = $('#selectProfile');
+                    var Quantity = $('#Quantity');
+                    var datepickerdelivery = $('#datepickerdelivery');
+                    var datevisit = $('#datevisit');
+                    var selectStatus = $('#selectStatus');
+
+                    if (ProjName.val() == '') {
+                        document.getElementById("divErrorProjName").style.display = '';
+                        document.getElementById("divErrorProjName").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorProjName").style.display = '';
+                        document.getElementById("divErrorProjName").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (newLocation.val() == '') {
+                        document.getElementById("divErrorLocation").style.display = '';
+                        document.getElementById("divErrorLocation").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorLocation").style.display = '';
+                        document.getElementById("divErrorLocation").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (selectProjectStep.val() == '-1') {
+                        document.getElementById("divErrorProjectStep").style.display = '';
+                        document.getElementById("divErrorProjectStep").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorProjectStep").style.display = '';
+                        document.getElementById("divErrorProjectStep").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (selectProduct.val() == '-1') {
+                        document.getElementById("divErrorProduct").style.display = '';
+                        document.getElementById("divErrorProduct").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                        //alert(selectProduct.val());
+
+                    } else {
+                        document.getElementById("divErrorProduct").style.display = '';
+                        document.getElementById("divErrorProduct").style.display = 'none';
+                        chkValidate = 'true';
+                        //alert(selectProduct.val());
+                    }
+                    
+                    if (selectProfile.val() == '-1') {
+                        document.getElementById("divErrorProfile").style.display = '';
+                        document.getElementById("divErrorProfile").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorProfile").style.display = '';
+                        document.getElementById("divErrorProfile").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (Quantity.val() == '') {
+                        document.getElementById("divErrorQuantity").style.display = '';
+                        document.getElementById("divErrorQuantity").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorQuantity").style.display = '';
+                        document.getElementById("divErrorQuantity").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (datepickerdelivery.val() == '') {
+                        document.getElementById("divErrorDeliveryDate").style.display = '';
+                        document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorDeliveryDate").style.display = '';
+                        document.getElementById("divErrorDeliveryDate").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (datevisit.val() == '') {
+                        document.getElementById("divErrorNextVisit").style.display = '';
+                        document.getElementById("divErrorNextVisit").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorNextVisit").style.display = '';
+                        document.getElementById("divErrorNextVisit").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (selectStatus.val() == '-1') {
+                        document.getElementById("divErrorStatus").style.display = '';
+                        document.getElementById("divErrorStatus").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorStatus").style.display = '';
+                        document.getElementById("divErrorStatus").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+
+                    if (chkValidate == 'true') {
+                        alert($('#selectCompany option:selected').text());
+                        //to do save weekly report option new Projects
+                        // $.ajax({
+                        //    url: 'DataServices.asmx/GetCountProject',
+                        //    method: 'POST',
+                        //    dataType: 'json',
+                        //    success: function (data) {
+                        //        var obj = jQuery.parseJSON(JSON.stringify(data));
+                        //        if (obj != '') {
+                        //            $.each(obj, function (key, inval) {
+                        //                $("#ProjectID").val(inval["ProjectID"]);
+
+                        //                //Get insert new architech
+                        //                $.ajax({
+                        //                    url: 'DataServices.asmx/GetInsertWeeklyReport',
+                        //                    method: 'POST',
+                        //                    data: {
+                        //                        WeekDate: $('#datepickertrans').val(),
+                        //                        WeekTime: $('#inputtime').val(),
+                        //                        CompanyID: $('#selectCompany').val(),
+                        //                        CompanyName: $('#selectCompany option:selected').text(),
+                        //                        ArchitecID: $('#').val(),
+                        //                        Name: $('#').val(),
+                        //                        TransID: $('#').val(),
+                        //                        TransNameEN: $('#').val(),
+                        //                        ProjectID: $('#').val(),
+                        //                        ProjectName: $('#').val(),
+                        //                        Location: $('#').val(),
+                        //                        StepID: $('#').val(),
+                        //                        StepNameEn: $('#').val(),
+                        //                        BiddingName1: $('#').val(),
+                        //                        OwnerName1: $('#').val(),
+                        //                        BiddingName2: $('#').val(),
+                        //                        OwnerName2: $('#').val(),
+                        //                        BiddingName3: $('#').val(),
+                        //                        OwnerName3: $('#').val(),
+                        //                        AwardMC: $('#').val(),
+                        //                        ContactMC: $('#').val(),
+                        //                        AwardRF: $('#').val(),
+                        //                        ContactRF: $('#').val(),
+                        //                        ProdTypeID: $('#').val(),
+                        //                        ProdTypeNameEN: $('#').val(),
+                        //                        ProdID: $('#').val(),
+                        //                        ProdNameEN: $('#').val(),
+                        //                        Quantity: $('#').val(),
+                        //                        DeliveryDate: $('#').val(),
+                        //                        NextVisitDate: $('#').val(),
+                        //                        StatusID: $('#').val(),
+                        //                        StatusNameEn: $('#').val(),
+                        //                        NewArchitect: $('#').val(),
+                        //                        HaveFiles: $('#').val(),
+                        //                        FileName: $('#').val(),
+                        //                        Remark: $('#').val(),
+                        //                        UserID: $('#').val(),
+                        //                        EmpCode: $('#').val(),
+                        //                        CreatedBy: $('#').val(),
+                        //                        CreatedDate: $('#').val()
+                        //                    },
+                        //                    dataType: 'json',
+                        //                    success: function (data) {
+
+                        //                    }
+                        //                });
+
+                        //                /// to do here
+                        //                alert('Data saved successfully..!');
+
+                        //            });
+                        //        }
+                        //    }
+                        //});
+
+
+                    } else {
+                        alert('Warnning, The data is not completed please check..!');
+                    }
+                });
+
+
+
+
 
             });
         </script>
@@ -386,7 +731,7 @@
                                     <div class="col-md-4 col-md-offset-2">
                                         <label class="txtLabel">Visit Date</label>
                                         <div class="input-group date">
-                                            <input type="text" class="form-control input-sm pull-left" id="datepickertrans" value="" autocomplete="off">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickertrans" value="" autocomplete="off">
                                             <div class="input-group-addon input-sm">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
@@ -398,7 +743,7 @@
                                             <div class="input-group">
                                                 <label class="txtLabel">StartTime</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control input-sm timepicker">
+                                                    <input type="text" id="inputtime" class="form-control input-sm timepicker txtLabel">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-clock-o"></i>
                                                     </div>
@@ -421,7 +766,7 @@
                                     <div class="col-md-1 input-group">
                                         <label class="txtLabel">Company</label>
                                         <div class="">
-                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openCompany()">New</button>
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" id="btnCompany" onclick="openCompany()">New</button>
                                         </div>
                                     </div>
                                 </div>
@@ -439,7 +784,7 @@
                                     <div class="col-md-1 input-group">
                                         <label class="txtLabel">Architect</label>
                                         <div class="">
-                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="openArchitect()">New</button>
+                                            <button type="button" class="btn btn-info btn-block btn-flat btn-sm" id="btnArchitect" onclick="openArchitect()">New</button>
                                         </div>
                                     </div>
                                 </div>
@@ -450,12 +795,6 @@
                                         <div class="input-group col-md-12">
                                             <span class="txtLabel">
                                                 <select id="selectTransEntry" onchange="getTransEntry(this)" class="form-control input input-sm " style="width: 100%;">
-                                                    <option value="0">Please select your transaction</option>
-                                                    <option value="1">New Project</option>
-                                                    <option value="2">Update Project</option>
-                                                    <option value="3">New Architect </option>
-                                                    <option value="4">Spec Intake</option>
-                                                    <option value="5">ผลการปฏิบัติงานอื่นๆ</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -472,12 +811,22 @@
 
                                 <div id="divNewProject" style="display: none;">
                                     <div id="rcorners1">
+                                        <div class="row hidden" style="margin-top: 5px;">
+                                            <div class="col-md-6 col-md-offset-2">
+                                                <label class="txtLabel">ProjectID</label>
+                                                <div class="input-group col-md-12">
+                                                    <input type="text" class="form-control input-sm txtLabel" id="ProjectID" name="ProjectID">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">New Project</label>
                                                 <div class="input-group col-md-12">
-                                                    <input type="text" class="form-control input-sm" id="ProjName" name="ProjName">
+                                                    <input type="text" class="form-control input-sm txtLabel" id="ProjName" name="ProjName">
                                                 </div>
+                                                <div id="divErrorProjName" class="txtLabel text-red" style="display: none;">Project name is not empty...!</div>
                                             </div>
                                         </div>
 
@@ -485,8 +834,9 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Locations</label>
                                                 <div class="">
-                                                    <textarea cols="40" rows="2" class="form-control input-sm" id="newLocation" name="newLocation"></textarea>
+                                                    <textarea cols="40" rows="2" class="form-control input-sm txtLabel" id="newLocation" name="newLocation"></textarea>
                                                 </div>
+                                                <div id="divErrorLocation" class="txtLabel text-red" style="display: none;">Let's them know where is project locations..!</div>
                                             </div>
                                         </div>
 
@@ -497,6 +847,7 @@
                                                     <select id="selectProjectStep" name="selectProjectStep" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
+                                                <div id="divErrorProjectStep" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
                                             </div>
 
                                             <div class="col-md-1 input-group hidden">
@@ -623,29 +974,17 @@
                                                 <div class="txtLabel">
                                                     <%--<input type="text" class="form-control input-sm" />--%>
                                                     <select id="selectProduct" class="form-control input-sm" style="width: 100%">
-                                                        <option value="Product1">Sealex DuraGel</option>
-                                                        <option value="Product1">TopLite Plus</option>
-                                                        <option value="Product1">RoofLite</option>
-                                                        <option value="Product1">SL Frie Retardant</option>
-                                                        <option value="Product1">ChemBlok</option>
-                                                        <option value="Product1">AmpGLAZE 3/600</option>
-                                                        <option value="Product1">AmpPAL 10/600</option>
-                                                        <option value="Product1">WebGLAS</option>
-                                                        <option value="Product1">WonderCOOL IR</option>
-                                                        <option value="Product1">COOL-LITE</option>
-                                                        <option value="Product1">SupraGlas</option>
                                                     </select>
                                                 </div>
+                                                <div id="divErrorProduct" class="txtLabel text-red" style="display: none;">Should choose at least 1 product of the project ..!</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Profile</label>
                                                 <div class="txtLabel">
                                                     <select id="selectProfile" class="form-control input-sm" style="width: 100%">
-                                                        <option value="value">Profile 1</option>
-                                                        <option value="value">Profile 2</option>
-                                                        <option value="value">Profile 3</option>
                                                     </select>
                                                 </div>
+                                                <div id="divErrorProfile" class="txtLabel text-red" style="display: none;">Should choose at least 1 profile of the project ..!</div>
                                             </div>
                                         </div>
 
@@ -653,8 +992,9 @@
                                             <div class="col-md-3 col-md-offset-2">
                                                 <label class="txtLabel">Quantity</label>
                                                 <div class="txtLabel">
-                                                    <input type="text" class="form-control input-sm" />
+                                                    <input type="text" id="Quantity" name="Quantity" autocomplete="off" class="form-control input-sm txtLabel" />
                                                 </div>
+                                                <div id="divErrorQuantity" class="txtLabel text-red" style="display: none;">Did you know quantity used of project..?</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Delivery Date</label>
@@ -664,6 +1004,7 @@
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
+                                                <div id="divErrorDeliveryDate" class="txtLabel text-red" style="display: none;">Please specify the delivery date..!</div>
                                             </div>
                                         </div>
 
@@ -671,21 +1012,20 @@
                                             <div class="col-md-3 col-md-offset-2">
                                                 <label class="txtLabel">Next Visit</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdelivery" value="" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datevisit" value="" autocomplete="off">
                                                     <div class="input-group-addon input-sm">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
+                                                <div id="divErrorNextVisit" class="txtLabel text-red" style="display: none;">Please specify the next visit date..!</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Status</label>
                                                 <div class="txtLabel">
                                                     <select id="selectStatus" class="form-control input-sm" style="width: 100%">
-                                                        <option value="value">Status 1</option>
-                                                        <option value="value">Status 2</option>
-                                                        <option value="value">Status 3</option>
                                                     </select>
                                                 </div>
+                                                <div id="divErrorStatus" class="txtLabel text-red" style="display: none;">Please select status..!</div>
                                             </div>
                                         </div>
 
@@ -694,7 +1034,7 @@
                                                 <label class="txtLabel">Details</label>
                                                 <div class="">
                                                     <%--<input type="text" class="form-control input-sm" />--%>
-                                                    <textarea id="inputreason" cols="40" rows="2" class="form-control input-sm"></textarea>
+                                                    <textarea id="detail1" cols="40" rows="2" class="form-control input-sm txtLabel"></textarea>
 
                                                 </div>
                                             </div>
@@ -707,27 +1047,47 @@
                                                     <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProject">Save Entry</button>
                                                 </div>
                                             </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">Add New Product</label>
+                                                <div class="">
+                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save New Product</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">Start New Entry</label>
+                                                <div class="">
+                                                    <a href="weeklyreport?opt=wkr" class="btn btn-info btn-flat btn-block btn-sm">New Entry</a>
+                                                    <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
 
                                 <div id="divUpdate" style="display: none;">
                                     <div id="rcorners2">
+                                        <div class="row hidden" style="margin-top: 5px;">
+                                            <div class="col-md-6 col-md-offset-2">
+                                                <label class="txtLabel">ProjectID</label>
+                                                <div class="input-group col-md-12">
+                                                    <input type="text" class="form-control input-sm txtLabel" id="upProjectID" name="upProjectID">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Update Project</label>
-                                                <div class="input-group col-md-12">
-                                                    <span class="txtLabel">
-                                                        <select id="selectUpdateProject" class="form-control input input-sm " style="width: 100%;">
-                                                            <option value=""></option>
-                                                            <option value="1">Project 1</option>
-                                                            <option value="2">Project 2</option>
-                                                            <option value="3">Project 3</option>
-                                                            <option value="4">Project 4</option>
-                                                            <option value="5">Project 5</option>
-                                                        </select>
-                                                    </span>
+                                               <%-- <div class="input-group col-md-12">
+                                                    <input type="text" class="form-control input-sm txtLabel" id="upProjName" name="upProjName">
+                                                </div>--%>
+                                                <div class="txtLabel">
+                                                    <select id="selectupProject" class="form-control input-sm" style="width: 100%">
+                                                    </select>
                                                 </div>
+                                                <div id="divErrorupProjName" class="txtLabel text-red" style="display: none;">Project name is not empty...!</div>
                                             </div>
                                         </div>
 
@@ -735,8 +1095,9 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Locations</label>
                                                 <div class="">
-                                                    <textarea cols="40" rows="2" class="form-control input-sm"></textarea>
+                                                    <textarea cols="40" rows="2" class="form-control input-sm txtLabel" id="upLocation" name="upLocation"></textarea>
                                                 </div>
+                                                <div id="divErrorupLocation" class="txtLabel text-red" style="display: none;">Let's them know where is project locations..!</div>
                                             </div>
                                         </div>
 
@@ -744,16 +1105,13 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Step</label>
                                                 <div class="txtLabel">
-                                                    <select id="selectUpdateProjectStep" onchange="getUpdateProjectStep(this)" class="form-control input-sm" style="width: 100%">
-                                                        <option value="0">Design</option>
-                                                        <option value="1">Bidding</option>
-                                                        <option value="2">Award MC</option>
-                                                        <option value="3">Award RF</option>
+                                                    <select id="selectupProjectStep" name="selectProjectStep" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
+                                                <div id="divErrorupProjectStep" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
                                             </div>
 
-                                            <div class="col-md-1 input-group">
+                                            <div class="col-md-1 input-group hidden">
                                                 <label class="txtLabel">View</label>
                                                 <div class="">
                                                     <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="myFunction()">View</button>
@@ -761,20 +1119,20 @@
                                             </div>
                                         </div>
 
-                                        <div id="divUpdateBidding" class="row" style="display: none;">
+                                        <div id="divupBidding" class="row" style="display: none;">
                                             <div class="col-md-6 col-md-offset-2">
-                                                <div id="rcorners21">
+                                                <div id="rcorners22">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Bidding Name No.1</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upbiddingname1" name="upbiddingname1" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Owner</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upowner1" name="upowner1" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -782,13 +1140,13 @@
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Bidding Name No.2</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upbiddingname2" name="upbiddingname2" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Owner</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upowner2" name="upowner2" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -796,13 +1154,13 @@
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Bidding Name No.3</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upbiddingname3" name="upbiddingname3" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Owner</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upowner3" name="upowner3" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -810,20 +1168,20 @@
                                             </div>
                                         </div>
 
-                                        <div id="divUpdateAwardMC" class="row" style="display: none;">
+                                        <div id="divupAwardMC" class="row" style="display: none;">
                                             <div class="col-md-6 col-md-offset-2">
-                                                <div id="rcorners22">
+                                                <div id="rcorners23">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Award Main Cons(MC)</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upawardmc" name="upawardmc" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Contact</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upcontactmc" name="upcontactmc" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -832,20 +1190,20 @@
                                             </div>
                                         </div>
 
-                                        <div id="divUpdateAwardRF" class="row" style="display: none;">
+                                        <div id="divupAwardRF" class="row" style="display: none;">
                                             <div class="col-md-6 col-md-offset-2">
-                                                <div id="rcorners23">
+                                                <div id="rcorners24">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Award Roll Forming(RF)</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upawardrf" name="upawardrf" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Contact</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control input input-sm">
+                                                                <input type="text" id="upcontactrf" name="upcontactrf" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -858,14 +1216,12 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Product Type</label>
                                                 <div class="txtLabel">
-                                                    <select id="selectUpdateProductType" onchange="getComboA(this)" class="form-control input-sm" style="width: 100%">
-                                                        <option value="value1">รุ่นของสินค้า Ampelite</option>
-                                                        <option value="value2">รุ่นของสินค้า Amperam</option>
+                                                    <select id="selectupProductType" onchange="getComboA(this)" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-1 input-group">
+                                            <div class="col-md-1 input-group hidden">
                                                 <label class="txtLabel">View</label>
                                                 <div class="">
                                                     <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="myFunction()">View</button>
@@ -878,30 +1234,18 @@
                                                 <label class="txtLabel">Product</label>
                                                 <div class="txtLabel">
                                                     <%--<input type="text" class="form-control input-sm" />--%>
-                                                    <select id="selectUpdateProduct" class="form-control input-sm" style="width: 100%">
-                                                        <option value="Product1">Sealex DuraGel</option>
-                                                        <option value="Product1">TopLite Plus</option>
-                                                        <option value="Product1">RoofLite</option>
-                                                        <option value="Product1">SL Frie Retardant</option>
-                                                        <option value="Product1">ChemBlok</option>
-                                                        <option value="Product1">AmpGLAZE 3/600</option>
-                                                        <option value="Product1">AmpPAL 10/600</option>
-                                                        <option value="Product1">WebGLAS</option>
-                                                        <option value="Product1">WonderCOOL IR</option>
-                                                        <option value="Product1">COOL-LITE</option>
-                                                        <option value="Product1">SupraGlas</option>
+                                                    <select id="selectupProduct" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
+                                                <div id="divErrorupProduct" class="txtLabel text-red" style="display: none;">Should choose at least 1 product of the project ..!</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Profile</label>
                                                 <div class="txtLabel">
-                                                    <select id="selectUpdateProfile" class="form-control input-sm" style="width: 100%">
-                                                        <option value="value">Profile 1</option>
-                                                        <option value="value">Profile 2</option>
-                                                        <option value="value">Profile 3</option>
+                                                    <select id="selectupProfile" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
+                                                <div id="divErrorupProfile" class="txtLabel text-red" style="display: none;">Should choose at least 1 profile of the project ..!</div>
                                             </div>
                                         </div>
 
@@ -909,17 +1253,19 @@
                                             <div class="col-md-3 col-md-offset-2">
                                                 <label class="txtLabel">Quantity</label>
                                                 <div class="txtLabel">
-                                                    <input type="text" class="form-control input-sm" />
+                                                    <input type="text" id="upQuantity" name="upQuantity" autocomplete="off" class="form-control input-sm txtLabel" />
                                                 </div>
+                                                <div id="divErrorupQuantity" class="txtLabel text-red" style="display: none;">Did you know quantity used of project..?</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Delivery Date</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdelivery" value="" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="updatepickerdelivery" value="" autocomplete="off">
                                                     <div class="input-group-addon input-sm">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
+                                                <div id="divErrorupDeliveryDate" class="txtLabel text-red" style="display: none;">Please specify the delivery date..!</div>
                                             </div>
                                         </div>
 
@@ -927,21 +1273,20 @@
                                             <div class="col-md-3 col-md-offset-2">
                                                 <label class="txtLabel">Next Visit</label>
                                                 <div class="input-group date">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdelivery" value="" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="updatevisit" value="" autocomplete="off">
                                                     <div class="input-group-addon input-sm">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
+                                                <div id="divErrorupNextVisit" class="txtLabel text-red" style="display: none;">Please specify the next visit date..!</div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Status</label>
                                                 <div class="txtLabel">
-                                                    <select id="selectUpateStatus" class="form-control input-sm" style="width: 100%">
-                                                        <option value="value">Status 1</option>
-                                                        <option value="value">Status 2</option>
-                                                        <option value="value">Status 3</option>
+                                                    <select id="selectupStatus" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
+                                                <div id="divErrorupStatus" class="txtLabel text-red" style="display: none;">Please select status..!</div>
                                             </div>
                                         </div>
 
@@ -950,7 +1295,7 @@
                                                 <label class="txtLabel">Details</label>
                                                 <div class="">
                                                     <%--<input type="text" class="form-control input-sm" />--%>
-                                                    <textarea id="inputreason" cols="40" rows="2" class="form-control input-sm"></textarea>
+                                                    <textarea id="updetail1" cols="40" rows="2" class="form-control input-sm txtLabel"></textarea>
 
                                                 </div>
                                             </div>
@@ -960,9 +1305,24 @@
                                             <div class="col-md-2 col-md-offset-2">
                                                 <label class="txtLabel">Save Entry</label>
                                                 <div class="">
-                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryUpdateProject">Save Entry</button>
+                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryupProject">Save Entry</button>
                                                 </div>
                                             </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">Add New Product</label>
+                                                <div class="">
+                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryupProduct">Save New Product</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">Start New Entry</label>
+                                                <div class="">
+                                                    <a href="weeklyreport?opt=wkr" class="btn btn-info btn-flat btn-block btn-sm">New Entry</a>
+                                                    <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -999,6 +1359,28 @@
                                 </div>
 
                                 <div id="divSpecIntake" style="display: none;">
+                                    <div class="row" style="margin-top: 5px;">
+                                     <div class="col-md-6 col-md-offset-2">
+                                                <label class="txtLabel">Project Name</label>
+                                                <div class="txtLabel">
+                                                    <select id="selectIntakeProject" name="selectIntakeProject" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
+                                                    </select>
+                                                </div>
+                                                <div id="divErrorIntakeProject" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
+                                            </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px;">
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Status</label>
+                                            <div class="txtLabel">
+                                                <select id="selectIntakeStatus" class="form-control input-sm" style="width: 100%">
+                                                </select>
+                                            </div>
+                                            <div id="divErrorIntakeStatus" class="txtLabel text-red" style="display: none;">Please select status..!</div>
+                                        </div>
+                                    </div>
+
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="col-md-2 col-md-offset-2">
                                             <div class="radio txtLabel">
@@ -1063,10 +1445,10 @@
 
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="col-md-6 col-md-offset-2">
-                                            <label class="txtLabel">Reason</label>
+                                            <label class="txtLabel">Details</label>
                                             <div class="">
                                                 <%--<input type="text" class="form-control input-sm" />--%>
-                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+                                                <textarea id="Details3" cols="40" rows="2" class="form-control input-sm txtLabel"></textarea>
 
                                             </div>
                                         </div>
@@ -1083,21 +1465,13 @@
                                 </div>
 
                                 <div id="divOther" style="display: none;">
+                                    
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="col-md-6 col-md-offset-2">
-                                            <label class="txtLabel">Other</label>
-                                            <div class="input-group col-md-12">
-                                                <input type="text" class="form-control input-sm">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" style="margin-top: 5px;">
-                                        <div class="col-md-6 col-md-offset-2">
-                                            <label class="txtLabel">Reason</label>
+                                            <label class="txtLabel">Details</label>
                                             <div class="">
                                                 <%--<input type="text" class="form-control input-sm" />--%>
-                                                <textarea id="inputreason" cols="40" rows="3" class="form-control input-sm"></textarea>
+                                                <textarea id="dettail4" cols="40" rows="3" class="form-control input-sm"></textarea>
 
                                             </div>
                                         </div>

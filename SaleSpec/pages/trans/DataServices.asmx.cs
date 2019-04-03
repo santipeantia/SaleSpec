@@ -157,13 +157,19 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
-        public void GetProducts()
+        public void GetProducts(string ProdTypeID)
         {
             List<GetDataProducts> products = new List<GetDataProducts>();
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 SqlCommand comm = new SqlCommand("spGetProducts", conn);
                 comm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter()
+                {
+                    ParameterName = "@ProdTypeID",
+                    Value = ProdTypeID
+                };
+                comm.Parameters.Add(param);
                 conn.Open();
 
                 SqlDataReader rdr = comm.ExecuteReader();
@@ -180,6 +186,81 @@ namespace SaleSpec.Class
             JavaScriptSerializer js = new JavaScriptSerializer();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(products));
+        }
+
+        [WebMethod]
+        public void GetProfile()
+        {
+            List<GetDataProfile> profiles = new List<GetDataProfile>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProfile", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProfile profile = new GetDataProfile();
+                    profile.ProfID = rdr["ProfID"].ToString();
+                    profile.ProfNameTH = rdr["ProfNameTH"].ToString();
+                    profile.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    profiles.Add(profile);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(profiles));
+        }
+
+        [WebMethod]
+        public void GetStatus()
+        {
+            List<GetDataStatus> statuses = new List<GetDataStatus>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetStatus", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataStatus status = new GetDataStatus();
+                    status.StatusID = rdr["StatusID"].ToString();
+                    status.StatusNameTh = rdr["StatusNameTh"].ToString();
+                    status.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    statuses.Add(status);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(statuses));
+        }
+
+        [WebMethod]
+        public void GetTransEntry()
+        {
+            List<GetDataTransEntry> transactions = new List<GetDataTransEntry>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetTransEntry", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataTransEntry transaction = new GetDataTransEntry();
+                    transaction.TransID = rdr["TransID"].ToString();
+                    transaction.TransNameTH = rdr["TransNameTH"].ToString();
+                    transaction.TransNameEN = rdr["TransNameEN"].ToString();
+                    transactions.Add(transaction);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(transactions));
         }
 
         [WebMethod]
@@ -250,6 +331,30 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
+        public void GetCountProject()
+        {
+            List<GetDataCountProject> countprojects = new List<GetDataCountProject>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetCountProject", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataCountProject countproject = new GetDataCountProject();
+                    countproject.ProjectID = rdr["ProjectID"].ToString();
+                    countprojects.Add(countproject);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(countprojects));
+        }
+
+        [WebMethod]
         public void GetDataInsertArchitect(string ArchitecID, string CompanyID, string Name, string FirstName, string LastName, 
                                             string NickName, string Position, string Address, string Phone, string Mobile, string Email, string StatusConID)
         {
@@ -274,6 +379,66 @@ namespace SaleSpec.Class
                 comm.ExecuteNonQuery();
                 conn.Close();
             }
-        }  
+        }
+
+        [WebMethod]
+        public void GetInsertWeeklyReport(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, 
+                                          string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID, 
+                                          string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2, 
+                                          string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, 
+                                          string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string Quantity, string DeliveryDate, 
+                                          string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect, string HaveFiles, string FileName, 
+                                          string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            List<GetInsertArchitect> companies = new List<GetInsertArchitect>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReport", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@TransID", TransID);
+                comm.Parameters.AddWithValue("@TransNameEN", TransNameEN);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@BiddingName1", BiddingName1);
+                comm.Parameters.AddWithValue("@OwnerName1", OwnerName1);
+                comm.Parameters.AddWithValue("@BiddingName2", BiddingName2);
+                comm.Parameters.AddWithValue("@OwnerName2", OwnerName2);
+                comm.Parameters.AddWithValue("@BiddingName3", BiddingName3);
+                comm.Parameters.AddWithValue("@OwnerName3", OwnerName3);
+                comm.Parameters.AddWithValue("@AwardMC", AwardMC);
+                comm.Parameters.AddWithValue("@ContactMC", ContactMC);
+                comm.Parameters.AddWithValue("@AwardRF", AwardRF);
+                comm.Parameters.AddWithValue("@ContactRF", ContactRF);
+                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                comm.Parameters.AddWithValue("@ProdID", ProdID);
+                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@Quantity", Quantity);
+                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
+                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
+                comm.Parameters.AddWithValue("@FileName", FileName);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }
