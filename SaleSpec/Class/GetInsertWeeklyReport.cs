@@ -34,6 +34,8 @@ namespace SaleSpec.Class
         public string ProdTypeNameEN { get; set; }
         public string ProdID { get; set; }
         public string ProdNameEN { get; set; }
+        public string ProfID { get; set; }
+        public string ProfNameEN { get; set; }
         public string Quantity { get; set; }
         public string DeliveryDate { get; set; }
         public string NextVisitDate { get; set; }

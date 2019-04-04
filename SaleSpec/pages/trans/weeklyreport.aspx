@@ -390,6 +390,19 @@
                     }
                 });
 
+                selectProjectStepDDL.change(function () {
+                    $('#biddingname1').val('');
+                    $('#owner1').val('');
+                    $('#biddingname2').val('');
+                    $('#owner2').val('');
+                    $('#biddingname3').val('');
+                    $('#owner3').val('');
+                    $('#awardmc').val('');
+                    $('#contactmc').val('');
+                    $('#awardrf').val('');
+                    $('#contactrf').val('');
+                });
+
                 //Validate option not allow when transaction date is empty
                 $('#datepickertrans').change(function () {
                     //alert($('#datepickertrans').val());
@@ -551,78 +564,108 @@
 
 
                     if (chkValidate == 'true') {
-                        alert($('#selectCompany option:selected').text());
+                        var userid = '<%= Session["UserID"]%>';
+                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                        var lastname = '<%= Session["sEmpEngLastName"] %>';
+                        var engmane = '<%= Session["sEngName"] %>';
+                        var empcode = '<%= Session["EmpCode"] %>';
+
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0');
+                        var yyyy = today.getFullYear();
+                        var tt =  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                        if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
+
+                            $.ajax({
+                                url: 'DataServices.asmx/GetCountProject',
+                                method: 'POST',
+                                dataType: 'json',
+                                success: function (data) {
+                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                    if (obj != '') {
+                                        $.each(obj, function (key, inval) {
+                                            $("#ProjectID").val(inval["ProjectID"]);
+
+                                            //Get insert new architech
+                                            $.ajax({
+                                                url: 'DataServices.asmx/GetInsertWeeklyReport',
+                                                method: 'POST',
+                                                data: {
+                                                    WeekDate: $('#datepickertrans').val(),
+                                                    WeekTime: $('#inputtime').val(),
+                                                    CompanyID: $('#selectCompany').val(),
+                                                    CompanyName: $('#selectCompany option:selected').text(),
+                                                    ArchitecID: $('#selectArchitect').val(),
+                                                    Name: $('#selectArchitect option:selected').text(),
+                                                    TransID: $('#selectTransEntry').val(),
+                                                    TransNameEN: $('#selectTransEntry option:selected').text(),
+                                                    ProjectID: $('#ProjectID').val(),
+                                                    ProjectName: $('#ProjName').val(),
+                                                    Location: $('#newLocation').val(),
+                                                    StepID: $('#selectProjectStep').val(),
+                                                    StepNameEn: $('#selectProjectStep option:selected').text(),
+                                                    BiddingName1: $('#biddingname1').val(),
+                                                    OwnerName1: $('#owner1').val(),
+                                                    BiddingName2: $('#biddingname2').val(),
+                                                    OwnerName2: $('#owner2').val(),
+                                                    BiddingName3: $('#biddingname3').val(),
+                                                    OwnerName3: $('#owner3').val(),
+                                                    AwardMC: $('#awardmc').val(),
+                                                    ContactMC: $('#contactmc').val(),
+                                                    AwardRF: $('#awardrf').val(),
+                                                    ContactRF: $('#contactrf').val(),
+                                                    ProdTypeID: $('#selectProductType').val(),
+                                                    ProdTypeNameEN: $('#selectProductType option:selected').text(),
+                                                    ProdID: $('#selectProduct').val(),
+                                                    ProdNameEN: $('#selectProduct option:selected').text(),
+                                                    ProfID: $('#selectProfile').val(),
+                                                    ProfNameEN: $('#selectProfile option:selected').text(),
+                                                    Quantity: $('#Quantity').val(),
+                                                    DeliveryDate: $('#datepickerdelivery').val(),
+                                                    NextVisitDate: $('#datevisit').val(),
+                                                    StatusID: $('#selectStatus').val(),
+                                                    StatusNameEn: $('#selectStatus option:selected').text(),
+                                                    NewArchitect: null,
+                                                    HaveFiles: null,
+                                                    FileName: null,
+                                                    Remark: $('#detail1').val(),
+                                                    UserID: userid,
+                                                    EmpCode: empcode,
+                                                    CreatedBy: firstname + ' ' + lastname,
+                                                    CreatedDate: currentdate
+                                                },
+                                                dataType: 'json',
+                                                success: function (data) {
+
+                                                }
+                                            });
+
+                                            /// to do here
+                                            alert('Data saved successfully..!');
+
+                                            
+                                            document.getElementById("divSaveEntry").style.display = '';
+                                            document.getElementById("divSaveEntry").style.display = 'none';
+
+                                            document.getElementById("divNewProduct").style.display = '';
+                                            document.getElementById("divNewProduct").style.display = 'normal';
+
+                                        });
+                                    }
+                                }
+                            });
+
+                        } else {
+                            alert('Warning, \n\When you create new transaction must be select step design only..!');
+                            return;
+                        }
+
+                        //alert(currentdate);
                         //to do save weekly report option new Projects
-                        // $.ajax({
-                        //    url: 'DataServices.asmx/GetCountProject',
-                        //    method: 'POST',
-                        //    dataType: 'json',
-                        //    success: function (data) {
-                        //        var obj = jQuery.parseJSON(JSON.stringify(data));
-                        //        if (obj != '') {
-                        //            $.each(obj, function (key, inval) {
-                        //                $("#ProjectID").val(inval["ProjectID"]);
-
-                        //                //Get insert new architech
-                        //                $.ajax({
-                        //                    url: 'DataServices.asmx/GetInsertWeeklyReport',
-                        //                    method: 'POST',
-                        //                    data: {
-                        //                        WeekDate: $('#datepickertrans').val(),
-                        //                        WeekTime: $('#inputtime').val(),
-                        //                        CompanyID: $('#selectCompany').val(),
-                        //                        CompanyName: $('#selectCompany option:selected').text(),
-                        //                        ArchitecID: $('#').val(),
-                        //                        Name: $('#').val(),
-                        //                        TransID: $('#').val(),
-                        //                        TransNameEN: $('#').val(),
-                        //                        ProjectID: $('#').val(),
-                        //                        ProjectName: $('#').val(),
-                        //                        Location: $('#').val(),
-                        //                        StepID: $('#').val(),
-                        //                        StepNameEn: $('#').val(),
-                        //                        BiddingName1: $('#').val(),
-                        //                        OwnerName1: $('#').val(),
-                        //                        BiddingName2: $('#').val(),
-                        //                        OwnerName2: $('#').val(),
-                        //                        BiddingName3: $('#').val(),
-                        //                        OwnerName3: $('#').val(),
-                        //                        AwardMC: $('#').val(),
-                        //                        ContactMC: $('#').val(),
-                        //                        AwardRF: $('#').val(),
-                        //                        ContactRF: $('#').val(),
-                        //                        ProdTypeID: $('#').val(),
-                        //                        ProdTypeNameEN: $('#').val(),
-                        //                        ProdID: $('#').val(),
-                        //                        ProdNameEN: $('#').val(),
-                        //                        Quantity: $('#').val(),
-                        //                        DeliveryDate: $('#').val(),
-                        //                        NextVisitDate: $('#').val(),
-                        //                        StatusID: $('#').val(),
-                        //                        StatusNameEn: $('#').val(),
-                        //                        NewArchitect: $('#').val(),
-                        //                        HaveFiles: $('#').val(),
-                        //                        FileName: $('#').val(),
-                        //                        Remark: $('#').val(),
-                        //                        UserID: $('#').val(),
-                        //                        EmpCode: $('#').val(),
-                        //                        CreatedBy: $('#').val(),
-                        //                        CreatedDate: $('#').val()
-                        //                    },
-                        //                    dataType: 'json',
-                        //                    success: function (data) {
-
-                        //                    }
-                        //                });
-
-                        //                /// to do here
-                        //                alert('Data saved successfully..!');
-
-                        //            });
-                        //        }
-                        //    }
-                        //});
-
+                        
 
                     } else {
                         alert('Warnning, The data is not completed please check..!');
@@ -1041,23 +1084,23 @@
                                         </div>
 
                                         <div class="row" style="margin-top: 5px;">
-                                            <div class="col-md-2 col-md-offset-2">
+                                            <div id="divSaveEntry" class="col-md-2 col-md-offset-2">
                                                 <label class="txtLabel">Save Entry</label>
                                                 <div class="">
                                                     <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProject">Save Entry</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-md-offset-2" id="divNewProduct" style="display: none">
                                                 <label class="txtLabel">Add New Product</label>
                                                 <div class="">
-                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save New Product</button>
+                                                    <button type="button" class="btn btn-warning btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save New Product</button>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" id="divNewEntry">
                                                 <label class="txtLabel">Start New Entry</label>
                                                 <div class="">
-                                                    <a href="weeklyreport?opt=wkr" class="btn btn-info btn-flat btn-block btn-sm">New Entry</a>
+                                                    <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">Clear & New Entry</a>
                                                     <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
                                                 </div>
                                             </div>
@@ -1352,7 +1395,7 @@
                                         <div class="col-md-2  col-md-offset-2">
                                             <label class="txtLabel">Save Entry</label>
                                             <div class="">
-                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="Button1">Save Entry</button>
+                                                <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveNewArchitect">Save Entry</button>
                                             </div>
                                         </div>
                                     </div>

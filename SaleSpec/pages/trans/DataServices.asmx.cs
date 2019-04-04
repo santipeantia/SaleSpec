@@ -386,9 +386,9 @@ namespace SaleSpec.Class
                                           string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID, 
                                           string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2, 
                                           string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, 
-                                          string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string Quantity, string DeliveryDate, 
-                                          string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect, string HaveFiles, string FileName, 
-                                          string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+                                          string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN, 
+                                          string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect, 
+                                          string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
         {
             List<GetInsertArchitect> companies = new List<GetInsertArchitect>();
             using (SqlConnection conn = new SqlConnection(cs))
@@ -423,6 +423,8 @@ namespace SaleSpec.Class
                 comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
                 comm.Parameters.AddWithValue("@ProdID", ProdID);
                 comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@ProfID", ProfID);
+                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
                 comm.Parameters.AddWithValue("@Quantity", Quantity);
                 comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
                 comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
