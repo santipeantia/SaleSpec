@@ -20,11 +20,23 @@
                 var btnCompany = $('#btnCompany');
                 var btnArchitect = $('#btnArchitect');
 
+                var selectUpdteProjectDDL = $('#selectUpdteProject');
+                var selectupdateProjectStepDDL = $('#selectupdateProjectStep');
+                var selectUpdateProductTypeDDL = $('#selectUpdateProductType');
+
                 selectCompanyDDL.prop('disabled', true);
                 selectArchitectDDL.prop('disabled', true);
                 selectTransEntryDDL.prop('disabled', true);
                 btnCompany.prop('disabled', true);
                 btnArchitect.prop('disabled', true);
+
+                
+                $('#updateLocation').prop('disabled', true);
+                $('#selectupdateProjectStep').prop('disabled', true);
+                selectUpdateProductTypeDDL.prop('disabled', true);
+
+
+
 
                 //Get data company from table
                 $.ajax({
@@ -35,6 +47,9 @@
                         selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
                         selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
                         selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                        selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step' }));
+                        selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+
                         $(data).each(function (index, item) {
                             selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
                         });
@@ -122,7 +137,8 @@
                     }
                 });
 
-                //When company select index change set cascading to architect
+                // ******* Start function create new project *******
+                // When company select index change set cascading to architect
                 selectCompanyDDL.change(function () {
                     if ($(this).val() == "-1") {
                         btnArchitect.prop('disabled', true);
@@ -443,7 +459,8 @@
                 });
 
                 var btnSaveHistoryNewProject = $('#btnSaveHistoryNewProject');
-                btnSaveHistoryNewProject.click(function () {
+                btnSaveHistoryNewProject.click(function ()
+                {
                     var chkValidate = 'false';
                     var ProjName = $('#ProjName');
                     var newLocation = $('#newLocation');
@@ -562,7 +579,6 @@
                         chkValidate = 'true';
                     }
 
-
                     if (chkValidate == 'true') {
                         var userid = '<%= Session["UserID"]%>';
                         var firstname = '<%= Session["sEmpEngFirstName"] %>';
@@ -646,7 +662,6 @@
                                             /// to do here
                                             alert('Data saved successfully..!');
 
-                                            
                                             document.getElementById("divSaveEntry").style.display = '';
                                             document.getElementById("divSaveEntry").style.display = 'none';
 
@@ -662,15 +677,321 @@
                             alert('Warning, \n\When you create new transaction must be select step design only..!');
                             return;
                         }
-
-                        //alert(currentdate);
-                        //to do save weekly report option new Projects
-                        
-
                     } else {
                         alert('Warnning, The data is not completed please check..!');
                     }
                 });
+
+                var btnSaveHistoryNewProduct = $('#btnSaveHistoryNewProduct');
+                btnSaveHistoryNewProduct.click(function () {
+                    var chkValidate = 'false';
+                    var ProjName = $('#ProjName');
+                    var newLocation = $('#newLocation');
+                    var selectProjectStep = $('#selectProjectStep');
+                    var selectProduct = $('#selectProduct');
+                    var selectProfile = $('#selectProfile');
+                    var Quantity = $('#Quantity');
+                    var datepickerdelivery = $('#datepickerdelivery');
+                    var datevisit = $('#datevisit');
+                    var selectStatus = $('#selectStatus');
+
+                    if (ProjName.val() == '') {
+                        document.getElementById("divErrorProjName").style.display = '';
+                        document.getElementById("divErrorProjName").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorProjName").style.display = '';
+                        document.getElementById("divErrorProjName").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (newLocation.val() == '') {
+                        document.getElementById("divErrorLocation").style.display = '';
+                        document.getElementById("divErrorLocation").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorLocation").style.display = '';
+                        document.getElementById("divErrorLocation").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (selectProjectStep.val() == '-1') {
+                        document.getElementById("divErrorProjectStep").style.display = '';
+                        document.getElementById("divErrorProjectStep").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorProjectStep").style.display = '';
+                        document.getElementById("divErrorProjectStep").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (selectProduct.val() == '-1') {
+                        document.getElementById("divErrorProduct").style.display = '';
+                        document.getElementById("divErrorProduct").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                        //alert(selectProduct.val());
+
+                    } else {
+                        document.getElementById("divErrorProduct").style.display = '';
+                        document.getElementById("divErrorProduct").style.display = 'none';
+                        chkValidate = 'true';
+                        //alert(selectProduct.val());
+                    }
+
+                    if (selectProfile.val() == '-1') {
+                        document.getElementById("divErrorProfile").style.display = '';
+                        document.getElementById("divErrorProfile").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorProfile").style.display = '';
+                        document.getElementById("divErrorProfile").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (Quantity.val() == '') {
+                        document.getElementById("divErrorQuantity").style.display = '';
+                        document.getElementById("divErrorQuantity").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorQuantity").style.display = '';
+                        document.getElementById("divErrorQuantity").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (datepickerdelivery.val() == '') {
+                        document.getElementById("divErrorDeliveryDate").style.display = '';
+                        document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorDeliveryDate").style.display = '';
+                        document.getElementById("divErrorDeliveryDate").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (datevisit.val() == '') {
+                        document.getElementById("divErrorNextVisit").style.display = '';
+                        document.getElementById("divErrorNextVisit").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorNextVisit").style.display = '';
+                        document.getElementById("divErrorNextVisit").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (selectStatus.val() == '-1') {
+                        document.getElementById("divErrorStatus").style.display = '';
+                        document.getElementById("divErrorStatus").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorStatus").style.display = '';
+                        document.getElementById("divErrorStatus").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
+                    if (chkValidate == 'true') {
+                        var userid = '<%= Session["UserID"]%>';
+                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                        var lastname = '<%= Session["sEmpEngLastName"] %>';
+                        var engmane = '<%= Session["sEngName"] %>';
+                        var empcode = '<%= Session["EmpCode"] %>';
+
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0');
+                        var yyyy = today.getFullYear();
+                        var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                        if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
+
+                            //Get insert new architech
+                            $.ajax({
+                                url: 'DataServices.asmx/GetInsertWeeklyReportWithExtended',
+                                method: 'POST',
+                                data: {
+                                    WeekDate: $('#datepickertrans').val(),
+                                    WeekTime: $('#inputtime').val(),
+                                    CompanyID: $('#selectCompany').val(),
+                                    CompanyName: $('#selectCompany option:selected').text(),
+                                    ArchitecID: $('#selectArchitect').val(),
+                                    Name: $('#selectArchitect option:selected').text(),
+                                    TransID: $('#selectTransEntry').val(),
+                                    TransNameEN: $('#selectTransEntry option:selected').text(),
+                                    ProjectID: $('#ProjectID').val(),
+                                    ProjectName: $('#ProjName').val(),
+                                    Location: $('#newLocation').val(),
+                                    StepID: $('#selectProjectStep').val(),
+                                    StepNameEn: $('#selectProjectStep option:selected').text(),
+                                    BiddingName1: $('#biddingname1').val(),
+                                    OwnerName1: $('#owner1').val(),
+                                    BiddingName2: $('#biddingname2').val(),
+                                    OwnerName2: $('#owner2').val(),
+                                    BiddingName3: $('#biddingname3').val(),
+                                    OwnerName3: $('#owner3').val(),
+                                    AwardMC: $('#awardmc').val(),
+                                    ContactMC: $('#contactmc').val(),
+                                    AwardRF: $('#awardrf').val(),
+                                    ContactRF: $('#contactrf').val(),
+                                    ProdTypeID: $('#selectProductType').val(),
+                                    ProdTypeNameEN: $('#selectProductType option:selected').text(),
+                                    ProdID: $('#selectProduct').val(),
+                                    ProdNameEN: $('#selectProduct option:selected').text(),
+                                    ProfID: $('#selectProfile').val(),
+                                    ProfNameEN: $('#selectProfile option:selected').text(),
+                                    Quantity: $('#Quantity').val(),
+                                    DeliveryDate: $('#datepickerdelivery').val(),
+                                    NextVisitDate: $('#datevisit').val(),
+                                    StatusID: $('#selectStatus').val(),
+                                    StatusNameEn: $('#selectStatus option:selected').text(),
+                                    NewArchitect: null,
+                                    HaveFiles: null,
+                                    FileName: null,
+                                    Remark: $('#detail1').val(),
+                                    UserID: userid,
+                                    EmpCode: empcode,
+                                    CreatedBy: firstname + ' ' + lastname,
+                                    CreatedDate: currentdate
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+
+                                }
+                            });
+
+                            /// to do here
+                            alert('Data saved product extended successfully..!');
+
+                            document.getElementById("divSaveEntry").style.display = '';
+                            document.getElementById("divSaveEntry").style.display = 'none';
+
+                            document.getElementById("divNewProduct").style.display = '';
+                            document.getElementById("divNewProduct").style.display = 'normal';
+
+                        } else {
+                            alert('Warning, \n\When you create new transaction must be select step design only..!');
+                            return;
+                        }
+                    } else {
+                        alert('Warnning, The data is not completed please check..!');
+                    }
+                });
+                // ******* End function create new project *******
+
+
+                // ******* Start function update project status *******
+                 selectTransEntryDDL.change(function () {
+                    if ($(this).val() == '-1') {
+                        selectUpdteProjectDDL.empty();
+                        selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                    }
+                    else
+                    {
+                        var selectCompanyDDL = $('#selectCompany option:selected').val();
+                        var selectArchitectDDL = $('#selectArchitect option:selected').val();
+                        var userid = '<%= Session["UserID"]%>';
+
+                        $.ajax({
+                            url: 'DataServices.asmx/GetDataProjectWithPort',
+                            method: 'post',
+                            data: {
+                                CompanyID: selectCompanyDDL,
+                                ArchitecID: selectArchitectDDL,
+                                TypeID: userid
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                selectUpdteProjectDDL.empty();
+                                selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                                $(data).each(function (index, item) {
+                                    selectUpdteProjectDDL.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
+                                });
+                            }
+                        });
+                    }
+                });
+
+                selectUpdteProjectDDL.change(function () {
+                    if ($(this).val() == '-1') {
+                        $('#updateLocation').prop('disabled', true);
+                        $('#selectupdateProjectStep').prop('disabled', true);
+                        selectupdateProjectStepDDL.empty();
+                        selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
+
+                        selectUpdateProductTypeDDL.empty();
+                        selectUpdateProductTypeDDL.prop('disabled', true);
+                        selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+
+                        document.getElementById("divUpdateBidding").style.display = 'none';
+                        document.getElementById("divUpdateAwardMC").style.display = 'none';
+                        document.getElementById("divUpdateAwardRF").style.display = 'none';
+
+
+                    } else {
+                        $('#updateLocation').prop('disabled', false);
+                        $('#selectupdateProjectStep').prop('disabled', false);
+                        selectUpdateProductTypeDDL.prop('disabled', false);
+
+                        // get project step design, bidding, awardmc, awardrf 
+                        $.ajax({
+                            url: 'DataServices.asmx/GetStepUpdate',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectupdateProjectStepDDL.empty();
+                                selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
+                                $(data).each(function (index, item) {
+                                    selectupdateProjectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameEn }));
+                                });
+                            }
+                        });
+
+                         // get project step design, bidding, awardmc, awardrf 
+                        $.ajax({
+                            url: 'DataServices.asmx/GetProductTypeUpdate',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectUpdateProductTypeDDL.empty();
+                                selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+                                $(data).each(function (index, item) {
+                                    selectUpdateProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                                });
+                            }
+                        });
+                    }
+                });
+
+               
+
+                //$.ajax({
+                //    url: 'DataServices.asmx/GetPositions',
+                //    method: 'post',
+                //    dataType: 'json',
+                //    success: function (data) {
+                //        selectArcPositionDDL.append($('<option/>', { value: -1, text: 'Select Position' }));
+                //        $(data).each(function (index, item) {
+                //            selectArcPositionDDL.append($('<option/>', { value: item.PositionID, text: item.PositionNameEN }));
+                //        });
+                //    }
+                //});
+
+
+                // ******* End function update project status *******
+
 
 
 
@@ -736,6 +1057,12 @@
         }
 
          #rcorners23 {
+            border-radius: 0 0 10px 10px;
+            background: #d4ebfc;
+            border: 1px solid #339eeb;
+            padding: 20px 0 20px 0;
+        }
+          #rcorners24 {
             border-radius: 0 0 10px 10px;
             background: #d4ebfc;
             border: 1px solid #339eeb;
@@ -1104,7 +1431,6 @@
                                                     <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -1115,7 +1441,7 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">ProjectID</label>
                                                 <div class="input-group col-md-12">
-                                                    <input type="text" class="form-control input-sm txtLabel" id="upProjectID" name="upProjectID">
+                                                    <input type="text" class="form-control input-sm txtLabel" id="updateProjectID" name="updateProjectID">
                                                 </div>
                                             </div>
                                         </div>
@@ -1127,7 +1453,7 @@
                                                     <input type="text" class="form-control input-sm txtLabel" id="upProjName" name="upProjName">
                                                 </div>--%>
                                                 <div class="txtLabel">
-                                                    <select id="selectupProject" class="form-control input-sm" style="width: 100%">
+                                                    <select id="selectUpdteProject" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
                                                 <div id="divErrorupProjName" class="txtLabel text-red" style="display: none;">Project name is not empty...!</div>
@@ -1138,7 +1464,7 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Locations</label>
                                                 <div class="">
-                                                    <textarea cols="40" rows="2" class="form-control input-sm txtLabel" id="upLocation" name="upLocation"></textarea>
+                                                    <textarea cols="40" rows="2" class="form-control input-sm txtLabel" id="updateLocation" name="updateLocation"></textarea>
                                                 </div>
                                                 <div id="divErrorupLocation" class="txtLabel text-red" style="display: none;">Let's them know where is project locations..!</div>
                                             </div>
@@ -1148,7 +1474,7 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Step</label>
                                                 <div class="txtLabel">
-                                                    <select id="selectupProjectStep" name="selectProjectStep" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
+                                                    <select id="selectupdateProjectStep" name="selectupdateProjectStep" onchange="getUpdateProjectStep(this)" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
                                                 <div id="divErrorupProjectStep" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
@@ -1162,20 +1488,20 @@
                                             </div>
                                         </div>
 
-                                        <div id="divupBidding" class="row" style="display: none;">
+                                        <div id="divUpdateBidding" class="row" style="display: none;">
                                             <div class="col-md-6 col-md-offset-2">
                                                 <div id="rcorners22">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Bidding Name No.1</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" id="upbiddingname1" name="upbiddingname1" class="form-control input input-sm">
+                                                                <input type="text" id="updatebiddingname1" name="updatebiddingname1" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Owner</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="upowner1" name="upowner1" class="form-control input input-sm">
+                                                                <input type="text" id="updateowner1" name="updateowner1" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1183,13 +1509,13 @@
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Bidding Name No.2</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" id="upbiddingname2" name="upbiddingname2" class="form-control input input-sm">
+                                                                <input type="text" id="updatebiddingname2" name="updatebiddingname2" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Owner</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="upowner2" name="upowner2" class="form-control input input-sm">
+                                                                <input type="text" id="updateowner2" name="updateowner2" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1197,13 +1523,13 @@
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Bidding Name No.3</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" id="upbiddingname3" name="upbiddingname3" class="form-control input input-sm">
+                                                                <input type="text" id="updatebiddingname3" name="updatebiddingname3" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Owner</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="upowner3" name="upowner3" class="form-control input input-sm">
+                                                                <input type="text" id="updateowner3" name="updateowner3" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1211,20 +1537,20 @@
                                             </div>
                                         </div>
 
-                                        <div id="divupAwardMC" class="row" style="display: none;">
+                                        <div id="divUpdateAwardMC" class="row" style="display: none;">
                                             <div class="col-md-6 col-md-offset-2">
                                                 <div id="rcorners23">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Award Main Cons(MC)</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" id="upawardmc" name="upawardmc" class="form-control input input-sm">
+                                                                <input type="text" id="updateawardmc" name="updateawardmc" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Contact</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="upcontactmc" name="upcontactmc" class="form-control input input-sm">
+                                                                <input type="text" id="updatecontactmc" name="updatecontactmc" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1233,20 +1559,20 @@
                                             </div>
                                         </div>
 
-                                        <div id="divupAwardRF" class="row" style="display: none;">
+                                        <div id="divUpdateAwardRF" class="row" style="display: none;">
                                             <div class="col-md-6 col-md-offset-2">
                                                 <div id="rcorners24">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
                                                             <label class="txtLabel">Award Roll Forming(RF)</label>
                                                             <div class="input-group col-md-12">
-                                                                <input type="text" id="upawardrf" name="upawardrf" class="form-control input input-sm">
+                                                                <input type="text" id="updateawardrf" name="updateawardrf" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label class="txtLabel">Contact</label>
                                                             <div class="input-group">
-                                                                <input type="text" id="upcontactrf" name="upcontactrf" class="form-control input input-sm">
+                                                                <input type="text" id="updatecontactrf" name="updatecontactrf" class="form-control input input-sm">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1259,7 +1585,7 @@
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Product Type</label>
                                                 <div class="txtLabel">
-                                                    <select id="selectupProductType" onchange="getComboA(this)" class="form-control input-sm" style="width: 100%">
+                                                    <select id="selectUpdateProductType" onchange="getComboA(this)" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
                                             </div>
@@ -1345,27 +1671,26 @@
                                         </div>
 
                                         <div class="row" style="margin-top: 5px;">
-                                            <div class="col-md-2 col-md-offset-2">
+                                            <div id="divUpdateEntry" class="col-md-2 col-md-offset-2">
                                                 <label class="txtLabel">Save Entry</label>
                                                 <div class="">
-                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryupProject">Save Entry</button>
+                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryUpdateProject">Save Entry</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-md-offset-2" id="divUpdateNewProduct" style="display: none">
                                                 <label class="txtLabel">Add New Product</label>
                                                 <div class="">
-                                                    <button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryupProduct">Save New Product</button>
+                                                    <button type="button" class="btn btn-warning btn-flat btn-block btn-sm" id="btnSaveHistoryUpdateProduct">Save New Product</button>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" id="divUpdateNewEntry">
                                                 <label class="txtLabel">Start New Entry</label>
                                                 <div class="">
-                                                    <a href="weeklyreport?opt=wkr" class="btn btn-info btn-flat btn-block btn-sm">New Entry</a>
+                                                    <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">Clear & New Entry</a>
                                                     <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

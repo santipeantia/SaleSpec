@@ -390,7 +390,6 @@ namespace SaleSpec.Class
                                           string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect, 
                                           string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
         {
-            List<GetInsertArchitect> companies = new List<GetInsertArchitect>();
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 conn.Open();
@@ -441,6 +440,149 @@ namespace SaleSpec.Class
                 comm.ExecuteNonQuery();
                 conn.Close();
             }
+        }
+
+        [WebMethod]
+        public void GetInsertWeeklyReportWithExtended(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name,
+                                         string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID,
+                                         string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                         string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
+                                         string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
+                                         string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
+                                         string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReportWithExtended", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@TransID", TransID);
+                comm.Parameters.AddWithValue("@TransNameEN", TransNameEN);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@BiddingName1", BiddingName1);
+                comm.Parameters.AddWithValue("@OwnerName1", OwnerName1);
+                comm.Parameters.AddWithValue("@BiddingName2", BiddingName2);
+                comm.Parameters.AddWithValue("@OwnerName2", OwnerName2);
+                comm.Parameters.AddWithValue("@BiddingName3", BiddingName3);
+                comm.Parameters.AddWithValue("@OwnerName3", OwnerName3);
+                comm.Parameters.AddWithValue("@AwardMC", AwardMC);
+                comm.Parameters.AddWithValue("@ContactMC", ContactMC);
+                comm.Parameters.AddWithValue("@AwardRF", AwardRF);
+                comm.Parameters.AddWithValue("@ContactRF", ContactRF);
+                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                comm.Parameters.AddWithValue("@ProdID", ProdID);
+                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@ProfID", ProfID);
+                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
+                comm.Parameters.AddWithValue("@Quantity", Quantity);
+                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
+                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
+                comm.Parameters.AddWithValue("@FileName", FileName);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        // GetData Services for update project
+
+        [WebMethod]
+        public void GetDataProjectWithPort(string CompanyID , string ArchitecID, string TypeID)
+        {
+            List<GetProjectWithPort> projects = new List<GetProjectWithPort>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProjectWithPort", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@CompanyID", Value = CompanyID };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@ArchitecID", Value = ArchitecID };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@TypeID", Value = TypeID };
+
+                comm.Parameters.Add(param1);
+                comm.Parameters.Add(param2);
+                comm.Parameters.Add(param3);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetProjectWithPort project = new GetProjectWithPort();
+                    project.ProjectID = rdr["ProjectID"].ToString();
+                    project.ProjectName = rdr["ProjectName"].ToString();
+                    projects.Add(project);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(projects));
+        }
+
+        [WebMethod]
+        public void GetStepUpdate()
+        {
+            List<GetDataStepUpdate> stepupdated = new List<GetDataStepUpdate>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetStepUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataStepUpdate stepupdate = new GetDataStepUpdate();
+                    stepupdate.StepID = rdr["StepID"].ToString();
+                    stepupdate.StepNameEn = rdr["StepNameEn"].ToString();
+                    stepupdated.Add(stepupdate);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(stepupdated));
+        }
+
+        [WebMethod]
+        public void GetProductTypeUpdate()
+        {
+            List<GetDataProductTypeUpdate> productupdated = new List<GetDataProductTypeUpdate>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProductTypeUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProductTypeUpdate productupdate = new GetDataProductTypeUpdate();
+                    productupdate.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    productupdate.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    productupdated.Add(productupdate);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(productupdated));
         }
     }
 }
