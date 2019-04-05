@@ -503,8 +503,9 @@ namespace SaleSpec.Class
             }
         }
 
+        // ***************************************//
+        // ***************************************//
         // GetData Services for update project
-
         [WebMethod]
         public void GetDataProjectWithPort(string CompanyID , string ArchitecID, string TypeID)
         {
@@ -583,6 +584,220 @@ namespace SaleSpec.Class
             JavaScriptSerializer js = new JavaScriptSerializer();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(productupdated));
+        }
+
+        [WebMethod]
+        public void GetProductsUpdate(string ProdTypeID)
+        {
+            List<GetDataProductsUpdate> products = new List<GetDataProductsUpdate>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProductsUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter()
+                {
+                    ParameterName = "@ProdTypeID",
+                    Value = ProdTypeID
+                };
+                comm.Parameters.Add(param);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProductsUpdate product = new GetDataProductsUpdate();
+                    product.ProdID = rdr["ProdID"].ToString();
+                    product.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    product.ProdNameTH = rdr["ProdNameTH"].ToString();
+                    product.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    products.Add(product);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(products));
+        }
+
+        [WebMethod]
+        public void GetProfileUpdate()
+        {
+            List<GetDataProfileUpdate> profiles = new List<GetDataProfileUpdate>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProfileUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProfileUpdate profile = new GetDataProfileUpdate();
+                    profile.ProfID = rdr["ProfID"].ToString();
+                    profile.ProfNameTH = rdr["ProfNameTH"].ToString();
+                    profile.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    profiles.Add(profile);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(profiles));
+        }
+
+        [WebMethod]
+        public void GetStatusUpdate()
+        {
+            List<GetDataStatusUpdate> statuses = new List<GetDataStatusUpdate>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetStatusUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataStatusUpdate status = new GetDataStatusUpdate();
+                    status.StatusID = rdr["StatusID"].ToString();
+                    status.StatusNameTh = rdr["StatusNameTh"].ToString();
+                    status.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    statuses.Add(status);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(statuses));
+        }
+
+        [WebMethod]
+        public void GetProjectLastUdate(string ProjectID)
+        {
+            List<GetDataProjectLastUdate> projects = new List<GetDataProjectLastUdate>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProjectLastUdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter()
+                {
+                    ParameterName = "@ProjectID",
+                    Value = ProjectID
+                };
+                comm.Parameters.Add(param);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProjectLastUdate project = new GetDataProjectLastUdate();
+                    project.ID = rdr["ID"].ToString();
+                    project.WeekDate = rdr["WeekDate"].ToString();
+                    project.WeekTime = rdr["WeekTime"].ToString();
+                    project.CompanyID = rdr["CompanyID"].ToString();
+                    project.CompanyName = rdr["CompanyName"].ToString();
+                    project.ArchitecID = rdr["ArchitecID"].ToString();
+                    project.Name = rdr["Name"].ToString();
+                    project.TransID = rdr["TransID"].ToString();
+                    project.TransNameEN = rdr["TransNameEN"].ToString();
+                    project.ProjectID = rdr["ProjectID"].ToString();
+                    project.ProjectName = rdr["ProjectName"].ToString();
+                    project.Location = rdr["Location"].ToString();
+                    project.StepID = rdr["StepID"].ToString();
+                    project.StepNameEn = rdr["StepNameEn"].ToString();
+                    project.BiddingName1 = rdr["BiddingName1"].ToString();
+                    project.OwnerName1 = rdr["OwnerName1"].ToString();
+                    project.BiddingName2 = rdr["BiddingName2"].ToString();
+                    project.OwnerName2 = rdr["OwnerName2"].ToString();
+                    project.BiddingName3 = rdr["BiddingName3"].ToString();
+                    project.OwnerName3 = rdr["OwnerName3"].ToString();
+                    project.AwardMC = rdr["AwardMC"].ToString();
+                    project.ContactMC = rdr["ContactMC"].ToString();
+                    project.AwardRF = rdr["AwardRF"].ToString();
+                    project.ContactRF = rdr["ContactRF"].ToString();
+                    project.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    project.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    project.ProdID = rdr["ProdID"].ToString();
+                    project.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    project.ProfID = rdr["ProfID"].ToString();
+                    project.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    project.Quantity = rdr["Quantity"].ToString();
+                    project.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    project.NextVisitDate = rdr["NextVisitDate"].ToString();
+                    project.StatusID = rdr["StatusID"].ToString();
+                    project.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    project.NewArchitect = rdr["NewArchitect"].ToString();
+                    project.HaveFiles = rdr["HaveFiles"].ToString();
+                    project.FileName = rdr["FileName"].ToString();
+                    project.Remark = rdr["Remark"].ToString();
+                    project.UserID = rdr["UserID"].ToString();
+                    project.EmpCode = rdr["EmpCode"].ToString();
+                    project.CreatedBy = rdr["CreatedBy"].ToString();
+                    project.CreatedDate = rdr["CreatedDate"].ToString();
+                    projects.Add(project);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(projects));
+        }
+
+        [WebMethod]
+        public void GetInsertWeeklyReportUpdate(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name,
+                                          string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID,
+                                          string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                          string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
+                                          string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
+                                          string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
+                                          string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReportUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@TransID", TransID);
+                comm.Parameters.AddWithValue("@TransNameEN", TransNameEN);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@BiddingName1", BiddingName1);
+                comm.Parameters.AddWithValue("@OwnerName1", OwnerName1);
+                comm.Parameters.AddWithValue("@BiddingName2", BiddingName2);
+                comm.Parameters.AddWithValue("@OwnerName2", OwnerName2);
+                comm.Parameters.AddWithValue("@BiddingName3", BiddingName3);
+                comm.Parameters.AddWithValue("@OwnerName3", OwnerName3);
+                comm.Parameters.AddWithValue("@AwardMC", AwardMC);
+                comm.Parameters.AddWithValue("@ContactMC", ContactMC);
+                comm.Parameters.AddWithValue("@AwardRF", AwardRF);
+                comm.Parameters.AddWithValue("@ContactRF", ContactRF);
+                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                comm.Parameters.AddWithValue("@ProdID", ProdID);
+                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@ProfID", ProfID);
+                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
+                comm.Parameters.AddWithValue("@Quantity", Quantity);
+                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
+                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
+                comm.Parameters.AddWithValue("@FileName", FileName);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
         }
     }
 }

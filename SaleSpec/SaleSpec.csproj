@@ -6826,19 +6826,24 @@
   <ItemGroup>
     <Compile Include="ClassConnection\dbConnection.cs" />
     <Compile Include="Class\GetCountArchitect.cs" />
+    <Compile Include="Class\GetDataProductsUpdate.cs" />
     <Compile Include="Class\GetDataCountProject.cs" />
     <Compile Include="Class\GetDataPosition.cs" />
     <Compile Include="Class\GetDataProducts.cs" />
     <Compile Include="Class\GetDataProfile.cs" />
+    <Compile Include="Class\GetDataProfileUpdate.cs" />
+    <Compile Include="Class\GetDataProjectLastUdate.cs" />
     <Compile Include="Class\GetDataProjectWithPort.cs" />
     <Compile Include="Class\GetDataStatus.cs" />
     <Compile Include="Class\GetDataStepUpdate.cs" />
     <Compile Include="Class\GetDataTransEntry.cs" />
     <Compile Include="Class\GetInsertArchitect.cs" />
     <Compile Include="Class\GetInsertWeeklyReport.cs" />
+    <Compile Include="Class\GetInsertWeeklyReportUpdate.cs" />
     <Compile Include="Class\GetInsertWeeklyReportWithExtended.cs" />
     <Compile Include="Class\GetProductType.cs" />
     <Compile Include="Class\GetProductTypeUpdate.cs" />
+    <Compile Include="Class\GetStatusUpdate.cs" />
     <Compile Include="Class\GetStepSpec.cs" />
     <Compile Include="pages\trans\GetInsertCompany.cs" />
     <Compile Include="pages\trans\GetArchitects.cs" />
