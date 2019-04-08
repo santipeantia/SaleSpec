@@ -799,5 +799,150 @@ namespace SaleSpec.Class
                 conn.Close();
             }
         }
+
+        [WebMethod]
+        public void GetInsertWeeklyReportWithExtendedUpdate(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name,
+                                         string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID,
+                                         string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                         string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
+                                         string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
+                                         string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
+                                         string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReportWithExtendedUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@TransID", TransID);
+                comm.Parameters.AddWithValue("@TransNameEN", TransNameEN);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@BiddingName1", BiddingName1);
+                comm.Parameters.AddWithValue("@OwnerName1", OwnerName1);
+                comm.Parameters.AddWithValue("@BiddingName2", BiddingName2);
+                comm.Parameters.AddWithValue("@OwnerName2", OwnerName2);
+                comm.Parameters.AddWithValue("@BiddingName3", BiddingName3);
+                comm.Parameters.AddWithValue("@OwnerName3", OwnerName3);
+                comm.Parameters.AddWithValue("@AwardMC", AwardMC);
+                comm.Parameters.AddWithValue("@ContactMC", ContactMC);
+                comm.Parameters.AddWithValue("@AwardRF", AwardRF);
+                comm.Parameters.AddWithValue("@ContactRF", ContactRF);
+                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                comm.Parameters.AddWithValue("@ProdID", ProdID);
+                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@ProfID", ProfID);
+                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
+                comm.Parameters.AddWithValue("@Quantity", Quantity);
+                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
+                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
+                comm.Parameters.AddWithValue("@FileName", FileName);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void GetInsertWeeklyReportNewArchitect(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name,
+                                         string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID,
+                                         string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                         string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
+                                         string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
+                                         string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
+                                         string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReportNewArchitect", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@TransID", TransID);
+                comm.Parameters.AddWithValue("@TransNameEN", TransNameEN);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@BiddingName1", BiddingName1);
+                comm.Parameters.AddWithValue("@OwnerName1", OwnerName1);
+                comm.Parameters.AddWithValue("@BiddingName2", BiddingName2);
+                comm.Parameters.AddWithValue("@OwnerName2", OwnerName2);
+                comm.Parameters.AddWithValue("@BiddingName3", BiddingName3);
+                comm.Parameters.AddWithValue("@OwnerName3", OwnerName3);
+                comm.Parameters.AddWithValue("@AwardMC", AwardMC);
+                comm.Parameters.AddWithValue("@ContactMC", ContactMC);
+                comm.Parameters.AddWithValue("@AwardRF", AwardRF);
+                comm.Parameters.AddWithValue("@ContactRF", ContactRF);
+                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                comm.Parameters.AddWithValue("@ProdID", ProdID);
+                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@ProfID", ProfID);
+                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
+                comm.Parameters.AddWithValue("@Quantity", Quantity);
+                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
+                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
+                comm.Parameters.AddWithValue("@FileName", FileName);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void GetUploadDocAttached(string id, string ProjectID, string ProjectName, string Description, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertDocAttached", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@id", id);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Description", Description);
+                comm.Parameters.AddWithValue("@FileName", FileName);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }
