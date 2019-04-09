@@ -469,6 +469,16 @@
                     'autoWidth': false
                 })
 
+                $('#tableWeeklyReport').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+
             })
 </script>
 

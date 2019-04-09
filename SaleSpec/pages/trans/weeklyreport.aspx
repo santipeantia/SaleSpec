@@ -1,383 +1,667 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="weeklyreport.aspx.cs" Inherits="SaleSpec.pages.trans.weeklyreport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <script src="jquery-1.11.2.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                //declare variable 
-                var datepickertrans = ('#datepickertrans');
-                var selectCompanyDDL = $('#selectCompany');
-                var selectArchitectDDL = $('#selectArchitect');
-                var selectTransEntryDDL = $('#selectTransEntry');
-                var selectArcCompanyDDL = $('#selectArcCompany');
-                var selectArcPositionDDL = $('#selectArcPosition');
-                var arcArchitecIDtxt = $('#arcArchitecID');
-                var selectProjectStepDDL = $('#selectProjectStep');
-                var selectProductTypeDDL = $('#selectProductType');
-                var selectProductDDL = $('#selectProduct');
-                var selectProfileDDL = $('#selectProfile');
-                var selectStatusDDL = $('#selectStatus');
-                var btnCompany = $('#btnCompany');
-                var btnArchitect = $('#btnArchitect');
+    <script src="jquery-1.11.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //declare variable 
+            var datepickertrans = ('#datepickertrans');
+            var selectCompanyDDL = $('#selectCompany');
+            var selectArchitectDDL = $('#selectArchitect');
+            var selectTransEntryDDL = $('#selectTransEntry');
+            var selectArcCompanyDDL = $('#selectArcCompany');
+            var selectArcPositionDDL = $('#selectArcPosition');
+            var arcArchitecIDtxt = $('#arcArchitecID');
+            var selectProjectStepDDL = $('#selectProjectStep');
+            var selectProductTypeDDL = $('#selectProductType');
+            var selectProductDDL = $('#selectProduct');
+            var selectProfileDDL = $('#selectProfile');
+            var selectStatusDDL = $('#selectStatus');
+            var btnCompany = $('#btnCompany');
+            var btnArchitect = $('#btnArchitect');
 
-                var selectUpdteProjectDDL = $('#selectUpdteProject');
-                var selectupdateProjectStepDDL = $('#selectupdateProjectStep');
-                var selectUpdateProductTypeDDL = $('#selectUpdateProductType');
-                var selectUpdateProductDDL = $('#selectUpdateProduct');
-                var selectUpdateProfileDDL = $('#selectUpdateProfile');
-                var updateQuantity = $('#updateQuantity');
-                var updatepickerdelivery = $('#updatepickerdelivery');
-                var updatevisit = $('#updatevisit');
-                var selectUpdateStatusDDL = $('#selectUpdateStatus');
-                var updatedetail = $('#updatedetail');
-
-
-                selectCompanyDDL.prop('disabled', true);
-                selectArchitectDDL.prop('disabled', true);
-                selectTransEntryDDL.prop('disabled', true);
-                btnCompany.prop('disabled', true);
-                btnArchitect.prop('disabled', true);
-
-                
-                $('#updateLocation').prop('disabled', true);
-                $('#selectupdateProjectStep').prop('disabled', true);
-                selectUpdateProductTypeDDL.prop('disabled', true);
-                selectUpdateProductDDL.prop('disabled', true);
-                selectUpdateProfileDDL.prop('disabled', true);
-                updateQuantity.prop('disabled', true);
-                updatepickerdelivery.prop('disabled', true);
-                updatevisit.prop('disabled', true);
-                selectUpdateStatusDDL.prop('disabled', true);
-                updatedetail.prop('disabled', true);
+            var selectUpdteProjectDDL = $('#selectUpdteProject');
+            var selectupdateProjectStepDDL = $('#selectupdateProjectStep');
+            var selectUpdateProductTypeDDL = $('#selectUpdateProductType');
+            var selectUpdateProductDDL = $('#selectUpdateProduct');
+            var selectUpdateProfileDDL = $('#selectUpdateProfile');
+            var updateQuantity = $('#updateQuantity');
+            var updatepickerdelivery = $('#updatepickerdelivery');
+            var updatevisit = $('#updatevisit');
+            var selectUpdateStatusDDL = $('#selectUpdateStatus');
+            var updatedetail = $('#updatedetail');
 
 
-                //Get data company from table
-                $.ajax({
-                    url: 'DataServices.asmx/GetDataCompany',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
-                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                        selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
-                        selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step' }));
-                        selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
-                        selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
-                        selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
-                        selectUpdateStatusDDL.append($('<option/>', { value: -1, text: 'Please select project status' }));
+            selectCompanyDDL.prop('disabled', true);
+            selectArchitectDDL.prop('disabled', true);
+            selectTransEntryDDL.prop('disabled', true);
+            btnCompany.prop('disabled', true);
+            btnArchitect.prop('disabled', true);
 
-                        $(data).each(function (index, item) {
-                            selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
-                        });
-                    }
-                });
 
-                //Get data position from position table
-                $.ajax({
-                    url: 'DataServices.asmx/GetPositions',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectArcPositionDDL.append($('<option/>', { value: -1, text: 'Select Position' }));
-                        $(data).each(function (index, item) {
-                            selectArcPositionDDL.append($('<option/>', { value: item.PositionID, text: item.PositionNameEN }));
-                        });
-                    }
-                });
+            $('#updateLocation').prop('disabled', true);
+            $('#selectupdateProjectStep').prop('disabled', true);
+            selectUpdateProductTypeDDL.prop('disabled', true);
+            selectUpdateProductDDL.prop('disabled', true);
+            selectUpdateProfileDDL.prop('disabled', true);
+            updateQuantity.prop('disabled', true);
+            updatepickerdelivery.prop('disabled', true);
+            updatevisit.prop('disabled', true);
+            selectUpdateStatusDDL.prop('disabled', true);
+            updatedetail.prop('disabled', true);
 
-                //Get data company from adcompany table for update architect
-                $.ajax({
-                    url: 'DataServices.asmx/GetDataCompany',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectArcCompanyDDL.append($('<option/>', { value: -1, text: 'Select Company' }));
-                        $(data).each(function (index, item) {
-                            selectArcCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
-                        });
-                    }
-                });
 
-                //Get data step of sale spec project
-                $.ajax({
-                    url: 'DataServices.asmx/GetStepSpec',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectProjectStepDDL.append($('<option/>', { value: -1, text: 'Select project step' }));
-                        $(data).each(function (index, item) {
-                            selectProjectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameEn }));
-                        });
-                    }
-                });
+            //Get data company from table
+            $.ajax({
+                url: 'DataServices.asmx/GetDataCompany',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                    selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                    selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                    selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step' }));
+                    selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+                    selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                    selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
+                    selectUpdateStatusDDL.append($('<option/>', { value: -1, text: 'Please select project status' }));
 
-                //Get Product type such as Ampelite, Ampelram
-                $.ajax({
-                    url: 'DataServices.asmx/GetProductType',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectProductTypeDDL.append($('<option/>', { value: -1, text: 'Select product type of project' }));
-                        selectProductDDL.append($('<option/>', { value: -1, text: "Please select product" }));
-                        selectProductDDL.prop('disabled', true);
-                        selectProfileDDL.prop('disabled', true);
-                        $(data).each(function (index, item) {
-                            selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
-                        });
-                    }
-                });
+                    $(data).each(function (index, item) {
+                        selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                    });
+                }
+            });
 
-                //Get data profile of products
-                $.ajax({
-                    url: 'DataServices.asmx/GetProfile',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectProfileDDL.append($('<option/>', { value: -1, text: 'Select product profile' }));
-                        $(data).each(function (index, item) {
-                            selectProfileDDL.append($('<option/>', { value: item.ProfID, text: item.ProfNameEN }));
-                        });
-                    }
-                });
+            //Get data position from position table
+            $.ajax({
+                url: 'DataServices.asmx/GetPositions',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectArcPositionDDL.append($('<option/>', { value: -1, text: 'Select Position' }));
+                    $(data).each(function (index, item) {
+                        selectArcPositionDDL.append($('<option/>', { value: item.PositionID, text: item.PositionNameEN }));
+                    });
+                }
+            });
 
-                //Get project status
-                $.ajax({
-                    url: 'DataServices.asmx/GetStatus',
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (data) {
-                        selectStatusDDL.append($('<option/>', { value: -1, text: 'Select status' }));
-                        $(data).each(function (index, item) {
-                            selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
-                        });
-                    }
-                });
+            //Get data company from adcompany table for update architect
+            $.ajax({
+                url: 'DataServices.asmx/GetDataCompany',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectArcCompanyDDL.append($('<option/>', { value: -1, text: 'Select Company' }));
+                    $(data).each(function (index, item) {
+                        selectArcCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                    });
+                }
+            });
 
-                // ******* Start function create new project *******
-                // When company select index change set cascading to architect
-                selectCompanyDDL.change(function () {
-                    if ($(this).val() == "-1") {
-                        btnArchitect.prop('disabled', true);
+            //Get data step of sale spec project
+            $.ajax({
+                url: 'DataServices.asmx/GetStepSpec',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectProjectStepDDL.append($('<option/>', { value: -1, text: 'Select project step' }));
+                    $(data).each(function (index, item) {
+                        selectProjectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameEn }));
+                    });
+                }
+            });
 
-                        selectArchitectDDL.empty();
-                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                        selectArchitectDDL.val('-1');
-                        selectArchitectDDL.prop('disabled', true);
-                    }
-                    else
-                    {
-                        btnArchitect.prop('disabled', false);
+            //Get Product type such as Ampelite, Ampelram
+            $.ajax({
+                url: 'DataServices.asmx/GetProductType',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectProductTypeDDL.append($('<option/>', { value: -1, text: 'Select product type of project' }));
+                    selectProductDDL.append($('<option/>', { value: -1, text: "Please select product" }));
+                    selectProductDDL.prop('disabled', true);
+                    selectProfileDDL.prop('disabled', true);
+                    $(data).each(function (index, item) {
+                        selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                    });
+                }
+            });
 
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataArchitect',
-                            method: 'post',
-                            data: {CompanyID: $(this).val()},
-                            dataType: 'json',
-                            success: function (data) {
-                                selectArchitectDDL.empty();
-                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                                selectArchitectDDL.prop('disabled', false);
-                                $(data).each(function (index, item) {
-                                    selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+            //Get data profile of products
+            $.ajax({
+                url: 'DataServices.asmx/GetProfile',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectProfileDDL.append($('<option/>', { value: -1, text: 'Select product profile' }));
+                    $(data).each(function (index, item) {
+                        selectProfileDDL.append($('<option/>', { value: item.ProfID, text: item.ProfNameEN }));
+                    });
+                }
+            });
+
+            //Get project status
+            $.ajax({
+                url: 'DataServices.asmx/GetStatus',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectStatusDDL.append($('<option/>', { value: -1, text: 'Select status' }));
+                    $(data).each(function (index, item) {
+                        selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                    });
+                }
+            });
+
+            // ******* Start function create new project *******
+            // When company select index change set cascading to architect
+            selectCompanyDDL.change(function () {
+                if ($(this).val() == "-1") {
+                    btnArchitect.prop('disabled', true);
+
+                    selectArchitectDDL.empty();
+                    selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                    selectArchitectDDL.val('-1');
+                    selectArchitectDDL.prop('disabled', true);
+                }
+                else {
+                    btnArchitect.prop('disabled', false);
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataArchitect',
+                        method: 'post',
+                        data: { CompanyID: $(this).val() },
+                        dataType: 'json',
+                        success: function (data) {
+                            selectArchitectDDL.empty();
+                            selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                            selectArchitectDDL.prop('disabled', false);
+                            $(data).each(function (index, item) {
+                                selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            //When select architect changed enable trransaction options
+            selectArchitectDDL.change(function () {
+                if ($(this).val() == '-1') {
+                    selectTransEntryDDL.empty();
+                    selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                    selectTransEntryDDL.val('-1');
+                    selectTransEntryDDL.prop('disabled', true);
+                }
+                else {
+                    $.ajax({
+                        url: 'DataServices.asmx/GetTransEntry',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectTransEntryDDL.empty();
+                            selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                            selectTransEntryDDL.prop('disabled', false);
+                            $(data).each(function (index, item) {
+                                selectTransEntryDDL.append($('<option/>', { value: item.TransID, text: item.TransNameEN }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            //When product type changed cascading of product
+            selectProductTypeDDL.change(function () {
+                if ($(this).val() == "-1") {
+                    selectProductDDL.empty();
+                    selectProductDDL.append($('<option/>', { value: -1, text: "Please select product" }));
+                    selectProductDDL.val('-1');
+                    selectProductDDL.prop('disabled', true);
+                    selectProfileDDL.prop('disabled', true);
+                } else {
+                    $.ajax({
+                        url: 'DataServices.asmx/GetProducts',
+                        method: 'post',
+                        data: { ProdTypeID: $(this).val() },
+                        dataType: 'json',
+                        success: function (data) {
+                            selectProductDDL.prop('disabled', false);
+                            selectProfileDDL.prop('disabled', false);
+                            selectProductDDL.empty();
+                            selectProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                            $(data).each(function (index, item) {
+                                selectProductDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            //client click add new company insert into data to table
+            var btnNewCompany = $('#btnNewCompany');
+            var CompanyName = $('#CompanyName');
+            btnNewCompany.click(function () {
+                if (CompanyName.val() == "") {
+                    //todo something you coding
+                }
+                else {
+                    $.ajax({
+                        url: 'DataServices.asmx/GetInsertCompanies',
+                        method: 'POST',
+                        data: {
+                            CompanyName: $('#CompanyName').val(),
+                            CompanyName2: $('#CompanyName2').val(),
+                            Address: $('#comAddress').val(),
+                            ProvinceID: $('#ProvinceID').val(),
+                            ContactName: $('#ContactPerson').val(),
+                            Phone: $('#comPhone').val(),
+                            Mobile: $('#comMobile').val(),
+                            Email: $('#Email').val(),
+                            StatusConID: "0"
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                        }
+                    });
+                    //alert message show successfully
+                    alert("Data saved successfully");
+                    $('#myModalCompany').modal('hide');
+
+                    //clear all data input
+                    $('#CompanyName').val('');
+                    $('#CompanyName2').val('');
+                    $('#comAddress').val('');
+                    $('#ProvinceID').val('');
+                    $('#ContactPerson').val('');
+                    $('#comPhone').val('');
+                    $('#comMobile').val('');
+                    $('#Email').val('');
+
+                    //calling function for refresh data update again
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataCompany',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                            selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                            $(data).each(function (index, item) {
+                                selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                            });
+                        }
+                    });
+
+                    //calling function get company for add new architect
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataCompany',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectArcCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                            $(data).each(function (index, item) {
+                                selectArcCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            //client click add new architect insert into data to table
+            var btnNewArchitect = $('#btnNewArchitect');
+            btnNewArchitect.click(function () {
+                var arcFirstName = $('#arcFirstName');
+                var arcLastName = $('#arcLastName');
+                var selectArcCompany = $('#selectArcCompany');
+                var selectArcPosition = $('#selectArcPosition');
+                var arcPhone = $('#arcMobile');
+                var arcMobile = $('#arcMobile');
+                var arcEmail = $('#arcEmail');
+
+                //alert(arcFirstName.val() + ' ' + arcLastName.val() + ' ' + selectArcCompany.val());
+                if (arcFirstName.val() == '') {
+                    alert('Please enter architect name..!');
+                    arcFirstName.focus();
+                    return;
+                } else if (arcLastName.val() == '') {
+                    alert('Please enter architect surname..!');
+                    arcLastName.focus();
+                    return;
+                } else if (selectArcCompany.val() == "-1") {
+                    alert('Please select company');
+                    selectArcCompany.focus();
+                    return;
+                } else if (selectArcPosition.val() == "-1") {
+                    alert('Please select architect position');
+                    selectArcPosition.focus();
+                    return;
+                } else if (arcPhone.val() == '') {
+                    alert('Please enter phone number..!');
+                    arcPhone.focus();
+                    return;
+                } else if (arcMobile.val() == '') {
+                    alert('Please enter mobile number..!');
+                    arcMobile.focus();
+                    return;
+                } else if (arcEmail.val() == '') {
+                    alert('Please enter contact email..!');
+                    arcEmail.focus();
+                    return;
+                } else {
+                    //validate all passed into data to table
+
+                    //Get last update running architect number
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataCountArchitect',
+                        method: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            var obj = jQuery.parseJSON(JSON.stringify(data));
+                            if (obj != '') {
+                                $.each(obj, function (key, inval) {
+                                    $("#arcArchitecID").val(inval["ArchitecID"]);
+
+                                    //Get insert new architech
+                                    $.ajax({
+                                        url: 'DataServices.asmx/GetDataInsertArchitect',
+                                        method: 'POST',
+                                        data: {
+                                            ArchitecID: $('#arcArchitecID').val(),
+                                            CompanyID: $('#selectArcCompany').val(),
+                                            Name: $('#arcFirstName').val() + ' ' + $('#arcLastName').val(),
+                                            FirstName: $('#arcFirstName').val(),
+                                            LastName: $('#arcLastName').val(),
+                                            NickName: $('#arcNickName').val(),
+                                            Position: $('#selectArcPosition').val(),
+                                            Address: $('#arcAddress').val(),
+                                            Phone: $('#arcPhone').val(),
+                                            Mobile: $('#arcMobile').val(),
+                                            Email: $('#arcEmail').val(),
+                                            StatusConID: "0"
+                                        },
+                                        dataType: 'json',
+                                        success: function (data) {
+
+                                        }
+                                    });
+
+                                    /// to do here
+                                    //alert(selectCompanyDDL.val());
+                                    alert('Data saved successfully..!');
+
+                                    $.ajax({
+                                        url: 'DataServices.asmx/GetDataArchitect',
+                                        method: 'post',
+                                        data: { CompanyID: $('#selectArcCompany').val() },
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            selectArchitectDDL.empty();
+                                            selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                                            $(data).each(function (index, item) {
+                                                selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                                            });
+                                        }
+                                    });
+
+                                    $('#myModalArchitect').modal('hide');
+
+                                    $('#arcArchitecID').val('');
+                                    $('#selectArcCompany').val('0');
+                                    $('#arcFirstName').val('');
+                                    $('#arcLastName').val('');
+                                    $('#arcNickName').val('');
+                                    $('#selectArcPosition').val('0');
+                                    $('#arcAddress').val('');
+                                    $('#arcPhone').val('');
+                                    $('#arcMobile').val('');
+                                    $('#arcEmail').val('');
                                 });
                             }
-                        });
-                    }
-                });
+                        }
+                    });
+                }
+            });
 
-                //When select architect changed enable trransaction options
-                selectArchitectDDL.change(function () {
-                    if ($(this).val() == '-1') {
-                        selectTransEntryDDL.empty();
-                        selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
-                        selectTransEntryDDL.val('-1');
-                        selectTransEntryDDL.prop('disabled', true);
-                    }
-                    else
-                    {
+            selectProjectStepDDL.change(function () {
+                $('#biddingname1').val('');
+                $('#owner1').val('');
+                $('#biddingname2').val('');
+                $('#owner2').val('');
+                $('#biddingname3').val('');
+                $('#owner3').val('');
+                $('#awardmc').val('');
+                $('#contactmc').val('');
+                $('#awardrf').val('');
+                $('#contactrf').val('');
+            });
+
+            //Validate option not allow when transaction date is empty
+            $('#datepickertrans').change(function () {
+                //alert($('#datepickertrans').val());
+                var strval = $('#datepickertrans').val();
+                if (strval == '') {
+                    btnCompany.prop('disabled', true);
+
+                    selectCompanyDDL.empty();
+                    selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                    selectCompanyDDL.prop('disabled', true);
+                    selectArchitectDDL.empty();
+                    selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                    selectArchitectDDL.prop('disabled', true);
+                    selectTransEntryDDL.empty();
+                    selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
+                    selectTransEntryDDL.prop('disabled', true);
+
+                    document.getElementById("divNewProject").style.display = 'none';
+
+                } else {
+                    btnCompany.prop('disabled', false);
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataCompany',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectCompanyDDL.empty();
+                            selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
+                            selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                            selectCompanyDDL.prop('disabled', false);
+                            $(data).each(function (index, item) {
+                                selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            var btnSaveHistoryNewProject = $('#btnSaveHistoryNewProject');
+            btnSaveHistoryNewProject.click(function () {
+                var chkValidate = 'false';
+                var ProjName = $('#ProjName');
+                var newLocation = $('#newLocation');
+                var selectProjectStep = $('#selectProjectStep');
+                var selectProduct = $('#selectProduct');
+                var selectProfile = $('#selectProfile');
+                var Quantity = $('#Quantity');
+                var datepickerdelivery = $('#datepickerdelivery');
+                var datevisit = $('#datevisit');
+                var selectStatus = $('#selectStatus');
+
+                if (ProjName.val() == '') {
+                    document.getElementById("divErrorProjName").style.display = '';
+                    document.getElementById("divErrorProjName").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorProjName").style.display = '';
+                    document.getElementById("divErrorProjName").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (newLocation.val() == '') {
+                    document.getElementById("divErrorLocation").style.display = '';
+                    document.getElementById("divErrorLocation").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorLocation").style.display = '';
+                    document.getElementById("divErrorLocation").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectProjectStep.val() == '-1') {
+                    document.getElementById("divErrorProjectStep").style.display = '';
+                    document.getElementById("divErrorProjectStep").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorProjectStep").style.display = '';
+                    document.getElementById("divErrorProjectStep").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectProduct.val() == '-1') {
+                    document.getElementById("divErrorProduct").style.display = '';
+                    document.getElementById("divErrorProduct").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                    //alert(selectProduct.val());
+
+                } else {
+                    document.getElementById("divErrorProduct").style.display = '';
+                    document.getElementById("divErrorProduct").style.display = 'none';
+                    chkValidate = 'true';
+                    //alert(selectProduct.val());
+                }
+
+                if (selectProfile.val() == '-1') {
+                    document.getElementById("divErrorProfile").style.display = '';
+                    document.getElementById("divErrorProfile").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorProfile").style.display = '';
+                    document.getElementById("divErrorProfile").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (Quantity.val() == '') {
+                    document.getElementById("divErrorQuantity").style.display = '';
+                    document.getElementById("divErrorQuantity").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorQuantity").style.display = '';
+                    document.getElementById("divErrorQuantity").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (datepickerdelivery.val() == '') {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (datevisit.val() == '') {
+                    document.getElementById("divErrorNextVisit").style.display = '';
+                    document.getElementById("divErrorNextVisit").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorNextVisit").style.display = '';
+                    document.getElementById("divErrorNextVisit").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectStatus.val() == '-1') {
+                    document.getElementById("divErrorStatus").style.display = '';
+                    document.getElementById("divErrorStatus").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorStatus").style.display = '';
+                    document.getElementById("divErrorStatus").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (chkValidate == 'true') {
+                    var userid = '<%= Session["UserID"]%>';
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
+
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                    if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
+
                         $.ajax({
-                            url: 'DataServices.asmx/GetTransEntry',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectTransEntryDDL.empty();
-                                selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
-                                selectTransEntryDDL.prop('disabled', false);
-                                $(data).each(function (index, item) {
-                                    selectTransEntryDDL.append($('<option/>', { value: item.TransID, text: item.TransNameEN }));
-                                });
-                            }
-                        });
-                    }
-                });
-
-                //When product type changed cascading of product
-                selectProductTypeDDL.change(function () {
-                    if ($(this).val() == "-1") {
-                        selectProductDDL.empty();
-                        selectProductDDL.append($('<option/>', { value: -1, text: "Please select product" }));
-                        selectProductDDL.val('-1');
-                        selectProductDDL.prop('disabled', true);
-                        selectProfileDDL.prop('disabled', true);
-                    } else {
-                        $.ajax({
-                            url: 'DataServices.asmx/GetProducts',
-                            method: 'post',
-                            data: {ProdTypeID: $(this).val()},
-                            dataType: 'json',
-                            success: function (data) {
-                                selectProductDDL.prop('disabled', false);
-                                selectProfileDDL.prop('disabled', false);
-                                selectProductDDL.empty();
-                                selectProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
-                                $(data).each(function (index, item) {
-                                    selectProductDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
-                                });
-                            }
-                        });
-                    }
-                });
-
-                //client click add new company insert into data to table
-                var btnNewCompany = $('#btnNewCompany');
-                var CompanyName = $('#CompanyName');
-                btnNewCompany.click(function () {
-                    if (CompanyName.val() == "") {
-                        //todo something you coding
-                    }
-                    else {
-                        $.ajax({
-                            url: 'DataServices.asmx/GetInsertCompanies',
-                            method: 'POST',
-                            data: {
-                                CompanyName: $('#CompanyName').val(),
-                                CompanyName2: $('#CompanyName2').val(),
-                                Address: $('#comAddress').val(),
-                                ProvinceID: $('#ProvinceID').val(),
-                                ContactName: $('#ContactPerson').val(),
-                                Phone: $('#comPhone').val(),
-                                Mobile: $('#comMobile').val(),
-                                Email: $('#Email').val(),
-                                StatusConID: "0"
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                            }
-                        });
-                        //alert message show successfully
-                        alert("Data saved successfully");
-                        $('#myModalCompany').modal('hide');
-
-                        //clear all data input
-                        $('#CompanyName').val('');
-                        $('#CompanyName2').val('');
-                        $('#comAddress').val('');
-                        $('#ProvinceID').val('');
-                        $('#ContactPerson').val('');
-                        $('#comPhone').val('');
-                        $('#comMobile').val('');
-                        $('#Email').val('');
-
-                        //calling function for refresh data update again
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataCompany',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
-                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                                $(data).each(function (index, item) {
-                                    selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
-                                });
-                            }
-                        });
-
-                        //calling function get company for add new architect
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataCompany',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectArcCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
-                                $(data).each(function (index, item) {
-                                    selectArcCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
-                                });
-                            }
-                        });
-                    }
-                });
-
-                //client click add new architect insert into data to table
-                var btnNewArchitect = $('#btnNewArchitect');
-                btnNewArchitect.click(function () {
-                    var arcFirstName = $('#arcFirstName');
-                    var arcLastName = $('#arcLastName');
-                    var selectArcCompany = $('#selectArcCompany');
-                    var selectArcPosition = $('#selectArcPosition');
-                    var arcPhone = $('#arcMobile');
-                    var arcMobile = $('#arcMobile');
-                    var arcEmail = $('#arcEmail');
-
-                    //alert(arcFirstName.val() + ' ' + arcLastName.val() + ' ' + selectArcCompany.val());
-                    if (arcFirstName.val() == '') {
-                        alert('Please enter architect name..!');
-                        arcFirstName.focus();
-                        return;
-                    } else if (arcLastName.val() == '') {
-                        alert('Please enter architect surname..!');
-                        arcLastName.focus();
-                        return;
-                    } else if (selectArcCompany.val() == "-1") {
-                        alert('Please select company');
-                        selectArcCompany.focus();
-                        return;
-                    } else if (selectArcPosition.val() == "-1") {
-                        alert('Please select architect position');
-                        selectArcPosition.focus();
-                        return;
-                    } else if (arcPhone.val() == '') {
-                        alert('Please enter phone number..!');
-                        arcPhone.focus();
-                        return;
-                    } else if (arcMobile.val() == '') {
-                        alert('Please enter mobile number..!');
-                        arcMobile.focus();
-                        return;
-                    } else if (arcEmail.val() == '') {
-                        alert('Please enter contact email..!');
-                        arcEmail.focus();
-                        return;
-                    } else {
-                        //validate all passed into data to table
-
-                        //Get last update running architect number
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataCountArchitect',
+                            url: 'DataServices.asmx/GetCountProject',
                             method: 'POST',
                             dataType: 'json',
                             success: function (data) {
                                 var obj = jQuery.parseJSON(JSON.stringify(data));
                                 if (obj != '') {
                                     $.each(obj, function (key, inval) {
-                                        $("#arcArchitecID").val(inval["ArchitecID"]);
+                                        $("#ProjectID").val(inval["ProjectID"]);
 
                                         //Get insert new architech
                                         $.ajax({
-                                            url: 'DataServices.asmx/GetDataInsertArchitect',
+                                            url: 'DataServices.asmx/GetInsertWeeklyReport',
                                             method: 'POST',
                                             data: {
-                                                ArchitecID: $('#arcArchitecID').val(),
-                                                CompanyID: $('#selectArcCompany').val(),
-                                                Name: $('#arcFirstName').val() + ' ' + $('#arcLastName').val(),
-                                                FirstName: $('#arcFirstName').val(),
-                                                LastName: $('#arcLastName').val(),
-                                                NickName: $('#arcNickName').val(),
-                                                Position: $('#selectArcPosition').val(),
-                                                Address: $('#arcAddress').val(),
-                                                Phone: $('#arcPhone').val(),
-                                                Mobile: $('#arcMobile').val(),
-                                                Email: $('#arcEmail').val(),
-                                                StatusConID: "0"
+                                                WeekDate: $('#datepickertrans').val(),
+                                                WeekTime: $('#inputtime').val(),
+                                                CompanyID: $('#selectCompany').val(),
+                                                CompanyName: $('#selectCompany option:selected').text(),
+                                                ArchitecID: $('#selectArchitect').val(),
+                                                Name: $('#selectArchitect option:selected').text(),
+                                                TransID: $('#selectTransEntry').val(),
+                                                TransNameEN: $('#selectTransEntry option:selected').text(),
+                                                ProjectID: $('#ProjectID').val(),
+                                                ProjectName: $('#ProjName').val(),
+                                                Location: $('#newLocation').val(),
+                                                StepID: $('#selectProjectStep').val(),
+                                                StepNameEn: $('#selectProjectStep option:selected').text(),
+                                                BiddingName1: $('#biddingname1').val(),
+                                                OwnerName1: $('#owner1').val(),
+                                                BiddingName2: $('#biddingname2').val(),
+                                                OwnerName2: $('#owner2').val(),
+                                                BiddingName3: $('#biddingname3').val(),
+                                                OwnerName3: $('#owner3').val(),
+                                                AwardMC: $('#awardmc').val(),
+                                                ContactMC: $('#contactmc').val(),
+                                                AwardRF: $('#awardrf').val(),
+                                                ContactRF: $('#contactrf').val(),
+                                                ProdTypeID: $('#selectProductType').val(),
+                                                ProdTypeNameEN: $('#selectProductType option:selected').text(),
+                                                ProdID: $('#selectProduct').val(),
+                                                ProdNameEN: $('#selectProduct option:selected').text(),
+                                                ProfID: $('#selectProfile').val(),
+                                                ProfNameEN: $('#selectProfile option:selected').text(),
+                                                Quantity: $('#Quantity').val(),
+                                                DeliveryDate: $('#datepickerdelivery').val(),
+                                                NextVisitDate: $('#datevisit').val(),
+                                                StatusID: $('#selectStatus').val(),
+                                                StatusNameEn: $('#selectStatus option:selected').text(),
+                                                Remark: $('#detail1').val(),
+                                                UserID: userid,
+                                                EmpCode: empcode,
+                                                CreatedBy: firstname + ' ' + lastname,
+                                                CreatedDate: currentdate
                                             },
                                             dataType: 'json',
                                             success: function (data) {
@@ -386,1105 +670,167 @@
                                         });
 
                                         /// to do here
-                                        //alert(selectCompanyDDL.val());
                                         alert('Data saved successfully..!');
 
-                                        $.ajax({
-                                            url: 'DataServices.asmx/GetDataArchitect',
-                                            method: 'post',
-                                            data: { CompanyID: $('#selectArcCompany').val() },
-                                            dataType: 'json',
-                                            success: function (data) {
-                                                selectArchitectDDL.empty();
-                                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                                                $(data).each(function (index, item) {
-                                                    selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
-                                                });
-                                            }
-                                        });
-
-                                        $('#myModalArchitect').modal('hide');
-
-                                        $('#arcArchitecID').val('');
-                                        $('#selectArcCompany').val('0');
-                                        $('#arcFirstName').val('');
-                                        $('#arcLastName').val('');
-                                        $('#arcNickName').val('');
-                                        $('#selectArcPosition').val('0');
-                                        $('#arcAddress').val('');
-                                        $('#arcPhone').val('');
-                                        $('#arcMobile').val('');
-                                        $('#arcEmail').val('');
-                                    });
-                                }
-                            }
-                        });
-                    }
-                });
-
-                selectProjectStepDDL.change(function () {
-                    $('#biddingname1').val('');
-                    $('#owner1').val('');
-                    $('#biddingname2').val('');
-                    $('#owner2').val('');
-                    $('#biddingname3').val('');
-                    $('#owner3').val('');
-                    $('#awardmc').val('');
-                    $('#contactmc').val('');
-                    $('#awardrf').val('');
-                    $('#contactrf').val('');
-                });
-
-                //Validate option not allow when transaction date is empty
-                $('#datepickertrans').change(function () {
-                    //alert($('#datepickertrans').val());
-                    var strval = $('#datepickertrans').val();
-                    if (strval == '') {
-                        btnCompany.prop('disabled', true);
-
-                        selectCompanyDDL.empty();
-                        selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
-                        selectCompanyDDL.prop('disabled', true);
-                        selectArchitectDDL.empty();
-                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                        selectArchitectDDL.prop('disabled', true);
-                        selectTransEntryDDL.empty();
-                        selectTransEntryDDL.append($('<option/>', { value: -1, text: 'Please select your transaction' }));
-                        selectTransEntryDDL.prop('disabled', true);
-
-                        document.getElementById("divNewProject").style.display = 'none';
-
-                    } else {
-                        btnCompany.prop('disabled', false);
-
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataCompany',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectCompanyDDL.empty();
-                                selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Companies' }));
-                                selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
-                                selectCompanyDDL.prop('disabled', false);
-                                $(data).each(function (index, item) {
-                                    selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
-                                });
-                            }
-                        });
-                    }
-                });
-
-                var btnSaveHistoryNewProject = $('#btnSaveHistoryNewProject');
-                btnSaveHistoryNewProject.click(function ()
-                {
-                    var chkValidate = 'false';
-                    var ProjName = $('#ProjName');
-                    var newLocation = $('#newLocation');
-                    var selectProjectStep = $('#selectProjectStep');
-                    var selectProduct = $('#selectProduct');
-                    var selectProfile = $('#selectProfile');
-                    var Quantity = $('#Quantity');
-                    var datepickerdelivery = $('#datepickerdelivery');
-                    var datevisit = $('#datevisit');
-                    var selectStatus = $('#selectStatus');
-
-                    if (ProjName.val() == '') {
-                        document.getElementById("divErrorProjName").style.display = '';
-                        document.getElementById("divErrorProjName").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorProjName").style.display = '';
-                        document.getElementById("divErrorProjName").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (newLocation.val() == '') {
-                        document.getElementById("divErrorLocation").style.display = '';
-                        document.getElementById("divErrorLocation").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorLocation").style.display = '';
-                        document.getElementById("divErrorLocation").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectProjectStep.val() == '-1') {
-                        document.getElementById("divErrorProjectStep").style.display = '';
-                        document.getElementById("divErrorProjectStep").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorProjectStep").style.display = '';
-                        document.getElementById("divErrorProjectStep").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectProduct.val() == '-1') {
-                        document.getElementById("divErrorProduct").style.display = '';
-                        document.getElementById("divErrorProduct").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                        //alert(selectProduct.val());
-
-                    } else {
-                        document.getElementById("divErrorProduct").style.display = '';
-                        document.getElementById("divErrorProduct").style.display = 'none';
-                        chkValidate = 'true';
-                        //alert(selectProduct.val());
-                    }
-                    
-                    if (selectProfile.val() == '-1') {
-                        document.getElementById("divErrorProfile").style.display = '';
-                        document.getElementById("divErrorProfile").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorProfile").style.display = '';
-                        document.getElementById("divErrorProfile").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (Quantity.val() == '') {
-                        document.getElementById("divErrorQuantity").style.display = '';
-                        document.getElementById("divErrorQuantity").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorQuantity").style.display = '';
-                        document.getElementById("divErrorQuantity").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (datepickerdelivery.val() == '') {
-                        document.getElementById("divErrorDeliveryDate").style.display = '';
-                        document.getElementById("divErrorDeliveryDate").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorDeliveryDate").style.display = '';
-                        document.getElementById("divErrorDeliveryDate").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (datevisit.val() == '') {
-                        document.getElementById("divErrorNextVisit").style.display = '';
-                        document.getElementById("divErrorNextVisit").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorNextVisit").style.display = '';
-                        document.getElementById("divErrorNextVisit").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectStatus.val() == '-1') {
-                        document.getElementById("divErrorStatus").style.display = '';
-                        document.getElementById("divErrorStatus").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorStatus").style.display = '';
-                        document.getElementById("divErrorStatus").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (chkValidate == 'true') {
-                        var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
-
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0');
-                        var yyyy = today.getFullYear();
-                        var tt =  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
-
-                        if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
-
-                            $.ajax({
-                                url: 'DataServices.asmx/GetCountProject',
-                                method: 'POST',
-                                dataType: 'json',
-                                success: function (data) {
-                                    var obj = jQuery.parseJSON(JSON.stringify(data));
-                                    if (obj != '') {
-                                        $.each(obj, function (key, inval) {
-                                            $("#ProjectID").val(inval["ProjectID"]);
-
-                                            //Get insert new architech
-                                            $.ajax({
-                                                url: 'DataServices.asmx/GetInsertWeeklyReport',
-                                                method: 'POST',
-                                                data: {
-                                                    WeekDate: $('#datepickertrans').val(),
-                                                    WeekTime: $('#inputtime').val(),
-                                                    CompanyID: $('#selectCompany').val(),
-                                                    CompanyName: $('#selectCompany option:selected').text(),
-                                                    ArchitecID: $('#selectArchitect').val(),
-                                                    Name: $('#selectArchitect option:selected').text(),
-                                                    TransID: $('#selectTransEntry').val(),
-                                                    TransNameEN: $('#selectTransEntry option:selected').text(),
-                                                    ProjectID: $('#ProjectID').val(),
-                                                    ProjectName: $('#ProjName').val(),
-                                                    Location: $('#newLocation').val(),
-                                                    StepID: $('#selectProjectStep').val(),
-                                                    StepNameEn: $('#selectProjectStep option:selected').text(),
-                                                    BiddingName1: $('#biddingname1').val(),
-                                                    OwnerName1: $('#owner1').val(),
-                                                    BiddingName2: $('#biddingname2').val(),
-                                                    OwnerName2: $('#owner2').val(),
-                                                    BiddingName3: $('#biddingname3').val(),
-                                                    OwnerName3: $('#owner3').val(),
-                                                    AwardMC: $('#awardmc').val(),
-                                                    ContactMC: $('#contactmc').val(),
-                                                    AwardRF: $('#awardrf').val(),
-                                                    ContactRF: $('#contactrf').val(),
-                                                    ProdTypeID: $('#selectProductType').val(),
-                                                    ProdTypeNameEN: $('#selectProductType option:selected').text(),
-                                                    ProdID: $('#selectProduct').val(),
-                                                    ProdNameEN: $('#selectProduct option:selected').text(),
-                                                    ProfID: $('#selectProfile').val(),
-                                                    ProfNameEN: $('#selectProfile option:selected').text(),
-                                                    Quantity: $('#Quantity').val(),
-                                                    DeliveryDate: $('#datepickerdelivery').val(),
-                                                    NextVisitDate: $('#datevisit').val(),
-                                                    StatusID: $('#selectStatus').val(),
-                                                    StatusNameEn: $('#selectStatus option:selected').text(),
-                                                    Remark: $('#detail1').val(),
-                                                    UserID: userid,
-                                                    EmpCode: empcode,
-                                                    CreatedBy: firstname + ' ' + lastname,
-                                                    CreatedDate: currentdate
-                                                },
-                                                dataType: 'json',
-                                                success: function (data) {
-
-                                                }
-                                            });
-
-                                            /// to do here
-                                            alert('Data saved successfully..!');
-
-                                            document.getElementById("divSaveEntry").style.display = '';
-                                            document.getElementById("divSaveEntry").style.display = 'none';
-
-                                            document.getElementById("divNewProduct").style.display = '';
-                                            document.getElementById("divNewProduct").style.display = 'normal';
-
-                                        });
-                                    }
-                                }
-                            });
-
-                        } else {
-                            alert('Warning, \n\When you create new transaction must be select step design only..!');
-                            return;
-                        }
-                    } else {
-                        alert('Warnning, The data is not completed please check..!');
-                    }
-                });
-
-                var btnSaveHistoryNewProduct = $('#btnSaveHistoryNewProduct');
-                btnSaveHistoryNewProduct.click(function () {
-                    var chkValidate = 'false';
-                    var ProjName = $('#ProjName');
-                    var newLocation = $('#newLocation');
-                    var selectProjectStep = $('#selectProjectStep');
-                    var selectProduct = $('#selectProduct');
-                    var selectProfile = $('#selectProfile');
-                    var Quantity = $('#Quantity');
-                    var datepickerdelivery = $('#datepickerdelivery');
-                    var datevisit = $('#datevisit');
-                    var selectStatus = $('#selectStatus');
-
-                    if (ProjName.val() == '') {
-                        document.getElementById("divErrorProjName").style.display = '';
-                        document.getElementById("divErrorProjName").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorProjName").style.display = '';
-                        document.getElementById("divErrorProjName").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (newLocation.val() == '') {
-                        document.getElementById("divErrorLocation").style.display = '';
-                        document.getElementById("divErrorLocation").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorLocation").style.display = '';
-                        document.getElementById("divErrorLocation").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectProjectStep.val() == '-1') {
-                        document.getElementById("divErrorProjectStep").style.display = '';
-                        document.getElementById("divErrorProjectStep").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorProjectStep").style.display = '';
-                        document.getElementById("divErrorProjectStep").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectProduct.val() == '-1') {
-                        document.getElementById("divErrorProduct").style.display = '';
-                        document.getElementById("divErrorProduct").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                        //alert(selectProduct.val());
-
-                    } else {
-                        document.getElementById("divErrorProduct").style.display = '';
-                        document.getElementById("divErrorProduct").style.display = 'none';
-                        chkValidate = 'true';
-                        //alert(selectProduct.val());
-                    }
-
-                    if (selectProfile.val() == '-1') {
-                        document.getElementById("divErrorProfile").style.display = '';
-                        document.getElementById("divErrorProfile").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorProfile").style.display = '';
-                        document.getElementById("divErrorProfile").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (Quantity.val() == '') {
-                        document.getElementById("divErrorQuantity").style.display = '';
-                        document.getElementById("divErrorQuantity").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorQuantity").style.display = '';
-                        document.getElementById("divErrorQuantity").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (datepickerdelivery.val() == '') {
-                        document.getElementById("divErrorDeliveryDate").style.display = '';
-                        document.getElementById("divErrorDeliveryDate").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorDeliveryDate").style.display = '';
-                        document.getElementById("divErrorDeliveryDate").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (datevisit.val() == '') {
-                        document.getElementById("divErrorNextVisit").style.display = '';
-                        document.getElementById("divErrorNextVisit").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorNextVisit").style.display = '';
-                        document.getElementById("divErrorNextVisit").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectStatus.val() == '-1') {
-                        document.getElementById("divErrorStatus").style.display = '';
-                        document.getElementById("divErrorStatus").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorStatus").style.display = '';
-                        document.getElementById("divErrorStatus").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (chkValidate == 'true') {
-                        var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
-
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0');
-                        var yyyy = today.getFullYear();
-                        var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
-
-                        if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
-
-                            //Get insert new architech
-                            $.ajax({
-                                url: 'DataServices.asmx/GetInsertWeeklyReportWithExtended',
-                                method: 'POST',
-                                data: {
-                                    WeekDate: $('#datepickertrans').val(),
-                                    WeekTime: $('#inputtime').val(),
-                                    CompanyID: $('#selectCompany').val(),
-                                    CompanyName: $('#selectCompany option:selected').text(),
-                                    ArchitecID: $('#selectArchitect').val(),
-                                    Name: $('#selectArchitect option:selected').text(),
-                                    TransID: $('#selectTransEntry').val(),
-                                    TransNameEN: $('#selectTransEntry option:selected').text(),
-                                    ProjectID: $('#ProjectID').val(),
-                                    ProjectName: $('#ProjName').val(),
-                                    Location: $('#newLocation').val(),
-                                    StepID: $('#selectProjectStep').val(),
-                                    StepNameEn: $('#selectProjectStep option:selected').text(),
-                                    BiddingName1: $('#biddingname1').val(),
-                                    OwnerName1: $('#owner1').val(),
-                                    BiddingName2: $('#biddingname2').val(),
-                                    OwnerName2: $('#owner2').val(),
-                                    BiddingName3: $('#biddingname3').val(),
-                                    OwnerName3: $('#owner3').val(),
-                                    AwardMC: $('#awardmc').val(),
-                                    ContactMC: $('#contactmc').val(),
-                                    AwardRF: $('#awardrf').val(),
-                                    ContactRF: $('#contactrf').val(),
-                                    ProdTypeID: $('#selectProductType').val(),
-                                    ProdTypeNameEN: $('#selectProductType option:selected').text(),
-                                    ProdID: $('#selectProduct').val(),
-                                    ProdNameEN: $('#selectProduct option:selected').text(),
-                                    ProfID: $('#selectProfile').val(),
-                                    ProfNameEN: $('#selectProfile option:selected').text(),
-                                    Quantity: $('#Quantity').val(),
-                                    DeliveryDate: $('#datepickerdelivery').val(),
-                                    NextVisitDate: $('#datevisit').val(),
-                                    StatusID: $('#selectStatus').val(),
-                                    StatusNameEn: $('#selectStatus option:selected').text(),
-                                    Remark: $('#detail1').val(),
-                                    UserID: userid,
-                                    EmpCode: empcode,
-                                    CreatedBy: firstname + ' ' + lastname,
-                                    CreatedDate: currentdate
-                                },
-                                dataType: 'json',
-                                success: function (data) {
-
-                                }
-                            });
-
-                            /// to do here
-                            alert('Data saved product extended successfully..!');
-
-                            document.getElementById("divSaveEntry").style.display = '';
-                            document.getElementById("divSaveEntry").style.display = 'none';
-
-                            document.getElementById("divNewProduct").style.display = '';
-                            document.getElementById("divNewProduct").style.display = 'normal';
-
-                        } else {
-                            alert('Warning, \n\When you create new transaction must be select step design only..!');
-                            return;
-                        }
-                    } else {
-                        alert('Warnning, The data is not completed please check..!');
-                    }
-                });
-                // ******* End function create new project *******
-
-
-                // ******* Start function update project status *******
-                 selectTransEntryDDL.change(function () {
-                    if ($(this).val() == '-1') {
-                        selectUpdteProjectDDL.empty();
-                        selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
-                    }
-                    else
-                    {
-                        var selectCompanyDDL = $('#selectCompany option:selected').val();
-                        var selectArchitectDDL = $('#selectArchitect option:selected').val();
-                        var userid = '<%= Session["UserID"]%>';
-
-                         $.ajax({
-                             url: 'DataServices.asmx/GetDataProjectWithPort',
-                             method: 'post',
-                             data: {
-                                 CompanyID: selectCompanyDDL,
-                                 ArchitecID: selectArchitectDDL,
-                                 TypeID: userid
-                             },
-                             dataType: 'json',
-                             success: function (data) {
-                                 selectUpdteProjectDDL.empty();
-                                 selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
-                                 $(data).each(function (index, item) {
-                                     selectUpdteProjectDDL.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
-                                 });
-                             }
-                         });
-
-                         // for transaction intake options
-                         var selectIntakeProject = $('#selectIntakeProject');
-                         $.ajax({
-                             url: 'DataServices.asmx/GetDataProjectWithPort',
-                             method: 'post',
-                             data: {
-                                 CompanyID: selectCompanyDDL,
-                                 ArchitecID: selectArchitectDDL,
-                                 TypeID: userid
-                             },
-                             dataType: 'json',
-                             success: function (data) {
-                                 selectIntakeProject.empty();
-                                 selectIntakeProject.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
-                                 $(data).each(function (index, item) {
-                                     selectIntakeProject.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
-                                 });
-                             }
-                         });
-                         //Get project status
-                         var selectIntakeStatus = $('#selectIntakeStatus');
-                         $.ajax({
-                             url: 'DataServices.asmx/GetStatus',
-                             method: 'post',
-                             dataType: 'json',
-                             success: function (data) {
-                                 selectIntakeStatus.append($('<option/>', { value: -1, text: 'Select status' }));
-                                 $(data).each(function (index, item) {
-                                     selectIntakeStatus.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
-                                 });
-                             }
-                         });
-
-                     }
-                 });
-
-                var selectIntakeProject = $('#selectIntakeProject');
-                selectIntakeProject.change(function(){
-                    // get data table files attached here
-                    $.ajax({
-                        url: 'DataServices.asmx/GetDocAttached',
-                        method: 'post',
-                        data: {
-                            ProjectID: $('#selectIntakeProject').val(),
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            var items = [];
-                            var trHTML = '';
-                            $('#tableAttach tr:not(:first)').remove();
-                            $(data).each(function (index, item) {
-                                trHTML += '<tr><td>' + item.id + '</td><td>' + item.Description + '</td><td>' + item.FileName + '</td><td><a href="uploads/' + item.FileName + '" download target="_blank">Download</a></td></tr>';
-                            });
-                            
-                            $('#tableAttach').append(trHTML);
-                        }
-                    });
-                });
-               
-                selectUpdteProjectDDL.change(function () {
-                    if ($(this).val() == '-1') {
-                        $('#updateLocation').prop('disabled', true);
-                        $('#selectupdateProjectStep').prop('disabled', true);
-                        selectupdateProjectStepDDL.empty();
-                        selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
-
-                        selectUpdateProductTypeDDL.empty();
-                        selectUpdateProductTypeDDL.prop('disabled', true);
-                        selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
-
-                        selectUpdateProductDDL.empty();
-                        selectUpdateProductDDL.prop('disabled', true);
-                        selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
-
-                        selectUpdateProfileDDL.empty();
-                        selectUpdateProfileDDL.prop('disabled', true);
-                        selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
-
-                        updateQuantity.val('');
-                        updateQuantity.prop('disabled', true);
-                        updatepickerdelivery.val('');
-                        updatepickerdelivery.prop('disabled', true);
-                        updatevisit.val('');
-                        updatevisit.prop('disabled', true);
-
-                        selectUpdateStatusDDL.empty();
-                        selectUpdateStatusDDL.prop('disabled', true);
-                        selectUpdateStatusDDL.append($('<option/>', { value: -1, text: 'Please select project status' }));
-                        updatedetail.prop('disabled', true);
-
-                        document.getElementById("divUpdateBidding").style.display = 'none';
-                        document.getElementById("divUpdateAwardMC").style.display = 'none';
-                        document.getElementById("divUpdateAwardRF").style.display = 'none';
-
-                        btnSaveHistoryUpdateProject.prop('disabled', true);
-                        btnSaveHistoryUpdateProduct.prop('disabled', true);
-
-                    } else {
-                        $('#updateLocation').prop('disabled', false);
-                        $('#selectupdateProjectStep').prop('disabled', false);
-                        //selectUpdateProductTypeDDL.prop('disabled', false);
-
-                        btnSaveHistoryUpdateProject.prop('disabled', false);
-                        btnSaveHistoryUpdateProduct.prop('disabled', false);
-
-                        // get 
-                        $.ajax({
-                            url: 'DataServices.asmx/GetStepUpdate',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectupdateProjectStepDDL.empty();
-                                selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
-                                $(data).each(function (index, item) {
-                                    selectupdateProjectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameEn }));
-                                });
-                            }
-                        });
-
-                         // get 
-                        $.ajax({
-                            url: 'DataServices.asmx/GetProductTypeUpdate',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectUpdateProductTypeDDL.empty();
-                                selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
-                                $(data).each(function (index, item) {
-                                    selectUpdateProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
-                                });
-                            }
-                        });
-
-                        // get data binding last update
-                        $.ajax({
-                            url: 'DataServices.asmx/GetProjectLastUdate',
-                            method: 'POST',
-                            data: {
-                                    ProjectID: selectUpdteProjectDDL.val()
-                                  },
-                            dataType: 'json',
-                            success: function (data) {
-                                var obj = jQuery.parseJSON(JSON.stringify(data));
-                                if (obj != '') {
-                                    $.each(obj, function (key, inval) {
-                                        $('#updateLocation').val(inval["Location"]);
-                                        $('#selectupdateProjectStep').val(inval["ProjStep"]).change();
-
-                                        //selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
-                                        //selectUpdateProductDDL.val(inval["ProdID"]).change();
-                                        //selectUpdateProfileDDL.val(inval["ProfID"]).change();
-
-                                        //updateQuantity.prop('disabled', true);
-                                        //updatepickerdelivery.prop('disabled', true);
-                                        //updatevisit.prop('disabled', true);
-                                        //selectUpdateStatusDDL.prop('disabled', true);
-                                        //updatedetail.prop('disabled', true);
-
-                                        //$('#selectupdateProjectStep').selectmenu('refresh');
-
-                                         //selectupdateProjectStepDDL.append($('selected', { value: inval["StepID"], text: inval["StepNameEn"] }));
-                                         //$('#selectupdateProjectStep option:selected').val(inval["StepID"]);
-                                        //$('#selectupdateProjectStep').text(inval["StepNameEn"]);
-                                       
+                                        document.getElementById("divSaveEntry").style.display = '';
+                                        document.getElementById("divSaveEntry").style.display = 'none';
+
+                                        document.getElementById("divNewProduct").style.display = '';
+                                        document.getElementById("divNewProduct").style.display = 'normal';
 
                                     });
                                 }
                             }
                         });
 
-                    }
-                });
-
-                selectupdateProjectStepDDL.change(function () {
-                    if ($(this).val() == '-1') {
-                        selectUpdateProductTypeDDL.empty();
-                        selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
-                        selectUpdateProductTypeDDL.val('-1');
-                        selectUpdateProductTypeDDL.prop('disabled', true);
-
                     } else {
-
-                        // get project step design, bidding, awardmc, awardrf 
-                        $.ajax({
-                            url: 'DataServices.asmx/GetProductTypeUpdate',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectUpdateProductTypeDDL.empty();
-                                selectUpdateProductTypeDDL.prop('disabled', false);
-                                selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
-                                $(data).each(function (index, item) {
-                                    selectUpdateProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
-                                });
-
-                                $.ajax({
-                                    url: 'DataServices.asmx/GetProjectLastUdate',
-                                    method: 'POST',
-                                    data: {
-                                        ProjectID: selectUpdteProjectDDL.val()
-                                    },
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        var obj = jQuery.parseJSON(JSON.stringify(data));
-                                        if (obj != '') {
-                                            $.each(obj, function (key, inval) {
-
-                                                selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
-
-                                                selectUpdateProductDDL.val(inval["ProdID"]).change();
-                                                selectUpdateProfileDDL.val(inval["ProfID"]).change();
-
-                                                $('#updatebiddingname1').val('');
-                                                $('#updateowner1').val('');
-
-                                                //$('#updatebiddingname2').val('');
-                                                //$('#updateowner2').val('');
-
-                                                //$('#updatebiddingname3').val('');
-                                                //$('#updateowner3').val('');
-
-                                                //$('#updateawardmc').val('');
-                                                //$('#updatecontactmc').val('');
-
-                                                //$('#updateawardrf').val('');
-                                                //$('#updatecontactrf').val('');
-
-                                                //$('#updatebiddingname1').val(inval["BiddingName1"]);
-                                                //$('#updateowner1').val(inval["OwnerName1"]);
-
-                                                //$('#updatebiddingname2').val(inval["BiddingName2"]);
-                                                //$('#updateowner2').val(inval["OwnerName2"]);
-
-                                                //$('#updatebiddingname3').val(inval["BiddingName3"]);
-                                                //$('#updateowner3').val(inval["OwnerName3"]);
-
-                                                //$('#updateawardmc').val(inval["AwardMC"]);
-                                                //$('#updatecontactmc').val(inval["ContactMC"]);
-
-                                                //$('#updateawardrf').val(inval["AwardRF"]);
-                                                //$('#updatecontactrf').val(inval["ContactRF"]);
-                                            });
-                                        }
-                                    }
-                                });
-
-                            }
-                        });
-
-                       
-                    }
-                });
-
-                selectUpdateProductTypeDDL.change(function () {
-                    if ($(this).val() == '-1') {
-                        selectUpdateProductDDL.prop('disabled', true);
-                        selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
-                        selectUpdateProductDDL.val('-1');
-
-                        selectUpdateProfileDDL.prop('disabled', true);
-                        selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
-                        selectUpdateProfileDDL.val('-1');
-
-                        updateQuantity.val('');
-                        updateQuantity.prop('disabled', true);
-                        updatepickerdelivery.val('');
-                        updatepickerdelivery.prop('disabled', true);
-
-                        updatevisit.val('');
-                        updatevisit.prop('disabled', true);
-
-                        selectUpdateStatusDDL.prop('disabled', true);
-                        selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select project stutus' }));
-
-                    } else {
-
-                        $.ajax({
-                            url: 'DataServices.asmx/GetProductsUpdate',
-                            method: 'post',
-                            data: {
-                                ProdTypeID: $(this).val()
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                                selectUpdateProductDDL.prop('disabled', false);
-                                selectUpdateProductDDL.empty();
-                                selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
-                                $(data).each(function (index, item) {
-                                    selectUpdateProductDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
-                                });
-
-
-                                $.ajax({
-                                    url: 'DataServices.asmx/GetProjectLastUdate',
-                                    method: 'POST',
-                                    data: {
-                                        ProjectID: selectUpdteProjectDDL.val()
-                                    },
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        var obj = jQuery.parseJSON(JSON.stringify(data));
-                                        if (obj != '') {
-                                            $.each(obj, function (key, inval) {
-
-                                                selectUpdateProductDDL.val(inval["ProdID"]).change();
-                                                //selectUpdateProfileDDL.val(inval["ProfID"]).change();
-                                                //selectUpdateStatusDDL.val(inval["StatusID"]).change();
-
-                                                updateQuantity.val(inval["Quantity"]);
-                                                updatepickerdelivery.val(inval["DeliveryDate"]);
-                                                //updatevisit.val(inval["NextVisitDate"]);
-                                                updatedetail.val(inval["Remark"]);
-                                                $('#updateUsers').val(inval["SaleSpec"]);
-                                                $('#updateLastdate').val(inval["LastUpdate"]);
-
-                                            });
-                                        }
-                                    }
-                                });
-
-                            }
-                        });
-
-                        $.ajax({
-                            url: 'DataServices.asmx/GetProfileUpdate',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectUpdateProfileDDL.prop('disabled', false);
-                                selectUpdateProfileDDL.empty();
-                                selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
-                                $(data).each(function (index, item) {
-                                    selectUpdateProfileDDL.append($('<option/>', { value: item.ProfID, text: item.ProfNameEN }));
-                                });
-
-                                 $.ajax({
-                                    url: 'DataServices.asmx/GetProjectLastUdate',
-                                    method: 'POST',
-                                    data: {
-                                        ProjectID: selectUpdteProjectDDL.val()
-                                    },
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        var obj = jQuery.parseJSON(JSON.stringify(data));
-                                        if (obj != '') {
-                                            $.each(obj, function (key, inval) {
-
-                                                //selectUpdateProductDDL.val(inval["ProdID"]).change();
-                                                selectUpdateProfileDDL.val(inval["ProfID"]).change();
-                                                //selectUpdateStatusDDL.val(inval["StatusID"]).change();
-
-                                                updateQuantity.val(inval["Quantity"]);
-                                                updatepickerdelivery.val(inval["DeliveryDate"]);
-                                                //updatevisit.val(inval["NextVisitDate"]);
-                                                updatedetail.val(inval["Remark"]);
-                                                $('#updateUsers').val(inval["SaleSpec"]);
-                                                $('#updateLastdate').val(inval["LastUpdate"]);
-
-                                            });
-                                        }
-                                    }
-                                });
-                            }
-                        });
-
-                        $.ajax({
-                            url: 'DataServices.asmx/GetStatusUpdate',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectUpdateStatusDDL.empty();
-                                selectUpdateStatusDDL.prop('disabled', false);
-                                selectUpdateStatusDDL.append($('<option/>', { value: -1, text: 'Please select project stutus' }));
-                                $(data).each(function (index, item) {
-                                    selectUpdateStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
-                                });
-
-                                $.ajax({
-                                    url: 'DataServices.asmx/GetProjectLastUdate',
-                                    method: 'POST',
-                                    data: {
-                                        ProjectID: selectUpdteProjectDDL.val()
-                                    },
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        var obj = jQuery.parseJSON(JSON.stringify(data));
-                                        if (obj != '') {
-                                            $.each(obj, function (key, inval) {
-
-                                                //selectUpdateProductDDL.val(inval["ProdID"]).change();
-                                                //selectUpdateProfileDDL.val(inval["ProfID"]).change();
-                                                selectUpdateStatusDDL.val(inval["StatusID"]).change();
-
-                                                updateQuantity.val(inval["Quantity"]);
-                                                updatepickerdelivery.val(inval["DeliveryDate"]);
-                                                //updatevisit.val(inval["NextVisitDate"]);
-                                                updatedetail.val(inval["Remark"]);
-                                                $('#updateUsers').val(inval["SaleSpec"]);
-                                                $('#updateLastdate').val(inval["LastUpdate"]);
-
-                                            });
-                                        }
-                                    }
-                                });
-
-                            }
-                        });
-
-                        updateQuantity.prop('disabled', false);
-                        updatepickerdelivery.prop('disabled', false);
-                        updatevisit.prop('disabled', false);
-                        updatedetail.prop('disabled', false);
-                    }
-                });
-
-
-                // ****** click save update project ******
-                var btnSaveHistoryUpdateProject = $('#btnSaveHistoryUpdateProject');
-                btnSaveHistoryUpdateProject.click(function ()
-                {
-                    var chkValidate = 'false';
-                    var ProjectID = $('#selectUpdteProject').val();
-                    var ProjName = $('#selectUpdteProject option:selected').text();
-                    var updateLocation = $('#updateLocation');
-                    var selectupdateProjectStep = $('#selectupdateProjectStep');
-                    var selectUpdateProduct = $('#selectUpdateProduct');
-                    var selectUpdateProfile = $('#selectUpdateProfile');
-                    var updateQuantity = $('#updateQuantity');
-                    var updatepickerdelivery = $('#updatepickerdelivery');
-                    var updatevisit = $('#updatevisit');
-                    var selectUpdateStatus = $('#selectUpdateStatus');
-
-                    if (ProjName == '') {
-                        document.getElementById("divErrorupProjName").style.display = '';
-                        document.getElementById("divErrorupProjName").style.display = 'normal';
-                        chkValidate = 'false';
+                        alert('Warning, \n\When you create new transaction must be select step design only..!');
                         return;
-                    } else {
-                        document.getElementById("divErrorupProjName").style.display = '';
-                        document.getElementById("divErrorupProjName").style.display = 'none';
-                        chkValidate = 'true';
                     }
+                } else {
+                    alert('Warnning, The data is not completed please check..!');
+                }
+            });
 
-                    if (updateLocation.val() == '') {
-                        document.getElementById("divErrorupLocation").style.display = '';
-                        document.getElementById("divErrorupLocation").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupLocation").style.display = '';
-                        document.getElementById("divErrorupLocation").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+            var btnSaveHistoryNewProduct = $('#btnSaveHistoryNewProduct');
+            btnSaveHistoryNewProduct.click(function () {
+                var chkValidate = 'false';
+                var ProjName = $('#ProjName');
+                var newLocation = $('#newLocation');
+                var selectProjectStep = $('#selectProjectStep');
+                var selectProduct = $('#selectProduct');
+                var selectProfile = $('#selectProfile');
+                var Quantity = $('#Quantity');
+                var datepickerdelivery = $('#datepickerdelivery');
+                var datevisit = $('#datevisit');
+                var selectStatus = $('#selectStatus');
 
-                    if (selectupdateProjectStep.val() == '-1') {
-                        document.getElementById("divErrorupProjectStep").style.display = '';
-                        document.getElementById("divErrorupProjectStep").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupProjectStep").style.display = '';
-                        document.getElementById("divErrorupProjectStep").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                if (ProjName.val() == '') {
+                    document.getElementById("divErrorProjName").style.display = '';
+                    document.getElementById("divErrorProjName").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorProjName").style.display = '';
+                    document.getElementById("divErrorProjName").style.display = 'none';
+                    chkValidate = 'true';
+                }
 
-                    if (selectUpdateProduct.val() == '-1') {
-                        document.getElementById("divErrorupProduct").style.display = '';
-                        document.getElementById("divErrorupProduct").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupProduct").style.display = '';
-                        document.getElementById("divErrorupProduct").style.display = 'none';
-                        chkValidate = 'true';;
-                    }
-                    
-                    if (selectUpdateProfile.val() == '-1') {
-                        document.getElementById("divErrorupProfile").style.display = '';
-                        document.getElementById("divErrorupProfile").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
+                if (newLocation.val() == '') {
+                    document.getElementById("divErrorLocation").style.display = '';
+                    document.getElementById("divErrorLocation").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorLocation").style.display = '';
+                    document.getElementById("divErrorLocation").style.display = 'none';
+                    chkValidate = 'true';
+                }
 
-                    } else {
-                        document.getElementById("divErrorupProfile").style.display = '';
-                        document.getElementById("divErrorupProfile").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                if (selectProjectStep.val() == '-1') {
+                    document.getElementById("divErrorProjectStep").style.display = '';
+                    document.getElementById("divErrorProjectStep").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorProjectStep").style.display = '';
+                    document.getElementById("divErrorProjectStep").style.display = 'none';
+                    chkValidate = 'true';
+                }
 
-                    if (updateQuantity.val() == '') {
-                        document.getElementById("divErrorupQuantity").style.display = '';
-                        document.getElementById("divErrorupQuantity").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
+                if (selectProduct.val() == '-1') {
+                    document.getElementById("divErrorProduct").style.display = '';
+                    document.getElementById("divErrorProduct").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                    //alert(selectProduct.val());
 
-                    } else {
-                        document.getElementById("divErrorupQuantity").style.display = '';
-                        document.getElementById("divErrorupQuantity").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                } else {
+                    document.getElementById("divErrorProduct").style.display = '';
+                    document.getElementById("divErrorProduct").style.display = 'none';
+                    chkValidate = 'true';
+                    //alert(selectProduct.val());
+                }
 
-                    if (updatepickerdelivery.val() == '') {
-                        document.getElementById("divErrorupDeliveryDate").style.display = '';
-                        document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
+                if (selectProfile.val() == '-1') {
+                    document.getElementById("divErrorProfile").style.display = '';
+                    document.getElementById("divErrorProfile").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
 
-                    } else {
-                        document.getElementById("divErrorupDeliveryDate").style.display = '';
-                        document.getElementById("divErrorupDeliveryDate").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                } else {
+                    document.getElementById("divErrorProfile").style.display = '';
+                    document.getElementById("divErrorProfile").style.display = 'none';
+                    chkValidate = 'true';
+                }
 
-                    if (updatevisit.val() == '') {
-                        document.getElementById("divErrorupNextVisit").style.display = '';
-                        document.getElementById("divErrorupNextVisit").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
+                if (Quantity.val() == '') {
+                    document.getElementById("divErrorQuantity").style.display = '';
+                    document.getElementById("divErrorQuantity").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
 
-                    } else {
-                        document.getElementById("divErrorupNextVisit").style.display = '';
-                        document.getElementById("divErrorupNextVisit").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                } else {
+                    document.getElementById("divErrorQuantity").style.display = '';
+                    document.getElementById("divErrorQuantity").style.display = 'none';
+                    chkValidate = 'true';
+                }
 
-                    if (selectUpdateStatus.val() == '-1') {
-                        document.getElementById("divErrorupStatus").style.display = '';
-                        document.getElementById("divErrorupStatus").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
+                if (datepickerdelivery.val() == '') {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
 
-                    } else {
-                        document.getElementById("divErrorupStatus").style.display = '';
-                        document.getElementById("divErrorupStatus").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                } else {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
 
-                    if (chkValidate == 'true') {
-                        var userid = '<%= Session["UserID"]%>';
+                if (datevisit.val() == '') {
+                    document.getElementById("divErrorNextVisit").style.display = '';
+                    document.getElementById("divErrorNextVisit").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorNextVisit").style.display = '';
+                    document.getElementById("divErrorNextVisit").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectStatus.val() == '-1') {
+                    document.getElementById("divErrorStatus").style.display = '';
+                    document.getElementById("divErrorStatus").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorStatus").style.display = '';
+                    document.getElementById("divErrorStatus").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (chkValidate == 'true') {
+                    var userid = '<%= Session["UserID"]%>';
                         var firstname = '<%= Session["sEmpEngFirstName"] %>';
                         var lastname = '<%= Session["sEmpEngLastName"] %>';
                         var engmane = '<%= Session["sEngName"] %>';
                         var empcode = '<%= Session["EmpCode"] %>';
 
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0');
-                        var yyyy = today.getFullYear();
-                        var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
+                    if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
 
+                        //Get insert new architech
                         $.ajax({
-                            url: 'DataServices.asmx/GetInsertWeeklyReportUpdate',
+                            url: 'DataServices.asmx/GetInsertWeeklyReportWithExtended',
                             method: 'POST',
                             data: {
                                 WeekDate: $('#datepickertrans').val(),
@@ -1495,231 +841,33 @@
                                 Name: $('#selectArchitect option:selected').text(),
                                 TransID: $('#selectTransEntry').val(),
                                 TransNameEN: $('#selectTransEntry option:selected').text(),
-                                ProjectID: $('#selectUpdteProject').val(),
-                                ProjectName: $('#selectUpdteProject option:selected').text(),
-                                Location: $('#updateLocation').val(),
-                                StepID: $('#selectupdateProjectStep').val(),
-                                StepNameEn: $('#selectupdateProjectStep option:selected').text(),
-                                BiddingName1: $('#updatebiddingname1').val(),
-                                OwnerName1: $('#updateowner1').val(),
-                                BiddingName2: $('#updatebiddingname2').val(),
-                                OwnerName2: $('#updateowner2').val(),
-                                BiddingName3: $('#updatebiddingname3').val(),
-                                OwnerName3: $('#updateowner3').val(),
-                                AwardMC: $('#updateawardmc').val(),
-                                ContactMC: $('#updatecontactmc').val(),
-                                AwardRF: $('#updateawardrf').val(),
-                                ContactRF: $('#updatecontactrf').val(),
-                                ProdTypeID: $('#selectUpdateProductType').val(),
-                                ProdTypeNameEN: $('#selectUpdateProductType option:selected').text(),
-                                ProdID: $('#selectUpdateProduct').val(),
-                                ProdNameEN: $('#selectUpdateProduct option:selected').text(),
-                                ProfID: $('#selectUpdateProfile').val(),
-                                ProfNameEN: $('#selectUpdateProfile option:selected').text(),
-                                Quantity: $('#updateQuantity').val(),
-                                DeliveryDate: $('#updatepickerdelivery').val(),
-                                NextVisitDate: $('#updatevisit').val(),
-                                StatusID: $('#selectUpdateStatus').val(),
-                                StatusNameEn: $('#selectUpdateStatus option:selected').text(),
-                                Remark: $('#updatedetail').val(),
-                                UserID: userid,
-                                EmpCode: empcode,
-                                CreatedBy: firstname + ' ' + lastname,
-                                CreatedDate: currentdate
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-
-                            }
-                        });
-
-                        /// to do here
-                        alert('Data saved successfully..!');
-
-                        document.getElementById("divUpdateEntry").style.display = '';
-                        document.getElementById("divUpdateEntry").style.display = 'none';
-
-                        document.getElementById("divUpdateNewProduct").style.display = '';
-                        document.getElementById("divUpdateNewProduct").style.display = 'normal';
-
-                    } else {
-                        alert('Warnning, The data is not completed please check..!');
-                    }
-                });
-
-                // codding.......
-                var btnSaveHistoryUpdateProduct = $('#btnSaveHistoryUpdateProduct');
-                btnSaveHistoryUpdateProduct.click(function () {
-                    var chkValidate = 'false';
-                    var ProjectID = $('#selectUpdteProject').val();
-                    var ProjName = $('#selectUpdteProject option:selected').text();
-                    var updateLocation = $('#updateLocation');
-                    var selectupdateProjectStep = $('#selectupdateProjectStep');
-                    var selectUpdateProduct = $('#selectUpdateProduct');
-                    var selectUpdateProfile = $('#selectUpdateProfile');
-                    var updateQuantity = $('#updateQuantity');
-                    var updatepickerdelivery = $('#updatepickerdelivery');
-                    var updatevisit = $('#updatevisit');
-                    var selectUpdateStatus = $('#selectUpdateStatus');
-
-                    if (ProjName == '') {
-                        document.getElementById("divErrorupProjName").style.display = '';
-                        document.getElementById("divErrorupProjName").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupProjName").style.display = '';
-                        document.getElementById("divErrorupProjName").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (updateLocation.val() == '') {
-                        document.getElementById("divErrorupLocation").style.display = '';
-                        document.getElementById("divErrorupLocation").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupLocation").style.display = '';
-                        document.getElementById("divErrorupLocation").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectupdateProjectStep.val() == '-1') {
-                        document.getElementById("divErrorupProjectStep").style.display = '';
-                        document.getElementById("divErrorupProjectStep").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupProjectStep").style.display = '';
-                        document.getElementById("divErrorupProjectStep").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectUpdateProduct.val() == '-1') {
-                        document.getElementById("divErrorupProduct").style.display = '';
-                        document.getElementById("divErrorupProduct").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorupProduct").style.display = '';
-                        document.getElementById("divErrorupProduct").style.display = 'none';
-                        chkValidate = 'true';;
-                    }
-
-                    if (selectUpdateProfile.val() == '-1') {
-                        document.getElementById("divErrorupProfile").style.display = '';
-                        document.getElementById("divErrorupProfile").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorupProfile").style.display = '';
-                        document.getElementById("divErrorupProfile").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (updateQuantity.val() == '') {
-                        document.getElementById("divErrorupQuantity").style.display = '';
-                        document.getElementById("divErrorupQuantity").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorupQuantity").style.display = '';
-                        document.getElementById("divErrorupQuantity").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (updatepickerdelivery.val() == '') {
-                        document.getElementById("divErrorupDeliveryDate").style.display = '';
-                        document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorupDeliveryDate").style.display = '';
-                        document.getElementById("divErrorupDeliveryDate").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (updatevisit.val() == '') {
-                        document.getElementById("divErrorupNextVisit").style.display = '';
-                        document.getElementById("divErrorupNextVisit").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorupNextVisit").style.display = '';
-                        document.getElementById("divErrorupNextVisit").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (selectUpdateStatus.val() == '-1') {
-                        document.getElementById("divErrorupStatus").style.display = '';
-                        document.getElementById("divErrorupStatus").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-
-                    } else {
-                        document.getElementById("divErrorupStatus").style.display = '';
-                        document.getElementById("divErrorupStatus").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-
-                    if (chkValidate == 'true') {
-                        var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
-
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0');
-                        var yyyy = today.getFullYear();
-                        var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
-
-
-                        $.ajax({
-                            url: 'DataServices.asmx/GetInsertWeeklyReportWithExtendedUpdate',
-                            method: 'POST',
-                            data: {
-                                WeekDate: $('#datepickertrans').val(),
-                                WeekTime: $('#inputtime').val(),
-                                CompanyID: $('#selectCompany').val(),
-                                CompanyName: $('#selectCompany option:selected').text(),
-                                ArchitecID: $('#selectArchitect').val(),
-                                Name: $('#selectArchitect option:selected').text(),
-                                TransID: $('#selectTransEntry').val(),
-                                TransNameEN: $('#selectTransEntry option:selected').text(),
-                                ProjectID: $('#selectUpdteProject').val(),
-                                ProjectName: $('#selectUpdteProject option:selected').text(),
-                                Location: $('#updateLocation').val(),
-                                StepID: $('#selectupdateProjectStep').val(),
-                                StepNameEn: $('#selectupdateProjectStep option:selected').text(),
-                                BiddingName1: $('#updatebiddingname1').val(),
-                                OwnerName1: $('#updateowner1').val(),
-                                BiddingName2: $('#updatebiddingname2').val(),
-                                OwnerName2: $('#updateowner2').val(),
-                                BiddingName3: $('#updatebiddingname3').val(),
-                                OwnerName3: $('#updateowner3').val(),
-                                AwardMC: $('#updateawardmc').val(),
-                                ContactMC: $('#updatecontactmc').val(),
-                                AwardRF: $('#updateawardrf').val(),
-                                ContactRF: $('#updatecontactrf').val(),
-                                ProdTypeID: $('#selectUpdateProductType').val(),
-                                ProdTypeNameEN: $('#selectUpdateProductType option:selected').text(),
-                                ProdID: $('#selectUpdateProduct').val(),
-                                ProdNameEN: $('#selectUpdateProduct option:selected').text(),
-                                ProfID: $('#selectUpdateProfile').val(),
-                                ProfNameEN: $('#selectUpdateProfile option:selected').text(),
-                                Quantity: $('#updateQuantity').val(),
-                                DeliveryDate: $('#updatepickerdelivery').val(),
-                                NextVisitDate: $('#updatevisit').val(),
-                                StatusID: $('#selectUpdateStatus').val(),
-                                StatusNameEn: $('#selectUpdateStatus option:selected').text(),
-                                Remark: $('#updatedetail').val(),
+                                ProjectID: $('#ProjectID').val(),
+                                ProjectName: $('#ProjName').val(),
+                                Location: $('#newLocation').val(),
+                                StepID: $('#selectProjectStep').val(),
+                                StepNameEn: $('#selectProjectStep option:selected').text(),
+                                BiddingName1: $('#biddingname1').val(),
+                                OwnerName1: $('#owner1').val(),
+                                BiddingName2: $('#biddingname2').val(),
+                                OwnerName2: $('#owner2').val(),
+                                BiddingName3: $('#biddingname3').val(),
+                                OwnerName3: $('#owner3').val(),
+                                AwardMC: $('#awardmc').val(),
+                                ContactMC: $('#contactmc').val(),
+                                AwardRF: $('#awardrf').val(),
+                                ContactRF: $('#contactrf').val(),
+                                ProdTypeID: $('#selectProductType').val(),
+                                ProdTypeNameEN: $('#selectProductType option:selected').text(),
+                                ProdID: $('#selectProduct').val(),
+                                ProdNameEN: $('#selectProduct option:selected').text(),
+                                ProfID: $('#selectProfile').val(),
+                                ProfNameEN: $('#selectProfile option:selected').text(),
+                                Quantity: $('#Quantity').val(),
+                                DeliveryDate: $('#datepickerdelivery').val(),
+                                NextVisitDate: $('#datevisit').val(),
+                                StatusID: $('#selectStatus').val(),
+                                StatusNameEn: $('#selectStatus option:selected').text(),
+                                Remark: $('#detail1').val(),
                                 UserID: userid,
                                 EmpCode: empcode,
                                 CreatedBy: firstname + ' ' + lastname,
@@ -1734,63 +882,1090 @@
                         /// to do here
                         alert('Data saved product extended successfully..!');
 
-                        document.getElementById("divUpdateEntry").style.display = '';
-                        document.getElementById("divUpdateEntry").style.display = 'none';
+                        document.getElementById("divSaveEntry").style.display = '';
+                        document.getElementById("divSaveEntry").style.display = 'none';
 
-                        document.getElementById("divUpdateNewProduct").style.display = '';
-                        document.getElementById("divUpdateNewProduct").style.display = 'normal';
-
+                        document.getElementById("divNewProduct").style.display = '';
+                        document.getElementById("divNewProduct").style.display = 'normal';
 
                     } else {
-                        alert('Warnning, The data is not completed please check..!');
+                        alert('Warning, \n\When you create new transaction must be select step design only..!');
+                        return;
+                    }
+                } else {
+                    alert('Warnning, The data is not completed please check..!');
+                }
+            });
+            // ******* End function create new project *******
+
+
+            // ******* Start function update project status *******
+            selectTransEntryDDL.change(function () {
+                if ($(this).val() == '-1') {
+                    selectUpdteProjectDDL.empty();
+                    selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                }
+                else {
+                    var selectCompanyDDL = $('#selectCompany option:selected').val();
+                    var selectArchitectDDL = $('#selectArchitect option:selected').val();
+                    var userid = '<%= Session["UserID"]%>';
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataProjectWithPort',
+                        method: 'post',
+                        data: {
+                            CompanyID: selectCompanyDDL,
+                            ArchitecID: selectArchitectDDL,
+                            TypeID: userid
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            selectUpdteProjectDDL.empty();
+                            selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                            $(data).each(function (index, item) {
+                                selectUpdteProjectDDL.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
+                            });
+                        }
+                    });
+
+                    // for transaction intake options
+                    var selectIntakeProject = $('#selectIntakeProject');
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDataProjectWithPort',
+                        method: 'post',
+                        data: {
+                            CompanyID: selectCompanyDDL,
+                            ArchitecID: selectArchitectDDL,
+                            TypeID: userid
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            selectIntakeProject.empty();
+                            selectIntakeProject.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                            $(data).each(function (index, item) {
+                                selectIntakeProject.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
+                            });
+                        }
+                    });
+                    //Get project status
+                    var selectIntakeStatus = $('#selectIntakeStatus');
+                    $.ajax({
+                        url: 'DataServices.asmx/GetStatus',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectIntakeStatus.append($('<option/>', { value: -1, text: 'Select status' }));
+                            $(data).each(function (index, item) {
+                                selectIntakeStatus.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                            });
+                        }
+                    });
+
+                }
+            });
+
+            var selectIntakeProject = $('#selectIntakeProject');
+            selectIntakeProject.change(function () {
+                // get data table files attached here
+                $.ajax({
+                    url: 'DataServices.asmx/GetDocAttached',
+                    method: 'post',
+                    data: {
+                        ProjectID: $('#selectIntakeProject').val(),
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var items = [];
+                        var trHTML = '';
+                        $('#tableAttach tr:not(:first)').remove();
+                        $(data).each(function (index, item) {
+                            trHTML += '<tr><td>' + item.id + '</td><td>' + item.Description + '</td><td>' + item.FileName + '</td><td><a href="uploads/' + item.FileName + '" download target="_blank">Download</a></td></tr>';
+                        });
+
+                        $('#tableAttach').append(trHTML);
                     }
                 });
+            });
 
-                
+            selectUpdteProjectDDL.change(function () {
+                if ($(this).val() == '-1') {
+                    $('#updateLocation').prop('disabled', true);
+                    $('#selectupdateProjectStep').prop('disabled', true);
+                    selectupdateProjectStepDDL.empty();
+                    selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
 
-                var btnSaveNewArchitect = $('#btnSaveNewArchitect');
-                btnSaveNewArchitect.click(function () {
-                    var chkValidate = 'false';
-                    var newarchitect = $('#newarchitect').val();
-                    var detailarchitect = $('#detailarchitect').val();
+                    selectUpdateProductTypeDDL.empty();
+                    selectUpdateProductTypeDDL.prop('disabled', true);
+                    selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
 
-                    if (newarchitect == '') {
-                        document.getElementById("divErrorArchitect").style.display = '';
-                        document.getElementById("divErrorArchitect").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorArchitect").style.display = '';
-                        document.getElementById("divErrorArchitect").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                    selectUpdateProductDDL.empty();
+                    selectUpdateProductDDL.prop('disabled', true);
+                    selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
 
-                    if (detailarchitect == '') {
-                        document.getElementById("divErrorDetailarchitect").style.display = '';
-                        document.getElementById("divErrorDetailarchitect").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorDetailarchitect").style.display = '';
-                        document.getElementById("divErrorDetailarchitect").style.display = 'none';
-                        chkValidate = 'true';
-                    }
+                    selectUpdateProfileDDL.empty();
+                    selectUpdateProfileDDL.prop('disabled', true);
+                    selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
+
+                    updateQuantity.val('');
+                    updateQuantity.prop('disabled', true);
+                    updatepickerdelivery.val('');
+                    updatepickerdelivery.prop('disabled', true);
+                    updatevisit.val('');
+                    updatevisit.prop('disabled', true);
+
+                    selectUpdateStatusDDL.empty();
+                    selectUpdateStatusDDL.prop('disabled', true);
+                    selectUpdateStatusDDL.append($('<option/>', { value: -1, text: 'Please select project status' }));
+                    updatedetail.prop('disabled', true);
+
+                    document.getElementById("divUpdateBidding").style.display = 'none';
+                    document.getElementById("divUpdateAwardMC").style.display = 'none';
+                    document.getElementById("divUpdateAwardRF").style.display = 'none';
+
+                    btnSaveHistoryUpdateProject.prop('disabled', true);
+                    btnSaveHistoryUpdateProduct.prop('disabled', true);
+
+                } else {
+                    $('#updateLocation').prop('disabled', false);
+                    $('#selectupdateProjectStep').prop('disabled', false);
+                    //selectUpdateProductTypeDDL.prop('disabled', false);
+
+                    btnSaveHistoryUpdateProject.prop('disabled', false);
+                    btnSaveHistoryUpdateProduct.prop('disabled', false);
+
+                    // get 
+                    $.ajax({
+                        url: 'DataServices.asmx/GetStepUpdate',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectupdateProjectStepDDL.empty();
+                            selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
+                            $(data).each(function (index, item) {
+                                selectupdateProjectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameEn }));
+                            });
+                        }
+                    });
+
+                    // get 
+                    $.ajax({
+                        url: 'DataServices.asmx/GetProductTypeUpdate',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectUpdateProductTypeDDL.empty();
+                            selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+                            $(data).each(function (index, item) {
+                                selectUpdateProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                            });
+                        }
+                    });
+
+                    // get data binding last update
+                    $.ajax({
+                        url: 'DataServices.asmx/GetProjectLastUdate',
+                        method: 'POST',
+                        data: {
+                            ProjectID: selectUpdteProjectDDL.val()
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var obj = jQuery.parseJSON(JSON.stringify(data));
+                            if (obj != '') {
+                                $.each(obj, function (key, inval) {
+                                    $('#updateLocation').val(inval["Location"]);
+                                    $('#selectupdateProjectStep').val(inval["ProjStep"]).change();
+
+                                    //selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
+                                    //selectUpdateProductDDL.val(inval["ProdID"]).change();
+                                    //selectUpdateProfileDDL.val(inval["ProfID"]).change();
+
+                                    //updateQuantity.prop('disabled', true);
+                                    //updatepickerdelivery.prop('disabled', true);
+                                    //updatevisit.prop('disabled', true);
+                                    //selectUpdateStatusDDL.prop('disabled', true);
+                                    //updatedetail.prop('disabled', true);
+
+                                    //$('#selectupdateProjectStep').selectmenu('refresh');
+
+                                    //selectupdateProjectStepDDL.append($('selected', { value: inval["StepID"], text: inval["StepNameEn"] }));
+                                    //$('#selectupdateProjectStep option:selected').val(inval["StepID"]);
+                                    //$('#selectupdateProjectStep').text(inval["StepNameEn"]);
 
 
-                    if (chkValidate == 'true') {
-                        var userid = '<%= Session["UserID"]%>';
+                                });
+                            }
+                        }
+                    });
+
+                }
+            });
+
+            selectupdateProjectStepDDL.change(function () {
+                if ($(this).val() == '-1') {
+                    selectUpdateProductTypeDDL.empty();
+                    selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+                    selectUpdateProductTypeDDL.val('-1');
+                    selectUpdateProductTypeDDL.prop('disabled', true);
+
+                } else {
+
+                    // get project step design, bidding, awardmc, awardrf 
+                    $.ajax({
+                        url: 'DataServices.asmx/GetProductTypeUpdate',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectUpdateProductTypeDDL.empty();
+                            selectUpdateProductTypeDDL.prop('disabled', false);
+                            selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
+                            $(data).each(function (index, item) {
+                                selectUpdateProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                            });
+
+                            $.ajax({
+                                url: 'DataServices.asmx/GetProjectLastUdate',
+                                method: 'POST',
+                                data: {
+                                    ProjectID: selectUpdteProjectDDL.val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                    if (obj != '') {
+                                        $.each(obj, function (key, inval) {
+
+                                            selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
+
+                                            selectUpdateProductDDL.val(inval["ProdID"]).change();
+                                            selectUpdateProfileDDL.val(inval["ProfID"]).change();
+
+                                            $('#updatebiddingname1').val('');
+                                            $('#updateowner1').val('');
+
+                                            //$('#updatebiddingname2').val('');
+                                            //$('#updateowner2').val('');
+
+                                            //$('#updatebiddingname3').val('');
+                                            //$('#updateowner3').val('');
+
+                                            //$('#updateawardmc').val('');
+                                            //$('#updatecontactmc').val('');
+
+                                            //$('#updateawardrf').val('');
+                                            //$('#updatecontactrf').val('');
+
+                                            //$('#updatebiddingname1').val(inval["BiddingName1"]);
+                                            //$('#updateowner1').val(inval["OwnerName1"]);
+
+                                            //$('#updatebiddingname2').val(inval["BiddingName2"]);
+                                            //$('#updateowner2').val(inval["OwnerName2"]);
+
+                                            //$('#updatebiddingname3').val(inval["BiddingName3"]);
+                                            //$('#updateowner3').val(inval["OwnerName3"]);
+
+                                            //$('#updateawardmc').val(inval["AwardMC"]);
+                                            //$('#updatecontactmc').val(inval["ContactMC"]);
+
+                                            //$('#updateawardrf').val(inval["AwardRF"]);
+                                            //$('#updatecontactrf').val(inval["ContactRF"]);
+                                        });
+                                    }
+                                }
+                            });
+
+                        }
+                    });
+
+
+                }
+            });
+
+            selectUpdateProductTypeDDL.change(function () {
+                if ($(this).val() == '-1') {
+                    selectUpdateProductDDL.prop('disabled', true);
+                    selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                    selectUpdateProductDDL.val('-1');
+
+                    selectUpdateProfileDDL.prop('disabled', true);
+                    selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
+                    selectUpdateProfileDDL.val('-1');
+
+                    updateQuantity.val('');
+                    updateQuantity.prop('disabled', true);
+                    updatepickerdelivery.val('');
+                    updatepickerdelivery.prop('disabled', true);
+
+                    updatevisit.val('');
+                    updatevisit.prop('disabled', true);
+
+                    selectUpdateStatusDDL.prop('disabled', true);
+                    selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select project stutus' }));
+
+                } else {
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetProductsUpdate',
+                        method: 'post',
+                        data: {
+                            ProdTypeID: $(this).val()
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            selectUpdateProductDDL.prop('disabled', false);
+                            selectUpdateProductDDL.empty();
+                            selectUpdateProductDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                            $(data).each(function (index, item) {
+                                selectUpdateProductDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
+                            });
+
+
+                            $.ajax({
+                                url: 'DataServices.asmx/GetProjectLastUdate',
+                                method: 'POST',
+                                data: {
+                                    ProjectID: selectUpdteProjectDDL.val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                    if (obj != '') {
+                                        $.each(obj, function (key, inval) {
+
+                                            selectUpdateProductDDL.val(inval["ProdID"]).change();
+                                            //selectUpdateProfileDDL.val(inval["ProfID"]).change();
+                                            //selectUpdateStatusDDL.val(inval["StatusID"]).change();
+
+                                            updateQuantity.val(inval["Quantity"]);
+                                            updatepickerdelivery.val(inval["DeliveryDate"]);
+                                            //updatevisit.val(inval["NextVisitDate"]);
+                                            updatedetail.val(inval["Remark"]);
+                                            $('#updateUsers').val(inval["SaleSpec"]);
+                                            $('#updateLastdate').val(inval["LastUpdate"]);
+
+                                        });
+                                    }
+                                }
+                            });
+
+                        }
+                    });
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetProfileUpdate',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectUpdateProfileDDL.prop('disabled', false);
+                            selectUpdateProfileDDL.empty();
+                            selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
+                            $(data).each(function (index, item) {
+                                selectUpdateProfileDDL.append($('<option/>', { value: item.ProfID, text: item.ProfNameEN }));
+                            });
+
+                            $.ajax({
+                                url: 'DataServices.asmx/GetProjectLastUdate',
+                                method: 'POST',
+                                data: {
+                                    ProjectID: selectUpdteProjectDDL.val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                    if (obj != '') {
+                                        $.each(obj, function (key, inval) {
+
+                                            //selectUpdateProductDDL.val(inval["ProdID"]).change();
+                                            selectUpdateProfileDDL.val(inval["ProfID"]).change();
+                                            //selectUpdateStatusDDL.val(inval["StatusID"]).change();
+
+                                            updateQuantity.val(inval["Quantity"]);
+                                            updatepickerdelivery.val(inval["DeliveryDate"]);
+                                            //updatevisit.val(inval["NextVisitDate"]);
+                                            updatedetail.val(inval["Remark"]);
+                                            $('#updateUsers').val(inval["SaleSpec"]);
+                                            $('#updateLastdate').val(inval["LastUpdate"]);
+
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetStatusUpdate',
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectUpdateStatusDDL.empty();
+                            selectUpdateStatusDDL.prop('disabled', false);
+                            selectUpdateStatusDDL.append($('<option/>', { value: -1, text: 'Please select project stutus' }));
+                            $(data).each(function (index, item) {
+                                selectUpdateStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                            });
+
+                            $.ajax({
+                                url: 'DataServices.asmx/GetProjectLastUdate',
+                                method: 'POST',
+                                data: {
+                                    ProjectID: selectUpdteProjectDDL.val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                    if (obj != '') {
+                                        $.each(obj, function (key, inval) {
+
+                                            //selectUpdateProductDDL.val(inval["ProdID"]).change();
+                                            //selectUpdateProfileDDL.val(inval["ProfID"]).change();
+                                            selectUpdateStatusDDL.val(inval["StatusID"]).change();
+
+                                            updateQuantity.val(inval["Quantity"]);
+                                            updatepickerdelivery.val(inval["DeliveryDate"]);
+                                            //updatevisit.val(inval["NextVisitDate"]);
+                                            updatedetail.val(inval["Remark"]);
+                                            $('#updateUsers').val(inval["SaleSpec"]);
+                                            $('#updateLastdate').val(inval["LastUpdate"]);
+
+                                        });
+                                    }
+                                }
+                            });
+
+                        }
+                    });
+
+                    updateQuantity.prop('disabled', false);
+                    updatepickerdelivery.prop('disabled', false);
+                    updatevisit.prop('disabled', false);
+                    updatedetail.prop('disabled', false);
+                }
+            });
+
+
+            // ****** click save update project ******
+            var btnSaveHistoryUpdateProject = $('#btnSaveHistoryUpdateProject');
+            btnSaveHistoryUpdateProject.click(function () {
+                var chkValidate = 'false';
+                var ProjectID = $('#selectUpdteProject').val();
+                var ProjName = $('#selectUpdteProject option:selected').text();
+                var updateLocation = $('#updateLocation');
+                var selectupdateProjectStep = $('#selectupdateProjectStep');
+                var selectUpdateProduct = $('#selectUpdateProduct');
+                var selectUpdateProfile = $('#selectUpdateProfile');
+                var updateQuantity = $('#updateQuantity');
+                var updatepickerdelivery = $('#updatepickerdelivery');
+                var updatevisit = $('#updatevisit');
+                var selectUpdateStatus = $('#selectUpdateStatus');
+
+                if (ProjName == '') {
+                    document.getElementById("divErrorupProjName").style.display = '';
+                    document.getElementById("divErrorupProjName").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupProjName").style.display = '';
+                    document.getElementById("divErrorupProjName").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updateLocation.val() == '') {
+                    document.getElementById("divErrorupLocation").style.display = '';
+                    document.getElementById("divErrorupLocation").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupLocation").style.display = '';
+                    document.getElementById("divErrorupLocation").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectupdateProjectStep.val() == '-1') {
+                    document.getElementById("divErrorupProjectStep").style.display = '';
+                    document.getElementById("divErrorupProjectStep").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupProjectStep").style.display = '';
+                    document.getElementById("divErrorupProjectStep").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectUpdateProduct.val() == '-1') {
+                    document.getElementById("divErrorupProduct").style.display = '';
+                    document.getElementById("divErrorupProduct").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupProduct").style.display = '';
+                    document.getElementById("divErrorupProduct").style.display = 'none';
+                    chkValidate = 'true';;
+                }
+
+                if (selectUpdateProfile.val() == '-1') {
+                    document.getElementById("divErrorupProfile").style.display = '';
+                    document.getElementById("divErrorupProfile").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupProfile").style.display = '';
+                    document.getElementById("divErrorupProfile").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updateQuantity.val() == '') {
+                    document.getElementById("divErrorupQuantity").style.display = '';
+                    document.getElementById("divErrorupQuantity").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupQuantity").style.display = '';
+                    document.getElementById("divErrorupQuantity").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updatepickerdelivery.val() == '') {
+                    document.getElementById("divErrorupDeliveryDate").style.display = '';
+                    document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupDeliveryDate").style.display = '';
+                    document.getElementById("divErrorupDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updatevisit.val() == '') {
+                    document.getElementById("divErrorupNextVisit").style.display = '';
+                    document.getElementById("divErrorupNextVisit").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupNextVisit").style.display = '';
+                    document.getElementById("divErrorupNextVisit").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectUpdateStatus.val() == '-1') {
+                    document.getElementById("divErrorupStatus").style.display = '';
+                    document.getElementById("divErrorupStatus").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupStatus").style.display = '';
+                    document.getElementById("divErrorupStatus").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (chkValidate == 'true') {
+                    var userid = '<%= Session["UserID"]%>';
                         var firstname = '<%= Session["sEmpEngFirstName"] %>';
                         var lastname = '<%= Session["sEmpEngLastName"] %>';
                         var engmane = '<%= Session["sEngName"] %>';
                         var empcode = '<%= Session["EmpCode"] %>';
 
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0');
-                        var yyyy = today.getFullYear();
-                        var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetInsertWeeklyReportUpdate',
+                        method: 'POST',
+                        data: {
+                            WeekDate: $('#datepickertrans').val(),
+                            WeekTime: $('#inputtime').val(),
+                            CompanyID: $('#selectCompany').val(),
+                            CompanyName: $('#selectCompany option:selected').text(),
+                            ArchitecID: $('#selectArchitect').val(),
+                            Name: $('#selectArchitect option:selected').text(),
+                            TransID: $('#selectTransEntry').val(),
+                            TransNameEN: $('#selectTransEntry option:selected').text(),
+                            ProjectID: $('#selectUpdteProject').val(),
+                            ProjectName: $('#selectUpdteProject option:selected').text(),
+                            Location: $('#updateLocation').val(),
+                            StepID: $('#selectupdateProjectStep').val(),
+                            StepNameEn: $('#selectupdateProjectStep option:selected').text(),
+                            BiddingName1: $('#updatebiddingname1').val(),
+                            OwnerName1: $('#updateowner1').val(),
+                            BiddingName2: $('#updatebiddingname2').val(),
+                            OwnerName2: $('#updateowner2').val(),
+                            BiddingName3: $('#updatebiddingname3').val(),
+                            OwnerName3: $('#updateowner3').val(),
+                            AwardMC: $('#updateawardmc').val(),
+                            ContactMC: $('#updatecontactmc').val(),
+                            AwardRF: $('#updateawardrf').val(),
+                            ContactRF: $('#updatecontactrf').val(),
+                            ProdTypeID: $('#selectUpdateProductType').val(),
+                            ProdTypeNameEN: $('#selectUpdateProductType option:selected').text(),
+                            ProdID: $('#selectUpdateProduct').val(),
+                            ProdNameEN: $('#selectUpdateProduct option:selected').text(),
+                            ProfID: $('#selectUpdateProfile').val(),
+                            ProfNameEN: $('#selectUpdateProfile option:selected').text(),
+                            Quantity: $('#updateQuantity').val(),
+                            DeliveryDate: $('#updatepickerdelivery').val(),
+                            NextVisitDate: $('#updatevisit').val(),
+                            StatusID: $('#selectUpdateStatus').val(),
+                            StatusNameEn: $('#selectUpdateStatus option:selected').text(),
+                            Remark: $('#updatedetail').val(),
+                            UserID: userid,
+                            EmpCode: empcode,
+                            CreatedBy: firstname + ' ' + lastname,
+                            CreatedDate: currentdate
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+
+                        }
+                    });
+
+                    /// to do here
+                    alert('Data saved successfully..!');
+
+                    document.getElementById("divUpdateEntry").style.display = '';
+                    document.getElementById("divUpdateEntry").style.display = 'none';
+
+                    document.getElementById("divUpdateNewProduct").style.display = '';
+                    document.getElementById("divUpdateNewProduct").style.display = 'normal';
+
+                } else {
+                    alert('Warnning, The data is not completed please check..!');
+                }
+            });
+
+            // codding.......
+            var btnSaveHistoryUpdateProduct = $('#btnSaveHistoryUpdateProduct');
+            btnSaveHistoryUpdateProduct.click(function () {
+                var chkValidate = 'false';
+                var ProjectID = $('#selectUpdteProject').val();
+                var ProjName = $('#selectUpdteProject option:selected').text();
+                var updateLocation = $('#updateLocation');
+                var selectupdateProjectStep = $('#selectupdateProjectStep');
+                var selectUpdateProduct = $('#selectUpdateProduct');
+                var selectUpdateProfile = $('#selectUpdateProfile');
+                var updateQuantity = $('#updateQuantity');
+                var updatepickerdelivery = $('#updatepickerdelivery');
+                var updatevisit = $('#updatevisit');
+                var selectUpdateStatus = $('#selectUpdateStatus');
+
+                if (ProjName == '') {
+                    document.getElementById("divErrorupProjName").style.display = '';
+                    document.getElementById("divErrorupProjName").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupProjName").style.display = '';
+                    document.getElementById("divErrorupProjName").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updateLocation.val() == '') {
+                    document.getElementById("divErrorupLocation").style.display = '';
+                    document.getElementById("divErrorupLocation").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupLocation").style.display = '';
+                    document.getElementById("divErrorupLocation").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectupdateProjectStep.val() == '-1') {
+                    document.getElementById("divErrorupProjectStep").style.display = '';
+                    document.getElementById("divErrorupProjectStep").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupProjectStep").style.display = '';
+                    document.getElementById("divErrorupProjectStep").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectUpdateProduct.val() == '-1') {
+                    document.getElementById("divErrorupProduct").style.display = '';
+                    document.getElementById("divErrorupProduct").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupProduct").style.display = '';
+                    document.getElementById("divErrorupProduct").style.display = 'none';
+                    chkValidate = 'true';;
+                }
+
+                if (selectUpdateProfile.val() == '-1') {
+                    document.getElementById("divErrorupProfile").style.display = '';
+                    document.getElementById("divErrorupProfile").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupProfile").style.display = '';
+                    document.getElementById("divErrorupProfile").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updateQuantity.val() == '') {
+                    document.getElementById("divErrorupQuantity").style.display = '';
+                    document.getElementById("divErrorupQuantity").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupQuantity").style.display = '';
+                    document.getElementById("divErrorupQuantity").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updatepickerdelivery.val() == '') {
+                    document.getElementById("divErrorupDeliveryDate").style.display = '';
+                    document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupDeliveryDate").style.display = '';
+                    document.getElementById("divErrorupDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (updatevisit.val() == '') {
+                    document.getElementById("divErrorupNextVisit").style.display = '';
+                    document.getElementById("divErrorupNextVisit").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupNextVisit").style.display = '';
+                    document.getElementById("divErrorupNextVisit").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (selectUpdateStatus.val() == '-1') {
+                    document.getElementById("divErrorupStatus").style.display = '';
+                    document.getElementById("divErrorupStatus").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+
+                } else {
+                    document.getElementById("divErrorupStatus").style.display = '';
+                    document.getElementById("divErrorupStatus").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (chkValidate == 'true') {
+                    var userid = '<%= Session["UserID"]%>';
+                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                        var lastname = '<%= Session["sEmpEngLastName"] %>';
+                        var engmane = '<%= Session["sEngName"] %>';
+                        var empcode = '<%= Session["EmpCode"] %>';
+
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetInsertWeeklyReportWithExtendedUpdate',
+                        method: 'POST',
+                        data: {
+                            WeekDate: $('#datepickertrans').val(),
+                            WeekTime: $('#inputtime').val(),
+                            CompanyID: $('#selectCompany').val(),
+                            CompanyName: $('#selectCompany option:selected').text(),
+                            ArchitecID: $('#selectArchitect').val(),
+                            Name: $('#selectArchitect option:selected').text(),
+                            TransID: $('#selectTransEntry').val(),
+                            TransNameEN: $('#selectTransEntry option:selected').text(),
+                            ProjectID: $('#selectUpdteProject').val(),
+                            ProjectName: $('#selectUpdteProject option:selected').text(),
+                            Location: $('#updateLocation').val(),
+                            StepID: $('#selectupdateProjectStep').val(),
+                            StepNameEn: $('#selectupdateProjectStep option:selected').text(),
+                            BiddingName1: $('#updatebiddingname1').val(),
+                            OwnerName1: $('#updateowner1').val(),
+                            BiddingName2: $('#updatebiddingname2').val(),
+                            OwnerName2: $('#updateowner2').val(),
+                            BiddingName3: $('#updatebiddingname3').val(),
+                            OwnerName3: $('#updateowner3').val(),
+                            AwardMC: $('#updateawardmc').val(),
+                            ContactMC: $('#updatecontactmc').val(),
+                            AwardRF: $('#updateawardrf').val(),
+                            ContactRF: $('#updatecontactrf').val(),
+                            ProdTypeID: $('#selectUpdateProductType').val(),
+                            ProdTypeNameEN: $('#selectUpdateProductType option:selected').text(),
+                            ProdID: $('#selectUpdateProduct').val(),
+                            ProdNameEN: $('#selectUpdateProduct option:selected').text(),
+                            ProfID: $('#selectUpdateProfile').val(),
+                            ProfNameEN: $('#selectUpdateProfile option:selected').text(),
+                            Quantity: $('#updateQuantity').val(),
+                            DeliveryDate: $('#updatepickerdelivery').val(),
+                            NextVisitDate: $('#updatevisit').val(),
+                            StatusID: $('#selectUpdateStatus').val(),
+                            StatusNameEn: $('#selectUpdateStatus option:selected').text(),
+                            Remark: $('#updatedetail').val(),
+                            UserID: userid,
+                            EmpCode: empcode,
+                            CreatedBy: firstname + ' ' + lastname,
+                            CreatedDate: currentdate
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+
+                        }
+                    });
+
+                    /// to do here
+                    alert('Data saved product extended successfully..!');
+
+                    document.getElementById("divUpdateEntry").style.display = '';
+                    document.getElementById("divUpdateEntry").style.display = 'none';
+
+                    document.getElementById("divUpdateNewProduct").style.display = '';
+                    document.getElementById("divUpdateNewProduct").style.display = 'normal';
+
+
+                } else {
+                    alert('Warnning, The data is not completed please check..!');
+                }
+            });
+
+
+
+            var btnSaveNewArchitect = $('#btnSaveNewArchitect');
+            btnSaveNewArchitect.click(function () {
+                var chkValidate = 'false';
+                var newarchitect = $('#newarchitect').val();
+                var detailarchitect = $('#detailarchitect').val();
+
+                if (newarchitect == '') {
+                    document.getElementById("divErrorArchitect").style.display = '';
+                    document.getElementById("divErrorArchitect").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorArchitect").style.display = '';
+                    document.getElementById("divErrorArchitect").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+                if (detailarchitect == '') {
+                    document.getElementById("divErrorDetailarchitect").style.display = '';
+                    document.getElementById("divErrorDetailarchitect").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorDetailarchitect").style.display = '';
+                    document.getElementById("divErrorDetailarchitect").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+
+                if (chkValidate == 'true') {
+                    var userid = '<%= Session["UserID"]%>';
+                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                        var lastname = '<%= Session["sEmpEngLastName"] %>';
+                        var engmane = '<%= Session["sEngName"] %>';
+                        var empcode = '<%= Session["EmpCode"] %>';
+
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+
+                    $.ajax({
+                        url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
+                        method: 'POST',
+                        data: {
+                            WeekDate: $('#datepickertrans').val(),
+                            WeekTime: $('#inputtime').val(),
+                            CompanyID: $('#selectCompany').val(),
+                            CompanyName: $('#selectCompany option:selected').text(),
+                            ArchitecID: $('#selectArchitect').val(),
+                            Name: $('#selectArchitect option:selected').text(),
+                            TransID: $('#selectTransEntry').val(),
+                            TransNameEN: $('#selectTransEntry option:selected').text(),
+                            ProjectID: null,    // $('#selectTransEntry').val(),
+                            ProjectName: null,  //$('#selectTransEntry option:selected').text(),
+                            Location: null,     //$('#selectArchitect').val(),
+                            StepID: null,       //$('#selectArchitect').val(),
+                            StepNameEn: null,   // $('#selectTransEntry option:selected').text(),
+                            StatusID: null,     //$('#selectArchitect').val(),
+                            StatusNameEn: null, //$('#selectTransEntry option:selected').text(),
+                            NewArchitect: $('#newarchitect').val(),
+                            HaveFiles: null,
+                            FileName: null,
+                            Remark: $('#detailarchitect').val(),
+                            UserID: userid,
+                            EmpCode: empcode,
+                            CreatedBy: firstname + ' ' + lastname,
+                            CreatedDate: currentdate
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+
+                        }
+                    });
+
+                    /// to do here
+                    alert('Data saved new architect successfully..!');
+
+                    document.getElementById("divUpdateEntry").style.display = '';
+                    document.getElementById("divUpdateEntry").style.display = 'none';
+
+                    document.getElementById("divUpdateNewProduct").style.display = '';
+                    document.getElementById("divUpdateNewProduct").style.display = 'normal';
+
+
+                } else {
+                    alert('Warnning, The data is not completed please check..!');
+                }
+            });
+
+            var btnOtherDetail = $('#btnOtherDetail');
+            btnOtherDetail.click(function () {
+
+                //var otherdetail = $('#otherdetail').val();
+                var otherdetail = $('#otherdetail').val();
+                if (otherdetail == '') {
+                    document.getElementById("divErrorDetailOther").style.display = '';
+                    document.getElementById("divErrorDetailOther").style.display = 'normal';
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorDetailOther").style.display = '';
+                    document.getElementById("divErrorDetailOther").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+
+                var userid = '<%= Session["UserID"]%>';
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyyy = today.getFullYear();
+                var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                $.ajax({
+                    url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
+                    method: 'POST',
+                    data: {
+                        WeekDate: $('#datepickertrans').val(),
+                        WeekTime: $('#inputtime').val(),
+                        CompanyID: $('#selectCompany').val(),
+                        CompanyName: $('#selectCompany option:selected').text(),
+                        ArchitecID: $('#selectArchitect').val(),
+                        Name: $('#selectArchitect option:selected').text(),
+                        TransID: $('#selectTransEntry').val(),
+                        TransNameEN: $('#selectTransEntry option:selected').text(),
+                        ProjectID: null,
+                        ProjectName: null,
+                        Location: null,
+                        StepID: null,
+                        StepNameEn: null,
+                        StatusID: null,
+                        StatusNameEn: null,
+                        NewArchitect: null,
+                        HaveFiles: null,
+                        FileName: null,
+                        Remark: $('#otherdetail').val(),
+                        UserID: userid,
+                        EmpCode: empcode,
+                        CreatedBy: firstname + ' ' + lastname,
+                        CreatedDate: currentdate
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+
+                    }
+                });
+
+                /// to do here
+                alert('Data saved other details successfully..!');
+            });
+            // ******* End function update project status *******
+
+
+
+            $("body").on("click", "#btnUpload", function () {
+                // validate object here first.....
+                var selectIntakeProject = $('#selectIntakeProject').val();
+                var selectIntakeStatus = $('#selectIntakeStatus').val();
+                var intakeDetails = $('#intakeDetails').val();
+
+                if (selectIntakeProject == '-1') {
+                    document.getElementById("divErrorIntakeProject").style.display = '';
+                    document.getElementById("divErrorIntakeProject").style.display = 'normal';
+                    return;
+                } else {
+                    document.getElementById("divErrorIntakeProject").style.display = '';
+                    document.getElementById("divErrorIntakeProject").style.display = 'none';
+                }
+
+                if (selectIntakeStatus == '-1') {
+                    document.getElementById("divErrorIntakeStatus").style.display = '';
+                    document.getElementById("divErrorIntakeStatus").style.display = 'normal';
+                    return;
+                } else {
+                    document.getElementById("divErrorIntakeStatus").style.display = '';
+                    document.getElementById("divErrorIntakeStatus").style.display = 'none';
+                }
+
+                if (intakeDetails == '') {
+                    document.getElementById("divErrorIntakeDetail").style.display = '';
+                    document.getElementById("divErrorIntakeDetail").style.display = 'normal';
+                    return;
+                } else {
+                    document.getElementById("divErrorIntakeDetail").style.display = '';
+                    document.getElementById("divErrorIntakeDetail").style.display = 'none';
+                }
+
+
+
+                var userid = '<%= Session["UserID"]%>';
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyyy = today.getFullYear();
+                var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                var optionsRadios1 = $('#optionsRadios1');
+                var postedFile = $('#postedFile').val();
+                var havefile = '';
+                if (document.getElementById("optionsRadios1").checked == true) {
+                    havefile = postedFile;
+
+                    // check file name is not empty
+                    if (havefile == '') {
+                        alert('Intake attached find not found file name..');
+                    }
+                    else {
 
                         $.ajax({
                             url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
@@ -1804,17 +1979,17 @@
                                 Name: $('#selectArchitect option:selected').text(),
                                 TransID: $('#selectTransEntry').val(),
                                 TransNameEN: $('#selectTransEntry option:selected').text(),
-                                ProjectID: null,    // $('#selectTransEntry').val(),
-                                ProjectName: null,  //$('#selectTransEntry option:selected').text(),
-                                Location: null,     //$('#selectArchitect').val(),
-                                StepID: null,       //$('#selectArchitect').val(),
-                                StepNameEn: null,   // $('#selectTransEntry option:selected').text(),
-                                StatusID: null,     //$('#selectArchitect').val(),
-                                StatusNameEn: null, //$('#selectTransEntry option:selected').text(),
-                                NewArchitect: $('#newarchitect').val(),
+                                ProjectID: $('#selectIntakeProject').val(),
+                                ProjectName: $('#selectIntakeProject option:selected').text(),
+                                Location: null,
+                                StepID: null,
+                                StepNameEn: null,
+                                StatusID: $('#selectIntakeStatus').val(),
+                                StatusNameEn: $('#selectIntakeStatus option:selected').text(),
+                                NewArchitect: null,
                                 HaveFiles: null,
-                                FileName: null,
-                                Remark: $('#detailarchitect').val(),
+                                FileName: havefile.replace('C:\\fakepath\\', ''),
+                                Remark: $('#intakeDetails').val(),
                                 UserID: userid,
                                 EmpCode: empcode,
                                 CreatedBy: firstname + ' ' + lastname,
@@ -1826,74 +2001,20 @@
                             }
                         });
 
-                        /// to do here
-                        alert('Data saved new architect successfully..!');
 
-                        document.getElementById("divUpdateEntry").style.display = '';
-                        document.getElementById("divUpdateEntry").style.display = 'none';
-
-                        document.getElementById("divUpdateNewProduct").style.display = '';
-                        document.getElementById("divUpdateNewProduct").style.display = 'normal';
-
-
-                    } else {
-                        alert('Warnning, The data is not completed please check..!');
-                    }
-                });
-
-                var btnOtherDetail = $('#btnOtherDetail');
-                btnOtherDetail.click(function () {
-
-                    //var otherdetail = $('#otherdetail').val();
-                    var otherdetail = $('#otherdetail').val();
-                    if (otherdetail == '') {
-                        document.getElementById("divErrorDetailOther").style.display = '';
-                        document.getElementById("divErrorDetailOther").style.display = 'normal';
-                        chkValidate = 'false';
-                        return;
-                    } else {
-                        document.getElementById("divErrorDetailOther").style.display = '';
-                        document.getElementById("divErrorDetailOther").style.display = 'none';
-                        chkValidate = 'true';
-                    }
-                    
-
-                    var userid = '<%= Session["UserID"]%>';
-                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                    var lastname = '<%= Session["sEmpEngLastName"] %>';
-                    var engmane = '<%= Session["sEngName"] %>';
-                    var empcode = '<%= Session["EmpCode"] %>';
-
-                    var today = new Date();
-                    var dd = String(today.getDate()).padStart(2, '0');
-                    var mm = String(today.getMonth() + 1).padStart(2, '0');
-                    var yyyy = today.getFullYear();
-                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
-
-                    $.ajax({
-                            url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
+                        $.ajax({
+                            url: 'DataServices.asmx/GetInsertWeeklyReportIntakeUpdate',
                             method: 'POST',
                             data: {
-                                WeekDate: $('#datepickertrans').val(),
-                                WeekTime: $('#inputtime').val(),
                                 CompanyID: $('#selectCompany').val(),
                                 CompanyName: $('#selectCompany option:selected').text(),
                                 ArchitecID: $('#selectArchitect').val(),
                                 Name: $('#selectArchitect option:selected').text(),
-                                TransID: $('#selectTransEntry').val(),
-                                TransNameEN: $('#selectTransEntry option:selected').text(),
-                                ProjectID: null,
-                                ProjectName: null,
-                                Location: null,
-                                StepID: null,
-                                StepNameEn: null,
-                                StatusID: null,
-                                StatusNameEn: null,
-                                NewArchitect: null,
-                                HaveFiles: null,
-                                FileName: null,
-                                Remark: $('#otherdetail').val(),
+                                ProjectID: $('#selectIntakeProject').val(),
+                                ProjectName: $('#selectIntakeProject option:selected').text(),
+                                StepID: $('#selectTransEntry').val(),
+                                StatusID: $('#selectIntakeStatus').val(),
+                                StatusNameEn: $('#selectIntakeStatus option:selected').text(),
                                 UserID: userid,
                                 EmpCode: empcode,
                                 CreatedBy: firstname + ' ' + lastname,
@@ -1905,195 +2026,69 @@
                             }
                         });
 
-                    /// to do here
-                    alert('Data saved other details successfully..!');
-                });
-                // ******* End function update project status *******
+                        // when insert weekly report table succeed then upload file to server
+                        $.ajax({
+                            url: 'HandlerCS.ashx',
+                            type: 'POST',
+                            data: new FormData($('form')[0]),
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (file) {
 
-
-
-                $("body").on("click", "#btnUpload", function () {
-                    // validate object here first.....
-                    var selectIntakeProject = $('#selectIntakeProject').val();
-                    var selectIntakeStatus = $('#selectIntakeStatus').val();
-                    var intakeDetails = $('#intakeDetails').val();
-                    
-                    if (selectIntakeProject == '-1') {
-                        document.getElementById("divErrorIntakeProject").style.display = '';
-                        document.getElementById("divErrorIntakeProject").style.display = 'normal';
-                        return;
-                    } else {
-                        document.getElementById("divErrorIntakeProject").style.display = '';
-                        document.getElementById("divErrorIntakeProject").style.display = 'none';
-                    }
-
-                    if (selectIntakeStatus == '-1') {
-                        document.getElementById("divErrorIntakeStatus").style.display = '';
-                        document.getElementById("divErrorIntakeStatus").style.display = 'normal';
-                        return;
-                    } else {
-                        document.getElementById("divErrorIntakeStatus").style.display = '';
-                        document.getElementById("divErrorIntakeStatus").style.display = 'none';
-                    }
-
-                    if (intakeDetails == '') {
-                        document.getElementById("divErrorIntakeDetail").style.display = '';
-                        document.getElementById("divErrorIntakeDetail").style.display = 'normal';
-                        return;
-                    } else {
-                        document.getElementById("divErrorIntakeDetail").style.display = '';
-                        document.getElementById("divErrorIntakeDetail").style.display = 'none';
-                    }
-
-                    
-
-                    var userid = '<%= Session["UserID"]%>';
-                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                    var lastname = '<%= Session["sEmpEngLastName"] %>';
-                    var engmane = '<%= Session["sEngName"] %>';
-                    var empcode = '<%= Session["EmpCode"] %>';
-
-                    var today = new Date();
-                    var dd = String(today.getDate()).padStart(2, '0');
-                    var mm = String(today.getMonth() + 1).padStart(2, '0');
-                    var yyyy = today.getFullYear();
-                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
-
-                    var optionsRadios1 = $('#optionsRadios1');
-                    var postedFile = $('#postedFile').val();
-                    var havefile = '';
-                    if (document.getElementById("optionsRadios1").checked == true) {
-                        havefile = postedFile;
-
-                        // check file name is not empty
-                        if (havefile == '') {
-                            alert('Intake attached find not found file name..');
-                        }
-                        else {
-
-                            $.ajax({
-                                url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
-                                method: 'POST',
-                                data: {
-                                    WeekDate: $('#datepickertrans').val(),
-                                    WeekTime: $('#inputtime').val(),
-                                    CompanyID: $('#selectCompany').val(),
-                                    CompanyName: $('#selectCompany option:selected').text(),
-                                    ArchitecID: $('#selectArchitect').val(),
-                                    Name: $('#selectArchitect option:selected').text(),
-                                    TransID: $('#selectTransEntry').val(),
-                                    TransNameEN: $('#selectTransEntry option:selected').text(),
-                                    ProjectID: $('#selectIntakeProject').val(),
-                                    ProjectName: $('#selectIntakeProject option:selected').text(),
-                                    Location: null,
-                                    StepID: null,
-                                    StepNameEn: null,
-                                    StatusID: $('#selectIntakeStatus').val(),
-                                    StatusNameEn: $('#selectIntakeStatus option:selected').text(),
-                                    NewArchitect: null,
-                                    HaveFiles: null,
-                                    FileName: havefile.replace('C:\\fakepath\\', ''),
-                                    Remark: $('#intakeDetails').val(),
-                                    UserID: userid,
-                                    EmpCode: empcode,
-                                    CreatedBy: firstname + ' ' + lastname,
-                                    CreatedDate: currentdate
-                                },
-                                dataType: 'json',
-                                success: function (data) {
-
-                                }
-                            });
-
-
-                            $.ajax({
-                                url: 'DataServices.asmx/GetInsertWeeklyReportIntakeUpdate',
-                                method: 'POST',
-                                data: {
-                                    CompanyID: $('#selectCompany').val(),
-                                    CompanyName: $('#selectCompany option:selected').text(),
-                                    ArchitecID: $('#selectArchitect').val(),
-                                    Name: $('#selectArchitect option:selected').text(),
-                                    ProjectID: $('#selectIntakeProject').val(),
-                                    ProjectName: $('#selectIntakeProject option:selected').text(),
-                                    StepID: $('#selectTransEntry').val(),
-                                    StatusID: $('#selectIntakeStatus').val(),
-                                    StatusNameEn: $('#selectIntakeStatus option:selected').text(),
-                                    UserID: userid,
-                                    EmpCode: empcode,
-                                    CreatedBy: firstname + ' ' + lastname,
-                                    CreatedDate: currentdate
-                                },
-                                dataType: 'json',
-                                success: function (data) {
-
-                                }
-                            });
-
-                            // when insert weekly report table succeed then upload file to server
-                            $.ajax({
-                                url: 'HandlerCS.ashx',
-                                type: 'POST',
-                                data: new FormData($('form')[0]),
-                                cache: false,
-                                contentType: false,
-                                processData: false,
-                                success: function (file) {
-
-                                    $.ajax({
-                                        url: 'DataServices.asmx/GetUploadDocAttached',
-                                        method: 'post',
-                                        data: {
-                                            ProjectID: $('#selectIntakeProject').val(),
-                                            ProjectName: $('#selectIntakeProject option:selected').text(),
-                                            Description: $('#intakeDesc').val(),
-                                            FileName: file.name,
-                                            Remark: $('#intakeDetails').val(),
-                                            UserID: userid,
-                                            EmpCode: empcode,
-                                            CreatedBy: firstname + ' ' + lastname,
-                                            CreatedDate: currentdate
-                                        },
-                                        dataType: 'json',
-                                        success: function (data) {
-                                        }
-                                    });
-
-                                    $("#fileProgress").hide();
-                                    $("#lblMessage").html("<b>" + file.name + "</b> has been uploaded.");
-                                },
-                                xhr: function () {
-                                    var fileXhr = $.ajaxSettings.xhr();
-                                    if (fileXhr.upload) {
-                                        $("progress").show();
-                                        fileXhr.upload.addEventListener("progress", function (e) {
-                                            if (e.lengthComputable) {
-                                                $("#fileProgress").attr({
-                                                    value: e.loaded,
-                                                    max: e.total
-                                                });
-                                            }
-                                        }, false);
+                                $.ajax({
+                                    url: 'DataServices.asmx/GetUploadDocAttached',
+                                    method: 'post',
+                                    data: {
+                                        ProjectID: $('#selectIntakeProject').val(),
+                                        ProjectName: $('#selectIntakeProject option:selected').text(),
+                                        Description: $('#intakeDesc').val(),
+                                        FileName: file.name,
+                                        Remark: $('#intakeDetails').val(),
+                                        UserID: userid,
+                                        EmpCode: empcode,
+                                        CreatedBy: firstname + ' ' + lastname,
+                                        CreatedDate: currentdate
+                                    },
+                                    dataType: 'json',
+                                    success: function (data) {
                                     }
-                                    return fileXhr;
+                                });
+
+                                $("#fileProgress").hide();
+                                $("#lblMessage").html("<b>" + file.name + "</b> has been uploaded.");
+                            },
+                            xhr: function () {
+                                var fileXhr = $.ajaxSettings.xhr();
+                                if (fileXhr.upload) {
+                                    $("progress").show();
+                                    fileXhr.upload.addEventListener("progress", function (e) {
+                                        if (e.lengthComputable) {
+                                            $("#fileProgress").attr({
+                                                value: e.loaded,
+                                                max: e.total
+                                            });
+                                        }
+                                    }, false);
                                 }
-                            });
+                                return fileXhr;
+                            }
+                        });
 
-                            alert('File has been uploaded...');
+                        alert('File has been uploaded...');
 
-                        }
                     }
-                    else {
-                        havefile = 'Intake option request more file attached...';
-                        alert(havefile);
-                        return;
-                    }
-                });
-
+                }
+                else {
+                    havefile = 'Intake option request more file attached...';
+                    alert(havefile);
+                    return;
+                }
             });
-        </script>
-    
+
+        });
+    </script>
+
     <style>
         .select2-container .select2-selection--multiple {
             font-family: 'Arial', Verdana;
@@ -2116,21 +2111,21 @@
             padding: 20px 0 20px 0;
         }
 
-         #rcorners13 {
+        #rcorners13 {
             border-radius: 0 0 10px 10px;
             background: #e2f7c4;
             border: 1px solid #73AD21;
             padding: 20px 0 20px 0;
         }
 
-         #rcorners14 {
+        #rcorners14 {
             border-radius: 0 0 10px 10px;
             background: #e2f7c4;
             border: 1px solid #73AD21;
             padding: 20px 0 20px 0;
         }
 
-          #rcorners2 {
+        #rcorners2 {
             border-radius: 10px;
             border: 1px solid #339eeb;
             padding: 20px 0 20px 0;
@@ -2143,20 +2138,21 @@
             padding: 20px 0 20px 0;
         }
 
-         #rcorners22 {
+        #rcorners22 {
             border-radius: 0 0 10px 10px;
             background: #d4ebfc;
             border: 1px solid #339eeb;
             padding: 20px 0 20px 0;
         }
 
-         #rcorners23 {
+        #rcorners23 {
             border-radius: 0 0 10px 10px;
             background: #d4ebfc;
             border: 1px solid #339eeb;
             padding: 20px 0 20px 0;
         }
-          #rcorners24 {
+
+        #rcorners24 {
             border-radius: 0 0 10px 10px;
             background: #d4ebfc;
             border: 1px solid #339eeb;
@@ -2190,7 +2186,7 @@
                                     </span>
                                     <span class="description">Details for weekly report</span>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-4 col-md-offset-2">
                                         <label class="txtLabel">Visit Date</label>
@@ -2543,7 +2539,7 @@
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Update Project</label>
-                                               <%-- <div class="input-group col-md-12">
+                                                <%-- <div class="input-group col-md-12">
                                                     <input type="text" class="form-control input-sm txtLabel" id="upProjName" name="upProjName">
                                                 </div>--%>
                                                 <div class="txtLabel">
@@ -2764,7 +2760,7 @@
                                             </div>
                                         </div>
 
-                                         <div class="row" style="margin-top: 5px;">
+                                        <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-3 col-md-offset-2">
                                                 <label class="txtLabel">Updated by</label>
                                                 <div class="txtLabel">
@@ -2845,14 +2841,14 @@
 
                                 <div id="divSpecIntake" style="display: none;">
                                     <div class="row" style="margin-top: 5px;">
-                                     <div class="col-md-6 col-md-offset-2">
-                                                <label class="txtLabel">Project Name</label>
-                                                <div class="txtLabel">
-                                                    <select id="selectIntakeProject" name="selectIntakeProject" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
-                                                    </select>
-                                                </div>
-                                                <div id="divErrorIntakeProject" class="txtLabel text-red" style="display: none;">Please select a project...!</div>
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <label class="txtLabel">Project Name</label>
+                                            <div class="txtLabel">
+                                                <select id="selectIntakeProject" name="selectIntakeProject" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
+                                                </select>
                                             </div>
+                                            <div id="divErrorIntakeProject" class="txtLabel text-red" style="display: none;">Please select a project...!</div>
+                                        </div>
                                     </div>
 
                                     <div class="row" style="margin-top: 5px;">
@@ -2894,11 +2890,11 @@
                                             <input class="btn btn-info btn-block btn-flat btn-sm" type="file" id="postedFile" name="postedFile" />
 
                                             <progress id="fileProgress" style="display: none"></progress>
-                                            
+
                                             <span id="lblMessage" class="txtLabel" style="color: Green"></span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="col-md-6 col-md-offset-2">
                                             <label class="txtLabel">Description</label>
@@ -2948,7 +2944,7 @@
                                 </div>
 
                                 <div id="divOther" style="display: none;">
-                                    
+
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="col-md-6 col-md-offset-2">
                                             <label class="txtLabel">Details</label>
@@ -3144,7 +3140,7 @@
                                     </div>
                                 </div>
 
-                                 <div class="row" style="margin-bottom: 5px">
+                                <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4">Mobile</div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control input input-sm" id="comMobile" name="comMobile" placeholder="" value="" autocomplete="off" required>
@@ -3374,132 +3370,132 @@
                 </div>
             </div>
 
-            </div>  
+        </div>
 
         <script>
 
-                function getTransEntry(trans) {
-                    var t = trans.value;
+            function getTransEntry(trans) {
+                var t = trans.value;
 
-                    var div1 = document.getElementById("divNewProject");
-                    var div2 = document.getElementById("divUpdate");
-                    var div3 = document.getElementById("divNewArchitect");
-                    var div4 = document.getElementById("divSpecIntake");
-                    var div5 = document.getElementById("divOther");
-                    
-                    if (t == "1") { div1.style.display = "block"; } else { div1.style.display = "none"; }
-                    if (t == "2") { div2.style.display = "block"; } else { div2.style.display = "none"; }
-                    if (t == "3") { div3.style.display = "block"; } else { div3.style.display = "none"; }
-                    if (t == "4") { div4.style.display = "block"; } else { div4.style.display = "none"; }
-                    if (t == "5") { div5.style.display = "block"; } else { div5.style.display = "none"; }
+                var div1 = document.getElementById("divNewProject");
+                var div2 = document.getElementById("divUpdate");
+                var div3 = document.getElementById("divNewArchitect");
+                var div4 = document.getElementById("divSpecIntake");
+                var div5 = document.getElementById("divOther");
+
+                if (t == "1") { div1.style.display = "block"; } else { div1.style.display = "none"; }
+                if (t == "2") { div2.style.display = "block"; } else { div2.style.display = "none"; }
+                if (t == "3") { div3.style.display = "block"; } else { div3.style.display = "none"; }
+                if (t == "4") { div4.style.display = "block"; } else { div4.style.display = "none"; }
+                if (t == "5") { div5.style.display = "block"; } else { div5.style.display = "none"; }
+            }
+
+            function getProjectStep(step) {
+                var s = step.value;
+
+                var dv1 = document.getElementById("divBidding");
+                var dv2 = document.getElementById("divAwardMC");
+                var dv3 = document.getElementById("divAwardRF");
+
+                if (s == "1") { dv1.style.display = "block"; } else { dv1.style.display = "none"; }
+                if (s == "2") { dv2.style.display = "block"; } else { dv2.style.display = "none"; }
+                if (s == "3") { dv3.style.display = "block"; } else { dv3.style.display = "none"; }
+                //alert(s);
+            }
+
+            function getUpdateProjectStep(step) {
+                var s = step.value;
+
+                var dv1 = document.getElementById("divUpdateBidding");
+                var dv2 = document.getElementById("divUpdateAwardMC");
+                var dv3 = document.getElementById("divUpdateAwardRF");
+
+                if (s == "1") { dv1.style.display = "block"; } else { dv1.style.display = "none"; }
+                if (s == "2") { dv2.style.display = "block"; } else { dv2.style.display = "none"; }
+                if (s == "3") { dv3.style.display = "block"; } else { dv3.style.display = "none"; }
+            }
+
+
+            function getComboA(sel) {
+                var value = sel.value;
+                //alert(value);
+
+
+            }
+
+
+            function myFunction() {
+
+                var s = document.getElementById("selectTransEntry");
+                var div1 = document.getElementById("divNewProject");
+                var div2 = document.getElementById("divUpdate");
+                var div3 = document.getElementById("divNewArchitect");
+                var div4 = document.getElementById("divSpecIntake");
+                var div5 = document.getElementById("divOther");
+
+                //if (x.style.display === "none") {
+                //    x.style.display = "block";
+                //} else {
+                //    x.style.display = "none";
+                //}
+
+                //alert(s.value);
+
+                if (s.value == "1") { div1.style.display = "block"; } else { div1.style.display = "none"; }
+                if (s.value == "2") { div2.style.display = "block"; } else { div2.style.display = "none"; }
+                if (s.value == "3") { div3.style.display = "block"; } else { div3.style.display = "none"; }
+                if (s.value == "4") { div4.style.display = "block"; } else { div4.style.display = "none"; }
+                if (s.value == "5") { div5.style.display = "block"; } else { div5.style.display = "none"; }
+
+            }
+
+            function onChangeClick() {
+                document.getElementById("button").click();
+            }
+
+            function openCompany() {
+
+                $("#myModalCompany").modal({ backdrop: false });
+                $('[id=myModalCompany]').modal('show');
+            }
+
+            function openArchitect() {
+
+                $("#myModalArchitect").modal({ backdrop: false });
+                $('[id=myModalArchitect]').modal('show');
+            }
+
+            function openProject() {
+
+                $("#myModalProject").modal({ backdrop: false });
+                $('[id=myModalProject]').modal('show');
+            }
+
+            function ShowModalWindow() {
+                // true to refresh the parent after popup closed
+                RefreshParent(false);
+                window.showModalDialog("www.google.com", "",
+                    "dialogHeight:600px;dialogWidth:990px;resizable:no;status:no;");
+                return false;
+            }
+
+            function CloseWindow() {
+                if (confirm("Are you sure do you want to delete..?")) {
+                    close();
                 }
-
-                function getProjectStep(step) {
-                    var s = step.value;
-
-                    var dv1 = document.getElementById("divBidding");
-                    var dv2 = document.getElementById("divAwardMC");
-                    var dv3 = document.getElementById("divAwardRF");
-
-                    if (s == "1") { dv1.style.display = "block"; } else { dv1.style.display = "none"; }
-                    if (s == "2") { dv2.style.display = "block"; } else { dv2.style.display = "none"; }
-                    if (s == "3") { dv3.style.display = "block"; } else { dv3.style.display = "none"; }
-                    //alert(s);
-                }
-
-                function getUpdateProjectStep(step) {
-                    var s = step.value;
-
-                    var dv1 = document.getElementById("divUpdateBidding");
-                    var dv2 = document.getElementById("divUpdateAwardMC");
-                    var dv3 = document.getElementById("divUpdateAwardRF");
-
-                    if (s == "1") { dv1.style.display = "block"; } else { dv1.style.display = "none"; }
-                    if (s == "2") { dv2.style.display = "block"; } else { dv2.style.display = "none"; }
-                    if (s == "3") { dv3.style.display = "block"; } else { dv3.style.display = "none"; }
-                }
+            }
 
 
-                function getComboA(sel) {
-                    var value = sel.value;
-                    //alert(value);
+            function popupwindow(url, title, w, h) {
+                var left = (screen.width / 2) - (w / 2);
+                var top = (screen.height / 2) - (h / 2);
+                var param = '?id=001&sr=es5';
+                var url2 = url + param;
+                return window.open(url2, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+            }
+        </script>
 
 
-                }
 
-
-                function myFunction() {
-
-                    var s = document.getElementById("selectTransEntry");
-                    var div1 = document.getElementById("divNewProject");
-                    var div2 = document.getElementById("divUpdate");
-                    var div3 = document.getElementById("divNewArchitect");
-                    var div4 = document.getElementById("divSpecIntake");
-                    var div5 = document.getElementById("divOther");
-
-                    //if (x.style.display === "none") {
-                    //    x.style.display = "block";
-                    //} else {
-                    //    x.style.display = "none";
-                    //}
-
-                    //alert(s.value);
-
-                    if (s.value == "1") { div1.style.display = "block"; } else { div1.style.display = "none"; }
-                    if (s.value == "2") { div2.style.display = "block"; } else { div2.style.display = "none"; }
-                    if (s.value == "3") { div3.style.display = "block"; } else { div3.style.display = "none"; }
-                    if (s.value == "4") { div4.style.display = "block"; } else { div4.style.display = "none"; }
-                    if (s.value == "5") { div5.style.display = "block"; } else { div5.style.display = "none"; }
-
-                }
-
-                function onChangeClick() {
-                    document.getElementById("button").click();
-                }
-
-                function openCompany() {
-
-                    $("#myModalCompany").modal({ backdrop: false });
-                    $('[id=myModalCompany]').modal('show');
-                }
-
-                function openArchitect() {
-
-                    $("#myModalArchitect").modal({ backdrop: false });
-                    $('[id=myModalArchitect]').modal('show');
-                }
-
-                function openProject() {
-
-                    $("#myModalProject").modal({ backdrop: false });
-                    $('[id=myModalProject]').modal('show');
-                }
-
-                function ShowModalWindow() {
-                    // true to refresh the parent after popup closed
-                    RefreshParent(false);
-                    window.showModalDialog("www.google.com", "",
-                        "dialogHeight:600px;dialogWidth:990px;resizable:no;status:no;");
-                    return false;
-                }
-
-                function CloseWindow() {
-                    if (confirm("Are you sure do you want to delete..?")) {
-                        close();
-                    }
-                }
-
-
-                function popupwindow(url, title, w, h) {
-                    var left = (screen.width / 2) - (w / 2);
-                    var top = (screen.height / 2) - (h / 2);
-                    var param = '?id=001&sr=es5';
-                    var url2 = url + param;
-                    return window.open(url2, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-                }
-            </script>
-
-
-        
     </section>
 </asp:Content>
