@@ -5,9 +5,9 @@ using System.Web;
 
 namespace SaleSpec.Class
 {
-    public class GetDocAttached
+    public class GetDataDocAttached
     {
-        //public string id { get; set; }
+        public string id { get; set; }
         public string ProjectID { get; set; }
         public string ProjectName { get; set; }
         public string Description { get; set; }

@@ -660,9 +660,6 @@
                                                     NextVisitDate: $('#datevisit').val(),
                                                     StatusID: $('#selectStatus').val(),
                                                     StatusNameEn: $('#selectStatus option:selected').text(),
-                                                    NewArchitect: null,
-                                                    HaveFiles: null,
-                                                    FileName: null,
                                                     Remark: $('#detail1').val(),
                                                     UserID: userid,
                                                     EmpCode: empcode,
@@ -873,9 +870,6 @@
                                     NextVisitDate: $('#datevisit').val(),
                                     StatusID: $('#selectStatus').val(),
                                     StatusNameEn: $('#selectStatus option:selected').text(),
-                                    NewArchitect: null,
-                                    HaveFiles: null,
-                                    FileName: null,
                                     Remark: $('#detail1').val(),
                                     UserID: userid,
                                     EmpCode: empcode,
@@ -920,63 +914,83 @@
                         var selectArchitectDDL = $('#selectArchitect option:selected').val();
                         var userid = '<%= Session["UserID"]%>';
 
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataProjectWithPort',
-                            method: 'post',
-                            data: {
-                                CompanyID: selectCompanyDDL,
-                                ArchitecID: selectArchitectDDL,
-                                TypeID: userid
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                                selectUpdteProjectDDL.empty();
-                                selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
-                                $(data).each(function (index, item) {
-                                    selectUpdteProjectDDL.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
-                                });
-                            }
-                        });
+                         $.ajax({
+                             url: 'DataServices.asmx/GetDataProjectWithPort',
+                             method: 'post',
+                             data: {
+                                 CompanyID: selectCompanyDDL,
+                                 ArchitecID: selectArchitectDDL,
+                                 TypeID: userid
+                             },
+                             dataType: 'json',
+                             success: function (data) {
+                                 selectUpdteProjectDDL.empty();
+                                 selectUpdteProjectDDL.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                                 $(data).each(function (index, item) {
+                                     selectUpdteProjectDDL.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
+                                 });
+                             }
+                         });
 
-                        // for transaction intake options
-                        var selectIntakeProject = $('#selectIntakeProject');
-                        $.ajax({
-                            url: 'DataServices.asmx/GetDataProjectWithPort',
-                            method: 'post',
-                            data: {
-                                CompanyID: selectCompanyDDL,
-                                ArchitecID: selectArchitectDDL,
-                                TypeID: userid
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                                selectIntakeProject.empty();
-                                selectIntakeProject.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
-                                $(data).each(function (index, item) {
-                                    selectIntakeProject.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
-                                });
-                            }
-                        });
+                         // for transaction intake options
+                         var selectIntakeProject = $('#selectIntakeProject');
+                         $.ajax({
+                             url: 'DataServices.asmx/GetDataProjectWithPort',
+                             method: 'post',
+                             data: {
+                                 CompanyID: selectCompanyDDL,
+                                 ArchitecID: selectArchitectDDL,
+                                 TypeID: userid
+                             },
+                             dataType: 'json',
+                             success: function (data) {
+                                 selectIntakeProject.empty();
+                                 selectIntakeProject.append($('<option/>', { value: -1, text: 'Please select your project...!' }));
+                                 $(data).each(function (index, item) {
+                                     selectIntakeProject.append($('<option/>', { value: item.ProjectID, text: item.ProjectName }));
+                                 });
+                             }
+                         });
+                         //Get project status
+                         var selectIntakeStatus = $('#selectIntakeStatus');
+                         $.ajax({
+                             url: 'DataServices.asmx/GetStatus',
+                             method: 'post',
+                             dataType: 'json',
+                             success: function (data) {
+                                 selectIntakeStatus.append($('<option/>', { value: -1, text: 'Select status' }));
+                                 $(data).each(function (index, item) {
+                                     selectIntakeStatus.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                                 });
+                             }
+                         });
 
+                     }
+                 });
 
-
-                        //Get project status
-                        var selectIntakeStatus = $('#selectIntakeStatus');
-                        $.ajax({
-                            url: 'DataServices.asmx/GetStatus',
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (data) {
-                                selectIntakeStatus.append($('<option/>', { value: -1, text: 'Select status' }));
-                                $(data).each(function (index, item) {
-                                    selectIntakeStatus.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
-                                });
-                            }
-                        });
-
-                    }
+                var selectIntakeProject = $('#selectIntakeProject');
+                selectIntakeProject.change(function(){
+                    // get data table files attached here
+                    $.ajax({
+                        url: 'DataServices.asmx/GetDocAttached',
+                        method: 'post',
+                        data: {
+                            ProjectID: $('#selectIntakeProject').val(),
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var items = [];
+                            var trHTML = '';
+                            $('#tableAttach tr:not(:first)').remove();
+                            $(data).each(function (index, item) {
+                                trHTML += '<tr><td>' + item.id + '</td><td>' + item.Description + '</td><td>' + item.FileName + '</td><td><a href="uploads/' + item.FileName + '" download target="_blank">Download</a></td></tr>';
+                            });
+                            
+                            $('#tableAttach').append(trHTML);
+                        }
+                    });
                 });
-
+               
                 selectUpdteProjectDDL.change(function () {
                     if ($(this).val() == '-1') {
                         $('#updateLocation').prop('disabled', true);
@@ -1012,11 +1026,16 @@
                         document.getElementById("divUpdateAwardMC").style.display = 'none';
                         document.getElementById("divUpdateAwardRF").style.display = 'none';
 
+                        btnSaveHistoryUpdateProject.prop('disabled', true);
+                        btnSaveHistoryUpdateProduct.prop('disabled', true);
 
                     } else {
                         $('#updateLocation').prop('disabled', false);
                         $('#selectupdateProjectStep').prop('disabled', false);
                         //selectUpdateProductTypeDDL.prop('disabled', false);
+
+                        btnSaveHistoryUpdateProject.prop('disabled', false);
+                        btnSaveHistoryUpdateProduct.prop('disabled', false);
 
                         // get 
                         $.ajax({
@@ -1059,7 +1078,7 @@
                                 if (obj != '') {
                                     $.each(obj, function (key, inval) {
                                         $('#updateLocation').val(inval["Location"]);
-                                        $("#selectupdateProjectStep").val(inval["StepID"]).change();
+                                        $('#selectupdateProjectStep').val(inval["ProjStep"]).change();
 
                                         //selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
                                         //selectUpdateProductDDL.val(inval["ProdID"]).change();
@@ -1092,7 +1111,9 @@
                         selectUpdateProductTypeDDL.append($('<option/>', { value: -1, text: 'Please select product type' }));
                         selectUpdateProductTypeDDL.val('-1');
                         selectUpdateProductTypeDDL.prop('disabled', true);
+
                     } else {
+
                         // get project step design, bidding, awardmc, awardrf 
                         $.ajax({
                             url: 'DataServices.asmx/GetProductTypeUpdate',
@@ -1126,32 +1147,32 @@
                                                 $('#updatebiddingname1').val('');
                                                 $('#updateowner1').val('');
 
-                                                $('#updatebiddingname2').val('');
-                                                $('#updateowner2').val('');
+                                                //$('#updatebiddingname2').val('');
+                                                //$('#updateowner2').val('');
 
-                                                $('#updatebiddingname3').val('');
-                                                $('#updateowner3').val('');
+                                                //$('#updatebiddingname3').val('');
+                                                //$('#updateowner3').val('');
 
-                                                $('#updateawardmc').val('');
-                                                $('#updatecontactmc').val('');
+                                                //$('#updateawardmc').val('');
+                                                //$('#updatecontactmc').val('');
 
-                                                $('#updateawardrf').val('');
-                                                $('#updatecontactrf').val('');
+                                                //$('#updateawardrf').val('');
+                                                //$('#updatecontactrf').val('');
 
-                                                $('#updatebiddingname1').val(inval["BiddingName1"]);
-                                                $('#updateowner1').val(inval["OwnerName1"]);
+                                                //$('#updatebiddingname1').val(inval["BiddingName1"]);
+                                                //$('#updateowner1').val(inval["OwnerName1"]);
 
-                                                $('#updatebiddingname2').val(inval["BiddingName2"]);
-                                                $('#updateowner2').val(inval["OwnerName2"]);
+                                                //$('#updatebiddingname2').val(inval["BiddingName2"]);
+                                                //$('#updateowner2').val(inval["OwnerName2"]);
 
-                                                $('#updatebiddingname3').val(inval["BiddingName3"]);
-                                                $('#updateowner3').val(inval["OwnerName3"]);
+                                                //$('#updatebiddingname3').val(inval["BiddingName3"]);
+                                                //$('#updateowner3').val(inval["OwnerName3"]);
 
-                                                $('#updateawardmc').val(inval["AwardMC"]);
-                                                $('#updatecontactmc').val(inval["ContactMC"]);
+                                                //$('#updateawardmc').val(inval["AwardMC"]);
+                                                //$('#updatecontactmc').val(inval["ContactMC"]);
 
-                                                $('#updateawardrf').val(inval["AwardRF"]);
-                                                $('#updatecontactrf').val(inval["ContactRF"]);
+                                                //$('#updateawardrf').val(inval["AwardRF"]);
+                                                //$('#updatecontactrf').val(inval["ContactRF"]);
                                             });
                                         }
                                     }
@@ -1221,10 +1242,10 @@
 
                                                 updateQuantity.val(inval["Quantity"]);
                                                 updatepickerdelivery.val(inval["DeliveryDate"]);
-                                                updatevisit.val(inval["NextVisitDate"]);
+                                                //updatevisit.val(inval["NextVisitDate"]);
                                                 updatedetail.val(inval["Remark"]);
-                                                $('#updateUsers').val(inval["CreatedBy"]);
-                                                $('#updateLastdate').val(inval["CreatedDate"]);
+                                                $('#updateUsers').val(inval["SaleSpec"]);
+                                                $('#updateLastdate').val(inval["LastUpdate"]);
 
                                             });
                                         }
@@ -1264,10 +1285,10 @@
 
                                                 updateQuantity.val(inval["Quantity"]);
                                                 updatepickerdelivery.val(inval["DeliveryDate"]);
-                                                updatevisit.val(inval["NextVisitDate"]);
+                                                //updatevisit.val(inval["NextVisitDate"]);
                                                 updatedetail.val(inval["Remark"]);
-                                                $('#updateUsers').val(inval["CreatedBy"]);
-                                                $('#updateLastdate').val(inval["CreatedDate"]);
+                                                $('#updateUsers').val(inval["SaleSpec"]);
+                                                $('#updateLastdate').val(inval["LastUpdate"]);
 
                                             });
                                         }
@@ -1306,10 +1327,10 @@
 
                                                 updateQuantity.val(inval["Quantity"]);
                                                 updatepickerdelivery.val(inval["DeliveryDate"]);
-                                                updatevisit.val(inval["NextVisitDate"]);
+                                                //updatevisit.val(inval["NextVisitDate"]);
                                                 updatedetail.val(inval["Remark"]);
-                                                $('#updateUsers').val(inval["CreatedBy"]);
-                                                $('#updateLastdate').val(inval["CreatedDate"]);
+                                                $('#updateUsers').val(inval["SaleSpec"]);
+                                                $('#updateLastdate').val(inval["LastUpdate"]);
 
                                             });
                                         }
@@ -1500,9 +1521,6 @@
                                 NextVisitDate: $('#updatevisit').val(),
                                 StatusID: $('#selectUpdateStatus').val(),
                                 StatusNameEn: $('#selectUpdateStatus option:selected').text(),
-                                NewArchitect: null,
-                                HaveFiles: null,
-                                FileName: null,
                                 Remark: $('#updatedetail').val(),
                                 UserID: userid,
                                 EmpCode: empcode,
@@ -1701,9 +1719,6 @@
                                 NextVisitDate: $('#updatevisit').val(),
                                 StatusID: $('#selectUpdateStatus').val(),
                                 StatusNameEn: $('#selectUpdateStatus option:selected').text(),
-                                NewArchitect: null,
-                                HaveFiles: null,
-                                FileName: null,
                                 Remark: $('#updatedetail').val(),
                                 UserID: userid,
                                 EmpCode: empcode,
@@ -1750,6 +1765,17 @@
                         chkValidate = 'true';
                     }
 
+                    if (detailarchitect == '') {
+                        document.getElementById("divErrorDetailarchitect").style.display = '';
+                        document.getElementById("divErrorDetailarchitect").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorDetailarchitect").style.display = '';
+                        document.getElementById("divErrorDetailarchitect").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+
 
                     if (chkValidate == 'true') {
                         var userid = '<%= Session["UserID"]%>';
@@ -1767,7 +1793,7 @@
 
 
                         $.ajax({
-                            url: 'DataServices.asmx/GetInsertWeeklyReportUpdate',
+                            url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
                             method: 'POST',
                             data: {
                                 WeekDate: $('#datepickertrans').val(),
@@ -1778,32 +1804,13 @@
                                 Name: $('#selectArchitect option:selected').text(),
                                 TransID: $('#selectTransEntry').val(),
                                 TransNameEN: $('#selectTransEntry option:selected').text(),
-                                ProjectID: null,
-                                ProjectName: null,
-                                Location: null,
-                                StepID: null,
-                                StepNameEn: null,
-                                BiddingName1: null,
-                                OwnerName1: null,
-                                BiddingName2: null,
-                                OwnerName2: null,
-                                BiddingName3: null,
-                                OwnerName3: null,
-                                AwardMC: null,
-                                ContactMC: null,
-                                AwardRF: null,
-                                ContactRF: null,
-                                ProdTypeID: null,
-                                ProdTypeNameEN: null,
-                                ProdID: null,
-                                ProdNameEN: null,
-                                ProfID: null,
-                                ProfNameEN: null,
-                                Quantity: null,
-                                DeliveryDate: null,
-                                NextVisitDate: null,
-                                StatusID: null,
-                                StatusNameEn: null,
+                                ProjectID: null,    // $('#selectTransEntry').val(),
+                                ProjectName: null,  //$('#selectTransEntry option:selected').text(),
+                                Location: null,     //$('#selectArchitect').val(),
+                                StepID: null,       //$('#selectArchitect').val(),
+                                StepNameEn: null,   // $('#selectTransEntry option:selected').text(),
+                                StatusID: null,     //$('#selectArchitect').val(),
+                                StatusNameEn: null, //$('#selectTransEntry option:selected').text(),
                                 NewArchitect: $('#newarchitect').val(),
                                 HaveFiles: null,
                                 FileName: null,
@@ -1838,6 +1845,18 @@
                 btnOtherDetail.click(function () {
 
                     //var otherdetail = $('#otherdetail').val();
+                    var otherdetail = $('#otherdetail').val();
+                    if (otherdetail == '') {
+                        document.getElementById("divErrorDetailOther").style.display = '';
+                        document.getElementById("divErrorDetailOther").style.display = 'normal';
+                        chkValidate = 'false';
+                        return;
+                    } else {
+                        document.getElementById("divErrorDetailOther").style.display = '';
+                        document.getElementById("divErrorDetailOther").style.display = 'none';
+                        chkValidate = 'true';
+                    }
+                    
 
                     var userid = '<%= Session["UserID"]%>';
                     var firstname = '<%= Session["sEmpEngFirstName"] %>';
@@ -1852,59 +1871,39 @@
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
-
                     $.ajax({
-                        url: 'DataServices.asmx/GetInsertWeeklyReportUpdate',
-                        method: 'POST',
-                        data: {
-                            WeekDate: $('#datepickertrans').val(),
-                            WeekTime: $('#inputtime').val(),
-                            CompanyID: $('#selectCompany').val(),
-                            CompanyName: $('#selectCompany option:selected').text(),
-                            ArchitecID: $('#selectArchitect').val(),
-                            Name: $('#selectArchitect option:selected').text(),
-                            TransID: $('#selectTransEntry').val(),
-                            TransNameEN: $('#selectTransEntry option:selected').text(),
-                            ProjectID: null,
-                            ProjectName: null,
-                            Location: null,
-                            StepID: null,
-                            StepNameEn: null,
-                            BiddingName1: null,
-                            OwnerName1: null,
-                            BiddingName2: null,
-                            OwnerName2: null,
-                            BiddingName3: null,
-                            OwnerName3: null,
-                            AwardMC: null,
-                            ContactMC: null,
-                            AwardRF: null,
-                            ContactRF: null,
-                            ProdTypeID: null,
-                            ProdTypeNameEN: null,
-                            ProdID: null,
-                            ProdNameEN: null,
-                            ProfID: null,
-                            ProfNameEN: null,
-                            Quantity: null,
-                            DeliveryDate: null,
-                            NextVisitDate: null,
-                            StatusID: null,
-                            StatusNameEn: null,
-                            NewArchitect: null,
-                            HaveFiles: null,
-                            FileName: null,
-                            Remark: $('#otherdetail').val(),
-                            UserID: userid,
-                            EmpCode: empcode,
-                            CreatedBy: firstname + ' ' + lastname,
-                            CreatedDate: currentdate
-                        },
-                        dataType: 'json',
-                        success: function (data) {
+                            url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
+                            method: 'POST',
+                            data: {
+                                WeekDate: $('#datepickertrans').val(),
+                                WeekTime: $('#inputtime').val(),
+                                CompanyID: $('#selectCompany').val(),
+                                CompanyName: $('#selectCompany option:selected').text(),
+                                ArchitecID: $('#selectArchitect').val(),
+                                Name: $('#selectArchitect option:selected').text(),
+                                TransID: $('#selectTransEntry').val(),
+                                TransNameEN: $('#selectTransEntry option:selected').text(),
+                                ProjectID: null,
+                                ProjectName: null,
+                                Location: null,
+                                StepID: null,
+                                StepNameEn: null,
+                                StatusID: null,
+                                StatusNameEn: null,
+                                NewArchitect: null,
+                                HaveFiles: null,
+                                FileName: null,
+                                Remark: $('#otherdetail').val(),
+                                UserID: userid,
+                                EmpCode: empcode,
+                                CreatedBy: firstname + ' ' + lastname,
+                                CreatedDate: currentdate
+                            },
+                            dataType: 'json',
+                            success: function (data) {
 
-                        }
-                    });
+                            }
+                        });
 
                     /// to do here
                     alert('Data saved other details successfully..!');
@@ -1915,8 +1914,38 @@
 
                 $("body").on("click", "#btnUpload", function () {
                     // validate object here first.....
+                    var selectIntakeProject = $('#selectIntakeProject').val();
+                    var selectIntakeStatus = $('#selectIntakeStatus').val();
+                    var intakeDetails = $('#intakeDetails').val();
+                    
+                    if (selectIntakeProject == '-1') {
+                        document.getElementById("divErrorIntakeProject").style.display = '';
+                        document.getElementById("divErrorIntakeProject").style.display = 'normal';
+                        return;
+                    } else {
+                        document.getElementById("divErrorIntakeProject").style.display = '';
+                        document.getElementById("divErrorIntakeProject").style.display = 'none';
+                    }
 
+                    if (selectIntakeStatus == '-1') {
+                        document.getElementById("divErrorIntakeStatus").style.display = '';
+                        document.getElementById("divErrorIntakeStatus").style.display = 'normal';
+                        return;
+                    } else {
+                        document.getElementById("divErrorIntakeStatus").style.display = '';
+                        document.getElementById("divErrorIntakeStatus").style.display = 'none';
+                    }
 
+                    if (intakeDetails == '') {
+                        document.getElementById("divErrorIntakeDetail").style.display = '';
+                        document.getElementById("divErrorIntakeDetail").style.display = 'normal';
+                        return;
+                    } else {
+                        document.getElementById("divErrorIntakeDetail").style.display = '';
+                        document.getElementById("divErrorIntakeDetail").style.display = 'none';
+                    }
+
+                    
 
                     var userid = '<%= Session["UserID"]%>';
                     var firstname = '<%= Session["sEmpEngFirstName"] %>';
@@ -1932,75 +1961,77 @@
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
                     var optionsRadios1 = $('#optionsRadios1');
-                    var exampleInputFile = $('#exampleInputFile');
+                    var postedFile = $('#postedFile').val();
                     var havefile = '';
                     if (document.getElementById("optionsRadios1").checked == true) {
-                        havefile = exampleInputFile.val();
-                        //alert(havefile);
+                        havefile = postedFile;
 
+                        // check file name is not empty
                         if (havefile == '') {
-
+                            alert('Intake attached find not found file name..');
                         }
+                        else {
 
-                            return;
-                    }
-                    else {
-                        havefile = 'Intake option request more file attached...';
-                        alert(havefile);
-                        return;
-                    }
-                    
-                    // if validate is passed -- action here
-                    $.ajax({
-                        url: 'DataServices.asmx/GetInsertWeeklyReportUpdate',
-                        method: 'POST',
-                        data: {
-                            WeekDate: $('#datepickertrans').val(),
-                            WeekTime: $('#inputtime').val(),
-                            CompanyID: $('#selectCompany').val(),
-                            CompanyName: $('#selectCompany option:selected').text(),
-                            ArchitecID: $('#selectArchitect').val(),
-                            Name: $('#selectArchitect option:selected').text(),
-                            TransID: $('#selectTransEntry').val(),
-                            TransNameEN: $('#selectTransEntry option:selected').text(),
-                            ProjectID: null,
-                            ProjectName: null,
-                            Location: null,
-                            StepID: null,
-                            StepNameEn: null,
-                            BiddingName1: null,
-                            OwnerName1: null,
-                            BiddingName2: null,
-                            OwnerName2: null,
-                            BiddingName3: null,
-                            OwnerName3: null,
-                            AwardMC: null,
-                            ContactMC: null,
-                            AwardRF: null,
-                            ContactRF: null,
-                            ProdTypeID: null,
-                            ProdTypeNameEN: null,
-                            ProdID: null,
-                            ProdNameEN: null,
-                            ProfID: null,
-                            ProfNameEN: null,
-                            Quantity: null,
-                            DeliveryDate: null,
-                            NextVisitDate: null,
-                            StatusID: null,
-                            StatusNameEn: null,
-                            NewArchitect: null,
-                            HaveFiles: null,
-                            FileName: null,
-                            Remark: $('#intakeDetails').val(),
-                            UserID: userid,
-                            EmpCode: empcode,
-                            CreatedBy: firstname + ' ' + lastname,
-                            CreatedDate: currentdate
-                        },
-                        dataType: 'json',
-                        success: function (data) {
+                            $.ajax({
+                                url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
+                                method: 'POST',
+                                data: {
+                                    WeekDate: $('#datepickertrans').val(),
+                                    WeekTime: $('#inputtime').val(),
+                                    CompanyID: $('#selectCompany').val(),
+                                    CompanyName: $('#selectCompany option:selected').text(),
+                                    ArchitecID: $('#selectArchitect').val(),
+                                    Name: $('#selectArchitect option:selected').text(),
+                                    TransID: $('#selectTransEntry').val(),
+                                    TransNameEN: $('#selectTransEntry option:selected').text(),
+                                    ProjectID: $('#selectIntakeProject').val(),
+                                    ProjectName: $('#selectIntakeProject option:selected').text(),
+                                    Location: null,
+                                    StepID: null,
+                                    StepNameEn: null,
+                                    StatusID: $('#selectIntakeStatus').val(),
+                                    StatusNameEn: $('#selectIntakeStatus option:selected').text(),
+                                    NewArchitect: null,
+                                    HaveFiles: null,
+                                    FileName: havefile.replace('C:\\fakepath\\', ''),
+                                    Remark: $('#intakeDetails').val(),
+                                    UserID: userid,
+                                    EmpCode: empcode,
+                                    CreatedBy: firstname + ' ' + lastname,
+                                    CreatedDate: currentdate
+                                },
+                                dataType: 'json',
+                                success: function (data) {
 
+                                }
+                            });
+
+
+                            $.ajax({
+                                url: 'DataServices.asmx/GetInsertWeeklyReportIntakeUpdate',
+                                method: 'POST',
+                                data: {
+                                    CompanyID: $('#selectCompany').val(),
+                                    CompanyName: $('#selectCompany option:selected').text(),
+                                    ArchitecID: $('#selectArchitect').val(),
+                                    Name: $('#selectArchitect option:selected').text(),
+                                    ProjectID: $('#selectIntakeProject').val(),
+                                    ProjectName: $('#selectIntakeProject option:selected').text(),
+                                    StepID: $('#selectTransEntry').val(),
+                                    StatusID: $('#selectIntakeStatus').val(),
+                                    StatusNameEn: $('#selectIntakeStatus option:selected').text(),
+                                    UserID: userid,
+                                    EmpCode: empcode,
+                                    CreatedBy: firstname + ' ' + lastname,
+                                    CreatedDate: currentdate
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+
+                                }
+                            });
+
+                            // when insert weekly report table succeed then upload file to server
                             $.ajax({
                                 url: 'HandlerCS.ashx',
                                 type: 'POST',
@@ -2011,10 +2042,9 @@
                                 success: function (file) {
 
                                     $.ajax({
-                                        url: 'ataServices.asmx/GetUploadDocAttached',
+                                        url: 'DataServices.asmx/GetUploadDocAttached',
                                         method: 'post',
                                         data: {
-                                            id: null,
                                             ProjectID: $('#selectIntakeProject').val(),
                                             ProjectName: $('#selectIntakeProject option:selected').text(),
                                             Description: $('#intakeDesc').val(),
@@ -2049,10 +2079,16 @@
                                     return fileXhr;
                                 }
                             });
+
+                            alert('File has been uploaded...');
+
                         }
-                    });
-
-
+                    }
+                    else {
+                        havefile = 'Intake option request more file attached...';
+                        alert(havefile);
+                        return;
+                    }
                 });
 
             });
@@ -2154,7 +2190,7 @@
                                     </span>
                                     <span class="description">Details for weekly report</span>
                                 </div>
-
+                                
                                 <div class="row">
                                     <div class="col-md-4 col-md-offset-2">
                                         <label class="txtLabel">Visit Date</label>
@@ -2786,6 +2822,7 @@
                                                 <%--<input type="text" class="form-control input-sm" />--%>
                                                 <textarea id="detailarchitect" cols="40" rows="3" class="form-control input-sm"></textarea>
                                             </div>
+                                            <div id="divErrorDetailarchitect" class="txtLabel text-red" style="display: none;">Please enter comment for new architect name..!</div>
                                         </div>
                                     </div>
 
@@ -2808,16 +2845,13 @@
 
                                 <div id="divSpecIntake" style="display: none;">
                                     <div class="row" style="margin-top: 5px;">
-
-                                       
-
                                      <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Project Name</label>
                                                 <div class="txtLabel">
                                                     <select id="selectIntakeProject" name="selectIntakeProject" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
-                                                <div id="divErrorIntakeProject" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
+                                                <div id="divErrorIntakeProject" class="txtLabel text-red" style="display: none;">Please select a project...!</div>
                                             </div>
                                     </div>
 
@@ -2857,7 +2891,7 @@
 
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="col-md-6 col-md-offset-2">
-                                            <input class="btn btn-info btn-block btn-flat btn-sm" type="file" name="postedFile" />
+                                            <input class="btn btn-info btn-block btn-flat btn-sm" type="file" id="postedFile" name="postedFile" />
 
                                             <progress id="fileProgress" style="display: none"></progress>
                                             
@@ -2869,7 +2903,7 @@
                                         <div class="col-md-6 col-md-offset-2">
                                             <label class="txtLabel">Description</label>
                                             <div class="txtLabel">
-                                                <input class="btn btn-info btn-block btn-flat btn-sm" type="text" id="intakeDesc" name="intakeDesc" />
+                                                <input class="form-control input-sm" type="text" id="intakeDesc" name="intakeDesc" />
                                             </div>
                                         </div>
                                     </div>
@@ -2883,31 +2917,9 @@
                                                         <th>Descript</th>
                                                         <th>Details</th>
                                                         <th>#</th>
-                                                        <th>#</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>document support no.1</td>
-                                                        <td>Details document support no.1</td>
-                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
-                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>document support no.2</td>
-                                                        <td>Details document support no.2</td>
-                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
-                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>document support no.3</td>
-                                                        <td>Details document support no.3</td>
-                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a></td>
-                                                        <td style="width: 20px; text-align: center;"><a href="#" title="Delete"><i class="fa fa-trash text-red"></i></a></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -2919,8 +2931,8 @@
                                             <div class="">
                                                 <%--<input type="text" class="form-control input-sm" />--%>
                                                 <textarea id="intakeDetails" cols="40" rows="2" class="form-control input-sm txtLabel"></textarea>
-
                                             </div>
+                                            <div id="divErrorIntakeDetail" class="txtLabel text-red" style="display: none;">Please select status..!</div>
                                         </div>
                                     </div>
 
@@ -2945,6 +2957,7 @@
                                                 <textarea id="otherdetail" cols="40" rows="3" class="form-control input-sm"></textarea>
 
                                             </div>
+                                            <div id="divErrorDetailOther" class="txtLabel text-red" style="display: none;">Please enter your comment..!</div>
                                         </div>
                                     </div>
 

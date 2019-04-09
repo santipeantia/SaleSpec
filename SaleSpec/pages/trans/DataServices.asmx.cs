@@ -382,13 +382,11 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
-        public void GetInsertWeeklyReport(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, 
-                                          string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID, 
-                                          string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2, 
-                                          string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, 
-                                          string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN, 
-                                          string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect, 
-                                          string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        public void GetInsertWeeklyReport(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID, string TransNameEN,
+                                          string ProjectID, string ProjectName, string Location, string StepID, string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                          string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN,
+                                          string ProfID, string ProfNameEN, string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string Remark,
+                                          string UserID, string EmpCode, string CreatedBy, string CreatedDate)
         {
             using (SqlConnection conn = new SqlConnection(cs))
             {
@@ -429,9 +427,6 @@ namespace SaleSpec.Class
                 comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
                 comm.Parameters.AddWithValue("@StatusID", StatusID);
                 comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
-                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
-                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
-                comm.Parameters.AddWithValue("@FileName", FileName);
                 comm.Parameters.AddWithValue("@Remark", Remark);
                 comm.Parameters.AddWithValue("@UserID", UserID);
                 comm.Parameters.AddWithValue("@EmpCode", EmpCode);
@@ -443,13 +438,11 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
-        public void GetInsertWeeklyReportWithExtended(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name,
-                                         string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID,
-                                         string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
-                                         string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
-                                         string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
-                                         string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
-                                         string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        public void GetInsertWeeklyReportWithExtended(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID, string TransNameEN,
+                                          string ProjectID, string ProjectName, string Location, string StepID, string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                          string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN,
+                                          string ProfID, string ProfNameEN, string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string Remark,
+                                          string UserID, string EmpCode, string CreatedBy, string CreatedDate)
         {
             using (SqlConnection conn = new SqlConnection(cs))
             {
@@ -490,9 +483,6 @@ namespace SaleSpec.Class
                 comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
                 comm.Parameters.AddWithValue("@StatusID", StatusID);
                 comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
-                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
-                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
-                comm.Parameters.AddWithValue("@FileName", FileName);
                 comm.Parameters.AddWithValue("@Remark", Remark);
                 comm.Parameters.AddWithValue("@UserID", UserID);
                 comm.Parameters.AddWithValue("@EmpCode", EmpCode);
@@ -688,43 +678,69 @@ namespace SaleSpec.Class
                 while (rdr.Read())
                 {
                     GetDataProjectLastUdate project = new GetDataProjectLastUdate();
-                    project.ID = rdr["ID"].ToString();
-                    project.WeekDate = rdr["WeekDate"].ToString();
-                    project.WeekTime = rdr["WeekTime"].ToString();
+                    project.ProjectID = rdr["ProjectID"].ToString();
+                    project.ProjectYear = rdr["ProjectYear"].ToString();
+                    project.ProjectMonth = rdr["ProjectMonth"].ToString();
+                    project.ProjectName = rdr["ProjectName"].ToString();
                     project.CompanyID = rdr["CompanyID"].ToString();
                     project.CompanyName = rdr["CompanyName"].ToString();
                     project.ArchitecID = rdr["ArchitecID"].ToString();
                     project.Name = rdr["Name"].ToString();
-                    project.TransID = rdr["TransID"].ToString();
-                    project.TransNameEN = rdr["TransNameEN"].ToString();
-                    project.ProjectID = rdr["ProjectID"].ToString();
-                    project.ProjectName = rdr["ProjectName"].ToString();
                     project.Location = rdr["Location"].ToString();
-                    project.StepID = rdr["StepID"].ToString();
-                    project.StepNameEn = rdr["StepNameEn"].ToString();
-                    project.BiddingName1 = rdr["BiddingName1"].ToString();
-                    project.OwnerName1 = rdr["OwnerName1"].ToString();
-                    project.BiddingName2 = rdr["BiddingName2"].ToString();
-                    project.OwnerName2 = rdr["OwnerName2"].ToString();
-                    project.BiddingName3 = rdr["BiddingName3"].ToString();
-                    project.OwnerName3 = rdr["OwnerName3"].ToString();
-                    project.AwardMC = rdr["AwardMC"].ToString();
-                    project.ContactMC = rdr["ContactMC"].ToString();
-                    project.AwardRF = rdr["AwardRF"].ToString();
-                    project.ContactRF = rdr["ContactRF"].ToString();
+                    project.MainCons = rdr["MainCons"].ToString();
+                    project.RefRfDf = rdr["RefRfDf"].ToString();
+                    project.ProjStep = rdr["ProjStep"].ToString();
+                    project.ProductType = rdr["ProductType"].ToString();
+                    project.RefProfile = rdr["RefProfile"].ToString();
                     project.ProdTypeID = rdr["ProdTypeID"].ToString();
                     project.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
                     project.ProdID = rdr["ProdID"].ToString();
                     project.ProdNameEN = rdr["ProdNameEN"].ToString();
                     project.ProfID = rdr["ProfID"].ToString();
                     project.ProfNameEN = rdr["ProfNameEN"].ToString();
-                    project.Quantity = rdr["Quantity"].ToString();
-                    project.DeliveryDate = rdr["DeliveryDate"].ToString();
-                    project.NextVisitDate = rdr["NextVisitDate"].ToString();
                     project.StatusID = rdr["StatusID"].ToString();
                     project.StatusNameEn = rdr["StatusNameEn"].ToString();
-                    project.NewArchitect = rdr["NewArchitect"].ToString();
-                    project.HaveFiles = rdr["HaveFiles"].ToString();
+                    project.Quantity = rdr["Quantity"].ToString();
+                    project.RefType = rdr["RefType"].ToString();
+                    project.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    project.Drawing = rdr["Drawing"].ToString();
+                    project.TypeID = rdr["TypeID"].ToString();
+                    project.SaleSpec = rdr["SaleSpec"].ToString();
+                    project.StatusConID = rdr["StatusConID"].ToString();
+                    project.LastUpdate = rdr["LastUpdate"].ToString();
+                    projects.Add(project);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(projects));
+        }
+
+        //get attached
+        [WebMethod]
+        public void GetDocAttached(string ProjectID)
+        {
+            List<GetDataDocAttached> projects = new List<GetDataDocAttached>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetDocAttached", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter()
+                {
+                    ParameterName = "@ProjectID",
+                    Value = ProjectID
+                };
+                comm.Parameters.Add(param);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataDocAttached project = new GetDataDocAttached();
+                    project.id = rdr["id"].ToString();
+                    project.ProjectID = rdr["ProjectID"].ToString();
+                    project.ProjectName = rdr["ProjectName"].ToString();
+                    project.Description = rdr["Description"].ToString();
                     project.FileName = rdr["FileName"].ToString();
                     project.Remark = rdr["Remark"].ToString();
                     project.UserID = rdr["UserID"].ToString();
@@ -745,8 +761,9 @@ namespace SaleSpec.Class
                                           string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
                                           string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
                                           string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
-                                          string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
-                                          string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+                                          string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, 
+                                          string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+          
         {
             using (SqlConnection conn = new SqlConnection(cs))
             {
@@ -787,6 +804,46 @@ namespace SaleSpec.Class
                 comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
                 comm.Parameters.AddWithValue("@StatusID", StatusID);
                 comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+
+        [WebMethod]
+        public void GetInsertWeeklyReportUpdateOther
+            (string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID,
+                        string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID, string StepNameEn, string StatusID, string StatusNameEn,
+                        string NewArchitect, string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+           
+
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReportUpdateOther", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@TransID", TransID);
+                comm.Parameters.AddWithValue("@TransNameEN", TransNameEN);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
                 comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
                 comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
                 comm.Parameters.AddWithValue("@FileName", FileName);
@@ -801,18 +858,45 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
-        public void GetInsertWeeklyReportWithExtendedUpdate(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name,
-                                         string TransID, string TransNameEN, string ProjectID, string ProjectName, string Location, string StepID,
-                                         string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
-                                         string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF,
-                                         string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfID, string ProfNameEN,
-                                         string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string NewArchitect,
-                                         string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        public void GetInsertWeeklyReportIntakeUpdate(string CompanyID, string CompanyName, string ArchitecID, string Name, 
+                                                        string ProjectID, string ProjectName, string StepID, string StatusID, string StatusNameEn, 
+                                                        string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertWeeklyReportIntakeUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@CompanyID", CompanyID);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                comm.Parameters.AddWithValue("@ProjectName", ProjectName);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
+                comm.Parameters.AddWithValue("@UserID", UserID);
+                comm.Parameters.AddWithValue("@EmpCode", EmpCode);
+                comm.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                comm.Parameters.AddWithValue("@CreatedDate", CreatedDate);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void GetInsertWeeklyReportWithExtendedUpdate(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID, string TransNameEN,
+                                          string ProjectID, string ProjectName, string Location, string StepID, string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                          string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN,
+                                          string ProfID, string ProfNameEN, string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string Remark,
+                                          string UserID, string EmpCode, string CreatedBy, string CreatedDate)
         {
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 conn.Open();
                 SqlCommand comm = new SqlCommand("spInsertWeeklyReportWithExtendedUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.Parameters.AddWithValue("@WeekDate", WeekDate);
                 comm.Parameters.AddWithValue("@WeekTime", WeekTime);
@@ -848,9 +932,6 @@ namespace SaleSpec.Class
                 comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
                 comm.Parameters.AddWithValue("@StatusID", StatusID);
                 comm.Parameters.AddWithValue("@StatusNameEn", StatusNameEn);
-                comm.Parameters.AddWithValue("@NewArchitect", NewArchitect);
-                comm.Parameters.AddWithValue("@HaveFiles", HaveFiles);
-                comm.Parameters.AddWithValue("@FileName", FileName);
                 comm.Parameters.AddWithValue("@Remark", Remark);
                 comm.Parameters.AddWithValue("@UserID", UserID);
                 comm.Parameters.AddWithValue("@EmpCode", EmpCode);
@@ -923,14 +1004,14 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
-        public void GetUploadDocAttached(string id, string ProjectID, string ProjectName, string Description, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
+        public void GetUploadDocAttached(string ProjectID, string ProjectName, string Description, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
         {
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 conn.Open();
                 SqlCommand comm = new SqlCommand("spInsertDocAttached", conn);
                 comm.CommandType = CommandType.StoredProcedure;
-                comm.Parameters.AddWithValue("@id", id);
+                //comm.Parameters.AddWithValue("@id", id);
                 comm.Parameters.AddWithValue("@ProjectID", ProjectID);
                 comm.Parameters.AddWithValue("@ProjectName", ProjectName);
                 comm.Parameters.AddWithValue("@Description", Description);
