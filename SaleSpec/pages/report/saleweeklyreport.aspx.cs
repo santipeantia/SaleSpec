@@ -63,7 +63,52 @@ namespace SaleSpec.pages.report
 
                 if (dt.Rows.Count != 0) {
 
-                    strTblDetail += "";
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string WeekDate = dt.Rows[0]["WeekDate"].ToString();
+                        string WeekTime = dt.Rows[0]["WeekTime"].ToString();
+
+                        string CompanyID = dt.Rows[i]["CompanyID"].ToString();
+                        string CompanyName = dt.Rows[i]["CompanyName"].ToString();
+                        string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
+                        string Name = dt.Rows[i]["Name"].ToString();
+                        string ProjectID = dt.Rows[i]["ProjectID"].ToString();
+                        string ProjectName = dt.Rows[i]["ProjectName"].ToString();
+
+                        string Location = dt.Rows[i]["Location"].ToString();
+                        string StatusID = dt.Rows[i]["StatusID"].ToString();
+                        string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
+                        string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
+                        string Remark = dt.Rows[i]["Remark"].ToString();
+
+                        string UserID = dt.Rows[i]["UserID"].ToString();
+                        string EmpCode = dt.Rows[i]["EmpCode"].ToString();
+                        string CreatedBy = dt.Rows[i]["CreatedBy"].ToString();
+                        string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
+
+
+                        strTblDetail += "<tr> " +
+                                   "    <td>" + CompanyID + "</td> " +
+                                   "    <td>" + CompanyName + "</td> " +
+                                   "    <td>" + ArchitecID + "</td> " +
+                                   "    <td>" + Name + "</td> " +
+                                   "    <td>" + ProjectID + "</td> " +
+                                   "    <td>" + ProjectName + "</td> " +
+                                   "    <td>" + Location + "</td> " +
+                                   "    <td>" + StatusID + "</td> " +
+                                   "    <td>" + StatusNameEn + "</td> " +
+                                   "    <td>" + Remark + "</td> " +
+                                   "    <td style=\"width: 20px; text-align: center;\"> " +
+                                   "        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"แก้ไข\"><span class='glyphicon glyphicon-edit text-green'></span></a></td> " +
+                                   "    <td style=\"width: 20px; text-align: center;\"> " +
+                                   "        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
+                                   "</tr> ";
+
+
+                    }
+
+
+
 
                     //Response.Write("<script>alert('Data inserted successfully')</script>");
                 }

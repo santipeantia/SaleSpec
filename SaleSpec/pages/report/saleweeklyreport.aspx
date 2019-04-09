@@ -103,6 +103,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%= strTblDetail %>
                                         </tbody>
                                     </table>
                                 </div>
