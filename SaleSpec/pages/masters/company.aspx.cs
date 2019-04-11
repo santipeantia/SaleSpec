@@ -97,7 +97,7 @@ namespace SaleSpec.pages.masters
             {
                 //CompanyID, CompanyName, CompanyName2, Address, ProvinceID, ArchitecName, Phone, Mobile, Email
 
-                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ArchitecName, " +
+                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
                        "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
                        "FROM    adCompany a LEFT OUTER JOIN " +
                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
@@ -113,7 +113,7 @@ namespace SaleSpec.pages.masters
                         string strCompanyName2 = dt.Rows[i]["CompanyName2"].ToString();
                         string strAddress = dt.Rows[i]["Address"].ToString();
                         string strProvinceID = dt.Rows[i]["ProvinceID"].ToString();
-                        string strContactPerson = dt.Rows[i]["ArchitecName"].ToString();
+                        string strContactPerson = dt.Rows[i]["ContactName"].ToString();
                         string strPhone = dt.Rows[i]["Phone"].ToString();
                         string strMobile = dt.Rows[i]["Mobile"].ToString();
                         string strEmail = dt.Rows[i]["Email"].ToString();

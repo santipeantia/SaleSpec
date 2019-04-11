@@ -971,7 +971,7 @@
                     url: 'DataServices.asmx/GetDocAttached',
                     method: 'post',
                     data: {
-                        ProjectID: $('#selectIntakeProject').val(),
+                        ProjectID: $('#selectIntakeProject').val()
                     },
                     dataType: 'json',
                     success: function (data) {

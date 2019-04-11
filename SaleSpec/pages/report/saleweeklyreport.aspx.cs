@@ -15,7 +15,7 @@ namespace SaleSpec.pages.report
     public partial class saleweeklyreport : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
-
+        
         string ssql;
         DataTable dt = new DataTable();
 
@@ -28,6 +28,7 @@ namespace SaleSpec.pages.report
 
         public string strMsgAlert = "";
         public string strTblDetail = "";
+        public string strPortOption = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,28 +37,71 @@ namespace SaleSpec.pages.report
             {
                 Response.Redirect("../../pages/users/login");
             }
+
+            if (!IsPostBack) {
+                GetDataSalePort();
+            }
+        }
+
+        protected void GetDataSalePort()
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetDataSaleSpec", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0) {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++) {
+                        string strValue = dt.Rows[i]["SpecID"].ToString();
+                        string strText = dt.Rows[i]["FullName"].ToString();
+
+                        strPortOption += "<option value=\""+ strValue + "\">"+ strText + "</option>";
+
+                    }
+                }
+            }
+            catch (Exception ex) {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
         }
 
         protected void btnQuery_Click(object sender, EventArgs e)
         {
             try
             {
-                SqlConnection conn = new SqlConnection();
-                conn = dbConn.OpenConn();
+                string strPort = Request.Form["selectSalePort"];
+                string strStart = Request.Form["datepickertrans"];
+                string strEnd = Request.Form["datepickerend"];
 
-                SqlCommand comm = new SqlCommand("spWeeklyReporting", conn);
-                comm.CommandType = CommandType.StoredProcedure;
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
 
-                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = "VCA" };
-                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = "2019-04-01" };
-                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = "2019-05-30" };
+                Comm = new SqlCommand("spWeeklyReporting", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
 
-                comm.Parameters.Add(param1);
-                comm.Parameters.Add(param2);
-                comm.Parameters.Add(param3);
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
                 //conn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = comm;
+                adapter.SelectCommand = Comm;
                 dt = new DataTable();
                 adapter.Fill(dt);
 
@@ -65,8 +109,8 @@ namespace SaleSpec.pages.report
 
                     for (int i = 0; i <= dt.Rows.Count - 1; i++)
                     {
-                        string WeekDate = dt.Rows[0]["WeekDate"].ToString();
-                        string WeekTime = dt.Rows[0]["WeekTime"].ToString();
+                        string WeekDate = dt.Rows[i]["WeekDate"].ToString();
+                        string WeekTime = dt.Rows[i]["WeekTime"].ToString();
 
                         string CompanyID = dt.Rows[i]["CompanyID"].ToString();
                         string CompanyName = dt.Rows[i]["CompanyName"].ToString();
@@ -78,7 +122,7 @@ namespace SaleSpec.pages.report
                         string Location = dt.Rows[i]["Location"].ToString();
                         string StatusID = dt.Rows[i]["StatusID"].ToString();
                         string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
-                        string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
+                        //string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
                         string Remark = dt.Rows[i]["Remark"].ToString();
 
                         string UserID = dt.Rows[i]["UserID"].ToString();
@@ -88,6 +132,8 @@ namespace SaleSpec.pages.report
 
 
                         strTblDetail += "<tr> " +
+                                    "    <td>" + WeekDate + "</td> " +
+                                   "    <td>" + WeekTime + "</td> " +
                                    "    <td>" + CompanyID + "</td> " +
                                    "    <td>" + CompanyName + "</td> " +
                                    "    <td>" + ArchitecID + "</td> " +
@@ -95,28 +141,91 @@ namespace SaleSpec.pages.report
                                    "    <td>" + ProjectID + "</td> " +
                                    "    <td>" + ProjectName + "</td> " +
                                    "    <td>" + Location + "</td> " +
-                                   "    <td>" + StatusID + "</td> " +
+                                   "    <td class=\"hidden\">" + StatusID + "</td> " +
                                    "    <td>" + StatusNameEn + "</td> " +
                                    "    <td>" + Remark + "</td> " +
-                                   "    <td style=\"width: 20px; text-align: center;\"> " +
-                                   "        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"แก้ไข\"><span class='glyphicon glyphicon-edit text-green'></span></a></td> " +
-                                   "    <td style=\"width: 20px; text-align: center;\"> " +
-                                   "        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
+                                   "    <td>" + CreatedBy + "</td> " +
+                                   "    <td>" + CreatedDate + "</td> " +
+                                   //"    <td style=\"width: 20px; text-align: center;\"> " +
+                                   //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"แก้ไข\"><span class='glyphicon glyphicon-edit text-green'></span></a></td> " +
+                                   //"    <td style=\"width: 20px; text-align: center;\"> " +
+                                   //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
                                    "</tr> ";
-
-
                     }
-
-
-
 
                     //Response.Write("<script>alert('Data inserted successfully')</script>");
                 }
-
+                GetDataSalePort();
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('"+ ex.Message +"')</script>");
+                //Response.Write("<script>alert('"+ ex.Message +"')</script>");
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void btnExportExcel_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strPort = Request.Form["selectSalePort"];
+                string strStart = Request.Form["datepickertrans"];
+                string strEnd = Request.Form["datepickerend"];
+
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spWeeklyReporting", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
+                //conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = Comm;
+                dt = new DataTable();
+                adapter.Fill(dt);
+
+                GridView GridviewExport = new GridView();
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    GridviewExport.DataSource = dt;
+                    GridviewExport.DataBind();
+
+                    Response.Clear();
+                    Response.AddHeader("content-disposition", "attachment;filename=ExportWeeklyReport_"+ strPort + ".xls");
+                    Response.ContentType = "application/ms-excel";
+                    Response.ContentEncoding = System.Text.Encoding.Unicode;
+                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                    System.IO.StringWriter sw = new System.IO.StringWriter();
+                    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                    GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
+                    Response.Write(sw.ToString());
+                    Response.End();
+
+                }
+                Response.Write("<script>alert('Data find not found please check...')</script>");
+                GetDataSalePort();
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
             }
         }
     }

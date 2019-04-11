@@ -18,7 +18,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Projects</span>
-                        <span class="info-box-number">2,090<small> Tasks</small></span>
+                        <span class="info-box-number"><%= strCountProjects %><small> Tasks</small></span>
                         <span class="info-box-more"><small>Active 50 <i class="fa fa-circle text-green small"></i></small></span>
                     </div>
                     <!-- /.info-box-content -->

@@ -27,6 +27,8 @@ namespace SaleSpec
         public string strTblDetail = "";
         public string strTblActive = "";
 
+        public string strCountProjects = "";
+
         dbConnection dbConn = new dbConnection();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -73,9 +75,40 @@ namespace SaleSpec
             txtMacAddress.Text = sMacAddress;
         }
 
+        protected void GetCountProjects()
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("GetDashboardCountProjects", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    strCountProjects = dt.Rows[0]["CountProject"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
         protected void GetInitialData()
         {
-            GetTransArchitectDataBind();
+            //GetTransArchitectDataBind();
+            GetCountProjects();
         }
 
         protected void GetTransArchitectDataBind()
