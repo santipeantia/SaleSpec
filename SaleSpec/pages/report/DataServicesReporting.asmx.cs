@@ -55,6 +55,8 @@ namespace SaleSpec.pages.report
                     week.Location = rdr["Location"].ToString();
                     week.StatusID = rdr["StatusID"].ToString();
                     week.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    week.StepID = rdr["StepID"].ToString();
+                    week.StepNameEn = rdr["StepNameEn"].ToString();
                     week.Remark = rdr["Remark"].ToString();
                     week.UserID = rdr["UserID"].ToString();
                     week.EmpCode = rdr["EmpCode"].ToString();

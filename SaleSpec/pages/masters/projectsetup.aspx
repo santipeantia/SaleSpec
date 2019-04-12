@@ -35,33 +35,20 @@
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
-                                    <td>ProjectID</td>
-                                        <td class="hidden">ProjectYear</td>
-                                        <td class="hidden">ProjectMonth</td>
-                                        <td>ProjectName</td>
-                                        <td class="hidden">ArchitecID</td>
-                                        <td class="hidden">CompanyID</td>
-                                        <td>CompanyName</td>
-                                        <td>strLocation</td>
-                                        <td class="hidden">ProvinceID</td>
-                                        <td class="hidden">ProvinceName</td>
-                                        <td class="hidden">strMainCons</td>
-                                        <td class="hidden">RefRfDf</td>
-                                        <td>RefProfile</td>
-                                        <td>Quantity</td>
-                                        <td class="hidden">RefType</td>
-                                        <td>DeliveryDate</td>
-                                        <td>ProcID</td>
-                                        <td>StepID</td>
-                                        <td class="hidden">EmpCode</td>
-                                        <td class="hidden">sEmFirstName</td>
-                                        <td class="hidden">sEmLastName</td>
-                                        <td class="hidden">CreatedDate</td>
-                                        <td class="hidden">CreatedBy</td>
-                                        <td class="hidden">LastedUpdate</td>
-                                        <td class="hidden">UpdatedBy</td>
-                                        <td class="hidden">StatusConID</td>
-                                        <td>ConDesc2</td>
+                                    <th>ProjectID</th>
+                                    <th class="hidden">ProjectYear</th>
+                                    <th class="hidden">ProjectMonth</th>
+                                    <th>ProjectName</th>
+                                    <th class="hidden">ArchitecID</th>
+                                    <th class="hidden">CompanyID</th>
+                                    <th>CompanyName</th>
+                                    <th>Location</th>
+                                    <th class="hidden">MainCons</th>
+                                    <th class="hidden">RefRfDf</th>
+                                    <th>RefProfile</th>
+                                    <th>Quantity</th>
+                                    <th>DeliveryDate</th>
+                                    <th>ConDesc2</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                 </tr>

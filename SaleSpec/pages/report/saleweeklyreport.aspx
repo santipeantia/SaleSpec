@@ -3,6 +3,17 @@
     <script src="jquery-1.11.2.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var currentdate = yyyy + '-' + mm + '-' + dd;
+
+            var datepickertrans = $('#datepickertrans');
+            datepickertrans.val(currentdate);
+
             var btnJsonReport = $('#btnJsonReport');
             btnJsonReport.click(function () {
                 var selectSaleport = $('#selectSalePort').val();
@@ -37,6 +48,8 @@
                                 '<td>' + item.Location + '</td>' +
                                 '<td class="hidden">' + item.StatusID + '</td>' +
                                 '<td>' + item.StatusNameEn + '</td>' +
+                                '<td class="hidden">' + item.StepID + '</td>' +
+                                '<td>' + item.StepNameEn + '</td>' +
                                 '<td>' + item.Remark + '</td>' +
                                 '<td>' + item.CreatedBy + '</td>' +
                                 '<td>' + item.CreatedDate + '</td>' +
@@ -160,8 +173,10 @@
                                                 <th>ProjID</th>
                                                 <th>ProjName</th>
                                                 <th>Location</th>
-                                                <th  class="hidden">StatusID</th>
+                                                <th class="hidden">StatusID</th>
                                                 <th>Status</th>
+                                                <th class="hidden">StepID</th>
+                                                <th>StepNameEn</th>
                                                 <th>Details</th>
                                                 <th>Updated</th>
                                                 <th>Lasted</th>

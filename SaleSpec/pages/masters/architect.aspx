@@ -429,7 +429,7 @@
                         cIndex = this.cellIndex;
                         console.log(rIndex + "  :  " + cIndex);
 
-                        if (this.cellIndex == 9) {
+                        if (this.cellIndex == 10) {
                             var strID = table.rows[rIndex].cells[0].innerHTML;
                             var strFirstName = table.rows[rIndex].cells[1].innerHTML;
                             var strLastName = table.rows[rIndex].cells[2].innerHTML;
@@ -457,7 +457,7 @@
 
                         }
 
-                        if (this.cellIndex == 10) {
+                        if (this.cellIndex == 11) {
                             var strID = table.rows[rIndex].cells[0].innerHTML;
                             var strFirstName = table.rows[rIndex].cells[1].innerHTML;
                             var strLastName = table.rows[rIndex].cells[2].innerHTML;

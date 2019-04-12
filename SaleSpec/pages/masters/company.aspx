@@ -144,7 +144,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Edit Grade Details</h4>
+                        <h4 class="modal-title">Edit Company Details</h4>
                     </div>
 
                     <div class="modal-body">
@@ -188,7 +188,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Delete Grade</h4>
+                        <h4 class="modal-title">Delete Company</h4>
                     </div>
 
                     <div class="modal-body">
@@ -330,7 +330,7 @@
                         cIndex = this.cellIndex;
                         console.log(rIndex + "  :  " + cIndex);
 
-                        if (this.cellIndex == 3) {
+                        if (this.cellIndex == 10) {
                             var strID = table.rows[rIndex].cells[0].innerHTML;
                             var strDesc = table.rows[rIndex].cells[1].innerHTML;
                             var strDetail = table.rows[rIndex].cells[2].innerHTML;
@@ -346,7 +346,7 @@
 
                         }
 
-                        if (this.cellIndex == 4) {
+                        if (this.cellIndex == 11) {
                             var strGradeIDDelete = table.rows[rIndex].cells[0].innerHTML;
                             var stGradeDescDelete = table.rows[rIndex].cells[1].innerHTML;
                             var strGradeDetailDelete = table.rows[rIndex].cells[2].innerHTML;
