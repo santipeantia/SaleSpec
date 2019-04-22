@@ -238,6 +238,32 @@ namespace SaleSpec.Class
             Context.Response.Write(js.Serialize(statuses));
         }
 
+        //GetDataStatusConfirm
+        [WebMethod]
+        public void GetStatusConfirm()
+        {
+            List<GetDataStatusConfirm> confirmed = new List<GetDataStatusConfirm>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetStatusConfirm", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataStatusConfirm confirm = new GetDataStatusConfirm();
+                    confirm.StatusConID = rdr["StatusConID"].ToString();
+                    confirm.ConDesc = rdr["ConDesc"].ToString();
+                    confirm.ConDesc2 = rdr["ConDesc2"].ToString();
+                    confirmed.Add(confirm);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(confirmed));
+        }
+
         [WebMethod]
         public void GetTransEntry()
         {
@@ -1026,8 +1052,8 @@ namespace SaleSpec.Class
             }
         }
 
+      
 
-       
 
     }
 }

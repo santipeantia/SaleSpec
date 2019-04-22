@@ -109,6 +109,7 @@ namespace SaleSpec.pages.masters
                         string strSpecLastname = dt.Rows[i]["SpecLastname"].ToString();
                         string strEmpCode = dt.Rows[i]["EmpCode"].ToString();
                         string strSpecDesc = dt.Rows[i]["SpecDesc"].ToString();
+                        string strisActive = dt.Rows[i]["isActive"].ToString();
 
                         strTblDetail += "<tr> " +
                                         "     <td>" + strSpecID + "</td> " +

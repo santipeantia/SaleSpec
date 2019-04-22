@@ -32,6 +32,11 @@ namespace SaleSpec.pages.masters
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../../pages/users/login");
+            }
+
             if (!IsPostBack)
             {
                 GetInitialData();

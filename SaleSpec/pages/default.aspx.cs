@@ -28,6 +28,10 @@ namespace SaleSpec
         public string strTblActive = "";
 
         public string strCountProjects = "";
+        public string strCountProjectsYear = "";
+        public string strCountCompany = "";
+        public string strCountSaleSpec = "";
+        public string strCountArchitect = "";
 
         dbConnection dbConn = new dbConnection();
 
@@ -105,10 +109,134 @@ namespace SaleSpec
             }
         }
 
+        protected void GetCountProjectsYear(int iyear)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("GetDashboardCountProjectsYear", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+                Comm.Parameters.AddWithValue("@CurrentYear", iyear);
+                
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    strCountProjectsYear = dt.Rows[0]["CountProject"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void GetCountCopany()
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("GetDashboardCountCompany", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    strCountCompany = dt.Rows[0]["CountCompany"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void GetCountSaleSpec()
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("GetDashboardCountSaleSpec", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    strCountSaleSpec = dt.Rows[0]["CountSaleSpec"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void GetCountArchitect()
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("GetDashboardCountArchitect", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    strCountArchitect = dt.Rows[0]["CountArchitect"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
         protected void GetInitialData()
         {
             //GetTransArchitectDataBind();
             GetCountProjects();
+            GetCountProjectsYear(int.Parse(DateTime.Now.ToString("yyyy")));
+            GetCountCopany();
+            GetCountSaleSpec();
+            GetCountArchitect();
         }
 
         protected void GetTransArchitectDataBind()

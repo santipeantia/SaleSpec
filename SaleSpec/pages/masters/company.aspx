@@ -1,5 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="company.aspx.cs" Inherits="SaleSpec.pages.masters.company" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="../trans/jquery-1.11.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var selectStatusConIDDDL = $('#selectStatusConID');
+
+
+            //Get data project type
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetStatusConfirm',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectStatusConIDDDL.append($('<option/>', { value: -1, text: 'Select Status' }));
+                    $(data).each(function (index, item) {
+                        selectStatusConIDDDL.append($('<option/>', { value: item.StatusConID, text: item.ConDesc2 }));
+                    });
+                }
+            });
+
+        });
+    </script>
+
          <!-- Header content -->
     <section class="content-header">
         <h1>Company Setup
@@ -71,57 +93,77 @@
 
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">CompanyID</div>
+                            <div class="row hidden" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">CompanyID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtCompanyID" name="txtCompanyID" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyID" name="txtCompanyID" placeholder="" value="" required>
                                 </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">CompanyName</div>
+                                <div class="col-md-4 txtLabel">CompanyName</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtCompanyName" name="txtCompanyName" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName" name="txtCompanyName" placeholder="" value="" required>
                                 </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">CompanyName2</div>
+                                <div class="col-md-4 txtLabel">CompanyName2</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtCompanyName2" name="txtCompanyName2" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName2" name="txtCompanyName2" placeholder="" value="" required>
                                 </div>
                             </div>
-
+                           
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">Address	</div>
+                                <div class="col-md-4 txtLabel">Address	</div>
                                 <div class="col-md-8">
-                                    <textarea cols="40" rows="3" id="txtAddress" name="txtAddress" class="form-control input input-sm"></textarea>
+                                    <textarea cols="40" rows="3" id="txtAddress" name="txtAddress" class="form-control input input-sm txtLabel"></textarea>
                                     <%--<input type="text" class="form-control input input-sm" id="txtGradeDetailEdit" name="txtGradeDetailEdit" placeholder="" value="" required>--%>
                                 </div>
                             </div>
-
+                            
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">ContactPerson</div>
+                                <div class="col-md-4 txtLabel">ProvinceID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtContactPerson" name="txtContactPerson" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProvinceID" name="txtProvinceID" placeholder="" value="" required>
                                 </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">Phone</div>
+                                <div class="col-md-4 txtLabel">ContactName</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtPhone" name="txtPhone" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtContactName" name="txtContactName" placeholder="" value="" required>
+                                </div>
+                            </div>
+                           
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Phone</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhone" name="txtPhone" placeholder="" value="" required>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4">Status</div>
+                             <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Mobile</div>
                                 <div class="col-md-8">
-                                    <div class="input-group">
-                                        <input type="text" id="txtStatusNew" name="txtStatusNew" class="form-control input input-sm txtLabel" value="" required readonly>
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-warning btn-flat btn-sm" data-toggle="modal" data-target="#myModalActiveNew"><i class="fa fa-search"></i></button>
-                                        </span>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobile" name="txtMobile" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Email</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmail" name="txtEmail" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                             <div class="row" style="margin-top: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">StatusConID</label></div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectStatusConID" name="selectStatusConID" class="form-control input-sm"  style="width: 100%">
+                                        </select>
                                     </div>
                                 </div>
                             </div>

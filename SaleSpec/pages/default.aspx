@@ -19,7 +19,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Projects</span>
                         <span class="info-box-number"><%= strCountProjects %><small> Tasks</small></span>
-                        <span class="info-box-more"><small>Active 50 <i class="fa fa-circle text-green small"></i></small></span>
+                        <span class="info-box-more"><small>in Year <%= strCountProjectsYear %> <i class="fa fa-circle text-green small"></i></small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -31,8 +31,8 @@
                     <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Customers</span>
-                        <span class="info-box-number">1,410</span>
+                        <span class="info-box-text">Company</span>
+                        <span class="info-box-number"><%= strCountCompany %> <small> Active </small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -49,7 +49,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Sales Spec</span>
-                        <span class="info-box-number">20</span>
+                        <span class="info-box-number"><%= strCountSaleSpec %> <small> People </small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -62,8 +62,8 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Architect</span>
-                        <span class="info-box-number">976 people</span>
-                        <span class="info-box-more"><small>976 people <i class="fa fa-circle text-red"></i></small></span>
+                        <span class="info-box-number"><%= strCountArchitect %> <small> People </small></span>
+                        <span class="info-box-more"><small><%= strCountArchitect %> people <i class="fa fa-circle text-red"></i></small></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -97,7 +97,7 @@
 
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <!-- LINE CHART -->
                             <div class="box box-warning">
                                 <div class="box-header with-border">
@@ -119,64 +119,9 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Chart No.2</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="box-body">
-                                    <%--<canvas id="pieChart" style="height: 250px"></canvas>--%>
-                                    
-                                    <img src="../dist/img/chart_gant.png" />
-                                </div>
-                            </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <!-- LINE CHART -->
-                            <div class="box box-success">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Chart No.3</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="box-body">
-                                    <div class="chart">
-                                        <%--<canvas id="lineChart2" style="height: 250px"></canvas>--%>
-                                        <img src="../dist/img/chart_doublegant.png" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box box-danger">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Chart No.4</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="box-body">
-                                    <%--<canvas id="pieChart2" style="height: 250px"></canvas>--%>
-                                    <img src="../dist/img/chart_line.png" />
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

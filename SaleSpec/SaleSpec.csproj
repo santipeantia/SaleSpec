@@ -6839,6 +6839,7 @@
     <Compile Include="Class\GetDataProjectLastUdate.cs" />
     <Compile Include="Class\GetDataProjectWithPort.cs" />
     <Compile Include="Class\GetDataStatus.cs" />
+    <Compile Include="Class\GetDataStatusConfirm.cs" />
     <Compile Include="Class\GetDataStepUpdate.cs" />
     <Compile Include="Class\GetDataTransEntry.cs" />
     <Compile Include="Class\GetDataWeeklyReporting.cs" />
