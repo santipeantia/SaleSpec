@@ -30,6 +30,11 @@ namespace SaleSpec.pages.masters
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../../pages/users/login");
+            }
+
             if (!IsPostBack)
             {
                 GetInitialData();
@@ -100,7 +105,8 @@ namespace SaleSpec.pages.masters
                 ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
                        "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
                        "FROM    adCompany a LEFT OUTER JOIN " +
-                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
+                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID " + 
+                       "WHERE a.CompanyID not in ('0') ";
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
@@ -143,6 +149,7 @@ namespace SaleSpec.pages.masters
                                         "     <td>" + strPhone + "</td> " +
                                         "     <td class=\"hidden\">" + strMobile + "</td> " +
                                         "     <td class=\"hidden\">" + strEmail + "</td> " +
+                                        "     <td class=\"hidden\">" + strStatusConID + "</td> " +
                                         "     <td>" + strStatus + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
@@ -171,24 +178,38 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeID = Request.Form["txtGradeID"];
-                string strGradeDesc = Request.Form["txtGradeDesc"];
-                string strGradeDetail = Request.Form["txtGradeDetail"];
+                string strCompanyID = Request.Form["txtCompanyID"];
+                string strCompanyName = Request.Form["txtCompanyName"];
+                string strCompanyName2 = Request.Form["txtCompanyName2"];
+                string strAddress = Request.Form["txtAddress"];
+                string strProvinceID = Request.Form["txtProvinceID"];
+                string strContactName = Request.Form["txtContactName"];
+                string strPhone = Request.Form["txtPhone"];
+                string strMobile = Request.Form["txtMobile"];
+                string strEmail = Request.Form["txtEmail"];
+                string strStatusConID = Request.Form["selectStatusConID"];
 
-                if (strGradeID != "" && strGradeDesc != "")
+                if (strCompanyName != "" && strCompanyName2 != "")
                 {
-                    ssql = "insert into adGrade (GradeID, GradeDesc, GradeDetail) " +
-                           "values    (@GradeID, @GradeDesc, @GradeDetail)  ";
+                    ssql = "insert into adCompany (CompanyName, CompanyName2, Address, ProvinceID, ContactName, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate) " +
+                           "values    (@CompanyName, @CompanyName2, @Address, @ProvinceID, @ContactName, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
-                    Comm.Parameters.Add("@GradeDesc", SqlDbType.NVarChar).Value = strGradeDesc;
-                    Comm.Parameters.Add("@GradeDetail", SqlDbType.NVarChar).Value = strGradeDetail;
-
+                    Comm.Parameters.Add("@CompanyName", SqlDbType.NVarChar).Value = strCompanyName;
+                    Comm.Parameters.Add("@CompanyName2", SqlDbType.NVarChar).Value = strCompanyName2;
+                    Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
+                    Comm.Parameters.Add("@ProvinceID", SqlDbType.NVarChar).Value = strProvinceID;
+                    Comm.Parameters.Add("@ContactName", SqlDbType.NVarChar).Value = strContactName;
+                    Comm.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = strPhone;
+                    Comm.Parameters.Add("@Mobile", SqlDbType.NVarChar).Value = strMobile;
+                    Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
+                    Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
+                    Comm.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.ExecuteNonQuery();
 
                 }
@@ -224,24 +245,39 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeIDEdit = Request.Form["txtGradeIDEdit"];
-                string strGradeDescEdit = Request.Form["txtGradeDescEdit"];
-                string strGradeDetailEdit = Request.Form["txtGradeDetailEdit"];
+                string strCompanyID = Request.Form["txtCompanyIDEdit"];
+                string strCompanyName = Request.Form["txtCompanyNameEdit"];
+                string strCompanyName2 = Request.Form["txtCompanyName2Edit"];
+                string strAddress = Request.Form["txtAddressEdit"];
+                string strProvinceID = Request.Form["txtProvinceIDEdit"];
+                string strContactName = Request.Form["txtContactNameEdit"];
+                string strPhone = Request.Form["txtPhoneEdit"];
+                string strMobile = Request.Form["txtMobileEdit"];
+                string strEmail = Request.Form["txtEmailEdit"];
+                string strStatusConID = Request.Form["selectStatusConIDEdit"];
 
-                if (strGradeIDEdit != "" && strGradeDescEdit != "")
+                if (strCompanyID != "" && strCompanyName != "")
                 {
-                    ssql = "update adGrade set  GradeID=@GradeID, GradeDesc=@GradeDesc, GradeDetail=@GradeDetail " +
-                           "where    GradeID=@GradeID  ";
+                    ssql = "update  adCompany set CompanyName=@CompanyName, CompanyName2=@CompanyName2, Address=@Address, ProvinceID=@ProvinceID, " +
+                           "        ContactName=@ContactName, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate " +
+                           "where   CompanyID=@CompanyID  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeIDEdit;
-                    Comm.Parameters.Add("@GradeDesc", SqlDbType.NVarChar).Value = strGradeDescEdit;
-                    Comm.Parameters.Add("@GradeDetail", SqlDbType.NVarChar).Value = strGradeDetailEdit;
-
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompanyID;
+                    Comm.Parameters.Add("@CompanyName", SqlDbType.NVarChar).Value = strCompanyName;
+                    Comm.Parameters.Add("@CompanyName2", SqlDbType.NVarChar).Value = strCompanyName2;
+                    Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
+                    Comm.Parameters.Add("@ProvinceID", SqlDbType.NVarChar).Value = strProvinceID;
+                    Comm.Parameters.Add("@ContactName", SqlDbType.NVarChar).Value = strContactName;
+                    Comm.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = strPhone;
+                    Comm.Parameters.Add("@Mobile", SqlDbType.NVarChar).Value = strMobile;
+                    Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
+                    Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
+                    Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.ExecuteNonQuery();
 
                 }
@@ -277,21 +313,18 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeIDDelete = Request.Form["txtGradeIDDelete"];
-                //string strGradeDescEdit = Request.Form["txtGradeDescDelete"];
-                //string strGradeDetailEdit = Request.Form["txtGradeDetailDelete"];
+                string strCompanyID = Request.Form["txtCompanyIDDel"];
 
-                if (strGradeIDDelete != "")
+                if (strCompanyID != "")
                 {
-                    ssql = "delete from adGrade " +
-                           "where    GradeID=@GradeID  ";
+                    ssql = "delete from  adCompany where   CompanyID=@CompanyID  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeIDDelete;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompanyID;
                     Comm.ExecuteNonQuery();
 
                 }
@@ -323,8 +356,12 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT CustomerID, CustomerName, CustomerName2, Address, ProvinceID, ContactPerson, Phone, Mobile, Email " +
-                      "FROM    adCustomers ";
+                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
+                        "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
+                        "FROM    adCompany a LEFT OUTER JOIN " +
+                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID " +
+                        "WHERE a.CompanyID not in ('0') ";
+
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
@@ -337,7 +374,7 @@ namespace SaleSpec.pages.masters
                     GridviewExport.DataBind();
 
                     Response.Clear();
-                    Response.AddHeader("content-disposition", "attachment;filename=CustomerExport.xls");
+                    Response.AddHeader("content-disposition", "attachment;filename=CompanyExport.xls");
                     Response.ContentType = "application/ms-excel";
                     Response.ContentEncoding = System.Text.Encoding.Unicode;
                     Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
