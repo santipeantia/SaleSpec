@@ -31,6 +31,11 @@ namespace SaleSpec.pages.masters
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../../pages/users/login");
+            }
+
             if (!IsPostBack)
             {
                 GetInitialData();
@@ -48,7 +53,7 @@ namespace SaleSpec.pages.masters
             {
                 //ssql = "SELECT ArchitecID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email, Status='Confirmed' FROM adArchitecture ";
 
-                ssql = "SELECT a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
+                ssql = "SELECT a.CompanyID, a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
                        "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
                        "FROM adArchitecture AS a LEFT OUTER JOIN " + 
                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
@@ -59,6 +64,7 @@ namespace SaleSpec.pages.masters
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
+                        string strCompanyID = dt.Rows[i]["CompanyID"].ToString();
                         string strArchitecID = dt.Rows[i]["ArchitecID"].ToString();
                         string strFirstName = dt.Rows[i]["FirstName"].ToString();
                         string strLastName = dt.Rows[i]["LastName"].ToString();
@@ -84,6 +90,7 @@ namespace SaleSpec.pages.masters
                             strStatus = "<span class=\"text-red\">" + strStatus + "</span>";
                         }
                         strTblDetail += "<tr> " +
+                                        "     <td class=\"hidden\">" + strCompanyID + "</td> " +
                                         "     <td>" + strArchitecID + "</td> " +
                                         //"     <td>" + strArchitecName + "</td> " +
                                         "     <td>" + strFirstName + "</td> " +
@@ -94,6 +101,7 @@ namespace SaleSpec.pages.masters
                                         "     <td>" + strPhone + "</td> " +
                                         "     <td>" + strMobile + "</td> " +
                                         "     <td>" + strEmail + "</td> " +
+                                        "     <td class=\"hidden\">" + strStatusConID + "</td> " +
                                         "     <td>" + strStatus + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
@@ -118,28 +126,66 @@ namespace SaleSpec.pages.masters
         {
             try
             {
+                string strArcID = "";
+                ssql = "spGetCountArchitect";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(Comm);
+
+                DataTable dtCount = new DataTable();
+                da.Fill(dtCount);
+                if (dtCount.Rows.Count != 0)
+                {
+                    strArcID = dtCount.Rows[0]["ArchitecID"].ToString();
+                }
+                Conn.Close();
+
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeID = Request.Form["txtGradeID"];
-                string strGradeDesc = Request.Form["txtGradeDesc"];
-                string strGradeDetail = Request.Form["txtGradeDetail"];
+                string strArchitectID = strArcID; //Request.Form["txtArchitectID"];
+                string strFirstName = Request.Form["txtFirstName"];
+                string strLastName = Request.Form["txtLastName"];
+                string strCompany = Request.Form["selectCompany"];  
+                string strNickName = Request.Form["txtNickName"];
+                string strPosition = Request.Form["txtPosition"];
+                string strAddress = Request.Form["txtAddress"];
+                string strPhone = Request.Form["txtPhone"];
+                string strMobile = Request.Form["txtMobile"];
+                string strEmail = Request.Form["txtEmail"];
+                string strStatusConID = Request.Form["selectStatusConID"];
 
-                if (strGradeID != "" && strGradeDesc != "")
+                if (strFirstName != "" && strLastName != "")
                 {
-                    ssql = "insert into adGrade (GradeID, GradeDesc, GradeDetail) " +
-                           "values    (@GradeID, @GradeDesc, @GradeDetail)  ";
+                    ssql = "insert into adArchitecture (ArchitecID, CompanyID, Name, FirstName, LastName, NickName, Position, " +
+                           "       Address, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate) " +
+                           "values  (@ArchitecID, @CompanyID, @Name, @FirstName, @LastName, @NickName, @Position, " +
+                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
-                    Comm.Parameters.Add("@GradeDesc", SqlDbType.NVarChar).Value = strGradeDesc;
-                    Comm.Parameters.Add("@GradeDetail", SqlDbType.NVarChar).Value = strGradeDetail;
-
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitectID;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompany;
+                    Comm.Parameters.Add("@Name", SqlDbType.NVarChar).Value = strFirstName;
+                    Comm.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = strFirstName;
+                    Comm.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = strLastName;
+                    Comm.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = strNickName;
+                    Comm.Parameters.Add("@Position", SqlDbType.NVarChar).Value = strPosition;
+                    Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
+                    Comm.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = strPhone;
+                    Comm.Parameters.Add("@Mobile", SqlDbType.NVarChar).Value = strMobile;
+                    Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
+                    Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
+                    Comm.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.ExecuteNonQuery();
 
                 }
@@ -175,29 +221,32 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strArchitecID = Request.Form["txtArchitectIDEdit"];
+                string strArchitectID = Request.Form["txtArchitectIDEdit"];
                 string strFirstName = Request.Form["txtFirstNameEdit"];
                 string strLastName = Request.Form["txtLastNameEdit"];
+                string strCompany = Request.Form["selectCompanyEdit"];
                 string strNickName = Request.Form["txtNickNameEdit"];
                 string strPosition = Request.Form["txtPositionEdit"];
                 string strAddress = Request.Form["txtAddressEdit"];
                 string strPhone = Request.Form["txtPhoneEdit"];
                 string strMobile = Request.Form["txtMobileEdit"];
                 string strEmail = Request.Form["txtEmailEdit"];
+                string strStatusConID = Request.Form["selectStatusConIDEdit"];
 
-                if (strArchitecID != "")
+                if (strFirstName != "" && strLastName != "")
                 {
-                    ssql = "update adArchitecture set  ArchitecID=@ArchitecID, FirstName=@FirstName, LastName=@LastName, NickName=@NickName, " +
-                           "       Position=@Position, Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email " +
-                           "where    ArchitecID=@ArchitecID  ";
+                    ssql = "update  adArchitecture set CompanyID=@CompanyID, Name=@Name, FirstName=@FirstName, LastName=@LastName, NickName=@NickName, Position=@Position, " +
+                           "       Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate " +
+                           "where  ArchitecID=@ArchitecID ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitecID;
-                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = "";
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitectID;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompany;
+                    Comm.Parameters.Add("@Name", SqlDbType.NVarChar).Value = strFirstName;
                     Comm.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = strFirstName;
                     Comm.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = strLastName;
                     Comm.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = strNickName;
@@ -206,6 +255,8 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = strPhone;
                     Comm.Parameters.Add("@Mobile", SqlDbType.NVarChar).Value = strMobile;
                     Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
+                    Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
+                    Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.ExecuteNonQuery();
 
                 }
@@ -243,17 +294,16 @@ namespace SaleSpec.pages.masters
 
                 string strArchitecID = Request.Form["txtArchitectIDDel"];
 
-                if (strArchitecID != "")
+                if (strArchitecID != "" )
                 {
-                    ssql = "delete from adArchitecture " +
-                           "where    ArchitecID=@ArchitecID  ";
+                    ssql = "delete from  adArchitecture where  ArchitecID=@ArchitecID ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitecID;
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitecID; 
                     Comm.ExecuteNonQuery();
 
                 }
@@ -285,7 +335,11 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT ID, ArchitecID, CompanyID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
+                ssql = "SELECT a.CompanyID, a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
+                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
+                       "FROM adArchitecture AS a LEFT OUTER JOIN " +
+                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
+
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
