@@ -1,5 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="projectsetup.aspx.cs" Inherits="SaleSpec.pages.masters.projectsetup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="../trans/jquery-1.11.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var selectCompanyIDDDL = $('#selectCompanyID');
+
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetDataCompany',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectCompanyIDDDL.append($('<option/>', { value: -1, text: 'Select Company' }));
+                    $(data).each(function (index, item) {
+                        selectCompanyIDDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
+                    });
+                }
+            });
+
+
+        });
+    </script>
+
     <!-- Header content -->
     <section class="content-header">
         <h1>Projects Setup
@@ -38,17 +59,29 @@
                                     <th>ProjectID</th>
                                     <th class="hidden">ProjectYear</th>
                                     <th class="hidden">ProjectMonth</th>
-                                    <th>ProjectName</th>
+                                    <th>Project</th>
                                     <th class="hidden">ArchitecID</th>
                                     <th class="hidden">CompanyID</th>
-                                    <th>CompanyName</th>
+                                    <th>Company</th>
                                     <th>Location</th>
                                     <th class="hidden">MainCons</th>
                                     <th class="hidden">RefRfDf</th>
+                                    
+                                    <td class="hidden">ProjStep</td>
+                                    <td>Step</td>
+
+                                    <th class="hidden">ProdTypeID</th>
+                                    <th>TypeName</th>
+                                    <th class="hidden">ProdID</th>
+                                    <th>ProdName</th>
                                     <th>RefProfile</th>
                                     <th>Quantity</th>
-                                    <th>DeliveryDate</th>
-                                    <th>ConDesc2</th>
+                                    <th>Delivery</th>
+                                    <th class="hidden">StatusID</th>
+                                    <th>Step</th>
+                                    <th>Port</th>
+                                    <th class="hidden">StatusConID</th>
+                                    <th>Status</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                 </tr>
@@ -68,60 +101,205 @@
 
         <!-- /.modal myModalNew -->
         <div class="modal modal-default fade" id="myModalNew">
-            <div class="modal-dialog">
+            <div class="modal-dialog"  style="width: 800px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">New Company</h4>
+                        <h4 class="modal-title">New Project</h4>
                     </div>
 
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">CompanyID</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtCompanyID" name="txtCompanyID" placeholder="" value=""  required></div>
+                            <%--Left side--%>
+                            <div class="col-md-12">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-2 txtLabel">ProjectName </div>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProjectName" name="ProjectName" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">Company</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="txtLabel">
+                                            <select id="selectCompanyID" name="selectCompanyID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">ArchitecID</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="txtLabel">
+                                            <select id="selectArchitecID" name="selectArchitecID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">CompanyName</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtCompanyName" name="txtCompanyName" placeholder="" value="" required></div>
+                            <div class="col-md-6">
+                                <div class="row hidden" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">ProjectID</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProjectID" name="ProjectID" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row hidden" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">ProjectYear</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProjectYear" name="ProjectYear" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row hidden" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">ProjectMonth</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProjectMonth" name="ProjectMonth" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px; margin-top: 5px">
+                                    <div class="col-md-4 txtLabel">Location</div>
+                                    <div class="col-md-8">
+                                        <textarea cols="40" rows="3" id="Location" name="Location" class="form-control input input-sm txtLabel"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Main Consumer</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="MainCons" name="MainCons" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Roll Former</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="RefRfDf" name="RefRfDf" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Project Step</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectProjStep" name="selectProjStep" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px; margin-top: 5px">
+                                    <div class="col-md-4 txtLabel">ProductType</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProductType" name="ProductType" placeholder="" value="" required>
+                                    </div>
+                                </div>
+
+                                <%--<div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Profile</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="RefProfile" name="RefProfile" placeholder="" value="" required>
+                                    </div>
+                                </div>--%>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Product Type</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectProdTypeID" name="selectProdTypeID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">CompanyName2</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtCompanyName2" name="txtCompanyName2" placeholder="" value="" required></div>
-                            </div>
+                            <%--Right Side--%>
+                            <div class="col-md-6">
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Product</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectProdID" name="selectProdID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">ProfID</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectProfID" name="selectProfID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">Address	</div>
-                                <div class="col-md-8">
-                                    <textarea cols="40" rows="3" id="txtAddress" name="txtAddress" class="form-control input input-sm"></textarea>
-                                    <%--<input type="text" class="form-control input input-sm" id="txtGradeDetailEdit" name="txtGradeDetailEdit" placeholder="" value="" required>--%></div>
-                            </div>
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Project Step</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectStep" name="selectStep" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">ContactPerson</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtContactPerson" name="txtContactPerson" placeholder="" value="" required></div>
-                            </div>
+                                <div class="row" style="margin-bottom: 5px; margin-top: 5px">
+                                    <div class="col-md-4 txtLabel">Quantity</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="Quantity" name="Quantity" placeholder="" value="" required>
+                                    </div>
+                                </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4">Phone</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtPhone" name="txtPhone" placeholder="" value="" required></div>
-                            </div>
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Delivery</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="DeliveryDate" name="DeliveryDate" placeholder="" value="" required>
+                                    </div>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-md-4">Status</div>
-                                <div class="col-md-8">
-                                    <div class="input-group">
-                                        <input type="text" id="txtStatusNew" name="txtStatusNew" class="form-control input input-sm txtLabel" value="" required readonly>
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-warning btn-flat btn-sm" data-toggle="modal" data-target="#myModalActiveNew"><i class="fa fa-search"></i></button>
-                                        </span>
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Port</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectTypeID" name="selectTypeID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectStatusConID" name="selectStatusConID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +502,7 @@
                         cIndex = this.cellIndex;
                         console.log(rIndex + "  :  " + cIndex);
 
-                        if (this.cellIndex == 3) {
+                        if (this.cellIndex == 24) {
                             var strID = table.rows[rIndex].cells[0].innerHTML;
                             var strDesc = table.rows[rIndex].cells[1].innerHTML;
                             var strDetail = table.rows[rIndex].cells[2].innerHTML;
@@ -340,7 +518,7 @@
 
                         }
 
-                        if (this.cellIndex == 4) {
+                        if (this.cellIndex == 25) {
                             var strGradeIDDelete = table.rows[rIndex].cells[0].innerHTML;
                             var stGradeDescDelete = table.rows[rIndex].cells[1].innerHTML;
                             var strGradeDetailDelete = table.rows[rIndex].cells[2].innerHTML;
@@ -410,26 +588,7 @@
                 }
             }
 
-            $(function () {
-
-                $("#myModalEdit").validate({
-                    rules: {
-                        txtCustTypeDesc: {
-                            required: true,
-                            minlength: 8
-                        },
-                        action: "required"
-                    },
-                    messages: {
-                        txtCustTypeDesc: {
-                            required: "Please enter some data",
-                            minlength: "Your data must be at least 8 characters"
-                        },
-                        action: "Please provide some data"
-                    }
-                });
-            });
-
+           
             function ValidateSave() {
                 var str1 = document.getElementById("txtGradeID").value;
                 var str2 = document.getElementById("txtGradeDesc").value;

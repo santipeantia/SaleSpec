@@ -30,6 +30,11 @@ namespace SaleSpec.pages.masters
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../../pages/users/login");
+            }
+
             if (!IsPostBack)
             {
                 GetInitialData();
@@ -97,12 +102,14 @@ namespace SaleSpec.pages.masters
             {
                 //CompanyID, CompanyName, CompanyName2, Address, ProvinceID, ArchitecName, Phone, Mobile, Email
 
-                ssql = "SELECT	a.ProjectID, a.ProjectYear, a.ProjectMonth, a.ProjectName, a.CompanyID, a.CompanyName, a.ArchitecID, a.Name, a.Location, " +
-                       "        a.MainCons, a.RefRfDf, a.ProjStep, a.ProductType, a.RefProfile, a.ProdTypeID, a.ProdTypeNameEN, a.ProdID, a.ProdNameEN, a.ProfID,  " +
-                       "        a.ProfNameEN, a.StatusID, a.StatusNameEn, a.Quantity, a.RefType, a.DeliveryDate, a.Drawing, a.TypeID, a.SaleSpec, a.StatusConID,  " +
-                       "        a.CreatedDate, a.LastUpdate, b.ConDesc2 " +
-                       "FROM    adProjects AS a LEFT JOIN " +
-                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID ";
+                ssql = "SELECT		a.ProjectID, a.ProjectYear, a.ProjectMonth, a.ProjectName, a.CompanyID, a.CompanyName, " +
+                        "            a.ArchitecID, a.Name, a.Location, a.MainCons, a.RefRfDf, a.ProjStep, b.StepNameEn,  " +
+                        "            a.ProductType, a.RefProfile, a.ProdTypeID,  a.ProdTypeNameEN, a.ProdID, a.ProdNameEN,  " +
+                        "            a.ProfID, a.ProfNameEN, a.StatusID, a.StatusNameEn, a.Quantity, a.RefType, a.DeliveryDate,  " +
+                        "            a.Drawing, a.TypeID, a.SaleSpec, a.StatusConID, c.ConDesc2, a.CreatedDate, a.LastUpdate " +
+                        "FROM        adProjects AS a LEFT JOIN " +
+                        "            adStep AS b ON a.ProjStep = b.StepID left join " +
+                        "            adStatusConfirm AS c ON a.StatusConID = c.StatusConID";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
@@ -123,6 +130,7 @@ namespace SaleSpec.pages.masters
                         string strMainCons = dt.Rows[i]["MainCons"].ToString();
                         string strRefRfDf = dt.Rows[i]["RefRfDf"].ToString();
                         string strProjStep = dt.Rows[i]["ProjStep"].ToString();
+                        string strStepNameEn = dt.Rows[i]["StepNameEn"].ToString();
                         string strProductType = dt.Rows[i]["ProductType"].ToString();
                         string strRefProfile = dt.Rows[i]["RefProfile"].ToString();
                         string strProdTypeID = dt.Rows[i]["ProdTypeID"].ToString();
@@ -155,26 +163,39 @@ namespace SaleSpec.pages.masters
                         else {
                             strConDesc2 = "<span class=\"text-red\">" + strConDesc2 + "</span>";
                         }
-                            strTblDetail += "<tr> " +
-                                            "     <td>" + strProjectID + "</td> " +
-                                            "     <td class=\"hidden\">" + strProjectYear + "</td> " +
-                                            "     <td class=\"hidden\">" + strProjectMonth + "</td> " +
-                                            "     <td>" + strProjectName + "</td> " +
-                                            "     <td class=\"hidden\">" + strArchitecID + "</td> " +
-                                            "     <td class=\"hidden\">" + strCompanyID + "</td> " +
-                                            "     <td>" + strCompanyName + "</td> " +
-                                            "     <td>" + strLocation + "</td> " +
-                                            "     <td class=\"hidden\">" + strMainCons + "</td> " +
-                                            "     <td class=\"hidden\">" + strRefRfDf + "</td> " +
-                                            "     <td>" + strRefProfile + "</td> " +
-                                            "     <td>" + strQuantity + "</td> " +
-                                            "     <td>" + strDeliveryDate + "</td> " +
-                                            "     <td>" + strConDesc2 + "</td> " +
-                                            "<td style=\"width: 20px; text-align: center;\"> " +
-                                            "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
-                                            "<td style=\"width: 20px; text-align: center;\"> " +
-                                            "       <a href=\"#\" title=\"Delete\"><i class=\"fa fa-trash text-red\"></i></a></td> " +
-                                            "</tr>";
+                        strTblDetail += "<tr> " +
+                                        "     <td>" + strProjectID + "</td> " +
+                                        "     <td class=\"hidden\">" + strProjectYear + "</td> " +
+                                        "     <td class=\"hidden\">" + strProjectMonth + "</td> " +
+                                        "     <td>" + strProjectName + "</td> " +
+                                        "     <td class=\"hidden\">" + strArchitecID + "</td> " +
+                                        "     <td class=\"hidden\">" + strCompanyID + "</td> " +
+                                        "     <td>" + strCompanyName + "</td> " +
+                                        "     <td>" + strLocation + "</td> " +
+                                        "     <td class=\"hidden\">" + strMainCons + "</td> " +
+                                        "     <td class=\"hidden\">" + strRefRfDf + "</td> " +
+
+                                        "     <td class=\"hidden\">" + strProjStep + "</td> " +
+                                        "     <td>" + strStepNameEn + "</td> " +
+
+                                        "     <td class=\"hidden\">" + strProdTypeID + "</td> " +
+                                        "     <td>" + strProdTypeNameEN + "</td> " +
+                                        "     <td class=\"hidden\">" + strProdID + "</td> " +
+                                        "     <td>" + strProdNameEN + "</td> " +
+
+                                        "     <td>" + strRefProfile + "</td> " +
+                                        "     <td>" + strQuantity + "</td> " +
+                                        "     <td>" + strDeliveryDate + "</td> " +
+                                        "     <td class=\"hidden\">" + strStatusID + "</td> " +
+                                        "     <td>" + strStatusNameEn + "</td> " +
+                                        "     <td>" + strTypeID + "</td> " +
+                                        "     <td class=\"hidden\">" + strStatusConID + "</td> " +
+                                        "     <td>" + strConDesc2 + "</td> " +
+                                        "<td style=\"width: 20px; text-align: center;\"> " +
+                                        "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
+                                        "<td style=\"width: 20px; text-align: center;\"> " +
+                                        "       <a href=\"#\" title=\"Delete\"><i class=\"fa fa-trash text-red\"></i></a></td> " +
+                                        "</tr>";
                     }
 
                     Session["datalist"] = strTblDetail;
