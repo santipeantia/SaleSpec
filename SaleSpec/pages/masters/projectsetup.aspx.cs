@@ -214,6 +214,24 @@ namespace SaleSpec.pages.masters
         {
             try
             {
+                string strProjecID = "";
+                ssql = "spGetCountProject";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(Comm);
+
+                DataTable dtCount = new DataTable();
+                da.Fill(dtCount);
+                if (dtCount.Rows.Count != 0)
+                {
+                    strProjecID = dtCount.Rows[0]["ProjectID"].ToString();
+                }
+                Conn.Close();
+
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
@@ -222,10 +240,34 @@ namespace SaleSpec.pages.masters
                 string strGradeDesc = Request.Form["txtGradeDesc"];
                 string strGradeDetail = Request.Form["txtGradeDetail"];
 
+                string strProjectID = Request.Form["ProjectID"];
+                string strProjectName = Request.Form["ProjectName"];
+                string strselectCompanyID = Request.Form["selectCompanyID"];
+                string strselectArchitecID = Request.Form["selectArchitecID"];
+                string strProjectYear = Request.Form["ProjectYear"];
+                string strProjectMonth = Request.Form["ProjectMonth"];
+                string strLocation = Request.Form["Location"];
+                string strMainCons = Request.Form["MainCons"];
+                string strRefRfDf = Request.Form["RefRfDf"];
+                string strselectProjStep = Request.Form["selectProjStep"];
+                string strselectTypeID = Request.Form["selectTypeID"];
+                string strselectProdTypeID = Request.Form["selectProdTypeID"];
+                string strselectProdID = Request.Form["selectProdID"];
+                string strProfID = Request.Form["ProfID"];
+                string strQuantity = Request.Form["Quantity"];
+                string strdatepickerdelivery = Request.Form["datepickerdelivery"];
+                string strselectStatusConID = Request.Form["selectStatusConID"];
+
                 if (strGradeID != "" && strGradeDesc != "")
                 {
-                    ssql = "insert into adGrade (GradeID, GradeDesc, GradeDetail) " +
-                           "values    (@GradeID, @GradeDesc, @GradeDetail)  ";
+                    ssql = "insert into adProjects (ProjectID, ProjectYear, ProjectMonth, ProjectName, CompanyID, CompanyName, " +
+                            "   ArchitecID, Name, Location, MainCons, RefRfDf, ProjStep, ProductType, RefProfile, ProdTypeID, " +
+                            "   ProdTypeNameEN, ProdID, ProdNameEN, ProfID, ProfNameEN, StatusID, StatusNameEn, Quantity, RefType, " +
+                            "   DeliveryDate, Drawing, TypeID, SaleSpec, StatusConID, CreatedDate, LastUpdate) " +
+                           "values    (@ProjectID, @ProjectYear, @ProjectMonth, @ProjectName, @CompanyID, @CompanyName, " +
+                            "   @ArchitecID, @Name, @Location, @MainCons, @RefRfDf, @ProjStep, @ProductType, @RefProfile, @ProdTypeID, " +
+                            "   @ProdTypeNameEN, @ProdID, @ProdNameEN, @ProfID, @ProfNameEN, @StatusID, @StatusNameEn, @Quantity, @RefType, " +
+                            "   @DeliveryDate, @Drawing, @TypeID, @SaleSpec, @StatusConID, @CreatedDate, @LastUpdate)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;

@@ -1052,8 +1052,29 @@ namespace SaleSpec.Class
             }
         }
 
-      
+        [WebMethod]
+        public void GetSpecPerson()
+        {
+            List<GetDataSpecPerson> specpersonal = new List<GetDataSpecPerson>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetSpecPerson", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
 
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataSpecPerson specperson = new GetDataSpecPerson();
+                    specperson.SpecID = rdr["SpecID"].ToString();
+                    specperson.FullName = rdr["FullName"].ToString();
+                    specpersonal.Add(specperson);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(specpersonal));
+        }
 
     }
 }

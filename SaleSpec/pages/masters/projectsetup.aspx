@@ -4,6 +4,12 @@
     <script>
         $(document).ready(function () {
             var selectCompanyIDDDL = $('#selectCompanyID');
+            var selectArchitecIDDDL = $('#selectArchitecID');
+            var selectProjStepDDL = $('#selectProjStep');
+            var selectProdTypeIDDDL = $('#selectProdTypeID');
+            var selectProdIDDDL = $('#selectProdID');
+            var selectTypeIDDDL = $('#selectTypeID');
+            var selectStatusConIDDDL = $('#selectStatusConID');
 
             $.ajax({
                 url: '../trans/DataServices.asmx/GetDataCompany',
@@ -11,12 +17,107 @@
                 dataType: 'json',
                 success: function (data) {
                     selectCompanyIDDDL.append($('<option/>', { value: -1, text: 'Select Company' }));
+                    selectArchitecIDDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
                     $(data).each(function (index, item) {
                         selectCompanyIDDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyNameEN }));
                     });
                 }
             });
 
+
+            selectCompanyIDDDL.change(function () {
+                $.ajax({
+                    url: '../trans/DataServices.asmx/GetDataArchitect',
+                    method: 'post',
+                    data: { CompanyID: $(this).val() },
+                    dataType: 'json',
+                    success: function (data) {
+                        selectArchitecIDDDL.empty();
+                        selectArchitecIDDDL.append($('<option/>', { value: -1, text: 'Select Architect' }));
+                        selectArchitecIDDDL.prop('disabled', false);
+                        $(data).each(function (index, item) {
+                            selectArchitecIDDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                        });
+                    }
+                });
+            });
+
+            //Get data step of sale spec project
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetStepSpec',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectProjStepDDL.append($('<option/>', { value: -1, text: 'Select project step' }));
+                    $(data).each(function (index, item) {
+                        selectProjStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameEn }));
+                    });
+                }
+            });
+
+            //Get Product type such as Ampelite, Ampelram
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetProductType',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectProdTypeIDDDL.append($('<option/>', { value: -1, text: 'Select product type of project' }));
+                    selectProdIDDDL.append($('<option/>', { value: -1, text: "Please select product" }));
+                    $(data).each(function (index, item) {
+                        selectProdTypeIDDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                    });
+                }
+            });
+
+            //When product type changed cascading of product
+            selectProdTypeIDDDL.change(function () {
+                if ($(this).val() == "-1") {
+                    selectProdIDDDL.empty();
+                    selectProdIDDDL.append($('<option/>', { value: -1, text: "Please select product" }));
+                    selectProdIDDDL.val('-1');
+                } else {
+                    $.ajax({
+                        url: '../trans/DataServices.asmx/GetProducts',
+                        method: 'post',
+                        data: { ProdTypeID: $(this).val() },
+                        dataType: 'json',
+                        success: function (data) {
+                            selectProdIDDDL.prop('disabled', false);
+                            selectProdIDDDL.empty();
+                            selectProdIDDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                            $(data).each(function (index, item) {
+                                selectProdIDDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            //Get Spec Personal / Sale Spec
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetSpecPerson',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectTypeIDDDL.append($('<option/>', { value: -1, text: 'Select personal spec' }));
+                    $(data).each(function (index, item) {
+                        selectTypeIDDDL.append($('<option/>', { value: item.SpecID, text: item.FullName }));
+                    });
+                }
+            });
+
+            //Get project status
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetStatus',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectStatusConIDDDL.append($('<option/>', { value: -1, text: 'Select status' }));
+                    $(data).each(function (index, item) {
+                        selectStatusConIDDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                    });
+                }
+            });
 
         });
     </script>
@@ -200,20 +301,21 @@
                                     </div>
                                 </div>
 
-                                <div class="row" style="margin-bottom: 5px; margin-top: 5px">
-                                    <div class="col-md-4 txtLabel">ProductType</div>
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Port</label>
+                                    </div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="ProductType" name="ProductType" placeholder="" value="" required>
+                                        <div class="txtLabel">
+                                            <select id="selectTypeID" name="selectTypeID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <%--<div class="row" style="margin-bottom: 5px">
-                                    <div class="col-md-4 txtLabel">Profile</div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="RefProfile" name="RefProfile" placeholder="" value="" required>
-                                    </div>
-                                </div>--%>
-
+                            <%--Right Side--%>
+                            <div class="col-md-6">
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
                                         <label class="txtLabel">Product Type</label>
@@ -225,10 +327,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <%--Right Side--%>
-                            <div class="col-md-6">
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
                                         <label class="txtLabel">Product</label>
@@ -243,17 +342,14 @@
                                 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
-                                        <label class="txtLabel">ProfID</label>
+                                        <label class="txtLabel">Profile</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="txtLabel">
-                                            <select id="selectProfID" name="selectProfID" class="form-control input-sm" style="width: 100%">
-                                            </select>
-                                        </div>
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProfID" name="ProfID" placeholder="" value="" required>
                                     </div>
                                 </div>
 
-                                <div class="row" style="margin-top: 5px;">
+                                <%--<div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
                                         <label class="txtLabel">Project Step</label>
                                     </div>
@@ -263,7 +359,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <div class="row" style="margin-bottom: 5px; margin-top: 5px">
                                     <div class="col-md-4 txtLabel">Quantity</div>
@@ -275,21 +371,18 @@
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Delivery</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="DeliveryDate" name="DeliveryDate" placeholder="" value="" required>
+                                        <%--<input type="text" class="form-control input input-sm txtLabel" id="DeliveryDate" name="DeliveryDate" placeholder="" value="" required>--%>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdelivery" name="datepickerdelivery" value="" autocomplete="off">
+                                            <div class="input-group-addon input-sm">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    
                                     </div>
                                 </div>
 
-                                <div class="row" style="margin-top: 5px;">
-                                    <div class="col-md-4">
-                                        <label class="txtLabel">Port</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="txtLabel">
-                                            <select id="selectTypeID" name="selectTypeID" class="form-control input-sm" style="width: 100%">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
@@ -590,10 +683,25 @@
 
            
             function ValidateSave() {
-                var str1 = document.getElementById("txtGradeID").value;
-                var str2 = document.getElementById("txtGradeDesc").value;
-                var str3 = document.getElementById("txtGradeDetail").value;
-                if (str1 != '' && str2 != '' && str3 !='') {
+               
+                var str1 = 'new'; //document.getElementById("ProjectID").value;
+                var str2 = document.getElementById("ProjectName").value;
+                var str3 = document.getElementById("selectCompanyID").value;
+                var str4 = document.getElementById("selectArchitecID").value;
+                var str5 = document.getElementById("ProjectYear").value;
+                var str6 = document.getElementById("ProjectMonth").value;
+                var str7 = document.getElementById("Location").value;
+                var str8 = document.getElementById("MainCons").value;
+                var str9 = document.getElementById("RefRfDf").value;
+                var str10 = document.getElementById("selectProjStep").value;
+                var str11 = document.getElementById("selectTypeID").value;
+                var str12 = document.getElementById("selectProdTypeID").value;
+                var str13 = document.getElementById("selectProdID").value;
+                var str14 = document.getElementById("ProfID").value;
+                var str15 = document.getElementById("Quantity").value;
+                var str16 = document.getElementById("datepickerdelivery").value;
+                var str17 = document.getElementById("selectStatusConID").value;
+                if (str1 != '' && str2 != '' && str3 != '' && str4 !='') {
                     document.getElementById("<%=  btnSaveNewData.ClientID %>").click();
                 }
             }
