@@ -236,29 +236,37 @@ namespace SaleSpec.pages.masters
                 Conn = dbConn.OpenConn();
                 transac = Conn.BeginTransaction();
 
-                string strGradeID = Request.Form["txtGradeID"];
-                string strGradeDesc = Request.Form["txtGradeDesc"];
-                string strGradeDetail = Request.Form["txtGradeDetail"];
+                string strProjectID = strProjecID; // Request.Form["ProjectID"];
+                string strProjectYear = DateTime.Now.ToString("yyyy"); //Request.Form["ProjectYear"];
+                string strProjectMonth = DateTime.Now.ToString("MM");  //Request.Form["ProjectMonth"];
 
-                string strProjectID = Request.Form["ProjectID"];
                 string strProjectName = Request.Form["ProjectName"];
                 string strselectCompanyID = Request.Form["selectCompanyID"];
+                string strselectCompanyName = Request.Form["CompanyName"];
                 string strselectArchitecID = Request.Form["selectArchitecID"];
-                string strProjectYear = Request.Form["ProjectYear"];
-                string strProjectMonth = Request.Form["ProjectMonth"];
+                string strselectArchitecName = Request.Form["ArchitecName"];
+
                 string strLocation = Request.Form["Location"];
                 string strMainCons = Request.Form["MainCons"];
                 string strRefRfDf = Request.Form["RefRfDf"];
                 string strselectProjStep = Request.Form["selectProjStep"];
+                string strselectProjStepName = Request.Form["ProjStepName"];
+
                 string strselectTypeID = Request.Form["selectTypeID"];
+                string strselectTypeName = Request.Form["TypeName"];
+
                 string strselectProdTypeID = Request.Form["selectProdTypeID"];
+                string strselectProdTypeName = Request.Form["ProductTypeName"];
+
                 string strselectProdID = Request.Form["selectProdID"];
+                string strselectProdName = Request.Form["ProductName"];
                 string strProfID = Request.Form["ProfID"];
+
                 string strQuantity = Request.Form["Quantity"];
                 string strdatepickerdelivery = Request.Form["datepickerdelivery"];
-                string strselectStatusConID = Request.Form["selectStatusConID"];
+                string strselectStatusConID =  Request.Form["selectStatusConID"];
 
-                if (strGradeID != "" && strGradeDesc != "")
+                if (strProjectID != "" && strProjectName != "")
                 {
                     ssql = "insert into adProjects (ProjectID, ProjectYear, ProjectMonth, ProjectName, CompanyID, CompanyName, " +
                             "   ArchitecID, Name, Location, MainCons, RefRfDf, ProjStep, ProductType, RefProfile, ProdTypeID, " +
@@ -274,10 +282,37 @@ namespace SaleSpec.pages.masters
                     Comm.CommandType = CommandType.Text;
                     Comm.Connection = Conn;
                     Comm.Transaction = transac;
-                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
-                    Comm.Parameters.Add("@GradeDesc", SqlDbType.NVarChar).Value = strGradeDesc;
-                    Comm.Parameters.Add("@GradeDetail", SqlDbType.NVarChar).Value = strGradeDetail;
-
+                    Comm.Parameters.Add("@ProjectID", SqlDbType.NVarChar).Value = strProjectID;
+                    Comm.Parameters.Add("@ProjectYear", SqlDbType.NVarChar).Value = strProjectYear;
+                    Comm.Parameters.Add("@ProjectMonth", SqlDbType.NVarChar).Value = strProjectMonth;
+                    Comm.Parameters.Add("@ProjectName", SqlDbType.NVarChar).Value = strProjectName;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strselectCompanyID;
+                    Comm.Parameters.Add("@CompanyName", SqlDbType.NVarChar).Value = strselectCompanyName;
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strselectArchitecID;
+                    Comm.Parameters.Add("@Name", SqlDbType.NVarChar).Value = strselectArchitecName;
+                    Comm.Parameters.Add("@Location", SqlDbType.NVarChar).Value = strLocation;
+                    Comm.Parameters.Add("@MainCons", SqlDbType.NVarChar).Value = strMainCons;
+                    Comm.Parameters.Add("@RefRfDf", SqlDbType.NVarChar).Value = strRefRfDf;
+                    Comm.Parameters.Add("@ProjStep", SqlDbType.NVarChar).Value = strselectProjStep;
+                    Comm.Parameters.Add("@ProductType", SqlDbType.NVarChar).Value = strselectProdTypeID;
+                    Comm.Parameters.Add("@RefProfile", SqlDbType.NVarChar).Value = strProfID;
+                    Comm.Parameters.Add("@ProdTypeID", SqlDbType.NVarChar).Value = strselectProdTypeID;
+                    Comm.Parameters.Add("@ProdTypeNameEN", SqlDbType.NVarChar).Value = strselectProdTypeName;
+                    Comm.Parameters.Add("@ProdID", SqlDbType.NVarChar).Value = strselectProdID;
+                    Comm.Parameters.Add("@ProdNameEN", SqlDbType.NVarChar).Value = strselectProdName;
+                    Comm.Parameters.Add("@ProfID", SqlDbType.NVarChar).Value = strProfID;
+                    Comm.Parameters.Add("@ProfNameEN", SqlDbType.NVarChar).Value = strProfID;
+                    Comm.Parameters.Add("@StatusID", SqlDbType.NVarChar).Value = "S00";
+                    Comm.Parameters.Add("@StatusNameEn", SqlDbType.NVarChar).Value = "N/A"; //project step name
+                    Comm.Parameters.Add("@Quantity", SqlDbType.NVarChar).Value = strQuantity;
+                    Comm.Parameters.Add("@RefType", SqlDbType.NVarChar).Value = DBNull.Value;
+                    Comm.Parameters.Add("@DeliveryDate", SqlDbType.NVarChar).Value = strdatepickerdelivery;
+                    Comm.Parameters.Add("@Drawing", SqlDbType.NVarChar).Value = DBNull.Value;
+                    Comm.Parameters.Add("@TypeID", SqlDbType.NVarChar).Value = strselectTypeID;
+                    Comm.Parameters.Add("@SaleSpec", SqlDbType.NVarChar).Value = strselectTypeName.Replace("[" + strselectTypeID + "] ", "");
+                    Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strselectStatusConID;
+                    Comm.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@LastUpdate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.ExecuteNonQuery();
 
                 }
