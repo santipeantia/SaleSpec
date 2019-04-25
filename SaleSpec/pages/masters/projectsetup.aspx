@@ -183,6 +183,9 @@
                         selectArchitecIDEditDDL.prop('disabled', false);
                         $(data).each(function (index, item) {
                             selectArchitecIDEditDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                            
+                            var valArchitecIDEdit = $('#ArchitecIDEdit').val();
+                            $('#selectArchitecIDEdit').val(valArchitecIDEdit).change();
                         });
 
                         var strComName = $('#selectCompanyIDEdit option:selected').text();
@@ -251,6 +254,9 @@
                             selectProdIDEditDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
                             $(data).each(function (index, item) {
                                 selectProdIDEditDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
+
+                                var valProdIDEdit = $('#ProdIDEdit').val();
+                                $('#selectProdIDEdit').val(valProdIDEdit).change();
                             });
                         }
                     });
@@ -635,6 +641,7 @@
                                         <div class="txtLabel">
                                             <select id="selectArchitecIDEdit" name="selectArchitecIDEdit" class="form-control input-sm" style="width: 100%">
                                             </select>
+                                            <input type="text" class="form-control input input-sm txtLabel hidden" id="ArchitecIDEdit" name="ArchitecIDEdit" placeholder="" value="" required>
                                             <input type="text" class="form-control input input-sm txtLabel hidden" id="ArchitecNameEdit" name="ArchitecNameEdit" placeholder="" value="" required>
                                         </div>
                                     </div>
@@ -735,6 +742,7 @@
                                         <div class="txtLabel">
                                             <select id="selectProdIDEdit" name="selectProdIDEdit" class="form-control input-sm" style="width: 100%">
                                             </select>
+                                            <input type="text" class="form-control input input-sm txtLabel hidden" id="ProdIDEdit" name="ProdIDEdit" placeholder="" value="" required>
                                             <input type="text" class="form-control input input-sm txtLabel hidden" id="ProductNameEdit" name="ProductNameEdit" placeholder="" value="" required>
                                         </div>
                                     </div>
@@ -961,9 +969,16 @@
                             $('#selectCompanyIDEdit').val(strVal5); 
                             $('#selectCompanyIDEdit').change();
 
+                            // raminder please check here when using select option cascade...
+                            document.getElementById("ArchitecIDEdit").value = strVal4;
+
                             //document.getElementById("selectArchitecIDEdit").value = strVal4;
-                            $('#selectArchitecIDEdit').val(strVal4); 
-                            $('#selectArchitecIDEdit').change();
+                            //$('#idUkuran').val(11).change();
+                            //$('#selectArchitecIDEdit').val(strVal4).change(); 
+                            //$('#selectArchitecIDEdit').change();
+
+                            //$("#selectArchitecIDEdit option[value='"+strVal4+"']").attr("selected", true);
+
 
                             document.getElementById("ProjectIDEdit").value = strVal0;
                             document.getElementById("ProjectYearEdit").value = strVal1;
@@ -987,6 +1002,8 @@
                             //document.getElementById("selectProdIDEdit").value = strVal14;
                             $('#selectProdIDEdit').val(strVal14);
                             $('#selectProdIDEdit').change();
+
+                            document.getElementById("ProdIDEdit").value = strVal14;
 
                             //alert(strVal14);
 
