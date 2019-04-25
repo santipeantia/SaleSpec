@@ -532,17 +532,17 @@
                     //alert(selectProduct.val());
                 }
 
-                if (selectProfile.val() == '-1') {
-                    document.getElementById("divErrorProfile").style.display = '';
-                    document.getElementById("divErrorProfile").style.display = 'normal';
-                    chkValidate = 'false';
-                    return;
+                //if (selectProfile.val() == '-1') {
+                //    document.getElementById("divErrorProfile").style.display = '';
+                //    document.getElementById("divErrorProfile").style.display = 'normal';
+                //    chkValidate = 'false';
+                //    return;
 
-                } else {
-                    document.getElementById("divErrorProfile").style.display = '';
-                    document.getElementById("divErrorProfile").style.display = 'none';
-                    chkValidate = 'true';
-                }
+                //} else {
+                //    document.getElementById("divErrorProfile").style.display = '';
+                //    document.getElementById("divErrorProfile").style.display = 'none';
+                //    chkValidate = 'true';
+                //}
 
                 if (Quantity.val() == '') {
                     document.getElementById("divErrorQuantity").style.display = '';
@@ -634,6 +634,7 @@
                                                 ProjectID: $('#ProjectID').val(),
                                                 ProjectName: $('#ProjName').val(),
                                                 Location: $('#newLocation').val(),
+                                                TurnKey: $('#selectTurnKey').val(),
                                                 StepID: $('#selectProjectStep').val(),
                                                 StepNameEn: $('#selectProjectStep option:selected').text(),
                                                 BiddingName1: $('#biddingname1').val(),
@@ -650,8 +651,11 @@
                                                 ProdTypeNameEN: $('#selectProductType option:selected').text(),
                                                 ProdID: $('#selectProduct').val(),
                                                 ProdNameEN: $('#selectProduct option:selected').text(),
-                                                ProfID: $('#selectProfile').val(),
-                                                ProfNameEN: $('#selectProfile option:selected').text(),
+                                                //ProfID: $('#selectProfile').val(),
+                                                //ProfNameEN: $('#selectProfile option:selected').text(),
+                                                ProfID: '0',
+                                                ProfNameEN: $('#Profile').val(),
+                                                
                                                 Quantity: $('#Quantity').val(),
                                                 DeliveryDate: $('#datepickerdelivery').val(),
                                                 NextVisitDate: $('#datevisit').val(),
@@ -860,8 +864,11 @@
                                 ProdTypeNameEN: $('#selectProductType option:selected').text(),
                                 ProdID: $('#selectProduct').val(),
                                 ProdNameEN: $('#selectProduct option:selected').text(),
-                                ProfID: $('#selectProfile').val(),
-                                ProfNameEN: $('#selectProfile option:selected').text(),
+                                //ProfID: $('#selectProfile').val(),
+                                //ProfNameEN: $('#selectProfile option:selected').text(),
+                                ProfID: '0',
+                                ProfNameEN: $('#Profile').val(),
+
                                 Quantity: $('#Quantity').val(),
                                 DeliveryDate: $('#datepickerdelivery').val(),
                                 NextVisitDate: $('#datevisit').val(),
@@ -2251,7 +2258,7 @@
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-6 col-md-offset-2">
-                                        <label class="txtLabel">What do you do...</label>
+                                        <label class="txtLabel">What are your jobs</label>
                                         <div class="input-group col-md-12">
                                             <span class="txtLabel">
                                                 <select id="selectTransEntry" onchange="getTransEntry(this)" class="form-control input input-sm " style="width: 100%;">
@@ -2297,6 +2304,26 @@
                                                     <textarea cols="40" rows="2" class="form-control input-sm txtLabel" id="newLocation" name="newLocation"></textarea>
                                                 </div>
                                                 <div id="divErrorLocation" class="txtLabel text-red" style="display: none;">Let's them know where is project locations..!</div>
+                                            </div>
+                                        </div>
+
+                                         <div class="row" style="margin-top: 5px;">
+                                            <div class="col-md-6 col-md-offset-2">
+                                                <label class="txtLabel">TurnKey</label>
+                                                <div class="txtLabel">
+                                                    <select id="selectTurnKey" name="selectTurnKey"  class="form-control input-sm" style="width: 100%">
+                                                        <option value="Y">Yes</option>
+                                                        <option value="N">No</option>
+                                                    </select>
+                                                </div>
+                                                <div id="divErrorselectTurnKey" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
+                                            </div>
+
+                                            <div class="col-md-1 input-group hidden">
+                                                <label class="txtLabel">View</label>
+                                                <div class="">
+                                                    <button type="button" class="btn btn-info btn-block btn-flat btn-sm" onclick="myFunction()">View</button>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -2372,7 +2399,7 @@
                                                 <div id="rcorners13">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
-                                                            <label class="txtLabel">Award Main Cons(MC)</label>
+                                                            <label class="txtLabel">Award Main Consumers</label>
                                                             <div class="input-group col-md-12">
                                                                 <input type="text" id="awardmc" name="awardmc" class="form-control input input-sm">
                                                             </div>
@@ -2394,7 +2421,7 @@
                                                 <div id="rcorners14">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
-                                                            <label class="txtLabel">Award Roll Forming(RF)</label>
+                                                            <label class="txtLabel">Award Roll Former</label>
                                                             <div class="input-group col-md-12">
                                                                 <input type="text" id="awardrf" name="awardrf" class="form-control input input-sm">
                                                             </div>
@@ -2440,7 +2467,8 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Profile</label>
-                                                <div class="txtLabel">
+                                                <input type="text" class="form-control input-sm txtLabel" id="Profile" name="Profile">
+                                                <div class="txtLabel hidden">
                                                     <select id="selectProfile" class="form-control input-sm" style="width: 100%">
                                                     </select>
                                                 </div>
@@ -2562,6 +2590,19 @@
 
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-6 col-md-offset-2">
+                                                <label class="txtLabel">TurnKey</label>
+                                                <div class="txtLabel">
+                                                    <select id="selectUpdateTurnKey" name="selectUpdateTurnKey" class="form-control input-sm" style="width: 100%">
+                                                        <option value="Y">Yes</option>
+                                                        <option value="N">Yes</option>
+                                                    </select>
+                                                </div>
+                                                <div id="divErrorupTurnKey" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 5px;">
+                                            <div class="col-md-6 col-md-offset-2">
                                                 <label class="txtLabel">Step</label>
                                                 <div class="txtLabel">
                                                     <select id="selectupdateProjectStep" name="selectupdateProjectStep" onchange="getUpdateProjectStep(this)" class="form-control input-sm" style="width: 100%">
@@ -2632,7 +2673,7 @@
                                                 <div id="rcorners23">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
-                                                            <label class="txtLabel">Award Main Cons(MC)</label>
+                                                            <label class="txtLabel">Award Main Consumers</label>
                                                             <div class="input-group col-md-12">
                                                                 <input type="text" id="updateawardmc" name="updateawardmc" class="form-control input input-sm">
                                                             </div>
@@ -2654,7 +2695,7 @@
                                                 <div id="rcorners24">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
-                                                            <label class="txtLabel">Award Roll Forming(RF)</label>
+                                                            <label class="txtLabel">Award Roll Former</label>
                                                             <div class="input-group col-md-12">
                                                                 <input type="text" id="updateawardrf" name="updateawardrf" class="form-control input input-sm">
                                                             </div>
@@ -2700,8 +2741,9 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="txtLabel">Profile</label>
-                                                <div class="txtLabel">
-                                                    <select id="selectUpdateProfile" class="form-control input-sm" style="width: 100%">
+                                                <input type="text" class="form-control input-sm txtLabel" id="updateProfile" name="updateProfile">
+                                                <div class="txtLabel hidden">
+                                                    <select id="selectUpdateProfile" class="form-control input-sm " style="width: 100%">
                                                     </select>
                                                 </div>
                                                 <div id="divErrorupProfile" class="txtLabel text-red" style="display: none;">Should choose at least 1 profile of the project ..!</div>

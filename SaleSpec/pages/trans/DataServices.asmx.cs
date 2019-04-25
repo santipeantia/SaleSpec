@@ -409,7 +409,7 @@ namespace SaleSpec.Class
 
         [WebMethod]
         public void GetInsertWeeklyReport(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID, string TransNameEN,
-                                          string ProjectID, string ProjectName, string Location, string StepID, string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
+                                          string ProjectID, string ProjectName, string Location, string TurnKey, string StepID, string StepNameEn, string BiddingName1, string OwnerName1, string BiddingName2, string OwnerName2,
                                           string BiddingName3, string OwnerName3, string AwardMC, string ContactMC, string AwardRF, string ContactRF, string ProdTypeID, string ProdTypeNameEN, string ProdID, string ProdNameEN,
                                           string ProfID, string ProfNameEN, string Quantity, string DeliveryDate, string NextVisitDate, string StatusID, string StatusNameEn, string Remark,
                                           string UserID, string EmpCode, string CreatedBy, string CreatedDate)
@@ -430,6 +430,7 @@ namespace SaleSpec.Class
                 comm.Parameters.AddWithValue("@ProjectID", ProjectID);
                 comm.Parameters.AddWithValue("@ProjectName", ProjectName);
                 comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@TurnKey", TurnKey);                
                 comm.Parameters.AddWithValue("@StepID", StepID);
                 comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
                 comm.Parameters.AddWithValue("@BiddingName1", BiddingName1);
