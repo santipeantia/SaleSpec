@@ -40,6 +40,9 @@
 
 
             $('#updateLocation').prop('disabled', true);
+            $('#selectUpdateTurnKey').prop('disabled', true);
+            $('#updateProfile').prop('disabled', true);
+
             $('#selectupdateProjectStep').prop('disabled', true);
             selectUpdateProductTypeDDL.prop('disabled', true);
             selectUpdateProductDDL.prop('disabled', true);
@@ -474,6 +477,7 @@
 
             var btnSaveHistoryNewProject = $('#btnSaveHistoryNewProject');
             btnSaveHistoryNewProject.click(function () {
+                
                 var chkValidate = 'false';
                 var ProjName = $('#ProjName');
                 var newLocation = $('#newLocation');
@@ -605,6 +609,20 @@
                     var yyyy = today.getFullYear();
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+                    var currentdate2 = yyyy + '-' + mm + '-' + dd;
+
+                    var datepickertrans = $('#datepickertrans');
+                    //datepickertrans
+
+                    if (datepickertrans.val() > currentdate2) {
+
+                        alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                        return;
+                    }
+                    //else {
+                    //    alert('วันที่น้อยกว่า และเท่ากับวันที่ปัจจุบัน..');
+                    //    return;
+                    //}
 
                     if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
 
@@ -655,7 +673,7 @@
                                                 //ProfNameEN: $('#selectProfile option:selected').text(),
                                                 ProfID: '0',
                                                 ProfNameEN: $('#Profile').val(),
-                                                
+
                                                 Quantity: $('#Quantity').val(),
                                                 DeliveryDate: $('#datepickerdelivery').val(),
                                                 NextVisitDate: $('#datevisit').val(),
@@ -687,11 +705,14 @@
                             }
                         });
 
-                    } else {
+                    }
+                    else {
                         alert('Warning, \n\When you create new transaction must be select step design only..!');
                         return;
                     }
-                } else {
+                }
+                else
+                {
                     alert('Warnning, The data is not completed please check..!');
                 }
             });
@@ -997,6 +1018,9 @@
             selectUpdteProjectDDL.change(function () {
                 if ($(this).val() == '-1') {
                     $('#updateLocation').prop('disabled', true);
+                    $('#selectUpdateTurnKey').prop('disabled', true);
+                    $('#updateProfile').prop('disabled', true);
+
                     $('#selectupdateProjectStep').prop('disabled', true);
                     selectupdateProjectStepDDL.empty();
                     selectupdateProjectStepDDL.append($('<option/>', { value: -1, text: 'Please select project step..' }));
@@ -1012,6 +1036,8 @@
                     selectUpdateProfileDDL.empty();
                     selectUpdateProfileDDL.prop('disabled', true);
                     selectUpdateProfileDDL.append($('<option/>', { value: -1, text: 'Please select profile' }));
+
+                    updateProfile.val('');
 
                     updateQuantity.val('');
                     updateQuantity.prop('disabled', true);
@@ -1034,6 +1060,9 @@
 
                 } else {
                     $('#updateLocation').prop('disabled', false);
+                    $('#selectUpdateTurnKey').prop('disabled', false);
+                    $('#updateProfile').prop('disabled', false);
+
                     $('#selectupdateProjectStep').prop('disabled', false);
                     //selectUpdateProductTypeDDL.prop('disabled', false);
 
@@ -1081,6 +1110,9 @@
                             if (obj != '') {
                                 $.each(obj, function (key, inval) {
                                     $('#updateLocation').val(inval["Location"]);
+                                    $('#selectUpdateTurnKey').val(inval["TurnKey"]).change();
+                                    $('#updateProfile').val(inval["ProfNameEN"]);
+
                                     $('#selectupdateProjectStep').val(inval["ProjStep"]).change();
 
                                     //selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
@@ -1472,10 +1504,10 @@
 
                 if (chkValidate == 'true') {
                     var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
 
                     var today = new Date();
                     var dd = String(today.getDate()).padStart(2, '0');
@@ -1500,6 +1532,8 @@
                             ProjectID: $('#selectUpdteProject').val(),
                             ProjectName: $('#selectUpdteProject option:selected').text(),
                             Location: $('#updateLocation').val(),
+                            TurnKey: $('#selectUpdateTurnKey').val(),
+
                             StepID: $('#selectupdateProjectStep').val(),
                             StepNameEn: $('#selectupdateProjectStep option:selected').text(),
                             BiddingName1: $('#updatebiddingname1').val(),
@@ -1516,8 +1550,11 @@
                             ProdTypeNameEN: $('#selectUpdateProductType option:selected').text(),
                             ProdID: $('#selectUpdateProduct').val(),
                             ProdNameEN: $('#selectUpdateProduct option:selected').text(),
-                            ProfID: $('#selectUpdateProfile').val(),
-                            ProfNameEN: $('#selectUpdateProfile option:selected').text(),
+                            //ProfID: $('#selectUpdateProfile').val(),
+                            //ProfNameEN: $('#selectUpdateProfile option:selected').text(),
+                            ProfID: '0',
+                            ProfNameEN: $('#updateProfile').val(),
+
                             Quantity: $('#updateQuantity').val(),
                             DeliveryDate: $('#updatepickerdelivery').val(),
                             NextVisitDate: $('#updatevisit').val(),
@@ -1608,17 +1645,17 @@
                     chkValidate = 'true';;
                 }
 
-                if (selectUpdateProfile.val() == '-1') {
-                    document.getElementById("divErrorupProfile").style.display = '';
-                    document.getElementById("divErrorupProfile").style.display = 'normal';
-                    chkValidate = 'false';
-                    return;
+                //if (selectUpdateProfile.val() == '-1') {
+                //    document.getElementById("divErrorupProfile").style.display = '';
+                //    document.getElementById("divErrorupProfile").style.display = 'normal';
+                //    chkValidate = 'false';
+                //    return;
 
-                } else {
-                    document.getElementById("divErrorupProfile").style.display = '';
-                    document.getElementById("divErrorupProfile").style.display = 'none';
-                    chkValidate = 'true';
-                }
+                //} else {
+                //    document.getElementById("divErrorupProfile").style.display = '';
+                //    document.getElementById("divErrorupProfile").style.display = 'none';
+                //    chkValidate = 'true';
+                //}
 
                 if (updateQuantity.val() == '') {
                     document.getElementById("divErrorupQuantity").style.display = '';
@@ -1670,10 +1707,10 @@
 
                 if (chkValidate == 'true') {
                     var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
 
                     var today = new Date();
                     var dd = String(today.getDate()).padStart(2, '0');
@@ -1698,6 +1735,8 @@
                             ProjectID: $('#selectUpdteProject').val(),
                             ProjectName: $('#selectUpdteProject option:selected').text(),
                             Location: $('#updateLocation').val(),
+                            TurnKey: $('#selectUpdateTurnKey').val(),
+
                             StepID: $('#selectupdateProjectStep').val(),
                             StepNameEn: $('#selectupdateProjectStep option:selected').text(),
                             BiddingName1: $('#updatebiddingname1').val(),
@@ -1714,8 +1753,11 @@
                             ProdTypeNameEN: $('#selectUpdateProductType option:selected').text(),
                             ProdID: $('#selectUpdateProduct').val(),
                             ProdNameEN: $('#selectUpdateProduct option:selected').text(),
-                            ProfID: $('#selectUpdateProfile').val(),
-                            ProfNameEN: $('#selectUpdateProfile option:selected').text(),
+                            //ProfID: $('#selectUpdateProfile').val(),
+                            //ProfNameEN: $('#selectUpdateProfile option:selected').text(),
+                            ProfID: '0',
+                            ProfNameEN: $('#updateProfile').val(),
+
                             Quantity: $('#updateQuantity').val(),
                             DeliveryDate: $('#updatepickerdelivery').val(),
                             NextVisitDate: $('#updatevisit').val(),
@@ -2258,7 +2300,7 @@
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-6 col-md-offset-2">
-                                        <label class="txtLabel">What are your jobs</label>
+                                        <label class="txtLabel">What Is Your Job</label>
                                         <div class="input-group col-md-12">
                                             <span class="txtLabel">
                                                 <select id="selectTransEntry" onchange="getTransEntry(this)" class="form-control input input-sm " style="width: 100%;">
@@ -2545,7 +2587,7 @@
                                             <div class="col-md-2" id="divNewEntry">
                                                 <label class="txtLabel">Start New Entry</label>
                                                 <div class="">
-                                                    <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">Clear & New Entry</a>
+                                                    <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">New Entry</a>
                                                     <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
                                                 </div>
                                             </div>
@@ -2594,7 +2636,7 @@
                                                 <div class="txtLabel">
                                                     <select id="selectUpdateTurnKey" name="selectUpdateTurnKey" class="form-control input-sm" style="width: 100%">
                                                         <option value="Y">Yes</option>
-                                                        <option value="N">Yes</option>
+                                                        <option value="N">No</option>
                                                     </select>
                                                 </div>
                                                 <div id="divErrorupTurnKey" class="txtLabel text-red" style="display: none;">The project steps should be progressive ..!</div>
@@ -2834,7 +2876,7 @@
                                             <div class="col-md-2" id="divUpdateNewEntry">
                                                 <label class="txtLabel">Start New Entry</label>
                                                 <div class="">
-                                                    <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">Clear & New Entry</a>
+                                                    <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">New Entry</a>
                                                     <%--<button type="button" class="btn btn-info btn-flat btn-block btn-sm" id="btnSaveHistoryNewProduct">Save Entry</button>--%>
                                                 </div>
                                             </div>
@@ -2875,7 +2917,7 @@
                                         <div class="col-md-2" id="divArchitectNewEntry">
                                             <label class="txtLabel">Start New Entry</label>
                                             <div class="">
-                                                <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">Clear & New Entry</a>
+                                                <a href="weeklyreport?opt=wkr" class="btn btn-success btn-flat btn-block btn-sm">New Entry</a>
                                             </div>
                                         </div>
                                     </div>

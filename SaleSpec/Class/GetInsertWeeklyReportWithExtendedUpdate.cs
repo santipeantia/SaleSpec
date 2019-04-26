@@ -18,6 +18,7 @@ namespace SaleSpec.Class
         public string ProjectID { get; set; }
         public string ProjectName { get; set; }
         public string Location { get; set; }
+        public string TurnKey { get; set; }
         public string StepID { get; set; }
         public string StepNameEn { get; set; }
         public string BiddingName1 { get; set; }

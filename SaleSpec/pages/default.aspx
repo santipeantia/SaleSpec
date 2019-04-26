@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="SaleSpec._default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    
+
+
     <section class="content-header">
         <h1>Dashboard
                     <small>Control panel</small>
@@ -111,17 +115,18 @@
                                     </div>
                                 </div>
                                 <div class="box-body">
-                                    <div class="chart">
+                                    <%--<div class="chart">--%>
                                         <%--<canvas id="myChart" style="height: 250px"></canvas>--%>
                                        
-                                        <img src="../dist/img/chart_doubleline.png" />
+                                        <%--<img src="../dist/img/chart_doubleline.png" />--%>
 
-                                    </div>
+                                   <%-- </div>--%>
+
+                                    <iframe src="PortChart.aspx" frameborder="0"  style="height:500px; width:100%;" ></iframe>
+
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
             </div>

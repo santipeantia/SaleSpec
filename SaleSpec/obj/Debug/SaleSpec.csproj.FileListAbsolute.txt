@@ -12,3 +12,8 @@ D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.cspr
 D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
 D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.dll
 D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.pdb
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\EntityFramework.dll
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\EntityFramework.SqlServer.dll
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\EntityFramework.xml
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\EntityFramework.SqlServer.xml
+D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete

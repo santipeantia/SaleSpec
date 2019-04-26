@@ -42,7 +42,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -6480,6 +6488,19 @@
     <Content Include="build\js\PushMenu.js" />
     <Content Include="build\js\TodoList.js" />
     <Content Include="build\js\Tree.js" />
+    <Content Include="ChartData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ChartData.Context.cs</LastGenOutput>
+      <DependentUpon>ChartData.edmx</DependentUpon>
+    </Content>
+    <Content Include="ChartData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChartData.edmx</DependentUpon>
+      <LastGenOutput>ChartData.cs</LastGenOutput>
+    </Content>
+    <Content Include="pages\CanvasJS.html" />
+    <Content Include="pages\Charts.aspx" />
+    <Content Include="pages\PortChart.aspx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\trans\DataServices.asmx" />
@@ -6811,8 +6832,17 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="pages\trans\HandlerCS.ashx" />
+    <EntityDeploy Include="ChartData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChartData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ChartData.edmx.diagram">
+      <DependentUpon>ChartData.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Scripts\jquery-1.3.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.3.2.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.8.3%281%29.js" />
     <Content Include="Scripts\jquery-1.8.3.intellisense%281%29.js" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js" />
@@ -6827,6 +6857,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adCharts.cs">
+      <DependentUpon>ChartData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChartData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChartData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChartData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChartData.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ClassConnection\dbConnection.cs" />
     <Compile Include="Class\GetCountArchitect.cs" />
     <Compile Include="Class\GetDataDocAttached.cs" />
@@ -6856,6 +6904,20 @@
     <Compile Include="Class\GetProductTypeUpdate.cs" />
     <Compile Include="Class\GetStatusUpdate.cs" />
     <Compile Include="Class\GetStepSpec.cs" />
+    <Compile Include="pages\Charts.aspx.cs">
+      <DependentUpon>Charts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Charts.aspx.designer.cs">
+      <DependentUpon>Charts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\PortChart.aspx.cs">
+      <DependentUpon>PortChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\PortChart.aspx.designer.cs">
+      <DependentUpon>PortChart.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\report\DataServicesReporting.asmx.cs">
       <DependentUpon>DataServicesReporting.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -7752,6 +7814,9 @@
   <ItemGroup>
     <Folder Include="aspnet_client\system_web\4_0_30319\" />
     <Folder Include="pages\trans\uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

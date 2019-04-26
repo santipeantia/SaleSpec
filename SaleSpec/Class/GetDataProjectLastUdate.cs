@@ -16,6 +16,7 @@ namespace SaleSpec.Class
         public string ArchitecID { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
+        public string TurnKey { get; set; }
         public string MainCons { get; set; }
         public string RefRfDf { get; set; }
         public string ProjStep { get; set; }
