@@ -9,10 +9,15 @@
             var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
             var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            var firstdate = yyyy + '-' + mm + '-01';
             var currentdate = yyyy + '-' + mm + '-' + dd;
+           
 
             var datepickertrans = $('#datepickertrans');
-            datepickertrans.val(currentdate);
+            var datepickerend = $('#datepickerend');
+            datepickertrans.val(firstdate);
+            datepickerend.val(currentdate);
 
             var btnJsonReport = $('#btnJsonReport');
             btnJsonReport.click(function () {
