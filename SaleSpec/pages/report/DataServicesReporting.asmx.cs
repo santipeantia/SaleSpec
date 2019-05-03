@@ -19,7 +19,7 @@ namespace SaleSpec.pages.report
      [System.Web.Script.Services.ScriptService]
     public class DataServicesReporting : System.Web.Services.WebService
     {
-        string cs = "server=ITMANAGER-IT;database=DB_SaleSpec;uid=sa;pwd=sa1234;";
+        string cs = "server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;";
 
         //get attached
         [WebMethod]
