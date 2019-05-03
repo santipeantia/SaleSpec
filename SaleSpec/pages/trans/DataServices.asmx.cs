@@ -1082,5 +1082,53 @@ namespace SaleSpec.Class
             Context.Response.Write(js.Serialize(specpersonal));
         }
 
+        [WebMethod]
+        public void GetCustomerType()
+        {
+            List<GetDataCustomerType> customers = new List<GetDataCustomerType>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetCustomerType", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataCustomerType customer = new GetDataCustomerType();
+                    customer.CustTypeID = rdr["CustTypeID"].ToString();
+                    customer.CustTypeDesc = rdr["CustTypeDesc"].ToString();
+                    customers.Add(customer);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(customers));
+        }
+
+
+        [WebMethod]
+        public void GetDataGrade()
+        {
+            List<GetDataGrade> grades = new List<GetDataGrade>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetGrade", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataGrade grade = new GetDataGrade();
+                    grade.GradeID = rdr["GradeID"].ToString();
+                    grade.GradeDesc = rdr["GradeDesc"].ToString();
+                    grades.Add(grade);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(grades));
+        }
     }
 }

@@ -10,6 +10,10 @@
             var selectStatusConIDDelDDL = $('#selectStatusConIDDel');
             var selectCompanyDelDDL = $('#selectCompanyDel');
 
+            var selectGradeIDDDL = $('#selectGradeID');
+            var selectGradeIDEditDDL = $('#selectGradeIDEdit');
+            var selectGradeIDDelDDL = $('#selectGradeIDDel');
+
             $.ajax({
                 url: '../trans/DataServices.asmx/GetStatusConfirm',
                 method: 'post',
@@ -34,7 +38,7 @@
                 }
             });
 
-             $.ajax({
+            $.ajax({
                 url: '../trans/DataServices.asmx/GetStatusConfirm',
                 method: 'post',
                 dataType: 'json',
@@ -45,9 +49,6 @@
                     });
                 }
             });
-
-
-
 
             $.ajax({
                 url: '../trans/DataServices.asmx/GetDataCompany',
@@ -84,6 +85,44 @@
                     });
                 }
             });
+
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetDataGrade',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectGradeIDDDL.append($('<option/>', { value: -1, text: 'Select Grade' }));
+                    $(data).each(function (index, item) {
+                        selectGradeIDDDL.append($('<option/>', { value: item.GradeID, text: item.GradeDesc }));
+                    });
+                }
+            });
+
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetDataGrade',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectGradeIDEditDDL.append($('<option/>', { value: -1, text: 'Select Grade' }));
+                    $(data).each(function (index, item) {
+                        selectGradeIDEditDDL.append($('<option/>', { value: item.GradeID, text: item.GradeDesc }));
+                    });
+                }
+            });
+
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetDataGrade',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectGradeIDDelDDL.append($('<option/>', { value: -1, text: 'Select Grade' }));
+                    $(data).each(function (index, item) {
+                        selectGradeIDDelDDL.append($('<option/>', { value: item.GradeID, text: item.GradeDesc }));
+                    });
+                }
+            });
+
+
            
 
 
@@ -113,7 +152,7 @@
                             </button>
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" runat="server" onserverclick="btnDownload_click"><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click"><i class="fa fa-table"></i></button>
                             </div>
@@ -137,6 +176,7 @@
                                     <td>Email</td>
                                     <td class="hidden">StatusID</td>
                                     <td>Status</td>
+                                    <td class="hidden">GradeID</td>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                 </tr>
@@ -191,6 +231,18 @@
                                 <div class="col-md-8">
                                     <div class="txtLabel">
                                         <select id="selectCompany" name="selectCompany" class="form-control input-sm"  style="width: 100%">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">Grade</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectGradeID" name="selectGradeID" class="form-control input-sm" style="width: 100%">
                                         </select>
                                     </div>
                                 </div>
@@ -304,6 +356,18 @@
                                 </div>
                             </div>
 
+                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">Grade</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectGradeIDEdit" name="selectGradeIDEdit" class="form-control input-sm" style="width: 100%">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">NickName</div>
                                 <div class="col-md-8">
@@ -406,6 +470,18 @@
                                 <div class="col-md-8">
                                     <div class="txtLabel">
                                         <select id="selectCompanyDel" name="selectCompanyDel" class="form-control input-sm" disabled style="width: 100%">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">Grade</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectGradeIDDel" name="selectGradeIDDel" class="form-control input-sm" disabled style="width: 100%">
                                         </select>
                                     </div>
                                 </div>
@@ -580,7 +656,7 @@
                         cIndex = this.cellIndex;
                         console.log(rIndex + "  :  " + cIndex);
 
-                        if (this.cellIndex == 12) {
+                        if (this.cellIndex == 13) {
                             var strVal0 = table.rows[rIndex].cells[0].innerHTML;
                             var strVal1 = table.rows[rIndex].cells[1].innerHTML;
                             var strVal2 = table.rows[rIndex].cells[2].innerHTML;
@@ -593,10 +669,14 @@
                             var strVal9 = table.rows[rIndex].cells[9].innerHTML;
                             var strVal10 = table.rows[rIndex].cells[10].innerHTML;
                             var strVal11 = table.rows[rIndex].cells[11].innerHTML;
+                            var strVal12 = table.rows[rIndex].cells[12].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
                             $('#selectCompanyEdit').val(strVal0); 
                             $('#selectCompanyEdit').change();
+
+                            $('#selectGradeIDEdit').val(strVal12); 
+                            $('#selectGradeIDEdit').change();
 
                             document.getElementById("txtArchitectIDEdit").value = strVal1;
                             document.getElementById("txtFirstNameEdit").value = strVal2;
@@ -616,7 +696,7 @@
 
                         }
 
-                        if (this.cellIndex == 13) {
+                        if (this.cellIndex == 14) {
 
                             var strVal0 = table.rows[rIndex].cells[0].innerHTML;
                             var strVal1 = table.rows[rIndex].cells[1].innerHTML;
@@ -630,10 +710,14 @@
                             var strVal9 = table.rows[rIndex].cells[9].innerHTML;
                             var strVal10 = table.rows[rIndex].cells[10].innerHTML;
                             var strVal11 = table.rows[rIndex].cells[11].innerHTML;
+                            var strVal12 = table.rows[rIndex].cells[12].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
                             $('#selectCompanyDel').val(strVal0); 
                             $('#selectCompanyDel').change();
+
+                            $('#selectGradeIDDel').val(strVal12); 
+                            $('#selectGradeIDDel').change();
 
                             document.getElementById("txtArchitectIDDel").value = strVal1;
                             document.getElementById("txtFirstNameDel").value = strVal2;

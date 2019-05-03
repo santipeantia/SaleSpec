@@ -29,6 +29,8 @@ namespace SaleSpec.pages.masters
 
         dbConnection dbConn = new dbConnection();
 
+        public string sPage = "masters/customertype";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)

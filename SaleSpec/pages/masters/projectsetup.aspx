@@ -11,6 +11,7 @@
             var selectProdIDDDL = $('#selectProdID');
             var selectTypeIDDDL = $('#selectTypeID');
             var selectStatusConIDDDL = $('#selectStatusConID');
+            var selectStatusIDDDL = $('#selectStatusID');
 
             $.ajax({
                 url: '../trans/DataServices.asmx/GetDataCompany',
@@ -147,6 +148,27 @@
                 }
             });
 
+            //Get project status project
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetStatus',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectStatusIDDDL.append($('<option/>', { value: -1, text: 'Select status' }));
+                    $(data).each(function (index, item) {
+                        selectStatusIDDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                    });
+                }
+            });
+
+            selectStatusIDDDL.change(function () {
+                 var txtStatusID = $('#selectStatusID option:selected').text();
+                $('#txtStatusID').val(txtStatusID);
+
+            });
+
+
+
             // ** End in case insert data new project
             //***********************************************//
             // in case insert data update project
@@ -157,6 +179,7 @@
             var selectProdIDEditDDL = $('#selectProdIDEdit');
             var selectTypeIDEditDDL = $('#selectTypeIDEdit');
             var selectStatusConIDEditDDL = $('#selectStatusConIDEdit');
+            var selectStatusIDEditDDL = $('#selectStatusIDEdit');
 
             $.ajax({
                 url: '../trans/DataServices.asmx/GetDataCompany',
@@ -299,6 +322,25 @@
                 }
             });
 
+            //Get project status project
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetStatus',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectStatusIDEditDDL.append($('<option/>', { value: -1, text: 'Select status' }));
+                    $(data).each(function (index, item) {
+                        selectStatusIDEditDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                    });
+                }
+            });
+
+            selectStatusIDEditDDL.change(function () {
+                 var txtStatusID = $('#selectStatusIDEdit option:selected').text();
+                $('#txtStatusIDEdit').val(txtStatusID);
+
+            });
+
             // ** End in case insert data update project
             //***********************************************//
  
@@ -310,6 +352,7 @@
             var selectProdIDDelDDL = $('#selectProdIDDel');
             var selectTypeIDDelDDL = $('#selectTypeIDDel');
             var selectStatusConIDDelDDL = $('#selectStatusConIDDel');
+            var selectStatusIDDelDDL  = $('#selectStatusIDDel');
 
             $.ajax({
                 url: '../trans/DataServices.asmx/GetDataCompany',
@@ -449,6 +492,26 @@
                     });
                 }
             });
+
+            //Get project status project
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetStatus',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectStatusIDDelDDL.append($('<option/>', { value: -1, text: 'Select status' }));
+                    $(data).each(function (index, item) {
+                        selectStatusIDDelDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                    });
+                }
+            });
+
+            selectStatusIDDelDDL.change(function () {
+                 var txtStatusID = $('#selectStatusIDDel option:selected').text();
+                $('#txtStatusIDDel').val(txtStatusID);
+
+            });
+
             // ** End in case insert data delete project
             //***********************************************//
 
@@ -726,7 +789,7 @@
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
-                                        <label class="txtLabel">Status</label>
+                                        <label class="txtLabel">Active</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="txtLabel">
@@ -735,6 +798,20 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectStatusID" name="selectStatusID" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                            <input type="text" class="form-control input input-sm txtLabel hidden" id="txtStatusID" name="txtStatusID" placeholder="" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
@@ -943,12 +1020,25 @@
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
-                                        <label class="txtLabel">Status</label>
+                                        <label class="txtLabel">Active</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="txtLabel">
                                             <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectStatusIDEdit" name="selectStatusIDEdit" class="form-control input-sm" style="width: 100%">
+                                            </select>
+                                            <input type="text" class="form-control input input-sm txtLabel hidden" id="txtStatusIDEdit" name="txtStatusIDEdit" placeholder="" value="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -1148,12 +1238,25 @@
 
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-4">
-                                        <label class="txtLabel">Status</label>
+                                        <label class="txtLabel">Active</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="txtLabel">
                                             <select id="selectStatusConIDDel" name="selectStatusConIDDel" class="form-control input-sm" disabled style="width: 100%">
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Status</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="txtLabel">
+                                            <select id="selectStatusIDDel" name="selectStatusIDDel" class="form-control input-sm" disabled style="width: 100%">
+                                            </select>
+                                            <input type="text" class="form-control input input-sm txtLabel hidden" id="txtStatusIDDel" name="txtStatusIDDel" placeholder="" value="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -1328,6 +1431,9 @@
                             $('#selectStatusConIDEdit').val(strVal22); 
                             $('#selectStatusConIDEdit').change();
 
+                            $('#selectStatusIDEdit').val(strVal19); 
+                            $('#selectStatusIDEdit').change();
+                            
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
 
                             //document.getElementById("txtGradeIDEdit").value = strID;
@@ -1404,6 +1510,9 @@
                             //document.getElementById("selectStatusConIDDel").value = strVal19;
                             $('#selectStatusConIDDel').val(strVal22); 
                             $('#selectStatusConIDDel').change();
+
+                            $('#selectStatusIDDel').val(strVal19); 
+                            $('#selectStatusIDDel').change();
 
                             $("#myModalDelete").modal({ backdrop: false });
                             $("#myModalDelete").modal("show");

@@ -6,6 +6,9 @@
             var selectStatusConIDDDL = $('#selectStatusConID');
             var selectStatusConIDEditDDL = $('#selectStatusConIDEdit');
             var selectStatusConIDDelDDL = $('#selectStatusConIDDel');
+            var selectCustTypeIDDDL = $('#selectCustTypeID');
+            var selectCustTypeIDEditDDL = $('#selectCustTypeIDEdit');
+            var selectCustTypeIDDelDDL = $('#selectCustTypeIDDel');
 
 
             //Get data project type
@@ -44,6 +47,43 @@
                     });
                 }
             });
+           
+             $.ajax({
+                url: '../trans/DataServices.asmx/GetCustomerType',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectCustTypeIDDDL.append($('<option/>', { value: -1, text: 'Select CustomerType' }));
+                    $(data).each(function (index, item) {
+                        selectCustTypeIDDDL.append($('<option/>', { value: item.CustTypeID, text: item.CustTypeDesc }));
+                    });
+                }
+            });
+            
+            $.ajax({
+                url: '../trans/DataServices.asmx/GetCustomerType',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectCustTypeIDEditDDL.append($('<option/>', { value: -1, text: 'Select CustomerType' }));
+                    $(data).each(function (index, item) {
+                        selectCustTypeIDEditDDL.append($('<option/>', { value: item.CustTypeID, text: item.CustTypeDesc }));
+                    });
+                }
+            });
+
+             $.ajax({
+                url: '../trans/DataServices.asmx/GetCustomerType',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    selectCustTypeIDDelDDL.append($('<option/>', { value: -1, text: 'Select CustomerType' }));
+                    $(data).each(function (index, item) {
+                        selectCustTypeIDDelDDL.append($('<option/>', { value: item.CustTypeID, text: item.CustTypeDesc }));
+                    });
+                }
+            });
+
 
         });
     </script>
@@ -70,7 +110,7 @@
                                 <i class="fa fa-plus"></i>
                             </button>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" id="btnDownload" runat="server" onserverclick="btnDownload_click"><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click"><i class="fa fa-table"></i></button>
                             </div>
@@ -85,6 +125,7 @@
                                     <td>CompanyID</td>
                                     <td>CompanyName</td>
                                     <td>CompanyName2</td>
+                                    <td class="hidden">CustTypeID</td>
                                     <td>Address</td>
                                     <td class="hidden">ProvinceID</td>
                                     <td>ContactPerson</td>
@@ -138,6 +179,18 @@
                                 <div class="col-md-4 txtLabel">CompanyName2</div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName2" name="txtCompanyName2" placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">CustomerType</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectCustTypeID" name="selectCustTypeID" class="form-control input-sm" style="width: 100%">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                            
@@ -235,7 +288,18 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">CompanyName2</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName2Edit" name="txtCompanyName2Edit" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName2Edit" name="txtCompanyName2Edit" placeholder="" value="" >
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">CustomerType</label></div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectCustTypeIDEdit" name="selectCustTypeIDEdit" class="form-control input-sm"  style="width: 100%">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                            
@@ -250,35 +314,35 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">ProvinceID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProvinceIDEdit" name="txtProvinceIDEdit" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProvinceIDEdit" name="txtProvinceIDEdit" placeholder="" value="" >
                                 </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">ContactName</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtContactNameEdit" name="txtContactNameEdit" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtContactNameEdit" name="txtContactNameEdit" placeholder="" value="" >
                                 </div>
                             </div>
                            
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Phone</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="" >
                                 </div>
                             </div>
 
                              <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Mobile</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="" >
                                 </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Email</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="" required>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="" >
                                 </div>
                             </div>
 
@@ -334,6 +398,17 @@
                                 <div class="col-md-4 txtLabel">CompanyName2</div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName2Del" name="txtCompanyName2Del" disabled placeholder="" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-md-4">
+                                    <label class="txtLabel">CustomerType</label></div>
+                                <div class="col-md-8">
+                                    <div class="txtLabel">
+                                        <select id="selectCustTypeIDDel" name="selectCustTypeIDDel" class="form-control input-sm" disabled style="width: 100%">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                            
@@ -507,39 +582,6 @@
                         cIndex = this.cellIndex;
                         console.log(rIndex + "  :  " + cIndex);
 
-                        if (this.cellIndex == 11) {
-                            var strVal0 = table.rows[rIndex].cells[0].innerHTML;
-                            var strVal1 = table.rows[rIndex].cells[1].innerHTML;
-                            var strVal2 = table.rows[rIndex].cells[2].innerHTML;
-                            var strVal3 = table.rows[rIndex].cells[3].innerHTML;
-                            var strVal4 = table.rows[rIndex].cells[4].innerHTML;
-                            var strVal5 = table.rows[rIndex].cells[5].innerHTML;
-                            var strVal6 = table.rows[rIndex].cells[6].innerHTML;
-                            var strVal7 = table.rows[rIndex].cells[7].innerHTML;
-                            var strVal8 = table.rows[rIndex].cells[8].innerHTML;
-                            var strVal9 = table.rows[rIndex].cells[9].innerHTML;
-
-                            //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
-
-                            document.getElementById("txtCompanyIDEdit").value = strVal0;
-                            document.getElementById("txtCompanyNameEdit").value = strVal1;
-                            document.getElementById("txtCompanyName2Edit").value = strVal2;
-                            document.getElementById("txtAddressEdit").value = strVal3;
-                            document.getElementById("txtProvinceIDEdit").value = strVal4;
-                            document.getElementById("txtContactNameEdit").value = strVal5;
-                            document.getElementById("txtPhoneEdit").value = strVal6;
-                            document.getElementById("txtMobileEdit").value = strVal7;
-                            document.getElementById("txtEmailEdit").value = strVal8;
-
-                            //document.getElementById("selectStatusConID").value = strDetail;
-                            $('#selectStatusConIDEdit').val(strVal9); 
-                            $('#selectStatusConIDEdit').change();
-
-                            $("#myModalEdit").modal({ backdrop: false });
-                            $("#myModalEdit").modal("show");
-
-                        }
-
                         if (this.cellIndex == 12) {
                             var strVal0 = table.rows[rIndex].cells[0].innerHTML;
                             var strVal1 = table.rows[rIndex].cells[1].innerHTML;
@@ -551,20 +593,63 @@
                             var strVal7 = table.rows[rIndex].cells[7].innerHTML;
                             var strVal8 = table.rows[rIndex].cells[8].innerHTML;
                             var strVal9 = table.rows[rIndex].cells[9].innerHTML;
+                            var strVal10 = table.rows[rIndex].cells[10].innerHTML;
+
+                            //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
+
+                            document.getElementById("txtCompanyIDEdit").value = strVal0;
+                            document.getElementById("txtCompanyNameEdit").value = strVal1;
+                            document.getElementById("txtCompanyName2Edit").value = strVal2;
+
+                            $('#selectCustTypeIDEdit').val(strVal3); 
+                            $('#selectCustTypeIDEdit').change();
+
+                            document.getElementById("txtAddressEdit").value = strVal4;
+                            document.getElementById("txtProvinceIDEdit").value = strVal5;
+                            document.getElementById("txtContactNameEdit").value = strVal6;
+                            document.getElementById("txtPhoneEdit").value = strVal7;
+                            document.getElementById("txtMobileEdit").value = strVal8;
+                            document.getElementById("txtEmailEdit").value = strVal9;
+
+                            //document.getElementById("selectStatusConID").value = strDetail;
+                            $('#selectStatusConIDEdit').val(strVal10); 
+                            $('#selectStatusConIDEdit').change();
+
+                            $("#myModalEdit").modal({ backdrop: false });
+                            $("#myModalEdit").modal("show");
+
+                        }
+
+                        if (this.cellIndex == 13) {
+                            var strVal0 = table.rows[rIndex].cells[0].innerHTML;
+                            var strVal1 = table.rows[rIndex].cells[1].innerHTML;
+                            var strVal2 = table.rows[rIndex].cells[2].innerHTML;
+                            var strVal3 = table.rows[rIndex].cells[3].innerHTML;
+                            var strVal4 = table.rows[rIndex].cells[4].innerHTML;
+                            var strVal5 = table.rows[rIndex].cells[5].innerHTML;
+                            var strVal6 = table.rows[rIndex].cells[6].innerHTML;
+                            var strVal7 = table.rows[rIndex].cells[7].innerHTML;
+                            var strVal8 = table.rows[rIndex].cells[8].innerHTML;
+                            var strVal9 = table.rows[rIndex].cells[9].innerHTML;
+                            var strVal10 = table.rows[rIndex].cells[10].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
 
                             document.getElementById("txtCompanyIDDel").value = strVal0;
                             document.getElementById("txtCompanyNameDel").value = strVal1;
                             document.getElementById("txtCompanyName2Del").value = strVal2;
-                            document.getElementById("txtAddressDel").value = strVal3;
-                            document.getElementById("txtProvinceIDDel").value = strVal4;
-                            document.getElementById("txtContactNameDel").value = strVal5;
-                            document.getElementById("txtPhoneDel").value = strVal6;
-                            document.getElementById("txtMobileDel").value = strVal7;
-                            document.getElementById("txtEmailDel").value = strVal8;
 
-                            $('#selectStatusConIDDel').val(strVal9); 
+                             $('#selectCustTypeIDDel').val(strVal3); 
+                            $('#selectCustTypeIDDel').change();
+
+                            document.getElementById("txtAddressDel").value = strVal4;
+                            document.getElementById("txtProvinceIDDel").value = strVal5;
+                            document.getElementById("txtContactNameDel").value = strVal6;
+                            document.getElementById("txtPhoneDel").value = strVal7;
+                            document.getElementById("txtMobileDel").value = strVal8;
+                            document.getElementById("txtEmailDel").value = strVal9;
+
+                            $('#selectStatusConIDDel').val(strVal10); 
                             $('#selectStatusConIDDel').change();
 
                             $("#myModalDelete").modal({ backdrop: false });

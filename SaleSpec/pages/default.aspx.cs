@@ -35,6 +35,8 @@ namespace SaleSpec
 
         dbConnection dbConn = new dbConnection();
 
+        public string sPage = "pages/default";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //string strUserID = Session["UserID"].ToString();

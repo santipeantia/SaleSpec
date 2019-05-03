@@ -839,10 +839,10 @@
 
                 if (chkValidate == 'true') {
                     var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
 
                     var today = new Date();
                     var dd = String(today.getDate()).padStart(2, '0');
@@ -850,6 +850,15 @@
                     var yyyy = today.getFullYear();
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+                    var currentdate2 = yyyy + '-' + mm + '-' + dd;
+
+                    var datepickertrans = $('#datepickertrans');
+                    //datepickertrans
+                    if (datepickertrans.val() > currentdate2) {
+
+                        alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                        return;
+                    }
 
                     if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
 
@@ -1516,6 +1525,14 @@
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
+                    var currentdate2 = yyyy + '-' + mm + '-' + dd;
+                    var datepickertrans = $('#datepickertrans');
+                    //datepickertrans
+                    if (datepickertrans.val() > currentdate2) {
+
+                        alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                        return;
+                    }
 
                     $.ajax({
                         url: 'DataServices.asmx/GetInsertWeeklyReportUpdate',
@@ -1719,6 +1736,14 @@
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
+                    var currentdate2 = yyyy + '-' + mm + '-' + dd;
+                    var datepickertrans = $('#datepickertrans');
+                    //datepickertrans
+                    if (datepickertrans.val() > currentdate2) {
+
+                        alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                        return;
+                    }
 
                     $.ajax({
                         url: 'DataServices.asmx/GetInsertWeeklyReportWithExtendedUpdate',
@@ -1835,6 +1860,14 @@
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
+                    var currentdate2 = yyyy + '-' + mm + '-' + dd;
+                    var datepickertrans = $('#datepickertrans');
+                    //datepickertrans
+                    if (datepickertrans.val() > currentdate2) {
+
+                        alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                        return;
+                    }
 
                     $.ajax({
                         url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
@@ -1903,10 +1936,10 @@
 
 
                 var userid = '<%= Session["UserID"]%>';
-                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                    var lastname = '<%= Session["sEmpEngLastName"] %>';
-                    var engmane = '<%= Session["sEngName"] %>';
-                    var empcode = '<%= Session["EmpCode"] %>';
+                var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                var lastname = '<%= Session["sEmpEngLastName"] %>';
+                var engmane = '<%= Session["sEngName"] %>';
+                var empcode = '<%= Session["EmpCode"] %>';
 
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
@@ -1914,6 +1947,15 @@
                 var yyyy = today.getFullYear();
                 var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                 var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                var currentdate2 = yyyy + '-' + mm + '-' + dd;
+                var datepickertrans = $('#datepickertrans');
+                //datepickertrans
+                if (datepickertrans.val() > currentdate2) {
+
+                    alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                    return;
+                }
 
                 $.ajax({
                     url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
@@ -1992,10 +2034,10 @@
 
 
                 var userid = '<%= Session["UserID"]%>';
-                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                    var lastname = '<%= Session["sEmpEngLastName"] %>';
-                    var engmane = '<%= Session["sEngName"] %>';
-                    var empcode = '<%= Session["EmpCode"] %>';
+                var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                var lastname = '<%= Session["sEmpEngLastName"] %>';
+                var engmane = '<%= Session["sEngName"] %>';
+                var empcode = '<%= Session["EmpCode"] %>';
 
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
@@ -2003,6 +2045,15 @@
                 var yyyy = today.getFullYear();
                 var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                 var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                var currentdate2 = yyyy + '-' + mm + '-' + dd;
+                var datepickertrans = $('#datepickertrans');
+                //datepickertrans
+                if (datepickertrans.val() > currentdate2) {
+
+                    alert(datepickertrans.val() + '  ไม่อนุญาติให้บันทึกข้อมูลเกินวันที่ปัจจุบัน โปรดตรวจสอบ..!  ' + currentdate2);
+                    return;
+                }
 
                 var optionsRadios1 = $('#optionsRadios1');
                 var postedFile = $('#postedFile').val();

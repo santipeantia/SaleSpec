@@ -28,6 +28,8 @@ namespace SaleSpec.pages.masters
 
         dbConnection dbConn = new dbConnection();
 
+        public string sPage = "masters/projectsetup";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
@@ -275,6 +277,8 @@ namespace SaleSpec.pages.masters
                 string strQuantity = Request.Form["Quantity"];
                 string strdatepickerdelivery = Request.Form["datepickerdelivery"];
                 string strselectStatusConID =  Request.Form["selectStatusConID"];
+                string selectStatusID = Request.Form["selectStatusID"];
+                string txtStatusNameEn = Request.Form["txtStatusID"];
 
                 if (strProjectID != "" && strProjectName != "")
                 {
@@ -312,8 +316,8 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@ProdNameEN", SqlDbType.NVarChar).Value = strselectProdName;
                     Comm.Parameters.Add("@ProfID", SqlDbType.NVarChar).Value = strProfID;
                     Comm.Parameters.Add("@ProfNameEN", SqlDbType.NVarChar).Value = strProfID;
-                    Comm.Parameters.Add("@StatusID", SqlDbType.NVarChar).Value = "S00";
-                    Comm.Parameters.Add("@StatusNameEn", SqlDbType.NVarChar).Value = "N/A"; //project step name
+                    Comm.Parameters.Add("@StatusID", SqlDbType.NVarChar).Value = selectStatusID;
+                    Comm.Parameters.Add("@StatusNameEn", SqlDbType.NVarChar).Value = txtStatusNameEn; //project step name
                     Comm.Parameters.Add("@Quantity", SqlDbType.NVarChar).Value = strQuantity;
                     Comm.Parameters.Add("@RefType", SqlDbType.NVarChar).Value = DBNull.Value;
                     Comm.Parameters.Add("@DeliveryDate", SqlDbType.NVarChar).Value = strdatepickerdelivery;
@@ -379,12 +383,14 @@ namespace SaleSpec.pages.masters
                 string strQuantity = Request.Form["QuantityEdit"];
                 string strdatepickerdelivery = Request.Form["datepickerdeliveryEdit"];
                 string strselectStatusConID = Request.Form["selectStatusConIDEdit"];
+                string selectStatusID = Request.Form["selectStatusIDEdit"];
+                string txtStatusNameEn = Request.Form["txtStatusIDEdit"];
 
                 if (strProjectID != "" && strProjectName != "")
                 {
                     ssql = "update adProjects set ProjectID=@ProjectID, ProjectName=@ProjectName, CompanyID=@CompanyID, CompanyName=@CompanyName, " +
                             "   ArchitecID=@ArchitecID, Name=@Name, Location=@Location, MainCons=@MainCons, RefRfDf=@RefRfDf, ProjStep=@ProjStep, ProductType=@ProductType, RefProfile=@RefProfile, ProdTypeID=@ProdTypeID, " +
-                            "   ProdTypeNameEN=@ProdTypeNameEN, ProdID=@ProdID, ProdNameEN=@ProdNameEN, ProfID=@ProfID, ProfNameEN=@ProfNameEN, Quantity=@Quantity, RefType=@RefType, " +
+                            "   ProdTypeNameEN=@ProdTypeNameEN, ProdID=@ProdID, ProdNameEN=@ProdNameEN, ProfID=@ProfID, ProfNameEN=@ProfNameEN, StatusID=@StatusID, StatusNameEn=@StatusNameEn, Quantity=@Quantity, RefType=@RefType, " +
                             "   DeliveryDate=@DeliveryDate, Drawing=@Drawing, TypeID=@TypeID, SaleSpec=@SaleSpec, StatusConID=@StatusConID, LastUpdate=@LastUpdate  " +
                            "where    ProjectID=@ProjectID  ";
 
@@ -411,6 +417,9 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@ProdNameEN", SqlDbType.NVarChar).Value = strselectProdName;
                     Comm.Parameters.Add("@ProfID", SqlDbType.NVarChar).Value = strProfID;
                     Comm.Parameters.Add("@ProfNameEN", SqlDbType.NVarChar).Value = strProfID;
+                    Comm.Parameters.Add("@StatusID", SqlDbType.NVarChar).Value = selectStatusID;
+                    Comm.Parameters.Add("@StatusNameEn", SqlDbType.NVarChar).Value = txtStatusNameEn; //project step name
+
                     Comm.Parameters.Add("@Quantity", SqlDbType.NVarChar).Value = strQuantity;
                     Comm.Parameters.Add("@RefType", SqlDbType.NVarChar).Value = DBNull.Value;
                     Comm.Parameters.Add("@DeliveryDate", SqlDbType.NVarChar).Value = strdatepickerdelivery;

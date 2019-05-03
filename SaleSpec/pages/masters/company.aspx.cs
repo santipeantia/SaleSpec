@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
 using System.Text;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Security.Cryptography;
 
 namespace SaleSpec.pages.masters
 {
@@ -27,6 +29,10 @@ namespace SaleSpec.pages.masters
         public string strTblActive = "";
 
         dbConnection dbConn = new dbConnection();
+
+        ReportDocument rpt = new ReportDocument();
+
+        public string sPage = "masters/company";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -103,7 +109,7 @@ namespace SaleSpec.pages.masters
                 //CompanyID, CompanyName, CompanyName2, Address, ProvinceID, ArchitecName, Phone, Mobile, Email
 
                 ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
-                       "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
+                       "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2, CustTypeID " +
                        "FROM    adCompany a LEFT OUTER JOIN " +
                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID " + 
                        "WHERE a.CompanyID not in ('0') ";
@@ -117,6 +123,7 @@ namespace SaleSpec.pages.masters
                         string strCompanyID = dt.Rows[i]["CompanyID"].ToString();
                         string strCompanyName = dt.Rows[i]["CompanyName"].ToString();
                         string strCompanyName2 = dt.Rows[i]["CompanyName2"].ToString();
+                        string strCustTypeID = dt.Rows[i]["CustTypeID"].ToString();
                         string strAddress = dt.Rows[i]["Address"].ToString();
                         string strProvinceID = dt.Rows[i]["ProvinceID"].ToString();
                         string strContactPerson = dt.Rows[i]["ContactName"].ToString();
@@ -143,6 +150,7 @@ namespace SaleSpec.pages.masters
                                         "     <td>" + strCompanyID + "</td> " +
                                         "     <td>" + strCompanyName + "</td> " +
                                         "     <td>" + strCompanyName2 + "</td> " +
+                                        "     <td class=\"hidden\">" + strCustTypeID + "</td> " +
                                         "     <td>" + strAddress + "</td> " +
                                         "     <td class=\"hidden\">" + strProvinceID + "</td> " +
                                         "     <td>" + strContactPerson + "</td> " +
@@ -181,6 +189,7 @@ namespace SaleSpec.pages.masters
                 string strCompanyID = Request.Form["txtCompanyID"];
                 string strCompanyName = Request.Form["txtCompanyName"];
                 string strCompanyName2 = Request.Form["txtCompanyName2"];
+                string strCustTypeID = Request.Form["selectCustTypeID"];
                 string strAddress = Request.Form["txtAddress"];
                 string strProvinceID = Request.Form["txtProvinceID"];
                 string strContactName = Request.Form["txtContactName"];
@@ -191,8 +200,8 @@ namespace SaleSpec.pages.masters
 
                 if (strCompanyName != "" && strCompanyName2 != "")
                 {
-                    ssql = "insert into adCompany (CompanyName, CompanyName2, Address, ProvinceID, ContactName, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate) " +
-                           "values    (@CompanyName, @CompanyName2, @Address, @ProvinceID, @ContactName, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate)  ";
+                    ssql = "insert into adCompany (CompanyName, CompanyName2, CustTypeID, Address, ProvinceID, ContactName, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate) " +
+                           "values    (@CompanyName, @CompanyName2, @CustTypeID, @Address, @ProvinceID, @ContactName, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
@@ -201,6 +210,7 @@ namespace SaleSpec.pages.masters
                     Comm.Transaction = transac;
                     Comm.Parameters.Add("@CompanyName", SqlDbType.NVarChar).Value = strCompanyName;
                     Comm.Parameters.Add("@CompanyName2", SqlDbType.NVarChar).Value = strCompanyName2;
+                    Comm.Parameters.Add("@CustTypeID", SqlDbType.NVarChar).Value = strCustTypeID;
                     Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
                     Comm.Parameters.Add("@ProvinceID", SqlDbType.NVarChar).Value = strProvinceID;
                     Comm.Parameters.Add("@ContactName", SqlDbType.NVarChar).Value = strContactName;
@@ -248,6 +258,7 @@ namespace SaleSpec.pages.masters
                 string strCompanyID = Request.Form["txtCompanyIDEdit"];
                 string strCompanyName = Request.Form["txtCompanyNameEdit"];
                 string strCompanyName2 = Request.Form["txtCompanyName2Edit"];
+                string strCustTypeID = Request.Form["selectCustTypeIDEdit"];
                 string strAddress = Request.Form["txtAddressEdit"];
                 string strProvinceID = Request.Form["txtProvinceIDEdit"];
                 string strContactName = Request.Form["txtContactNameEdit"];
@@ -258,7 +269,7 @@ namespace SaleSpec.pages.masters
 
                 if (strCompanyID != "" && strCompanyName != "")
                 {
-                    ssql = "update  adCompany set CompanyName=@CompanyName, CompanyName2=@CompanyName2, Address=@Address, ProvinceID=@ProvinceID, " +
+                    ssql = "update  adCompany set CompanyName=@CompanyName, CompanyName2=@CompanyName2, CustTypeID=@CustTypeID, Address=@Address, ProvinceID=@ProvinceID, " +
                            "        ContactName=@ContactName, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate " +
                            "where   CompanyID=@CompanyID  ";
 
@@ -270,6 +281,7 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompanyID;
                     Comm.Parameters.Add("@CompanyName", SqlDbType.NVarChar).Value = strCompanyName;
                     Comm.Parameters.Add("@CompanyName2", SqlDbType.NVarChar).Value = strCompanyName2;
+                    Comm.Parameters.Add("@CustTypeID", SqlDbType.NVarChar).Value = strCustTypeID;
                     Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
                     Comm.Parameters.Add("@ProvinceID", SqlDbType.NVarChar).Value = strProvinceID;
                     Comm.Parameters.Add("@ContactName", SqlDbType.NVarChar).Value = strContactName;
@@ -356,10 +368,11 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
+                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.CustTypeID, c.CustTypeDesc, a.Address, a.ProvinceID, a.ContactName, " +
                         "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
                         "FROM    adCompany a LEFT OUTER JOIN " +
-                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID " +
+                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID  left join " +
+                        "        adCustomerType c on a.CustTypeID=c.CustTypeID " +
                         "WHERE a.CompanyID not in ('0') ";
 
                 dt = new DataTable();
@@ -395,6 +408,43 @@ namespace SaleSpec.pages.masters
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                               "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
                               "</div>";
+            }
+        }
+
+        protected void btnDownload_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+                ssql = "spPrintCompany";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    rpt.Load(Server.MapPath("../reports/rptPrintCompany.rpt"));
+
+                    reports.dsCompanies dsCompanies = new reports.dsCompanies();
+                    dsCompanies.Merge(dt);
+
+                    rpt.SetDataSource(dt);
+                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ExportCompany"+ strDate);
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error GetOrderCharge..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
             }
         }
     }

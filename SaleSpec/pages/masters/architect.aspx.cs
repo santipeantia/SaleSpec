@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
 using System.Text;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Security.Cryptography;
 
 
 namespace SaleSpec.pages.masters
@@ -28,6 +30,10 @@ namespace SaleSpec.pages.masters
         public string strTblActive = "";
 
         dbConnection dbConn = new dbConnection();
+
+        ReportDocument rpt = new ReportDocument();
+
+        public string sPage = "masters/architect";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -54,9 +60,11 @@ namespace SaleSpec.pages.masters
                 //ssql = "SELECT ArchitecID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email, Status='Confirmed' FROM adArchitecture ";
 
                 ssql = "SELECT a.CompanyID, a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
-                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
+                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2, a.GradeID, c.GradeDesc " +
                        "FROM adArchitecture AS a LEFT OUTER JOIN " + 
-                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
+                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID LEFT JOIN " + 
+                       "        adGrade c on a.GradeID=c.GradeID ";
+
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
@@ -76,6 +84,7 @@ namespace SaleSpec.pages.masters
                         string strEmail = dt.Rows[i]["Email"].ToString();
                         string strStatusConID = dt.Rows[i]["StatusConID"].ToString();
                         string strStatus = dt.Rows[i]["ConDesc2"].ToString();
+                        string strGradeID = dt.Rows[i]["GradeID"].ToString();
 
                         if (strStatusConID == "0")
                         {
@@ -103,6 +112,8 @@ namespace SaleSpec.pages.masters
                                         "     <td>" + strEmail + "</td> " +
                                         "     <td class=\"hidden\">" + strStatusConID + "</td> " +
                                         "     <td>" + strStatus + "</td> " +
+                                        "     <td class=\"hidden\">" + strGradeID + "</td> " +
+                                        
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
@@ -159,13 +170,14 @@ namespace SaleSpec.pages.masters
                 string strMobile = Request.Form["txtMobile"];
                 string strEmail = Request.Form["txtEmail"];
                 string strStatusConID = Request.Form["selectStatusConID"];
+                string strGradeID = Request.Form["selectGradeID"];
 
                 if (strFirstName != "" && strLastName != "")
                 {
                     ssql = "insert into adArchitecture (ArchitecID, CompanyID, Name, FirstName, LastName, NickName, Position, " +
-                           "       Address, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate) " +
+                           "       Address, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate, GradeID) " +
                            "values  (@ArchitecID, @CompanyID, @Name, @FirstName, @LastName, @NickName, @Position, " +
-                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate)  ";
+                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate @GradeID)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
@@ -186,6 +198,7 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
                     Comm.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
                     Comm.ExecuteNonQuery();
 
                 }
@@ -232,11 +245,12 @@ namespace SaleSpec.pages.masters
                 string strMobile = Request.Form["txtMobileEdit"];
                 string strEmail = Request.Form["txtEmailEdit"];
                 string strStatusConID = Request.Form["selectStatusConIDEdit"];
+                string strGradeID = Request.Form["selectGradeIDEdit"];
 
                 if (strFirstName != "" && strLastName != "")
                 {
                     ssql = "update  adArchitecture set CompanyID=@CompanyID, Name=@Name, FirstName=@FirstName, LastName=@LastName, NickName=@NickName, Position=@Position, " +
-                           "       Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate " +
+                           "       Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate, GradeID=@GradeID " +
                            "where  ArchitecID=@ArchitecID ";
 
                     Comm = new SqlCommand();
@@ -257,6 +271,7 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
                     Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
                     Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
                     Comm.ExecuteNonQuery();
 
                 }
@@ -376,6 +391,43 @@ namespace SaleSpec.pages.masters
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                               "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
                               "</div>";
+            }
+        }
+
+        protected void btnDownload_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+                ssql = "spPrintArchitect";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    rpt.Load(Server.MapPath("../reports/rptPrintArchitect.rpt"));
+
+                    reports.dsArchitects dsArchitects = new reports.dsArchitects();
+                    dsArchitects.Merge(dt);
+
+                    rpt.SetDataSource(dt);
+                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, true, "ExportArchitect" + strDate);
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error Download..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
             }
         }
     }
