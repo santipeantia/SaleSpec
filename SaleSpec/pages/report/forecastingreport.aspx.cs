@@ -9,6 +9,8 @@ namespace SaleSpec.pages.report
 {
     public partial class forecastingreport : System.Web.UI.Page
     {
+        public string sPage = "report/forecastingreport";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

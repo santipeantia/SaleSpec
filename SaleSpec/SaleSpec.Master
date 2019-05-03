@@ -210,7 +210,7 @@
                             </a>
                         </li>
 
-                        <li class="<%= strActiveMasterSetup.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                        <li id="mnuenterprise" runat="server" visible="false"  class="<%= strActiveMasterSetup.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
                             <a href="#">
                                 <i class="fa fa-gear treeview"></i><span class="txtLabel">Enterprise Master</span>
                                 <span class="pull-right-container">
@@ -218,31 +218,31 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="mascusgrade" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/customergrade?opt=cusg"><i class="fa fa-angle-right <%= strTextCustomerGrade.ToString() %>"></i><span class="txtLabel <%= strTextCustomerGrade.ToString() %>">Customer Grade</span></a>
                                 </li>
 
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="mascustype" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/customertype?opt=cus"><i class="fa fa-angle-right <%= strTextCustomerType.ToString() %>"></i><span class="txtLabel <%= strTextCustomerType.ToString() %>">Customer Type</span></a>
                                 </li>
 
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="masprodgroup" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/productgroup?opt=prdg"><i class="fa fa-angle-right <%= strTextProductGroup.ToString() %>"></i><span class="txtLabel <%= strTextProductGroup.ToString() %>">Product Group</span></a>
                                 </li>
 
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="masspecifier" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/specifier?opt=spc"><i class="fa fa-angle-right <%= strTextSpecifier.ToString() %>"></i><span class="txtLabel <%= strTextSpecifier.ToString() %>">Specifier Setup</span></a>
                                 </li>
 
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="mascompany" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a>
                                 </li>
 
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="masarchitect" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/architect?opt=sarc"><i class="fa fa-angle-right <%= strTextArchitect.ToString() %>"></i><span class="txtLabel <%= strTextArchitect.ToString() %>">Architect Setup</span></a>
                                 </li>
 
-                                <li class="<%= strActiveMasterSetup.ToString() %> ">
+                                <li id="masprojsetup" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
                                     <a href="../../pages/masters/projectsetup?opt=prjs"><i class="fa fa-angle-right <%= strTextProjectsetup.ToString() %>"></i><span class="txtLabel <%= strTextProjectsetup.ToString() %>">Projects Setup</span></a>
                                 </li>
 
@@ -257,19 +257,19 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                <li id="transwkr" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/weeklyreport?opt=wkr"><i class="fa fa-angle-right <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a>
                                 </li>
-                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                <li id="transproject" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a>
                                 </li>
-                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                <li id="transappreqnew" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a>
                                 </li>
-                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                <li id="transapprequest" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a>
                                 </li>
-                                <li class="<%= strActiveTransaction.ToString() %> ">
+                                <li id="transsaleonspec" runat="server" visible="false"  class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale On Spec</span></a>
                                 </li>
                             </ul>
@@ -283,34 +283,34 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="reportsalewrk" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/saleweeklyreport?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Sale Weekly Report</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="reportcomreport" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="reportarchitect" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Report</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="reportproject" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Report</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="reportforecasting" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="reportspecintake" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a>
                                 </li>
 
                             </ul>
                         </li>
 
-                        <li class="<%= strActiveActivity.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                        <li id="mnuactivity" runat="server" visible="false" class="<%= strActiveActivity.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
                             <a href="#">
                                 <i class="fa fa-coffee treeview"></i><span class="txtLabel">Activities</span>
                                 <span class="pull-right-container">
@@ -318,15 +318,15 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="<%= strActiveActivity.ToString() %> ">
+                                <li id="actevent" runat="server" visible="false" class="<%= strActiveActivity.ToString() %> ">
                                     <a href="../../pages/activity/eventactivity?opt=evt"><i class="fa fa-angle-right <%= strTextEventActivity.ToString() %>"></i><span class="txtLabel <%= strTextEventActivity.ToString() %>">Event / Activity</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="actpremium" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/activity/premiumgift?opt=preg"><i class="fa fa-angle-right <%= strTextPremiumGift.ToString() %>"></i><span class="txtLabel <%= strTextPremiumGift.ToString() %>">Gift / Premium</span></a>
                                 </li>
 
-                                <li class="<%= strActiveReporting.ToString() %> ">
+                                <li id="actsurprise" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/activity/surprisegift?opt=spg"><i class="fa fa-angle-right <%= strTextSurprise.ToString() %>"></i><span class="txtLabel <%= strTextSurprise.ToString() %>">Surprise Gift</span></a>
                                 </li>
 

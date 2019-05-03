@@ -8,6 +8,9 @@ using System.Text;
 using System.IO;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.OleDb;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Security.Cryptography;
 
 namespace SaleSpec
 {
@@ -50,7 +53,6 @@ namespace SaleSpec
         public string strTextEventActivity = "";
         public string strTextPremiumGift = "";
         public string strTextSurprise = "";
-
 
 
         //public string strTextProductGroup = "";
@@ -120,9 +122,9 @@ namespace SaleSpec
         string ssql;
         string strOpt = "";
 
-        DataTable dt = new DataTable();
-        SqlConnection sqlConn = new SqlConnection();
-        SqlTransaction transac;
+        DataTable dt;
+        //SqlConnection sqlConn = new SqlConnection();
+        //SqlTransaction transac;
 
         dbConnection dbConn = new dbConnection();
 
@@ -132,6 +134,8 @@ namespace SaleSpec
             {
                 Response.Redirect("../../users/login");
             }
+            string sEmpCode = Session["EmpCode"].ToString();
+            GetAllowNavigation(sEmpCode);
 
             strFullName = Session["sEmpEngFirstName"].ToString() + "  "  + Session["sEmpEngLastName"].ToString();
             strDept =  Session["sEngName"].ToString();
@@ -185,6 +189,59 @@ namespace SaleSpec
                 return;
             }
             
+        }
+
+        protected void GetAllowNavigation(string strEmpCode)
+        {
+            try
+            {
+                ssql = "SELECT  mid, UserID, EmpCode, PageURL, isAllow " +
+                        "FROM adUserPermission  " +
+                        "WHERE (EmpCode = '"+ strEmpCode + "') and isAllow='1' ";
+
+                dt = new DataTable();
+                dt = dbConn.GetDataTable(ssql);
+
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string xPage = dt.Rows[i]["PageURL"].ToString();
+
+                        
+                        if (xPage == "Enterprise") { mnuenterprise.Visible = true; }
+                        if (xPage == "masters/customergrade") { mascusgrade.Visible = true; }
+                        if (xPage == "masters/customertype") { mascustype.Visible = true; }
+                        if (xPage == "masters/productgroup") { masprodgroup.Visible = true; }
+                        if (xPage == "masters/specifier") { masspecifier.Visible = true; }
+                        if (xPage == "masters/company") { mascompany.Visible = true; }
+                        if (xPage == "masters/architect") { masarchitect.Visible = true; }
+                        if (xPage == "masters/projectsetup") { masprojsetup.Visible = true; }
+
+                        if (xPage == "trans/weeklyreport") { transwkr.Visible = true; }
+                        if (xPage == "trans/projects") { transproject.Visible = true; }
+                        if (xPage == "trans/apprequest-new") { transappreqnew.Visible = true; }
+                        if (xPage == "trans/apprequest") { transapprequest.Visible = true; }
+                        if (xPage == "trans/saleonspec") { transsaleonspec.Visible = true; }
+
+                        if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }
+                        if (xPage == "report/companyreport") { reportcomreport.Visible = true; }
+                        if (xPage == "report/architectreport") { reportarchitect.Visible = true; }
+                        if (xPage == "report/projectreport") { reportproject.Visible = true; }
+                        if (xPage == "report/forecastingreport") { reportforecasting.Visible = true; }
+                        if (xPage == "report/specintakereport") { reportspecintake.Visible = true; }
+
+                        if (xPage == "Activity") { mnuactivity.Visible = true; }
+                        if (xPage == "activity/eventactivity") { actevent.Visible = true; }
+                        if (xPage == "activity/premiumgift") { actpremium.Visible = true; }
+                        if (xPage == "activity/surprisegift") { actsurprise.Visible = true; }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

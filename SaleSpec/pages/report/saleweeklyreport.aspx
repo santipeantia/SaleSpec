@@ -154,7 +154,7 @@
                                         <label class="txtLabel">Query Info</label>
                                         <div class="">
                                             <%--<button type="button" id="btnQuery" runat="server" onserverclick="btnQuery_Click" class="btn btn-info btn-flat btn-block btn-sm hidden" >Show Report</button>--%>
-                                            <button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show JSON Report</button>
+                                            <button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>
                                         </div>
                                     </div>
                                 </div>

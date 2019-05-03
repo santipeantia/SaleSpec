@@ -28,6 +28,8 @@ namespace SaleSpec.pages.trans
 
         dbConnection dbConn = new dbConnection();
 
+        public string sPage = "trans/apprequest";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

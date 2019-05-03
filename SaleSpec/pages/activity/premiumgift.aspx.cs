@@ -9,6 +9,8 @@ namespace SaleSpec.pages.activity
 {
     public partial class premiumgift : System.Web.UI.Page
     {
+        public string sPage = "activity/premiumgift";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

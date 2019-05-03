@@ -9,6 +9,8 @@ namespace SaleSpec.pages.trans
 {
     public partial class weeklyreport : System.Web.UI.Page
     {
+        public string sPage = "trans/weeklyreport";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //string strUserID = Session["UserID"].ToString();

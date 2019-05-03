@@ -29,6 +29,8 @@ namespace SaleSpec.pages.trans
 
         dbConnection dbConn = new dbConnection();
 
+        public string sPage = "trans/projects";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

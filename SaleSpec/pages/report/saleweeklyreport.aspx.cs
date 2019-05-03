@@ -30,6 +30,8 @@ namespace SaleSpec.pages.report
         public string strTblDetail = "";
         public string strPortOption = "";
 
+        public string sPage = "report/saleweeklyreport";
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             //string strUserID = Session["UserID"].ToString();
@@ -52,6 +54,7 @@ namespace SaleSpec.pages.report
 
                 Comm = new SqlCommand("spGetDataSaleSpec", Conn);
                 Comm.CommandType = CommandType.StoredProcedure;
+                Comm.Parameters.AddWithValue("@SpecID", Session["EmpCode"].ToString());
 
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = Comm;

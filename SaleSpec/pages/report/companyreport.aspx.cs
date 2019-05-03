@@ -9,6 +9,8 @@ namespace SaleSpec.pages.trans
 {
     public partial class companyreport : System.Web.UI.Page
     {
+        public string sPage = "report/companyreport";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
