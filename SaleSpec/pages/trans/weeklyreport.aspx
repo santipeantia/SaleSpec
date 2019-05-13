@@ -2492,7 +2492,7 @@
                                                 <div id="rcorners13">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
-                                                            <label class="txtLabel">Award Main Consumers</label>
+                                                            <label class="txtLabel">Award Main Constructor</label>
                                                             <div class="input-group col-md-12">
                                                                 <input type="text" id="awardmc" name="awardmc" class="form-control input input-sm">
                                                             </div>
@@ -2591,7 +2591,7 @@
 
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-3 col-md-offset-2">
-                                                <label class="txtLabel">Next Visit</label>
+                                                <label class="txtLabel">Next/following</label>
                                                 <div class="input-group date">
                                                     <input type="text" class="form-control input-sm pull-left txtLabel" id="datevisit" value="" autocomplete="off">
                                                     <div class="input-group-addon input-sm">
@@ -2766,7 +2766,7 @@
                                                 <div id="rcorners23">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-1">
-                                                            <label class="txtLabel">Award Main Consumers</label>
+                                                            <label class="txtLabel">Award Main Constructor</label>
                                                             <div class="input-group col-md-12">
                                                                 <input type="text" id="updateawardmc" name="updateawardmc" class="form-control input input-sm">
                                                             </div>
@@ -2865,7 +2865,7 @@
 
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-md-3 col-md-offset-2">
-                                                <label class="txtLabel">Next Visit</label>
+                                                <label class="txtLabel">Next/following</label>
                                                 <div class="input-group date">
                                                     <input type="text" class="form-control input-sm pull-left txtLabel" id="updatevisit" value="" autocomplete="off">
                                                     <div class="input-group-addon input-sm">
