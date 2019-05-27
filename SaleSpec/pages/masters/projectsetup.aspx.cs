@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
 using System.Text;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Security.Cryptography;
 
 namespace SaleSpec.pages.masters
 {
@@ -27,6 +29,7 @@ namespace SaleSpec.pages.masters
         public string strTblActive = "";
 
         dbConnection dbConn = new dbConnection();
+        ReportDocument rpt = new ReportDocument();
 
         public string sPage = "masters/projectsetup";
 
@@ -558,6 +561,43 @@ namespace SaleSpec.pages.masters
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                               "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
                               "</div>";
+            }
+        }
+
+        protected void btnDownload_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+                ssql = "spPrintArchitect";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    rpt.Load(Server.MapPath("../reports/rptPrintArchitect.rpt"));
+
+                    reports.dsArchitects dsArchitects = new reports.dsArchitects();
+                    dsArchitects.Merge(dt);
+
+                    rpt.SetDataSource(dt);
+                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, true, "ExportArchitect" + strDate);
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error Download..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
             }
         }
     }

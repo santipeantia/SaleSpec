@@ -848,11 +848,9 @@ namespace SaleSpec.Class
 
 
         [WebMethod]
-        public void GetInsertWeeklyReportUpdateOther
-            (string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID,
+        public void GetInsertWeeklyReportUpdateOther(string WeekDate, string WeekTime, string CompanyID, string CompanyName, string ArchitecID, string Name, string TransID,
                         string TransNameEN, string ProjectID, string ProjectName, string Location, string TurnKey, string StepID, string StepNameEn, string StatusID, string StatusNameEn,
                         string NewArchitect, string HaveFiles, string FileName, string Remark, string UserID, string EmpCode, string CreatedBy, string CreatedDate)
-           
 
         {
             using (SqlConnection conn = new SqlConnection(cs))

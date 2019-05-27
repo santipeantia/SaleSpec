@@ -542,7 +542,7 @@
                                 <i class="fa fa-plus"></i>
                             </button>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" id="btnDownload" runat="server" onserverclick="btnDownload_click" ><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click"><i class="fa fa-table"></i></button>
                             </div>

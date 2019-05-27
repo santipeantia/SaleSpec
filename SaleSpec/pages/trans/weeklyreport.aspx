@@ -259,7 +259,7 @@
                             Phone: $('#comPhone').val(),
                             Mobile: $('#comMobile').val(),
                             Email: $('#Email').val(),
-                            StatusConID: "0"
+                            StatusConID: "1"
                         },
                         dataType: 'json',
                         success: function (data) {
@@ -378,7 +378,7 @@
                                             Phone: $('#arcPhone').val(),
                                             Mobile: $('#arcMobile').val(),
                                             Email: $('#arcEmail').val(),
-                                            StatusConID: "0"
+                                            StatusConID: "1"
                                         },
                                         dataType: 'json',
                                         success: function (data) {
@@ -1869,6 +1869,8 @@
                         return;
                     }
 
+                    alert(datepickertrans.val());
+
                     $.ajax({
                         url: 'DataServices.asmx/GetInsertWeeklyReportUpdateOther',
                         method: 'POST',
@@ -1884,6 +1886,7 @@
                             ProjectID: null,    // $('#selectTransEntry').val(),
                             ProjectName: null,  //$('#selectTransEntry option:selected').text(),
                             Location: null,     //$('#selectArchitect').val(),
+                            TurnKey: null,
                             StepID: null,       //$('#selectArchitect').val(),
                             StepNameEn: null,   // $('#selectTransEntry option:selected').text(),
                             StatusID: null,     //$('#selectArchitect').val(),
@@ -1899,12 +1902,12 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-
+                            /// to do here
+                            alert('Data saved new architect successfully..!');
                         }
                     });
 
-                    /// to do here
-                    alert('Data saved new architect successfully..!');
+                    
 
                     document.getElementById("divUpdateEntry").style.display = '';
                     document.getElementById("divUpdateEntry").style.display = 'none';
@@ -1972,6 +1975,7 @@
                         ProjectID: null,
                         ProjectName: null,
                         Location: null,
+                        TurnKey: null,
                         StepID: null,
                         StepNameEn: null,
                         StatusID: null,
@@ -2082,6 +2086,7 @@
                                 ProjectID: $('#selectIntakeProject').val(),
                                 ProjectName: $('#selectIntakeProject option:selected').text(),
                                 Location: null,
+                                TurnKey: null,
                                 StepID: null,
                                 StepNameEn: null,
                                 StatusID: $('#selectIntakeStatus').val(),

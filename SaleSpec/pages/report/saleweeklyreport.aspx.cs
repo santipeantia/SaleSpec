@@ -174,6 +174,7 @@ namespace SaleSpec.pages.report
         {
             try
             {
+                string strReportType = Request.Form["selectReportType"];
                 string strPort = Request.Form["selectSalePort"];
                 string strStart = Request.Form["datepickertrans"];
                 string strEnd = Request.Form["datepickerend"];
