@@ -157,6 +157,24 @@ namespace SaleSpec {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportsalewrk;
         
         /// <summary>
+        /// reportnewproject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportnewproject;
+        
+        /// <summary>
+        /// reportspecintake control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportspecintake;
+        
+        /// <summary>
         /// reportcomreport control.
         /// </summary>
         /// <remarks>
@@ -191,15 +209,6 @@ namespace SaleSpec {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportforecasting;
-        
-        /// <summary>
-        /// reportspecintake control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportspecintake;
         
         /// <summary>
         /// mnuactivity control.

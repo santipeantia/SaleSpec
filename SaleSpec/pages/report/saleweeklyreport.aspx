@@ -111,7 +111,7 @@
                                 </div>
 
 
-                                <div class="row" style="margin-left: 30px;">
+                                <%--<div class="row" style="margin-left: 30px;">
                                     <div class="col-md-4">
                                         <label class="txtLabel">Select Reports</label>
                                         <div class="txtLabel">
@@ -120,7 +120,7 @@
                                                 <option value="2">Spec Intake</option>
                                                 <option value="3">Step Design > Bidding </option>
                                                 <option value="4">Step Bidding > Award MC</option>
-                                                <option value="5">Step Award RF > Award RF </option>
+                                                <option value="5">Step Award MC > Award RF </option>
                                                 <option value="6">Project Bidding </option>
                                                 <option value="7">Project Award MC</option>
                                                 <option value="8">Project Award RF</option>
@@ -130,7 +130,7 @@
                                         </div>
                                         <div id="divErrorselectReportType" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <div class="row" style="margin-left: 30px;">
                                     <div class="col-md-4 hidden">

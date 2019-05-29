@@ -287,6 +287,14 @@
                                     <a href="../../pages/report/saleweeklyreport?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Sale Weekly Report</span></a>
                                 </li>
 
+                                <li id="reportnewproject" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/newprojectreport?opt=rptnprj"><i class="fa fa-angle-right <%= strTextNewProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextNewProjectReport.ToString() %>">New Projects Report</span></a>
+                                </li>
+
+                                <li id="reportspecintake" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a>
+                                </li>
+
                                 <li id="reportcomreport" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a>
                                 </li>
@@ -303,9 +311,7 @@
                                     <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a>
                                 </li>
 
-                                <li id="reportspecintake" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a>
-                                </li>
+                                
 
                             </ul>
                         </li>

@@ -43,6 +43,8 @@ namespace SaleSpec
 
         public string strActiveReporting = "";
         public string strTextSaleWeeklyReport = "";
+        public string strTextNewProjectReport = "";
+
         public string strTextReportForecasting = "";
         public string strTextSaleIntake = "";
         public string strTextCompanyReport = "";
@@ -171,6 +173,11 @@ namespace SaleSpec
 
 
                 if (strOpt == "rptswr") { strActiveReporting = "active"; strTextSaleWeeklyReport = "text-red"; return; } else { strActiveReporting = ""; strTextSaleWeeklyReport = ""; }
+                if (strOpt == "rptnprj") { strActiveReporting = "active"; strTextNewProjectReport = "text-red"; return; } else { strActiveReporting = ""; strTextNewProjectReport = ""; }
+
+
+
+
                 if (strOpt == "rcom") { strActiveReporting = "active"; strTextCompanyReport = "text-red"; return; } else { strActiveReporting = ""; strTextCompanyReport = ""; }
                 if (strOpt == "rarc") { strActiveReporting = "active"; strTextArchitectReport = "text-red"; return; } else { strActiveReporting = ""; strTextArchitectReport = ""; }
                 if (strOpt == "rpjc") { strActiveReporting = "active"; strTextProjectReport = "text-red"; return; } else { strActiveReporting = ""; strTextProjectReport = ""; }
@@ -225,6 +232,9 @@ namespace SaleSpec
                         if (xPage == "trans/saleonspec") { transsaleonspec.Visible = true; }
 
                         if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }
+                        if (xPage == "report/newprojectreport") { reportnewproject.Visible = true; }
+
+
                         if (xPage == "report/companyreport") { reportcomreport.Visible = true; }
                         if (xPage == "report/architectreport") { reportarchitect.Visible = true; }
                         if (xPage == "report/projectreport") { reportproject.Visible = true; }
