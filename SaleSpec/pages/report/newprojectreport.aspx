@@ -26,7 +26,7 @@
                 var datepickerend = $('#datepickerend').val();
 
                 $.ajax({
-                    url: 'DataServicesReporting.asmx/GetWeeklyReporting',
+                    url: 'DataServicesReporting.asmx/GetNewProjectReporting',
                     method: 'post',
                     data: {
                         strUserID: selectSaleport,
@@ -66,7 +66,7 @@
                 });
             });
 
-            var btnExportExcel = $('#btnExportExcel');
+            //var btnExportExcel = $('#btnExportExcel');
           
 
         })
@@ -100,7 +100,7 @@
                                             <i class="fa fa-plus"></i>
                                         </button>
                                         <span class="btn-group">
-                                            <button type="button" class="btn btn-default btn-sm hidden" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
+                                            <button id="btnDownload" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF"><i class="fa fa-download"></i></button>
                                             <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
                                             <button id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel"><i class="fa fa-table"></i></button>
                                         </span>

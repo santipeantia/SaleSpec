@@ -1,0 +1,2 @@
+﻿server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;
+server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=Amp88Cloud@2018;

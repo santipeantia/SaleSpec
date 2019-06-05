@@ -9,12 +9,17 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
 using System.Text;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Security.Cryptography;
+
 
 namespace SaleSpec.pages.report
 {
     public partial class newprojectreport : System.Web.UI.Page
     {
         dbConnection dbConn = new dbConnection();
+
+        ReportDocument rpt = new ReportDocument();
 
         string ssql;
         DataTable dt = new DataTable();
@@ -235,6 +240,60 @@ namespace SaleSpec.pages.report
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                               "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
                               "</div>";
+            }
+        }
+
+        protected void btnDownload_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                //string strReportType = Request.Form["selectReportType"];
+                string strPort = Request.Form["selectSalePort"];
+                string strStart = Request.Form["datepickertrans"];
+                string strEnd = Request.Form["datepickerend"];
+
+                ssql = "spWeeklyReporting";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    rpt.Load(Server.MapPath("../reports/rptPrintWeeklyReport.rpt"));
+
+                    reports.dsCompanies dsCompanies = new reports.dsCompanies();
+                    dsCompanies.Merge(dt);
+
+                    rpt.SetDataSource(dt);
+                    rpt.SetParameterValue("UserID", strPort);
+                    rpt.SetParameterValue("StartDate", strStart);
+                    rpt.SetParameterValue("EndDate", strEnd);
+                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ExportWeekly" + strDate);
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error spWeeklyReporting..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
             }
         }
     }

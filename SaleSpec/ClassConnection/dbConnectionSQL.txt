@@ -1,1 +1,1 @@
-﻿server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321; 
+﻿server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;

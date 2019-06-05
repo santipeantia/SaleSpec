@@ -20,6 +20,7 @@ namespace SaleSpec.pages.report
     public class DataServicesReporting : System.Web.Services.WebService
     {
         string cs = "server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;";
+        //string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=Amp88Cloud@2018;";
 
         //get attached
         [WebMethod]

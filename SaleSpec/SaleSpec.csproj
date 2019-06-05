@@ -6501,6 +6501,7 @@
       <DependentUpon>ChartData.edmx</DependentUpon>
       <LastGenOutput>ChartData.cs</LastGenOutput>
     </Content>
+    <Content Include="ClassConnection\dbConnectionSQL - Copy.txt" />
     <Content Include="pages\CanvasJS.html" />
     <Content Include="pages\Charts.aspx" />
     <Content Include="pages\PortChart.aspx" />
@@ -6866,6 +6867,17 @@
     <Content Include="pages\reports\dsCompanies.xss">
       <DependentUpon>dsCompanies.xsd</DependentUpon>
     </Content>
+    <Content Include="pages\reports\dsWeeklyReport.xsc">
+      <DependentUpon>dsWeeklyReport.xsd</DependentUpon>
+    </Content>
+    <None Include="pages\reports\dsWeeklyReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsWeeklyReport.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="pages\reports\dsWeeklyReport.xss">
+      <DependentUpon>dsWeeklyReport.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.3.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.3.2.js" />
@@ -6960,6 +6972,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCompanies.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pages\reports\dsWeeklyReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsWeeklyReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="pages\reports\rptPrintArchitect.cs">
       <DependentUpon>rptPrintArchitect.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -6970,6 +6987,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptPrintCompany.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintWeeklyReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintWeeklyReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\report\DataServicesReporting.asmx.cs">
@@ -7888,6 +7911,10 @@
     <EmbeddedResource Include="pages\reports\rptPrintCompany.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintCompany.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintWeeklyReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintWeeklyReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
