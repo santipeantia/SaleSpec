@@ -254,7 +254,7 @@ namespace SaleSpec.pages.report
                 string strStart = Request.Form["datepickertrans"];
                 string strEnd = Request.Form["datepickerend"];
 
-                ssql = "spWeeklyReporting";
+                ssql = "spNewProjectReporting";
 
                 Conn = dbConn.OpenConn();
                 Comm = new SqlCommand(ssql);
@@ -276,7 +276,7 @@ namespace SaleSpec.pages.report
 
                 if (dt.Rows.Count != 0)
                 {
-                    rpt.Load(Server.MapPath("../reports/rptPrintWeeklyReport.rpt"));
+                    rpt.Load(Server.MapPath("../reports/rptPrintNewProjectReport.rpt"));
 
                     reports.dsCompanies dsCompanies = new reports.dsCompanies();
                     dsCompanies.Merge(dt);
@@ -285,7 +285,7 @@ namespace SaleSpec.pages.report
                     rpt.SetParameterValue("UserID", strPort);
                     rpt.SetParameterValue("StartDate", strStart);
                     rpt.SetParameterValue("EndDate", strEnd);
-                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ExportWeekly" + strDate);
+                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ExportNewProject" + strDate);
                 }
             }
             catch (Exception ex)

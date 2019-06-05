@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsNewProjectReport" targetNamespace="http://tempuri.org/dsNewProjectReport.xsd" xmlns:mstns="http://tempuri.org/dsNewProjectReport.xsd" xmlns="http://tempuri.org/dsNewProjectReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsNewProjectReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsNewProjectReport" msprop:Generator_UserDSName="dsNewProjectReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dsNewProjectReport" msprop:Generator_TableClassName="dsNewProjectReportDataTable" msprop:Generator_TableVarName="tabledsNewProjectReport" msprop:Generator_TablePropName="_dsNewProjectReport" msprop:Generator_RowDeletingName="dsNewProjectReportRowDeleting" msprop:Generator_RowChangingName="dsNewProjectReportRowChanging" msprop:Generator_RowEvHandlerName="dsNewProjectReportRowChangeEventHandler" msprop:Generator_RowDeletedName="dsNewProjectReportRowDeleted" msprop:Generator_UserTableName="dsNewProjectReport" msprop:Generator_RowChangedName="dsNewProjectReportRowChanged" msprop:Generator_RowEvArgName="dsNewProjectReportRowChangeEvent" msprop:Generator_RowClassName="dsNewProjectReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WeekDate" msprop:Generator_ColumnVarNameInTable="columnWeekDate" msprop:Generator_ColumnPropNameInRow="WeekDate" msprop:Generator_ColumnPropNameInTable="WeekDateColumn" msprop:Generator_UserColumnName="WeekDate" type="xs:string" minOccurs="0" />
+              <xs:element name="WeekTime" msprop:Generator_ColumnVarNameInTable="columnWeekTime" msprop:Generator_ColumnPropNameInRow="WeekTime" msprop:Generator_ColumnPropNameInTable="WeekTimeColumn" msprop:Generator_UserColumnName="WeekTime" type="xs:string" minOccurs="0" />
+              <xs:element name="CompanyID" msprop:Generator_ColumnVarNameInTable="columnCompanyID" msprop:Generator_ColumnPropNameInRow="CompanyID" msprop:Generator_ColumnPropNameInTable="CompanyIDColumn" msprop:Generator_UserColumnName="CompanyID" type="xs:string" minOccurs="0" />
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName" type="xs:string" minOccurs="0" />
+              <xs:element name="ArchitecID" msprop:Generator_ColumnVarNameInTable="columnArchitecID" msprop:Generator_ColumnPropNameInRow="ArchitecID" msprop:Generator_ColumnPropNameInTable="ArchitecIDColumn" msprop:Generator_UserColumnName="ArchitecID" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="TransID" msprop:Generator_ColumnVarNameInTable="columnTransID" msprop:Generator_ColumnPropNameInRow="TransID" msprop:Generator_ColumnPropNameInTable="TransIDColumn" msprop:Generator_UserColumnName="TransID" type="xs:string" minOccurs="0" />
+              <xs:element name="TransNameEN" msprop:Generator_ColumnVarNameInTable="columnTransNameEN" msprop:Generator_ColumnPropNameInRow="TransNameEN" msprop:Generator_ColumnPropNameInTable="TransNameENColumn" msprop:Generator_UserColumnName="TransNameEN" type="xs:string" minOccurs="0" />
+              <xs:element name="ProjectID" msprop:Generator_ColumnVarNameInTable="columnProjectID" msprop:Generator_ColumnPropNameInRow="ProjectID" msprop:Generator_ColumnPropNameInTable="ProjectIDColumn" msprop:Generator_UserColumnName="ProjectID" type="xs:string" minOccurs="0" />
+              <xs:element name="ProjectName" msprop:Generator_ColumnVarNameInTable="columnProjectName" msprop:Generator_ColumnPropNameInRow="ProjectName" msprop:Generator_ColumnPropNameInTable="ProjectNameColumn" msprop:Generator_UserColumnName="ProjectName" type="xs:string" minOccurs="0" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" type="xs:string" minOccurs="0" />
+              <xs:element name="StatusID" msprop:Generator_ColumnVarNameInTable="columnStatusID" msprop:Generator_ColumnPropNameInRow="StatusID" msprop:Generator_ColumnPropNameInTable="StatusIDColumn" msprop:Generator_UserColumnName="StatusID" type="xs:string" minOccurs="0" />
+              <xs:element name="StatusNameEn" msprop:Generator_ColumnVarNameInTable="columnStatusNameEn" msprop:Generator_ColumnPropNameInRow="StatusNameEn" msprop:Generator_ColumnPropNameInTable="StatusNameEnColumn" msprop:Generator_UserColumnName="StatusNameEn" type="xs:string" minOccurs="0" />
+              <xs:element name="StepID" msprop:Generator_ColumnVarNameInTable="columnStepID" msprop:Generator_ColumnPropNameInRow="StepID" msprop:Generator_ColumnPropNameInTable="StepIDColumn" msprop:Generator_UserColumnName="StepID" type="xs:string" minOccurs="0" />
+              <xs:element name="StepNameEn" msprop:Generator_ColumnVarNameInTable="columnStepNameEn" msprop:Generator_ColumnPropNameInRow="StepNameEn" msprop:Generator_ColumnPropNameInTable="StepNameEnColumn" msprop:Generator_UserColumnName="StepNameEn" type="xs:string" minOccurs="0" />
+              <xs:element name="Remark" msprop:Generator_ColumnVarNameInTable="columnRemark" msprop:Generator_ColumnPropNameInRow="Remark" msprop:Generator_ColumnPropNameInTable="RemarkColumn" msprop:Generator_UserColumnName="Remark" type="xs:string" minOccurs="0" />
+              <xs:element name="UserID" msprop:Generator_ColumnVarNameInTable="columnUserID" msprop:Generator_ColumnPropNameInRow="UserID" msprop:Generator_ColumnPropNameInTable="UserIDColumn" msprop:Generator_UserColumnName="UserID" type="xs:string" minOccurs="0" />
+              <xs:element name="EmpCode" msprop:Generator_ColumnVarNameInTable="columnEmpCode" msprop:Generator_ColumnPropNameInRow="EmpCode" msprop:Generator_ColumnPropNameInTable="EmpCodeColumn" msprop:Generator_UserColumnName="EmpCode" type="xs:string" minOccurs="0" />
+              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" type="xs:string" minOccurs="0" />
+              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

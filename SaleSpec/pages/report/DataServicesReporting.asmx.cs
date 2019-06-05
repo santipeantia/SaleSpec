@@ -70,5 +70,58 @@ namespace SaleSpec.pages.report
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(weeks));
         }
+
+
+        [WebMethod]
+        public void GetNewProjectReporting(string strUserID, string strStartDate, string strEndDate)
+        {
+            List<GetDataNewProjectReporting> newprojects = new List<GetDataNewProjectReporting>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spNewProjectReporting", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strUserID };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStartDate };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEndDate };
+
+                comm.Parameters.Add(param1);
+                comm.Parameters.Add(param2);
+                comm.Parameters.Add(param3);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read()) {
+                    GetDataNewProjectReporting newproject = new GetDataNewProjectReporting();
+                    newproject.WeekDate = rdr["WeekDate"].ToString();
+                    newproject.WeekTime = rdr["WeekTime"].ToString();
+                    newproject.CompanyID = rdr["CompanyID"].ToString();
+                    newproject.CompanyName = rdr["CompanyName"].ToString();
+                    newproject.ArchitecID = rdr["ArchitecID"].ToString();
+                    newproject.Name = rdr["Name"].ToString();
+                    newproject.ProjectID = rdr["ProjectID"].ToString();
+                    newproject.ProjectName = rdr["ProjectName"].ToString();
+                    newproject.Location = rdr["Location"].ToString();
+                    newproject.StatusID = rdr["StatusID"].ToString();
+                    newproject.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    newproject.StepID = rdr["StepID"].ToString();
+                    newproject.StepNameEn = rdr["StepNameEn"].ToString();
+                    newproject.Remark = rdr["Remark"].ToString();
+                    newproject.UserID = rdr["UserID"].ToString();
+                    newproject.EmpCode = rdr["EmpCode"].ToString();
+                    newproject.CreatedBy = rdr["CreatedBy"].ToString();
+                    newproject.CreatedDate = rdr["CreatedDate"].ToString();
+                    newprojects.Add(newproject);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(newprojects));
+
+        }
+
+
+
     }
 }
