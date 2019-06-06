@@ -477,7 +477,9 @@
 
             var btnSaveHistoryNewProject = $('#btnSaveHistoryNewProject');
             btnSaveHistoryNewProject.click(function () {
-                
+
+                $('#btnSaveHistoryNewProject').prop('disabled', true);
+
                 var chkValidate = 'false';
                 var ProjName = $('#ProjName');
                 var newLocation = $('#newLocation');
@@ -700,6 +702,8 @@
                                         document.getElementById("divNewProduct").style.display = '';
                                         document.getElementById("divNewProduct").style.display = 'normal';
 
+                                         $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                                     });
                                 }
                             }
@@ -719,6 +723,8 @@
 
             var btnSaveHistoryNewProduct = $('#btnSaveHistoryNewProduct');
             btnSaveHistoryNewProduct.click(function () {
+                $('#btnSaveHistoryNewProduct').prop('disabled', true);
+
                 var chkValidate = 'false';
                 var ProjName = $('#ProjName');
                 var newLocation = $('#newLocation');
@@ -924,6 +930,8 @@
 
                         document.getElementById("divNewProduct").style.display = '';
                         document.getElementById("divNewProduct").style.display = 'normal';
+
+                        $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     } else {
                         alert('Warning, \n\When you create new transaction must be select step design only..!');
@@ -1395,6 +1403,8 @@
             // ****** click save update project ******
             var btnSaveHistoryUpdateProject = $('#btnSaveHistoryUpdateProject');
             btnSaveHistoryUpdateProject.click(function () {
+                $('#btnSaveHistoryUpdateProject').prop('disabled', true);
+
                 var chkValidate = 'false';
                 var ProjectID = $('#selectUpdteProject').val();
                 var ProjName = $('#selectUpdteProject option:selected').text();
@@ -1598,6 +1608,8 @@
                     document.getElementById("divUpdateNewProduct").style.display = '';
                     document.getElementById("divUpdateNewProduct").style.display = 'normal';
 
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+
                 } else {
                     alert('Warnning, The data is not completed please check..!');
                 }
@@ -1606,6 +1618,8 @@
             // codding.......
             var btnSaveHistoryUpdateProduct = $('#btnSaveHistoryUpdateProduct');
             btnSaveHistoryUpdateProduct.click(function () {
+                $('#btnSaveHistoryUpdateProduct').prop('disabled', true);
+
                 var chkValidate = 'false';
                 var ProjectID = $('#selectUpdteProject').val();
                 var ProjName = $('#selectUpdteProject option:selected').text();
@@ -1809,6 +1823,7 @@
                     document.getElementById("divUpdateNewProduct").style.display = '';
                     document.getElementById("divUpdateNewProduct").style.display = 'normal';
 
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                 } else {
                     alert('Warnning, The data is not completed please check..!');
@@ -1819,6 +1834,8 @@
 
             var btnSaveNewArchitect = $('#btnSaveNewArchitect');
             btnSaveNewArchitect.click(function () {
+                $('#btnSaveNewArchitect').prop('disabled', true);
+
                 var chkValidate = 'false';
                 var newarchitect = $('#newarchitect').val();
                 var detailarchitect = $('#detailarchitect').val();
@@ -1904,6 +1921,7 @@
                         success: function (data) {
                             /// to do here
                             alert('Data saved new architect successfully..!');
+                            $('#btnSaveNewArchitect').prop('disabled', false);
                         }
                     });
 
@@ -1923,6 +1941,7 @@
 
             var btnOtherDetail = $('#btnOtherDetail');
             btnOtherDetail.click(function () {
+                $('#btnOtherDetail').prop('disabled', true);
 
                 //var otherdetail = $('#otherdetail').val();
                 var otherdetail = $('#otherdetail').val();
@@ -1991,12 +2010,11 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-
+                         /// to do here
+                        alert('Data saved other details successfully..!');
+                        $('#btnOtherDetail').prop('disabled', false);
                     }
                 });
-
-                /// to do here
-                alert('Data saved other details successfully..!');
             });
             // ******* End function update project status *******
 
