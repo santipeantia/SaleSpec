@@ -204,7 +204,7 @@
 
                         <li id="mnuDashboard" runat="server" class="<%= strActiveDashboard.ToString() %>" style="border-top: 1px solid #dddddd;">
                             <%--<a href="../../pages/dashboard?opt=dashboard">--%>
-                            <a href="../../pages/">
+                            <a href="../../pages/home/">
                                 <i class="fa fa-dashboard"></i>
                                 <span class="txtLabel <%= strTextRedDashboard.ToString() %>">Dashboard</span>
                             </a>

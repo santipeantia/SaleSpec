@@ -76,7 +76,7 @@ public partial class pages_users_login : System.Web.UI.Page
                     Session["sEmpNickName"] = dt.Rows[0]["sEmpNickName"].ToString();
 
                     //Response.Redirect("../byksales/salesrecords?opt=salerec");
-                    Response.Redirect("../../pages/");
+                    Response.Redirect("../../pages/home/");
 
                 }
                 else

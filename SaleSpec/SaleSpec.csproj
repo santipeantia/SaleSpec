@@ -6504,6 +6504,8 @@
     <Content Include="ClassConnection\dbConnectionSQL - Copy.txt" />
     <Content Include="pages\CanvasJS.html" />
     <Content Include="pages\Charts.aspx" />
+    <Content Include="pages\home\default.aspx" />
+    <Content Include="pages\home\PortChart.aspx" />
     <Content Include="pages\PortChart.aspx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
@@ -6963,6 +6965,20 @@
     </Compile>
     <Compile Include="pages\Charts.aspx.designer.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\home\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\home\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\home\PortChart.aspx.cs">
+      <DependentUpon>PortChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\home\PortChart.aspx.designer.cs">
+      <DependentUpon>PortChart.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\PortChart.aspx.cs">
       <DependentUpon>PortChart.aspx</DependentUpon>
