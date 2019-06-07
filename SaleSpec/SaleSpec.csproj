@@ -6884,6 +6884,17 @@
     <Content Include="pages\reports\dsNewProjectReport.xss">
       <DependentUpon>dsNewProjectReport.xsd</DependentUpon>
     </Content>
+    <Content Include="pages\reports\dsSpecIntakeReport.xsc">
+      <DependentUpon>dsSpecIntakeReport.xsd</DependentUpon>
+    </Content>
+    <None Include="pages\reports\dsSpecIntakeReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsSpecIntakeReport.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="pages\reports\dsSpecIntakeReport.xss">
+      <DependentUpon>dsSpecIntakeReport.xsd</DependentUpon>
+    </Content>
     <None Include="pages\reports\dsWeeklyReport.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -7006,6 +7017,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsNewProjectReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pages\reports\dsSpecIntakeReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsSpecIntakeReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="pages\reports\dsWeeklyReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7021,6 +7037,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptPrintCompany.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintIntakeProjectReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintIntakeProjectReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\reports\rptPrintNewProjectReport.cs">
@@ -7040,6 +7062,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
+    <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
     <Compile Include="pages\report\GetDataWeeklyReporting.cs" />
     <Compile Include="pages\report\newprojectreport.aspx.cs">
       <DependentUpon>newprojectreport.aspx</DependentUpon>
@@ -7952,6 +7975,10 @@
     <EmbeddedResource Include="pages\reports\rptPrintCompany.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintCompany.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintIntakeProjectReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintIntakeProjectReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\reports\rptPrintNewProjectReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
