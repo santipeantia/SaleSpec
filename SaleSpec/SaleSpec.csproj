@@ -6502,6 +6502,7 @@
       <LastGenOutput>ChartData.cs</LastGenOutput>
     </Content>
     <Content Include="ClassConnection\dbConnectionSQL - Copy.txt" />
+    <Content Include="index.html" />
     <Content Include="pages\CanvasJS.html" />
     <Content Include="pages\Charts.aspx" />
     <Content Include="pages\home\default.aspx" />
