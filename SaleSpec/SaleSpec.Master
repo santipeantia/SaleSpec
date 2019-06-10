@@ -340,6 +340,14 @@
                         </li>
 
                         <li style="border-top: 1px solid #dddddd;">
+                            <a href="../../pages/help/salespec_guide.pdf" target="_blank">
+                                <i class="fa fa-question-circle"></i>
+                                <span class="txtLabel">Help</span>
+                            </a>
+                        </li>
+                        <%--<li style="border-top: 1px solid #dddddd;"></li>--%>
+
+                        <li style="border-top: 1px solid #dddddd;">
                             <a href="../../pages/users/logout">
                                 <i class="fa fa-power-off"></i>
                                 <span class="txtLabel">Sign Out</span>

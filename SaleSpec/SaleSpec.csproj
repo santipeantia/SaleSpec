@@ -6854,6 +6854,7 @@
     <Content Include="pages\reports\dsArchitects.xsc">
       <DependentUpon>dsArchitects.xsd</DependentUpon>
     </Content>
+    <Content Include="pages\help\salespec_guide.pdf" />
     <None Include="pages\reports\dsArchitects.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
