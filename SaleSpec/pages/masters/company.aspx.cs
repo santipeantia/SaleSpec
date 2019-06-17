@@ -87,7 +87,7 @@ namespace SaleSpec.pages.masters
                                         "     <td>" + strStatusDesc + "</td> " +
                                         "     <td>" + strStatusDetails + "</td> " +
                                         "     <td style=\"width: 20px; text-align: center;\"> " +
-                                        "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
+                                        "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i>aaa</a></td> " +
                                         "</tr>";
                     }
                 }

@@ -644,7 +644,8 @@
                                             method: 'POST',
                                             data: {
                                                 WeekDate: $('#datepickertrans').val(),
-                                                WeekTime: $('#inputtime').val(),
+                                                //WeekTime: $('#inputtime').val(),
+                                                WeekTime: $('#selecttime option:selected').text(),
                                                 CompanyID: $('#selectCompany').val(),
                                                 CompanyName: $('#selectCompany option:selected').text(),
                                                 ArchitecID: $('#selectArchitect').val(),
@@ -874,7 +875,8 @@
                             method: 'POST',
                             data: {
                                 WeekDate: $('#datepickertrans').val(),
-                                WeekTime: $('#inputtime').val(),
+                                //WeekTime: $('#inputtime').val(),
+                                WeekTime: $('#selecttime option:selected').text(),
                                 CompanyID: $('#selectCompany').val(),
                                 CompanyName: $('#selectCompany option:selected').text(),
                                 ArchitecID: $('#selectArchitect').val(),
@@ -1549,7 +1551,8 @@
                         method: 'POST',
                         data: {
                             WeekDate: $('#datepickertrans').val(),
-                            WeekTime: $('#inputtime').val(),
+                            //WeekTime: $('#inputtime').val(),
+                            WeekTime: $('#selecttime option:selected').text(),
                             CompanyID: $('#selectCompany').val(),
                             CompanyName: $('#selectCompany option:selected').text(),
                             ArchitecID: $('#selectArchitect').val(),
@@ -1764,7 +1767,8 @@
                         method: 'POST',
                         data: {
                             WeekDate: $('#datepickertrans').val(),
-                            WeekTime: $('#inputtime').val(),
+                            //WeekTime: $('#inputtime').val(),
+                            WeekTime: $('#selecttime option:selected').text(),
                             CompanyID: $('#selectCompany').val(),
                             CompanyName: $('#selectCompany option:selected').text(),
                             ArchitecID: $('#selectArchitect').val(),
@@ -1893,7 +1897,8 @@
                         method: 'POST',
                         data: {
                             WeekDate: $('#datepickertrans').val(),
-                            WeekTime: $('#inputtime').val(),
+                            //WeekTime: $('#inputtime').val(),
+                            WeekTime: $('#selecttime option:selected').text(),
                             CompanyID: $('#selectCompany').val(),
                             CompanyName: $('#selectCompany option:selected').text(),
                             ArchitecID: $('#selectArchitect').val(),
@@ -1984,7 +1989,8 @@
                     method: 'POST',
                     data: {
                         WeekDate: $('#datepickertrans').val(),
-                        WeekTime: $('#inputtime').val(),
+                        //WeekTime: $('#inputtime').val(),
+                        WeekTime: $('#selecttime option:selected').text(),
                         CompanyID: $('#selectCompany').val(),
                         CompanyName: $('#selectCompany option:selected').text(),
                         ArchitecID: $('#selectArchitect').val(),
@@ -2094,7 +2100,8 @@
                             method: 'POST',
                             data: {
                                 WeekDate: $('#datepickertrans').val(),
-                                WeekTime: $('#inputtime').val(),
+                                //WeekTime: $('#inputtime').val(),
+                                WeekTime: $('#selecttime option:selected').text(),
                                 CompanyID: $('#selectCompany').val(),
                                 CompanyName: $('#selectCompany option:selected').text(),
                                 ArchitecID: $('#selectArchitect').val(),
@@ -2322,14 +2329,57 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                        <div class="bootstrap-timepicker">
+                                        <div class="">
                                             <div class="input-group">
                                                 <label class="txtLabel">StartTime</label>
                                                 <div class="input-group">
-                                                    <input type="text" id="inputtime" class="form-control input-sm timepicker txtLabel">
-                                                    <div class="input-group-addon">
+                                                    <input type="text" id="inputtime" class="form-control input-sm timepicker txtLabel hidden">
+                                                    <div class="input-group-addon hidden">
                                                         <i class="fa fa-clock-o"></i>
                                                     </div>
+
+                                                    <span class="txtLabel " style="width: 100%">
+                                                        <select id="selecttime" class="form-control input-sm ">
+                                                            <option value="600">6:00</option>
+                                                            <option value="630">6:30</option>
+                                                            <option value="700">7:00</option>
+                                                            <option value="730">7:30</option>
+                                                            <option value="800">8:00</option>
+                                                            <option value="830">8:30</option>
+                                                            <option value="900">9:00</option>
+                                                            <option value="930">9:30</option>
+                                                            <option value="1000">10:00</option>
+                                                            <option value="1030">10:30</option>
+                                                            <option value="1100">11:00</option>
+                                                            <option value="1130">11:30</option>
+                                                            <option value="1200">12:00</option>
+                                                            <option value="1230">12:30</option>
+                                                            <option value="1300">13:00</option>
+                                                            <option value="1330">13:30</option>
+                                                            <option value="1400">14:00</option>
+                                                            <option value="1430">14:30</option>
+                                                            <option value="1500">15:00</option>
+                                                            <option value="1530">15:30</option>
+                                                            <option value="1600">16:00</option>
+                                                            <option value="1630">16:30</option>
+                                                            <option value="1700">17:00</option>
+                                                            <option value="1730">17:30</option>
+                                                            <option value="1800">18:00</option>
+                                                            <option value="1830">18:30</option>
+                                                            <option value="1900">19:00</option>
+                                                            <option value="1930">19:30</option>
+                                                            <option value="2000">20:00</option>
+                                                            <option value="2030">20:30</option>
+                                                            <option value="2100">21:00</option>
+                                                            <option value="2130">21:30</option>
+                                                            <option value="2200">22:00</option>
+                                                            <option value="2230">22:30</option>
+                                                            <option value="2300">23:00</option>
+                                                            <option value="2330">23:30</option>
+                                                        </select>
+                                                    </span>
+
+
                                                 </div>
                                             </div>
                                         </div>

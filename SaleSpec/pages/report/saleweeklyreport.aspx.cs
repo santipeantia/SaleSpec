@@ -94,6 +94,10 @@ namespace SaleSpec.pages.report
                 string strStart = Request.Form["datepickertrans"];
                 string strEnd = Request.Form["datepickerend"];
 
+                Session["ssPort"] = strPort;
+                Session["ssStart"] = strStart;
+                Session["ssEnd"] = strEnd;
+
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
@@ -142,11 +146,11 @@ namespace SaleSpec.pages.report
                         strTblDetail += "<tr> " +
                                     "    <td>" + WeekDate + "</td> " +
                                    "    <td>" + WeekTime + "</td> " +
-                                   "    <td>" + CompanyID + "</td> " +
+                                   "    <td  class=\"hidden\">" + CompanyID + "</td> " +
                                    "    <td>" + CompanyName + "</td> " +
-                                   "    <td>" + ArchitecID + "</td> " +
+                                   "    <td  class=\"hidden\">" + ArchitecID + "</td> " +
                                    "    <td>" + Name + "</td> " +
-                                   "    <td>" + ProjectID + "</td> " +
+                                   "    <td  class=\"hidden\">" + ProjectID + "</td> " +
                                    "    <td>" + ProjectName + "</td> " +
                                    "    <td>" + Location + "</td> " +
                                    "    <td class=\"hidden\">" + StatusID + "</td> " +
@@ -154,8 +158,9 @@ namespace SaleSpec.pages.report
                                    "    <td>" + Remark + "</td> " +
                                    "    <td>" + CreatedBy + "</td> " +
                                    "    <td>" + CreatedDate + "</td> " +
-                                   //"    <td style=\"width: 20px; text-align: center;\"> " +
-                                   //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"แก้ไข\"><span class='glyphicon glyphicon-edit text-green'></span></a></td> " +
+                                   "    <td style=\"width: 20px; text-align: center;\"> " +
+                                   "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-search text-green\"></i></a></td> " +
+
                                    //"    <td style=\"width: 20px; text-align: center;\"> " +
                                    //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
                                    "</tr> ";
@@ -178,16 +183,20 @@ namespace SaleSpec.pages.report
         protected void btnExportExcel_click(object sender, EventArgs e)
         {
             try
+
+                //Session["ssPort"] = strPort;
+                //Session["ssStart"] = strStart;
+                //Session["ssEnd"] = strEnd;
             {
                 string strReportType = Request.Form["selectReportType"];
-                string strPort = Request.Form["selectSalePort"];
-                string strStart = Request.Form["datepickertrans"];
-                string strEnd = Request.Form["datepickerend"];
+                string strPort = Session["ssPort"].ToString(); // Request.Form["selectSalePort"];
+                string strStart = Session["ssStart"].ToString(); // Request.Form["datepickertrans"];
+                string strEnd = Session["ssEnd"].ToString(); // Request.Form["datepickerend"];
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spWeeklyReporting", Conn);
+                Comm = new SqlCommand("spWeeklyReportingClear", Conn);
                 Comm.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };

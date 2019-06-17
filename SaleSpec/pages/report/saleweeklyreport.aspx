@@ -175,8 +175,8 @@
                                     <div class="col-md-2">
                                         <label class="txtLabel">Query Info</label>
                                         <div class="">
-                                            <%--<button type="button" id="btnQuery" runat="server" onserverclick="btnQuery_Click" class="btn btn-info btn-flat btn-block btn-sm hidden" >Show Report</button>--%>
-                                            <button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>
+                                            <button type="button" id="btnQuery" runat="server" onserverclick="btnQuery_Click" class="btn btn-info btn-flat btn-block btn-sm" >Show Report</button>
+                                            <%--<button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -193,11 +193,11 @@
                                             <tr>
                                                 <th style="width: 70px;">Date</th>
                                                 <th>Time</th>
-                                                <th>ComID</th>
+                                                <th class="hidden">ComID</th>
                                                 <th>ComName</th>
-                                                <th>ArchID</th>
+                                                <th class="hidden">ArchID</th>
                                                 <th>ArchName</th>
-                                                <th>ProjID</th>
+                                                <th class="hidden">ProjID</th>
                                                 <th>ProjName</th>
                                                 <th>Location</th>
                                                 <th class="hidden">StatusID</th>
@@ -206,7 +206,7 @@
                                                 <th>StepNameEn</th>
                                                 <th>Details</th>
                                                 <th>Updated</th>
-                                                <th>Lasted</th>
+                                                <th>View</th>
                                             </tr>
                                         </thead>
                                         <tbody>
