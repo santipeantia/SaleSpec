@@ -50,11 +50,11 @@
                         $(data).each(function (index, item) {
                             trHTML += '<tr>' +
                                 '<td>' + item.No + '</td>' +
-                                '<td>' + item.ProjectID + '</td>' +
+                                //'<td>' + item.ProjectID + '</td>' +
                                 '<td> ' + item.ProjectName + '</td>' +
-                                '<td>' + item.CompanyID + '</td>' +
+                                //'<td>' + item.CompanyID + '</td>' +
                                 '<td>' + item.CompanyName + '</td>' +
-                                '<td>' + item.ArchitecID + '</td>' +
+                                //'<td>' + item.ArchitecID + '</td>' +
                                 '<td>' + item.Name + '</td>' +
                                 '<td>' + item.Location + '</td>' +
                                 '<td>' + item.ProdTypeNameEN + '</td>' +
@@ -63,6 +63,7 @@
                                 '<td>' + item.DeliveryDate + '</td>' +
                                 '<td>' + item.Quantity + '</td>' +
                                 '<td>' + item.LastUpdate + '</td>' +
+                                '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
                                 '</tr > ';
                         });
 
@@ -90,11 +91,11 @@
                         $(data).each(function (index, item) {
                             trHTML += '<tr>' +
                                 '<td>' + item.No + '</td>' +
-                                '<td>' + item.ProjectID + '</td>' +
+                                //'<td>' + item.ProjectID + '</td>' +
                                 '<td> ' + item.ProjectName + '</td>' +
-                                '<td>' + item.CompanyID + '</td>' +
+                                //'<td>' + item.CompanyID + '</td>' +
                                 '<td>' + item.CompanyName + '</td>' +
-                                '<td>' + item.ArchitecID + '</td>' +
+                                //'<td>' + item.ArchitecID + '</td>' +
                                 '<td>' + item.Name + '</td>' +
                                 '<td>' + item.Location + '</td>' +
                                 '<td>' + item.ProdTypeNameEN + '</td>' +
@@ -103,6 +104,7 @@
                                 '<td>' + item.DeliveryDate + '</td>' +
                                 '<td>' + item.Quantity + '</td>' +
                                 '<td>' + item.LastUpdate + '</td>' +
+                                '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
                                 '</tr > ';
                         });
 
@@ -236,11 +238,11 @@
                                         <thead>
                                             <tr>
                                                 <td>No</td>
-                                                <td>ProjID</td>
+                                                <%--<td>ProjID</td>--%>
                                                 <td>Project Name</td>
-                                                <td>ComID</td>
+                                                <%--<td>ComID</td>--%>
                                                 <td>Company Name</td>
-                                                <td>Architec ID</td>
+                                                <%--<td>Architec ID</td>--%>
                                                 <td>Architec Name</td>
                                                 <td>Location</td>
                                                 <td>ProdType</td>
@@ -249,6 +251,7 @@
                                                 <td>Delivery</td>
                                                 <td>Quantity</td>
                                                 <td>LastUpdate</td>
+                                                <td>#</td>
                                             </tr>
                                         </thead>
                                         <tbody>

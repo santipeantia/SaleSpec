@@ -44,16 +44,16 @@
                             trHTML += '<tr>' +
                                 '<td>' + item.WeekDate + '</td>' +
                                 '<td> ' + item.WeekTime + '</td>' +
-                                '<td>' + item.CompanyID + '</td>' +
+                                //'<td>' + item.CompanyID + '</td>' +
                                 '<td>' + item.CompanyName + '</td>' +
-                                '<td>' + item.ArchitecID + '</td>' +
+                                //'<td>' + item.ArchitecID + '</td>' +
                                 '<td>' + item.Name + '</td>' +
-                                '<td>' + item.ProjectID + '</td>' +
+                                //'<td>' + item.ProjectID + '</td>' +
                                 '<td>' + item.ProjectName + '</td>' +
                                 '<td>' + item.Location + '</td>' +
-                                '<td class="hidden">' + item.StatusID + '</td>' +
+                                //'<td class="hidden">' + item.StatusID + '</td>' +
                                 '<td>' + item.StatusNameEn + '</td>' +
-                                '<td class="hidden">' + item.StepID + '</td>' +
+                                //'<td class="hidden">' + item.StepID + '</td>' +
                                 '<td>' + item.StepNameEn + '</td>' +
                                 '<td>' + item.Remark + '</td>' +
                                 '<td>' + item.CreatedBy + '</td>' +
@@ -193,11 +193,11 @@
                                             <tr>
                                                 <th style="width: 70px;">Date</th>
                                                 <th>Time</th>
-                                                <th>ComID</th>
+                                                <%--<th>ComID</th>--%>
                                                 <th>ComName</th>
-                                                <th>ArchID</th>
+                                                <%--<th>ArchID</th>--%>
                                                 <th>ArchName</th>
-                                                <th>ProjID</th>
+                                                <%--<th>ProjID</th>--%>
                                                 <th>ProjName</th>
                                                 <th>Location</th>
                                                 <th class="hidden">StatusID</th>

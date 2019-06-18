@@ -192,7 +192,7 @@ namespace SaleSpec.pages.report
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spWeeklyReporting", Conn);
+                Comm = new SqlCommand("spNewProjectReporting", Conn);
                 Comm.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };

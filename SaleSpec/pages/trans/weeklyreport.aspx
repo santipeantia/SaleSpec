@@ -2017,10 +2017,11 @@
                     dataType: 'json',
                     success: function (data) {
                          /// to do here
-                        alert('Data saved other details successfully..!');
-                        $('#btnOtherDetail').prop('disabled', false);
+                        
                     }
                 });
+                alert('Data saved other details successfully..!');
+                $('#btnOtherDetail').prop('disabled', false);
             });
             // ******* End function update project status *******
 
