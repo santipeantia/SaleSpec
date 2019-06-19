@@ -43,6 +43,9 @@
         routes.MapPageRoute("pages/report/newprojectreport", "pages/report/newprojectreport", "~/pages/report/newprojectreport.aspx");
 
         routes.MapPageRoute("pages/report/companyreport", "pages/report/companyreport", "~/pages/report/companyreport.aspx");
+        routes.MapPageRoute("pages/report/companyreportview", "pages/report/companyreportview", "~/pages/report/companyreportview.aspx");
+        
+
         routes.MapPageRoute("pages/report/architectreport", "pages/report/architectreport", "~/pages/report/architectreport.aspx");
         routes.MapPageRoute("pages/report/projectreport", "pages/report/projectreport", "~/pages/report/projectreport.aspx");
         routes.MapPageRoute("pages/report/forecastingreport", "pages/report/forecastingreport", "~/pages/report/forecastingreport.aspx");

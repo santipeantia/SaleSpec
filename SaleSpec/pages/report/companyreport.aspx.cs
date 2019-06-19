@@ -95,6 +95,9 @@ namespace SaleSpec.pages.trans
             try
             {
                 string strPort = Request.Form["selectSalePort"];
+
+                Session["ssPort"] = strPort;
+
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlParameter param1 = new SqlParameter();
 
@@ -172,12 +175,14 @@ namespace SaleSpec.pages.trans
                                             "<td class=\"hidden\">" + Phone + "</td>" +
                                             "<td>" + Mobile + "</td>" +
                                             "<td>" + Email + "</td>" +
+                                            "<td><a href=\"../report/companyreportview?opt=rcom&comid=" + CompanyID +"&portid="+ strPort +"\" title=\"View\"><i class=\"fa fa-search text-green\"></i></a></td>" +
                                        "</tr> ";
                     }
 
                     //Response.Write("<script>alert('Data inserted successfully')</script>");
                 }
-                GetDataSalePort();
+
+                 GetDataSalePort();
             }
             catch (Exception ex)
             {
@@ -193,7 +198,17 @@ namespace SaleSpec.pages.trans
         {
             try
             {
-                string strPort = Request.Form["selectSalePort"];
+                if (Session["ssPort"] == null)
+                {
+                    strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> Please get show data before export the report..!  " +
+                           "</div>";
+                    GetDataSalePort();
+                    return;
+                }
+
+                string strPort = Session["ssPort"].ToString(); // Request.Form["selectSalePort"];
+
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlParameter param1 = new SqlParameter();
 

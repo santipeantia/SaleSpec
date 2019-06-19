@@ -10,7 +10,16 @@
 namespace SaleSpec.pages.report {
     
     
-    public partial class projectreport {
+    public partial class companyreportview {
+        
+        /// <summary>
+        /// btnReply control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnReply;
         
         /// <summary>
         /// btnDownload control.
@@ -29,14 +38,5 @@ namespace SaleSpec.pages.report {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
-        
-        /// <summary>
-        /// btnQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnQuery;
     }
 }

@@ -6521,6 +6521,7 @@
     <Content Include="pages\home\default.aspx" />
     <Content Include="pages\home\PortChart.aspx" />
     <Content Include="pages\PortChart.aspx" />
+    <Content Include="pages\report\companyreportview.aspx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\report\newprojectreport.aspx" />
@@ -7071,6 +7072,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>rptPrintWeeklyReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\report\companyreportview.aspx.cs">
+      <DependentUpon>companyreportview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\companyreportview.aspx.designer.cs">
+      <DependentUpon>companyreportview.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\report\DataServicesReporting.asmx.cs">
       <DependentUpon>DataServicesReporting.asmx</DependentUpon>

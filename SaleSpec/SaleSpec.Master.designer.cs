@@ -184,15 +184,6 @@ namespace SaleSpec {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportcomreport;
         
         /// <summary>
-        /// reportarchitect control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportarchitect;
-        
-        /// <summary>
         /// reportproject control.
         /// </summary>
         /// <remarks>
@@ -200,6 +191,15 @@ namespace SaleSpec {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportproject;
+        
+        /// <summary>
+        /// reportarchitect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportarchitect;
         
         /// <summary>
         /// reportforecasting control.

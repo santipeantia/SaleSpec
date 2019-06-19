@@ -299,14 +299,16 @@
                                     <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a>
                                 </li>
 
-                                <li id="reportarchitect" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Report</span></a>
-                                </li>
-
                                 <li id="reportproject" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
-                                    <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Report</span></a>
+                                    <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Status</span></a>
                                 </li>
 
+
+                                <li id="reportarchitect" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Profile</span></a>
+                                </li>
+
+                                
                                 <li id="reportforecasting" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a>
                                 </li>

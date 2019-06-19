@@ -89,17 +89,17 @@
                                         <thead>
                                             <tr>
                                                 <td>Port</td>
-                                                <td>CompanyName</td>
+                                                <td>Company</td>
                                                 <td class="hidden">CompanyName2</td>
-                                                
                                                 <td>Address</td>
-                                                <td>CustTypeID</td>
+                                                <td>CustType</td>
                                                 <td class="hidden">CustTypeDesc</td>
                                                 <td class="hidden">ProvinceID</td>
-                                                <td>ContactName</td>
+                                                <td>Contact</td>
                                                 <td class="hidden">Phone</td>
                                                 <td>Mobile</td>
                                                 <td>Email</td>
+                                                <td>#</td>
                                             </tr>
                                         </thead>
                                         <tbody>
