@@ -6970,6 +6970,7 @@
     <Compile Include="Class\GetDataProjectLastUdate.cs" />
     <Compile Include="Class\GetDataProjectWithPort.cs" />
     <Compile Include="Class\GetDataSpecPerson.cs" />
+    <Compile Include="Class\GetDataSpecPort.cs" />
     <Compile Include="Class\GetDataStatus.cs" />
     <Compile Include="Class\GetDataStatusConfirm.cs" />
     <Compile Include="Class\GetDataStepUpdate.cs" />

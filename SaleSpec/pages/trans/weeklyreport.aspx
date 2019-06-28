@@ -31,6 +31,28 @@
             var selectUpdateStatusDDL = $('#selectUpdateStatus');
             var updatedetail = $('#updatedetail');
 
+            //var selecttimeDDL = $('#selecttime');
+
+            var selectPortDDL = $('#selectPort');
+            var userid0 = '<%= Session["UserID"]%>';
+
+            var userid= userid0;
+
+            $.ajax({
+                url: 'DataServices.asmx/GetSpecPort',
+                method: 'post',
+                data: {
+                    TypeID: userid
+                },
+                dataType: 'json',
+                success: function (data) {
+                    selectPortDDL.empty();
+                    $(data).each(function (index, item) {
+                        selectPortDDL.append($('<option/>', { value: item.SpecID, text: item.FullName }));
+                    });
+                }
+            });
+
 
             selectCompanyDDL.prop('disabled', true);
             selectArchitectDDL.prop('disabled', true);
@@ -187,6 +209,8 @@
                 }
             });
 
+
+           
             //When select architect changed enable trransaction options
             selectArchitectDDL.change(function () {
                 if ($(this).val() == '-1') {
@@ -599,7 +623,7 @@
                 }
 
                 if (chkValidate == 'true') {
-                    var userid = '<%= Session["UserID"]%>';
+                    var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
                     var firstname = '<%= Session["sEmpEngFirstName"] %>';
                     var lastname = '<%= Session["sEmpEngLastName"] %>';
                     var engmane = '<%= Session["sEngName"] %>';
@@ -845,7 +869,7 @@
                 }
 
                 if (chkValidate == 'true') {
-                    var userid = '<%= Session["UserID"]%>';
+                    var userid =  $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
                     var firstname = '<%= Session["sEmpEngFirstName"] %>';
                     var lastname = '<%= Session["sEmpEngLastName"] %>';
                     var engmane = '<%= Session["sEngName"] %>';
@@ -955,7 +979,7 @@
                 else {
                     var selectCompanyDDL = $('#selectCompany option:selected').val();
                     var selectArchitectDDL = $('#selectArchitect option:selected').val();
-                    var userid = '<%= Session["UserID"]%>';
+                    var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
 
                     $.ajax({
                         url: 'DataServices.asmx/GetDataProjectWithPort',
@@ -1524,7 +1548,7 @@
                 }
 
                 if (chkValidate == 'true') {
-                    var userid = '<%= Session["UserID"]%>';
+                    var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
                     var firstname = '<%= Session["sEmpEngFirstName"] %>';
                     var lastname = '<%= Session["sEmpEngLastName"] %>';
                     var engmane = '<%= Session["sEngName"] %>';
@@ -1740,7 +1764,7 @@
                 }
 
                 if (chkValidate == 'true') {
-                    var userid = '<%= Session["UserID"]%>';
+                    var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
                     var firstname = '<%= Session["sEmpEngFirstName"] %>';
                     var lastname = '<%= Session["sEmpEngLastName"] %>';
                     var engmane = '<%= Session["sEngName"] %>';
@@ -1868,11 +1892,11 @@
 
 
                 if (chkValidate == 'true') {
-                    var userid = '<%= Session["UserID"]%>';
-                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
-                        var lastname = '<%= Session["sEmpEngLastName"] %>';
-                        var engmane = '<%= Session["sEngName"] %>';
-                        var empcode = '<%= Session["EmpCode"] %>';
+                    var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
+                    var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                    var lastname = '<%= Session["sEmpEngLastName"] %>';
+                    var engmane = '<%= Session["sEngName"] %>';
+                    var empcode = '<%= Session["EmpCode"] %>';
 
                     var today = new Date();
                     var dd = String(today.getDate()).padStart(2, '0');
@@ -1962,7 +1986,7 @@
                 }
 
 
-                var userid = '<%= Session["UserID"]%>';
+                var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
                 var firstname = '<%= Session["sEmpEngFirstName"] %>';
                 var lastname = '<%= Session["sEmpEngLastName"] %>';
                 var engmane = '<%= Session["sEngName"] %>';
@@ -2062,7 +2086,7 @@
 
 
 
-                var userid = '<%= Session["UserID"]%>';
+                var userid = $('#selectPort option:selected').val(); <%--'<%= Session["UserID"]%>';--%>
                 var firstname = '<%= Session["sEmpEngFirstName"] %>';
                 var lastname = '<%= Session["sEmpEngLastName"] %>';
                 var engmane = '<%= Session["sEngName"] %>';
@@ -2318,7 +2342,20 @@
                                     <span class="description">Details for weekly report</span>
                                 </div>
 
+
                                 <div class="row">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        <label class="txtLabel">Port</label>
+                                        <div class="input-group col-md-12">
+                                            <span class="txtLabel">
+                                                <select id="selectPort" name="selectPort" class="form-control input input-sm " style="width: 100%;">
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
                                     <div class="col-md-4 col-md-offset-2">
                                         <label class="txtLabel">Visit Date</label>
                                         <div class="input-group date">
@@ -2387,6 +2424,8 @@
                                     </div>
                                 </div>
 
+                               
+
                                 <div class="row" style="margin-top: 5px;">
                                     <div class="col-md-6 col-md-offset-2">
                                         <label class="txtLabel">Company</label>
@@ -2433,6 +2472,7 @@
                                             </span>
                                         </div>
                                     </div>
+
                                     <div class="col-md-1 input-group hidden">
                                         <label class="txtLabel">Entry</label>
                                         <div class="">

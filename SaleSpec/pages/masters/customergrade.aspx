@@ -10,7 +10,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-         <%= strMsgAlert %>
+        <%-- <%= strMsgAlert %>--%>
 
         <div class="row">
             <div class="col-xs-12">

@@ -1082,6 +1082,35 @@ namespace SaleSpec.Class
             Context.Response.Write(js.Serialize(specpersonal));
         }
 
+
+        [WebMethod]
+        public void GetSpecPort(string TypeID)
+        {
+            List<GetDataSpecPort> specports = new List<GetDataSpecPort>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetSpecPort", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter() { ParameterName = "@TypeID", Value = TypeID };
+                comm.Parameters.Add(param);
+
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataSpecPort specport = new GetDataSpecPort();
+                    specport.SpecID = rdr["SpecID"].ToString();
+                    specport.FullName = rdr["FullName"].ToString();
+                    specports.Add(specport);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(specports));
+        }
+
+
         [WebMethod]
         public void GetCustomerType()
         {
