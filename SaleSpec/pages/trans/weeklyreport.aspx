@@ -178,6 +178,30 @@
                 }
             });
 
+
+            selectStatusDDL.change(function () {
+                if (($(this).val() == "S03") || ($(this).val() == "S04") || ($(this).val() == "S07")) {
+                    datevisit.value = datepickerdelivery.value;
+                    //datevisit.prop('disabled', true);
+                } else {
+                    datevisit.value = "";
+                    //datevisit.prop('disabled', false);
+                }
+            });
+
+
+            selectUpdateStatusDDL.change(function () {
+                if (($(this).val() == "S03") || ($(this).val() == "S04") || ($(this).val() == "S07")) {
+                    $('#updatevisit').val(updatepickerdelivery.val());
+                    //datevisit.prop('disabled', true);
+
+                    //alert(updatepickerdelivery.val());
+                } else {
+                    updatevisit.value = "";
+                    //datevisit.prop('disabled', false);
+                }
+            });
+
             // ******* Start function create new project *******
             // When company select index change set cascading to architect
             selectCompanyDDL.change(function () {
@@ -518,6 +542,10 @@
                 if (ProjName.val() == '') {
                     document.getElementById("divErrorProjName").style.display = '';
                     document.getElementById("divErrorProjName").style.display = 'normal';
+
+                    alert('Warning message..! Project name is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -529,6 +557,10 @@
                 if (newLocation.val() == '') {
                     document.getElementById("divErrorLocation").style.display = '';
                     document.getElementById("divErrorLocation").style.display = 'normal';
+
+                    alert('Warning message..! Location is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -540,6 +572,10 @@
                 if (selectProjectStep.val() == '-1') {
                     document.getElementById("divErrorProjectStep").style.display = '';
                     document.getElementById("divErrorProjectStep").style.display = 'normal';
+
+                    alert('Warning message..! Project step is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -551,6 +587,10 @@
                 if (selectProduct.val() == '-1') {
                     document.getElementById("divErrorProduct").style.display = '';
                     document.getElementById("divErrorProduct").style.display = 'normal';
+
+                    alert('Warning message..! Product is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                     //alert(selectProduct.val());
@@ -577,6 +617,10 @@
                 if (Quantity.val() == '') {
                     document.getElementById("divErrorQuantity").style.display = '';
                     document.getElementById("divErrorQuantity").style.display = 'normal';
+
+                    alert('Warning message..! Quantity is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -586,9 +630,31 @@
                     chkValidate = 'true';
                 }
 
+                var regEx = /^\d{4}-\d{2}-\d{2}$/;
+                var dateString = datepickerdelivery.val();
+
+                if (!dateString.match(regEx)) {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Format date is incorrect please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+                    
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
                 if (datepickerdelivery.val() == '') {
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Delivery date is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -601,6 +667,10 @@
                 if (datevisit.val() == '') {
                     document.getElementById("divErrorNextVisit").style.display = '';
                     document.getElementById("divErrorNextVisit").style.display = 'normal';
+
+                    alert('Warning message..! Next Following is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -613,10 +683,15 @@
                 if (selectStatus.val() == '-1') {
                     document.getElementById("divErrorStatus").style.display = '';
                     document.getElementById("divErrorStatus").style.display = 'normal';
+
+                    alert('Warning message..! Status is not empty please check...');
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
                 } else {
+
                     document.getElementById("divErrorStatus").style.display = '';
                     document.getElementById("divErrorStatus").style.display = 'none';
                     chkValidate = 'true';
@@ -764,6 +839,10 @@
                 if (ProjName.val() == '') {
                     document.getElementById("divErrorProjName").style.display = '';
                     document.getElementById("divErrorProjName").style.display = 'normal';
+
+                    alert('Warning message..! Project name is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -775,6 +854,10 @@
                 if (newLocation.val() == '') {
                     document.getElementById("divErrorLocation").style.display = '';
                     document.getElementById("divErrorLocation").style.display = 'normal';
+
+                    alert('Warning message..! Location is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -786,6 +869,10 @@
                 if (selectProjectStep.val() == '-1') {
                     document.getElementById("divErrorProjectStep").style.display = '';
                     document.getElementById("divErrorProjectStep").style.display = 'normal';
+
+                    alert('Warning message..! Step name is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -797,6 +884,10 @@
                 if (selectProduct.val() == '-1') {
                     document.getElementById("divErrorProduct").style.display = '';
                     document.getElementById("divErrorProduct").style.display = 'normal';
+
+                    alert('Warning message..! Product type is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                     //alert(selectProduct.val());
@@ -808,21 +899,25 @@
                     //alert(selectProduct.val());
                 }
 
-                if (selectProfile.val() == '-1') {
-                    document.getElementById("divErrorProfile").style.display = '';
-                    document.getElementById("divErrorProfile").style.display = 'normal';
-                    chkValidate = 'false';
-                    return;
+                //if (selectProfile.val() == '-1') {
+                //    document.getElementById("divErrorProfile").style.display = '';
+                //    document.getElementById("divErrorProfile").style.display = 'normal';
+                //    chkValidate = 'false';
+                //    return;
 
-                } else {
-                    document.getElementById("divErrorProfile").style.display = '';
-                    document.getElementById("divErrorProfile").style.display = 'none';
-                    chkValidate = 'true';
-                }
+                //} else {
+                //    document.getElementById("divErrorProfile").style.display = '';
+                //    document.getElementById("divErrorProfile").style.display = 'none';
+                //    chkValidate = 'true';
+                //}
 
                 if (Quantity.val() == '') {
                     document.getElementById("divErrorQuantity").style.display = '';
                     document.getElementById("divErrorQuantity").style.display = 'normal';
+
+                    alert('Warning message..! Quantyti is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -832,9 +927,31 @@
                     chkValidate = 'true';
                 }
 
+                var regEx = /^\d{4}-\d{2}-\d{2}$/;
+                var dateString = datepickerdelivery.val();
+
+                if (!dateString.match(regEx)) {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Format date is incorrect please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+                    
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
                 if (datepickerdelivery.val() == '') {
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Delivery date is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -847,6 +964,10 @@
                 if (datevisit.val() == '') {
                     document.getElementById("divErrorNextVisit").style.display = '';
                     document.getElementById("divErrorNextVisit").style.display = 'normal';
+
+                    alert('Warning message..! Next Following is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -859,6 +980,11 @@
                 if (selectStatus.val() == '-1') {
                     document.getElementById("divErrorStatus").style.display = '';
                     document.getElementById("divErrorStatus").style.display = 'normal';
+
+                    alert('Warning message..! Status name is not empty please check...');
+                    $('#btnSaveHistoryNewProduct').prop('disabled', false);
+
+
                     chkValidate = 'false';
                     return;
 
@@ -1446,6 +1572,10 @@
                 if (ProjName == '') {
                     document.getElementById("divErrorupProjName").style.display = '';
                     document.getElementById("divErrorupProjName").style.display = 'normal';
+
+                    alert('Warning message..! Data is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1457,6 +1587,10 @@
                 if (updateLocation.val() == '') {
                     document.getElementById("divErrorupLocation").style.display = '';
                     document.getElementById("divErrorupLocation").style.display = 'normal';
+
+                    alert('Warning message..! Data location is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1468,6 +1602,10 @@
                 if (selectupdateProjectStep.val() == '-1') {
                     document.getElementById("divErrorupProjectStep").style.display = '';
                     document.getElementById("divErrorupProjectStep").style.display = 'normal';
+
+                    alert('Warning message..! Project step is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1479,6 +1617,10 @@
                 if (selectUpdateProduct.val() == '-1') {
                     document.getElementById("divErrorupProduct").style.display = '';
                     document.getElementById("divErrorupProduct").style.display = 'normal';
+
+                    alert('Warning message..! Product is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1487,22 +1629,25 @@
                     chkValidate = 'true';;
                 }
 
-                if (selectUpdateProfile.val() == '-1') {
-                    document.getElementById("divErrorupProfile").style.display = '';
-                    document.getElementById("divErrorupProfile").style.display = 'normal';
-                    chkValidate = 'false';
-                    return;
+                //if (selectUpdateProfile.val() == '-1') {
+                //    document.getElementById("divErrorupProfile").style.display = '';
+                //    document.getElementById("divErrorupProfile").style.display = 'normal';
+                //    chkValidate = 'false';
+                //    return;
 
-                } else {
-                    document.getElementById("divErrorupProfile").style.display = '';
-                    document.getElementById("divErrorupProfile").style.display = 'none';
-                    chkValidate = 'true';
-                }
+                //} else {
+                //    document.getElementById("divErrorupProfile").style.display = '';
+                //    document.getElementById("divErrorupProfile").style.display = 'none';
+                //    chkValidate = 'true';
+                //}
 
                 if (updateQuantity.val() == '') {
                     document.getElementById("divErrorupQuantity").style.display = '';
                     document.getElementById("divErrorupQuantity").style.display = 'normal';
                     chkValidate = 'false';
+
+                    alert('Warning message..! Quantity is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
                 } else {
@@ -1511,13 +1656,37 @@
                     chkValidate = 'true';
                 }
 
+                var regEx = /^\d{4}-\d{2}-\d{2}$/;
+                var dateString = updatepickerdelivery.val();
+
+                if (!dateString.match(regEx)) {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Format date is incorrect please check...');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+                    
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupDeliveryDate").style.display = '';
+                    document.getElementById("divErrorupDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+
                 if (updatepickerdelivery.val() == '') {
                     document.getElementById("divErrorupDeliveryDate").style.display = '';
                     document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
                     chkValidate = 'false';
+
+                    alert('Warning message..! Delivery date is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
                 } else {
+
+
                     document.getElementById("divErrorupDeliveryDate").style.display = '';
                     document.getElementById("divErrorupDeliveryDate").style.display = 'none';
                     chkValidate = 'true';
@@ -1527,6 +1696,10 @@
                     document.getElementById("divErrorupNextVisit").style.display = '';
                     document.getElementById("divErrorupNextVisit").style.display = 'normal';
                     chkValidate = 'false';
+
+
+                    alert('Warning message..! Next/following is not empty please check..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
                 } else {
@@ -1539,6 +1712,9 @@
                     document.getElementById("divErrorupStatus").style.display = '';
                     document.getElementById("divErrorupStatus").style.display = 'normal';
                     chkValidate = 'false';
+
+                    alert('Warning message..! Please select at least status..');
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
                 } else {
@@ -1638,6 +1814,7 @@
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
 
                 } else {
+                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     alert('Warnning, The data is not completed please check..!');
                 }
             });
@@ -1662,6 +1839,10 @@
                 if (ProjName == '') {
                     document.getElementById("divErrorupProjName").style.display = '';
                     document.getElementById("divErrorupProjName").style.display = 'normal';
+
+                    alert('Warning message..! Project name is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1673,6 +1854,10 @@
                 if (updateLocation.val() == '') {
                     document.getElementById("divErrorupLocation").style.display = '';
                     document.getElementById("divErrorupLocation").style.display = 'normal';
+
+                    alert('Warning message..! Data location is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1684,6 +1869,10 @@
                 if (selectupdateProjectStep.val() == '-1') {
                     document.getElementById("divErrorupProjectStep").style.display = '';
                     document.getElementById("divErrorupProjectStep").style.display = 'normal';
+
+                    alert('Warning message..! Project step is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1695,6 +1884,10 @@
                 if (selectUpdateProduct.val() == '-1') {
                     document.getElementById("divErrorupProduct").style.display = '';
                     document.getElementById("divErrorupProduct").style.display = 'normal';
+
+                    alert('Warning message..! Data product is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {
@@ -1718,6 +1911,10 @@
                 if (updateQuantity.val() == '') {
                     document.getElementById("divErrorupQuantity").style.display = '';
                     document.getElementById("divErrorupQuantity").style.display = 'normal';
+
+                    alert('Warning message..! Quantity is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -1727,9 +1924,32 @@
                     chkValidate = 'true';
                 }
 
+                var regEx = /^\d{4}-\d{2}-\d{2}$/;
+                var dateString = updatepickerdelivery.val();
+
+                if (!dateString.match(regEx)) {
+                    document.getElementById("divErrorDeliveryDate").style.display = '';
+                    document.getElementById("divErrorDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Format date is incorrect please check...');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+                    
+                    chkValidate = 'false';
+                    return;
+                } else {
+                    document.getElementById("divErrorupDeliveryDate").style.display = '';
+                    document.getElementById("divErrorupDeliveryDate").style.display = 'none';
+                    chkValidate = 'true';
+                }
+
+
                 if (updatepickerdelivery.val() == '') {
                     document.getElementById("divErrorupDeliveryDate").style.display = '';
                     document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
+
+                    alert('Warning message..! Delivery Date is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -1742,6 +1962,10 @@
                 if (updatevisit.val() == '') {
                     document.getElementById("divErrorupNextVisit").style.display = '';
                     document.getElementById("divErrorupNextVisit").style.display = 'normal';
+
+                    alert('Warning message..! Data is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -1754,6 +1978,10 @@
                 if (selectUpdateStatus.val() == '-1') {
                     document.getElementById("divErrorupStatus").style.display = '';
                     document.getElementById("divErrorupStatus").style.display = 'normal';
+
+                    alert('Warning message..! Status is not empty please check..');
+                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
 
@@ -1856,6 +2084,8 @@
                 } else {
                     alert('Warnning, The data is not completed please check..!');
                 }
+
+                $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
             });
 
 
@@ -1977,6 +2207,10 @@
                 if (otherdetail == '') {
                     document.getElementById("divErrorDetailOther").style.display = '';
                     document.getElementById("divErrorDetailOther").style.display = 'normal';
+
+                    alert('Warning message..! Description is not empty please check...');
+                    $('#btnOtherDetail').prop('disabled', false);
+
                     chkValidate = 'false';
                     return;
                 } else {

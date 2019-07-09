@@ -55,6 +55,7 @@
                                 '<td>' + item.StatusNameEn + '</td>' +
                                 //'<td class="hidden">' + item.StepID + '</td>' +
                                 '<td>' + item.StepNameEn + '</td>' +
+                                '<td>' + item.Quantity + '</td>' +
                                 '<td>' + item.Remark + '</td>' +
                                 '<td>' + item.CreatedBy + '</td>' +
                                 '<td>' + item.CreatedDate + '</td>' +
@@ -172,6 +173,60 @@
                                         </div>
                                     </div>
 
+                                    
+                                </div>
+
+                                <div class="row" style="margin-left: 30px;">
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">From Quantity </label>
+                                        <div class="txtLabel">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="QuantityStart" name="QuantityStart" value="" autocomplete="off">
+
+                                            <%--<select id="selectStatus" name="selectStatus" class="form-control input-sm" style="width: 100%">--%>
+                                               <%-- <%= strStatusOption %>--%>
+
+                                                <%--<option value="V000">[SELECTED ALL]</option>
+                                                <option value="VL01">จำนวน <= 100</option>
+                                                <option value="VL02">จำนวน <= 200</option>
+                                                <option value="VL03">จำนวน <= 300</option>
+                                                <option value="VL04">จำนวน <= 400</option>
+                                                <option value="VL05">จำนวน <= 500</option>
+                                                <option value="VP01">จำนวน >= 500</option>
+                                                <option value="VP02">จำนวน >= 600</option>
+                                                <option value="VP03">จำนวน >= 700</option>
+                                                <option value="VP04">จำนวน >= 800</option>
+                                                <option value="VP05">จำนวน >= 900</option>
+                                                <option value="VP06">จำนวน >= 1000</option>--%>
+                                           <%-- </select>--%>
+                                        </div>
+                                        <div id="divErrorSelectStatus" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">To Quantity</label>
+                                        <div class="txtLabel">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="QuantityEnd" name="QuantityEnd" value="" autocomplete="off">
+
+                                            <%--<select id="selectStatus" name="selectStatus" class="form-control input-sm" style="width: 100%">--%>
+                                               <%-- <%= strStatusOption %>--%>
+
+                                                <%--<option value="V000">[SELECTED ALL]</option>
+                                                <option value="VL01">จำนวน <= 100</option>
+                                                <option value="VL02">จำนวน <= 200</option>
+                                                <option value="VL03">จำนวน <= 300</option>
+                                                <option value="VL04">จำนวน <= 400</option>
+                                                <option value="VL05">จำนวน <= 500</option>
+                                                <option value="VP01">จำนวน >= 500</option>
+                                                <option value="VP02">จำนวน >= 600</option>
+                                                <option value="VP03">จำนวน >= 700</option>
+                                                <option value="VP04">จำนวน >= 800</option>
+                                                <option value="VP05">จำนวน >= 900</option>
+                                                <option value="VP06">จำนวน >= 1000</option>--%>
+                                           <%-- </select>--%>
+                                        </div>
+                                        <div id="divErrorSelectStatus" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                    </div>
+
                                     <div class="col-md-2">
                                         <label class="txtLabel">Query Info</label>
                                         <div class="">
@@ -179,13 +234,25 @@
                                             <button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="margin-left: 30px;">
-                                    
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">Reporting</label>
+                                        <div>
+                                            <span class="btn-group">
+                                                <button id="Button1" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-danger btn-flat btn-sm " style="width: 50%" data-toggle="tooltip" title="Print PDF">
+                                                    <i class="fa fa-file-pdf-o"></i> Print PDF</button>
+                                                <button id="Button2" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-success btn-flat btn-sm " style="width: 50%" data-toggle="tooltip" title="Print PDF">
+                                                    <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
+
                             <hr />
+
                             <div id="divWeeklyReport">
                                 <div class="row">
                                     <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
@@ -204,6 +271,7 @@
                                                 <th>Status</th>
                                                 <th class="hidden">StepID</th>
                                                 <th>StepNameEn</th>
+                                                <th>Quantity</th>
                                                 <th>Details</th>
                                                 <th>Updated</th>
                                                 <th>Lasted</th>

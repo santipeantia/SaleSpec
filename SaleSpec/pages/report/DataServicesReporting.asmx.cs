@@ -106,6 +106,8 @@ namespace SaleSpec.pages.report
                     newproject.StatusNameEn = rdr["StatusNameEn"].ToString();
                     //newproject.StepID = rdr["StepID"].ToString();
                     newproject.StepNameEn = rdr["StepNameEn"].ToString();
+                    
+                    newproject.Quantity = rdr["Quantity"].ToString();
                     newproject.Remark = rdr["Remark"].ToString();
                     newproject.UserID = rdr["UserID"].ToString();
                     //newproject.EmpCode = rdr["EmpCode"].ToString();

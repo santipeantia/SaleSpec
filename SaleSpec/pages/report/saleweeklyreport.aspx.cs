@@ -360,7 +360,7 @@ namespace SaleSpec.pages.report
                 string strProject = Request.Form["txtProject"];
                 string strLocation = Request.Form["txtLocation"];
                 string strDesc = Request.Form["txtDesc"];
-                string UserID = Session["UserID"].ToString();
+                string UserID = Session["ssPort"].ToString(); // Session["UserID"].ToString();
                 string EmpCode = Session["EmpCode"].ToString();
                 string CreatedBy = Session["sEmpFirstName"].ToString() + "  " + Session["sEmpLastName"].ToString();
                 DateTime CreateDate = DateTime.Now;

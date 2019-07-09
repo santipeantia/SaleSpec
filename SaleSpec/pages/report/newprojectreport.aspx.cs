@@ -34,6 +34,7 @@ namespace SaleSpec.pages.report
         public string strMsgAlert = "";
         public string strTblDetail = "";
         public string strPortOption = "";
+        public string strStatusOption = "";
 
         public string sPage = "report/newprojectreport";
 
@@ -48,6 +49,7 @@ namespace SaleSpec.pages.report
             if (!IsPostBack)
             {
                 GetDataSalePort();
+                GetDataStatus();
             }
         }
 
@@ -90,6 +92,45 @@ namespace SaleSpec.pages.report
             }
         }
 
+        protected void GetDataStatus() {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetStatusReport", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+                //Comm.Parameters.AddWithValue("@SpecID", Session["EmpCode"].ToString());
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string strValue = dt.Rows[i]["StatusID"].ToString();
+                        string strText = dt.Rows[i]["StatusNameTh"].ToString();
+
+                        strStatusOption += "<option value=\"" + strValue + "\">" + strText + "</option>";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+
+        }
+
         protected void btnQuery_Click(object sender, EventArgs e)
         {
             try
@@ -97,6 +138,7 @@ namespace SaleSpec.pages.report
                 string strPort = Request.Form["selectSalePort"];
                 string strStart = Request.Form["datepickertrans"];
                 string strEnd = Request.Form["datepickerend"];
+                string strStatus = Request.Form["selectStatus"];
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
@@ -107,10 +149,12 @@ namespace SaleSpec.pages.report
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                //SqlParameter param4 = new SqlParameter() { ParameterName = "@TransID", Value = strStatus };
 
                 Comm.Parameters.Add(param1);
                 Comm.Parameters.Add(param2);
                 Comm.Parameters.Add(param3);
+                //Comm.Parameters.Add(param4);
                 //conn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = Comm;
@@ -136,6 +180,8 @@ namespace SaleSpec.pages.report
                         string StatusID = dt.Rows[i]["StatusID"].ToString();
                         string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
                         //string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
+
+                        string Quantity = dt.Rows[i]["Quantity"].ToString();
                         string Remark = dt.Rows[i]["Remark"].ToString();
 
                         string UserID = dt.Rows[i]["UserID"].ToString();
@@ -156,6 +202,7 @@ namespace SaleSpec.pages.report
                                    "    <td>" + Location + "</td> " +
                                    "    <td class=\"hidden\">" + StatusID + "</td> " +
                                    "    <td>" + StatusNameEn + "</td> " +
+                                   "    <td>" + Quantity + "</td> " +
                                    "    <td>" + Remark + "</td> " +
                                    "    <td>" + CreatedBy + "</td> " +
                                    "    <td>" + CreatedDate + "</td> " +
