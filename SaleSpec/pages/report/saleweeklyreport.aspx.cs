@@ -194,6 +194,7 @@ namespace SaleSpec.pages.report
                 string strPort = Session["ssPort"].ToString();
                 string strStart = Session["ssStart"].ToString();
                 string strEnd = Session["ssEnd"].ToString();
+                string strSearch = Request.Form["Search"];
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
@@ -204,10 +205,13 @@ namespace SaleSpec.pages.report
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
                 Comm.Parameters.Add(param1);
                 Comm.Parameters.Add(param2);
                 Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
+
                 //conn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = Comm;
@@ -293,6 +297,7 @@ namespace SaleSpec.pages.report
                 string strPort = Session["ssPort"].ToString(); // Request.Form["selectSalePort"];
                 string strStart = Session["ssStart"].ToString(); // Request.Form["datepickertrans"];
                 string strEnd = Session["ssEnd"].ToString(); // Request.Form["datepickerend"];
+                string strSearch = Session["ssSearch"].ToString();
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
@@ -303,10 +308,12 @@ namespace SaleSpec.pages.report
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
                 Comm.Parameters.Add(param1);
                 Comm.Parameters.Add(param2);
                 Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
                 //conn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = Comm;

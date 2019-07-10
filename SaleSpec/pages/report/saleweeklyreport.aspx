@@ -188,7 +188,7 @@
                                     <div class="col-md-4">
                                         <label class="txtLabel">Search</label>
                                         <div class="txtLabel">
-                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="Search" name="Search" value="" autocomplete="off">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="Search" name="Search" value="" autocomplete="off" placeholder="Can you search data in here..">
                                          </div>
                                         <div id="divErrorSearch" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
                                     </div>
@@ -206,7 +206,7 @@
                                         <div>
                                             <span class="">
                                                
-                                                <button id="btnDownloadExcel" runat="server" type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
+                                                <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcel_click" type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
                                                     <i class="fa fa-file-excel-o"></i> Print Excel</button>
                                             </span>
                                         </div>
