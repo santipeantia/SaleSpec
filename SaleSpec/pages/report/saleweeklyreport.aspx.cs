@@ -93,10 +93,12 @@ namespace SaleSpec.pages.report
                 string strPort = Request.Form["selectSalePort"];
                 string strStart = Request.Form["datepickertrans"];
                 string strEnd = Request.Form["datepickerend"];
+                string strSearch = Request.Form["Search"];
 
                 Session["ssPort"] = strPort;
                 Session["ssStart"] = strStart;
                 Session["ssEnd"] = strEnd;
+                Session["ssSearch"] = strSearch;
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
@@ -107,10 +109,12 @@ namespace SaleSpec.pages.report
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
                 Comm.Parameters.Add(param1);
                 Comm.Parameters.Add(param2);
                 Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
                 //conn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = Comm;

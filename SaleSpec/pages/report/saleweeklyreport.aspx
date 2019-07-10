@@ -181,16 +181,37 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                   
+                                </div>
+
+                                <div class="row" style="margin-left: 30px;">
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Search</label>
+                                        <div class="txtLabel">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="Search" name="Search" value="" autocomplete="off">
+                                         </div>
+                                        <div id="divErrorSearch" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                    </div>
+
+                                     <div class="col-md-2">
                                         <label class="txtLabel">Query Info</label>
                                         <div class="">
                                             <button type="button" id="btnQuery" runat="server" onserverclick="btnQuery_Click" class="btn btn-info btn-flat btn-block btn-sm" >Show Report</button>
                                             <%--<button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>--%>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="margin-left: 30px;">
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">Reporting</label>
+                                        <div>
+                                            <span class="">
+                                               
+                                                <button id="btnDownloadExcel" runat="server" type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
+                                                    <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                            </span>
+                                        </div>
+                                    </div>
+
                                     
                                 </div>
                             </div>
