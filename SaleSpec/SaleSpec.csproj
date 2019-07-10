@@ -6903,6 +6903,17 @@
     <Content Include="pages\reports\dsSpecIntakeReport.xsc">
       <DependentUpon>dsSpecIntakeReport.xsd</DependentUpon>
     </Content>
+    <Content Include="pages\reports\dsPrintNewProjectWithOption.xsc">
+      <DependentUpon>dsPrintNewProjectWithOption.xsd</DependentUpon>
+    </Content>
+    <None Include="pages\reports\dsPrintNewProjectWithOption.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintNewProjectWithOption.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="pages\reports\dsPrintNewProjectWithOption.xss">
+      <DependentUpon>dsPrintNewProjectWithOption.xsd</DependentUpon>
+    </Content>
     <None Include="pages\reports\dsSpecIntakeReport.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -7034,6 +7045,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsNewProjectReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pages\reports\dsPrintNewProjectWithOption.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintNewProjectWithOption.xsd</DependentUpon>
+    </Compile>
     <Compile Include="pages\reports\dsSpecIntakeReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7067,6 +7083,12 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintNewProjectReportWithOption.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintNewProjectReportWithOption.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\reports\rptPrintWeeklyReport.cs">
       <AutoGen>True</AutoGen>
@@ -8014,6 +8036,10 @@
     <EmbeddedResource Include="pages\reports\rptPrintNewProjectReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintNewProjectReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintNewProjectReportWithOption.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintNewProjectReportWithOption.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\reports\rptPrintWeeklyReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -202,8 +202,9 @@ namespace SaleSpec.pages.report
                                    "    <td>" + Location + "</td> " +
                                    "    <td class=\"hidden\">" + StatusID + "</td> " +
                                    "    <td>" + StatusNameEn + "</td> " +
-                                   "    <td>" + Quantity + "</td> " +
+
                                    "    <td>" + Remark + "</td> " +
+                                   "    <td>" + Quantity + "</td> " +
                                    "    <td>" + CreatedBy + "</td> " +
                                    "    <td>" + CreatedDate + "</td> " +
                                    //"    <td style=\"width: 20px; text-align: center;\"> " +
@@ -341,6 +342,139 @@ namespace SaleSpec.pages.report
                             "      <strong>Error spWeeklyReporting..!</strong> " + ex.Message + " " +
                             "</div>";
                 return;
+            }
+        }
+
+        protected void btnDownloadExcel_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                //string strReportType = Request.Form["selectReportType"];
+                string strPort = Request.Form["selectSalePort"];
+                string strStart = Request.Form["datepickertrans"];
+                string strEnd = Request.Form["datepickerend"];
+                string strQtyStart = Request.Form["QuantityStart"];
+                string strQtyEnd = Request.Form["QuantityEnd"];
+                string strQtySearch = Request.Form["Search"];
+
+                ssql = "spNewProjectReportingWithSearch";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@QtyStart", Value = strQtyStart };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@QtyEnd", Value = strQtyEnd };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@Search", Value = strQtySearch };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
+                Comm.Parameters.Add(param5);
+                Comm.Parameters.Add(param6);
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                GridView GridviewExport = new GridView();
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    GridviewExport.DataSource = dt;
+                    GridviewExport.DataBind();
+
+                    Response.Clear();
+                    Response.AddHeader("content-disposition", "attachment;filename=ExportReportWithOption_" + strPort + ".xls");
+                    Response.ContentType = "application/ms-excel";
+                    Response.ContentEncoding = System.Text.Encoding.Unicode;
+                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                    System.IO.StringWriter sw = new System.IO.StringWriter();
+                    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                    GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
+                    Response.Write(sw.ToString());
+                    Response.End();
+
+                }
+                Response.Write("<script>alert('Data find not found please check...')</script>");
+                GetDataSalePort();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected void btnDownloadPDF_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                //string strReportType = Request.Form["selectReportType"];
+                string strPort = Request.Form["selectSalePort"];
+                string strStart = Request.Form["datepickertrans"];
+                string strEnd = Request.Form["datepickerend"];
+                string strQtyStart = Request.Form["QuantityStart"];
+                string strQtyEnd = Request.Form["QuantityEnd"];
+                string strQtySearch = Request.Form["Search"];
+
+                ssql = "spNewProjectReportingWithSearch";
+
+                Conn = dbConn.OpenConn();
+                Comm = new SqlCommand(ssql);
+                Comm.Connection = Conn;
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@QtyStart", Value = strQtyStart };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@QtyEnd", Value = strQtyEnd };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@Search", Value = strQtySearch };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
+                Comm.Parameters.Add(param5);
+                Comm.Parameters.Add(param6);
+
+                da = new SqlDataAdapter(Comm);
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    rpt.Load(Server.MapPath("../reports/rptPrintNewProjectReportWithOption.rpt"));
+
+                    reports.dsCompanies dsCompanies = new reports.dsCompanies();
+                    dsCompanies.Merge(dt);
+
+                    rpt.SetDataSource(dt);
+                    rpt.SetParameterValue("UserID", strPort);
+                    rpt.SetParameterValue("StartDate", strStart);
+                    rpt.SetParameterValue("EndDate", strEnd);
+                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ExportReportWithOption_" + strDate);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

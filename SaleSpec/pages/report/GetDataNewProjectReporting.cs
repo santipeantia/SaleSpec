@@ -22,6 +22,7 @@ namespace SaleSpec.pages.report
         public string StatusNameEn { get; set; }
         public string StepID { get; set; }
         public string StepNameEn { get; set; }
+        public string Quantity { get; set; }
         public string Remark { get; set; }
         public string UserID { get; set; }
         public string EmpCode { get; set; }

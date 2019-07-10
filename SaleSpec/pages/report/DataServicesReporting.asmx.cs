@@ -73,7 +73,7 @@ namespace SaleSpec.pages.report
 
 
         [WebMethod]
-        public void GetNewProjectReporting(string strUserID, string strStartDate, string strEndDate)
+        public void GetNewProjectReporting(string strUserID, string strStartDate, string strEndDate, string strQtyStart, string strQtyEnd, string strSearch)
         {
             List<GetDataNewProjectReporting> newprojects = new List<GetDataNewProjectReporting>();
             using (SqlConnection conn = new SqlConnection(cs))
@@ -84,10 +84,16 @@ namespace SaleSpec.pages.report
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strUserID };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStartDate };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEndDate };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@QtyStart", Value = strQtyStart };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@QtyEnd", Value = strQtyEnd };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
                 comm.Parameters.Add(param1);
                 comm.Parameters.Add(param2);
                 comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
+                comm.Parameters.Add(param5);
+                comm.Parameters.Add(param6);
                 conn.Open();
 
                 SqlDataReader rdr = comm.ExecuteReader();
