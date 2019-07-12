@@ -7110,6 +7110,7 @@
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
     <Compile Include="pages\report\GetDataWeeklyReporting.cs" />
+    <Compile Include="pages\report\GetReportProjectStatusByOptions.cs" />
     <Compile Include="pages\report\newprojectreport.aspx.cs">
       <DependentUpon>newprojectreport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -366,5 +366,69 @@ namespace SaleSpec.pages.report
 
         }
 
+
+        [WebMethod]
+        public void GetDataProjectByPortByOption(string strOption, string strDateStart, string strDateEnd, string strUserID, string strQtyStart, string strQtyEnd, string strSearch)
+        {
+
+            List<GetReportProjectStatusByOptions> projects = new List<GetReportProjectStatusByOptions>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetReportProjectStatusByOption", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = strOption };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = strDateStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = strDateEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = strUserID };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strQtyStart };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strQtyEnd };
+                SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strSearch };
+
+                comm.Parameters.Add(param1);
+                comm.Parameters.Add(param2);
+                comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
+                comm.Parameters.Add(param5);
+                comm.Parameters.Add(param6);
+                comm.Parameters.Add(param7);
+
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetReportProjectStatusByOptions project = new GetReportProjectStatusByOptions();
+
+                    project.WeekDate = rdr["WeekDate"].ToString();
+                    project.WeekTime = rdr["WeekTime"].ToString();
+                    project.CompanyName = rdr["CompanyName"].ToString();
+                    project.Name = rdr["Name"].ToString();
+                    project.ProjectID = rdr["ProjectID"].ToString();
+                    project.ProjectName = rdr["ProjectName"].ToString();
+                    project.Location = rdr["Location"].ToString();
+                    project.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    project.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    project.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    project.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    project.NextVisitDate = rdr["NextVisitDate"].ToString();
+                    project.Quantity = rdr["Quantity"].ToString();
+                    project.StepNameA = rdr["StepNameA"].ToString();
+                    project.StepNameB = rdr["StepNameB"].ToString();
+                    project.RefWeekDate = rdr["RefWeekDate"].ToString();
+                    project.Ref1 = rdr["Ref1"].ToString();
+                    project.Ref2 = rdr["Ref2"].ToString();
+                    project.Ref3 = rdr["Ref3"].ToString();
+                    project.RefRemark = rdr["RefRemark"].ToString();
+                    projects.Add(project);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(projects));
+
+        }
+
     }
 }
