@@ -130,23 +130,29 @@ namespace SaleSpec.pages.report
         }
 
         [WebMethod]
-        public void GetDataProjectByPortStatus(string strUserID, string strStatus, string strStartDate, string strEndDate)
+        public void GetDataProjectByPortStatus(string strUserID, string strStatus, string strStartDate, string strEndDate, string strQtyStart, string strQtyEnd, string strSearch)
         {
             List<GetDataProjectByPortStatus> intakeprojects = new List<GetDataProjectByPortStatus>();
             using (SqlConnection conn = new SqlConnection(cs))
             {
-                SqlCommand comm = new SqlCommand("sp_GetDataProjectByPortStatus", conn);
+                SqlCommand comm = new SqlCommand("sp_GetDataProjectByPortStatusOption", conn);
                 comm.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@TypeID", Value = strUserID };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StatusID", Value = strStatus };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@StartDate", Value = strStartDate };
                 SqlParameter param4 = new SqlParameter() { ParameterName = "@EndDate", Value = strEndDate };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@QtyStart", Value = strQtyStart };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@QtyEnd", Value = strQtyEnd };
+                SqlParameter param7 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
                 comm.Parameters.Add(param1);
                 comm.Parameters.Add(param2);
                 comm.Parameters.Add(param3);
                 comm.Parameters.Add(param4);
+                comm.Parameters.Add(param5);
+                comm.Parameters.Add(param6);
+                comm.Parameters.Add(param7);
                 conn.Open();
 
                 SqlDataReader rdr = comm.ExecuteReader();
@@ -154,40 +160,83 @@ namespace SaleSpec.pages.report
                 {
                     GetDataProjectByPortStatus intakeproject = new GetDataProjectByPortStatus();
                     intakeproject.No = rdr["No"].ToString();
-                    intakeproject.ProjectID = rdr["ProjectID"].ToString();
-                    intakeproject.ProjectYear = rdr["ProjectYear"].ToString();
-                    intakeproject.ProjectMonth = rdr["ProjectMonth"].ToString();
-                    intakeproject.ProjectName = rdr["ProjectName"].ToString();
-                    //intakeproject.CompanyID = rdr["CompanyID"].ToString();
+                    intakeproject.WeekDate = rdr["WeekDate"].ToString();
+                    intakeproject.WeekTime = rdr["WeekTime"].ToString();
+                    intakeproject.CompanyID = rdr["CompanyID"].ToString();
                     intakeproject.CompanyName = rdr["CompanyName"].ToString();
-                    //intakeproject.ArchitecID = rdr["ArchitecID"].ToString();
+                    intakeproject.ArchitecID = rdr["ArchitecID"].ToString();
                     intakeproject.Name = rdr["Name"].ToString();
+                    intakeproject.TransID = rdr["TransID"].ToString();
+                    intakeproject.TransNameEN = rdr["TransNameEN"].ToString();
+                    intakeproject.ProjectID = rdr["ProjectID"].ToString();
+                    intakeproject.ProjectName = rdr["ProjectName"].ToString();
                     intakeproject.Location = rdr["Location"].ToString();
                     intakeproject.TurnKey = rdr["TurnKey"].ToString();
-                    intakeproject.MainCons = rdr["MainCons"].ToString();
-                    intakeproject.RefRfDf = rdr["RefRfDf"].ToString();
-                    //intakeproject.ProjStep = rdr["ProjStep"].ToString();
-                    intakeproject.StepNameTh = rdr["StepNameTh"].ToString();
-                    intakeproject.ProductType = rdr["ProductType"].ToString();
-                    intakeproject.RefProfile = rdr["RefProfile"].ToString();
-                    //intakeproject.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    intakeproject.StepID = rdr["StepID"].ToString();
+                    intakeproject.StepNameEn = rdr["StepNameEn"].ToString();
+                    intakeproject.BiddingName1 = rdr["BiddingName1"].ToString();
+                    intakeproject.OwnerName1 = rdr["OwnerName1"].ToString();
+                    intakeproject.BiddingName2 = rdr["BiddingName2"].ToString();
+                    intakeproject.OwnerName2 = rdr["OwnerName2"].ToString();
+                    intakeproject.BiddingName3 = rdr["BiddingName3"].ToString();
+                    intakeproject.OwnerName3 = rdr["OwnerName3"].ToString();
+                    intakeproject.AwardMC = rdr["AwardMC"].ToString();
+                    intakeproject.ContactMC = rdr["ContactMC"].ToString();
+                    intakeproject.AwardRF = rdr["AwardRF"].ToString();
+                    intakeproject.ContactRF = rdr["ContactRF"].ToString();
+                    intakeproject.ProdTypeID = rdr["ProdTypeID"].ToString();
                     intakeproject.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
-                    //intakeproject.ProdID = rdr["ProdID"].ToString();
+                    intakeproject.ProdID = rdr["ProdID"].ToString();
                     intakeproject.ProdNameEN = rdr["ProdNameEN"].ToString();
-                    //intakeproject.ProfID = rdr["ProfID"].ToString();
+                    intakeproject.ProfID = rdr["ProfID"].ToString();
                     intakeproject.ProfNameEN = rdr["ProfNameEN"].ToString();
-                    //intakeproject.StatusID = rdr["StatusID"].ToString();
-                    intakeproject.StatusNameEn = rdr["StatusNameEn"].ToString();
                     intakeproject.Quantity = rdr["Quantity"].ToString();
-                    intakeproject.RefType = rdr["RefType"].ToString();
                     intakeproject.DeliveryDate = rdr["DeliveryDate"].ToString();
-                    //intakeproject.Drawing = rdr["Drawing"].ToString();
-                    intakeproject.TypeID = rdr["TypeID"].ToString();
-                    intakeproject.SaleSpec = rdr["SaleSpec"].ToString();
-                    //intakeproject.StatusConID = rdr["StatusConID"].ToString();
+                    intakeproject.NextVisitDate = rdr["NextVisitDate"].ToString();
+                    intakeproject.StatusID = rdr["StatusID"].ToString();
+                    intakeproject.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    intakeproject.Remark = rdr["Remark"].ToString();
+                    intakeproject.UserID = rdr["UserID"].ToString();
+                    intakeproject.EmpCode = rdr["EmpCode"].ToString();
+                    intakeproject.CreatedBy = rdr["CreatedBy"].ToString();
                     intakeproject.CreatedDate = rdr["CreatedDate"].ToString();
-                    intakeproject.LastUpdate = rdr["LastUpdate"].ToString();
-                    intakeproject.StatusNameTh = rdr["StatusNameTh"].ToString();
+
+
+                    //intakeproject.No = rdr["No"].ToString();
+                    //intakeproject.ProjectID = rdr["ProjectID"].ToString();
+                    //intakeproject.ProjectYear = rdr["ProjectYear"].ToString();
+                    //intakeproject.ProjectMonth = rdr["ProjectMonth"].ToString();
+                    //intakeproject.ProjectName = rdr["ProjectName"].ToString();
+                    ////intakeproject.CompanyID = rdr["CompanyID"].ToString();
+                    //intakeproject.CompanyName = rdr["CompanyName"].ToString();
+                    ////intakeproject.ArchitecID = rdr["ArchitecID"].ToString();
+                    //intakeproject.Name = rdr["Name"].ToString();
+                    //intakeproject.Location = rdr["Location"].ToString();
+                    //intakeproject.TurnKey = rdr["TurnKey"].ToString();
+                    //intakeproject.MainCons = rdr["MainCons"].ToString();
+                    //intakeproject.RefRfDf = rdr["RefRfDf"].ToString();
+                    ////intakeproject.ProjStep = rdr["ProjStep"].ToString();
+                    //intakeproject.StepNameTh = rdr["StepNameTh"].ToString();
+                    //intakeproject.ProductType = rdr["ProductType"].ToString();
+                    //intakeproject.RefProfile = rdr["RefProfile"].ToString();
+                    ////intakeproject.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    //intakeproject.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    ////intakeproject.ProdID = rdr["ProdID"].ToString();
+                    //intakeproject.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    ////intakeproject.ProfID = rdr["ProfID"].ToString();
+                    //intakeproject.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    ////intakeproject.StatusID = rdr["StatusID"].ToString();
+                    //intakeproject.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    //intakeproject.Quantity = rdr["Quantity"].ToString();
+                    //intakeproject.RefType = rdr["RefType"].ToString();
+                    //intakeproject.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    ////intakeproject.Drawing = rdr["Drawing"].ToString();
+                    //intakeproject.TypeID = rdr["TypeID"].ToString();
+                    //intakeproject.SaleSpec = rdr["SaleSpec"].ToString();
+                    ////intakeproject.StatusConID = rdr["StatusConID"].ToString();
+                    //intakeproject.CreatedDate = rdr["CreatedDate"].ToString();
+                    //intakeproject.LastUpdate = rdr["LastUpdate"].ToString();
+                    //intakeproject.StatusNameTh = rdr["StatusNameTh"].ToString();
                     intakeprojects.Add(intakeproject);
                 }
             }
@@ -199,21 +248,29 @@ namespace SaleSpec.pages.report
         }
 
         [WebMethod]
-        public void GetDataProjectByPortStatusAll(string strStatus, string strStartDate, string strEndDate)
+        public void GetDataProjectByPortStatusAll(string strUserID, string strStatus, string strStartDate, string strEndDate, string strQtyStart, string strQtyEnd, string strSearch)
         {
             List<GetDataProjectByPortStatus> intakeprojects = new List<GetDataProjectByPortStatus>();
             using (SqlConnection conn = new SqlConnection(cs))
             {
-                SqlCommand comm = new SqlCommand("sp_GetDataProjectByPortStatusAll", conn);
+                SqlCommand comm = new SqlCommand("sp_GetDataProjectByPortStatusAllOption", conn);
                 comm.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter param1 = new SqlParameter() { ParameterName = "@StatusID", Value = strStatus };
-                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStartDate };
-                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEndDate };
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@TypeID", Value = strUserID };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StatusID", Value = strStatus };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@StartDate", Value = strStartDate };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@EndDate", Value = strEndDate };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@QtyStart", Value = strQtyStart };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@QtyEnd", Value = strQtyEnd };
+                SqlParameter param7 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
                 comm.Parameters.Add(param1);
                 comm.Parameters.Add(param2);
                 comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
+                comm.Parameters.Add(param5);
+                comm.Parameters.Add(param6);
+                comm.Parameters.Add(param7);
 
                 conn.Open();
 
@@ -221,41 +278,84 @@ namespace SaleSpec.pages.report
                 while (rdr.Read())
                 {
                     GetDataProjectByPortStatus intakeproject = new GetDataProjectByPortStatus();
+
                     intakeproject.No = rdr["No"].ToString();
-                    intakeproject.ProjectID = rdr["ProjectID"].ToString();
-                    intakeproject.ProjectYear = rdr["ProjectYear"].ToString();
-                    intakeproject.ProjectMonth = rdr["ProjectMonth"].ToString();
-                    intakeproject.ProjectName = rdr["ProjectName"].ToString();
-                    //intakeproject.CompanyID = rdr["CompanyID"].ToString();
+                    intakeproject.WeekDate = rdr["WeekDate"].ToString();
+                    intakeproject.WeekTime = rdr["WeekTime"].ToString();
+                    intakeproject.CompanyID = rdr["CompanyID"].ToString();
                     intakeproject.CompanyName = rdr["CompanyName"].ToString();
-                    //intakeproject.ArchitecID = rdr["ArchitecID"].ToString();
+                    intakeproject.ArchitecID = rdr["ArchitecID"].ToString();
                     intakeproject.Name = rdr["Name"].ToString();
+                    intakeproject.TransID = rdr["TransID"].ToString();
+                    intakeproject.TransNameEN = rdr["TransNameEN"].ToString();
+                    intakeproject.ProjectID = rdr["ProjectID"].ToString();
+                    intakeproject.ProjectName = rdr["ProjectName"].ToString();
                     intakeproject.Location = rdr["Location"].ToString();
                     intakeproject.TurnKey = rdr["TurnKey"].ToString();
-                    intakeproject.MainCons = rdr["MainCons"].ToString();
-                    intakeproject.RefRfDf = rdr["RefRfDf"].ToString();
-                    //intakeproject.ProjStep = rdr["ProjStep"].ToString();
-                    intakeproject.StepNameTh = rdr["StepNameTh"].ToString();
-                    intakeproject.ProductType = rdr["ProductType"].ToString();
-                    intakeproject.RefProfile = rdr["RefProfile"].ToString();
-                    //intakeproject.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    intakeproject.StepID = rdr["StepID"].ToString();
+                    intakeproject.StepNameEn = rdr["StepNameEn"].ToString();
+                    intakeproject.BiddingName1 = rdr["BiddingName1"].ToString();
+                    intakeproject.OwnerName1 = rdr["OwnerName1"].ToString();
+                    intakeproject.BiddingName2 = rdr["BiddingName2"].ToString();
+                    intakeproject.OwnerName2 = rdr["OwnerName2"].ToString();
+                    intakeproject.BiddingName3 = rdr["BiddingName3"].ToString();
+                    intakeproject.OwnerName3 = rdr["OwnerName3"].ToString();
+                    intakeproject.AwardMC = rdr["AwardMC"].ToString();
+                    intakeproject.ContactMC = rdr["ContactMC"].ToString();
+                    intakeproject.AwardRF = rdr["AwardRF"].ToString();
+                    intakeproject.ContactRF = rdr["ContactRF"].ToString();
+                    intakeproject.ProdTypeID = rdr["ProdTypeID"].ToString();
                     intakeproject.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
-                    //intakeproject.ProdID = rdr["ProdID"].ToString();
+                    intakeproject.ProdID = rdr["ProdID"].ToString();
                     intakeproject.ProdNameEN = rdr["ProdNameEN"].ToString();
-                    //intakeproject.ProfID = rdr["ProfID"].ToString();
+                    intakeproject.ProfID = rdr["ProfID"].ToString();
                     intakeproject.ProfNameEN = rdr["ProfNameEN"].ToString();
-                    //intakeproject.StatusID = rdr["StatusID"].ToString();
-                    intakeproject.StatusNameEn = rdr["StatusNameEn"].ToString();
                     intakeproject.Quantity = rdr["Quantity"].ToString();
-                    intakeproject.RefType = rdr["RefType"].ToString();
                     intakeproject.DeliveryDate = rdr["DeliveryDate"].ToString();
-                    //intakeproject.Drawing = rdr["Drawing"].ToString();
-                    intakeproject.TypeID = rdr["TypeID"].ToString();
-                    intakeproject.SaleSpec = rdr["SaleSpec"].ToString();
-                    //intakeproject.StatusConID = rdr["StatusConID"].ToString();
+                    intakeproject.NextVisitDate = rdr["NextVisitDate"].ToString();
+                    intakeproject.StatusID = rdr["StatusID"].ToString();
+                    intakeproject.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    intakeproject.Remark = rdr["Remark"].ToString();
+                    intakeproject.UserID = rdr["UserID"].ToString();
+                    intakeproject.EmpCode = rdr["EmpCode"].ToString();
+                    intakeproject.CreatedBy = rdr["CreatedBy"].ToString();
                     intakeproject.CreatedDate = rdr["CreatedDate"].ToString();
-                    intakeproject.LastUpdate = rdr["LastUpdate"].ToString();
-                    intakeproject.StatusNameTh = rdr["StatusNameTh"].ToString();
+
+                    //intakeproject.No = rdr["No"].ToString();
+                    //intakeproject.ProjectID = rdr["ProjectID"].ToString();
+                    //intakeproject.ProjectYear = rdr["ProjectYear"].ToString();
+                    //intakeproject.ProjectMonth = rdr["ProjectMonth"].ToString();
+                    //intakeproject.ProjectName = rdr["ProjectName"].ToString();
+                    ////intakeproject.CompanyID = rdr["CompanyID"].ToString();
+                    //intakeproject.CompanyName = rdr["CompanyName"].ToString();
+                    ////intakeproject.ArchitecID = rdr["ArchitecID"].ToString();
+                    //intakeproject.Name = rdr["Name"].ToString();
+                    //intakeproject.Location = rdr["Location"].ToString();
+                    //intakeproject.TurnKey = rdr["TurnKey"].ToString();
+                    //intakeproject.MainCons = rdr["MainCons"].ToString();
+                    //intakeproject.RefRfDf = rdr["RefRfDf"].ToString();
+                    ////intakeproject.ProjStep = rdr["ProjStep"].ToString();
+                    //intakeproject.StepNameTh = rdr["StepNameTh"].ToString();
+                    //intakeproject.ProductType = rdr["ProductType"].ToString();
+                    //intakeproject.RefProfile = rdr["RefProfile"].ToString();
+                    ////intakeproject.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    //intakeproject.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    ////intakeproject.ProdID = rdr["ProdID"].ToString();
+                    //intakeproject.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    ////intakeproject.ProfID = rdr["ProfID"].ToString();
+                    //intakeproject.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    ////intakeproject.StatusID = rdr["StatusID"].ToString();
+                    //intakeproject.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    //intakeproject.Quantity = rdr["Quantity"].ToString();
+                    //intakeproject.RefType = rdr["RefType"].ToString();
+                    //intakeproject.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    ////intakeproject.Drawing = rdr["Drawing"].ToString();
+                    //intakeproject.TypeID = rdr["TypeID"].ToString();
+                    //intakeproject.SaleSpec = rdr["SaleSpec"].ToString();
+                    ////intakeproject.StatusConID = rdr["StatusConID"].ToString();
+                    //intakeproject.CreatedDate = rdr["CreatedDate"].ToString();
+                    //intakeproject.LastUpdate = rdr["LastUpdate"].ToString();
+                    //intakeproject.StatusNameTh = rdr["StatusNameTh"].ToString();
                     intakeprojects.Add(intakeproject);
                 }
             }

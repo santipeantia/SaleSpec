@@ -27,6 +27,9 @@
                 var strStatus = 'S01'; //$('#selectSalePort').val();
                 var datepickertrans = $('#datepickertrans').val();
                 var datepickerend = $('#datepickerend').val();
+                var strqtystrat = $('#QtyStart').val();
+                var strqtyend = $('#QtyEnd').val();
+                var strsearch = $('#Search').val();
 
                 //alert(selectSaleport);
 
@@ -38,7 +41,10 @@
                         strUserID: selectSaleport,
                         strStatus: strStatus,
                         strStartDate: datepickertrans,
-                        strEndDate: datepickerend
+                        strEndDate: datepickerend,
+                        strQtyStart: strqtystrat,
+                        strQtyEnd: strqtyend,
+                        strSearch: strsearch
                     },
                     dataType: 'json',
                     success: function (data) {
@@ -58,13 +64,56 @@
                                 '<td>' + item.Name + '</td>' +
                                 '<td>' + item.Location + '</td>' +
                                 '<td>' + item.ProdTypeNameEN + '</td>' +
-                                '<td>' + item.StepNameTh + '</td>' +
+                                '<td>' + item.StepNameEn + '</td>' +
                                 '<td>' + item.StatusNameEn + '</td>' +
                                 '<td>' + item.DeliveryDate + '</td>' +
                                 '<td>' + item.Quantity + '</td>' +
-                                '<td>' + item.LastUpdate + '</td>' +
+                                '<td>' + item.CreatedBy + '</td>' +
+                                '<td>' + item.CreatedDate + '</td>' +
                                 '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
                                 '</tr > ';
+
+                            //No
+                            //WeekDate
+                            //WeekTime
+                            //CompanyID
+                            //CompanyName
+                            //ArchitecID
+                            //Name
+                            //TransID
+                            //TransNameEN
+                            //ProjectID
+                            //ProjectName
+                            //Location
+                            //TurnKey
+                            //StepID
+                            //StepNameEn
+                            //BiddingName1
+                            //OwnerName1
+                            //BiddingName2
+                            //OwnerName2
+                            //BiddingName3
+                            //OwnerName3
+                            //AwardMC
+                            //ContactMC
+                            //AwardRF
+                            //ContactRF
+                            //ProdTypeID
+                            //ProdTypeNameEN
+                            //ProdID
+                            //ProdNameEN
+                            //ProfID
+                            //ProfNameEN
+                            //Quantity
+                            //DeliveryDate
+                            //NextVisitDate
+                            //StatusID
+                            //StatusNameEn
+                            //Remark
+                            //UserID
+                            //EmpCode
+                            //CreatedBy
+                            //CreatedDate
                         });
 
                         $('#tableWeeklyReportx').append(trHTML);
@@ -76,10 +125,14 @@
                     $.ajax({
                     url: 'DataServicesReporting.asmx/GetDataProjectByPortStatusAll',
                     method: 'post',
-                    data: {
+                        data: {
+                        strUserID: selectSaleport,
                         strStatus: strStatus,
                         strStartDate: datepickertrans,
-                        strEndDate: datepickerend
+                        strEndDate: datepickerend,
+                        strQtyStart: strqtystrat,
+                        strQtyEnd: strqtyend,
+                        strSearch: strsearch
                     },
                     dataType: 'json',
                     success: function (data) {
@@ -99,11 +152,12 @@
                                 '<td>' + item.Name + '</td>' +
                                 '<td>' + item.Location + '</td>' +
                                 '<td>' + item.ProdTypeNameEN + '</td>' +
-                                '<td>' + item.StepNameTh + '</td>' +
+                                '<td>' + item.StepNameEn + '</td>' +
                                 '<td>' + item.StatusNameEn + '</td>' +
                                 '<td>' + item.DeliveryDate + '</td>' +
                                 '<td>' + item.Quantity + '</td>' +
-                                '<td>' + item.LastUpdate + '</td>' +
+                                '<td>' + item.CreatedBy + '</td>' +
+                                '<td>' + item.CreatedDate + '</td>' +
                                 '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
                                 '</tr > ';
                         });
@@ -218,13 +272,55 @@
                                         </div>
                                     </div>
 
+                                   
+                                </div>
+
+                                <div class="row" style="margin-left: 30px;">
                                     <div class="col-md-2">
+                                        <label class="txtLabel">From Quantity</label>
+                                        <div class="txtLabel">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="QtyStart" name="QtyStart" value="" autocomplete="off" placeholder="">
+                                         </div>
+                                        <div id="divErrorQtyStart" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">To Quantity</label>
+                                        <div class="txtLabel">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="QtyEnd" name="QtyEnd" value="" autocomplete="off" placeholder="">
+                                         </div>
+                                        <div id="divErrorQtyEnd" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Search</label>
+                                        <div class="txtLabel">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="Search" name="Search" value="" autocomplete="off" placeholder="Can you search data in here..">
+                                         </div>
+                                        <div id="divErrorSearch" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                    </div>
+
+                                     <div class="col-md-2">
                                         <label class="txtLabel">Query Info</label>
                                         <div class="">
                                             <%--<button type="button" id="btnQuery" runat="server" onserverclick="btnQuery_Click" class="btn btn-info btn-flat btn-block btn-sm hidden" >Show Report</button>--%>
                                             <button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">Reporting</label>
+                                        <div>
+                                            <span class="">
+                                               
+                                                <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click"  type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
+                                                    <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    
                                 </div>
 
                                 <div class="row" style="margin-left: 30px;">
@@ -250,6 +346,7 @@
                                                 <td>Status</td>
                                                 <td>Delivery</td>
                                                 <td>Quantity</td>
+                                                <td>CreatedBy</td>
                                                 <td>LastUpdate</td>
                                                 <td>#</td>
                                             </tr>

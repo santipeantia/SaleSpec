@@ -319,5 +319,91 @@ namespace SaleSpec.pages.report
                 return;
             }
         }
+
+        protected void btnExportExcelOption_click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strPort = Request.Form["selectSalePort"];
+                string strStatus = "S01";
+                string strStart = Request.Form["datepickertrans"];
+                string strEnd = Request.Form["datepickerend"];
+                string strQtyStart = Request.Form["QtyStart"];
+                string strQtyEnd = Request.Form["QtyEnd"];
+                string strSearch = Request.Form["Search"];
+
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                if (strPort != "SELECTED ALL")
+                {
+                    Comm = new SqlCommand("sp_GetDataProjectByPortStatusOptionReport", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
+                }
+                else {
+
+                    Comm = new SqlCommand("sp_GetDataProjectByPortStatusAllOptionReport", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
+                }
+                                
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@TypeID", Value = strPort };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StatusID", Value = strStatus };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@QtyStart", Value = strQtyStart };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@QtyEnd", Value = strQtyEnd };
+                SqlParameter param7 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
+                Comm.Parameters.Add(param5);
+                Comm.Parameters.Add(param6);
+                Comm.Parameters.Add(param7);
+
+
+
+                //conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = Comm;
+                dt = new DataTable();
+                adapter.Fill(dt);
+
+                GridView GridviewExport = new GridView();
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    GridviewExport.DataSource = dt;
+                    GridviewExport.DataBind();
+
+                    Response.Clear();
+                    Response.AddHeader("content-disposition", "attachment;filename=ExportIntakeReport_" + strPort + ".xls");
+                    Response.ContentType = "application/ms-excel";
+                    Response.ContentEncoding = System.Text.Encoding.Unicode;
+                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                    System.IO.StringWriter sw = new System.IO.StringWriter();
+                    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                    GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
+                    Response.Write(sw.ToString());
+                    Response.End();
+
+                }
+                Response.Write("<script>alert('Data find not found please check...')</script>");
+                GetDataSalePort();
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                              "</div>";
+            }
+        }
     }
 }
