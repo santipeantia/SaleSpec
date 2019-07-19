@@ -495,6 +495,16 @@
                     'autoWidth': false
                 })
 
+                $('#tableArchitectProfile').DataTable({
+                    'iDisplayLength': 50,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+
             })
 </script>
 
@@ -631,7 +641,18 @@
                     autoclose: true,
                     todayHighlight: true,
                     format: 'yyyy-mm-dd'
-                });
+             });
+            $('#datedelivery').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+            });
+            $('#datefollowing').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+            });
+
             
             
 

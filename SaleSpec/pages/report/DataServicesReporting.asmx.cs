@@ -400,14 +400,18 @@ namespace SaleSpec.pages.report
                 {
                     GetReportProjectStatusByOptions project = new GetReportProjectStatusByOptions();
 
+                    project.ID = rdr["ID"].ToString();
                     project.WeekDate = rdr["WeekDate"].ToString();
                     project.WeekTime = rdr["WeekTime"].ToString();
                     project.CompanyName = rdr["CompanyName"].ToString();
+                    project.ArchitectID = rdr["ArchitecID"].ToString();
                     project.Name = rdr["Name"].ToString();
                     project.ProjectID = rdr["ProjectID"].ToString();
                     project.ProjectName = rdr["ProjectName"].ToString();
                     project.Location = rdr["Location"].ToString();
+                    project.ProdTypeID = rdr["ProdTypeID"].ToString();
                     project.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    project.ProdID = rdr["ProdID"].ToString();
                     project.ProdNameEN = rdr["ProdNameEN"].ToString();
                     project.ProfNameEN = rdr["ProfNameEN"].ToString();
                     project.DeliveryDate = rdr["DeliveryDate"].ToString();
@@ -427,6 +431,39 @@ namespace SaleSpec.pages.report
             JavaScriptSerializer js = new JavaScriptSerializer();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(projects));
+
+        }
+
+
+        [WebMethod]
+        public void DataReportGetArchitect(string id)
+        {
+
+            List<GetDataReportGetArchitect> architects = new List<GetDataReportGetArchitect>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spReportGetArchitect", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@id", Value = id };
+                comm.Parameters.Add(param1);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataReportGetArchitect architect = new GetDataReportGetArchitect();
+
+                    architect.ArchitecID = rdr["ArchitecID"].ToString();
+                    architect.ArchitectName = rdr["ArchitectName"].ToString();
+
+                    architects.Add(architect);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(architects));
 
         }
 

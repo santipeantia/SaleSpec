@@ -10,7 +10,7 @@
 namespace SaleSpec.pages.report {
     
     
-    public partial class projectreport {
+    public partial class architectprofile {
         
         /// <summary>
         /// btnDownload control.
@@ -38,23 +38,5 @@ namespace SaleSpec.pages.report {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadExcel;
-        
-        /// <summary>
-        /// btnDownloadPDF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadPDF;
-        
-        /// <summary>
-        /// btnUpdateData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnUpdateData;
     }
 }

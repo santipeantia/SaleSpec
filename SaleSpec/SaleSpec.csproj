@@ -6521,6 +6521,7 @@
     <Content Include="pages\home\default.aspx" />
     <Content Include="pages\home\PortChart.aspx" />
     <Content Include="pages\PortChart.aspx" />
+    <Content Include="pages\report\architectprofile.aspx" />
     <Content Include="pages\report\companyreportview.aspx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
@@ -7096,6 +7097,13 @@
       <DependentUpon>rptPrintWeeklyReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="pages\report\architectprofile.aspx.cs">
+      <DependentUpon>architectprofile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\architectprofile.aspx.designer.cs">
+      <DependentUpon>architectprofile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\report\companyreportview.aspx.cs">
       <DependentUpon>companyreportview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7109,6 +7117,7 @@
     </Compile>
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
+    <Compile Include="pages\report\GetDataReportGetArchitect.cs" />
     <Compile Include="pages\report\GetDataWeeklyReporting.cs" />
     <Compile Include="pages\report\GetReportProjectStatusByOptions.cs" />
     <Compile Include="pages\report\newprojectreport.aspx.cs">

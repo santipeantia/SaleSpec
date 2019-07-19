@@ -639,7 +639,7 @@
                             document.getElementById("txtCompanyNameDel").value = strVal1;
                             document.getElementById("txtCompanyName2Del").value = strVal2;
 
-                             $('#selectCustTypeIDDel').val(strVal3); 
+                            $('#selectCustTypeIDDel').val(strVal3); 
                             $('#selectCustTypeIDDel').change();
 
                             document.getElementById("txtAddressDel").value = strVal4;
@@ -659,8 +659,6 @@
                     }
                 }
             }
-
-
 
             var tableActive = document.getElementById("tableActive"), rIndex;
             for (var i = 1; i < tableActive.rows.length; i++) {
