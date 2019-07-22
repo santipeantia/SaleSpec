@@ -7117,9 +7117,11 @@
     </Compile>
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
+    <Compile Include="pages\report\GetDataProjectHistory.cs" />
     <Compile Include="pages\report\GetDataReportGetArchitect.cs" />
     <Compile Include="pages\report\GetDataWeeklyReporting.cs" />
     <Compile Include="pages\report\GetReportProjectStatusByOptions.cs" />
+    <Compile Include="pages\report\GetUpdateWeeklyReportViaSupervisor.cs" />
     <Compile Include="pages\report\newprojectreport.aspx.cs">
       <DependentUpon>newprojectreport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

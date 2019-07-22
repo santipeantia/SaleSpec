@@ -424,6 +424,7 @@ namespace SaleSpec.pages.report
                     project.Ref2 = rdr["Ref2"].ToString();
                     project.Ref3 = rdr["Ref3"].ToString();
                     project.RefRemark = rdr["RefRemark"].ToString();
+                    project.StepID = rdr["StepID"].ToString();
                     projects.Add(project);
                 }
             }
@@ -433,6 +434,85 @@ namespace SaleSpec.pages.report
             Context.Response.Write(js.Serialize(projects));
 
         }
+
+        [WebMethod]
+        public void GetDataProjectHistory(string ProjectID)
+        {
+            List<GetDataProjectHistory> histories = new List<GetDataProjectHistory>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProjectHistory", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ProjectID", Value = ProjectID };
+                comm.Parameters.Add(param1);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataProjectHistory history = new GetDataProjectHistory();
+                    history.WeekDate = rdr["WeekDate"].ToString();
+                    history.WeekTime = rdr["WeekTime"].ToString();
+                    history.TransNameEN = rdr["TransNameEN"].ToString();
+                    history.StepNameEn = rdr["StepNameEn"].ToString();
+                    history.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    history.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    history.BiddingName1 = rdr["BiddingName1"].ToString();
+                    history.AwardMC = rdr["AwardMC"].ToString();
+                    history.AwardRF = rdr["AwardRF"].ToString();
+                    history.Quantity = rdr["Quantity"].ToString();
+                    history.Remark = rdr["Remark"].ToString();
+                    history.NextVisitDate = rdr["NextVisitDate"].ToString();
+                    histories.Add(history);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(histories));
+        }
+
+        
+        [WebMethod]
+        public void GetUpdateWeeklyReportViaSupervisor(string ID, string WeekDate, string WeekTime, string CompanyName, string ArchitecID,
+                                            string Name, string Location, string ProdTypeID, 
+                                            string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate, 
+                                            string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2, 
+                                            string Remark, string StepID)
+        {
+            List<GetUpdateWeeklyReportViaSupervisor> companies = new List<GetUpdateWeeklyReportViaSupervisor>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spGetUpdateWeeklyReportViaSupervisor", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                
+                comm.Parameters.AddWithValue("@ID", ID);
+                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@Name", Name);
+                comm.Parameters.AddWithValue("@Location", Location);
+                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                comm.Parameters.AddWithValue("@ProdID", ProdID);
+                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
+                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                comm.Parameters.AddWithValue("@Quantity", Quantity);
+                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                comm.Parameters.AddWithValue("@Ref1", Ref1);
+                comm.Parameters.AddWithValue("@Ref2", Ref2);
+                comm.Parameters.AddWithValue("@Remark", Remark);
+                comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
 
 
         [WebMethod]

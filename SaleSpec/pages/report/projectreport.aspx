@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="projectreport.aspx.cs" Inherits="SaleSpec.pages.report.projectreport" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
     <section class="content-header">
@@ -62,7 +63,7 @@
                                     '<td class="hidden">' + item.ArchitectID + '</td>' +
                                     '<td>' + item.Name + '</td>' +
                                     '<td class="hidden">' + item.ProjectID + '</td>' +
-                                    '<td>' + item.ProjectName + '</td>' +
+                                    '<td class="text-blue">' + item.ProjectName + '</td>' +
                                     '<td>' + item.Location + '</td>' +
                                     '<td class="hidden">' + item.ProdTypeID + '</td>' +
                                     '<td>' + item.ProdTypeNameEN + '</td>' +
@@ -79,6 +80,7 @@
                                     '<td>' + item.Ref2 + '</td>' +
                                     '<td>' + item.Ref3 + '</td>' +
                                     '<td>' + item.RefRemark + '</td>' +
+                                    '<td class="hidden">' + item.StepID + '</td>' +
                                     '</tr > ';
 
                             });
@@ -87,16 +89,15 @@
 
                             $(function () {
 
-                                //var refTab = $('#tableWeeklyReportx');
-                                //for (var i = 0; i < refTab.rows[i]; i++) {
-                                //    var row = refTab.rows.item(i);
-                                //    for (var j = 0; j < row.cells[j]; j++) {
-                                //        refTab.rows[i].cells[j].onclick = function () {
-                                //            var col = row.cells.item(j);
-                                //            alert(col.firstChild.innerText);
-                                //        }
-                                //    }
-                                //}
+                                
+                                $('#tableWeeklyReportx td').hover(function () {
+                                    rIndex = this.parentElement.rowIndex;
+                                    cIndex = this.cellIndex;
+                                    if (rIndex != 0 & cIndex == 7) {
+                                        $(this).css('cursor', 'pointer');
+                                    }
+                                });
+
 
                                 var table = $('#tableWeeklyReportx');
                                 $('#tableWeeklyReportx td').click(function () {
@@ -106,6 +107,19 @@
 
                                     if (rIndex != 0 & cIndex == 7) {
                                         //alert(rIndex + '' + cIndex);
+
+                                        document.getElementById("divErrorArchitect").style.display = 'none';
+                                        document.getElementById("divErrorLocation").style.display = 'none';
+                                        document.getElementById("divErrorProductType").style.display = 'none';
+                                        document.getElementById("divErrorProductName").style.display = 'none';
+                                        document.getElementById("divErrorProfile").style.display = 'none';
+                                        document.getElementById("divErrorDelivery").style.display = 'none';
+                                        document.getElementById("divErrorFollowing").style.display = 'none';
+                                        document.getElementById("divErrorQuantity").style.display = 'none';
+                                        document.getElementById("divErrorRemark").style.display = 'none';
+                                        document.getElementById("divErrorStatus").style.display = 'none';
+
+
 
                                         var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
                                         var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
@@ -118,12 +132,15 @@
                                         var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');
                                         var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');
                                         var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)');
-                                        
+
                                         var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');
                                         var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');
                                         var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');
                                         var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
+                                        var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
+                                        var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
                                         var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
+                                        var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
 
 
                                         //document.getElementById("txtid").value = strVal0.text();
@@ -142,12 +159,12 @@
                                                 id: strVal0.text()
                                             },
                                             datatype: 'json',
-                                            success: function (data){
+                                            success: function (data) {
                                                 selectArchitectNameDDL.empty();
                                                 $(data).each(function (index, item) {
                                                     selectArchitectNameDDL.append($('<option/>', { value: item.ArchitecID, text: item.ArchitectName }));
 
-                                                    $('#selectArchitectName').val(strVal4.text()); 
+                                                    $('#selectArchitectName').val(strVal4.text());
                                                     $('#selectArchitectName').change();
 
                                                     //selectArchitectNameDDL.text = strVal4.text();
@@ -198,15 +215,65 @@
                                             });
                                         });
 
-
+                                        //Get Product type such as Ampelite, Ampelram
+                                        var selectStatusDDL = $('#selectStatus');
+                                        $.ajax({
+                                            url: '../trans/DataServices.asmx/GetStepSpec',
+                                            method: 'post',
+                                            dataType: 'json',
+                                            success: function (data) {
+                                                selectStatusDDL.empty();
+                                                $(data).each(function (index, item) {
+                                                    selectStatusDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
+                                                    $('#selectStatus').val(strVal24.text());
+                                                    $('#selectStatus').change();
+                                                });
+                                            }
+                                        });
 
 
                                         $('#txtProfile').val(strVal13.text());
                                         $('#datedelivery').val(strVal14.text());
                                         $('#datefollowing').val(strVal15.text());
                                         $('#txtQuantity').val(strVal16.text());
+                                        $('#txtRefMcRf').val(strVal20.text());
+                                        $('#txtContactMcRf').val(strVal21.text());
+
                                         $('#txtRemark').val(strVal23.text());
+
                                         
+                                        $.ajax({
+                                            url: 'DataServicesReporting.asmx/GetDataProjectHistory',
+                                            method: 'post',
+                                            data: {
+                                                ProjectID: strVal6.text()
+                                            },
+                                            dataType: 'json',
+                                            success: function (data) {
+
+                                                var trHTML2 = '';
+                                                $('#tableHistory tr:not(:first)').remove();
+                                                $(data).each(function (index, item) {
+                                                    trHTML2 += '<tr>' +
+                                                        '<td class="">' + item.WeekDate + '</td>' +
+                                                        '<td class="">' + item.WeekTime + '</td>' +
+                                                        '<td class="">' + item.NextVisitDate + '</td>' +
+                                                        '<td class="">' + item.TransNameEN + '</td>' +
+                                                        '<td class="">' + item.StepNameEn + '</td>' +
+                                                        '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
+                                                        '<td class="">' + item.ProdNameEN + '</td>' +
+                                                        '<td class="">' + item.BiddingName1 + '</td>' +
+                                                        '<td class="">' + item.AwardMC + '</td>' +
+                                                        '<td class="">' + item.AwardRF + '</td>' +
+                                                        '<td class="">' + item.Quantity + '</td>' +
+                                                        '<td class="">' + item.Remark + '</td>' +
+                                                        '</tr > ';
+                                                });
+                                                $('#tableHistory').append(trHTML2);
+                                            }
+
+                                        });
+                                       
 
 
                                         setTimeout(function () {
@@ -214,10 +281,10 @@
                                             $("#myModalEdit").modal("show");
                                         }, 500);
 
-                                        
+
                                     }
 
-                                   
+
                                     //$('table tbody tr:not(:first)').on('click', function () {
 
                                     //    alert($(this).html()); // or .text()
@@ -231,7 +298,15 @@
                 });
 
 
-               
+                $('#txtQuantity').keypress(function (event) {
+                    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                    if (($(this).val().indexOf('.') != -1) && ($(this).val().substring($(this).val().indexOf('.'), $(this).val().indexOf('.').length).length > 2)) {
+                        event.preventDefault();
+                    }
+                });
+
             })
         </script>
 
@@ -277,7 +352,7 @@
                             <hr />
 
                             <div class="row" style="margin-left: 30px;">
-                               
+
                                 <div class="col-md-4">
                                     <label class="txtLabel">Report Options</label>
                                     <div class="txtLabel">
@@ -296,7 +371,7 @@
                                     <div id="divErrorselectReportOption" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
                                 </div>
 
-                               
+
 
                                 <div class="col-md-2">
                                     <label class="txtLabel">From Date</label>
@@ -320,8 +395,8 @@
                             </div>
 
                             <div class="row" style="margin-left: 30px;">
-                                
-                                 <div class="col-md-4">
+
+                                <div class="col-md-4">
                                     <label class="txtLabel">Sale Spec</label>
                                     <div class="txtLabel">
                                         <select id="selectSalePort" name="selectSalePort" class="form-control input-sm" style="width: 100%">
@@ -331,7 +406,7 @@
                                     <div id="divErrorSelectSaleSpec" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
                                 </div>
 
-                               <div class="col-md-2">
+                                <div class="col-md-2">
                                     <label class="txtLabel">From Quantity</label>
                                     <div class="txtLabel">
                                         <input type="text" class="form-control input-sm pull-left txtLabel" id="QtyStart" name="QtyStart" value="" autocomplete="off" placeholder="">
@@ -349,7 +424,7 @@
                             </div>
 
                             <div class="row" style="margin-left: 30px;">
-                                
+
 
 
                                 <div class="col-md-6">
@@ -372,7 +447,7 @@
                                     <div>
                                         <span class="">
                                             <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click" type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
-                                                <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                                <i class="fa fa-file-excel-o"></i>Print Excel</button>
                                         </span>
                                     </div>
                                 </div>
@@ -382,7 +457,7 @@
                                     <div>
                                         <span class="">
                                             <button id="btnDownloadPDF" runat="server" type="button" class="btn btn-warning btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
-                                                <i class="fa fa-pdf-o"></i> Print PDF</button>
+                                                <i class="fa fa-pdf-o"></i>Print PDF</button>
                                         </span>
                                     </div>
                                 </div>
@@ -392,7 +467,7 @@
 
 
                             <br />
-                           
+
                             <div id="divWeeklyReport">
                                 <div class="row">
                                     <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
@@ -422,6 +497,7 @@
                                                 <td>Ref2</td>
                                                 <td>Ref3</td>
                                                 <td>RefRemark</td>
+                                                <td class="hidden">StepID</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -441,7 +517,7 @@
 
         <!-- /.modal myModalEdit -->
         <div class="modal modal-default fade" id="myModalEdit">
-            <div class="modal-dialog">
+            <div class="modal-dialog"  style="width: 60%">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -450,140 +526,219 @@
 
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">ID</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtid" name="txtid"  autocomplete="off" readonly placeholder="" value="" required>
-                                </div>
-                            </div>
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+                                    <li><a href="#history" data-toggle="tab">Project History</a></li>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                
-                                    <div class="col-md-4 txtLabel">Date / Time</div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtVisitDate" name="txtVisitDate" readonly autocomplete="off" placeholder="" value="" required>
-                                    </div>
-                               
+                                </ul>
 
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtTime" name="txtTime"  readonly autocomplete="off" placeholder="" value="" required>
-                                    </div>
-                                
-                            </div>
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="overview">
+                                        <!-- Post -->
+                                        <div class="post clearfix">
+                                            <div class="row hidden" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">ID</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtid" name="txtid" autocomplete="off" readonly placeholder="" value="" required>
+                                                </div>
+                                            </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Company</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName" name="txtCompanyName" readonly autocomplete="off" placeholder="" value="" required>
-                                </div>
-                            </div>
+                                            <div class="row hidden" style="margin-bottom: 5px">
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Project Name</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProjectName" name="txtProjectName" readonly autocomplete="off" placeholder="" value="" >
-                                </div>
-                            </div>
+                                                <div class="col-md-4 txtLabel">Date / Time</div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtVisitDate" name="txtVisitDate" readonly autocomplete="off" placeholder="" value="" required>
+                                                </div>
 
-                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
-                                <div class="col-md-4">
-                                    <label class="txtLabel">Architect</label></div>
-                                <div class="col-md-8">
-                                    <div class="txtLabel">
-                                        <select id="selectArchitectName" name="selectArchitectName" class="form-control input-sm"  style="width: 100%">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Location</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtLocation" name="txtLocation" autocomplete="off" placeholder="" value="" >
-                                </div>
-                            </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtTime" name="txtTime" readonly autocomplete="off" placeholder="" value="" required>
+                                                </div>
 
-                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
-                                <div class="col-md-4">
-                                    <label class="txtLabel">ProductType</label></div>
-                                <div class="col-md-8">
-                                    <div class="txtLabel">
-                                        <select id="selectProductType" name="selectProductType" class="form-control input-sm"  style="width: 100%">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                                            </div>
 
-                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
-                                <div class="col-md-4">
-                                    <label class="txtLabel">ProductName</label></div>
-                                <div class="col-md-8">
-                                    <div class="txtLabel">
-                                        <select id="selectProductName" name="selectProductName" class="form-control input-sm"  style="width: 100%">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Company</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtCompanyName" name="txtCompanyName" readonly autocomplete="off" placeholder="" value="" required>
+                                                </div>
+                                            </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Profile</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProfile" name="txtProfile" autocomplete="off" placeholder="" >
-                                </div>
-                            </div>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Project Name</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProjectName" name="txtProjectName" readonly autocomplete="off" placeholder="" value="">
+                                                </div>
+                                            </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Delivery / Following</div>
-                                <div class="col-md-4">
-                                    <div class="input-group date">
-                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datedelivery" name="datedelivery" autocomplete="off">
-                                        <div class="input-group-addon input-sm">
-                                            <i class="fa fa-calendar"></i>
+                                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                                <div class="col-md-4">
+                                                    <label class="txtLabel">Architect</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="txtLabel">
+                                                        <select id="selectArchitectName" name="selectArchitectName" class="form-control input-sm" style="width: 100%">
+                                                        </select>
+                                                    </div>
+                                                    <div id="divErrorArchitect" class="txtLabel text-red" style="display: none;">Please select data at least one item..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Location</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtLocation" name="txtLocation" autocomplete="off" placeholder="" value="">
+                                                    <div id="divErrorLocation" class="txtLabel text-red" style="display: none;">Location is not empty please check and try agian..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                                <div class="col-md-4">
+                                                    <label class="txtLabel">ProductType</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="txtLabel">
+                                                        <select id="selectProductType" name="selectProductType" class="form-control input-sm" style="width: 100%">
+                                                        </select>
+                                                    </div>
+                                                    <div id="divErrorProductType" class="txtLabel text-red" style="display: none;">Please select data at least one item..!</div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="txtLabel">
+                                                        <select id="selectProductName" name="selectProductName" class="form-control input-sm" style="width: 100%">
+                                                        </select>
+                                                    </div>
+                                                    <div id="divErrorProductName" class="txtLabel text-red" style="display: none;">Please select data at least one item..!</div>
+                                                </div>
+                                            </div>
+
+                                           
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Profile</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtProfile" name="txtProfile" autocomplete="off" placeholder="">
+                                                    <div id="divErrorProfile" class="txtLabel text-red" style="display: none;">Data profile is not empty please check and try agian..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Delivery / Following</div>
+                                                <div class="col-md-4">
+                                                    <div class="input-group date">
+                                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datedelivery" name="datedelivery" autocomplete="off">
+                                                        <div class="input-group-addon input-sm">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div id="divErrorDelivery" class="txtLabel text-red" style="display: none;">Delivery date is not empty please check and try agian..!</div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="input-group date">
+                                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datefollowing" name="datefollowing" value="" autocomplete="off">
+                                                        <div class="input-group-addon input-sm">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div id="divErrorFollowing" class="txtLabel text-red" style="display: none;">Data is not empty please check and try agian..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Quantity</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtQuantity" name="txtQuantity" autocomplete="off" placeholder="" value="">
+                                                    <div id="divErrorQuantity" class="txtLabel text-red" style="display: none;">Quantity is not empty please check and try agian..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Ref.MC/RF</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtRefMcRf" name="txtRefMcRf" autocomplete="off" placeholder="" value="">
+                                                    <div id="divErrorRefMcRf" class="txtLabel text-red" style="display: none;">Quantity is not empty please check and try agian..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Contact.MC/RF</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtContactMcRf" name="txtContactMcRf" autocomplete="off" placeholder="" value="">
+                                                    <div id="divErrorContactMcRf" class="txtLabel text-red" style="display: none;">Quantity is not empty please check and try agian..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Remark</div>
+                                                <div class="col-md-8">
+                                                    <textarea cols="40" rows="3" id="txtRemark" name="txtRemark" class="form-control input input-sm txtLabel"></textarea>
+                                                    <div id="divErrorRemark" class="txtLabel text-red" style="display: none;">Please enter your comment..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-top: 5px;">
+                                                <div class="col-md-4">
+                                                    <label class="txtLabel">Status</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="txtLabel">
+                                                        <select id="selectStatus" name="selectStatus" class="form-control input-sm" style="width: 100%">
+                                                        </select>
+                                                    </div>
+                                                    <div id="divErrorStatus" class="txtLabel text-red" style="display: none;">Please select at least one item..!</div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
+                                        <!-- /.post -->
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group date">
-                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datefollowing" name="datefollowing" value="" autocomplete="off">
-                                        <div class="input-group-addon input-sm">
-                                            <i class="fa fa-calendar"></i>
+
+
+                                    <div class="tab-pane" id="history">
+                                        <!-- Post -->
+                                        <div class="post clearfix">
+                                            <div id="divWeeklyHistory">
+                                                <div class="row">
+                                                    <table id="tableHistory" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <td class="">WeekDate</td>
+                                                                <td class="">WeekTime</td>
+                                                                <td class="">Following</td>
+                                                                <td class="">TransName</td>
+                                                                <td class="">StepName</td>
+                                                                <td class="hidden">ProdType</td>
+                                                                <td class="">ProdName</td>
+                                                                <td class="">BiddingName</td>
+                                                                <td class="">AwardMC</td>
+                                                                <td class="">AwardRF</td>
+                                                                <td class="">Quantity</td>
+                                                                <td class="">Remark</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <!-- /.post -->
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Quantity</div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtQuantity" name="txtQuantity" autocomplete="off" placeholder="" value="" >
-                                </div>
-                            </div>
-                           
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-4 txtLabel">Remark</div>
-                                <div class="col-md-8">
-                                    <textarea cols="40" rows="5" id="txtRemark" name="txtRemark" class="form-control input input-sm txtLabel"></textarea>
-                                </div>
-                            </div>
 
-                            <div class="row" style="margin-top: 5px;">
-                                <div class="col-md-4">
-                                    <label class="txtLabel">Status</label></div>
-                                <div class="col-md-8">
-                                    <div class="txtLabel">
-                                        <select id="selectStatus" name="selectStatus" class="form-control input-sm" style="width: 100%">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            
 
                         </div>
                     </div>
 
-                    <div class="modal-footer">
+                    <div class="modal-footer clearfix">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="btnSubmitUpdate" class="btn btn-primary" >Update Changes</button>
+                        <button type="button" id="btnSubmitUpdate" onclick="ValidateUpdate()" class="btn btn-primary">Update Changes</button>
                         <button type="button" class="btn btn-primary hidden" id="btnUpdateData" runat="server">Update Changes</button>
                     </div>
                 </div>
@@ -591,51 +746,165 @@
         </div>
 
         <script>
-            //var refTab = document.getElementById("tableWeeklyReportx")
-            //var ttl;
-            //// Loop through all rows and columns of the table and popup alert with the value
-            //// /content of each cell.
-            //for (var i = 0; row = refTab.rows[i]; i++) {
-            //    row = refTab.rows[i];
-            //    for (var j = 0; col = row.cells[j]; j++) {
+            function ValidateUpdate() {
+                var str1 = document.getElementById("txtid").value;
+                var str2 = document.getElementById("txtVisitDate").value;
+                var str3 = document.getElementById("txtTime").value;
+                var str4 = document.getElementById("txtCompanyName").value;
+                var str5 = document.getElementById("txtProjectName").value;
+                var str6 = document.getElementById("selectArchitectName").value;
+                var str7 = document.getElementById("txtLocation").value;
+                var str8 = document.getElementById("selectProductType").value;
+                var str9 = document.getElementById("selectProductName").value;
+                var str10 = document.getElementById("txtProfile").value;
+                var str11 = document.getElementById("datedelivery").value;
+                var str12 = document.getElementById("datefollowing").value;
+                var str13 = document.getElementById("txtQuantity").value;
+                var str14 = document.getElementById("txtRemark").value;
+                var str15 = document.getElementById("selectStatus").value;
 
-            //        //refTab.rows[i].cells[j].onclick = function () {
+                var div1 = document.getElementById("divErrorArchitect");
+                var div2 = document.getElementById("divErrorLocation");
+                var div3 = document.getElementById("divErrorProductType");
+                var div4 = document.getElementById("divErrorProductName");
+                var div5 = document.getElementById("divErrorProfile");
+                var div6 = document.getElementById("divErrorDelivery");
+                var div7 = document.getElementById("divErrorFollowing");
+                var div8 = document.getElementById("divErrorQuantity");
+                var div9 = document.getElementById("divErrorRemark");
+                var div10 = document.getElementById("divErrorStatus");
+
+
+                //var str3 = document.getElementById("txtGradeDetailEdit").value;
+                if (str1 != '' && str2 != '') {
+                    {
+                        if (str6 == '' || str6 == '-1') {
+                            div1.style.display = "block";
+                            alert('Architect is not empty..!');
+                            return;
+                        }
+                        else { div1.style.display = "none"; }
+
+                        if (str7 == '') {
+                            div2.style.display = "block";
+                            alert('Location is not empty..!');
+                            return;
+                        }
+                        else { div2.style.display = "none"; }
+
+                        if (str8 == '') {
+                            div3.style.display = "block";
+                            alert('Data is not empty..!');
+                            return;
+                        }
+                        else { div3.style.display = "none"; }
+
+                        if (str9 == '') {
+                            div4.style.display = "block";
+                            alert('Data is not empty..!');
+                            return;
+                        }
+                        else { div4.style.display = "none"; }
+
+                        if (str10 == '') {
+                            div5.style.display = "block";
+                            alert('Data is not empty..!');
+                            return;
+                        }
+                        else { div5.style.display = "none"; }
+
+                        var regEx = /^\d{4}-\d{2}-\d{2}$/;
+                        var dateString = str11;
+
+                        if (!dateString.match(regEx)) {
+                            div6.style.display = "block";
+                            alert('Format date is incorrect please check..!');
+                            return;
+                        }
+                        else { div6.style.display = "none"; }
+
+                        if (str11 == '') {
+                            div6.style.display = "block";
+                            alert('Data is not empty..!');
+                            return;
+                        }
+                        else { div6.style.display = "none"; }
+
                         
-            //        //}
+                        var dateString2 = str12;
 
-            //        alert(col.firstChild.nodeValue);
-                    
-            //    }
-            //}
+                        if (!dateString2.match(regEx)) {
+                            div7.style.display = "block";
+                            alert('Format date is incorrect please check..!');
+                            return;
+                        }
+                        else { div7.style.display = "none"; }
 
+                        if (str12 == '') {
+                            div7.style.display = "block";
+                            alert('Data Following is incorrect..!');
+                            return;
+                        }
+                        else { div7.style.display = "none"; }
 
+                        if (str13 == '') {
+                            div8.style.display = "block";
+                            alert('Data Quantity is not empty..!');
+                            return;
+                        }
+                        else { div8.style.display = "none"; }
 
-
-            //var table = $('#tableWeeklyReportx');
-            //for (var i = 0; i < table.rows[i]; i++) {
-            //    row = refTab.rows[i];
-            //    for (var j = 0; col = table.rows[i].cells[j]; j++) {
-
-                    //table.rows[i].cells[j].onclick = function () {
-                        //rIndex = this.parentElement.rowIndex;
-                        //cIndex = this.cellIndex;
-                        //console.log(rIndex + "  :  " + cIndex);
-
-                        //if (this.cellIndex == 3) {
-
-                        //    $("#myModalEdit").modal({ backdrop: false });
-                        //    $("#myModalEdit").modal("show");
-
-                        //}
-                //    }
-                //}
-
-
-            //$('#tableWeeklyReportx').find('td').click(function () {
-            //    alert($(this).text());
-            //});
+                        if (str14 == '') {
+                            div9.style.display = "block";
+                            alert('Data details is not empty..!');
+                            return;
+                        }
+                        else { div9.style.display = "none"; }
 
 
+
+                        //Get insert new architech
+                        $.ajax({
+                            url: 'DataServicesReporting.asmx/GetUpdateWeeklyReportViaSupervisor',
+                            method: 'POST',
+                            data: {
+                                ID: str1,
+                                WeekDate:  str2,
+                                WeekTime:  str3,
+                                CompanyName:  str4,
+                                ArchitecID: $('#selectArchitectName').val(),
+                                Name:  $('#selectArchitectName option:selected').text(),
+                                Location:  str9,
+                                ProdTypeID:  str10,
+                                ProdTypeNameEN:  str11,
+                                ProdID:  str12,
+                                ProdNameEN:  str13,
+                                ProfNameEN:  str14,
+                                DeliveryDate:  str15,
+                                NextVisitDate:  str16,
+                                Quantity:  str17,
+                                StepNameEn:  str18,
+                                Ref1:  str19,
+                                Ref2:  str20,
+                                Remark:  str21,
+                                StepID:  str22
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+
+                            }
+                        });
+
+
+
+
+
+                       <%--document.getElementById("<%= btnUpdateData.ClientID %>").click();--%>
+
+
+                    }
+                }
+            }
 
         </script>
 
