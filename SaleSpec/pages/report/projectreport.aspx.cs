@@ -450,7 +450,7 @@ namespace SaleSpec.pages.report
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spGetReportProjectStatusByOption", Conn);
+                Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
                 Comm.CommandType = CommandType.StoredProcedure;
                 
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };

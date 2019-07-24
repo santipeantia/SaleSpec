@@ -139,6 +139,7 @@
                                         var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
                                         var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
                                         var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
+                                        var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
                                         var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
                                         var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
 
@@ -236,8 +237,21 @@
                                         $('#datedelivery').val(strVal14.text());
                                         $('#datefollowing').val(strVal15.text());
                                         $('#txtQuantity').val(strVal16.text());
-                                        $('#txtRefMcRf').val(strVal20.text());
-                                        $('#txtContactMcRf').val(strVal21.text());
+
+                                        if (strVal24.text() == '1') {
+                                            $('#txtRefMcRf').val(strVal20.text());
+                                            $('#txtContactMcRf').val(strVal21.text());
+                                        }
+                                        else if (strVal24.text() == '2') {
+                                            $('#txtRefMcRf').val(strVal21.text());
+                                            $('#txtContactMcRf').val(strVal22.text());
+                                        }
+                                        else {
+                                            $('#txtRefMcRf').val(strVal22.text());
+                                            //$('#txtContactMcRf').val(strVal22.text());
+                                        }
+
+                                        
 
                                         $('#txtRemark').val(strVal23.text());
 
@@ -279,7 +293,7 @@
                                         setTimeout(function () {
                                             $("#myModalEdit").modal({ backdrop: false });
                                             $("#myModalEdit").modal("show");
-                                        }, 500);
+                                        }, 1500);
 
 
                                     }
@@ -358,9 +372,9 @@
                                     <div class="txtLabel">
                                         <select id="selectReportOption" name="selectReportOption" class="form-control input-sm" style="width: 100%">
                                             <%--<%= strReportOption %>--%>
-                                            <option value="R001">Design <--> Bidding</option>
-                                            <option value="R002">Bidding <--> Award Main Cons</option>
-                                            <option value="R003">Award Main Cons <--> Award RF</option>
+                                            <option value="R001">Design</option>
+                                            <option value="R002">Bidding</option>
+                                            <option value="R003">Award Main Cons</option>
                                             <option value="R004">Next Following</option>
                                             <option value="R011">Design --> Bidding</option>
                                             <option value="R012">Bidding --> Award Main Cons</option>
@@ -493,9 +507,9 @@
                                                 <td>StepNameA</td>
                                                 <td>StepNameB</td>
                                                 <td>RefWeekDate</td>
-                                                <td>Ref1</td>
-                                                <td>Ref2</td>
-                                                <td>Ref3</td>
+                                                <td>BD</td>
+                                                <td>MC</td>
+                                                <td>RF</td>
                                                 <td>RefRemark</td>
                                                 <td class="hidden">StepID</td>
                                             </tr>
@@ -537,7 +551,7 @@
                                     <div class="active tab-pane" id="overview">
                                         <!-- Post -->
                                         <div class="post clearfix">
-                                            <div class="row hidden" style="margin-bottom: 5px">
+                                            <div class="row" style="margin-bottom: 5px">
                                                 <div class="col-md-4 txtLabel">ID</div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control input input-sm txtLabel" id="txtid" name="txtid" autocomplete="off" readonly placeholder="" value="" required>
@@ -762,6 +776,8 @@
                 var str13 = document.getElementById("txtQuantity").value;
                 var str14 = document.getElementById("txtRemark").value;
                 var str15 = document.getElementById("selectStatus").value;
+                var str16 = document.getElementById("txtRefMcRf").value;
+                var str17 = document.getElementById("txtContactMcRf").value;
 
                 var div1 = document.getElementById("divErrorArchitect");
                 var div2 = document.getElementById("divErrorLocation");
@@ -862,8 +878,7 @@
                         else { div9.style.display = "none"; }
 
 
-
-                        //Get insert new architech
+                        //Get update weekly report succeseed...
                         $.ajax({
                             url: 'DataServicesReporting.asmx/GetUpdateWeeklyReportViaSupervisor',
                             method: 'POST',
@@ -874,28 +889,28 @@
                                 CompanyName:  str4,
                                 ArchitecID: $('#selectArchitectName').val(),
                                 Name:  $('#selectArchitectName option:selected').text(),
-                                Location:  str9,
-                                ProdTypeID:  str10,
-                                ProdTypeNameEN:  str11,
-                                ProdID:  str12,
-                                ProdNameEN:  str13,
-                                ProfNameEN:  str14,
-                                DeliveryDate:  str15,
-                                NextVisitDate:  str16,
-                                Quantity:  str17,
-                                StepNameEn:  str18,
-                                Ref1:  str19,
-                                Ref2:  str20,
-                                Remark:  str21,
-                                StepID:  str22
+                                Location:  str7,
+                                ProdTypeID:  $('#selectProductType').val(),
+                                ProdTypeNameEN:  $('#selectProductType option:selected').text(),
+                                ProdID:  $('#selectProductName').val(),
+                                ProdNameEN:  $('#selectProductName option:selected').text(),
+                                ProfNameEN:  str10,
+                                DeliveryDate:  str11,
+                                NextVisitDate:  str12,
+                                Quantity:  str13,
+                                StepNameEn:  $('#selectStatus option:selected').text(),
+                                Ref1:  str16,
+                                Ref2:  str17,
+                                Remark:  str14,
+                                StepID:  $('#selectStatus').val()
                             },
                             dataType: 'json',
                             success: function (data) {
-
+                               
                             }
                         });
 
-
+                         alert('Update data succeseed..!');
 
 
 
