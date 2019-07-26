@@ -38,6 +38,11 @@ namespace SaleSpec.pages.report
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string strUserID = Session["UserID"].ToString();
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../../pages/users/login");
+            }
 
         }
 

@@ -110,11 +110,9 @@ namespace SaleSpec.pages.report
                                         "     <td>" + strPositionNameTH + "</td> " +
                                         "     <td class=\"hidden\">" + strPositionNameEN + "</td> " +
                                         "     <td>" + strGradeDesc + "</td> " +
-                                        "     <td>" + strGradeDetail + "</td> " +
+                                        "     <td class=\"hidden\">" + strGradeDetail + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
-                                        "       <a href=\"../report/architectprofile.aspx\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
-                                        "<td style=\"width: 20px; text-align: center;\"> " +
-                                        "       <a href=\"#\" title=\"Delete\"><i class=\"fa fa-trash text-red\"></i></a></td> " +
+                                        "       <a href=\"../report/architectprofile.aspx?opt=rarc&id="+ strArchitecID + "\" target=\"_blank\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
                                         "</tr>";
                     }
 

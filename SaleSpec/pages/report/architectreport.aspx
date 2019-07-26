@@ -159,12 +159,11 @@
                                                 <td class="hidden">Updated</td>
                                                 <td class="hidden">strGradeID</td>
                                                 <td class="hidden">ConDesc</td>
-                                                <td>ConDesc2</td>
-                                                <td>PositionTH</td>
+                                                <td>Status</td>
+                                                <td>Position</td>
                                                 <td class="hidden">PositionEN</td>
                                                 <td>Grade</td>
-                                                <td>GradeDetail</td>
-                                                <td>#</td>
+                                                <td class="hidden">GradeDetail</td>
                                                 <td>#</td>
                                             </tr>
                                         </thead>
