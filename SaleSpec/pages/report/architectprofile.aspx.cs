@@ -33,8 +33,31 @@ namespace SaleSpec.pages.report
         public string strMsgAlert = "";
         public string strTblDetail = "";
         public string strPortOption = "";
+        public string strCompany = "";
+        public string strGrade = "";
+        public string strStatus = "";
+        public string strTblWeeklyReport = "";
 
         public string sPage = "report/architectprofile";
+
+        public string ID;
+        public string ArchitecID;
+        public string CompanyID;
+        public string Name;
+        public string FirstName;
+        public string LastName;
+        public string NickName;
+        public string Position;
+        public string Address;
+        public string Phone;
+        public string Mobile;
+        public string Email;
+        public string StatusConID;
+        public string ConDesc;
+        public string UpdatedDate;
+        public string GradeID;
+        public string GradeDesc;
+        public string GradeDetail;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,19 +66,86 @@ namespace SaleSpec.pages.report
             {
                 Response.Redirect("../../pages/users/login");
             }
+            else {
 
+                try
+                {
+                    string id = Request.QueryString["id"].ToString();
+                    if (id != null || id != "")
+                    {
+                        GetArchitectProfile(id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                    return;
+                }
+            }
         }
 
-        protected void GetDataSalePort()
+        protected void GetArchitectProfile(string id)
+        {
+            Conn = new SqlConnection();
+            Conn = dbConn.OpenConn();
+
+            Comm = new SqlCommand("spGetArchitectInfoByid", Conn);
+            Comm.CommandType = CommandType.StoredProcedure;
+            Comm.Parameters.AddWithValue("@ArchitecID", id);
+
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = Comm;
+
+            dt = new DataTable();
+            da.Fill(dt);
+
+            if (dt.Rows.Count != 0)
+            {
+                 ID = dt.Rows[0]["ID"].ToString();
+                 ArchitecID = dt.Rows[0]["ArchitecID"].ToString();
+                 CompanyID = dt.Rows[0]["CompanyID"].ToString();
+                 Name = dt.Rows[0]["Name"].ToString();
+                 FirstName = dt.Rows[0]["FirstName"].ToString();
+                 LastName = dt.Rows[0]["LastName"].ToString();
+                 NickName = dt.Rows[0]["NickName"].ToString();
+                 Position = dt.Rows[0]["Position"].ToString();
+                 Address = dt.Rows[0]["Address"].ToString();
+                 Phone = dt.Rows[0]["Phone"].ToString();
+                 Mobile = dt.Rows[0]["Mobile"].ToString();
+                 Email = dt.Rows[0]["Email"].ToString();
+                 StatusConID = dt.Rows[0]["StatusConID"].ToString();
+                 ConDesc = dt.Rows[0]["ConDesc"].ToString();
+                 UpdatedDate = dt.Rows[0]["UpdatedDate"].ToString();
+                 GradeID = dt.Rows[0]["GradeID"].ToString();
+                 GradeDesc = dt.Rows[0]["GradeDesc"].ToString();
+                 GradeDetail = dt.Rows[0]["GradeDetail"].ToString();
+
+
+                //txtFirstNameEdit.val(FirstName);
+                GetDataCompanyByid(CompanyID);
+                GetDataGradeByid(GradeID);
+                GetDataStatusConfirmByid(StatusConID);
+                GetDataProjectByid(ArchitecID);
+                GetDataWeeklyReportByid(ArchitecID);
+
+
+            }
+        }
+
+                          
+
+        protected void GetDataCompanyByid(string companyid)
         {
             try
             {
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spGetDataSaleSpec", Conn);
+                Comm = new SqlCommand("spGetCompanyInfoByid", Conn);
                 Comm.CommandType = CommandType.StoredProcedure;
-                Comm.Parameters.AddWithValue("@SpecID", Session["EmpCode"].ToString());
+                Comm.Parameters.AddWithValue("@CompanyID", companyid);
 
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = Comm;
@@ -68,10 +158,10 @@ namespace SaleSpec.pages.report
 
                     for (int i = 0; i <= dt.Rows.Count - 1; i++)
                     {
-                        string strValue = dt.Rows[i]["SpecID"].ToString();
-                        string strText = dt.Rows[i]["FullName"].ToString();
+                        string strValue = dt.Rows[i]["CompanyID"].ToString();
+                        string strText = dt.Rows[i]["CompanyNameTH"].ToString();
 
-                        strPortOption += "<option value=\"" + strValue + "\">" + strText + "</option>";
+                        strCompany += "<option value=\"" + strValue + "\">" + strText + "</option>";
 
                     }
                 }
@@ -84,6 +174,258 @@ namespace SaleSpec.pages.report
                 return;
             }
         }
+
+        protected void GetDataGradeByid(string gradeid)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetGradeInfoByid", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+                Comm.Parameters.AddWithValue("@GradeID", gradeid);
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string strValue = dt.Rows[i]["GradeID"].ToString();
+                        string strText = dt.Rows[i]["GradeDesc"].ToString();
+
+                        strGrade += "<option value=\"" + strValue + "\">" + strText + "</option>";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void GetDataStatusConfirmByid(string statusconid)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetStatusConInfoByid", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+                Comm.Parameters.AddWithValue("@StatusConID", statusconid);
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+
+                dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string strValue = dt.Rows[i]["StatusConID"].ToString();
+                        string strText = dt.Rows[i]["ConDesc2"].ToString();
+
+                        strStatus += "<option value=\"" + strValue + "\">" + strText + "</option>";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void GetDataProjectByid(string architectid)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetProjectInfoByid", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = architectid };
+
+                Comm.Parameters.Add(param1);
+
+                //conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = Comm;
+                dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string No = dt.Rows[i]["No"].ToString();
+                        string ProjectID = dt.Rows[i]["ProjectID"].ToString();
+                        string ProjectYear = dt.Rows[i]["ProjectYear"].ToString();
+                        string ProjectMonth = dt.Rows[i]["ProjectMonth"].ToString();
+                        string ProjectName = dt.Rows[i]["ProjectName"].ToString();
+                        string CompanyID = dt.Rows[i]["CompanyID"].ToString();
+                        string CompanyName = dt.Rows[i]["CompanyName"].ToString();
+                        string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
+                        string Name = dt.Rows[i]["Name"].ToString();
+                        string Location = dt.Rows[i]["Location"].ToString();
+                        string TurnKey = dt.Rows[i]["TurnKey"].ToString();
+                        string MainCons = dt.Rows[i]["MainCons"].ToString();
+                        string RefRfDf = dt.Rows[i]["RefRfDf"].ToString();
+                        string ProjStep = dt.Rows[i]["ProjStep"].ToString();
+                        string ProductType = dt.Rows[i]["ProductType"].ToString();
+                        string RefProfile = dt.Rows[i]["RefProfile"].ToString();
+                        string ProdTypeID = dt.Rows[i]["ProdTypeID"].ToString();
+                        string ProdTypeNameEN = dt.Rows[i]["ProdTypeNameEN"].ToString();
+                        string ProdID = dt.Rows[i]["ProdID"].ToString();
+                        string ProdNameEN = dt.Rows[i]["ProdNameEN"].ToString();
+                        string ProfID = dt.Rows[i]["ProfID"].ToString();
+                        string ProfNameEN = dt.Rows[i]["ProfNameEN"].ToString();
+                        string StatusID = dt.Rows[i]["StatusID"].ToString();
+                        string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
+                        string Quantity = dt.Rows[i]["Quantity"].ToString();
+                        string RefType = dt.Rows[i]["RefType"].ToString();
+                        string DeliveryDate = dt.Rows[i]["DeliveryDate"].ToString();
+                        string Drawing = dt.Rows[i]["Drawing"].ToString();
+                        string TypeID = dt.Rows[i]["TypeID"].ToString();
+                        string SaleSpec = dt.Rows[i]["SaleSpec"].ToString();
+                        string StatusConID = dt.Rows[i]["StatusConID"].ToString();
+                        string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
+                        string LastUpdate = dt.Rows[i]["LastUpdate"].ToString();
+
+                        strTblDetail += "<tr> " +
+                                            "<td>" + No + "</td>" +
+                                            "<td>" + ProjectYear + "</td>" +
+                                            "<td>" + ProjectMonth + "</td>" +
+                                            "<td class=\"hidden\">" + ProjectID + "</td>" +
+                                            "<td> " + ProjectName + "</td>" +
+                                            "<td class=\"hidden\">" + CompanyID + "</td>" +
+                                            "<td>" + CompanyName + "</td>" +
+                                            "<td class=\"hidden\">" + ArchitecID + "</td>" +
+                                            "<td class=\"hidden\">" + Name + "</td>" +
+                                            "<td>" + Location + "</td>" +
+                                            "<td>" + ProdTypeNameEN + "</td>" +
+                                            "<td>" + StatusNameEn + "</td>" +
+                                            "<td>" + DeliveryDate + "</td>" +
+                                            "<td>" + Quantity + "</td>" +
+                                            "<td>" + LastUpdate + "</td>" +
+                                       "</tr> ";
+                    }
+
+                    //Response.Write("<script>alert('Data inserted successfully')</script>");
+                }
+                //GetDataSalePort();
+            }
+            catch (Exception ex)
+            {
+                //Response.Write("<script>alert('"+ ex.Message +"')</script>");
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void GetDataWeeklyReportByid(string architectid)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetWeeklyReportInfoByid", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = architectid };
+
+                Comm.Parameters.Add(param1);
+
+                //conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = Comm;
+                dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string No = dt.Rows[i]["No"].ToString();
+                        string WeekDate = dt.Rows[i]["WeekDate"].ToString();
+                        string WeekTime = dt.Rows[i]["WeekTime"].ToString();
+                        string CompanyID = dt.Rows[i]["CompanyID"].ToString();
+                        string CompanyName = dt.Rows[i]["CompanyName"].ToString();
+                        string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
+                        string Name = dt.Rows[i]["Name"].ToString();
+                        string TransID = dt.Rows[i]["TransID"].ToString();
+                        string TransNameEN = dt.Rows[i]["TransNameEN"].ToString();
+                        string ProjectID = dt.Rows[i]["ProjectID"].ToString();
+                        string ProjectName = dt.Rows[i]["ProjectName"].ToString();
+                        string Location = dt.Rows[i]["Location"].ToString();
+                        string StatusID = dt.Rows[i]["StatusID"].ToString();
+                        string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
+                        string StepID = dt.Rows[i]["StepID"].ToString();
+                        string StepNameEn = dt.Rows[i]["StepNameEn"].ToString();
+                        string Remark = dt.Rows[i]["Remark"].ToString();
+                        string UserID = dt.Rows[i]["UserID"].ToString();
+                        string EmpCode = dt.Rows[i]["EmpCode"].ToString();
+                        string CreatedBy = dt.Rows[i]["CreatedBy"].ToString();
+                        string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
+                        string ID = dt.Rows[i]["ID"].ToString();
+                        string STB = dt.Rows[i]["STB"].ToString();
+
+
+                        strTblWeeklyReport += "<tr> " +
+                                            "<td>" + No + "</td>" +
+                                            "<td> " + WeekDate + "</td>" +
+                                            "<td> " + WeekTime + "</td>" +
+                                            "<td> " + ProjectName + "</td>" +
+                                            "<td>" + CompanyName + "</td>" +
+                                            "<td>" + Location + "</td>" +
+                                            "<td>" + Name + "</td>" +
+                                            "<td>" + StepNameEn + "</td>" +
+                                            "<td>" + Remark + "</td>" +
+                                            "<td>" + UserID + "</td>" +
+                                            "<td>" + CreatedDate + "</td>" +
+                                       "</tr> ";
+                    }
+
+                    //Response.Write("<script>alert('Data inserted successfully')</script>");
+                }
+                //GetDataSalePort();
+            }
+            catch (Exception ex)
+            {
+                //Response.Write("<script>alert('"+ ex.Message +"')</script>");
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+
+
 
         protected void btnQuery_Click(object sender, EventArgs e)
         {
@@ -155,7 +497,7 @@ namespace SaleSpec.pages.report
 
                     //Response.Write("<script>alert('Data inserted successfully')</script>");
                 }
-                GetDataSalePort();
+                //GetDataSalePort();
             }
             catch (Exception ex)
             {
@@ -222,7 +564,7 @@ namespace SaleSpec.pages.report
 
                 }
                 Response.Write("<script>alert('Data find not found please check...')</script>");
-                GetDataSalePort();
+                //GetDataSalePort();
             }
             catch (Exception ex)
             {
@@ -392,7 +734,7 @@ namespace SaleSpec.pages.report
 
                 }
                 Response.Write("<script>alert('Data find not found please check...')</script>");
-                GetDataSalePort();
+                //GetDataSalePort();
             }
             catch (Exception ex)
             {

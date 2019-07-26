@@ -228,14 +228,14 @@
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">FirstName</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtFirstNameEdit" name="txtFirstNameEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtFirstNameEdit" name="txtFirstNameEdit" placeholder="" value="<%= FirstName %>" required>
                                             </div>
                                         </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">LastName</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtLastNameEdit" name="txtLastNameEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtLastNameEdit" name="txtLastNameEdit" placeholder="" value="<%= LastName %>" required>
                                             </div>                                            
                                         </div>
 
@@ -246,6 +246,7 @@
                                             <div class="col-md-8">
                                                 <div class="txtLabel">
                                                     <select id="selectCompanyEdit" name="selectCompanyEdit" class="form-control input-sm" style="width: 100%">
+                                                        <%= strCompany %>
                                                     </select>
                                                 </div>
                                             </div>
@@ -253,11 +254,12 @@
 
                                         <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
                                             <div class="col-md-4">
-                                                <label class="txtLabel">Grade</label>
+                                                <label class="txtLabel">Type</label>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="txtLabel">
                                                     <select id="selectGradeIDEdit" name="selectGradeIDEdit" class="form-control input-sm" style="width: 100%">
+                                                        <%= strGrade %>
                                                     </select>
                                                 </div>
                                             </div>
@@ -266,14 +268,14 @@
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">NickName</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtNickNameEdit" name="txtNickNameEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtNickNameEdit" name="txtNickNameEdit" placeholder="" value="<%= Name %>" required>
                                             </div>
                                         </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">Position</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPositionEdit" name="txtPositionEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPositionEdit" name="txtPositionEdit" placeholder="" value="<%=Position %>" required>
                                             </div>
                                         </div>
 
@@ -281,28 +283,28 @@
                                             <div class="col-md-4 txtLabel">Address</div>
                                             <div class="col-md-8">
                                                 <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                                <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"></textarea>
+                                                <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
                                             </div>
                                         </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">Phone</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="<%= Phone %>" required>
                                             </div>
                                         </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">Mobile</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="<%= Mobile %>" required>
                                             </div>
                                         </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">Email</div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="" required>
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="<%= Email %>" required>
                                             </div>
                                         </div>
 
@@ -313,14 +315,13 @@
                                             <div class="col-md-8">
                                                 <div class="txtLabel">
                                                     <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
+                                                        <%= strStatus %>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-                                   
-                                    
                                 </div>
                                 <div class="row" style="margin-left: 30px;">
                                 </div>
@@ -338,26 +339,26 @@
                                     <span class="description">Details of all projecs</span>
                                 </div>
                                 <br />
-                                <div class="row" style="margin-left: 30px;">
-                                    <div class="container">
+                                <div class="row" style="">
+                                    <div class="">
                                         <table id="tableProject" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
-                                                    <%--<td>ProjID</td>--%>
-                                                    <td>Project Name</td>
-                                                    <%--<td>ComID</td>--%>
-                                                    <td>Company Name</td>
-                                                    <%--<td>Architec ID</td>--%>
-                                                    <td>Architec Name</td>
+                                                    <td>Year</td>
+                                                    <td>Month</td>
+                                                    <td class="hidden">ProjectID</td>
+                                                    <td>ProjectName</td>
+                                                    <td class="hidden">CompanyID</td>
+                                                    <td>CompanyName</td>
+                                                    <td class="hidden">Architect</td>
+                                                    <td class="hidden">Name</td>
                                                     <td>Location</td>
                                                     <td>ProdType</td>
-                                                    <td>Step</td>
                                                     <td>Status</td>
                                                     <td>Delivery</td>
                                                     <td>Quantity</td>
-
-                                                    <td>#</td>
+                                                    <td>LastUpdate</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -376,36 +377,64 @@
                                     <img class="img-circle img-bordered-sm" src="../../dist/img/handshake.png" alt="User Image">
                                     <span class="username">
                                         <a href="#">Reward and Event</a>
+                                        <span class="pull-right">
+
+                                            <span class="btn-group">
+                                                <button id="Button1" runat="server" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="เพิ่มรายการ"><i class="fa fa-plus"></i></button>
+                                            </span>
+                                        </span>
 
                                     </span>
+
                                     <span class="description">Reward and Event</span>
                                 </div>
                                 <br />
-                                <div class="row" style="margin-left: 30px; top: 50px;">
-                                    <div class="container">
+                                <div class="row" style="top: 50px;">
+                                    <div class="">
                                         <table id="tableReward" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
-                                                    <%--<td>ProjID</td>--%>
-                                                    <td>Project Name</td>
-                                                    <%--<td>ComID</td>--%>
-                                                    <td>Company Name</td>
-                                                    <%--<td>Architec ID</td>--%>
-                                                    <td>Architec Name</td>
-                                                    <td>Location</td>
-                                                    <td>ProdType</td>
-                                                    <td>Step</td>
-                                                    <td>Status</td>
-                                                    <td>Delivery</td>
-                                                    <td>Quantity</td>
-                                                    <td>CreatedBy</td>
-                                                    <td>LastUpdate</td>
-                                                    <td>#</td>
+                                                    <td>Reward</td>
+                                                    <td>Year 2015</td>
+                                                    <td>Year 2016</td>
+                                                    <td>Year 2017</td>
+                                                    <td>Year 2018</td>
+                                                    <td>Year 2019</td>
+                                                    <td>Remark</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%= strTblDetail %>
+                                               <tr>
+                                                   <td>1</td>
+                                                    <td>BD Gift</td>
+                                                    <td>10,000 บาท</td>
+                                                    <td></td>
+                                                    <td>5,000 บาท</td>
+                                                    <td></td>
+                                                    <td>ค่าเดินทาง</td>
+                                                    <td>ระบุหมายเหตุต่างๆ....</td>
+                                               </tr>
+                                                <tr>
+                                                   <td>2</td>
+                                                    <td>Chef Table</td>
+                                                    <td></td>
+                                                    <td>20,000 บาท</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>5,000 บาท</td>
+                                                    <td>ระบุหมายเหตุต่างๆ....</td>
+                                               </tr>
+                                                <tr>
+                                                   <td>3</td>
+                                                    <td>New Year Premium</td>
+                                                    <td></td>
+                                                    <td>สนับสนุนงานเลี้ยงปีใหม่</td>
+                                                    <td>กล่องของขวัญ</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>ระบุหมายเหตุต่างๆ....</td>
+                                               </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -423,31 +452,26 @@
                                     <span class="description">Weekly Report</span>
                                 </div>
                                 <br />
-                                <div class="row" style="margin-left: 30px; top: 50px;">
-                                    <div class="container">
+                                <div class="row" style="top: 50px;">
+                                    <div class="">
                                         <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
-                                                    <%--<td>ProjID</td>--%>
-                                                    <td>Project Name</td>
-                                                    <%--<td>ComID</td>--%>
-                                                    <td>Company Name</td>
-                                                    <%--<td>Architec ID</td>--%>
-                                                    <td>Architec Name</td>
+                                                    <td>WeekDate</td>
+                                                    <td>WeekTime</td>
+                                                    <td>ProjectName</td>
+                                                    <td>CompanyName</td>
                                                     <td>Location</td>
-                                                    <td>ProdType</td>
+                                                    <td>Name</td>
                                                     <td>Step</td>
-                                                    <td>Status</td>
-                                                    <td>Delivery</td>
-                                                    <td>Quantity</td>
-                                                    <td>CreatedBy</td>
-                                                    <td>LastUpdate</td>
-                                                    <td>#</td>
+                                                    <td>Remark</td>
+                                                    <td>Port</td>
+                                                    <td>Updated</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%= strTblDetail %>
+                                                <%= strTblWeeklyReport %>
                                             </tbody>
                                         </table>
                                     </div>
