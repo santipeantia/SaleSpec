@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
     <section class="content-header">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="jquery-1.11.2.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -22,6 +23,18 @@
                 datepickertrans.val(firstdate);
                 datepickerend.val(currentdate);
 
+                var selectReportOptionDDL = $('#selectReportOption');
+                selectReportOptionDDL.change(function () {
+                    var strOption = $("#selectReportOption option:selected").text();
+                    $('#optionName').val(strOption);
+
+                    //alert(strOption);
+
+                });
+
+
+
+
                 var btnJsonReport = $('#btnJsonReport');
                 btnJsonReport.click(function () {
                     var selectOption = $('#selectReportOption').val();
@@ -32,285 +45,563 @@
                     var strqtyend = $('#QtyEnd').val();
                     var strsearch = $('#Search').val();
 
+                    var empcode = '<%= Session["EmpCode"] %>';
+
                     //alert(selectSaleport);
 
+                    if (selectSaleport == 'SELECTED ALL') {
 
-                    $.ajax({
-                        url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
-                        method: 'post',
-                        data: {
-                            strOption: selectOption,
-                            strDateStart: datepickertrans,
-                            strDateEnd: datepickerend,
-                            strUserID: selectSaleport,
-                            strQtyStart: strqtystrat,
-                            strQtyEnd: strqtyend,
-                            strSearch: strsearch
-                        },
-                        dataType: 'json',
-                        success: function (data) {
+                        if (empcode == '118052' || empcode == '316010' || empcode == '506009') {
+                            $.ajax({
+                                url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
+                                method: 'post',
+                                data: {
+                                    strOption: selectOption,
+                                    strDateStart: datepickertrans,
+                                    strDateEnd: datepickerend,
+                                    strUserID: selectSaleport,
+                                    strQtyStart: strqtystrat,
+                                    strQtyEnd: strqtyend,
+                                    strSearch: strsearch
+                                },
+                                dataType: 'json',
+                                success: function (data) {
 
-                            //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+                                    //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
 
-                            var trHTML = '';
-                            $('#tableWeeklyReportx tr:not(:first)').remove();
-                            $(data).each(function (index, item) {
-                                trHTML += '<tr>' +
-                                    '<td class="hidden">' + item.ID + '</td>' +
-                                    '<td class="hidden">' + item.WeekDate + '</td>' +
-                                    '<td class="hidden">' + item.WeekTime + '</td>' +
-                                    '<td>' + item.CompanyName + '</td>' +
-                                    '<td class="hidden">' + item.ArchitectID + '</td>' +
-                                    '<td>' + item.Name + '</td>' +
-                                    '<td class="hidden">' + item.ProjectID + '</td>' +
-                                    '<td class="text-blue">' + item.ProjectName + '</td>' +
-                                    '<td>' + item.Location + '</td>' +
-                                    '<td class="hidden">' + item.ProdTypeID + '</td>' +
-                                    '<td>' + item.ProdTypeNameEN + '</td>' +
-                                    '<td class="hidden">' + item.ProdID + '</td>' +
-                                    '<td>' + item.ProdNameEN + '</td>' +
-                                    '<td>' + item.ProfNameEN + '</td>' +
-                                    '<td>' + item.DeliveryDate + '</td>' +
-                                    '<td>' + item.NextVisitDate + '</td>' +
-                                    '<td>' + item.Quantity + '</td>' +
-                                    '<td>' + item.StepNameA + '</td>' +
-                                    '<td>' + item.StepNameB + '</td>' +
-                                    '<td>' + item.RefWeekDate + '</td>' +
-                                    '<td>' + item.Ref1 + '</td>' +
-                                    '<td>' + item.Ref2 + '</td>' +
-                                    '<td>' + item.Ref3 + '</td>' +
-                                    '<td>' + item.RefRemark + '</td>' +
-                                    '<td class="hidden">' + item.StepID + '</td>' +
-                                    '</tr > ';
+                                    var trHTML = '';
+                                    $('#tableWeeklyReportx tr:not(:first)').remove();
+                                    $(data).each(function (index, item) {
+                                        trHTML += '<tr>' +
+                                            '<td class="hidden">' + item.ID + '</td>' +
+                                            '<td class="hidden">' + item.WeekDate + '</td>' +
+                                            '<td class="hidden">' + item.WeekTime + '</td>' +
+                                            '<td>' + item.CompanyName + '</td>' +
+                                            '<td class="hidden">' + item.ArchitectID + '</td>' +
+                                            '<td>' + item.Name + '</td>' +
+                                            '<td class="hidden">' + item.ProjectID + '</td>' +
+                                            '<td class="text-blue">' + item.ProjectName + '</td>' +
+                                            '<td>' + item.Location + '</td>' +
+                                            '<td class="hidden">' + item.ProdTypeID + '</td>' +
+                                            '<td>' + item.ProdTypeNameEN + '</td>' +
+                                            '<td class="hidden">' + item.ProdID + '</td>' +
+                                            '<td>' + item.ProdNameEN + '</td>' +
+                                            '<td>' + item.ProfNameEN + '</td>' +
+                                            '<td>' + item.DeliveryDate + '</td>' +
+                                            '<td>' + item.NextVisitDate + '</td>' +
+                                            '<td>' + item.Quantity + '</td>' +
+                                            '<td>' + item.StepNameA + '</td>' +
+                                            '<td>' + item.StepNameB + '</td>' +
+                                            '<td>' + item.RefWeekDate + '</td>' +
+                                            '<td>' + item.Ref1 + '</td>' +
+                                            '<td>' + item.Ref2 + '</td>' +
+                                            '<td>' + item.Ref3 + '</td>' +
+                                            '<td>' + item.RefRemark + '</td>' +
+                                            '<td class="hidden">' + item.StepID + '</td>' +
+                                            '</tr > ';
 
+                                    });
+
+                                    $('#tableWeeklyReportx').append(trHTML);
+
+                                    $(function () {
+
+
+                                        $('#tableWeeklyReportx td').hover(function () {
+                                            rIndex = this.parentElement.rowIndex;
+                                            cIndex = this.cellIndex;
+                                            if (rIndex != 0 & cIndex == 7) {
+                                                $(this).css('cursor', 'pointer');
+                                            }
+                                        });
+
+
+                                        var table = $('#tableWeeklyReportx');
+                                        $('#tableWeeklyReportx td').click(function () {
+
+                                            rIndex = this.parentElement.rowIndex;
+                                            cIndex = this.cellIndex;
+
+                                            if (rIndex != 0 & cIndex == 7) {
+                                                //alert(rIndex + '' + cIndex);
+
+                                                document.getElementById("divErrorArchitect").style.display = 'none';
+                                                document.getElementById("divErrorLocation").style.display = 'none';
+                                                document.getElementById("divErrorProductType").style.display = 'none';
+                                                document.getElementById("divErrorProductName").style.display = 'none';
+                                                document.getElementById("divErrorProfile").style.display = 'none';
+                                                document.getElementById("divErrorDelivery").style.display = 'none';
+                                                document.getElementById("divErrorFollowing").style.display = 'none';
+                                                document.getElementById("divErrorQuantity").style.display = 'none';
+                                                document.getElementById("divErrorRemark").style.display = 'none';
+                                                document.getElementById("divErrorStatus").style.display = 'none';
+
+
+
+                                                var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
+                                                var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
+                                                var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');
+                                                var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');
+                                                var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');
+                                                var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');
+                                                var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');
+                                                var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');
+                                                var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');
+                                                var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');
+                                                var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)');
+
+                                                var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');
+                                                var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');
+                                                var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');
+                                                var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
+                                                var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
+                                                var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
+                                                var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
+                                                var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
+                                                var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
+
+
+                                                //document.getElementById("txtid").value = strVal0.text();
+                                                $('#txtid').val(strVal0.text());
+                                                $('#txtVisitDate').val(strVal1.text());
+                                                $('#txtTime').val(strVal2.text());
+                                                $('#txtCompanyName').val(strVal3.text());
+
+                                                var selectArchitectNameDDL = $('#selectArchitectName');
+
+                                                //Get update architect name by company
+                                                $.ajax({
+                                                    url: 'DataServicesReporting.asmx/DataReportGetArchitect',
+                                                    method: 'post',
+                                                    data: {
+                                                        id: strVal0.text()
+                                                    },
+                                                    datatype: 'json',
+                                                    success: function (data) {
+                                                        selectArchitectNameDDL.empty();
+                                                        $(data).each(function (index, item) {
+                                                            selectArchitectNameDDL.append($('<option/>', { value: item.ArchitecID, text: item.ArchitectName }));
+
+                                                            $('#selectArchitectName').val(strVal4.text());
+                                                            $('#selectArchitectName').change();
+
+                                                            //selectArchitectNameDDL.text = strVal4.text();
+                                                            //selectArchitectNameDDL.change();
+                                                        });
+                                                    }
+
+                                                });
+
+                                                $('#txtProjectName').val(strVal7.text());
+                                                $('#txtLocation').val(strVal8.text());
+
+
+                                                //Get Product type such as Ampelite, Ampelram
+                                                var selectProductTypeDDL = $('#selectProductType');
+                                                $.ajax({
+                                                    url: '../trans/DataServices.asmx/GetProductType',
+                                                    method: 'post',
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                        selectProductTypeDDL.empty();
+                                                        $(data).each(function (index, item) {
+                                                            selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                                                            $('#selectProductType').val(strVal9.text());
+                                                            $('#selectProductType').change();
+                                                        });
+                                                    }
+                                                });
+
+
+                                                //When product type changed cascading of product
+                                                var selectProductNameDDL = $('#selectProductName');
+                                                selectProductTypeDDL.change(function () {
+                                                    $.ajax({
+                                                        url: '../trans/DataServices.asmx/GetProducts',
+                                                        method: 'post',
+                                                        data: { ProdTypeID: $(this).val() },
+                                                        dataType: 'json',
+                                                        success: function (data) {
+                                                            selectProductNameDDL.empty();
+                                                            selectProductNameDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                                                            $(data).each(function (index, item) {
+                                                                selectProductNameDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
+                                                                selectProductNameDDL.val(strVal11.text());
+                                                                selectProductNameDDL.change();
+                                                            });
+                                                        }
+                                                    });
+                                                });
+
+                                                //Get Product type such as Ampelite, Ampelram
+                                                var selectStatusDDL = $('#selectStatus');
+                                                $.ajax({
+                                                    url: '../trans/DataServices.asmx/GetStepSpec',
+                                                    method: 'post',
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                        selectStatusDDL.empty();
+                                                        $(data).each(function (index, item) {
+                                                            selectStatusDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
+                                                            $('#selectStatus').val(strVal24.text());
+                                                            $('#selectStatus').change();
+                                                        });
+                                                    }
+                                                });
+
+
+                                                $('#txtProfile').val(strVal13.text());
+                                                $('#datedelivery').val(strVal14.text());
+                                                $('#datefollowing').val(strVal15.text());
+                                                $('#txtQuantity').val(strVal16.text());
+
+                                                if (strVal24.text() == '1') {
+                                                    $('#txtRefMcRf').val(strVal20.text());
+                                                    $('#txtContactMcRf').val(strVal21.text());
+                                                }
+                                                else if (strVal24.text() == '2') {
+                                                    $('#txtRefMcRf').val(strVal21.text());
+                                                    $('#txtContactMcRf').val(strVal22.text());
+                                                }
+                                                else {
+                                                    $('#txtRefMcRf').val(strVal22.text());
+                                                    //$('#txtContactMcRf').val(strVal22.text());
+                                                }
+
+
+
+                                                $('#txtRemark').val(strVal23.text());
+
+
+                                                $.ajax({
+                                                    url: 'DataServicesReporting.asmx/GetDataProjectHistory',
+                                                    method: 'post',
+                                                    data: { ProjectID: strVal6.text() },
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                        var trHTML2 = '';
+                                                        $('#tableHistory tr:not(:first)').remove();
+
+                                                        $(data).each(function (index, item) {
+                                                            trHTML2 += '<tr>' +
+                                                                '<td class="">' + item.WeekDate + '</td>' +
+                                                                '<td class="">' + item.WeekTime + '</td>' +
+                                                                '<td class="">' + item.NextVisitDate + '</td>' +
+                                                                '<td class="">' + item.TransNameEN + '</td>' +
+                                                                '<td class="">' + item.StepNameEn + '</td>' +
+                                                                '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
+                                                                '<td class="">' + item.ProdNameEN + '</td>' +
+                                                                '<td class="">' + item.BiddingName1 + '</td>' +
+                                                                '<td class="">' + item.AwardMC + '</td>' +
+                                                                '<td class="">' + item.AwardRF + '</td>' +
+                                                                '<td class="">' + item.Quantity + '</td>' +
+                                                                '<td class="">' + item.Remark + '</td>' +
+                                                                '</tr > ';
+                                                        });
+                                                        $('#tableHistory').append(trHTML2);
+                                                    }
+                                                });
+
+                                                setTimeout(function () {
+                                                    $("#myModalEdit").modal({ backdrop: false });
+                                                    $("#myModalEdit").modal("show");
+                                                }, 1500);
+
+
+                                            }
+
+
+                                            //$('table tbody tr:not(:first)').on('click', function () {
+
+                                            //    alert($(this).html()); // or .text()
+                                            //});
+                                        });
+
+                                    });
+
+                                }
                             });
+                        } else {
+                            //alert('Warnning, คุณไม่มีสิทธิ์เรียกดูข้อมูลทั้งหมด..');
 
-                            $('#tableWeeklyReportx').append(trHTML);
+                            Swal.fire({
+                                type: 'error',
+                                title: 'You do not have permission selected all.',
+                                text: 'Permission access denied.',
+                                footer: 'Please contact system administrator..'
+                            })
+                        }
 
-                            $(function () {
+                        return;
+                    }
+                    else {
+                        $.ajax({
+                            url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
+                            method: 'post',
+                            data: {
+                                strOption: selectOption,
+                                strDateStart: datepickertrans,
+                                strDateEnd: datepickerend,
+                                strUserID: selectSaleport,
+                                strQtyStart: strqtystrat,
+                                strQtyEnd: strqtyend,
+                                strSearch: strsearch
+                            },
+                            dataType: 'json',
+                            success: function (data) {
 
-                                
-                                $('#tableWeeklyReportx td').hover(function () {
-                                    rIndex = this.parentElement.rowIndex;
-                                    cIndex = this.cellIndex;
-                                    if (rIndex != 0 & cIndex == 7) {
-                                        $(this).css('cursor', 'pointer');
-                                    }
+                                //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+
+                                var trHTML = '';
+                                $('#tableWeeklyReportx tr:not(:first)').remove();
+                                $(data).each(function (index, item) {
+                                    trHTML += '<tr>' +
+                                        '<td class="hidden">' + item.ID + '</td>' +
+                                        '<td class="hidden">' + item.WeekDate + '</td>' +
+                                        '<td class="hidden">' + item.WeekTime + '</td>' +
+                                        '<td>' + item.CompanyName + '</td>' +
+                                        '<td class="hidden">' + item.ArchitectID + '</td>' +
+                                        '<td>' + item.Name + '</td>' +
+                                        '<td class="hidden">' + item.ProjectID + '</td>' +
+                                        '<td class="text-blue">' + item.ProjectName + '</td>' +
+                                        '<td>' + item.Location + '</td>' +
+                                        '<td class="hidden">' + item.ProdTypeID + '</td>' +
+                                        '<td>' + item.ProdTypeNameEN + '</td>' +
+                                        '<td class="hidden">' + item.ProdID + '</td>' +
+                                        '<td>' + item.ProdNameEN + '</td>' +
+                                        '<td>' + item.ProfNameEN + '</td>' +
+                                        '<td>' + item.DeliveryDate + '</td>' +
+                                        '<td>' + item.NextVisitDate + '</td>' +
+                                        '<td>' + item.Quantity + '</td>' +
+                                        '<td>' + item.StepNameA + '</td>' +
+                                        '<td>' + item.StepNameB + '</td>' +
+                                        '<td>' + item.RefWeekDate + '</td>' +
+                                        '<td>' + item.Ref1 + '</td>' +
+                                        '<td>' + item.Ref2 + '</td>' +
+                                        '<td>' + item.Ref3 + '</td>' +
+                                        '<td>' + item.RefRemark + '</td>' +
+                                        '<td class="hidden">' + item.StepID + '</td>' +
+                                        '</tr > ';
+
                                 });
 
+                                $('#tableWeeklyReportx').append(trHTML);
 
-                                var table = $('#tableWeeklyReportx');
-                                $('#tableWeeklyReportx td').click(function () {
-
-                                    rIndex = this.parentElement.rowIndex;
-                                    cIndex = this.cellIndex;
-
-                                    if (rIndex != 0 & cIndex == 7) {
-                                        //alert(rIndex + '' + cIndex);
-
-                                        document.getElementById("divErrorArchitect").style.display = 'none';
-                                        document.getElementById("divErrorLocation").style.display = 'none';
-                                        document.getElementById("divErrorProductType").style.display = 'none';
-                                        document.getElementById("divErrorProductName").style.display = 'none';
-                                        document.getElementById("divErrorProfile").style.display = 'none';
-                                        document.getElementById("divErrorDelivery").style.display = 'none';
-                                        document.getElementById("divErrorFollowing").style.display = 'none';
-                                        document.getElementById("divErrorQuantity").style.display = 'none';
-                                        document.getElementById("divErrorRemark").style.display = 'none';
-                                        document.getElementById("divErrorStatus").style.display = 'none';
+                                $(function () {
 
 
-
-                                        var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
-                                        var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
-                                        var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');
-                                        var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');
-                                        var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');
-                                        var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');
-                                        var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');
-                                        var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');
-                                        var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');
-                                        var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');
-                                        var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)');
-
-                                        var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');
-                                        var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');
-                                        var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');
-                                        var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
-                                        var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
-                                        var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
-                                        var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
-                                        var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
-                                        var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
+                                    $('#tableWeeklyReportx td').hover(function () {
+                                        rIndex = this.parentElement.rowIndex;
+                                        cIndex = this.cellIndex;
+                                        if (rIndex != 0 & cIndex == 7) {
+                                            $(this).css('cursor', 'pointer');
+                                        }
+                                    });
 
 
-                                        //document.getElementById("txtid").value = strVal0.text();
-                                        $('#txtid').val(strVal0.text());
-                                        $('#txtVisitDate').val(strVal1.text());
-                                        $('#txtTime').val(strVal2.text());
-                                        $('#txtCompanyName').val(strVal3.text());
+                                    var table = $('#tableWeeklyReportx');
+                                    $('#tableWeeklyReportx td').click(function () {
 
-                                        var selectArchitectNameDDL = $('#selectArchitectName');
+                                        rIndex = this.parentElement.rowIndex;
+                                        cIndex = this.cellIndex;
 
-                                        //Get update architect name by company
-                                        $.ajax({
-                                            url: 'DataServicesReporting.asmx/DataReportGetArchitect',
-                                            method: 'post',
-                                            data: {
-                                                id: strVal0.text()
-                                            },
-                                            datatype: 'json',
-                                            success: function (data) {
-                                                selectArchitectNameDDL.empty();
-                                                $(data).each(function (index, item) {
-                                                    selectArchitectNameDDL.append($('<option/>', { value: item.ArchitecID, text: item.ArchitectName }));
+                                        if (rIndex != 0 & cIndex == 7) {
+                                            //alert(rIndex + '' + cIndex);
 
-                                                    $('#selectArchitectName').val(strVal4.text());
-                                                    $('#selectArchitectName').change();
-
-                                                    //selectArchitectNameDDL.text = strVal4.text();
-                                                    //selectArchitectNameDDL.change();
-                                                });
-                                            }
-
-                                        });
-
-                                        $('#txtProjectName').val(strVal7.text());
-                                        $('#txtLocation').val(strVal8.text());
+                                            document.getElementById("divErrorArchitect").style.display = 'none';
+                                            document.getElementById("divErrorLocation").style.display = 'none';
+                                            document.getElementById("divErrorProductType").style.display = 'none';
+                                            document.getElementById("divErrorProductName").style.display = 'none';
+                                            document.getElementById("divErrorProfile").style.display = 'none';
+                                            document.getElementById("divErrorDelivery").style.display = 'none';
+                                            document.getElementById("divErrorFollowing").style.display = 'none';
+                                            document.getElementById("divErrorQuantity").style.display = 'none';
+                                            document.getElementById("divErrorRemark").style.display = 'none';
+                                            document.getElementById("divErrorStatus").style.display = 'none';
 
 
-                                        //Get Product type such as Ampelite, Ampelram
-                                        var selectProductTypeDDL = $('#selectProductType');
-                                        $.ajax({
-                                            url: '../trans/DataServices.asmx/GetProductType',
-                                            method: 'post',
-                                            dataType: 'json',
-                                            success: function (data) {
-                                                selectProductTypeDDL.empty();
-                                                $(data).each(function (index, item) {
-                                                    selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
-                                                    $('#selectProductType').val(strVal9.text());
-                                                    $('#selectProductType').change();
-                                                });
-                                            }
-                                        });
+                                            var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
+                                            var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
+                                            var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');
+                                            var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');
+                                            var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');
+                                            var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');
+                                            var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');
+                                            var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');
+                                            var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');
+                                            var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');
+                                            var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)');
+
+                                            var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');
+                                            var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');
+                                            var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');
+                                            var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
+                                            var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
+                                            var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
+                                            var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
+                                            var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
+                                            var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
 
 
-                                        //When product type changed cascading of product
-                                        var selectProductNameDDL = $('#selectProductName');
-                                        selectProductTypeDDL.change(function () {
+                                            //document.getElementById("txtid").value = strVal0.text();
+                                            $('#txtid').val(strVal0.text());
+                                            $('#txtVisitDate').val(strVal1.text());
+                                            $('#txtTime').val(strVal2.text());
+                                            $('#txtCompanyName').val(strVal3.text());
+
+                                            var selectArchitectNameDDL = $('#selectArchitectName');
+
+                                            //Get update architect name by company
                                             $.ajax({
-                                                url: '../trans/DataServices.asmx/GetProducts',
+                                                url: 'DataServicesReporting.asmx/DataReportGetArchitect',
                                                 method: 'post',
-                                                data: { ProdTypeID: $(this).val() },
+                                                data: {
+                                                    id: strVal0.text()
+                                                },
+                                                datatype: 'json',
+                                                success: function (data) {
+                                                    selectArchitectNameDDL.empty();
+                                                    $(data).each(function (index, item) {
+                                                        selectArchitectNameDDL.append($('<option/>', { value: item.ArchitecID, text: item.ArchitectName }));
+
+                                                        $('#selectArchitectName').val(strVal4.text());
+                                                        $('#selectArchitectName').change();
+
+                                                        //selectArchitectNameDDL.text = strVal4.text();
+                                                        //selectArchitectNameDDL.change();
+                                                    });
+                                                }
+
+                                            });
+
+                                            $('#txtProjectName').val(strVal7.text());
+                                            $('#txtLocation').val(strVal8.text());
+
+
+                                            //Get Product type such as Ampelite, Ampelram
+                                            var selectProductTypeDDL = $('#selectProductType');
+                                            $.ajax({
+                                                url: '../trans/DataServices.asmx/GetProductType',
+                                                method: 'post',
                                                 dataType: 'json',
                                                 success: function (data) {
-                                                    selectProductNameDDL.empty();
-                                                    selectProductNameDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                                                    selectProductTypeDDL.empty();
                                                     $(data).each(function (index, item) {
-                                                        selectProductNameDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
-                                                        selectProductNameDDL.val(strVal11.text());
-                                                        selectProductNameDDL.change();
+                                                        selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
+                                                        $('#selectProductType').val(strVal9.text());
+                                                        $('#selectProductType').change();
                                                     });
                                                 }
                                             });
-                                        });
 
-                                        //Get Product type such as Ampelite, Ampelram
-                                        var selectStatusDDL = $('#selectStatus');
-                                        $.ajax({
-                                            url: '../trans/DataServices.asmx/GetStepSpec',
-                                            method: 'post',
-                                            dataType: 'json',
-                                            success: function (data) {
-                                                selectStatusDDL.empty();
-                                                $(data).each(function (index, item) {
-                                                    selectStatusDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
-                                                    $('#selectStatus').val(strVal24.text());
-                                                    $('#selectStatus').change();
+
+                                            //When product type changed cascading of product
+                                            var selectProductNameDDL = $('#selectProductName');
+                                            selectProductTypeDDL.change(function () {
+                                                $.ajax({
+                                                    url: '../trans/DataServices.asmx/GetProducts',
+                                                    method: 'post',
+                                                    data: { ProdTypeID: $(this).val() },
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                        selectProductNameDDL.empty();
+                                                        selectProductNameDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
+                                                        $(data).each(function (index, item) {
+                                                            selectProductNameDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
+                                                            selectProductNameDDL.val(strVal11.text());
+                                                            selectProductNameDDL.change();
+                                                        });
+                                                    }
                                                 });
+                                            });
+
+                                            //Get Product type such as Ampelite, Ampelram
+                                            var selectStatusDDL = $('#selectStatus');
+                                            $.ajax({
+                                                url: '../trans/DataServices.asmx/GetStepSpec',
+                                                method: 'post',
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    selectStatusDDL.empty();
+                                                    $(data).each(function (index, item) {
+                                                        selectStatusDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
+                                                        $('#selectStatus').val(strVal24.text());
+                                                        $('#selectStatus').change();
+                                                    });
+                                                }
+                                            });
+
+
+                                            $('#txtProfile').val(strVal13.text());
+                                            $('#datedelivery').val(strVal14.text());
+                                            $('#datefollowing').val(strVal15.text());
+                                            $('#txtQuantity').val(strVal16.text());
+
+                                            if (strVal24.text() == '1') {
+                                                $('#txtRefMcRf').val(strVal20.text());
+                                                $('#txtContactMcRf').val(strVal21.text());
                                             }
-                                        });
-
-
-                                        $('#txtProfile').val(strVal13.text());
-                                        $('#datedelivery').val(strVal14.text());
-                                        $('#datefollowing').val(strVal15.text());
-                                        $('#txtQuantity').val(strVal16.text());
-
-                                        if (strVal24.text() == '1') {
-                                            $('#txtRefMcRf').val(strVal20.text());
-                                            $('#txtContactMcRf').val(strVal21.text());
-                                        }
-                                        else if (strVal24.text() == '2') {
-                                            $('#txtRefMcRf').val(strVal21.text());
-                                            $('#txtContactMcRf').val(strVal22.text());
-                                        }
-                                        else {
-                                            $('#txtRefMcRf').val(strVal22.text());
-                                            //$('#txtContactMcRf').val(strVal22.text());
-                                        }
-
-                                        
-
-                                        $('#txtRemark').val(strVal23.text());
-
-                                        
-                                        $.ajax({
-                                            url: 'DataServicesReporting.asmx/GetDataProjectHistory',
-                                            method: 'post',
-                                            data: {
-                                                ProjectID: strVal6.text()
-                                            },
-                                            dataType: 'json',
-                                            success: function (data) {
-
-                                                var trHTML2 = '';
-                                                $('#tableHistory tr:not(:first)').remove();
-                                                $(data).each(function (index, item) {
-                                                    trHTML2 += '<tr>' +
-                                                        '<td class="">' + item.WeekDate + '</td>' +
-                                                        '<td class="">' + item.WeekTime + '</td>' +
-                                                        '<td class="">' + item.NextVisitDate + '</td>' +
-                                                        '<td class="">' + item.TransNameEN + '</td>' +
-                                                        '<td class="">' + item.StepNameEn + '</td>' +
-                                                        '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
-                                                        '<td class="">' + item.ProdNameEN + '</td>' +
-                                                        '<td class="">' + item.BiddingName1 + '</td>' +
-                                                        '<td class="">' + item.AwardMC + '</td>' +
-                                                        '<td class="">' + item.AwardRF + '</td>' +
-                                                        '<td class="">' + item.Quantity + '</td>' +
-                                                        '<td class="">' + item.Remark + '</td>' +
-                                                        '</tr > ';
-                                                });
-                                                $('#tableHistory').append(trHTML2);
+                                            else if (strVal24.text() == '2') {
+                                                $('#txtRefMcRf').val(strVal21.text());
+                                                $('#txtContactMcRf').val(strVal22.text());
+                                            }
+                                            else {
+                                                $('#txtRefMcRf').val(strVal22.text());
+                                                //$('#txtContactMcRf').val(strVal22.text());
                                             }
 
-                                        });
-                                       
 
 
-                                        setTimeout(function () {
-                                            $("#myModalEdit").modal({ backdrop: false });
-                                            $("#myModalEdit").modal("show");
-                                        }, 1500);
+                                            $('#txtRemark').val(strVal23.text());
 
 
-                                    }
+                                            $.ajax({
+                                                url: 'DataServicesReporting.asmx/GetDataProjectHistory',
+                                                method: 'post',
+                                                data: { ProjectID: strVal6.text() },
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    var trHTML2 = '';
+                                                    $('#tableHistory tr:not(:first)').remove();
+
+                                                    $(data).each(function (index, item) {
+                                                        trHTML2 += '<tr>' +
+                                                            '<td class="">' + item.WeekDate + '</td>' +
+                                                            '<td class="">' + item.WeekTime + '</td>' +
+                                                            '<td class="">' + item.NextVisitDate + '</td>' +
+                                                            '<td class="">' + item.TransNameEN + '</td>' +
+                                                            '<td class="">' + item.StepNameEn + '</td>' +
+                                                            '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
+                                                            '<td class="">' + item.ProdNameEN + '</td>' +
+                                                            '<td class="">' + item.BiddingName1 + '</td>' +
+                                                            '<td class="">' + item.AwardMC + '</td>' +
+                                                            '<td class="">' + item.AwardRF + '</td>' +
+                                                            '<td class="">' + item.Quantity + '</td>' +
+                                                            '<td class="">' + item.Remark + '</td>' +
+                                                            '</tr > ';
+                                                    });
+                                                    $('#tableHistory').append(trHTML2);
+                                                }
+                                            });
+
+                                            setTimeout(function () {
+                                                $("#myModalEdit").modal({ backdrop: false });
+                                                $("#myModalEdit").modal("show");
+                                            }, 1500);
 
 
-                                    //$('table tbody tr:not(:first)').on('click', function () {
+                                        }
+                                    });
 
-                                    //    alert($(this).html()); // or .text()
-                                    //});
                                 });
 
-                            });
+                            }
+                        });
+                    }
 
-                        }
-                    });
+
+                   
                 });
-
 
                 $('#txtQuantity').keypress(function (event) {
                     if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
@@ -323,8 +614,6 @@
 
             })
         </script>
-
-
 
         <h1>Project Status
             <small>Control panel</small>
@@ -368,6 +657,8 @@
                             <div class="row" style="margin-left: 30px;">
 
                                 <div class="col-md-4">
+                                    <input type="hidden" id="optionName" name="optionName" value="">
+
                                     <label class="txtLabel">Report Options</label>
                                     <div class="txtLabel">
                                         <select id="selectReportOption" name="selectReportOption" class="form-control input-sm" style="width: 100%">
@@ -375,7 +666,9 @@
                                             <option value="R001">Design</option>
                                             <option value="R002">Bidding</option>
                                             <option value="R003">Award Main Cons</option>
+                                            <option value="R006">Award Roll Formers</option>
                                             <option value="R004">Next Following</option>
+                                            <option value="R005">On Delivery Date</option>
                                             <option value="R011">Design --> Bidding</option>
                                             <option value="R012">Bidding --> Award Main Cons</option>
                                             <option value="R013">Award Main Cons --> Award RF</option>
@@ -461,7 +754,7 @@
                                     <div>
                                         <span class="">
                                             <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click" type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
-                                                <i class="fa fa-file-excel-o"></i>Print Excel</button>
+                                                <i class="fa fa-file-excel-o"></i> Print Excel</button>
                                         </span>
                                     </div>
                                 </div>

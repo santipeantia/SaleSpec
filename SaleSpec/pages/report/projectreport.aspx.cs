@@ -438,6 +438,7 @@ namespace SaleSpec.pages.report
 
 
                 string selectOption = Request.Form["selectReportOption"];
+                string strOptionName =  Request.Form["optionName"];
                 string datepickertrans = Request.Form["datepickertrans"];
                 string datepickerend = Request.Form["datepickerend"];
                 string selectSaleport = Request.Form["selectSalePort"];
@@ -486,7 +487,7 @@ namespace SaleSpec.pages.report
                     GridviewExport.DataBind();
 
                     Response.Clear();
-                    Response.AddHeader("content-disposition", "attachment;filename=ExportIntakeReport_" + selectSaleport + ".xls");
+                    Response.AddHeader("content-disposition", "attachment;filename=ExportReport_" + strOptionName + "_"+ selectSaleport + ".xls");
                     Response.ContentType = "application/ms-excel";
                     Response.ContentEncoding = System.Text.Encoding.Unicode;
                     Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
