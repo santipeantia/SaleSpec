@@ -446,37 +446,96 @@ namespace SaleSpec.pages.report
                 string strqtyend = Request.Form["QtyEnd"];
                 string strsearch = Request.Form["Search"];
 
-
+                string empcode = Session["EmpCode"].ToString();
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
-                Comm.CommandType = CommandType.StoredProcedure;
-                
-                SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
-                SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = datepickertrans };
-                SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = datepickerend };
-                SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = selectSaleport };
-                SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
-                SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
-                SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
-
-                Comm.Parameters.Add(param1);
-                Comm.Parameters.Add(param2);
-                Comm.Parameters.Add(param3);
-                Comm.Parameters.Add(param4);
-                Comm.Parameters.Add(param5);
-                Comm.Parameters.Add(param6);
-                Comm.Parameters.Add(param7);
 
 
+                if (selectSaleport == "SELECTED ALL")
+                {
+                    if (empcode == "118052" || empcode == "316010" || empcode == "506009")
+                    {
+                        Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
+                        Comm.CommandType = CommandType.StoredProcedure;
 
-                //conn.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = Comm;
-                dt = new DataTable();
-                adapter.Fill(dt);
+                        SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
+                        SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = datepickertrans };
+                        SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = datepickerend };
+                        SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = selectSaleport };
+                        SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
+                        SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
+                        SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
+
+                        Comm.Parameters.Add(param1);
+                        Comm.Parameters.Add(param2);
+                        Comm.Parameters.Add(param3);
+                        Comm.Parameters.Add(param4);
+                        Comm.Parameters.Add(param5);
+                        Comm.Parameters.Add(param6);
+                        Comm.Parameters.Add(param7);
+
+                        //conn.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = Comm;
+                        dt = new DataTable();
+                        adapter.Fill(dt);
+                    }
+                    else
+                    {
+                        //string strWarning = "";
+                        //strWarning += "Swal.fire({ ";
+                        //strWarning += "     type: 'error', ";
+                        //strWarning += "     title: 'You do not have permission print all.', ";
+                        //strWarning += "     text: 'Permission access denied.', ";
+                        //strWarning += "     footer: 'Please contact system administrator..'})";
+
+                        //Response.Write("<script>successalert();</script>");
+
+                        //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "myJsFn", "successalert();", true);
+
+                        //ScriptManager.RegisterStartupScript(this, GetType(), null, strWarning, true);
+
+                        //ClientScript.RegisterStartupScript(this.GetType(), "warning", "successalert()", true);
+
+                        //Response.Write(""+ strWarning  +"");
+
+                        GetDataSalePort();
+                        return;
+                    }
+                }
+                else
+                {
+                    Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
+                    SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = datepickertrans };
+                    SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = datepickerend };
+                    SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = selectSaleport };
+                    SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
+                    SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
+                    SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
+
+                    Comm.Parameters.Add(param1);
+                    Comm.Parameters.Add(param2);
+                    Comm.Parameters.Add(param3);
+                    Comm.Parameters.Add(param4);
+                    Comm.Parameters.Add(param5);
+                    Comm.Parameters.Add(param6);
+                    Comm.Parameters.Add(param7);
+
+                    //conn.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    adapter.SelectCommand = Comm;
+                    dt = new DataTable();
+                    adapter.Fill(dt);
+
+                }
+
+
+               
 
                 GridView GridviewExport = new GridView();
 

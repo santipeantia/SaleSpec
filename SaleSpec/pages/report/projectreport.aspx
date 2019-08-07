@@ -5,6 +5,38 @@
     <section class="content-header">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="jquery-1.11.2.min.js"></script>
+
+        <script>
+
+            function validateExcel() {
+                var selectSaleport = $('#selectSalePort').val();
+                var empcode = '<%= Session["EmpCode"] %>';
+
+                if (selectSaleport == 'SELECTED ALL') {
+
+                    if (empcode == '118052' || empcode == '316010' || empcode == '506009') {
+                         document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
+                    }
+                    else {
+                        successalert();
+                        return;
+                    }
+                }
+                else {
+                    document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
+                }
+
+            }
+
+             function successalert() {
+                    Swal.fire({
+                                type: 'error',
+                                title: 'You do not have permission print all.',
+                                text: 'Permission access denied.',
+                                footer: 'Please contact system administrator..'
+                            })
+                }
+        </script>
         <script>
             $(document).ready(function () {
 
@@ -33,8 +65,6 @@
                 });
 
 
-
-
                 var btnJsonReport = $('#btnJsonReport');
                 btnJsonReport.click(function () {
                     var selectOption = $('#selectReportOption').val();
@@ -48,6 +78,8 @@
                     var empcode = '<%= Session["EmpCode"] %>';
 
                     //alert(selectSaleport);
+
+                    selectReportOptionDDL.change();
 
                     if (selectSaleport == 'SELECTED ALL') {
 
@@ -753,8 +785,11 @@
                                     <label class="txtLabel">Reporting</label>
                                     <div>
                                         <span class="">
-                                            <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click" type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
+                                            <button type="button" id="alert" name="alert" class="btn btn-success btn-flat btn-block btn-sm " onclick="validateExcel();" ><i class="fa fa-file-excel-o"></i> Print Excel</button>
+
+                                            <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click" type="button" class="btn btn-success btn-flat btn-block btn-sm hidden" data-toggle="tooltip" title="Print Excel">
                                                 <i class="fa fa-file-excel-o"></i> Print Excel</button>
+
                                         </span>
                                     </div>
                                 </div>
@@ -765,6 +800,7 @@
                                         <span class="">
                                             <button id="btnDownloadPDF" runat="server" type="button" class="btn btn-warning btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
                                                 <i class="fa fa-pdf-o"></i>Print PDF</button>
+                                           
                                         </span>
                                     </div>
                                 </div>
