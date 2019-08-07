@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="weeklyreport.aspx.cs" Inherits="SaleSpec.pages.trans.weeklyreport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="jquery-1.11.2.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -314,7 +315,16 @@
                         }
                     });
                     //alert message show successfully
-                    alert("Data saved successfully");
+                    //alert("Data saved successfully");
+
+                    Swal.fire({
+                                type: 'success',
+                                title: 'Data saved successfully..',
+                                text: 'Data has been saved.',
+                                footer: 'Please contact system administrator..'
+                    })
+
+
                     $('#myModalCompany').modal('hide');
 
                     //clear all data input
@@ -369,31 +379,74 @@
 
                 //alert(arcFirstName.val() + ' ' + arcLastName.val() + ' ' + selectArcCompany.val());
                 if (arcFirstName.val() == '') {
-                    alert('Please enter architect name..!');
+                    //alert('Please enter architect name..!');
+                     Swal.fire({
+                                type: 'error',
+                                title: 'Please enter architect name..!',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
+
                     arcFirstName.focus();
                     return;
                 } else if (arcLastName.val() == '') {
-                    alert('Please enter architect surname..!');
+                    //alert('Please enter architect surname..!');
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Please enter architect surname..!',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
                     arcLastName.focus();
                     return;
                 } else if (selectArcCompany.val() == "-1") {
-                    alert('Please select company');
+                    //alert('Please select company');
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Please select company..',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
                     selectArcCompany.focus();
                     return;
                 } else if (selectArcPosition.val() == "-1") {
-                    alert('Please select architect position');
+                    //alert('Please select architect position');
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Please select architect position',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
                     selectArcPosition.focus();
                     return;
                 } else if (arcPhone.val() == '') {
-                    alert('Please enter phone number..!');
+                    //alert('Please enter phone number..!');
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Please enter phone number..',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
                     arcPhone.focus();
                     return;
                 } else if (arcMobile.val() == '') {
-                    alert('Please enter mobile number..!');
+                    //alert('Please enter mobile number..!');
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Please enter mobile number..!',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
                     arcMobile.focus();
                     return;
                 } else if (arcEmail.val() == '') {
-                    alert('Please enter contact email..!');
+                    //alert('Please enter contact email..!');
+                    Swal.fire({
+                                type: 'error',
+                                title: 'Please enter contact email..!',
+                                text: 'Data error please check..',
+                                footer: 'Please contact system administrator..'
+                    })
                     arcEmail.focus();
                     return;
                 } else {
@@ -436,7 +489,13 @@
 
                                     /// to do here
                                     //alert(selectCompanyDDL.val());
-                                    alert('Data saved successfully..!');
+                                    //alert('Data saved successfully..!');
+                                    Swal.fire({
+                                        type: 'success',
+                                        title: 'Data saved successfully..!',
+                                        text: 'Data has been saved',
+                                        footer: 'Please contact system administrator..'
+                                    })
 
                                     $.ajax({
                                         url: 'DataServices.asmx/GetDataArchitect',
@@ -543,7 +602,15 @@
                     document.getElementById("divErrorProjName").style.display = '';
                     document.getElementById("divErrorProjName").style.display = 'normal';
 
-                    alert('Warning message..! Project name is not empty please check...');
+                    //alert('Warning message..! Project name is not empty please check...');
+                    Swal.fire({
+                                        type: 'error',
+                                        title: 'Warning message..! Project name is not empty please check...',
+                                        text: 'Data error please check',
+                                        footer: 'Please contact system administrator..'
+                    })
+
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -558,7 +625,14 @@
                     document.getElementById("divErrorLocation").style.display = '';
                     document.getElementById("divErrorLocation").style.display = 'normal';
 
-                    alert('Warning message..! Location is not empty please check...');
+                    //alert('Warning message..! Location is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Location is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -573,7 +647,14 @@
                     document.getElementById("divErrorProjectStep").style.display = '';
                     document.getElementById("divErrorProjectStep").style.display = 'normal';
 
-                    alert('Warning message..! Project step is not empty please check...');
+                    //alert('Warning message..! Project step is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Project step is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -588,7 +669,14 @@
                     document.getElementById("divErrorProduct").style.display = '';
                     document.getElementById("divErrorProduct").style.display = 'normal';
 
-                    alert('Warning message..! Product is not empty please check...');
+                    //alert('Warning message..! Product is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Product is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -618,7 +706,14 @@
                     document.getElementById("divErrorQuantity").style.display = '';
                     document.getElementById("divErrorQuantity").style.display = 'normal';
 
-                    alert('Warning message..! Quantity is not empty please check...');
+                    //alert('Warning message..! Quantity is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Quantity is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -637,7 +732,14 @@
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Format date is incorrect please check...');
+                    //alert('Warning message..! Format date is incorrect please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Format date is incorrect please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
                     
                     chkValidate = 'false';
@@ -652,7 +754,14 @@
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Delivery date is not empty please check...');
+                    //alert('Warning message..! Delivery date is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Delivery date is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -668,7 +777,14 @@
                     document.getElementById("divErrorNextVisit").style.display = '';
                     document.getElementById("divErrorNextVisit").style.display = 'normal';
 
-                    alert('Warning message..! Next Following is not empty please check...');
+                    //alert('Warning message..! Next Following is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Next Following is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -684,7 +800,14 @@
                     document.getElementById("divErrorStatus").style.display = '';
                     document.getElementById("divErrorStatus").style.display = 'normal';
 
-                    alert('Warning message..! Status is not empty please check...');
+                    //alert('Warning message..! Status is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Status is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -794,7 +917,13 @@
                                         });
 
                                         /// to do here
-                                        alert('Data saved successfully..!');
+                                        //alert('Data saved successfully..!');
+                                        Swal.fire({
+                                            type: 'success',
+                                            title: 'Data saved successfully...',
+                                            text: 'Data has been saved',
+                                            footer: 'Please contact system administrator..'
+                                        })
 
                                         document.getElementById("divSaveEntry").style.display = '';
                                         document.getElementById("divSaveEntry").style.display = 'none';
@@ -811,13 +940,25 @@
 
                     }
                     else {
-                        alert('Warning, \n\When you create new transaction must be select step design only..!');
+                        //alert('Warning, \n\When you create new transaction must be select step design only..!');
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Warning message..! Create new transaction must be select step design only...',
+                            text: 'Data error please check',
+                            footer: 'Please contact system administrator..'
+                        })
                         return;
                     }
                 }
                 else
                 {
-                    alert('Warnning, The data is not completed please check..!');
+                    //alert('Warnning, The data is not completed please check..!');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! The data is not completed please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
                 }
             });
 
@@ -840,7 +981,14 @@
                     document.getElementById("divErrorProjName").style.display = '';
                     document.getElementById("divErrorProjName").style.display = 'normal';
 
-                    alert('Warning message..! Project name is not empty please check...');
+                    //alert('Warning message..! Project name is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Project name is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -855,7 +1003,14 @@
                     document.getElementById("divErrorLocation").style.display = '';
                     document.getElementById("divErrorLocation").style.display = 'normal';
 
-                    alert('Warning message..! Location is not empty please check...');
+                    //alert('Warning message..! Location is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Location is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -870,7 +1025,14 @@
                     document.getElementById("divErrorProjectStep").style.display = '';
                     document.getElementById("divErrorProjectStep").style.display = 'normal';
 
-                    alert('Warning message..! Step name is not empty please check...');
+                    //alert('Warning message..! Step name is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Step name is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -885,7 +1047,14 @@
                     document.getElementById("divErrorProduct").style.display = '';
                     document.getElementById("divErrorProduct").style.display = 'normal';
 
-                    alert('Warning message..! Product type is not empty please check...');
+                    //alert('Warning message..! Product type is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Product type is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -915,7 +1084,14 @@
                     document.getElementById("divErrorQuantity").style.display = '';
                     document.getElementById("divErrorQuantity").style.display = 'normal';
 
-                    alert('Warning message..! Quantyti is not empty please check...');
+                    //alert('Warning message..! Quantyti is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Quantity is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -934,7 +1110,14 @@
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Format date is incorrect please check...');
+                    //alert('Warning message..! Format date is incorrect please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Format date is incorrect please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
                     
                     chkValidate = 'false';
@@ -949,7 +1132,14 @@
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Delivery date is not empty please check...');
+                    //alert('Warning message..! Delivery date is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Delivery date is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -965,7 +1155,14 @@
                     document.getElementById("divErrorNextVisit").style.display = '';
                     document.getElementById("divErrorNextVisit").style.display = 'normal';
 
-                    alert('Warning message..! Next Following is not empty please check...');
+                    //alert('Warning message..! Next Following is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Next Following is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -981,7 +1178,14 @@
                     document.getElementById("divErrorStatus").style.display = '';
                     document.getElementById("divErrorStatus").style.display = 'normal';
 
-                    alert('Warning message..! Status name is not empty please check...');
+                    //alert('Warning message..! Status name is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Status name is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryNewProduct').prop('disabled', false);
 
 
@@ -1075,7 +1279,14 @@
                         });
 
                         /// to do here
-                        alert('Data saved product extended successfully..!');
+                        //alert('Data saved product extended successfully..!');
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Data saved product extended successfully..!',
+                            text: 'Data has been saved',
+                            footer: 'Please contact system administrator..'
+                        })
+
 
                         document.getElementById("divSaveEntry").style.display = '';
                         document.getElementById("divSaveEntry").style.display = 'none';
@@ -1573,7 +1784,14 @@
                     document.getElementById("divErrorupProjName").style.display = '';
                     document.getElementById("divErrorupProjName").style.display = 'normal';
 
-                    alert('Warning message..! Data is not empty please check..');
+                    //alert('Warning message..! Data is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Data is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1588,7 +1806,14 @@
                     document.getElementById("divErrorupLocation").style.display = '';
                     document.getElementById("divErrorupLocation").style.display = 'normal';
 
-                    alert('Warning message..! Data location is not empty please check..');
+                    //alert('Warning message..! Data location is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Data location is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1603,7 +1828,14 @@
                     document.getElementById("divErrorupProjectStep").style.display = '';
                     document.getElementById("divErrorupProjectStep").style.display = 'normal';
 
-                    alert('Warning message..! Project step is not empty please check..');
+                    //alert('Warning message..! Project step is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Project step is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1618,7 +1850,14 @@
                     document.getElementById("divErrorupProduct").style.display = '';
                     document.getElementById("divErrorupProduct").style.display = 'normal';
 
-                    alert('Warning message..! Product is not empty please check..');
+                    //alert('Warning message..! Product is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Product is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1646,7 +1885,14 @@
                     document.getElementById("divErrorupQuantity").style.display = 'normal';
                     chkValidate = 'false';
 
-                    alert('Warning message..! Quantity is not empty please check..');
+                    //alert('Warning message..! Quantity is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Quantity is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
@@ -1663,7 +1909,14 @@
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Format date is incorrect please check...');
+                    //alert('Warning message..! Format date is incorrect please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Format date is incorrect please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     
                     chkValidate = 'false';
@@ -1680,7 +1933,14 @@
                     document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
                     chkValidate = 'false';
 
-                    alert('Warning message..! Delivery date is not empty please check..');
+                    //alert('Warning message..! Delivery date is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Delivery date is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
@@ -1698,7 +1958,14 @@
                     chkValidate = 'false';
 
 
-                    alert('Warning message..! Next/following is not empty please check..');
+                    //alert('Warning message..! Next/following is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Next/Following is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
@@ -1713,7 +1980,14 @@
                     document.getElementById("divErrorupStatus").style.display = 'normal';
                     chkValidate = 'false';
 
-                    alert('Warning message..! Please select at least status..');
+                    //alert('Warning message..! Please select at least status..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Please select at least status...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProject').prop('disabled', false);
                     return;
 
@@ -1803,7 +2077,14 @@
                     });
 
                     /// to do here
-                    alert('Data saved successfully..!');
+                    //alert('Data saved successfully..!');
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Data saved successfully...',
+                        text: 'Data has been saved',
+                        footer: 'Please contact system administrator..'
+                    })
+
 
                     document.getElementById("divUpdateEntry").style.display = '';
                     document.getElementById("divUpdateEntry").style.display = 'none';
@@ -1840,7 +2121,14 @@
                     document.getElementById("divErrorupProjName").style.display = '';
                     document.getElementById("divErrorupProjName").style.display = 'normal';
 
-                    alert('Warning message..! Project name is not empty please check..');
+                    //alert('Warning message..! Project name is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Project name is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1855,7 +2143,14 @@
                     document.getElementById("divErrorupLocation").style.display = '';
                     document.getElementById("divErrorupLocation").style.display = 'normal';
 
-                    alert('Warning message..! Data location is not empty please check..');
+                    //alert('Warning message..! Data location is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Data location is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1870,7 +2165,14 @@
                     document.getElementById("divErrorupProjectStep").style.display = '';
                     document.getElementById("divErrorupProjectStep").style.display = 'normal';
 
-                    alert('Warning message..! Project step is not empty please check..');
+                    //alert('Warning message..! Project step is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Project step is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1885,7 +2187,14 @@
                     document.getElementById("divErrorupProduct").style.display = '';
                     document.getElementById("divErrorupProduct").style.display = 'normal';
 
-                    alert('Warning message..! Data product is not empty please check..');
+                    //alert('Warning message..! Data product is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Data product is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1912,7 +2221,14 @@
                     document.getElementById("divErrorupQuantity").style.display = '';
                     document.getElementById("divErrorupQuantity").style.display = 'normal';
 
-                    alert('Warning message..! Quantity is not empty please check..');
+                    //alert('Warning message..! Quantity is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Quantity is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1931,7 +2247,14 @@
                     document.getElementById("divErrorDeliveryDate").style.display = '';
                     document.getElementById("divErrorDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Format date is incorrect please check...');
+                    //alert('Warning message..! Format date is incorrect please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Format date is incorrect please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
                     
                     chkValidate = 'false';
@@ -1947,7 +2270,14 @@
                     document.getElementById("divErrorupDeliveryDate").style.display = '';
                     document.getElementById("divErrorupDeliveryDate").style.display = 'normal';
 
-                    alert('Warning message..! Delivery Date is not empty please check..');
+                    //alert('Warning message..! Delivery Date is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Delivery Date is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1963,7 +2293,14 @@
                     document.getElementById("divErrorupNextVisit").style.display = '';
                     document.getElementById("divErrorupNextVisit").style.display = 'normal';
 
-                    alert('Warning message..! Data is not empty please check..');
+                    //alert('Warning message..! Data is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Data is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -1979,7 +2316,14 @@
                     document.getElementById("divErrorupStatus").style.display = '';
                     document.getElementById("divErrorupStatus").style.display = 'normal';
 
-                    alert('Warning message..! Status is not empty please check..');
+                    //alert('Warning message..! Status is not empty please check..');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Status is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -2071,7 +2415,14 @@
                     });
 
                     /// to do here
-                    alert('Data saved product extended successfully..!');
+                    //alert('Data saved product extended successfully..!');
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Data saved product extended successfully...',
+                        text: 'Data has been saved',
+                        footer: 'Please contact system administrator..'
+                    })
+
 
                     document.getElementById("divUpdateEntry").style.display = '';
                     document.getElementById("divUpdateEntry").style.display = 'none';
@@ -2179,7 +2530,14 @@
                         dataType: 'json',
                         success: function (data) {
                             /// to do here
-                            alert('Data saved new architect successfully..!');
+                            //alert('Data saved new architect successfully..!');
+                            Swal.fire({
+                                type: 'success',
+                                title: 'Data saved new architect successfully...',
+                                text: 'Data has been saved',
+                                footer: 'Please contact system administrator..'
+                            })
+
                             $('#btnSaveNewArchitect').prop('disabled', false);
                         }
                     });
@@ -2194,7 +2552,14 @@
 
 
                 } else {
-                    alert('Warnning, The data is not completed please check..!');
+                    //alert('Warnning, The data is not completed please check..!');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! The data is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                 }
             });
 
@@ -2208,7 +2573,14 @@
                     document.getElementById("divErrorDetailOther").style.display = '';
                     document.getElementById("divErrorDetailOther").style.display = 'normal';
 
-                    alert('Warning message..! Description is not empty please check...');
+                    //alert('Warning message..! Description is not empty please check...');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Warning message..! Description is not empty please check...',
+                        text: 'Data error please check',
+                        footer: 'Please contact system administrator..'
+                    })
+
                     $('#btnOtherDetail').prop('disabled', false);
 
                     chkValidate = 'false';
@@ -2278,7 +2650,14 @@
                         
                     }
                 });
-                alert('Data saved other details successfully..!');
+                //alert('Data saved other details successfully..!');
+                Swal.fire({
+                        type: 'success',
+                        title: 'Data saved other details succrssfully...',
+                        text: 'Data has been saved',
+                        footer: 'Please contact system administrator..'
+                })
+
                 $('#btnOtherDetail').prop('disabled', false);
             });
             // ******* End function update project status *******
@@ -2350,7 +2729,13 @@
 
                     // check file name is not empty
                     if (havefile == '') {
-                        alert('Intake attached find not found file name..');
+                        //alert('Intake attached find not found file name..');
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Warning message..! Intake attached find not found file name...',
+                            text: 'Data error please check',
+                            footer: 'Please contact system administrator..'
+                        })
                     }
                     else {
 
@@ -2464,7 +2849,13 @@
                             }
                         });
 
-                        alert('File has been uploaded...');
+                        //alert('File has been uploaded...');
+                        Swal.fire({
+                            type: 'success',
+                            title: 'File has been uploaded...',
+                            text: 'Uploaded',
+                            footer: 'Please contact system administrator..'
+                        })
 
                     }
                 }
