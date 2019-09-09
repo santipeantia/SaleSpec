@@ -36,7 +36,7 @@ namespace SaleSpec.pages.report
         public string strPortOption = "";
 
         public string sPage = "report/saleweeklyreport";
-       
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //string strUserID = Session["UserID"].ToString();
@@ -45,7 +45,8 @@ namespace SaleSpec.pages.report
                 Response.Redirect("../../pages/users/login");
             }
 
-            if (!IsPostBack) {
+            if (!IsPostBack)
+            {
                 GetDataSalePort();
             }
         }
@@ -67,18 +68,21 @@ namespace SaleSpec.pages.report
                 dt = new DataTable();
                 da.Fill(dt);
 
-                if (dt.Rows.Count != 0) {
+                if (dt.Rows.Count != 0)
+                {
 
-                    for (int i = 0; i <= dt.Rows.Count - 1; i++) {
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
                         string strValue = dt.Rows[i]["SpecID"].ToString();
                         string strText = dt.Rows[i]["FullName"].ToString();
 
-                        strPortOption += "<option value=\""+ strValue + "\">"+ strText + "</option>";
+                        strPortOption += "<option value=\"" + strValue + "\">" + strText + "</option>";
 
                     }
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                            "      <strong>Warning..!</strong> " + ex.Message + " " +
                            "</div>";
@@ -90,6 +94,8 @@ namespace SaleSpec.pages.report
         {
             try
             {
+
+
                 string strPort = Request.Form["selectSalePort"];
                 string strStart = Request.Form["datepickertrans"];
                 string strEnd = Request.Form["datepickerend"];
@@ -100,82 +106,174 @@ namespace SaleSpec.pages.report
                 Session["ssEnd"] = strEnd;
                 Session["ssSearch"] = strSearch;
 
-                Conn = new SqlConnection();
-                Conn = dbConn.OpenConn();
+                if (Session["UserID"].ToString() == Session["ssPort"].ToString())
+                {
+                    Conn = new SqlConnection();
+                    Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spWeeklyReporting", Conn);
-                Comm.CommandType = CommandType.StoredProcedure;
+                    Comm = new SqlCommand("spWeeklyReporting", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
-                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
-                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
-                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
+                    SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                    SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                    SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                    SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
-                Comm.Parameters.Add(param1);
-                Comm.Parameters.Add(param2);
-                Comm.Parameters.Add(param3);
-                Comm.Parameters.Add(param4);
-                //conn.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = Comm;
-                dt = new DataTable();
-                adapter.Fill(dt);
+                    Comm.Parameters.Add(param1);
+                    Comm.Parameters.Add(param2);
+                    Comm.Parameters.Add(param3);
+                    Comm.Parameters.Add(param4);
+                    //conn.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    adapter.SelectCommand = Comm;
+                    dt = new DataTable();
+                    adapter.Fill(dt);
 
-                if (dt.Rows.Count != 0) {
-
-                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    if (dt.Rows.Count != 0)
                     {
-                        string WeekDate = dt.Rows[i]["WeekDate"].ToString();
-                        string WeekTime = dt.Rows[i]["WeekTime"].ToString();
 
-                        string CompanyID = dt.Rows[i]["CompanyID"].ToString();
-                        string CompanyName = dt.Rows[i]["CompanyName"].ToString();
-                        string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
-                        string Name = dt.Rows[i]["Name"].ToString();
-                        string ProjectID = dt.Rows[i]["ProjectID"].ToString();
-                        string ProjectName = dt.Rows[i]["ProjectName"].ToString();
+                        for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                        {
+                            string WeekDate = dt.Rows[i]["WeekDate"].ToString();
+                            string WeekTime = dt.Rows[i]["WeekTime"].ToString();
 
-                        string Location = dt.Rows[i]["Location"].ToString();
-                        string StatusID = dt.Rows[i]["StatusID"].ToString();
-                        string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
-                        //string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
-                        string Remark = dt.Rows[i]["Remark"].ToString();
+                            string CompanyID = dt.Rows[i]["CompanyID"].ToString();
+                            string CompanyName = dt.Rows[i]["CompanyName"].ToString();
+                            string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
+                            string Name = dt.Rows[i]["Name"].ToString();
+                            string ProjectID = dt.Rows[i]["ProjectID"].ToString();
+                            string ProjectName = dt.Rows[i]["ProjectName"].ToString();
 
-                        string UserID = dt.Rows[i]["UserID"].ToString();
-                        string EmpCode = dt.Rows[i]["EmpCode"].ToString();
-                        string CreatedBy = dt.Rows[i]["CreatedBy"].ToString();
-                        string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
-                        string ID = dt.Rows[i]["ID"].ToString();
-                        string STB = dt.Rows[i]["STB"].ToString();
+                            string Location = dt.Rows[i]["Location"].ToString();
+                            string StatusID = dt.Rows[i]["StatusID"].ToString();
+                            string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
+                            //string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
+                            string Remark = dt.Rows[i]["Remark"].ToString();
+
+                            string UserID = dt.Rows[i]["UserID"].ToString();
+                            string EmpCode = dt.Rows[i]["EmpCode"].ToString();
+                            string CreatedBy = dt.Rows[i]["CreatedBy"].ToString();
+                            string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
+                            string ID = dt.Rows[i]["ID"].ToString();
+                            string STB = dt.Rows[i]["STB"].ToString();
 
 
-                        strTblDetail += "<tr> " +
-                                    "    <td>" + WeekDate + "</td> " +
-                                   "    <td>" + WeekTime + "</td> " +
-                                   "    <td  class=\"hidden\">" + CompanyID + "</td> " +
-                                   "    <td>" + CompanyName + "</td> " +
-                                   "    <td  class=\"hidden\">" + ArchitecID + "</td> " +
-                                   "    <td>" + Name + "</td> " +
-                                   "    <td  class=\"hidden\">" + ProjectID + "</td> " +
-                                   "    <td>" + ProjectName + "</td> " +
-                                   "    <td>" + Location + "</td> " +
-                                   "    <td class=\"hidden\">" + StatusID + "</td> " +
-                                   "    <td>" + StatusNameEn + "</td> " +
-                                   "    <td>" + Remark + "</td> " +
-                                   "    <td>" + CreatedBy + "</td> " +
-                                   "    <td>" + CreatedDate + "</td> " +
-                                   "    <td style=\"width: 20px; text-align: center;\"> " +
-                                   "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-search text-green\"></i></a></td> " +
-                                   "    <td class=\"hidden\">" + ID + "</td> " +
-                                   "    <td class=\"hidden\">" + STB + "</td> " +
-                                   //"    <td style=\"width: 20px; text-align: center;\"> " +
-                                   //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
-                                   "</tr> ";
+                            strTblDetail += "<tr> " +
+                                        "    <td>" + WeekDate + "</td> " +
+                                       "    <td>" + WeekTime + "</td> " +
+                                       "    <td  class=\"hidden\">" + CompanyID + "</td> " +
+                                       "    <td>" + CompanyName + "</td> " +
+                                       "    <td  class=\"hidden\">" + ArchitecID + "</td> " +
+                                       "    <td>" + Name + "</td> " +
+                                       "    <td  class=\"hidden\">" + ProjectID + "</td> " +
+                                       "    <td>" + ProjectName + "</td> " +
+                                       "    <td>" + Location + "</td> " +
+                                       "    <td class=\"hidden\">" + StatusID + "</td> " +
+                                       "    <td>" + StatusNameEn + "</td> " +
+                                       "    <td>" + Remark + "</td> " +
+                                       "    <td>" + CreatedBy + "</td> " +
+                                       "    <td>" + CreatedDate + "</td> " +
+                                       "    <td style=\"width: 20px; text-align: center;\"> " +
+                                       "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-search text-green\"></i></a></td> " +
+                                       "    <td class=\"hidden\">" + ID + "</td> " +
+                                       "    <td class=\"hidden\">" + STB + "</td> " +
+                                       //"    <td style=\"width: 20px; text-align: center;\"> " +
+                                       //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
+                                       "</tr> ";
+                        }
+
+                        //Response.Write("<script>alert('Data inserted successfully')</script>");
                     }
-
-                    //Response.Write("<script>alert('Data inserted successfully')</script>");
                 }
+                else if (Session["EmpCode"].ToString() == "118052" || Session["UserID"].ToString() == "316010" || Session["UserID"].ToString() == "506009" || Session["UserID"].ToString() == "519012")
+                {
+                    Conn = new SqlConnection();
+                    Conn = dbConn.OpenConn();
+
+                    Comm = new SqlCommand("spWeeklyReporting", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                    SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                    SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                    SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
+
+                    Comm.Parameters.Add(param1);
+                    Comm.Parameters.Add(param2);
+                    Comm.Parameters.Add(param3);
+                    Comm.Parameters.Add(param4);
+                    //conn.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    adapter.SelectCommand = Comm;
+                    dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    if (dt.Rows.Count != 0)
+                    {
+
+                        for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                        {
+                            string WeekDate = dt.Rows[i]["WeekDate"].ToString();
+                            string WeekTime = dt.Rows[i]["WeekTime"].ToString();
+
+                            string CompanyID = dt.Rows[i]["CompanyID"].ToString();
+                            string CompanyName = dt.Rows[i]["CompanyName"].ToString();
+                            string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
+                            string Name = dt.Rows[i]["Name"].ToString();
+                            string ProjectID = dt.Rows[i]["ProjectID"].ToString();
+                            string ProjectName = dt.Rows[i]["ProjectName"].ToString();
+
+                            string Location = dt.Rows[i]["Location"].ToString();
+                            string StatusID = dt.Rows[i]["StatusID"].ToString();
+                            string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
+                            //string NewArchitect = dt.Rows[i]["NewArchitect"].ToString();
+                            string Remark = dt.Rows[i]["Remark"].ToString();
+
+                            string UserID = dt.Rows[i]["UserID"].ToString();
+                            string EmpCode = dt.Rows[i]["EmpCode"].ToString();
+                            string CreatedBy = dt.Rows[i]["CreatedBy"].ToString();
+                            string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
+                            string ID = dt.Rows[i]["ID"].ToString();
+                            string STB = dt.Rows[i]["STB"].ToString();
+
+
+                            strTblDetail += "<tr> " +
+                                        "    <td>" + WeekDate + "</td> " +
+                                       "    <td>" + WeekTime + "</td> " +
+                                       "    <td  class=\"hidden\">" + CompanyID + "</td> " +
+                                       "    <td>" + CompanyName + "</td> " +
+                                       "    <td  class=\"hidden\">" + ArchitecID + "</td> " +
+                                       "    <td>" + Name + "</td> " +
+                                       "    <td  class=\"hidden\">" + ProjectID + "</td> " +
+                                       "    <td>" + ProjectName + "</td> " +
+                                       "    <td>" + Location + "</td> " +
+                                       "    <td class=\"hidden\">" + StatusID + "</td> " +
+                                       "    <td>" + StatusNameEn + "</td> " +
+                                       "    <td>" + Remark + "</td> " +
+                                       "    <td>" + CreatedBy + "</td> " +
+                                       "    <td>" + CreatedDate + "</td> " +
+                                       "    <td style=\"width: 20px; text-align: center;\"> " +
+                                       "       <a href=\"#\" title=\"Edit\"><i class=\"fa fa-search text-green\"></i></a></td> " +
+                                       "    <td class=\"hidden\">" + ID + "</td> " +
+                                       "    <td class=\"hidden\">" + STB + "</td> " +
+                                       //"    <td style=\"width: 20px; text-align: center;\"> " +
+                                       //"        <a href=\"#\" data-toggle=\"modal\" class=\"\" title=\"ลบข้อมูล\"><span class='glyphicon glyphicon-trash text-red'></span></a></td> " +
+                                       "</tr> ";
+                        }
+
+                        //Response.Write("<script>alert('Data inserted successfully')</script>");
+                    }
+                }
+                else
+                {
+                    //Response.Write("<script>alert(AlertErorr())</script>");
+                    //return;
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "alertmee", "alert('Do not allowed selected all..!')", true);
+                }
+
                 GetDataSalePort();
+
             }
             catch (Exception ex)
             {
@@ -289,9 +387,9 @@ namespace SaleSpec.pages.report
         {
             try
 
-                //Session["ssPort"] = strPort;
-                //Session["ssStart"] = strStart;
-                //Session["ssEnd"] = strEnd;
+            //Session["ssPort"] = strPort;
+            //Session["ssStart"] = strStart;
+            //Session["ssEnd"] = strEnd;
             {
                 string strReportType = Request.Form["selectReportType"];
                 string strPort = Session["ssPort"].ToString(); // Request.Form["selectSalePort"];
@@ -299,52 +397,112 @@ namespace SaleSpec.pages.report
                 string strEnd = Session["ssEnd"].ToString(); // Request.Form["datepickerend"];
                 string strSearch = Session["ssSearch"].ToString();
 
-                Conn = new SqlConnection();
-                Conn = dbConn.OpenConn();
-
-                Comm = new SqlCommand("spWeeklyReportingClear", Conn);
-                Comm.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
-                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
-                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
-                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
-
-                Comm.Parameters.Add(param1);
-                Comm.Parameters.Add(param2);
-                Comm.Parameters.Add(param3);
-                Comm.Parameters.Add(param4);
-                //conn.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = Comm;
-                dt = new DataTable();
-                adapter.Fill(dt);
-
-                GridView GridviewExport = new GridView();
-
-                if (dt.Rows.Count != 0)
+                if (Session["UserID"].ToString() == Session["ssPort"].ToString())
                 {
+                    
 
-                    GridviewExport.DataSource = dt;
-                    GridviewExport.DataBind();
+                    Conn = new SqlConnection();
+                    Conn = dbConn.OpenConn();
 
-                    Response.Clear();
-                    Response.AddHeader("content-disposition", "attachment;filename=ExportWeeklyReport_"+ strPort + ".xls");
-                    Response.ContentType = "application/ms-excel";
-                    Response.ContentEncoding = System.Text.Encoding.Unicode;
-                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+                    Comm = new SqlCommand("spWeeklyReportingClear", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
 
-                    System.IO.StringWriter sw = new System.IO.StringWriter();
-                    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+                    SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                    SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                    SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                    SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
 
-                    GridviewExport.RenderControl(hw);
-                    string style = @"<style> td { mso-number-format:\@;} </style>";
-                    Response.Write(style);
-                    Response.Write(sw.ToString());
-                    Response.End();
+                    Comm.Parameters.Add(param1);
+                    Comm.Parameters.Add(param2);
+                    Comm.Parameters.Add(param3);
+                    Comm.Parameters.Add(param4);
+                    //conn.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    adapter.SelectCommand = Comm;
+                    dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    GridView GridviewExport = new GridView();
+
+                    if (dt.Rows.Count != 0)
+                    {
+
+                        GridviewExport.DataSource = dt;
+                        GridviewExport.DataBind();
+
+                        Response.Clear();
+                        Response.AddHeader("content-disposition", "attachment;filename=ExportWeeklyReport_" + strPort + ".xls");
+                        Response.ContentType = "application/ms-excel";
+                        Response.ContentEncoding = System.Text.Encoding.Unicode;
+                        Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                        System.IO.StringWriter sw = new System.IO.StringWriter();
+                        System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                        GridviewExport.RenderControl(hw);
+                        string style = @"<style> td { mso-number-format:\@;} </style>";
+                        Response.Write(style);
+                        Response.Write(sw.ToString());
+                        Response.End();
+
+                    }
 
                 }
-                Response.Write("<script>alert('Data find not found please check...')</script>");
+
+                else if (Session["EmpCode"].ToString() == "118052" || Session["UserID"].ToString() == "316010" || Session["UserID"].ToString() == "506009" || Session["UserID"].ToString() == "519012")
+                {
+
+                    Conn = new SqlConnection();
+                    Conn = dbConn.OpenConn();
+
+                    Comm = new SqlCommand("spWeeklyReportingClear", Conn);
+                    Comm.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strPort };
+                    SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
+                    SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                    SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strSearch };
+
+                    Comm.Parameters.Add(param1);
+                    Comm.Parameters.Add(param2);
+                    Comm.Parameters.Add(param3);
+                    Comm.Parameters.Add(param4);
+                    //conn.Open();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    adapter.SelectCommand = Comm;
+                    dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    GridView GridviewExport = new GridView();
+
+                    if (dt.Rows.Count != 0)
+                    {
+
+                        GridviewExport.DataSource = dt;
+                        GridviewExport.DataBind();
+
+                        Response.Clear();
+                        Response.AddHeader("content-disposition", "attachment;filename=ExportWeeklyReport_" + strPort + ".xls");
+                        Response.ContentType = "application/ms-excel";
+                        Response.ContentEncoding = System.Text.Encoding.Unicode;
+                        Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                        System.IO.StringWriter sw = new System.IO.StringWriter();
+                        System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                        GridviewExport.RenderControl(hw);
+                        string style = @"<style> td { mso-number-format:\@;} </style>";
+                        Response.Write(style);
+                        Response.Write(sw.ToString());
+                        Response.End();
+
+                    }
+
+                }
+                else
+                {
+                    Response.Write("<script>alert('Data find not found please check...')</script>");
+                }
                 GetDataSalePort();
             }
             catch (Exception ex)
@@ -357,7 +515,8 @@ namespace SaleSpec.pages.report
 
         protected void btnUpdateData_click(Object sender, EventArgs e)
         {
-            try {
+            try
+            {
 
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
@@ -378,9 +537,9 @@ namespace SaleSpec.pages.report
 
 
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
-                               "      <strong>Warning..!</strong> "+ strID + strSTB + strSelectTime + strDate + strCompany + strArchitect + strProject + strLocation + strDesc + UserID + EmpCode + CreatedBy+ CreateDate +"" +
+                               "      <strong>Warning..!</strong> " + strID + strSTB + strSelectTime + strDate + strCompany + strArchitect + strProject + strLocation + strDesc + UserID + EmpCode + CreatedBy + CreateDate + "" +
                                "</div>";
-               
+
 
 
                 if (strSTB == "A")
@@ -409,7 +568,8 @@ namespace SaleSpec.pages.report
 
 
                 }
-                else {
+                else
+                {
 
                     ssql = "update adWeeklyReportOther set WeekTime=@WeekTime, Location=@Location, Remark=@Remark, " +
                            "    CreatedBy=@CreatedBy, CreatedDate=@CreatedDate " +
@@ -448,7 +608,7 @@ namespace SaleSpec.pages.report
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
                              "</div>";
-                
+
             }
         }
 
@@ -505,5 +665,6 @@ namespace SaleSpec.pages.report
                 return;
             }
         }
+
     }
 }

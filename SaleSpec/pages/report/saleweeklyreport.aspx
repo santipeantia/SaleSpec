@@ -1,7 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="saleweeklyreport.aspx.cs" Inherits="SaleSpec.pages.report.saleweeklyreport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    
     <script src="jquery-1.11.2.min.js"></script>
+
     <script>
+       
+
         $(document).ready(function () {
 
             var today = new Date();
@@ -76,10 +81,11 @@
             });
 
             //var btnExportExcel = $('#btnExportExcel');
-          
 
         })
     </script>
+
+   
 
      <!-- Header content -->
     <section class="content-header">
@@ -198,6 +204,8 @@
                                         <div class="">
                                             <button type="button" id="btnQuery" runat="server" onserverclick="btnQuery_Click" class="btn btn-info btn-flat btn-block btn-sm" >Show Report</button>
                                             <%--<button type="button" id="btnJsonReport" class="btn btn-info btn-flat btn-block btn-sm " >Show Report</button>--%>
+
+                                             <%--<button type="button" class="btn btn-default" onclick="alerterror()" data-dismiss="modal">click alert</button>--%>
                                         </div>
                                     </div>
 
@@ -574,7 +582,14 @@
                 }
             }
 
-                        
+            function alerterror() {
+                Swal.fire({
+                    type: 'error',
+                    html: 'Do not get data selected all..!'
+                });
+            }
+
+            
         </script>
 
 
