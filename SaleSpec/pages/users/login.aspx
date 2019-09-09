@@ -108,6 +108,13 @@
                 increaseArea: '20%' // optional
             });
         });
+
+        $("#inpPassWord").keypress(function (e) {
+            if (e.which == 13) {
+                //onSignIn();
+                $('#btnLogin').click();
+            }
+        });
 </script>
 </body>
 </html>

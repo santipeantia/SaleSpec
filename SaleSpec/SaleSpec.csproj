@@ -6525,6 +6525,7 @@
     <Content Include="pages\report\companyreportview.aspx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
+    <Content Include="pages\report\jquery.table2excel.js" />
     <Content Include="pages\report\newprojectreport.aspx" />
     <Content Include="pages\report\specintakeview.aspx" />
     <Content Include="pages\trans\DataServices.asmx" />
@@ -7030,6 +7031,7 @@
     </Compile>
     <Compile Include="pages\reports\dsArchitects.cs">
       <DependentUpon>dsArchitects.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\reports\dsArchitects.Designer.cs">
       <AutoGen>True</AutoGen>

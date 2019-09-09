@@ -5,7 +5,7 @@
     <section class="content-header">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="jquery-1.11.2.min.js"></script>
-
+        <script src="jquery.table2excel.js"></script>
         <script>
 
             function validateExcel() {
@@ -35,7 +35,16 @@
                                 text: 'Permission access denied.',
                                 footer: 'Please contact system administrator..'
                             })
-                }
+            }
+
+            function exportexcel() {
+                    $("#tableHistory").table2excel({
+                        name: "Table2Excel",
+                        filename: "myFileName",
+                        fileext: ".xls"
+                    });
+            }  
+
         </script>
         <script>
             $(document).ready(function () {
@@ -644,6 +653,21 @@
                     }
                 });
 
+                //var btnHistoryExcel = $('#btnHistoryExcel');
+                //btnHistoryExcel.click(
+                //    function() {
+                //        var table = document.getElementById("tableHistory");
+                //        var html = table.outerHTML;
+                //        var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+                //        elem.setAttribute("href", url);
+                //        elem.setAttribute("download", "history.xls"); // Choose the file name
+                //        return false;
+                //    })
+
+
+
+                
+
             })
         </script>
 
@@ -1042,9 +1066,22 @@
 
                                     <div class="tab-pane" id="history">
                                         <!-- Post -->
+                                       
+
                                         <div class="post clearfix">
                                             <div id="divWeeklyHistory">
                                                 <div class="row">
+
+                                                    <span class="pull-right txtLabel">
+                                                        <button id="btnHistoryExcel" type="button" class="btn btn-default btn-sm"
+                                                            data-toggle="tooltip" title="Excel" onclick="exportexcel()">
+                                                            <i class="fa fa-table"></i>
+                                                        </button>
+
+                                                       
+                                                    </span>
+
+
                                                     <table id="tableHistory" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                                         <thead>
                                                             <tr>

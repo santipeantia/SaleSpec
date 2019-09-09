@@ -135,7 +135,7 @@
         </div>
 
         <!-- /.modal myModalEdit -->
-        <div class="modal modal-default fade" id="myModalEdit">
+        <div class="modal modal-default fade" id="q">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -499,25 +499,25 @@
                 }
             }
 
-            $(function () {
+            //$(function () {
 
-                $("#myModalEdit").validate({
-                    rules: {
-                        txtCustTypeDesc: {
-                            required: true,
-                            minlength: 8
-                        },
-                        action: "required"
-                    },
-                    messages: {
-                        txtCustTypeDesc: {
-                            required: "Please enter some data",
-                            minlength: "Your data must be at least 8 characters"
-                        },
-                        action: "Please provide some data"
-                    }
-                });
-            });
+            //    $("#myModalEdit").validate({
+            //        rules: {
+            //            txtCustTypeDesc: {
+            //                required: true,
+            //                minlength: 8
+            //            },
+            //            action: "required"
+            //        },
+            //        messages: {
+            //            txtCustTypeDesc: {
+            //                required: "Please enter some data",
+            //                minlength: "Your data must be at least 8 characters"
+            //            },
+            //            action: "Please provide some data"
+            //        }
+            //    });
+            //});
 
             function ValidateSave() {
                 var str1 = document.getElementById("txtSpecID").value;
