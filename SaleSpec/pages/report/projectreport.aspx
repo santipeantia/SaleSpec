@@ -58,7 +58,6 @@
                 var firstdate = yyyy + '-' + mm + '-01';
                 var currentdate = yyyy + '-' + mm + '-' + dd;
 
-
                 var datepickertrans = $('#datepickertrans');
                 var datepickerend = $('#datepickerend');
                 datepickertrans.val(firstdate);
@@ -342,6 +341,8 @@
                                                         $('#tableHistory').append(trHTML2);
                                                     }
                                                 });
+
+
 
                                                 setTimeout(function () {
                                                     $("#myModalEdit").modal({ backdrop: false });

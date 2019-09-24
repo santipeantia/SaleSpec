@@ -541,6 +541,8 @@
                 $('#contactmc').val('');
                 $('#awardrf').val('');
                 $('#contactrf').val('');
+
+                
             });
 
             //Validate option not allow when transaction date is empty
@@ -1511,11 +1513,12 @@
                                     //$('#selectupdateProjectStep option:selected').val(inval["StepID"]);
                                     //$('#selectupdateProjectStep').text(inval["StepNameEn"]);
 
-
                                 });
                             }
                         }
                     });
+
+                   
 
                 }
             });
@@ -1561,6 +1564,9 @@
 
                                             $('#updatebiddingname1').val('');
                                             $('#updateowner1').val('');
+
+
+                                           // $('#updatebiddingname1').val('test test test');
 
                                             //$('#updatebiddingname2').val('');
                                             //$('#updateowner2').val('');

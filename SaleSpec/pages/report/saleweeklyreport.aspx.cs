@@ -106,8 +106,9 @@ namespace SaleSpec.pages.report
                 Session["ssEnd"] = strEnd;
                 Session["ssSearch"] = strSearch;
 
-                if (Session["UserID"].ToString() == Session["ssPort"].ToString())
-                {
+                //if  (Session["UserID"].ToString() ==  Session["ssPort"].ToString())
+                  if (Session["ssPort"].ToString() != "SELECTED ALL")
+                    {
                     Conn = new SqlConnection();
                     Conn = dbConn.OpenConn();
 
@@ -397,9 +398,9 @@ namespace SaleSpec.pages.report
                 string strEnd = Session["ssEnd"].ToString(); // Request.Form["datepickerend"];
                 string strSearch = Session["ssSearch"].ToString();
 
-                if (Session["UserID"].ToString() == Session["ssPort"].ToString())
-                {
-                    
+                //if (Session["UserID"].ToString() == Session["ssPort"].ToString())
+                if (Session["ssPort"].ToString() != "SELECTED ALL")
+                    {                    
 
                     Conn = new SqlConnection();
                     Conn = dbConn.OpenConn();
