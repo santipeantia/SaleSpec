@@ -240,6 +240,36 @@ namespace SaleSpec.Class
             Context.Response.Write(js.Serialize(statuses));
         }
 
+        [WebMethod]
+        public void GetStatusWithProject(string ProjectID)
+        {
+            List<GetDataStatus> statuses = new List<GetDataStatus>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetStatusWithProject", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ProjectID", Value = ProjectID };
+
+                comm.Parameters.Add(param1);
+
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataStatus status = new GetDataStatus();
+                    status.StatusID = rdr["StatusID"].ToString();
+                    statuses.Add(status);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(statuses));
+        }
+
+
+
         //GetDataStatusConfirm
         [WebMethod]
         public void GetStatusConfirm()
@@ -739,6 +769,17 @@ namespace SaleSpec.Class
                     project.SaleSpec = rdr["SaleSpec"].ToString();
                     project.StatusConID = rdr["StatusConID"].ToString();
                     project.LastUpdate = rdr["LastUpdate"].ToString();
+
+                    project.BiddingName1 = rdr["BiddingName1"].ToString();
+                    project.OwnerName1 = rdr["OwnerName1"].ToString();
+                    project.BiddingName2 = rdr["BiddingName2"].ToString();
+                    project.OwnerName2 = rdr["OwnerName2"].ToString();
+                    project.BiddingName3 = rdr["BiddingName3"].ToString();
+                    project.OwnerName3 = rdr["OwnerName3"].ToString();
+                    project.AwardMC = rdr["AwardMC"].ToString();
+                    project.ContactMC = rdr["ContactMC"].ToString();
+                    project.AwardRF = rdr["AwardRF"].ToString();
+                    project.ContactRF = rdr["ContactRF"].ToString();
                     projects.Add(project);
                 }
             }

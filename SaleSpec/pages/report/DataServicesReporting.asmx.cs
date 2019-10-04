@@ -479,7 +479,7 @@ namespace SaleSpec.pages.report
                                             string Name, string Location, string ProdTypeID, 
                                             string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate, 
                                             string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2, 
-                                            string Remark, string StepID)
+                                            string Remark, string StepID, string StatusID, string ProjectID)
         {
             List<GetUpdateWeeklyReportViaSupervisor> companies = new List<GetUpdateWeeklyReportViaSupervisor>();
             using (SqlConnection conn = new SqlConnection(cs))
@@ -508,6 +508,8 @@ namespace SaleSpec.pages.report
                 comm.Parameters.AddWithValue("@Ref2", Ref2);
                 comm.Parameters.AddWithValue("@Remark", Remark);
                 comm.Parameters.AddWithValue("@StepID", StepID);
+                comm.Parameters.AddWithValue("@StatusID", StatusID);
+                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
                 comm.ExecuteNonQuery();
                 conn.Close();
             }

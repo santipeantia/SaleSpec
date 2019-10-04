@@ -200,6 +200,7 @@
                                                 var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
                                                 var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
 
+                                                //alert(strVal24.text());
 
                                                 //document.getElementById("txtid").value = strVal0.text();
                                                 $('#txtid').val(strVal0.text());
@@ -273,21 +274,61 @@
                                                     });
                                                 });
 
+
                                                 //Get Product type such as Ampelite, Ampelram
-                                                var selectStatusDDL = $('#selectStatus');
+                                                var selectStepDDL = $('#selectStep');
                                                 $.ajax({
                                                     url: '../trans/DataServices.asmx/GetStepSpec',
                                                     method: 'post',
                                                     dataType: 'json',
                                                     success: function (data) {
-                                                        selectStatusDDL.empty();
+                                                        selectStepDDL.empty();
                                                         $(data).each(function (index, item) {
-                                                            selectStatusDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
-                                                            $('#selectStatus').val(strVal24.text());
-                                                            $('#selectStatus').change();
+                                                            selectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
+                                                            $('#selectStep').val(strVal24.text());
+                                                            $('#selectStep').change();
                                                         });
                                                     }
                                                 });
+
+
+                                                //Get Product type such as Ampelite, Ampelram
+                                                var selectStatusDDL = $('#selectStatus');
+                                                $.ajax({
+                                                    url: '../trans/DataServices.asmx/GetStatus',
+                                                    method: 'post',
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                        selectStatusDDL.empty();
+                                                        $(data).each(function (index, item) {
+                                                            selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                                                            //$('#selectStatus').val('S03');
+                                                            //$('#selectStatus').change();
+                                                        })
+
+                                                         $.ajax({
+                                                            url: '../trans/DataServices.asmx/GetStatusWithProject',
+                                                            method: 'post',
+                                                            data: {
+                                                                ProjectID: strVal6.text()
+                                                            },
+                                                            dataType: 'json',
+                                                            success: function (data) {
+                                                                var obj = jQuery.parseJSON(JSON.stringify(data));
+
+                                                                if (obj != '') {
+                                                                    $.each(obj, function (key, inval) {
+                                                                        $('#selectStatus').val(inval["StatusID"]);
+                                                                        $('#selectStatus').change();
+                                                                    });
+                                                                }
+                                                            }
+                                                        })
+                                                    }
+                                                });
+
+
+                                                //alert(strVal6.text());
 
 
                                                 $('#txtProfile').val(strVal13.text());
@@ -377,6 +418,7 @@
                         return;
                     }
                     else {
+
                         $.ajax({
                             url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
                             method: 'post',
@@ -444,6 +486,7 @@
                                     var table = $('#tableWeeklyReportx');
                                     $('#tableWeeklyReportx td').click(function () {
 
+                                        
                                         rIndex = this.parentElement.rowIndex;
                                         cIndex = this.cellIndex;
 
@@ -484,8 +527,9 @@
                                             var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
                                             var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
 
+                                           
+                                            document.getElementById("ProjectID").value = strVal6.text();
 
-                                            //document.getElementById("txtid").value = strVal0.text();
                                             $('#txtid').val(strVal0.text());
                                             $('#txtVisitDate').val(strVal1.text());
                                             $('#txtTime').val(strVal2.text());
@@ -557,21 +601,68 @@
                                                 });
                                             });
 
+
+
+
+
                                             //Get Product type such as Ampelite, Ampelram
-                                            var selectStatusDDL = $('#selectStatus');
+                                            var selectStepDDL = $('#selectStep');
                                             $.ajax({
                                                 url: '../trans/DataServices.asmx/GetStepSpec',
                                                 method: 'post',
                                                 dataType: 'json',
                                                 success: function (data) {
-                                                    selectStatusDDL.empty();
+                                                    selectStepDDL.empty();
                                                     $(data).each(function (index, item) {
-                                                        selectStatusDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
-                                                        $('#selectStatus').val(strVal24.text());
-                                                        $('#selectStatus').change();
+                                                        selectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
+                                                        $('#selectStep').val(strVal24.text());
+                                                        $('#selectStep').change();
                                                     });
+
+                                                    
                                                 }
                                             });
+
+
+
+                                            
+                                            //Get Product type such as Ampelite, Ampelram
+                                            var selectStatusDDL = $('#selectStatus');
+                                            $.ajax({
+                                                url: '../trans/DataServices.asmx/GetStatus',
+                                                method: 'post',
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    selectStatusDDL.empty();
+                                                    $(data).each(function (index, item) {
+                                                        selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                                                        //$('#selectStatus').val('S03');
+                                                        //$('#selectStatus').change();
+                                                    })
+
+                                                    $.ajax({
+                                                        url: '../trans/DataServices.asmx/GetStatusWithProject',
+                                                        method: 'post',
+                                                        data: {
+                                                            ProjectID: strVal6.text()
+                                                        },
+                                                        dataType: 'json',
+                                                        success: function (data) {
+                                                            var obj = jQuery.parseJSON(JSON.stringify(data));
+
+                                                            if (obj != '') {
+                                                                $.each(obj, function (key, inval) {
+                                                                    $('#selectStatus').val(inval["StatusID"]);
+                                                                    $('#selectStatus').change();
+                                                                });
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                            });
+
+
+
 
 
                                             $('#txtProfile').val(strVal13.text());
@@ -595,6 +686,11 @@
 
 
                                             $('#txtRemark').val(strVal23.text());
+
+
+                                            
+
+                                            
 
 
                                             $.ajax({
@@ -678,7 +774,7 @@
     </section>
 
     <section class="content">
-        <%= strMsgAlert %>
+        <%--<%= strMsgAlert %>--%>
 
         <%-- Application Forms--%>
         <div class="row">
@@ -869,7 +965,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%= strTblDetail %>
+                                           <%-- <%= strTblDetail %>--%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -936,6 +1032,8 @@
                                             <div class="row" style="margin-bottom: 5px">
                                                 <div class="col-md-4 txtLabel">Project Name</div>
                                                 <div class="col-md-8">
+                                                    
+                                                    <input type="text" class="form-control input input-sm txtLabel hidden" id="ProjectID" name="ProjectID" readonly autocomplete="off" placeholder="" value="">
                                                     <input type="text" class="form-control input input-sm txtLabel" id="txtProjectName" name="txtProjectName" readonly autocomplete="off" placeholder="" value="">
                                                 </div>
                                             </div>
@@ -1048,6 +1146,19 @@
 
                                             <div class="row" style="margin-top: 5px;">
                                                 <div class="col-md-4">
+                                                    <label class="txtLabel">Proess Step</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="txtLabel">
+                                                        <select id="selectStep" name="selectStep" class="form-control input-sm" style="width: 100%">
+                                                        </select>
+                                                    </div>
+                                                    <div id="divErrorStep" class="txtLabel text-red" style="display: none;">Please select at least one item..!</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-top: 5px;">
+                                                <div class="col-md-4">
                                                     <label class="txtLabel">Status</label>
                                                 </div>
                                                 <div class="col-md-8">
@@ -1142,9 +1253,10 @@
                 var str12 = document.getElementById("datefollowing").value;
                 var str13 = document.getElementById("txtQuantity").value;
                 var str14 = document.getElementById("txtRemark").value;
-                var str15 = document.getElementById("selectStatus").value;
+                var str15 = document.getElementById("selectStep").value;
                 var str16 = document.getElementById("txtRefMcRf").value;
                 var str17 = document.getElementById("txtContactMcRf").value;
+                var str18 = document.getElementById("selectStatus").value;
 
                 var div1 = document.getElementById("divErrorArchitect");
                 var div2 = document.getElementById("divErrorLocation");
@@ -1265,11 +1377,13 @@
                                 DeliveryDate:  str11,
                                 NextVisitDate:  str12,
                                 Quantity:  str13,
-                                StepNameEn:  $('#selectStatus option:selected').text(),
+                                StepNameEn:  $('#selectStep option:selected').text(),
                                 Ref1:  str16,
                                 Ref2:  str17,
                                 Remark:  str14,
-                                StepID:  $('#selectStatus').val()
+                                StepID: $('#selectStep').val(),
+                                StatusID: $('#selectStatus').val(),
+                                ProjectID:  $('#ProjectID').val()
                             },
                             dataType: 'json',
                             success: function (data) {

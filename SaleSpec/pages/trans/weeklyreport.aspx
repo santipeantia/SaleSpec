@@ -1496,30 +1496,10 @@
                                     $('#updateProfile').val(inval["ProfNameEN"]);
 
                                     $('#selectupdateProjectStep').val(inval["ProjStep"]).change();
-
-                                    //selectUpdateProductTypeDDL.val(inval["ProdTypeID"]).change();
-                                    //selectUpdateProductDDL.val(inval["ProdID"]).change();
-                                    //selectUpdateProfileDDL.val(inval["ProfID"]).change();
-
-                                    //updateQuantity.prop('disabled', true);
-                                    //updatepickerdelivery.prop('disabled', true);
-                                    //updatevisit.prop('disabled', true);
-                                    //selectUpdateStatusDDL.prop('disabled', true);
-                                    //updatedetail.prop('disabled', true);
-
-                                    //$('#selectupdateProjectStep').selectmenu('refresh');
-
-                                    //selectupdateProjectStepDDL.append($('selected', { value: inval["StepID"], text: inval["StepNameEn"] }));
-                                    //$('#selectupdateProjectStep option:selected').val(inval["StepID"]);
-                                    //$('#selectupdateProjectStep').text(inval["StepNameEn"]);
-
                                 });
                             }
                         }
-                    });
-
-                   
-
+                    });              
                 }
             });
 
@@ -1562,9 +1542,17 @@
                                             selectUpdateProductDDL.val(inval["ProdID"]).change();
                                             selectUpdateProfileDDL.val(inval["ProfID"]).change();
 
-                                            $('#updatebiddingname1').val('');
-                                            $('#updateowner1').val('');
+                                            $('#updatebiddingname1').val(inval["BiddingName1"]);
+                                            $('#updateowner1').val(inval["OwnerName1"]);
+                                            $('#updatebiddingname2').val(inval["BiddingName2"]);
+                                            $('#updateowner2').val(inval["OwnerName2"]);
+                                            $('#updatebiddingname3').val(inval["BiddingName3"]);
+                                            $('#updateowner3').val(inval["OwnerName3"]);
 
+                                            $('#updateawardmc').val(inval["AwardMC"]);
+                                            $('#updatecontactmc').val(inval["ContactMC"]);
+                                            $('#updateawardrf').val(inval["AwardRF"]);
+                                            $('#updatecontactrf').val(inval["ContactRF"]);
 
                                            // $('#updatebiddingname1').val('test test test');
 
@@ -1958,28 +1946,39 @@
                     chkValidate = 'true';
                 }
 
-                if (updatevisit.val() == '') {
-                    document.getElementById("divErrorupNextVisit").style.display = '';
-                    document.getElementById("divErrorupNextVisit").style.display = 'normal';
-                    chkValidate = 'false';
 
-
-                    //alert('Warning message..! Next/following is not empty please check..');
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Warning message..! Next/Following is not empty please check...',
-                        text: 'Data error please check',
-                        footer: 'Please contact system administrator..'
-                    })
-
-                    $('#btnSaveHistoryUpdateProject').prop('disabled', false);
-                    return;
+                if (selectUpdateStatus.val() == 'S02' || selectUpdateStatus.val() == 'S04') {
+                    //to do somthing here....
+                    //alert('Cancel and Sold');
 
                 } else {
-                    document.getElementById("divErrorupNextVisit").style.display = '';
-                    document.getElementById("divErrorupNextVisit").style.display = 'none';
-                    chkValidate = 'true';
+                    if (updatevisit.val() == '') {
+                        document.getElementById("divErrorupNextVisit").style.display = '';
+                        document.getElementById("divErrorupNextVisit").style.display = 'normal';
+                        chkValidate = 'false';
+
+
+                        //alert('Warning message..! Next/following is not empty please check..');
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Warning message..! Next/Following is not empty please check...',
+                            text: 'Data error please check',
+                            footer: 'Please contact system administrator..'
+                        })
+
+                        $('#btnSaveHistoryUpdateProject').prop('disabled', false);
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorupNextVisit").style.display = '';
+                        document.getElementById("divErrorupNextVisit").style.display = 'none';
+                        chkValidate = 'true';
+                    }
                 }
+
+
+
+
 
                 if (selectUpdateStatus.val() == '-1') {
                     document.getElementById("divErrorupStatus").style.display = '';
@@ -2295,28 +2294,38 @@
                     chkValidate = 'true';
                 }
 
-                if (updatevisit.val() == '') {
-                    document.getElementById("divErrorupNextVisit").style.display = '';
-                    document.getElementById("divErrorupNextVisit").style.display = 'normal';
-
-                    //alert('Warning message..! Data is not empty please check..');
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Warning message..! Data is not empty please check...',
-                        text: 'Data error please check',
-                        footer: 'Please contact system administrator..'
-                    })
-
-                    $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
-
-                    chkValidate = 'false';
-                    return;
-
+                if (selectUpdateStatus.val() == 'S02' || selectUpdateStatus.val() == 'S04') {
+                    //to do somthing here....
+                    //alert('Cancel and Sold');
+                    
                 } else {
-                    document.getElementById("divErrorupNextVisit").style.display = '';
-                    document.getElementById("divErrorupNextVisit").style.display = 'none';
-                    chkValidate = 'true';
+                    if (updatevisit.val() == '') {
+                        document.getElementById("divErrorupNextVisit").style.display = '';
+                        document.getElementById("divErrorupNextVisit").style.display = 'normal';
+
+                        //alert('Warning message..! Data is not empty please check..');
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Warning message..! Data is not empty please check...',
+                            text: 'Data error please check',
+                            footer: 'Please contact system administrator..'
+                        })
+
+                        $('#btnSaveHistoryUpdateProduct').prop('disabled', false);
+
+                        chkValidate = 'false';
+                        return;
+
+                    } else {
+                        document.getElementById("divErrorupNextVisit").style.display = '';
+                        document.getElementById("divErrorupNextVisit").style.display = 'none';
+                        chkValidate = 'true';
+                    }
                 }
+
+                
+
+
 
                 if (selectUpdateStatus.val() == '-1') {
                     document.getElementById("divErrorupStatus").style.display = '';

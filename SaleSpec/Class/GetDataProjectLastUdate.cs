@@ -38,5 +38,17 @@ namespace SaleSpec.Class
         public string SaleSpec { get; set; }
         public string StatusConID { get; set; }
         public string LastUpdate { get; set; }
+
+        public string BiddingName1 { get; set; }
+        public string OwnerName1 { get; set; }
+        public string BiddingName2 { get; set; }
+        public string OwnerName2 { get; set; }
+        public string BiddingName3 { get; set; }
+        public string OwnerName3 { get; set; }
+        public string AwardMC { get; set; }
+        public string ContactMC { get; set; }
+        public string AwardRF { get; set; }
+        public string ContactRF { get; set; }
+
     }
 }
