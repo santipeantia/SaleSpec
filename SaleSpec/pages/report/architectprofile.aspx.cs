@@ -37,6 +37,7 @@ namespace SaleSpec.pages.report
         public string strGrade = "";
         public string strStatus = "";
         public string strTblWeeklyReport = "";
+        public string strTblReward = "";
 
         public string sPage = "report/architectprofile";
 
@@ -58,6 +59,15 @@ namespace SaleSpec.pages.report
         public string GradeID;
         public string GradeDesc;
         public string GradeDetail;
+        public string id;
+
+        public int gyear4;
+        public int gyear3;
+        public int gyear2;
+        public int gyear1;
+        public int gyear;
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -70,7 +80,7 @@ namespace SaleSpec.pages.report
 
                 try
                 {
-                    string id = Request.QueryString["id"].ToString();
+                    id = Request.QueryString["id"].ToString();
                     if (id != null || id != "")
                     {
                         GetArchitectProfile(id);
@@ -128,13 +138,12 @@ namespace SaleSpec.pages.report
                 GetDataGradeByid(GradeID);
                 GetDataStatusConfirmByid(StatusConID);
                 GetDataProjectByid(ArchitecID);
+                GetDataRewardEventByid(ArchitecID);
                 GetDataWeeklyReportByid(ArchitecID);
 
 
             }
         }
-
-                          
 
         protected void GetDataCompanyByid(string companyid)
         {
@@ -316,7 +325,7 @@ namespace SaleSpec.pages.report
                                             "<td>" + No + "</td>" +
                                             "<td>" + ProjectYear + "</td>" +
                                             "<td>" + ProjectMonth + "</td>" +
-                                            "<td class=\"hidden\">" + ProjectID + "</td>" +
+                                            "<td>" + ProjectID + "</td>" +
                                             "<td> " + ProjectName + "</td>" +
                                             "<td class=\"hidden\">" + CompanyID + "</td>" +
                                             "<td>" + CompanyName + "</td>" +
@@ -343,6 +352,80 @@ namespace SaleSpec.pages.report
                            "</div>";
                 return;
             }
+        }
+
+        public void GetDataRewardEventByid(string architectid)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetRewardEventYearly", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitectID", Value = architectid };
+                Comm.Parameters.Add(param1);
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = Comm;
+                dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+                    int cyear = int.Parse(DateTime.Now.ToString("yyyy"));
+                    gyear4 = cyear - 4;
+                    gyear3 = cyear - 3;
+                    gyear2 = cyear - 2;
+                    gyear1 = cyear - 1;
+                    gyear = cyear;
+
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string no = dt.Rows[i]["No"].ToString();
+                        string id = dt.Rows[i]["id"].ToString();
+                        string event_id = dt.Rows[i]["event_id"].ToString();
+                        string event_desc = dt.Rows[i]["event_desc"].ToString();
+                        string year4 = dt.Rows[i]["YEAR4"].ToString();
+                        string year3 = dt.Rows[i]["YEAR3"].ToString();
+                        string year2 = dt.Rows[i]["YEAR2"].ToString();
+                        string year1 = dt.Rows[i]["YEAR1"].ToString();
+                        string year = dt.Rows[i]["YEAR"].ToString();
+                        string trans_date = dt.Rows[i]["trans_date"].ToString();
+                        string remark = dt.Rows[i]["remark"].ToString();
+
+                        strTblReward += "<tr> " +
+                                            "<td>" + no + "</td>" +
+                                            "<td class=\"hidden\"> " + id + "</td>" +
+                                            "<td class=\"hidden\"> " + event_id + "</td>" +
+                                            "<td> " + event_desc + "</td>" +
+                                            "<td>" + year4 + "</td>" +
+                                            "<td>" + year3 + "</td>" +
+                                            "<td>" + year2 + "</td>" +
+                                            "<td>" + year1 + "</td>" +
+                                            "<td>" + year + "</td>" +
+                                            "<td>" + trans_date + "</td>" +
+                                            "<td>" + remark + "</td>" +
+                                            "<td style=\"width: 50px; text-align: center;\"> " +
+                                        "       <i class=\"fa fa-trash text-red\"></td> " +
+                                       "</tr> ";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
+            }
+        }
+
+        protected void btnCallRewardEvent_click(object sender, EventArgs e)
+        {
+            GetDataWeeklyReportByid(ArchitecID);
         }
 
         protected void GetDataWeeklyReportByid(string architectid)
@@ -423,8 +506,6 @@ namespace SaleSpec.pages.report
                 return;
             }
         }
-
-
 
 
         protected void btnQuery_Click(object sender, EventArgs e)
@@ -578,75 +659,51 @@ namespace SaleSpec.pages.report
         {
             try
             {
-                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
 
-                //string strReportType = Request.Form["selectReportType"];
-                string strPort = Request.Form["selectSalePort"];
-                string strStatus = "S01";
-                string strStart = Request.Form["datepickertrans"];
-                string strEnd = Request.Form["datepickerend"];
-                string strstrPort = "";
+                //ssql = "sp_GetDataProjectByPortStatusAll";
 
-                if (strPort != "SELECTED ALL")
-                {
-                    ssql = "sp_GetDataProjectByPortStatus";
+                //Conn = dbConn.OpenConn();
+                //Comm = new SqlCommand(ssql);
+                //Comm.Connection = Conn;
+                //Comm.CommandType = CommandType.StoredProcedure;
 
-                    Conn = dbConn.OpenConn();
-                    Comm = new SqlCommand(ssql);
-                    Comm.Connection = Conn;
-                    Comm.CommandType = CommandType.StoredProcedure;
+                //SqlParameter param1 = new SqlParameter() { ParameterName = "@id", Value = id };
+                //Comm.Parameters.Add(param1);
 
-                    SqlParameter param1 = new SqlParameter() { ParameterName = "@TypeID", Value = strPort };
-                    SqlParameter param2 = new SqlParameter() { ParameterName = "@StatusID", Value = strStatus };
-                    SqlParameter param3 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
-                    SqlParameter param4 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                //da = new SqlDataAdapter(Comm);
 
-                    Comm.Parameters.Add(param1);
-                    Comm.Parameters.Add(param2);
-                    Comm.Parameters.Add(param3);
-                    Comm.Parameters.Add(param4);
+                //dt = new DataTable();
+                //da.Fill(dt);
 
-                    strstrPort = Request.Form["selectSalePort"].ToString();
+                //if (dt.Rows.Count != 0)
+                //{
+                //    rpt.Load(Server.MapPath("../reports/rptPrintArchitectProfile.rpt"));
 
-                }
-                else
-                {
-                    ssql = "sp_GetDataProjectByPortStatusAll";
+                //    reports.dsCompanies dsCompanies = new reports.dsCompanies();
+                //    dsCompanies.Merge(dt);
 
-                    Conn = dbConn.OpenConn();
-                    Comm = new SqlCommand(ssql);
-                    Comm.Connection = Conn;
-                    Comm.CommandType = CommandType.StoredProcedure;
+                //    rpt.SetDataSource(dt);
+                //    rpt.SetParameterValue("id", id);
+                //    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ArchitectProfile" + id);
+                //}
 
-                    SqlParameter param1 = new SqlParameter() { ParameterName = "@StatusID", Value = strStatus };
-                    SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStart };
-                    SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEnd };
+                int gyear = int.Parse(DateTime.Now.ToString("yyyy"));
 
-                    Comm.Parameters.Add(param1);
-                    Comm.Parameters.Add(param2);
-                    Comm.Parameters.Add(param3);
+                rpt.Load(Server.MapPath("../reports/rptPrintArchitectProfile.rpt"));
 
-                    strstrPort = Request.Form["selectSalePort"].ToString();
-                }
+                //reports.dsCompanies dsCompanies = new reports.dsCompanies();
+                //dsCompanies.Merge(dt);
 
-                da = new SqlDataAdapter(Comm);
+                //rpt.SetDataSource(dt);
+                rpt.SetParameterValue("@ArchitectID", id);
+                rpt.SetParameterValue("year4", (gyear-4));
+                rpt.SetParameterValue("year3", (gyear-3));
+                rpt.SetParameterValue("year2", (gyear-2));
+                rpt.SetParameterValue("year1", (gyear-1));
+                rpt.SetParameterValue("year", gyear);
+                rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ArchitectProfile" + id);
 
-                dt = new DataTable();
-                da.Fill(dt);
 
-                if (dt.Rows.Count != 0)
-                {
-                    rpt.Load(Server.MapPath("../reports/rptPrintIntakeProjectReport.rpt"));
-
-                    reports.dsCompanies dsCompanies = new reports.dsCompanies();
-                    dsCompanies.Merge(dt);
-
-                    rpt.SetDataSource(dt);
-                    rpt.SetParameterValue("UserID", strstrPort);
-                    rpt.SetParameterValue("StartDate", strStart);
-                    rpt.SetParameterValue("EndDate", strEnd);
-                    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ExportIntakeProject" + strDate);
-                }
             }
             catch (Exception ex)
             {

@@ -6523,6 +6523,7 @@
     <Content Include="pages\PortChart.aspx" />
     <Content Include="pages\report\architectprofile.aspx" />
     <Content Include="pages\report\companyreportview.aspx" />
+    <Content Include="pages\report\DataServicesArchitectProfile.asmx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\report\jquery.table2excel.js" />
@@ -6972,6 +6973,7 @@
     <Compile Include="Class\GetCountArchitect.cs" />
     <Compile Include="Class\GetDataCustomerType.cs" />
     <Compile Include="Class\GetDataDocAttached.cs" />
+    <Compile Include="Class\GetDataEventType.cs" />
     <Compile Include="Class\GetDataGrade.cs" />
     <Compile Include="Class\GetDataNewProjectReporting.cs" />
     <Compile Include="Class\GetDataProductsUpdate.cs" />
@@ -6990,6 +6992,7 @@
     <Compile Include="Class\GetDataStepUpdate.cs" />
     <Compile Include="Class\GetDataTransEntry.cs" />
     <Compile Include="Class\GetDataWeeklyReporting.cs" />
+    <Compile Include="Class\GetDataYearly.cs" />
     <Compile Include="Class\GetDocAttached.cs" />
     <Compile Include="Class\GetInsertArchitect.cs" />
     <Compile Include="Class\GetInsertWeeklyReport.cs" />
@@ -7032,7 +7035,6 @@
     </Compile>
     <Compile Include="pages\reports\dsArchitects.cs">
       <DependentUpon>dsArchitects.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\reports\dsArchitects.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -7069,6 +7071,42 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintArchitectProfile.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintArchitectProfile.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintArchitectProfileInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintArchitectProfileInfo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintArchitectProfileInfo1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintArchitectProfileInfo1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintArchitectProfileProject.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintArchitectProfileProject.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintArchitectProfileReward.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintArchitectProfileReward.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptPrintArchitectProfileWeekly.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintArchitectProfileWeekly.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\reports\rptPrintCompany.cs">
       <AutoGen>True</AutoGen>
@@ -7113,6 +7151,10 @@
     </Compile>
     <Compile Include="pages\report\companyreportview.aspx.designer.cs">
       <DependentUpon>companyreportview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\DataServicesArchitectProfile.asmx.cs">
+      <DependentUpon>DataServicesArchitectProfile.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\report\DataServicesReporting.asmx.cs">
       <DependentUpon>DataServicesReporting.asmx</DependentUpon>
@@ -8039,6 +8081,30 @@
     <EmbeddedResource Include="pages\reports\rptPrintArchitect.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintArchitect.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintArchitectProfile.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintArchitectProfile.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintArchitectProfileInfo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintArchitectProfileInfo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintArchitectProfileInfo1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintArchitectProfileInfo1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintArchitectProfileProject.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintArchitectProfileProject.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintArchitectProfileReward.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintArchitectProfileReward.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintArchitectProfileWeekly.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintArchitectProfileWeekly.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\reports\rptPrintCompany.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

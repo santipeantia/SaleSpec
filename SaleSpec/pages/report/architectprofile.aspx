@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
     <section class="content-header">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="jquery-1.11.2.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -14,13 +15,13 @@
                 var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
                 var firstdate = yyyy + '-' + mm + '-01';
-                var currentdate = yyyy + '-' + mm + '-' + dd;
+                var currentdate3 = yyyy + '-' + mm + '-' + dd;
 
 
                 var datepickertrans = $('#datepickertrans');
                 var datepickerend = $('#datepickerend');
-                datepickertrans.val(firstdate);
-                datepickerend.val(currentdate);
+                datepickertrans.val(currentdate3);
+                //datepickerend.val(currentdate);
 
                 var btnJsonReport = $('#btnJsonReport');
                 btnJsonReport.click(function () {
@@ -170,6 +171,146 @@
 
 
                 });
+
+
+
+
+
+
+                 //client click btnSaveEvent add new event to table
+                var btnSaveEvent = $('#btnSaveEvent');
+                var txtdetails = $('#txtdetails');
+                btnSaveEvent.click(function () {
+                    if (txtdetails.val() == "") {
+                        //todo something you coding
+
+                        Swal.fire({
+                            type: 'error',
+                            title: '',
+                            text: 'Details is no empty please check...!',
+                            footer: 'Please contact system administrator..'
+                        })
+
+                    } else if ($('textarea#txtremark').val() == "")
+                    {
+                         Swal.fire({
+                            type: 'error',
+                            title: '',
+                            text: 'Remark is no empty...!',
+                            footer: 'Please contact system administrator..'
+                        })
+                    }
+                    else {
+                        var userid = '<%= Session["UserID"]%>';
+                        var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                        var lastname = '<%= Session["sEmpEngLastName"] %>';
+                        var engmane = '<%= Session["sEngName"] %>';
+                        var empcode = '<%= Session["EmpCode"] %>';
+
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0');
+                        var yyyy = today.getFullYear();
+                        var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+                        var currentdate2 = yyyy + '-' + mm + '-' + dd;
+
+                        var datepickertrans = $('#datepickertrans');
+
+                        $.ajax({
+                            url: 'DataServicesArchitectProfile.asmx/GetInsertRewardEvent',
+                            method: 'POST',
+                            data: {
+                                event_id: $('#selectEvent').val(),
+                                event_desc: $('#selectEvent option:selected').text(),
+                                trans_date: $('#datepickertrans').val(),
+                                architect_id: '<%= id %>',
+                                details: $('#txtdetails').val(),
+                                remark: $('#txtremark').val(),
+                                userid: userid,
+                                created_date: currentdate,
+                                lasted_date: currentdate
+                                },                
+                            dataType: 'json',
+                            success: function (data) {
+
+                            }                            
+                        });
+
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Data saved successfully..',
+                            text: 'Data has been saved.',
+                            footer: 'Please contact system administrator..'
+                        })                
+
+                        $('#modal-event').modal('hide');
+
+                        //clear all data input
+                        $('#txtdetails').val('');
+                        $('#txtremark').val('');
+
+
+                        //var btnCallRewardEvent = $('#btnCallRewardEvent');
+                        //btnCallRewardEvent.click();
+
+                        setTimeout(function () {
+                            document.getElementById("<%= btnCallRewardEvent.ClientID %>").click();
+                        }, 1000);
+                                              
+                       
+                    }
+                });
+
+
+                var tableReward = $('#tableReward');
+
+                $('#tableReward td').hover(function () {
+                    rIndex = this.parentElement.rowIndex;
+                    cIndex = this.cellIndex;
+                    if (rIndex != 0 & cIndex == 11) {
+                        $(this).css('cursor', 'pointer');
+                    }
+                });
+
+                $('#tableReward td').click(function () {
+
+
+                    rIndex = this.parentElement.rowIndex;
+                    cIndex = this.cellIndex;
+
+                    if (rIndex != 0 & cIndex == 11) {
+
+                        var strVal1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
+                        //alert(strVal1.text());
+
+
+                        $.ajax({
+                            url: 'DataServicesArchitectProfile.asmx/GetRewardEventUpdate',
+                            method: 'POST',
+                            data: {
+                                id: strVal1.text()
+                                },                
+                            dataType: 'json',
+                            success: function (data) {
+
+                            }                            
+                        });
+
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Deleted successfully..',
+                            text: 'Data has been saved.',
+                            footer: 'Please contact system administrator..'
+                        })
+
+                        setTimeout(function () {
+                            document.getElementById("<%= btnCallRewardEvent.ClientID %>").click();
+                        }, 1000);
+
+                    }
+                });
+
             })
         </script>
 
@@ -347,7 +488,7 @@
                                                     <td>No</td>
                                                     <td>Year</td>
                                                     <td>Month</td>
-                                                    <td class="hidden">ProjectID</td>
+                                                    <td>ProjectID</td>
                                                     <td>ProjectName</td>
                                                     <td class="hidden">CompanyID</td>
                                                     <td>CompanyName</td>
@@ -380,12 +521,13 @@
                                         <span class="pull-right">
 
                                             <span class="btn-group">
-                                                <button id="Button1" runat="server" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title="เพิ่มรายการ"><i class="fa fa-plus"></i></button>
+                                                <button id="Button1" runat="server" type="button" class="btn btn-success btn-sm"
+                                                    onclick="openEvent()" title="เพิ่มรายการ">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
                                             </span>
                                         </span>
-
                                     </span>
-
                                     <span class="description">Reward and Event</span>
                                 </div>
                                 <br />
@@ -395,46 +537,21 @@
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
-                                                    <td>Reward</td>
-                                                    <td>Year 2015</td>
-                                                    <td>Year 2016</td>
-                                                    <td>Year 2017</td>
-                                                    <td>Year 2018</td>
-                                                    <td>Year 2019</td>
+                                                    <td class="hidden">id</td>
+                                                    <td class="hidden">event_id</td>
+                                                    <td>Reward and Event</td>
+                                                    <td>Year <%= gyear4 %></td>
+                                                    <td>Year <%= gyear3 %></td>
+                                                    <td>Year <%= gyear2 %></td>
+                                                    <td>Year <%= gyear1 %></td>
+                                                    <td>Year <%= gyear %></td>
+                                                    <td>Dated</td>
                                                     <td>Remark</td>
+                                                    <td>#</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               <tr>
-                                                   <td>1</td>
-                                                    <td>BD Gift</td>
-                                                    <td>10,000 บาท</td>
-                                                    <td></td>
-                                                    <td>5,000 บาท</td>
-                                                    <td></td>
-                                                    <td>ค่าเดินทาง</td>
-                                                    <td>ระบุหมายเหตุต่างๆ....</td>
-                                               </tr>
-                                                <tr>
-                                                   <td>2</td>
-                                                    <td>Chef Table</td>
-                                                    <td></td>
-                                                    <td>20,000 บาท</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>5,000 บาท</td>
-                                                    <td>ระบุหมายเหตุต่างๆ....</td>
-                                               </tr>
-                                                <tr>
-                                                   <td>3</td>
-                                                    <td>New Year Premium</td>
-                                                    <td></td>
-                                                    <td>สนับสนุนงานเลี้ยงปีใหม่</td>
-                                                    <td>กล่องของขวัญ</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>ระบุหมายเหตุต่างๆ....</td>
-                                               </tr>
+                                               <%= strTblReward %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -484,5 +601,108 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modal-event">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Reward and Event</h4>
+              </div>
+              <div class="modal-body">
+                <%--<p>One fine body&hellip;</p>--%>
+
+                <div class="row" style="padding-bottom: 5px">
+                    <div class="col-md-4 txtLabel">Reward/Event</div>
+                    <div class="col-md-8">
+                        <span class="txtLabel">
+                            <select class="form-control input-sm"  style="width: 100%" id="selectEvent" name="selectEvent">
+                            </select>
+                        </span>
+                    </div>
+                </div>
+                  <div class="row" style="padding-bottom: 5px">
+                    <div class="col-md-4 txtLabel">inYear</div>
+                    <div class="col-md-8">
+                        <%--<span class="txtLabel">
+                            <select class="form-control input-sm" style="width: 100%" id="selectYear" name="selectYear">
+                            </select>     
+                                    
+                        </span>--%>
+
+                        <div class="input-group date">
+                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickertrans" value="" autocomplete="off">
+                            <div class="input-group-addon input-sm">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="row" style="padding-bottom: 5px">
+                    <div class="col-md-4 txtLabel">Details</div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm txtLabel" id="txtdetails" name="txtdetails" value="" />
+                    </div>
+                </div>
+
+                  <div class="row" style="padding-bottom: 5px">
+                    <div class="col-md-4 txtLabel">Remark</div>
+                    <div class="col-md-8">
+                        <textarea class="form-control input-sm txtLabel" cols="40" rows="3" id="txtremark" name="txtremark"></textarea>
+                    </div>
+                </div>
+
+
+            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSaveEvent" name="btnSaveEvent" class="btn btn-primary">Save changes</button>
+                  <button type="button" id="btnCallRewardEvent" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+            function openEvent() {
+                
+                var selectEventDDL = $('#selectEvent');
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetEventType',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectEventDDL.empty();
+                        $(data).each(function (index, item) {
+                            selectEventDDL.append($('<option/>', { value: item.id, text: item.event_desc }));
+                            //$('#selectProductType').val(strVal9.text());
+                            //$('#selectProductType').change();
+                        });
+
+
+                    }
+                });
+
+
+
+
+                $("#modal-event").modal({ backdrop: false });
+                $('[id=modal-event]').modal('show');
+            }
+
+
+            //function alertMessage(strtype, strtitle, strttext, strfooter) {
+            //    Swal.fire({
+            //        type: 'success',
+            //        title: 'Data saved successfully..',
+            //        text: 'Data has been saved.',
+            //        footer: 'Please contact system administrator..'
+            //    })
+            //}
+
+        </script>
+
     </section>
 </asp:Content>
