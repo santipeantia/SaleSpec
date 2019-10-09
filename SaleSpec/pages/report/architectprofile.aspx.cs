@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Security.Cryptography;
+using CrystalDecisions.Shared;
 
 namespace SaleSpec.pages.report
 {
@@ -687,20 +688,105 @@ namespace SaleSpec.pages.report
                 //    rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ArchitectProfile" + id);
                 //}
 
-                int gyear = int.Parse(DateTime.Now.ToString("yyyy"));
 
+                //ConnectionInfo crconnectioninfo = new ConnectionInfo();
+                //ReportDocument cryrpt = new ReportDocument();
+                //TableLogOnInfos crtablelogoninfos = new TableLogOnInfos();
+                //TableLogOnInfo crtablelogoninfo = new TableLogOnInfo();
+
+                //Tables CrTables;
+
+                //crconnectioninfo.ServerName = "203.154.45.40";
+                //crconnectioninfo.DatabaseName = "DB_SaleSpec";
+                //crconnectioninfo.UserID = "sa";
+                //crconnectioninfo.Password = "Amp88Cloud@2018";
+
+                //cryrpt.Load(Server.MapPath("../reports/rptPrintArchitectProfile.rpt"));
+
+                //CrTables = cryrpt.Database.Tables;
+
+                ////cryrpt.Load(Application.StartupPath + "\\rpts\\" + dealerInfo.ResourceName);
+
+
+
+                //foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables)
+                //{
+                //    crtablelogoninfo = CrTable.LogOnInfo;
+                //    crtablelogoninfo.ConnectionInfo = crconnectioninfo;
+                //    CrTable.ApplyLogOnInfo(crtablelogoninfo);
+                //}
+
+
+                rpt = new ReportDocument();
                 rpt.Load(Server.MapPath("../reports/rptPrintArchitectProfile.rpt"));
 
-                //reports.dsCompanies dsCompanies = new reports.dsCompanies();
-                //dsCompanies.Merge(dt);
+                TableLogOnInfo crtableLogoninfo = new TableLogOnInfo();
+                ConnectionInfo crConnectionInfo = new ConnectionInfo();
 
-                //rpt.SetDataSource(dt);
-                rpt.SetParameterValue("@ArchitectID", id);
-                rpt.SetParameterValue("year4", (gyear-4));
-                rpt.SetParameterValue("year3", (gyear-3));
-                rpt.SetParameterValue("year2", (gyear-2));
-                rpt.SetParameterValue("year1", (gyear-1));
+                Tables CrTables;
+
+                crConnectionInfo.ServerName = "203.154.45.40";
+                crConnectionInfo.DatabaseName = "DB_SaleSpec";
+                crConnectionInfo.UserID = "sa";
+                crConnectionInfo.Password = "Amp88Cloud@2018";
+                CrTables = rpt.Database.Tables;
+
+                foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables)
+
+                {
+                    crtableLogoninfo = CrTable.LogOnInfo;
+                    crtableLogoninfo.ConnectionInfo = crConnectionInfo;
+                    CrTable.ApplyLogOnInfo(crtableLogoninfo);
+                }
+
+
+                //foreach (CrystalDecisions.CrystalReports.Engine.Table crTable in crTables)
+                //{ // check if integrated security is enabled
+                //    SecureDB = crSubreportDocument.Database.Tables[tableIndex].LogOnInfo.ConnectionInfo.IntegratedSecurity;
+                //    string TableName = crTable.Name.ToString();
+                //    tableIndex++;
+                //    crConnectioninfo.ServerName = "VMW2K8CRSE2K8";
+                //    crConnectioninfo.UserID = "sa";
+                //    crConnectioninfo.Password = "PW";
+                //    crConnectioninfo.DatabaseName = "YourDBNAme";
+
+                //    crTableLogOnInfo = crTable.LogOnInfo;
+                //    crTableLogOnInfo.ConnectionInfo = crConnectioninfo;
+                //    crTable.ApplyLogOnInfo(crTableLogOnInfo);
+                //}
+
+                //ConnectionInfo crConnectionInfo = new ConnectionInfo();
+                //crConnectionInfo.ServerName = "203.154.45.40";
+                //crConnectionInfo.DatabaseName = "DB_SaleSpec";
+                //crConnectionInfo.UserID = "sa";
+                //crConnectionInfo.Password = "Amp88Cloud@2018";
+
+                //TableLogOnInfos crTableLogonInfos = new TableLogOnInfos();
+                //TableLogOnInfo crTableLogonInfo = new TableLogOnInfo();
+                //Tables CrTables;
+
+                //rpt = new ReportDocument();
+                //rpt.Load(Server.MapPath("../reports/rptPrintArchitectProfile.rpt"));
+                //CrTables = rpt.Database.Tables;
+
+                //foreach (CrystalDecisions.CrystalReports.Engine.Table crTable in CrTables)
+                //{
+                //    crTableLogonInfo = crTable.LogOnInfo;
+                //    crTableLogonInfo.ConnectionInfo = crConnectionInfo;
+                //    crTable.ApplyLogOnInfo(crTableLogonInfo);
+                //}
+
+                gyear = int.Parse(DateTime.Now.ToString("yyyy"));
+
+                rpt.SetParameterValue("@ArchitecID", id);
+                rpt.SetParameterValue("ArchitectID", id);
+                rpt.SetParameterValue("ArchitecID", id);
+                rpt.SetParameterValue("year4", (gyear - 4));
+                rpt.SetParameterValue("year3", (gyear - 3));
+                rpt.SetParameterValue("year2", (gyear - 2));
+                rpt.SetParameterValue("year1", (gyear - 1));
                 rpt.SetParameterValue("year", gyear);
+
                 rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "ArchitectProfile" + id);
 
 
@@ -708,7 +794,7 @@ namespace SaleSpec.pages.report
             catch (Exception ex)
             {
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
-                            "      <strong>Error rptPrintIntakeProjectReport..!</strong> " + ex.Message + " " +
+                            "      <strong>Error rptPrintArchitectProfile..!</strong> " + ex.Message + " " +
                             "</div>";
                 return;
             }

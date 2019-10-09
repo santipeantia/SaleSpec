@@ -114,7 +114,7 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileInfo1rpt_ArchitecID {
+        public CrystalDecisions.Shared.IParameterField Parameter_ArchitectID {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -122,7 +122,7 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileProjectrpt_ArchitecID {
+        public CrystalDecisions.Shared.IParameterField Parameter_ArchitecID {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -130,7 +130,7 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileRewardrpt_ArchitectID {
+        public CrystalDecisions.Shared.IParameterField Parameter_year4 {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -138,7 +138,7 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileRewardrpt_year {
+        public CrystalDecisions.Shared.IParameterField Parameter_year3 {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -146,7 +146,7 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileRewardrpt_year1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_year2 {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -154,7 +154,7 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileRewardrpt_year2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_year1 {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -162,27 +162,19 @@ namespace SaleSpec.pages.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileRewardrpt_year3 {
+        public CrystalDecisions.Shared.IParameterField Parameter_year {
             get {
                 return this.DataDefinition.ParameterFields[6];
             }
         }
         
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileRewardrpt_year4 {
-            get {
-                return this.DataDefinition.ParameterFields[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptPrintArchitectProfileWeeklyrpt_ArchitecID {
-            get {
-                return this.DataDefinition.ParameterFields[8];
-            }
-        }
+        //[Browsable(false)]
+        //[DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        //public CrystalDecisions.Shared.IParameterField Parameter_ArchitecID {
+        //    get {
+        //        return this.DataDefinition.ParameterFields[7];
+        //    }
+        //}
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
