@@ -16,7 +16,7 @@ namespace SaleSpec.pages.report
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-     [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class DataServicesReporting : System.Web.Services.WebService
     {
         //string cs = "server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;";
@@ -112,7 +112,7 @@ namespace SaleSpec.pages.report
                     newproject.StatusNameEn = rdr["StatusNameEn"].ToString();
                     //newproject.StepID = rdr["StepID"].ToString();
                     newproject.StepNameEn = rdr["StepNameEn"].ToString();
-                    
+
                     newproject.Quantity = rdr["Quantity"].ToString();
                     newproject.Remark = rdr["Remark"].ToString();
                     newproject.UserID = rdr["UserID"].ToString();
@@ -473,12 +473,12 @@ namespace SaleSpec.pages.report
             Context.Response.Write(js.Serialize(histories));
         }
 
-        
+
         [WebMethod]
         public void GetUpdateWeeklyReportViaSupervisor(string ID, string WeekDate, string WeekTime, string CompanyName, string ArchitecID,
-                                            string Name, string Location, string ProdTypeID, 
-                                            string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate, 
-                                            string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2, 
+                                            string Name, string Location, string ProdTypeID,
+                                            string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate,
+                                            string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2,
                                             string Remark, string StepID, string StatusID, string ProjectID)
         {
             List<GetUpdateWeeklyReportViaSupervisor> companies = new List<GetUpdateWeeklyReportViaSupervisor>();
@@ -487,7 +487,7 @@ namespace SaleSpec.pages.report
                 conn.Open();
                 SqlCommand comm = new SqlCommand("spGetUpdateWeeklyReportViaSupervisor", conn);
                 comm.CommandType = CommandType.StoredProcedure;
-                
+
                 comm.Parameters.AddWithValue("@ID", ID);
                 comm.Parameters.AddWithValue("@WeekDate", WeekDate);
                 comm.Parameters.AddWithValue("@WeekTime", WeekTime);
@@ -549,5 +549,105 @@ namespace SaleSpec.pages.report
 
         }
 
+        [WebMethod]
+        public void GetDataspGetProjectInfoByid2(string ArchitecID, string StartYearDate, string EndYearDate, string Search)
+        {
+            List<GetDataspGetProjectInfoByid2> project = new List<GetDataspGetProjectInfoByid2>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetProjectInfoByid2", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = ArchitecID };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartYearDate", Value = StartYearDate };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndYearDate", Value = EndYearDate };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = Search };
+                comm.Parameters.Add(param1);
+                comm.Parameters.Add(param2);
+                comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataspGetProjectInfoByid2 projects = new GetDataspGetProjectInfoByid2();
+
+                    projects.No = rdr["No"].ToString();
+                    projects.ProjectID = rdr["ProjectID"].ToString();
+                    projects.ProjectYear = rdr["ProjectYear"].ToString();
+                    projects.ProjectMonth = rdr["ProjectMonth"].ToString();
+                    projects.ProjectName = rdr["ProjectName"].ToString();
+                    projects.CompanyID = rdr["CompanyID"].ToString();
+                    projects.CompanyName = rdr["CompanyName"].ToString();
+                    projects.ArchitecID = rdr["ArchitecID"].ToString();
+                    projects.Name = rdr["Name"].ToString();
+                    projects.Location = rdr["Location"].ToString();
+                    projects.TurnKey = rdr["TurnKey"].ToString();
+                    projects.MainCons = rdr["MainCons"].ToString();
+                    projects.RefRfDf = rdr["RefRfDf"].ToString();
+                    projects.ProjStep = rdr["ProjStep"].ToString();
+                    projects.ProductType = rdr["ProductType"].ToString();
+                    projects.RefProfile = rdr["RefProfile"].ToString();
+                    projects.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    projects.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    projects.ProdID = rdr["ProdID"].ToString();
+                    projects.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    projects.ProfID = rdr["ProfID"].ToString();
+                    projects.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    projects.StatusID = rdr["StatusID"].ToString();
+                    projects.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    projects.Quantity = rdr["Quantity"].ToString();
+                    projects.RefType = rdr["RefType"].ToString();
+                    projects.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    projects.Drawing = rdr["Drawing"].ToString();
+                    projects.TypeID = rdr["TypeID"].ToString();
+                    projects.SaleSpec = rdr["SaleSpec"].ToString();
+                    projects.StatusConID = rdr["StatusConID"].ToString();
+                    projects.CreatedDate = rdr["CreatedDate"].ToString();
+                    projects.LastUpdate = rdr["LastUpdate"].ToString();
+                    project.Add(projects);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(project));
+        }
+
+
+        [WebMethod]
+        public void GetSumProjectInfoByid2(string ArchitecID, string StartYearDate, string EndYearDate, string Search)
+        {
+            List<GetDataSumProjectInfoByid2> project = new List<GetDataSumProjectInfoByid2>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetSumProjectInfoByid2", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = ArchitecID };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartYearDate", Value = StartYearDate };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndYearDate", Value = EndYearDate };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = Search };
+                comm.Parameters.Add(param1);
+                comm.Parameters.Add(param2);
+                comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataSumProjectInfoByid2 projects = new GetDataSumProjectInfoByid2();
+
+                    projects.SumQuantity = rdr["SumQuantity"].ToString();
+                    project.Add(projects);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(project));
+        }
     }
 }

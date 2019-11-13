@@ -23,30 +23,18 @@
                 datepickertrans.val(currentdate3);
                 //datepickerend.val(currentdate);
 
-                var btnJsonReport = $('#btnJsonReport');
-                btnJsonReport.click(function () {
-                    var selectSaleport = $('#selectSalePort').val();
-                    var strStatus = 'S01'; //$('#selectSalePort').val();
-                    var datepickertrans = $('#datepickertrans').val();
-                    var datepickerend = $('#datepickerend').val();
-                    var strqtystrat = $('#QtyStart').val();
-                    var strqtyend = $('#QtyEnd').val();
-                    var strsearch = $('#Search').val();
 
-                    //alert(selectSaleport);
 
-                    if (selectSaleport != "SELECTED ALL") {
-                        $.ajax({
-                            url: 'DataServicesReporting.asmx/GetDataProjectByPortStatus',
+                var btnShowResult = $('#btnShowResult');
+                btnShowResult.click(function () {
+                    $.ajax({
+                            url: 'DataServicesReporting.asmx/GetDataspGetProjectInfoByid2',
                             method: 'post',
                             data: {
-                                strUserID: selectSaleport,
-                                strStatus: strStatus,
-                                strStartDate: datepickertrans,
-                                strEndDate: datepickerend,
-                                strQtyStart: strqtystrat,
-                                strQtyEnd: strqtyend,
-                                strSearch: strsearch
+                                ArchitecID: $('#txtArchitectIDEdit').val(),
+                                StartYearDate: $('#datepickerstart').val(),
+                                EndYearDate: $('#datepickerend').val(),
+                                Search: $('#txtsearch').val()
                             },
                             dataType: 'json',
                             success: function (data) {
@@ -54,127 +42,59 @@
                                 //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
 
                                 var trHTML = '';
-                                $('#tableWeeklyReportx tr:not(:first)').remove();
+                                $('#tableProject tr:not(:first)').remove();
                                 $(data).each(function (index, item) {
                                     trHTML += '<tr>' +
+                                       
                                         '<td>' + item.No + '</td>' +
-                                        //'<td>' + item.ProjectID + '</td>' +
-                                        '<td> ' + item.ProjectName + '</td>' +
-                                        //'<td>' + item.CompanyID + '</td>' +
+                                        '<td>' + item.ProjectYear + '</td>' +
+                                        '<td>' + item.ProjectMonth + '</td>' +
+                                        '<td>' + item.ProjectID + '</td>' +
+                                        '<td>' + item.ProjectName + '</td>' +
+                                        '<td class="hidden">' + item.CompanyID + '</td>' +
                                         '<td>' + item.CompanyName + '</td>' +
-                                        //'<td>' + item.ArchitecID + '</td>' +
-                                        '<td>' + item.Name + '</td>' +
+                                        '<td class="hidden">' + item.Architect + '</td>' +
+                                        '<td class="hidden">' + item.Name + '</td>' +
                                         '<td>' + item.Location + '</td>' +
                                         '<td>' + item.ProdTypeNameEN + '</td>' +
-                                        '<td>' + item.StepNameEn + '</td>' +
+                                        '<td>' + item.ProdNameEN + '</td>' +
+                                        '<td>' + item.ProfNameEN + '</td>' +
                                         '<td>' + item.StatusNameEn + '</td>' +
                                         '<td>' + item.DeliveryDate + '</td>' +
                                         '<td>' + item.Quantity + '</td>' +
-                                        '<td>' + item.CreatedBy + '</td>' +
-                                        '<td>' + item.CreatedDate + '</td>' +
-                                        '<td><a href="../report/specintakeview?opt=itk&projid=' + item.ProjectID + '" title="View"><i class="fa fa-search text-green"></i></a></td>' +
-                                        '</tr > ';
-
-                                    //No
-                                    //WeekDate
-                                    //WeekTime
-                                    //CompanyID
-                                    //CompanyName
-                                    //ArchitecID
-                                    //Name
-                                    //TransID
-                                    //TransNameEN
-                                    //ProjectID
-                                    //ProjectName
-                                    //Location
-                                    //TurnKey
-                                    //StepID
-                                    //StepNameEn
-                                    //BiddingName1
-                                    //OwnerName1
-                                    //BiddingName2
-                                    //OwnerName2
-                                    //BiddingName3
-                                    //OwnerName3
-                                    //AwardMC
-                                    //ContactMC
-                                    //AwardRF
-                                    //ContactRF
-                                    //ProdTypeID
-                                    //ProdTypeNameEN
-                                    //ProdID
-                                    //ProdNameEN
-                                    //ProfID
-                                    //ProfNameEN
-                                    //Quantity
-                                    //DeliveryDate
-                                    //NextVisitDate
-                                    //StatusID
-                                    //StatusNameEn
-                                    //Remark
-                                    //UserID
-                                    //EmpCode
-                                    //CreatedBy
-                                    //CreatedDate
-                                });
-
-                                $('#tableWeeklyReportx').append(trHTML);
-                            }
-                        });
-                    } else {
-                        //alert('You select Get Data All')
-
-                        $.ajax({
-                            url: 'DataServicesReporting.asmx/GetDataProjectByPortStatusAll',
-                            method: 'post',
-                            data: {
-                                strUserID: selectSaleport,
-                                strStatus: strStatus,
-                                strStartDate: datepickertrans,
-                                strEndDate: datepickerend,
-                                strQtyStart: strqtystrat,
-                                strQtyEnd: strqtyend,
-                                strSearch: strsearch
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-
-                                //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
-
-                                var trHTML = '';
-                                $('#tableWeeklyReportx tr:not(:first)').remove();
-                                $(data).each(function (index, item) {
-                                    trHTML += '<tr>' +
-                                        '<td>' + item.No + '</td>' +
-                                        //'<td>' + item.ProjectID + '</td>' +
-                                        '<td> ' + item.ProjectName + '</td>' +
-                                        //'<td>' + item.CompanyID + '</td>' +
-                                        '<td>' + item.CompanyName + '</td>' +
-                                        //'<td>' + item.ArchitecID + '</td>' +
-                                        '<td>' + item.Name + '</td>' +
-                                        '<td>' + item.Location + '</td>' +
-                                        '<td>' + item.ProdTypeNameEN + '</td>' +
-                                        '<td>' + item.StepNameEn + '</td>' +
-                                        '<td>' + item.StatusNameEn + '</td>' +
-                                        '<td>' + item.DeliveryDate + '</td>' +
-                                        '<td>' + item.Quantity + '</td>' +
-                                        '<td>' + item.CreatedBy + '</td>' +
-                                        '<td>' + item.CreatedDate + '</td>' +
-                                        '<td><a href="../report/specintakeview?opt=itk&projid=' + item.ProjectID + '" title="View"><i class="fa fa-search text-green"></i></a></td>' +
+                                        '<td>' + item.LastUpdate + '</td>' +
                                         '</tr > ';
                                 });
 
-                                $('#tableWeeklyReportx').append(trHTML);
+                                $('#tableProject').append(trHTML);
+
+
+                                //********** Get Sum Quantity ***********//
+                                $.ajax({
+                                    url: 'DataServicesReporting.asmx/GetSumProjectInfoByid2',
+                                    method: 'post',
+                                    data: {
+                                        ArchitecID: $('#txtArchitectIDEdit').val(),
+                                        StartYearDate: $('#datepickerstart').val(),
+                                        EndYearDate: $('#datepickerend').val(),
+                                        Search: $('#txtsearch').val()
+                                    },
+                                    dataType: 'json',
+                                    success: function (data) {
+
+                                        var obj = jQuery.parseJSON(JSON.stringify(data));
+                                        if (obj != '') {
+                                            $.each(obj, function (key, inval) {
+                                                $('#test').text(inval["SumQuantity"]);
+                                                $('#txtSumQuantity').val(inval["SumQuantity"]);                                               
+                                            });
+                                        }
+                                    }
+                                });
                             }
-                        });
-                    }
-
-
+                        });                  
                 });
-
-
-
-
+                                             
 
 
                  //client click btnSaveEvent add new event to table
@@ -311,6 +231,10 @@
                     }
                 });
 
+
+               
+
+
             })
         </script>
 
@@ -360,7 +284,7 @@
                                             <div class="col-md-6">
                                                 <div class="col-md-4 txtLabel">Architect ID</div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDEdit" name="txtArchitectIDEdit" placeholder="" value="">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDEdit" name="txtArchitectIDEdit" placeholder="" value="<%= ArchitecID %>">
                                                 </div>
                                             </div>
                                         </div>
@@ -395,7 +319,7 @@
 
                                         <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
                                             <div class="col-md-4">
-                                                <label class="txtLabel">Type</label>
+                                                <label class="txtLabel">Grade</label>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="txtLabel">
@@ -424,7 +348,13 @@
                                             <div class="col-md-4 txtLabel">Address</div>
                                             <div class="col-md-8">
                                                 <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                                <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
+                                                <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
+                                            </div>
+                                        </div>
+                                         <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Birthday</div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtBirthday" name="txtBirthday" placeholder="" value="<%= Birthday %>" required>
                                             </div>
                                         </div>
 
@@ -480,7 +410,47 @@
                                     <span class="description">Details of all projecs</span>
                                 </div>
                                 <br />
+                                
+
                                 <div class="row" style="">
+                                    <div class="row" style="margin-left: 0px;">
+
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">From Date</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerstart" name="datepickerstart" value="" autocomplete="off">
+                                            <div class="input-group-addon input-sm">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="txtLabel">End Date</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerend" name="datepickerend" value="" autocomplete="off">
+                                            <div class="input-group-addon input-sm">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="txtLabel">Key Search [Enter your word need to know..]</label>
+                                        <div class="">
+                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="txtsearch" name="txtsearch" value="" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                        <div class="clo-md-2">
+                                            <label class="txtLabel">Show Data Result</label>
+                                            <div class="">
+                                                <button type="button" id="btnShowResult" name="btnShowResult" class="btn btn-primary">Show Result</button>
+                                            </div>
+                                        </div>
+                                </div>
+                                <br />
+
                                     <div class="">
                                         <table id="tableProject" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                             <thead>
@@ -496,6 +466,8 @@
                                                     <td class="hidden">Name</td>
                                                     <td>Location</td>
                                                     <td>ProdType</td>
+                                                    <td>ProductName</td>
+                                                    <td>Profile</td>
                                                     <td>Status</td>
                                                     <td>Delivery</td>
                                                     <td>Quantity</td>
@@ -506,6 +478,21 @@
                                                 <%= strTblDetail %>
                                             </tbody>
                                         </table>
+                                    </div>
+
+                                    <div class="row">
+                                        
+                                         <div class="col-md-8">
+                                           
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="txtLabel">
+                                            Sum Total Quantity : </label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><label id="test" class="txtLabel" style="margin-left: 40px"></label></b>
+                                            <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtSumQuantity" name="txtSumQuantity" value="" autocomplete="off" />
+                                        </div>
                                     </div>
                                 </div>
 
@@ -659,7 +646,7 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 <button type="button" id="btnSaveEvent" name="btnSaveEvent" class="btn btn-primary">Save changes</button>
-                  <button type="button" id="btnCallRewardEvent" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
+                <button type="button" id="btnCallRewardEvent" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
               </div>
             </div>
           </div>

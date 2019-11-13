@@ -106,7 +106,7 @@ namespace SaleSpec.pages.report
                                         "     <td class=\"hidden\">" + strUpdatedDate + "</td> " +
                                         "     <td class=\"hidden\">" + strGradeID + "</td> " +
                                         "     <td class=\"hidden\">" + strConDesc + "</td> " +
-                                        "     <td>" + strConDesc2 + "</td> " +
+                                        "     <td class=\"hidden\">" + strConDesc2 + "</td> " +
                                         "     <td>" + strPositionNameTH + "</td> " +
                                         "     <td class=\"hidden\">" + strPositionNameEN + "</td> " +
                                         "     <td>" + strGradeDesc + "</td> " +

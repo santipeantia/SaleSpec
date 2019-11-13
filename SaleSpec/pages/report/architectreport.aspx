@@ -142,28 +142,28 @@
                                     <table id="tableArchitectProfile" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <td class="hidden">ID</td>
-                                                <td class="hidden">ArchitecID</td>
-                                                <td class="hidden">CompanyID</td>
-                                                <td class="hidden">ArchitectName</td>
-                                                <td>FirstName</td>
-                                                <td>LastName</td>
-                                                <td>NickName</td>
-                                                <td class="hidden">Position</td>
-                                                <td class="hidden">Address</td>
-                                                <td>Phone</td>
-                                                <td>Mobile</td>
-                                                <td>Email</td>
+                                                <td class="hidden">strID</td>
+                                                <td class="hidden">strArchitecID</td>
+                                                <td class="hidden">strCompanyID</td>
+                                                <td class="hidden">strName</td>
+                                                <td>strFirstName</td>
+                                                <td>strLastName</td>
+                                                <td>strNickName</td>
+                                                <td class="hidden">strPosition</td>
+                                                <td class="hidden">strAddress</td>
+                                                <td>strPhone</td>
+                                                <td>strMobile</td>
+                                                <td>strEmail</td>
                                                 <td class="hidden">strStatusConID</td>
-                                                <td class="hidden">Created</td>
-                                                <td class="hidden">Updated</td>
+                                                <td class="hidden">strCreatedDate</td>
+                                                <td class="hidden">strUpdatedDate</td>
                                                 <td class="hidden">strGradeID</td>
-                                                <td class="hidden">ConDesc</td>
-                                                <td>Status</td>
-                                                <td>Position</td>
-                                                <td class="hidden">PositionEN</td>
-                                                <td>Grade</td>
-                                                <td class="hidden">GradeDetail</td>
+                                                <td class="hidden">strConDesc</td>
+                                                <td class="hidden">strConDesc2</td>
+                                                <td>strPositionNameTH</td>
+                                                <td class="hidden">strPositionNameEN</td>
+                                                <td>strGradeDesc</td>
+                                                <td class="hidden">strGradeDetail</td>
                                                 <td>#</td>
                                             </tr>
                                         </thead>

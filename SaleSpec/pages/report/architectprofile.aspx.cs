@@ -61,6 +61,7 @@ namespace SaleSpec.pages.report
         public string GradeDesc;
         public string GradeDetail;
         public string id;
+        public string Birthday;
 
         public int gyear4;
         public int gyear3;
@@ -132,6 +133,7 @@ namespace SaleSpec.pages.report
                 GradeID = dt.Rows[0]["GradeID"].ToString();
                 GradeDesc = dt.Rows[0]["GradeDesc"].ToString();
                 GradeDetail = dt.Rows[0]["GradeDetail"].ToString();
+                Birthday = dt.Rows[0]["Birthday"].ToString();
 
 
                 //txtFirstNameEdit.val(FirstName);
@@ -334,6 +336,11 @@ namespace SaleSpec.pages.report
                                             "<td class=\"hidden\">" + Name + "</td>" +
                                             "<td>" + Location + "</td>" +
                                             "<td>" + ProdTypeNameEN + "</td>" +
+                                           
+                                            "<td>" + ProdNameEN + "</td>" +
+                                            "<td>" + ProfNameEN + "</td>" +
+
+
                                             "<td>" + StatusNameEn + "</td>" +
                                             "<td>" + DeliveryDate + "</td>" +
                                             "<td>" + Quantity + "</td>" +
@@ -507,8 +514,7 @@ namespace SaleSpec.pages.report
                 return;
             }
         }
-
-
+        
         protected void btnQuery_Click(object sender, EventArgs e)
         {
             try
@@ -884,6 +890,111 @@ namespace SaleSpec.pages.report
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
                               "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
                               "</div>";
+            }
+        }
+
+        protected void btnShowResult_click(object sender, EventArgs e)
+        {
+            try
+            {
+                id = Request.QueryString["id"].ToString();
+                string StartYearDate = Request.Form["datepickerstart"];
+                string EndYearDate = Request.Form["datepickerend"];
+                string Search = Request.Form["txtsearch"];
+
+
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                Comm = new SqlCommand("spGetProjectInfoByid2", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = id };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@StartYearDate", Value = StartYearDate };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@EndYearDate", Value = EndYearDate };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = Search };
+
+                Comm.Parameters.Add(param1);
+                Comm.Parameters.Add(param2);
+                Comm.Parameters.Add(param3);
+                Comm.Parameters.Add(param4);
+
+                //conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = Comm;
+                dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                    {
+                        string No = dt.Rows[i]["No"].ToString();
+                        string ProjectID = dt.Rows[i]["ProjectID"].ToString();
+                        string ProjectYear = dt.Rows[i]["ProjectYear"].ToString();
+                        string ProjectMonth = dt.Rows[i]["ProjectMonth"].ToString();
+                        string ProjectName = dt.Rows[i]["ProjectName"].ToString();
+                        string CompanyID = dt.Rows[i]["CompanyID"].ToString();
+                        string CompanyName = dt.Rows[i]["CompanyName"].ToString();
+                        string ArchitecID = dt.Rows[i]["ArchitecID"].ToString();
+                        string Name = dt.Rows[i]["Name"].ToString();
+                        string Location = dt.Rows[i]["Location"].ToString();
+                        string TurnKey = dt.Rows[i]["TurnKey"].ToString();
+                        string MainCons = dt.Rows[i]["MainCons"].ToString();
+                        string RefRfDf = dt.Rows[i]["RefRfDf"].ToString();
+                        string ProjStep = dt.Rows[i]["ProjStep"].ToString();
+                        string ProductType = dt.Rows[i]["ProductType"].ToString();
+                        string RefProfile = dt.Rows[i]["RefProfile"].ToString();
+                        string ProdTypeID = dt.Rows[i]["ProdTypeID"].ToString();
+                        string ProdTypeNameEN = dt.Rows[i]["ProdTypeNameEN"].ToString();
+                        string ProdID = dt.Rows[i]["ProdID"].ToString();
+                        string ProdNameEN = dt.Rows[i]["ProdNameEN"].ToString();
+                        string ProfID = dt.Rows[i]["ProfID"].ToString();
+                        string ProfNameEN = dt.Rows[i]["ProfNameEN"].ToString();
+                        string StatusID = dt.Rows[i]["StatusID"].ToString();
+                        string StatusNameEn = dt.Rows[i]["StatusNameEn"].ToString();
+                        string Quantity = dt.Rows[i]["Quantity"].ToString();
+                        string RefType = dt.Rows[i]["RefType"].ToString();
+                        string DeliveryDate = dt.Rows[i]["DeliveryDate"].ToString();
+                        string Drawing = dt.Rows[i]["Drawing"].ToString();
+                        string TypeID = dt.Rows[i]["TypeID"].ToString();
+                        string SaleSpec = dt.Rows[i]["SaleSpec"].ToString();
+                        string StatusConID = dt.Rows[i]["StatusConID"].ToString();
+                        string CreatedDate = dt.Rows[i]["CreatedDate"].ToString();
+                        string LastUpdate = dt.Rows[i]["LastUpdate"].ToString();
+
+                        strTblDetail += "<tr> " +
+                                            "<td>" + No + "</td>" +
+                                            "<td>" + ProjectYear + "</td>" +
+                                            "<td>" + ProjectMonth + "</td>" +
+                                            "<td>" + ProjectID + "</td>" +
+                                            "<td> " + ProjectName + "</td>" +
+                                            "<td class=\"hidden\">" + CompanyID + "</td>" +
+                                            "<td>" + CompanyName + "</td>" +
+                                            "<td class=\"hidden\">" + ArchitecID + "</td>" +
+                                            "<td class=\"hidden\">" + Name + "</td>" +
+                                            "<td>" + Location + "</td>" +
+                                            "<td>" + ProdTypeNameEN + "</td>" +
+
+                                            "<td>" + ProdNameEN + "</td>" +
+                                            "<td>" + ProfNameEN + "</td>" +
+
+
+                                            "<td>" + StatusNameEn + "</td>" +
+                                            "<td>" + DeliveryDate + "</td>" +
+                                            "<td>" + Quantity + "</td>" +
+                                            "<td>" + LastUpdate + "</td>" +
+                                       "</tr> ";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                           "      <strong>Warning..!</strong> " + ex.Message + " " +
+                           "</div>";
+                return;
             }
         }
     }

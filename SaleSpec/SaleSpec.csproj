@@ -7164,6 +7164,8 @@
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
     <Compile Include="pages\report\GetDataProjectHistory.cs" />
     <Compile Include="pages\report\GetDataReportGetArchitect.cs" />
+    <Compile Include="pages\report\GetDataspGetProjectInfoByid2.cs" />
+    <Compile Include="pages\report\GetDataSumProjectInfoByid2.cs" />
     <Compile Include="pages\report\GetDataWeeklyReporting.cs" />
     <Compile Include="pages\report\GetReportProjectStatusByOptions.cs" />
     <Compile Include="pages\report\GetUpdateWeeklyReportViaSupervisor.cs" />
