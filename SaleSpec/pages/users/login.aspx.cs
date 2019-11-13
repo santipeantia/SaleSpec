@@ -54,7 +54,7 @@ public partial class pages_users_login : System.Web.UI.Page
                         "FROM    adUserLogin a left join " +
                         "        adEmployee b on a.EmpCode = b.sEmpID left join " +
                         "        adDepartment c on b.sEmpOrgLevel2 = c.sCode2 collate Thai_CI_AS" +
-                        "        WHERE a.UserID = '" + strUserName + "' and a.Password = '" + encassword + "'";
+                        "        WHERE a.UserID = '" + strUserName + "' and a.Password = '" + encassword + "' and StatusID='true' ";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);

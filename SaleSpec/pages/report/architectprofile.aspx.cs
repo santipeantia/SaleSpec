@@ -114,24 +114,24 @@ namespace SaleSpec.pages.report
 
             if (dt.Rows.Count != 0)
             {
-                 ID = dt.Rows[0]["ID"].ToString();
-                 ArchitecID = dt.Rows[0]["ArchitecID"].ToString();
-                 CompanyID = dt.Rows[0]["CompanyID"].ToString();
-                 Name = dt.Rows[0]["Name"].ToString();
-                 FirstName = dt.Rows[0]["FirstName"].ToString();
-                 LastName = dt.Rows[0]["LastName"].ToString();
-                 NickName = dt.Rows[0]["NickName"].ToString();
-                 Position = dt.Rows[0]["Position"].ToString();
-                 Address = dt.Rows[0]["Address"].ToString();
-                 Phone = dt.Rows[0]["Phone"].ToString();
-                 Mobile = dt.Rows[0]["Mobile"].ToString();
-                 Email = dt.Rows[0]["Email"].ToString();
-                 StatusConID = dt.Rows[0]["StatusConID"].ToString();
-                 ConDesc = dt.Rows[0]["ConDesc"].ToString();
-                 UpdatedDate = dt.Rows[0]["UpdatedDate"].ToString();
-                 GradeID = dt.Rows[0]["GradeID"].ToString();
-                 GradeDesc = dt.Rows[0]["GradeDesc"].ToString();
-                 GradeDetail = dt.Rows[0]["GradeDetail"].ToString();
+                ID = dt.Rows[0]["ID"].ToString();
+                ArchitecID = dt.Rows[0]["ArchitecID"].ToString();
+                CompanyID = dt.Rows[0]["CompanyID"].ToString();
+                Name = dt.Rows[0]["Name"].ToString();
+                FirstName = dt.Rows[0]["FirstName"].ToString();
+                LastName = dt.Rows[0]["LastName"].ToString();
+                NickName = dt.Rows[0]["NickName"].ToString();
+                Position = dt.Rows[0]["Position"].ToString();
+                Address = dt.Rows[0]["Address"].ToString();
+                Phone = dt.Rows[0]["Phone"].ToString();
+                Mobile = dt.Rows[0]["Mobile"].ToString();
+                Email = dt.Rows[0]["Email"].ToString();
+                StatusConID = dt.Rows[0]["StatusConID"].ToString();
+                ConDesc = dt.Rows[0]["ConDesc"].ToString();
+                UpdatedDate = dt.Rows[0]["UpdatedDate"].ToString();
+                GradeID = dt.Rows[0]["GradeID"].ToString();
+                GradeDesc = dt.Rows[0]["GradeDesc"].ToString();
+                GradeDetail = dt.Rows[0]["GradeDetail"].ToString();
 
 
                 //txtFirstNameEdit.val(FirstName);

@@ -179,6 +179,7 @@
                                     <td class="hidden">GradeID</td>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
+                                    <td class="hidden">Birthday</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -266,7 +267,19 @@
                                 <div class="col-md-4 txtLabel">Address</div>
                                 <div class="col-md-8">
                                     <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" ></textarea>
+                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Birthday</div>
+                                <div class="col-md-8">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datebirthday" name="datebirthday" value="" autocomplete="off">
+                                        <div class="input-group-addon input-sm">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -386,7 +399,19 @@
                                 <div class="col-md-4 txtLabel">Address</div>
                                 <div class="col-md-8">
                                     <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit" ></textarea>
+                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit" ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px">
+                                <div class="col-md-4 txtLabel">Birthday</div>
+                                <div class="col-md-8">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datebirthdayedit" name="datebirthdayedit" value="" autocomplete="off">
+                                        <div class="input-group-addon input-sm">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -670,6 +695,7 @@
                             var strVal10 = table.rows[rIndex].cells[10].innerHTML;
                             var strVal11 = table.rows[rIndex].cells[11].innerHTML;
                             var strVal12 = table.rows[rIndex].cells[12].innerHTML;
+                            var strVal15 = table.rows[rIndex].cells[15].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
                             $('#selectCompanyEdit').val(strVal0); 
@@ -687,6 +713,8 @@
                             document.getElementById("txtPhoneEdit").value = strVal7;
                             document.getElementById("txtMobileEdit").value = strVal8;
                             document.getElementById("txtEmailEdit").value = strVal9;
+
+                            document.getElementById("datebirthdayedit").value = strVal15;
 
                             $('#selectStatusConIDEdit').val(strVal10); 
                             $('#selectStatusConIDEdit').change();

@@ -632,6 +632,18 @@
                     todayHighlight: true,
                     format: 'yyyy-mm-dd'
                 });
+                $('#datebirthday').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+                });
+                 $('#datebirthdayedit').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'yyyy-mm-dd'
+                });
+
+            
              $('#updatepickerdelivery').datepicker({
                     autoclose: true,
                     todayHighlight: true,
