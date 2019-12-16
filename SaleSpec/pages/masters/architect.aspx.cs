@@ -184,7 +184,7 @@ namespace SaleSpec.pages.masters
                     ssql = "insert into adArchitecture (ArchitecID, CompanyID, Name, FirstName, LastName, NickName, Position, " +
                            "       Address, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate, GradeID, Birthday) " +
                            "values  (@ArchitecID, @CompanyID, @Name, @FirstName, @LastName, @NickName, @Position, " +
-                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate @GradeID, @Birthday)  ";
+                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate, @GradeID, @Birthday)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;

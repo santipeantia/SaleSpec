@@ -10,6 +10,8 @@
             var selectStatusConIDDelDDL = $('#selectStatusConIDDel');
             var selectCompanyDelDDL = $('#selectCompanyDel');
 
+            //var selectPositionEditDDL = $('#selectPositionEdit');
+
             var selectGradeIDDDL = $('#selectGradeID');
             var selectGradeIDEditDDL = $('#selectGradeIDEdit');
             var selectGradeIDDelDDL = $('#selectGradeIDDel');
@@ -25,6 +27,20 @@
                     });
                 }
             });
+
+            //SANTI 03/12/2019 11:15
+            //$.ajax({
+            //    url: '../trans/DataServices.asmx/GetPositions',
+            //    method: 'post',
+            //    dataType: 'json',
+            //    success: function (data) {
+            //        selectPositionEditDDL.append($('<option/>', { value: -1, text: 'Select Position' }));
+            //        $(data).each(function (index, item) {
+            //            selectPositionEditDDL.append($('<option/>', { value: item.PositionID, text: item.PositionNameEN }));
+            //        });
+            //    }
+            //});
+
 
             $.ajax({
                 url: '../trans/DataServices.asmx/GetStatusConfirm',
@@ -391,6 +407,7 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Position</div>
                                 <div class="col-md-8">
+                                    
                                     <input type="text" class="form-control input input-sm txtLabel" id="txtPositionEdit" name="txtPositionEdit" placeholder="" value="" required>
                                 </div>
                             </div>
@@ -708,7 +725,9 @@
                             document.getElementById("txtFirstNameEdit").value = strVal2;
                             document.getElementById("txtLastNameEdit").value = strVal3;
                             document.getElementById("txtNickNameEdit").value = strVal4;
+
                             document.getElementById("txtPositionEdit").value = strVal5;
+
                             document.getElementById("txtAddressEdit").value = strVal6;
                             document.getElementById("txtPhoneEdit").value = strVal7;
                             document.getElementById("txtMobileEdit").value = strVal8;
