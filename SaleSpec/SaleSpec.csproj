@@ -7160,6 +7160,7 @@
       <DependentUpon>DataServicesReporting.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="pages\report\GetDataLevel.cs" />
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
     <Compile Include="pages\report\GetDataProjectHistory.cs" />
@@ -7167,6 +7168,8 @@
     <Compile Include="pages\report\GetDataspGetProjectInfoByid2.cs" />
     <Compile Include="pages\report\GetDataSumProjectInfoByid2.cs" />
     <Compile Include="pages\report\GetDataWeeklyReporting.cs" />
+    <Compile Include="pages\report\GetLevelHistory.cs" />
+    <Compile Include="pages\report\GetPreviousYear.cs" />
     <Compile Include="pages\report\GetReportProjectStatusByOptions.cs" />
     <Compile Include="pages\report\GetUpdateWeeklyReportViaSupervisor.cs" />
     <Compile Include="pages\report\newprojectreport.aspx.cs">

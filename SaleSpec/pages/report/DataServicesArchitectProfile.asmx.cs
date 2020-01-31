@@ -133,5 +133,134 @@ namespace SaleSpec.pages.report
                 conn.Close();
             }
         }
+
+       
+
+        [WebMethod]
+        public void GetDataPreviousYear()
+        {
+            List<GetPreviousYear> objs = new List<GetPreviousYear>();
+
+
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("sp_GetPreviousYear", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetPreviousYear obj = new GetPreviousYear();
+                    obj.iYear = int.Parse(rdr["iYear"].ToString());
+                    obj.nYear = rdr["nYear"].ToString();
+                    objs.Add(obj);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+        }
+
+        [WebMethod]
+        public void GetDataLevel()
+        {
+            List<GetDataLevel> objs = new List<GetDataLevel>();
+
+
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("sp_GetDataLevel", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataLevel obj = new GetDataLevel();
+                    obj.level_id = rdr["level_id"].ToString();
+                    obj.level_desc = rdr["level_desc"].ToString();
+                    objs.Add(obj);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+        }
+
+
+
+        
+        [WebMethod]
+        public void GetLevelHistory(string id)
+        {
+            List<GetLevelHistory> levels = new List<GetLevelHistory>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("sp_GetLevelHistory", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = id };
+                comm.Parameters.Add(param1);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetLevelHistory level = new GetLevelHistory();
+
+                    level.id = int.Parse(rdr["id"].ToString());
+                    level.inYear = int.Parse(rdr["inYear"].ToString());
+                    level.ArchitecID = rdr["ArchitecID"].ToString();
+                    level.FirstName = rdr["FirstName"].ToString();
+                    level.LastName = rdr["LastName"].ToString();
+                    level.level_id = rdr["level_id"].ToString();
+                    level.level_desc = rdr["level_desc"].ToString();
+                    level.last_update = rdr["last_update"].ToString();
+                    levels.Add(level);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(levels));
+
+        }
+
+        [WebMethod]
+        public void GetInsertHistoryLevel(string inYear, string ArchitecID, string FirstName, string LastName, string level_id, string level_desc, string isactive, string last_update)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spInsertHistoryLevel", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@inYear", inYear);
+                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                comm.Parameters.AddWithValue("@FirstName", FirstName);
+                comm.Parameters.AddWithValue("@LastName", LastName);
+                comm.Parameters.AddWithValue("@level_id", level_id);
+                comm.Parameters.AddWithValue("@level_desc", level_desc);
+                comm.Parameters.AddWithValue("@isactive", isactive);
+                comm.Parameters.AddWithValue("@last_update", last_update);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void GetUpdateHistoryLevel(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("spHistoryLevelUpdate", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@id", id);
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
     }
 }

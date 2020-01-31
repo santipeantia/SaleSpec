@@ -232,9 +232,40 @@
                 });
 
 
-               
+                var btnSaveLevel = $('#btnSaveLevel');
+                btnSaveLevel.click(function () {
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                    var yyyy = today.getFullYear();
+                    var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                    $.ajax({
+                        url: 'DataServicesArchitectProfile.asmx/GetInsertHistoryLevel',
+                        method: 'POST',
+                        data: {
+                            inYear: $('#selectLevelYear').val(),
+                            ArchitecID: $('#txtLevelArchitect').val(),
+                            FirstName: $('#txtLevelFirstname').val(),
+                            LastName: $('#txtLevelLastname').val(),
+                            level_id: $('#selectLevel').val(),
+                            level_desc: $('#selectLevel option:selected').text(),
+                            isactive: '1',
+                            last_update: currentdate
+                        },
+                        dataType: 'json',
+                        complete: function (response) {
+                            //alert("Data was succesfully captured");
+                            getLevelHistory();
+                            $('[id=modal-level]').modal('hide');
+                        }
+                    });
+                    
+                })
 
 
+                getLevelHistory();
             })
         </script>
 
@@ -278,8 +309,8 @@
                                 <br />
 
                                 <div class="row" style="margin-left: 35px;">
-
-                                    <div class="col-md-6 offset-md-3">
+                                    
+                                        <div class="col-md-6 offset-md-3">
                                         <div class="row hidden" style="margin-bottom: 5px">
                                             <div class="col-md-6">
                                                 <div class="col-md-4 txtLabel">Architect ID</div>
@@ -344,56 +375,142 @@
                                             </div>
                                         </div>
 
-                                        <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-4 txtLabel">Address</div>
-                                            <div class="col-md-8">
-                                                <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                                <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Address</div>
+                                                <div class="col-md-8">
+                                                    <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
+                                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                         <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-4 txtLabel">Birthday</div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtBirthday" name="txtBirthday" placeholder="" value="<%= Birthday %>" required>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Birthday</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtBirthday" name="txtBirthday" placeholder="" value="<%= Birthday %>" required>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-4 txtLabel">Phone</div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="<%= Phone %>" required>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Phone</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="<%= Phone %>" required>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-4 txtLabel">Mobile</div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="<%= Mobile %>" required>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Mobile</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="<%= Mobile %>" required>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-4 txtLabel">Email</div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="<%= Email %>" required>
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-4 txtLabel">Email</div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="<%= Email %>" required>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row" style="margin-top: 5px;">
-                                            <div class="col-md-4">
-                                                <label class="txtLabel">StatusConID</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="txtLabel">
-                                                    <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
-                                                        <%= strStatus %>
-                                                    </select>
+                                            <div class="row" style="margin-top: 5px;">
+                                                <div class="col-md-4">
+                                                    <label class="txtLabel">StatusConID</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="txtLabel">
+                                                        <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
+                                                            <%= strStatus %>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                   
 
-                                    </div>
+                                    <div class="col-md-6">
+
+                                      <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active txtLabel"><a href="#activity" data-toggle="tab">Level history</a></li>
+              <%--<li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+              <li><a href="#settings" data-toggle="tab">Settings</a></li>--%>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+                <!-- Post -->
+                  <div class="post">
+                      <div class="user-block">
+                          <img class="img-circle img-bordered-sm" src="../../dist/img/info.png" alt="user image">
+                          <span class="username">
+                              <a href="#"><label id="fullname" class="txtLabel"></label></a>
+                              <button id="Button3" runat="server" type="button" class="btn btn-success btn-sm pull-right"
+                                                    onclick="openLevel()" title="เพิ่มรายการ">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                          </span>
+                          <span class="description">good member history</span>
+                      </div>
+                      <!-- /.user-block -->
+
+
+                      <p>
+                          <table id="tblLevelHistory" name="tblLevelHistory" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                              <thead>
+                                  <tr><td class="hidden">id</td>
+                                      <td>Year</td>
+                                      <td class="hidden">ArchitecID</td>
+                                      <td class="hidden">FirstName</td>
+                                      <td class="hidden">LastName</td>
+                                      <td class="hidden">Level</td>
+                                      <td>Description</td>
+                                      <td>Lasted</td>
+                                      <td style="width: 50px; text-align: center;">#</td>  
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                 <%-- <%= strTblWeeklyReport %>--%>
+                                  <%--<tr>
+                                      <td>2018</td>
+                                      <td>A</td>
+                                      <td>Member is A level.</td>
+                                      <td>2018-12-31 17:30:30</td>
+                                      <td style="width: 20px; text-align: center;">
+                                          <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>2019</td>
+                                      <td>AA</td>
+                                      <td>Member is AA level.</td>
+                                      <td>2019-12-31 16:30:30</td>
+                                      <td style="width: 20px; text-align: center;">
+                                          <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>2020</td>
+                                      <td>AAA</td>
+                                      <td>Member is AAA level.</td>
+                                      <td>2020-12-31 16:30:30</td>
+                                      <td style="width: 20px; text-align: center;">
+                                          <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a>
+                                      </td>
+                                  </tr>--%>
+
+                              </tbody>
+                          </table>
+                      </p>
+
+                  </div>
+                <!-- /.post -->
+
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+                                    </div>                                    
                                 </div>
+                               
                                 <div class="row" style="margin-left: 30px;">
                                 </div>
                             </div>
@@ -652,6 +769,71 @@
           </div>
         </div>
 
+
+        <div class="modal fade" id="modal-level">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Addnew Level</h4>
+              </div>
+              <div class="modal-body">
+                <%--<p>One fine body&hellip;</p>--%>
+
+            <div class="row hidden" style="padding-bottom: 5px">
+                <div class="col-md-4 txtLabel">Architect Name</div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm txtLabel" id="txtLevelArchitect" name="txtLevelArchitect" value="" />
+                </div>
+            </div>
+
+                  <div class="row" style="padding-bottom: 5px">
+                <div class="col-md-4 txtLabel">Firstname</div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm txtLabel" id="txtLevelFirstname" name="txtLevelFirstname" value="" readonly />
+                </div>
+            </div>
+
+                  <div class="row" style="padding-bottom: 5px">
+                <div class="col-md-4 txtLabel">Lastname</div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm txtLabel" id="txtLevelLastname" name="txtLevelLastname" value="" readonly />
+                </div>
+            </div>
+
+                  <div class="row" style="padding-bottom: 5px">
+                <div class="col-md-4 txtLabel">Year</div>
+                <div class="col-md-8">
+                    <span class="txtLabel">
+                        <select class="form-control input-sm" style="width: 100%" id="selectLevelYear" name="selectLevelYear">
+                        </select>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom: 5px">
+                <div class="col-md-4 txtLabel">Level</div>
+                <div class="col-md-8">
+                    <span class="txtLabel">
+                        <select class="form-control input-sm" style="width: 100%" id="selectLevel" name="selectLevel">
+                        </select>
+
+                       
+                    </span>
+                </div>
+            </div>
+
+            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSaveLevel" name="btnSaveLevel" class="btn btn-primary">Save changes</button>
+                <button type="button" id="Button2" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <script>
             function openEvent() {
                 
@@ -680,14 +862,123 @@
             }
 
 
-            //function alertMessage(strtype, strtitle, strttext, strfooter) {
-            //    Swal.fire({
-            //        type: 'success',
-            //        title: 'Data saved successfully..',
-            //        text: 'Data has been saved.',
-            //        footer: 'Please contact system administrator..'
-            //    })
-            //}
+            function openLevel() {
+                
+                var selectLevelYear = $('#selectLevelYear');
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetDataPreviousYear',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectLevelYear.empty();
+                        $(data).each(function (index, item) {
+                            selectLevelYear.append($('<option/>', { value: item.iYear, text: item.nYear }));
+                           
+                        });
+                    }
+                });
+
+
+                var selectLevel = $('#selectLevel');
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetDataLevel',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectLevel.empty();
+                        $(data).each(function (index, item) {
+                            selectLevel.append($('<option/>', { value: item.level_id, text: item.level_desc }));
+                           
+                        });
+                    }
+                });
+
+                var txtArchitectID = $('#txtArchitectIDEdit');
+                var txtFirstName = $('#txtFirstNameEdit');
+                var txtLastName = $('#txtLastNameEdit');
+
+                var txtLevelArchitect = $('#txtLevelArchitect');
+                var txtLevelFirstname = $('#txtLevelFirstname')
+                var txtLevelLastname = $('#txtLevelLastname')
+
+
+                txtLevelArchitect.val(txtArchitectID.val());
+                txtLevelFirstname.val(txtFirstName.val());
+                txtLevelLastname.val(txtLastName.val());
+
+                $("#modal-level").modal({ backdrop: false });
+                $('[id=modal-level]').modal('show');
+            }
+
+
+            function getLevelHistory() {
+                var txtArchitectID = $('#txtArchitectIDEdit');
+                var txtFirstName = $('#txtFirstNameEdit');
+                var txtLastName = $('#txtLastNameEdit');
+                var fullname = $('#fullname');
+
+                fullname.text(txtFirstName.val() + ' ' + txtLastName.val());
+
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetLevelHistory',
+                    method: 'post',
+                    data: {
+                        id: txtArchitectID.val()
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+
+                        //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+
+                        var trHTML = '';
+                        $('#tblLevelHistory tr:not(:first)').remove();
+                        $(data).each(function (index, item) {
+                            trHTML += '<tr>' +
+                                '<td class="hidden">' + item.id + '</td>' +
+                                '<td class="">' + item.inYear + '</td>' +
+                                '<td class="hidden">' + item.ArchitecID + '</td>' +
+                                '<td class="hidden">' + item.FirstName + '</td>' +
+                                '<td class="hidden">' + item.LastName + '</td>' +
+                                '<td class="hidden">' + item.level_id + '</td>' +
+                                '<td class="">' + item.level_desc + '</td>' +
+                                '<td class="">' + item.last_update + '</td>' +
+                                '<td style="width: 50px; text-align: center;"> <button  type="button" onClick="onDeleteLevel('+item.id+')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button></td>' +
+                                '</tr > ';
+                           
+                        });
+
+                        $('#tblLevelHistory').append(trHTML);
+
+                    }
+                })
+                
+            }
+
+
+            function onDeleteLevel(id) {
+               // alert(id);
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyyy = today.getFullYear();
+                var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
+
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetUpdateHistoryLevel',
+                    method: 'POST',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    complete: function (response) {
+                        //alert("Data was succesfully captured");
+                        getLevelHistory();
+                    }
+                });
+            }
+
 
         </script>
 
