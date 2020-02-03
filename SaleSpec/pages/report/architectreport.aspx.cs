@@ -51,12 +51,14 @@ namespace SaleSpec.pages.report
             {
                 ssql = "SELECT distinct b.ID, b.ArchitecID, b.CompanyID, b.Name, b.FirstName, b.LastName, b.NickName, " +
                         "       b.Position, b.Address, b.Phone, b.Mobile, b.Email, b.StatusConID, b.CreatedDate, b.UpdatedDate, b.GradeID,  " +
-                        "       c.ConDesc, c.ConDesc2,	d.PositionNameTH, d.PositionNameEN,	e.GradeDesc, e.GradeDetail " +
+                        "       c.ConDesc, c.ConDesc2,	d.PositionNameTH, d.PositionNameEN,	e.GradeDesc, e.GradeDetail, " +
+                        "      (select top 1 ' in year '+ convert(nvarchar(10), inYear) from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as inYear, " +
+                        "      (select top 1 level_desc from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as level_desc " +
                         "FROM adProjects a inner join " +
                         "       adArchitecture b on a.ArchitecID = b.ArchitecID left join " +
                         "       adStatusConfirm c on b.StatusConID = c.StatusConID left join " +
                         "       adPositions d on b.Position = d.PositionID left join " +
-                        "       adGrade e on b.GradeID = e.GradeID";
+                        "       adGrade e on b.GradeID = e.GradeID ";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
@@ -87,6 +89,9 @@ namespace SaleSpec.pages.report
                         string strPositionNameEN = dt.Rows[i]["PositionNameEN"].ToString();
                         string strGradeDesc = dt.Rows[i]["GradeDesc"].ToString();
                         string strGradeDetail = dt.Rows[i]["GradeDetail"].ToString();
+                        string strinYear = dt.Rows[i]["inYear"].ToString();
+                        string strlevel_desc = dt.Rows[i]["level_desc"].ToString();
+
 
                         strTblDetail += "<tr> " +
                                         "     <td class=\"hidden\">" + strID + "</td> " +
@@ -109,7 +114,7 @@ namespace SaleSpec.pages.report
                                         "     <td class=\"hidden\">" + strConDesc2 + "</td> " +
                                         "     <td>" + strPositionNameTH + "</td> " +
                                         "     <td class=\"hidden\">" + strPositionNameEN + "</td> " +
-                                        "     <td>" + strGradeDesc + "</td> " +
+                                        "     <td>" + strGradeDesc + " : " + strlevel_desc + " " + strinYear + "</td> " +
                                         "     <td class=\"hidden\">" + strGradeDetail + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"../report/architectprofile.aspx?opt=rarc&id="+ strArchitecID + "\" target=\"_blank\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
