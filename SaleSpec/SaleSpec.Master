@@ -138,7 +138,7 @@
     </style>
 </head>
 
-<body onselect="return true" class="hold-transition skin-blue-light sidebar-mini fixed ">
+<body onselect="return true" onload="screenZoom()" class="hold-transition skin-blue-light sidebar-mini fixed ">
     <div class="loader">
         <img src="../../dist/img/loader3.gif" alt="Loading..." />
     </div>
@@ -686,6 +686,22 @@
                     spinner.fadeOut("fast");
                     spinnerVisible = false;
                 }
+            };
+
+            function screenZoom() {
+                var x = screen.width;
+                if (x <= 1366) {
+                    //document.body.style.zoom = "80%"
+                    window.parent.document.body.style.zoom = 0.8;
+                    //myIframeZoom();             
+                }
+            };
+
+            function myIframeZoom() {
+                var x = document.getElementById("ifmBody");
+                var y = (x.contentWindow || x.contentDocument);
+                if (y.document) y = y.document;
+                y.body.style.zoom = 0.8;
             };
         </script>
     </div>

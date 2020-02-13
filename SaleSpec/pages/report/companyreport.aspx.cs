@@ -161,6 +161,7 @@ namespace SaleSpec.pages.trans
                         string Phone = dt.Rows[i]["Phone"].ToString();
                         string Mobile = dt.Rows[i]["Mobile"].ToString();
                         string Email = dt.Rows[i]["Email"].ToString();
+                        strPort = dt.Rows[i]["Port"].ToString();
 
                         strTblDetail += "<tr> " +
                                             "<td>" + strPort + "</td>" +

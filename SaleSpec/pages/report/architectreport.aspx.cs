@@ -107,8 +107,8 @@ namespace SaleSpec.pages.report
                                         "     <td>" + strMobile + "</td> " +
                                         "     <td>" + strEmail + "</td> " +
                                         "     <td class=\"hidden\">" + strStatusConID + "</td> " +
-                                        "     <td class=\"hidden\">" + strCreatedDate + "</td> " +
-                                        "     <td class=\"hidden\">" + strUpdatedDate + "</td> " +
+                                        "     <td class=\"hidden\"></td> " +
+                                        "     <td class=\"hidden\"></td> " +
                                         "     <td class=\"hidden\">" + strGradeID + "</td> " +
                                         "     <td class=\"hidden\">" + strConDesc + "</td> " +
                                         "     <td class=\"hidden\">" + strConDesc2 + "</td> " +

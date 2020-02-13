@@ -51,7 +51,7 @@
         }
     </style>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" onload="screenZoom()">
     <div class="login-box">
         <div class="login-logo">
         </div>
@@ -115,6 +115,23 @@
                 $('#btnLogin').click();
             }
         });
-</script>
+
+        function screenZoom() {
+            var x = screen.width;
+            if (x <= 1366) {
+                //document.body.style.zoom = "80%"
+                window.parent.document.body.style.zoom = 0.9;
+                //myIframeZoom();             
+            }
+        };
+
+        function myIframeZoom() {
+            var x = document.getElementById("ifmBody");
+            var y = (x.contentWindow || x.contentDocument);
+            if (y.document) y = y.document;
+            y.body.style.zoom = 0.9;
+        };
+
+    </script>
 </body>
 </html>
