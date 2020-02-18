@@ -6525,6 +6525,7 @@
     <Content Include="pages\report\companyreportview.aspx" />
     <Content Include="pages\report\DataServicesArchitectProfile.asmx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
+    <Content Include="pages\report\DataServicesSaleOnSpec.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\report\jquery.table2excel.js" />
     <Content Include="pages\report\newprojectreport.aspx" />
@@ -7160,10 +7161,15 @@
       <DependentUpon>DataServicesReporting.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="pages\report\DataServicesSaleOnSpec.asmx.cs">
+      <DependentUpon>DataServicesSaleOnSpec.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\report\GetDataLevel.cs" />
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />
     <Compile Include="pages\report\GetDataProjectHistory.cs" />
+    <Compile Include="pages\report\GetDataProjectWithInvoice.cs" />
     <Compile Include="pages\report\GetDataReportGetArchitect.cs" />
     <Compile Include="pages\report\GetDataspGetProjectInfoByid2.cs" />
     <Compile Include="pages\report\GetDataSumProjectInfoByid2.cs" />

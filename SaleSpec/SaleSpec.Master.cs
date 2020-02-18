@@ -56,6 +56,11 @@ namespace SaleSpec
         public string strTextPremiumGift = "";
         public string strTextSurprise = "";
 
+        public string strSaleOnSpecActive = "";
+        public string strSaleOnSpecTrans = "";
+        //public string strTextPremiumGift = "";
+        //public string strTextSurprise = "";
+
 
         //public string strTextProductGroup = "";
 
@@ -163,20 +168,20 @@ namespace SaleSpec
                 if (strOpt == "arc") { strActiveTransaction = "active"; strTextArchitectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextArchitectCenter = ""; }
                 if (strOpt == "pjc") { strActiveTransaction = "active"; strTextProjectCenter = "text-red"; return; } else { strActiveTransaction = ""; strTextProjectCenter = ""; }
                 if (strOpt == "wkr") { strActiveTransaction = "active"; strTextWeeklyReport = "text-red"; return; } else { strActiveTransaction = ""; strTextWeeklyReport = ""; }
-                if (strOpt == "sos") { strActiveTransaction = "active"; strTextSaleOnspec = "text-red"; return; } else { strActiveTransaction = ""; strTextSaleOnspec = ""; }
-
+               
                 if (strOpt == "evt") { strActiveActivity = "active"; strTextEventActivity = "text-red"; return; } else { strActiveActivity = ""; strTextEventActivity = ""; }
                 if (strOpt == "preg") { strActiveActivity = "active"; strTextPremiumGift = "text-red"; return; } else { strActiveActivity = ""; strTextPremiumGift = ""; }
                 if (strOpt == "spg") { strActiveActivity = "active"; strTextSurprise = "text-red"; return; } else { strActiveActivity = ""; strTextSurprise = ""; }
 
-                
+
+              
+
+                if (strOpt == "sos") { strSaleOnSpecActive = "active"; strTextSaleOnspec = "text-red"; return; } else { strSaleOnSpecActive = ""; strTextSaleOnspec = ""; }
 
 
                 if (strOpt == "rptswr") { strActiveReporting = "active"; strTextSaleWeeklyReport = "text-red"; return; } else { strActiveReporting = ""; strTextSaleWeeklyReport = ""; }
                 if (strOpt == "rptnprj") { strActiveReporting = "active"; strTextNewProjectReport = "text-red"; return; } else { strActiveReporting = ""; strTextNewProjectReport = ""; }
-
-
-
+                               
 
                 if (strOpt == "rcom") { strActiveReporting = "active"; strTextCompanyReport = "text-red"; return; } else { strActiveReporting = ""; strTextCompanyReport = ""; }
                 if (strOpt == "rarc") { strActiveReporting = "active"; strTextArchitectReport = "text-red"; return; } else { strActiveReporting = ""; strTextArchitectReport = ""; }
@@ -229,6 +234,9 @@ namespace SaleSpec
                         if (xPage == "trans/projects") { transproject.Visible = true; }
                         if (xPage == "trans/apprequest-new") { transappreqnew.Visible = true; }
                         if (xPage == "trans/apprequest") { transapprequest.Visible = true; }
+
+
+                        if (xPage == "SaleOnSpec") { menusaleonspec.Visible = true; }
                         if (xPage == "trans/saleonspec") { transsaleonspec.Visible = true; }
 
                         if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }
@@ -240,6 +248,9 @@ namespace SaleSpec
                         if (xPage == "report/projectreport") { reportproject.Visible = true; }
                         if (xPage == "report/forecastingreport") { reportforecasting.Visible = true; }
                         if (xPage == "report/specintakereport") { reportspecintake.Visible = true; }
+
+
+
 
                         if (xPage == "Activity") { mnuactivity.Visible = true; }
                         if (xPage == "activity/eventactivity") { actevent.Visible = true; }

@@ -45,6 +45,7 @@
                     });
             }  
 
+
         </script>
         <script>
             $(document).ready(function () {
@@ -55,7 +56,7 @@
                 var yyyy = today.getFullYear();
                 var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-                var firstdate = yyyy + '-' + mm + '-01';
+                var firstdate = (yyyy-2) + '-' + mm + '-01';
                 var currentdate = yyyy + '-' + mm + '-' + dd;
 
                 var datepickertrans = $('#datepickertrans');
@@ -72,6 +73,27 @@
 
                 });
 
+
+                var selectStatus = $('#selectStatus');
+                var txtRefDoc = $('#txtRefDoc');
+                selectStatus.change(function () {
+                    //alert(selectStatus.val());
+                    if (selectStatus.val() == 'S02') {
+
+                        //alert('Please enter reference invoice ');
+                        txtRefDoc.focus().select();
+                        txtRefDoc.css('background-color', '#00aaff');
+                        $('#txtRefDoc').prop('readonly', false);
+                        //txtRefDoc.css('visibility', '');
+                        txtRefDoc.val('');
+
+                    } else {
+                        txtRefDoc.css('background-color', '');
+                        $('#txtRefDoc').prop('readonly', true);
+                        //txtRefDoc.css('visibility', 'hidden');
+                        txtRefDoc.val('');
+                    }
+                })
 
                 var btnJsonReport = $('#btnJsonReport');
                 btnJsonReport.click(function () {
@@ -1161,12 +1183,19 @@
                                                 <div class="col-md-4">
                                                     <label class="txtLabel">Status</label>
                                                 </div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-4">
                                                     <div class="txtLabel">
                                                         <select id="selectStatus" name="selectStatus" class="form-control input-sm" style="width: 100%">
                                                         </select>
                                                     </div>
                                                     <div id="divErrorStatus" class="txtLabel text-red" style="display: none;">Please select at least one item..!</div>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                    <label class="txtLabel">Ref#Doc.</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" style="color: white; text-transform: uppercase;" autocomplete="off" placeholder="" value="">
                                                 </div>
                                             </div>
 
@@ -1257,6 +1286,7 @@
                 var str16 = document.getElementById("txtRefMcRf").value;
                 var str17 = document.getElementById("txtContactMcRf").value;
                 var str18 = document.getElementById("selectStatus").value;
+                var str19 =  document.getElementById("txtRefDoc").value;
 
                 var div1 = document.getElementById("divErrorArchitect");
                 var div2 = document.getElementById("divErrorLocation");
@@ -1357,6 +1387,36 @@
                         else { div9.style.display = "none"; }
 
 
+                        if (str19 == '') {
+                            //alert('Data is empty..');
+                            Swal.fire('Reference invoice is do not empty..!');
+                            return;
+
+                        } else {
+                            //alert('Data is ' + str19.toUpperCase());
+                            //Swal.fire('Are you sure compare this project with invoice..? ' + str19.toUpperCase());
+                            //check invoice from winspeed
+
+                            $.ajax({
+                                url: 'DataServicesSaleOnSpec.asmx/GetDataProjectWithInvoice',
+                                method: 'post',
+                                data: {
+                                    strInvNo: str19
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+
+
+                                },
+                                error: function (data) {
+                                     return;
+                                }
+                            })
+
+                        }
+
+                        return;
+
                         //Get update weekly report succeseed...
                         $.ajax({
                             url: 'DataServicesReporting.asmx/GetUpdateWeeklyReportViaSupervisor',
@@ -1386,12 +1446,12 @@
                                 ProjectID:  $('#ProjectID').val()
                             },
                             dataType: 'json',
-                            success: function (data) {
-                               
+                            complete: function (data) {
+                               alert('Update data succeseed..!');
                             }
                         });
 
-                         alert('Update data succeseed..!');
+                         
 
 
 

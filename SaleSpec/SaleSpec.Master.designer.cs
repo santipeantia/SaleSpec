@@ -139,15 +139,6 @@ namespace SaleSpec {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl transapprequest;
         
         /// <summary>
-        /// transsaleonspec control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl transsaleonspec;
-        
-        /// <summary>
         /// reportsalewrk control.
         /// </summary>
         /// <remarks>
@@ -245,6 +236,24 @@ namespace SaleSpec {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl actsurprise;
+        
+        /// <summary>
+        /// menusaleonspec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menusaleonspec;
+        
+        /// <summary>
+        /// transsaleonspec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl transsaleonspec;
         
         /// <summary>
         /// form1 control.

@@ -269,9 +269,7 @@
                                 <li id="transapprequest" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
                                     <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a>
                                 </li>
-                                <li id="transsaleonspec" runat="server" visible="false"  class="<%= strActiveTransaction.ToString() %> ">
-                                    <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale On Spec</span></a>
-                                </li>
+                                
                             </ul>
                         </li>
 
@@ -337,6 +335,23 @@
                                 <li id="actsurprise" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
                                     <a href="../../pages/activity/surprisegift?opt=spg"><i class="fa fa-angle-right <%= strTextSurprise.ToString() %>"></i><span class="txtLabel <%= strTextSurprise.ToString() %>">Surprise Gift</span></a>
                                 </li>
+
+                            </ul>
+                        </li>
+
+                       <li class="<%= strSaleOnSpecActive.ToString() %> treeview" id="menusaleonspec" runat="server" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview"></i><span class="txtLabel">Sale On Spec</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="transsaleonspec" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale on spec</span></a>
+                                </li>
+
+                              
 
                             </ul>
                         </li>
