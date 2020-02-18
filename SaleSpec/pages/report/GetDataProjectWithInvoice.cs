@@ -8,6 +8,7 @@ namespace SaleSpec.pages.report
     public class GetDataProjectWithInvoice
     {
         public string docuno { get; set; }
+        public string docudate { get; set; }
 
 
 
