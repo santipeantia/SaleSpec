@@ -40,7 +40,7 @@ namespace SaleSpec.pages.report
                 {
                     GetDataProjectWithInvoice project = new GetDataProjectWithInvoice();
                     project.docuno = rdr["WeekDate"].ToString();
-                    week.WeekTime = rdr["WeekTime"].ToString();
+                    weeks.WeekTime = rdr["WeekTime"].ToString();
                     week.CompanyID = rdr["CompanyID"].ToString();
                     week.CompanyName = rdr["CompanyName"].ToString();
                     week.ArchitecID = rdr["ArchitecID"].ToString();
