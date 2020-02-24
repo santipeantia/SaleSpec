@@ -78,7 +78,7 @@
                 var txtRefDoc = $('#txtRefDoc');
                 selectStatus.change(function () {
                     //alert(selectStatus.val());
-                    if (selectStatus.val() == 'S02') {
+                    if ((selectStatus.val() == 'S02') || (selectStatus.val() == 'S06')) {
 
                         //alert('Please enter reference invoice ');
                         txtRefDoc.focus().select();
@@ -1191,10 +1191,10 @@
                                                     <div id="divErrorStatus" class="txtLabel text-red" style="display: none;">Please select at least one item..!</div>
                                                 </div>
 
-                                                <div class="col-md-1">
+                                                <div class="col-md-1 ">
                                                     <label class="txtLabel">Ref#Doc.</label>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 ">
                                                     <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" style="color: white; text-transform: uppercase;" autocomplete="off" placeholder="" value="">
                                                 </div>
                                             </div>
@@ -1387,35 +1387,7 @@
                         else { div9.style.display = "none"; }
 
 
-                        if (str19 == '') {
-                            //alert('Data is empty..');
-                            Swal.fire('Reference invoice is do not empty..!');
-                            return;
-
-                        } else {
-                            //alert('Data is ' + str19.toUpperCase());
-                            //Swal.fire('Are you sure compare this project with invoice..? ' + str19.toUpperCase());
-                            //check invoice from winspeed
-
-                            $.ajax({
-                                url: 'DataServicesSaleOnSpec.asmx/GetDataProjectWithInvoice',
-                                method: 'post',
-                                data: {
-                                    strInvNo: str19
-                                },
-                                dataType: 'json',
-                                success: function (data) {
-
-
-                                },
-                                error: function (data) {
-                                     return;
-                                }
-                            })
-
-                        }
-
-                        return;
+                        
 
                         //Get update weekly report succeseed...
                         $.ajax({

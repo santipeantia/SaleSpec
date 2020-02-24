@@ -29,7 +29,7 @@ namespace SaleSpec
         public string strTextArchitect = "";
         public string strTextCustomers = "";
         public string strTextProjectsetup = "";
-        public string strTextSaleOnspec = "";
+        
 
 
         public string strActiveTransaction = "";
@@ -57,7 +57,9 @@ namespace SaleSpec
         public string strTextSurprise = "";
 
         public string strSaleOnSpecActive = "";
+        public string strTextSaleOnspec = "";
         public string strSaleOnSpecTrans = "";
+
         //public string strTextPremiumGift = "";
         //public string strTextSurprise = "";
 
@@ -236,7 +238,7 @@ namespace SaleSpec
                         if (xPage == "trans/apprequest") { transapprequest.Visible = true; }
 
 
-                        if (xPage == "SaleOnSpec") { menusaleonspec.Visible = true; }
+                       // if (xPage == "SaleOnSpec") { menusaleonspec.Visible = true; }
                         if (xPage == "trans/saleonspec") { transsaleonspec.Visible = true; }
 
                         if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }

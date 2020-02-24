@@ -40,23 +40,23 @@ namespace SaleSpec.pages.report
                 {
                     GetDataProjectWithInvoice project = new GetDataProjectWithInvoice();
                     project.docuno = rdr["WeekDate"].ToString();
-                    weeks.WeekTime = rdr["WeekTime"].ToString();
-                    week.CompanyID = rdr["CompanyID"].ToString();
-                    week.CompanyName = rdr["CompanyName"].ToString();
-                    week.ArchitecID = rdr["ArchitecID"].ToString();
-                    week.Name = rdr["Name"].ToString();
-                    week.ProjectID = rdr["ProjectID"].ToString();
-                    week.ProjectName = rdr["ProjectName"].ToString();
-                    week.Location = rdr["Location"].ToString();
-                    week.StatusID = rdr["StatusID"].ToString();
-                    week.StatusNameEn = rdr["StatusNameEn"].ToString();
-                    week.StepID = rdr["StepID"].ToString();
-                    week.StepNameEn = rdr["StepNameEn"].ToString();
-                    week.Remark = rdr["Remark"].ToString();
-                    week.UserID = rdr["UserID"].ToString();
-                    week.EmpCode = rdr["EmpCode"].ToString();
-                    week.CreatedBy = rdr["CreatedBy"].ToString();
-                    week.CreatedDate = rdr["CreatedDate"].ToString();
+                    //weeks.WeekTime = rdr["WeekTime"].ToString();
+                    //week.CompanyID = rdr["CompanyID"].ToString();
+                    //week.CompanyName = rdr["CompanyName"].ToString();
+                    //week.ArchitecID = rdr["ArchitecID"].ToString();
+                    //week.Name = rdr["Name"].ToString();
+                    //week.ProjectID = rdr["ProjectID"].ToString();
+                    //week.ProjectName = rdr["ProjectName"].ToString();
+                    //week.Location = rdr["Location"].ToString();
+                    //week.StatusID = rdr["StatusID"].ToString();
+                    //week.StatusNameEn = rdr["StatusNameEn"].ToString();
+                    //week.StepID = rdr["StepID"].ToString();
+                    //week.StepNameEn = rdr["StepNameEn"].ToString();
+                    //week.Remark = rdr["Remark"].ToString();
+                    //week.UserID = rdr["UserID"].ToString();
+                    //week.EmpCode = rdr["EmpCode"].ToString();
+                    //week.CreatedBy = rdr["CreatedBy"].ToString();
+                    //week.CreatedDate = rdr["CreatedDate"].ToString();
                     projects.Add(project);
                 }
             }

@@ -4350,6 +4350,13 @@
 
             function openArchitect() {
 
+                var strDefaultTect = $('#selectCompany').val();
+                var strDefaultTect2 = $('#selectCompany option:selected').text();
+
+                $('#selectArcCompany').val(strDefaultTect);
+                $('#selectArcCompany').change();
+
+
                 $("#myModalArchitect").modal({ backdrop: false });
                 $('[id=myModalArchitect]').modal('show');
             }

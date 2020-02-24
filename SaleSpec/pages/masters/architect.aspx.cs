@@ -360,10 +360,25 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT a.CompanyID, a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
-                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2, a.Birthday  " +
-                       "FROM adArchitecture AS a LEFT OUTER JOIN " +
-                       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
+                //ssql = "SELECT a.CompanyID, a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
+                //       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2, a.Birthday  " +
+                //       "FROM adArchitecture AS a LEFT OUTER JOIN " +
+                //       "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID";
+
+                ssql = "select *, " +
+                        "        ProjectName = stuff((select ', ' + ProjectName " +
+                        "         from adProjects " +
+                        "         where CompanyID = a.CompanyID and ArchitecID = a.ArchitecID " +
+                        "         for xml path(''), TYPE " +
+                        "        ).value('.[1]', 'nvarchar(max)'), 1, 1, '') " +
+                        "from(select distinct a.ArchitecID, a.FirstName, a.LastName, pj.CompanyID, cm.CompanyName, a.NickName, " +
+                        "        a.Position, a.Address, a.Phone, a.Mobile, a.Email, b.ConDesc2, a.Birthday, " +
+                        "        pj.TypeID as Port " +
+                        "from adArchitecture as a left join " +
+                        "        adStatusConfirm as b on a.StatusConID = b.StatusConID left join " +
+                        "        adProjects as pj on a.ArchitecID = pj.ArchitecID left join " +
+                        "        adCompany as cm on pj.CompanyID = cm.CompanyID " +
+                         "       ) a ";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
