@@ -368,12 +368,28 @@ namespace SaleSpec.pages.masters
         {
             try
             {
-                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.CustTypeID, c.CustTypeDesc, a.Address, a.ProvinceID, a.ContactName, " +
-                        "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
-                        "FROM    adCompany a LEFT OUTER JOIN " +
-                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID  left join " +
-                        "        adCustomerType c on a.CustTypeID=c.CustTypeID " +
-                        "WHERE a.CompanyID not in ('0') ";
+                //ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.CustTypeID, c.CustTypeDesc, a.Address, a.ProvinceID, a.ContactName, " +
+                //        "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2 " +
+                //        "FROM    adCompany a LEFT OUTER JOIN " +
+                //        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID  left join " +
+                //        "        adCustomerType c on a.CustTypeID=c.CustTypeID " +
+                //        "WHERE a.CompanyID not in ('0') ";
+
+                ssql = "select CompanyID, CompanyName, CompanyName2, " +
+                        "        Port = stuff((select distinct ', ' + TypeID " +
+                        "         from adProjects " +
+                        "         where CompanyID = a.CompanyID " +
+                        "         for xml path(''), TYPE " +
+                        "        ).value('.[1]', 'nvarchar(max)'), 1, 1,''), " +
+                        "        CustTypeID, CustTypeDesc, Address, ProvinceID, ContactName, " +
+                        "        Phone, Mobile, Email,  ConDesc2 " +
+                        "from( " +
+                        "    SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.CustTypeID, c.CustTypeDesc, a.Address, a.ProvinceID, a.ContactName, " +
+                        "            a.Phone, a.Mobile, a.Email, b.ConDesc2 " +
+                        "    FROM    adCompany a LEFT OUTER JOIN " +
+                        "            adStatusConfirm AS b ON a.StatusConID = b.StatusConID  left join " +
+                        "            adCustomerType c on a.CustTypeID = c.CustTypeID " +
+                        "    WHERE a.CompanyID not in ('0')) a";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
