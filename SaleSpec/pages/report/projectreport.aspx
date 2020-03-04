@@ -222,13 +222,16 @@
                                                 var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
                                                 var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
 
-                                                //alert(strVal24.text());
+                                                //alert(strVal6.text());
+
+                                                //return;
 
                                                 //document.getElementById("txtid").value = strVal0.text();
                                                 $('#txtid').val(strVal0.text());
                                                 $('#txtVisitDate').val(strVal1.text());
                                                 $('#txtTime').val(strVal2.text());
                                                 $('#txtCompanyName').val(strVal3.text());
+                                                $('#ProjectID').val(strVal6.text());
 
                                                 var selectArchitectNameDDL = $('#selectArchitectName');
 
@@ -1415,17 +1418,18 @@
                                 Remark:  str14,
                                 StepID: $('#selectStep').val(),
                                 StatusID: $('#selectStatus').val(),
-                                ProjectID:  $('#ProjectID').val()
+                                ProjectID: $('#ProjectID').val(),
+                                RefDocuNo: str19
                             },
                             dataType: 'json',
                             complete: function (data) {
-                               alert('Update data succeseed..!');
+                                alert('Update data succeseed please close and refresh..!');
                             }
                         });
 
                          
 
-
+                       
 
                        <%--document.getElementById("<%= btnUpdateData.ClientID %>").click();--%>
 

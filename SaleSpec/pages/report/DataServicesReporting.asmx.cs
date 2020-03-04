@@ -479,38 +479,93 @@ namespace SaleSpec.pages.report
                                             string Name, string Location, string ProdTypeID,
                                             string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate,
                                             string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2,
-                                            string Remark, string StepID, string StatusID, string ProjectID)
+                                            string Remark, string StepID, string StatusID, string ProjectID, string RefDocuNo)
         {
-            List<GetUpdateWeeklyReportViaSupervisor> companies = new List<GetUpdateWeeklyReportViaSupervisor>();
+            //List<GetUpdateWeeklyReportViaSupervisor> companies = new List<GetUpdateWeeklyReportViaSupervisor>();
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 conn.Open();
                 SqlCommand comm = new SqlCommand("spGetUpdateWeeklyReportViaSupervisor", conn);
                 comm.CommandType = CommandType.StoredProcedure;
+                try {
+                    SqlParameter param1 = new SqlParameter() { ParameterName = "@ID", Value = ID };
+                    SqlParameter param2 = new SqlParameter() { ParameterName = "@WeekDate", Value = WeekDate };
+                    SqlParameter param3 = new SqlParameter() { ParameterName = "@WeekTime", Value = WeekTime };
+                    SqlParameter param4 = new SqlParameter() { ParameterName = "@CompanyName", Value = CompanyName };
+                    SqlParameter param5 = new SqlParameter() { ParameterName = "@ArchitecID", Value = ArchitecID };
+                    SqlParameter param6 = new SqlParameter() { ParameterName = "@Name", Value = Name };
+                    SqlParameter param7 = new SqlParameter() { ParameterName = "@Location", Value = Location };
+                    SqlParameter param8 = new SqlParameter() { ParameterName = "@ProdTypeID", Value = ProdTypeID };
+                    SqlParameter param9 = new SqlParameter() { ParameterName = "@ProdTypeNameEN", Value = ProdTypeNameEN };
+                    SqlParameter param10 = new SqlParameter() { ParameterName = "@ProdID", Value = ProdID };
+                    SqlParameter param11 = new SqlParameter() { ParameterName = "@ProdNameEN", Value = ProdNameEN };
+                    SqlParameter param12 = new SqlParameter() { ParameterName = "@ProfNameEN", Value = ProfNameEN };
+                    SqlParameter param13 = new SqlParameter() { ParameterName = "@DeliveryDate", Value = DeliveryDate };
+                    SqlParameter param14 = new SqlParameter() { ParameterName = "@NextVisitDate", Value = NextVisitDate };
+                    SqlParameter param15 = new SqlParameter() { ParameterName = "@Quantity", Value = Quantity };
+                    SqlParameter param16 = new SqlParameter() { ParameterName = "@StepNameEn", Value = StepNameEn };
+                    SqlParameter param17 = new SqlParameter() { ParameterName = "@Ref1", Value = Ref1 };
+                    SqlParameter param18 = new SqlParameter() { ParameterName = "@Ref2", Value = Ref2 };
+                    SqlParameter param19 = new SqlParameter() { ParameterName = "@Remark", Value = Remark };
+                    SqlParameter param20 = new SqlParameter() { ParameterName = "@StepID", Value = StepID };
+                    SqlParameter param21 = new SqlParameter() { ParameterName = "@StatusID", Value = StatusID };
+                    SqlParameter param22 = new SqlParameter() { ParameterName = "@ProjectID", Value = ProjectID };
+                    SqlParameter param23 = new SqlParameter() { ParameterName = "@RefDocuNo", Value = RefDocuNo };
+                    comm.Parameters.Add(param1);
+                    comm.Parameters.Add(param2);
+                    comm.Parameters.Add(param3);
+                    comm.Parameters.Add(param4);
+                    comm.Parameters.Add(param5);
+                    comm.Parameters.Add(param6);
+                    comm.Parameters.Add(param7);
+                    comm.Parameters.Add(param8);
+                    comm.Parameters.Add(param9);
+                    comm.Parameters.Add(param10);
+                    comm.Parameters.Add(param11);
+                    comm.Parameters.Add(param12);
+                    comm.Parameters.Add(param13);
+                    comm.Parameters.Add(param14);
+                    comm.Parameters.Add(param15);
+                    comm.Parameters.Add(param16);
+                    comm.Parameters.Add(param17);
+                    comm.Parameters.Add(param18);
+                    comm.Parameters.Add(param19);
+                    comm.Parameters.Add(param20);
+                    comm.Parameters.Add(param21);
+                    comm.Parameters.Add(param22);
+                    comm.Parameters.Add(param23);
+                    comm.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
 
-                comm.Parameters.AddWithValue("@ID", ID);
-                comm.Parameters.AddWithValue("@WeekDate", WeekDate);
-                comm.Parameters.AddWithValue("@WeekTime", WeekTime);
-                comm.Parameters.AddWithValue("@CompanyName", CompanyName);
-                comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
-                comm.Parameters.AddWithValue("@Name", Name);
-                comm.Parameters.AddWithValue("@Location", Location);
-                comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
-                comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
-                comm.Parameters.AddWithValue("@ProdID", ProdID);
-                comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
-                comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
-                comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
-                comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
-                comm.Parameters.AddWithValue("@Quantity", Quantity);
-                comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
-                comm.Parameters.AddWithValue("@Ref1", Ref1);
-                comm.Parameters.AddWithValue("@Ref2", Ref2);
-                comm.Parameters.AddWithValue("@Remark", Remark);
-                comm.Parameters.AddWithValue("@StepID", StepID);
-                comm.Parameters.AddWithValue("@StatusID", StatusID);
-                comm.Parameters.AddWithValue("@ProjectID", ProjectID);
-                comm.ExecuteNonQuery();
+                }
+
+                
+
+                //comm.Parameters.AddWithValue("@WeekDate", WeekDate);
+                //comm.Parameters.AddWithValue("@WeekTime", WeekTime);
+                //comm.Parameters.AddWithValue("@CompanyName", CompanyName);
+                //comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+                //comm.Parameters.AddWithValue("@Name", Name);
+                //comm.Parameters.AddWithValue("@Location", Location);
+                //comm.Parameters.AddWithValue("@ProdTypeID", ProdTypeID);
+                //comm.Parameters.AddWithValue("@ProdTypeNameEN", ProdTypeNameEN);
+                //comm.Parameters.AddWithValue("@ProdID", ProdID);
+                //comm.Parameters.AddWithValue("@ProdNameEN", ProdNameEN);
+                //comm.Parameters.AddWithValue("@ProfNameEN", ProfNameEN);
+                //comm.Parameters.AddWithValue("@DeliveryDate", DeliveryDate);
+                //comm.Parameters.AddWithValue("@NextVisitDate", NextVisitDate);
+                //comm.Parameters.AddWithValue("@Quantity", Quantity);
+                //comm.Parameters.AddWithValue("@StepNameEn", StepNameEn);
+                //comm.Parameters.AddWithValue("@Ref1", Ref1);
+                //comm.Parameters.AddWithValue("@Ref2", Ref2);
+                //comm.Parameters.AddWithValue("@Remark", Remark);
+                //comm.Parameters.AddWithValue("@StepID", StepID);
+                //comm.Parameters.AddWithValue("@StatusID", StatusID);
+                //comm.Parameters.AddWithValue("@ProjectID", ProjectID);
+                //comm.Parameters.AddWithValue("@RefDocuNo", RefDocuNo);
+                //comm.ExecuteNonQuery();
                 conn.Close();
             }
         }

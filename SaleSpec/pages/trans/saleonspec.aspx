@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="saleonspec.aspx.cs" Inherits="SaleSpec.pages.trans.saleonspec" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
+
+    
+
     <section class="content-header">
         <h1>Sale On Spec (SOS)
             <small>Control panel</small>
@@ -31,37 +34,35 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width:5000px">
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
+                                    <td>CompanyID</td>
+                                    <td>CompanyName</td>
+                                    <td>ArchitecID</td>
+                                    <td>Name</td>
+                                    <td>Spec</td>
+                                    <td>DocuNo</td>
+                                    <td>DocDate</td>
+                                    <td>Rollformer</td>
                                     <td>ProjectID</td>
-                                        <td class="hidden">ProjectYear</td>
-                                        <td class="hidden">ProjectMonth</td>
-                                        <td>ProjectName</td>
-                                        <td class="hidden">ArchitecID</td>
-                                        <td class="hidden">CompanyID</td>
-                                        <td>CompanyName</td>
-                                        <td>strLocation</td>
-                                        <td class="hidden">ProvinceID</td>
-                                        <td class="hidden">ProvinceName</td>
-                                        <td class="hidden">strMainCons</td>
-                                        <td class="hidden">RefRfDf</td>
-                                        <td>RefProfile</td>
-                                        <td>Quantity</td>
-                                        <td class="hidden">RefType</td>
-                                        <td>DeliveryDate</td>
-                                        <td>ProcID</td>
-                                        <td>StepID</td>
-                                        <td class="hidden">EmpCode</td>
-                                        <td class="hidden">sEmFirstName</td>
-                                        <td class="hidden">sEmLastName</td>
-                                        <td class="hidden">CreatedDate</td>
-                                        <td class="hidden">CreatedBy</td>
-                                        <td class="hidden">LastedUpdate</td>
-                                        <td class="hidden">UpdatedBy</td>
-                                        <td class="hidden">StatusConID</td>
-                                        <td>ConDesc2</td>
+                                    <td>ProjectName</td>
+                                    <td>RefPO</td>
+                                    <td>GoodCode</td>
+                                    <td>Model</td>
+                                    <td>AcutalM</td>
+                                    <td>SpecM</td>
+                                    <td>Price</td>
+                                    <td>RentAmount</td>
+                                    <td>NetRF</td>
+                                    <td>NetCom</td>
+                                    <td>NetItem</td>
+                                    <td>Port</td>
+                                    <td>SendDate</td>
+                                    <td class="hidden">PriceRate</td>
+                                    <td class="hidden">PriceOver</td>
+                                    <td>ssConfirm</td>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                 </tr>

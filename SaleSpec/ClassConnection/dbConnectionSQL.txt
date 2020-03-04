@@ -1,1 +1,1 @@
-﻿server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=Amp88Cloud@2018;
+﻿server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;
