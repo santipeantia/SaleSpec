@@ -201,30 +201,32 @@
                                                 document.getElementById("divErrorRemark").style.display = 'none';
                                                 document.getElementById("divErrorStatus").style.display = 'none';
 
-
-
-                                                var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
-                                                var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
-                                                var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');
-                                                var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');
-                                                var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');
-                                                var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');
-                                                var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');
-                                                var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');
-                                                var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');
-                                                var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');
-                                                var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)');
-
-                                                var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');
-                                                var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');
-                                                var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');
-                                                var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
-                                                var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
-                                                var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
-                                                var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
-                                                var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
-                                                var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
-                                                var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');
+                                                var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');  //ID
+                                                var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');  //UserID
+                                                var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');  //WeekDate
+                                                var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');  //WeekTime
+                                                var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');  //CompanyName
+                                                var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');  //ArchitectID
+                                                var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');  //Name
+                                                var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');  //ProjectID
+                                                var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');  //ProjectName
+                                                var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');  //Location
+                                                var strVal10 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(10)'); //ProdTypeID
+                                                var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)'); //ProdTypeNameEN
+                                                var strVal12 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(12)'); //ProdID
+                                                var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');  //ProdNameEN
+                                                var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');    //ProfNameEN
+                                                var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');    //DeliveryDate
+                                                var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');    //NextVisitDate
+                                                var strVal17 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(17)');    //Quantity
+                                                var strVal18 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(18)');    //StepNameA
+                                                var strVal19 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(19)');    //StepNameB
+                                                var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');    //RefWeekDate
+                                                var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');    //Ref1
+                                                var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');    //Ref2
+                                                var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');    //Ref3
+                                                var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
+                                                var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
                                                 //alert(strVal6.text());
 
                                                 //return;
@@ -362,7 +364,7 @@
                                                 $('#txtProfile').val(strVal14.text());
                                                 $('#datedelivery').val(strVal15.text());
                                                 $('#datefollowing').val(strVal16.text());
-                                                $('#txtQuantity').val(strVal17.text());
+                                                $('#txtQuantity').val(strVal18.text());
 
                                                 if (strVal25.text() == '1') {
                                                     $('#txtRefMcRf').val(strVal21.text());
@@ -506,7 +508,7 @@
                                     $('#tableWeeklyReportx td').hover(function () {
                                         rIndex = this.parentElement.rowIndex;
                                         cIndex = this.cellIndex;
-                                        if (rIndex != 0 & cIndex == 7) {
+                                        if (rIndex != 0 & cIndex == 8) {
                                             $(this).css('cursor', 'pointer');
                                         }
                                     });
@@ -519,7 +521,7 @@
                                         rIndex = this.parentElement.rowIndex;
                                         cIndex = this.cellIndex;
 
-                                        if (rIndex != 0 & cIndex == 7) {
+                                        if (rIndex != 0 & cIndex == 8) {
                                             //alert(rIndex + '' + cIndex);
 
                                             document.getElementById("divErrorArchitect").style.display = 'none';
@@ -534,35 +536,40 @@
                                             document.getElementById("divErrorStatus").style.display = 'none';
 
 
-                                            var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
-                                            var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
-                                            var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');
-                                            var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');
-                                            var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');
-                                            var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');
-                                            var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');
-                                            var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');
-                                            var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');
-                                            var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');
-                                            var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)');
+                                            var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');  //ID
+                                            var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');  //UserID
+                                            var strVal2 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(2)');  //WeekDate
+                                            var strVal3 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)');  //WeekTime
+                                            var strVal4 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(4)');  //CompanyName
+                                            var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');  //ArchitectID
+                                            var strVal6 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(6)');  //Name
+                                            var strVal7 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(7)');  //ProjectID
+                                            var strVal8 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(8)');  //ProjectName
+                                            var strVal9 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(9)');  //Location
+                                            var strVal10 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(10)'); //ProdTypeID
+                                            var strVal11 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(11)'); //ProdTypeNameEN
+                                            var strVal12 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(12)'); //ProdID
+                                            var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');  //ProdNameEN
+                                            var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');    //ProfNameEN
+                                            var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');    //DeliveryDate
+                                            var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');    //NextVisitDate
+                                            var strVal17 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(17)');    //Quantity
+                                            var strVal18 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(18)');    //StepNameA
+                                            var strVal19 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(19)');    //StepNameB
+                                            var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');    //RefWeekDate
+                                            var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');    //Ref1
+                                            var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');    //Ref2
+                                            var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');    //Ref3
+                                            var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
+                                            var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
 
-                                            var strVal13 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(13)');
-                                            var strVal14 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(14)');
-                                            var strVal15 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(15)');
-                                            var strVal16 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(16)');
-                                            var strVal20 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(20)');
-                                            var strVal21 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(21)');
-                                            var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
-                                            var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
-                                            var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
-
-                                           
-                                            document.getElementById("ProjectID").value = strVal6.text();
+                                                                                     
+                                            document.getElementById("ProjectID").value = strVal7.text();
 
                                             $('#txtid').val(strVal0.text());
-                                            $('#txtVisitDate').val(strVal1.text());
-                                            $('#txtTime').val(strVal2.text());
-                                            $('#txtCompanyName').val(strVal3.text());
+                                            $('#txtVisitDate').val(strVal2.text());
+                                            $('#txtTime').val(strVal3.text());
+                                            $('#txtCompanyName').val(strVal4.text());
 
                                             var selectArchitectNameDDL = $('#selectArchitectName');
 
@@ -579,7 +586,7 @@
                                                     $(data).each(function (index, item) {
                                                         selectArchitectNameDDL.append($('<option/>', { value: item.ArchitecID, text: item.ArchitectName }));
 
-                                                        $('#selectArchitectName').val(strVal4.text());
+                                                        $('#selectArchitectName').val(strVal5.text());
                                                         $('#selectArchitectName').change();
 
                                                         //selectArchitectNameDDL.text = strVal4.text();
@@ -589,8 +596,8 @@
 
                                             });
 
-                                            $('#txtProjectName').val(strVal7.text());
-                                            $('#txtLocation').val(strVal8.text());
+                                            $('#txtProjectName').val(strVal8.text());
+                                            $('#txtLocation').val(strVal9.text());
 
 
                                             //Get Product type such as Ampelite, Ampelram
@@ -603,7 +610,7 @@
                                                     selectProductTypeDDL.empty();
                                                     $(data).each(function (index, item) {
                                                         selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
-                                                        $('#selectProductType').val(strVal9.text());
+                                                        $('#selectProductType').val(strVal10.text());
                                                         $('#selectProductType').change();
                                                     });
                                                 }
@@ -623,7 +630,7 @@
                                                         selectProductNameDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
                                                         $(data).each(function (index, item) {
                                                             selectProductNameDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
-                                                            selectProductNameDDL.val(strVal11.text());
+                                                            selectProductNameDDL.val(strVal12.text());
                                                             selectProductNameDDL.change();
                                                         });
                                                     }
@@ -644,7 +651,7 @@
                                                     selectStepDDL.empty();
                                                     $(data).each(function (index, item) {
                                                         selectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
-                                                        $('#selectStep').val(strVal24.text());
+                                                        $('#selectStep').val(strVal25.text());
                                                         $('#selectStep').change();
                                                     });
 
@@ -694,18 +701,18 @@
 
 
 
-                                            $('#txtProfile').val(strVal13.text());
-                                            $('#datedelivery').val(strVal14.text());
-                                            $('#datefollowing').val(strVal15.text());
-                                            $('#txtQuantity').val(strVal16.text());
+                                            $('#txtProfile').val(strVal14.text());
+                                            $('#datedelivery').val(strVal15.text());
+                                            $('#datefollowing').val(strVal16.text());
+                                            $('#txtQuantity').val(strVal18.text());
 
-                                            if (strVal24.text() == '1') {
-                                                $('#txtRefMcRf').val(strVal20.text());
-                                                $('#txtContactMcRf').val(strVal21.text());
-                                            }
-                                            else if (strVal24.text() == '2') {
+                                            if (strVal25.text() == '1') {
                                                 $('#txtRefMcRf').val(strVal21.text());
                                                 $('#txtContactMcRf').val(strVal22.text());
+                                            }
+                                            else if (strVal25.text() == '2') {
+                                                $('#txtRefMcRf').val(strVal22.text());
+                                                $('#txtContactMcRf').val(strVal23.text());
                                             }
                                             else {
                                                 $('#txtRefMcRf').val(strVal22.text());
@@ -714,7 +721,7 @@
 
 
 
-                                            $('#txtRemark').val(strVal23.text());
+                                            $('#txtRemark').val(strVal24.text());
 
 
                                             
@@ -725,7 +732,7 @@
                                             $.ajax({
                                                 url: 'DataServicesReporting.asmx/GetDataProjectHistory',
                                                 method: 'post',
-                                                data: { ProjectID: strVal6.text() },
+                                                data: { ProjectID: strVal7.text() },
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     var trHTML2 = '';
@@ -960,10 +967,9 @@
 
 
                             <br />
-
-                            <div id="divWeeklyReport">
-                                <div class="row">
-                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed"  style="width: 4000px">
+                            <div class="row">
+                                <div id="divWeeklyReport" style="height: 600px; overflow: scroll">
+                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <td class="hidden">ID</td>
@@ -995,7 +1001,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <%-- <%= strTblDetail %>--%>
+                                            <%-- <%= strTblDetail %>--%>
                                         </tbody>
                                     </table>
                                 </div>

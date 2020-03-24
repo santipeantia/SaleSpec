@@ -556,7 +556,10 @@
 					'ordering': true,
 					'info': true,
 					'autoWidth': false
-				})
+                })
+
+                
+               
 
 				$('#tableArchitectProfile').DataTable({
 					'iDisplayLength': 50,
