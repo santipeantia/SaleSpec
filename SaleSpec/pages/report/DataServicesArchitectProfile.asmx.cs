@@ -28,7 +28,7 @@ namespace SaleSpec.pages.report
         //}
 
         //string cs = "server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;";
-        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=Amp88Cloud@2018;";
+        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
 
         //get attached
         [WebMethod]
@@ -217,6 +217,7 @@ namespace SaleSpec.pages.report
                     level.level_id = rdr["level_id"].ToString();
                     level.level_desc = rdr["level_desc"].ToString();
                     level.last_update = rdr["last_update"].ToString();
+                    level.Port = rdr["Port"].ToString();
                     levels.Add(level);
                 }
             }
@@ -224,6 +225,37 @@ namespace SaleSpec.pages.report
             JavaScriptSerializer js = new JavaScriptSerializer();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(levels));
+
+        }
+
+        [WebMethod]
+        public void GetArchitectPortOwner(string id)
+        {
+            List<GetArchitectPortOwner> xPorts = new List<GetArchitectPortOwner>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("sp_GetArchitectPortOwner", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@ArchitecID", Value = id };
+                comm.Parameters.Add(param1);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetArchitectPortOwner xPort = new GetArchitectPortOwner();
+
+                    xPort.xNo = rdr["xNo"].ToString();
+                    xPort.ArchitecID = rdr["ArchitecID"].ToString();
+                    xPort.Port = rdr["Port"].ToString();
+                    xPorts.Add(xPort);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(xPorts));
 
         }
 

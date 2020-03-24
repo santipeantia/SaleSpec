@@ -143,27 +143,28 @@
                                         <thead>
                                             <tr>
                                                 <td class="hidden">strID</td>
-                                                <td class="hidden">strArchitecID</td>
-                                                <td class="hidden">strCompanyID</td>
+                                                <td class="hidden">strArchitecID</td>                                                
                                                 <td class="hidden">strName</td>
-                                                <td>strFirstName</td>
-                                                <td>strLastName</td>
-                                                <td>strNickName</td>
+                                                <td>FirstName</td>
+                                                <td>LastName</td>
+                                                <td>NickName</td>
+                                                <td class="">CompanyName</td>
                                                 <td class="hidden">strPosition</td>
                                                 <td class="hidden">strAddress</td>
-                                                <td>strPhone</td>
-                                                <td>strMobile</td>
-                                                <td>strEmail</td>
+                                                <td>Phone</td>
+                                                <td>Mobile</td>
+                                                <td>Email</td>
                                                 <td class="hidden">strStatusConID</td>
                                                 <td class="hidden">strCreatedDate</td>
                                                 <td class="hidden">strUpdatedDate</td>
                                                 <td class="hidden">strGradeID</td>
                                                 <td class="hidden">strConDesc</td>
                                                 <td class="hidden">strConDesc2</td>
-                                                <td>strPositionNameTH</td>
+                                                <td>Position</td>
                                                 <td class="hidden">strPositionNameEN</td>
-                                                <td>strGradeDesc</td>
+                                                <td>Grade</td>
                                                 <td class="hidden">strGradeDetail</td>
+                                                <td class="">Port</td>
                                                 <td>#</td>
                                             </tr>
                                         </thead>

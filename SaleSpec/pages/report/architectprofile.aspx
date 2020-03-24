@@ -63,6 +63,7 @@
                                         '<td>' + item.DeliveryDate + '</td>' +
                                         '<td>' + item.Quantity + '</td>' +
                                         '<td>' + item.LastUpdate + '</td>' +
+                                        '<td>' + item.TypeID + '</td>' +
                                         '</tr > ';
                                 });
 
@@ -320,6 +321,12 @@
                                             </div>
                                         </div>
 
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Port Owner</div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPortEdit" name="txtPortEdit" placeholder="" readonly>
+                                            </div>
+                                        </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">FirstName</div>
@@ -462,6 +469,7 @@
                                       <td class="hidden">Level</td>
                                       <td>Description</td>
                                       <td>Lasted</td>
+                                      <td>Port</td>
                                       <td style="width: 50px; text-align: center;">#</td>  
                                   </tr>
                               </thead>
@@ -589,6 +597,7 @@
                                                     <td>Delivery</td>
                                                     <td>Quantity</td>
                                                     <td>LastUpdate</td>
+                                                    <td>Port</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -942,6 +951,7 @@
                                 '<td class="hidden">' + item.level_id + '</td>' +
                                 '<td class="">' + item.level_desc + '</td>' +
                                 '<td class="">' + item.last_update + '</td>' +
+                                '<td class="">' + item.Port + '</td>' +
                                 '<td style="width: 50px; text-align: center;"> <button  type="button" onClick="onDeleteLevel('+item.id+')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button></td>' +
                                 '</tr > ';
                            
@@ -949,9 +959,28 @@
 
                         $('#tblLevelHistory').append(trHTML);
 
+                        getArchitectPortOwner(txtArchitectID.val());
                     }
                 })
                 
+            }
+
+            function getArchitectPortOwner(id) {
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetArchitectPortOwner',
+                    method: 'POST',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $(data).each(function (index, item) {
+                            var xport = item.Port;
+                            //alert(xport);
+                            $('#txtPortEdit').val(xport);
+                        });
+                    }
+                });
             }
 
 

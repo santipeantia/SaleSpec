@@ -34,7 +34,36 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width:5000px">
+                        <div class="row" style="margin-left: 0px;">
+                            <div class="col-md-2">
+                                <label class="txtLabel">From Date</label>
+                                <div class="input-group date">
+                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickertrans" name="datepickertrans" value="" autocomplete="off">
+                                    <div class="input-group-addon input-sm">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label class="txtLabel">End Date</label>
+                                <div class="input-group date">
+                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerend" name="datepickerend" value="" autocomplete="off">
+                                    <div class="input-group-addon input-sm">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label class="txtLabel">Show Report</label>
+                                <input type="button" class="btn btn-block btn-primary btn-sm" value="Show Report" />
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width: 5000px">
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
@@ -70,7 +99,6 @@
                             <tbody>
 
                                 <%= strTblDetail %>
-
                             </tbody>
 
                         </table>

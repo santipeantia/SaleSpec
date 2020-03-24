@@ -20,7 +20,7 @@ namespace SaleSpec.pages.report
     [System.Web.Script.Services.ScriptService]
     public class DataServicesSaleOnSpec : System.Web.Services.WebService
     {
-        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=Amp88Cloud@2018;";
+        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
 
 
         [WebMethod]

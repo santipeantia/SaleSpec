@@ -493,6 +493,7 @@
                     //'fixedColumns': { 'leftColumns': 6 }
                 })
 
+
 				$('#example2').DataTable({
 					'paging': true,
 					'lengthChange': true,
@@ -500,7 +501,18 @@
 					'ordering': true,
 					'info': true,
 					'autoWidth': false
-				})
+                })
+
+                
+                //$('#tableWeeklyReport').DataTable({
+                //    'paging': false,
+                //    'iDisplayLength': 10,
+                //    'autoWidth': true,
+                //    'scrollY': "4000px",
+                //    'scrollX': true,
+                //    'scrollCollapse': true
+                //    //'fixedColumns': { 'leftColumns': 6 }
+                //})
 			})
 	</script>
 

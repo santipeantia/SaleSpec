@@ -8,6 +8,7 @@ namespace SaleSpec.pages.report
     public class GetReportProjectStatusByOptions
     {
         public string ID { get; set; }
+        public string UserID { get; set; }
         public string WeekDate { get; set; }
         public string WeekTime { get; set; }
         public string CompanyName { get; set; }

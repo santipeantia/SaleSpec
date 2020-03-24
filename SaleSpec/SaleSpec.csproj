@@ -7165,6 +7165,7 @@
       <DependentUpon>DataServicesSaleOnSpec.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="pages\report\GetArchitectPortOwner.cs" />
     <Compile Include="pages\report\GetDataLevel.cs" />
     <Compile Include="pages\report\GetDataNewProjectReporting.cs" />
     <Compile Include="pages\report\GetDataProjectByPortStatus.cs" />

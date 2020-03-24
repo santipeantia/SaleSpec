@@ -60,7 +60,7 @@ namespace SaleSpec.pages.masters
                 //ssql = "SELECT ArchitecID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email, Status='Confirmed' FROM adArchitecture ";
 
                 ssql = "SELECT a.CompanyID, a.ArchitecID, a.FirstName, a.LastName, a.NickName, a.Position, a.Address, a.Phone, " +
-                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2, a.GradeID, c.GradeDesc, convert(nvarchar(10), a.Birthday, 126) Birthday " +
+                       "        a.Mobile, a.Email, a.StatusConID, b.ConDesc2, a.GradeID, c.GradeDesc, convert(nvarchar(10), a.Birthday, 126) Birthday, SpecID " +
                        "FROM adArchitecture AS a LEFT OUTER JOIN " + 
                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID LEFT JOIN " + 
                        "        adGrade c on a.GradeID=c.GradeID ";
@@ -86,6 +86,7 @@ namespace SaleSpec.pages.masters
                         string strStatus = dt.Rows[i]["ConDesc2"].ToString();
                         string strGradeID = dt.Rows[i]["GradeID"].ToString();
                         string strBirthday = dt.Rows[i]["Birthday"].ToString();
+                        string strSpecID = dt.Rows[i]["SpecID"].ToString();
 
                         if (strStatusConID == "0")
                         {
@@ -124,6 +125,7 @@ namespace SaleSpec.pages.masters
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"#\" title=\"Delete\"><i class=\"fa fa-trash text-red\"></i></a></td> " +
                                         "     <td class=\"hidden\">" + strBirthday + "</td> " +
+                                        "     <td>" + strSpecID + "</td> " +
                                         "</tr>";
                     }
 
@@ -178,13 +180,14 @@ namespace SaleSpec.pages.masters
                 string strStatusConID = Request.Form["selectStatusConID"];
                 string strGradeID = Request.Form["selectGradeID"];
                 string strDatebirthday = Request.Form["datebirthday"];
+                string strSpecID = Request.Form["txtPort"];
 
                 if (strFirstName != "" && strLastName != "")
                 {
                     ssql = "insert into adArchitecture (ArchitecID, CompanyID, Name, FirstName, LastName, NickName, Position, " +
-                           "       Address, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate, GradeID, Birthday) " +
+                           "       Address, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate, GradeID, Birthday, SpecID) " +
                            "values  (@ArchitecID, @CompanyID, @Name, @FirstName, @LastName, @NickName, @Position, " +
-                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate, @GradeID, @Birthday)  ";
+                           "       @Address, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate, @GradeID, @Birthday, @SpecID)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
@@ -207,6 +210,7 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
                     Comm.Parameters.Add("@Birthday", SqlDbType.NVarChar).Value = strDatebirthday;
+                    Comm.Parameters.Add("@SpecID", SqlDbType.NVarChar).Value = strSpecID;
                     Comm.ExecuteNonQuery();
 
                 }
@@ -255,11 +259,12 @@ namespace SaleSpec.pages.masters
                 string strStatusConID = Request.Form["selectStatusConIDEdit"];
                 string strGradeID = Request.Form["selectGradeIDEdit"];
                 string strDatebirthday = Request.Form["datebirthdayedit"];
+                string strSpecID = Request.Form["txtPortEdit"];
 
                 if (strFirstName != "" && strLastName != "")
                 {
                     ssql = "update  adArchitecture set CompanyID=@CompanyID, Name=@Name, FirstName=@FirstName, LastName=@LastName, NickName=@NickName, Position=@Position, " +
-                           "       Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate, GradeID=@GradeID, Birthday=@Birthday " +
+                           "       Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate, GradeID=@GradeID, Birthday=@Birthday, SpecID=@SpecID " +
                            "where  ArchitecID=@ArchitecID ";
 
                     Comm = new SqlCommand();
@@ -282,6 +287,7 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
                     Comm.Parameters.Add("@Birthday", SqlDbType.NVarChar).Value = strDatebirthday;
+                    Comm.Parameters.Add("@SpecID", SqlDbType.NVarChar).Value = strSpecID;
                     Comm.ExecuteNonQuery();
 
                 }

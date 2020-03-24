@@ -33,6 +33,12 @@ namespace SaleSpec.pages.trans
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string strUserID = Session["UserID"].ToString();
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("../../pages/users/login");
+            }
+
             if (!IsPostBack)
             {
                 GetInitialData();
@@ -56,7 +62,7 @@ namespace SaleSpec.pages.trans
                 //        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID " +
                 //        "WHERE  a.StepID in ('sold', 'sos') ";
 
-                ssql = "exec spSaleOnSpec '2019-12-01', '2019-12-31' ";
+                ssql = "exec spSaleOnSpec '2019-12-16', '2019-12-31' ";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);

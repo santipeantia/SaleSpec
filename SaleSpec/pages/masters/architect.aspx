@@ -196,6 +196,7 @@
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <td class="hidden">Birthday</td>
+                                    <td>Port</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -331,6 +332,13 @@
                                 </div>
                             </div>
 
+                            <div class="row" style="margin-top: 5px">
+                                <div class="col-md-4 txtLabel">Port</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPort" name="txtPort" placeholder="" value="" >
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -463,6 +471,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                             <div class="row" style="margin-top: 5px">
+                                <div class="col-md-4 txtLabel">Port</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPortEdit" name="txtPortEdit" placeholder="" value="" >
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -582,6 +597,14 @@
                                     </div>
                                 </div>
                             </div>
+
+                             <div class="row" style="margin-top: 5px">
+                                <div class="col-md-4 txtLabel">Port</div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPortDel" name="txtPortDel" placeholder="" value="" readonly >
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -713,6 +736,7 @@
                             var strVal11 = table.rows[rIndex].cells[11].innerHTML;
                             var strVal12 = table.rows[rIndex].cells[12].innerHTML;
                             var strVal15 = table.rows[rIndex].cells[15].innerHTML;
+                            var strVal16 = table.rows[rIndex].cells[16].innerHTML; //Port
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
                             $('#selectCompanyEdit').val(strVal0); 
@@ -738,6 +762,8 @@
                             $('#selectStatusConIDEdit').val(strVal10); 
                             $('#selectStatusConIDEdit').change();
 
+                            document.getElementById("txtPortEdit").value = strVal16;
+
                             $("#myModalEdit").modal({ backdrop: false });
                             $("#myModalEdit").modal("show");
 
@@ -758,6 +784,7 @@
                             var strVal10 = table.rows[rIndex].cells[10].innerHTML;
                             var strVal11 = table.rows[rIndex].cells[11].innerHTML;
                             var strVal12 = table.rows[rIndex].cells[12].innerHTML;
+                            var strVal16 = table.rows[rIndex].cells[16].innerHTML; //Port
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
                             $('#selectCompanyDel').val(strVal0); 
@@ -778,6 +805,9 @@
 
                             $('#selectStatusConIDDel').val(strVal10); 
                             $('#selectStatusConIDDel').change();
+
+                            document.getElementById("txtPortDel").value = strVal16;
+
 
                             $("#myModalDelete").modal({ backdrop: false });
                             $("#myModalDelete").modal("show");

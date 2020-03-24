@@ -20,7 +20,7 @@ namespace SaleSpec.pages.report
     public class DataServicesReporting : System.Web.Services.WebService
     {
         //string cs = "server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;";
-        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=Amp88Cloud@2018;";
+        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
 
         //get attached
         [WebMethod]
@@ -401,6 +401,7 @@ namespace SaleSpec.pages.report
                     GetReportProjectStatusByOptions project = new GetReportProjectStatusByOptions();
 
                     project.ID = rdr["ID"].ToString();
+                    project.UserID = rdr["UserID"].ToString();
                     project.WeekDate = rdr["WeekDate"].ToString();
                     project.WeekTime = rdr["WeekTime"].ToString();
                     project.CompanyName = rdr["CompanyName"].ToString();

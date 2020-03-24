@@ -50,6 +50,8 @@
         <script>
             $(document).ready(function () {
 
+               
+
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -136,6 +138,7 @@
                                     $(data).each(function (index, item) {
                                         trHTML += '<tr>' +
                                             '<td class="hidden">' + item.ID + '</td>' +
+                                            '<td class="">' + item.UserID + '</td>' +
                                             '<td class="hidden">' + item.WeekDate + '</td>' +
                                             '<td class="hidden">' + item.WeekTime + '</td>' +
                                             '<td>' + item.CompanyName + '</td>' +
@@ -172,7 +175,7 @@
                                         $('#tableWeeklyReportx td').hover(function () {
                                             rIndex = this.parentElement.rowIndex;
                                             cIndex = this.cellIndex;
-                                            if (rIndex != 0 & cIndex == 7) {
+                                            if (rIndex != 0 & cIndex == 8) {
                                                 $(this).css('cursor', 'pointer');
                                             }
                                         });
@@ -184,7 +187,7 @@
                                             rIndex = this.parentElement.rowIndex;
                                             cIndex = this.cellIndex;
 
-                                            if (rIndex != 0 & cIndex == 7) {
+                                            if (rIndex != 0 & cIndex == 8) {
                                                 //alert(rIndex + '' + cIndex);
 
                                                 document.getElementById("divErrorArchitect").style.display = 'none';
@@ -221,17 +224,17 @@
                                                 var strVal22 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(22)');
                                                 var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');
                                                 var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');
-
+                                                var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');
                                                 //alert(strVal6.text());
 
                                                 //return;
 
                                                 //document.getElementById("txtid").value = strVal0.text();
                                                 $('#txtid').val(strVal0.text());
-                                                $('#txtVisitDate').val(strVal1.text());
-                                                $('#txtTime').val(strVal2.text());
-                                                $('#txtCompanyName').val(strVal3.text());
-                                                $('#ProjectID').val(strVal6.text());
+                                                $('#txtVisitDate').val(strVal2.text());
+                                                $('#txtTime').val(strVal3.text());
+                                                $('#txtCompanyName').val(strVal4.text());
+                                                $('#ProjectID').val(strVal8.text());
 
                                                 var selectArchitectNameDDL = $('#selectArchitectName');
 
@@ -248,7 +251,7 @@
                                                         $(data).each(function (index, item) {
                                                             selectArchitectNameDDL.append($('<option/>', { value: item.ArchitecID, text: item.ArchitectName }));
 
-                                                            $('#selectArchitectName').val(strVal4.text());
+                                                            $('#selectArchitectName').val(strVal5.text());
                                                             $('#selectArchitectName').change();
 
                                                             //selectArchitectNameDDL.text = strVal4.text();
@@ -258,8 +261,8 @@
 
                                                 });
 
-                                                $('#txtProjectName').val(strVal7.text());
-                                                $('#txtLocation').val(strVal8.text());
+                                                $('#txtProjectName').val(strVal8.text());
+                                                $('#txtLocation').val(strVal9.text());
 
 
                                                 //Get Product type such as Ampelite, Ampelram
@@ -272,7 +275,7 @@
                                                         selectProductTypeDDL.empty();
                                                         $(data).each(function (index, item) {
                                                             selectProductTypeDDL.append($('<option/>', { value: item.ProdTypeID, text: item.ProdTypeNameEN }));
-                                                            $('#selectProductType').val(strVal9.text());
+                                                            $('#selectProductType').val(strVal10.text());
                                                             $('#selectProductType').change();
                                                         });
                                                     }
@@ -292,7 +295,7 @@
                                                             selectProductNameDDL.append($('<option/>', { value: -1, text: 'Please select product' }));
                                                             $(data).each(function (index, item) {
                                                                 selectProductNameDDL.append($('<option/>', { value: item.ProdID, text: item.ProdNameEN }));
-                                                                selectProductNameDDL.val(strVal11.text());
+                                                                selectProductNameDDL.val(strVal12.text());
                                                                 selectProductNameDDL.change();
                                                             });
                                                         }
@@ -310,7 +313,7 @@
                                                         selectStepDDL.empty();
                                                         $(data).each(function (index, item) {
                                                             selectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
-                                                            $('#selectStep').val(strVal24.text());
+                                                            $('#selectStep').val(strVal25.text());
                                                             $('#selectStep').change();
                                                         });
                                                     }
@@ -335,7 +338,7 @@
                                                             url: '../trans/DataServices.asmx/GetStatusWithProject',
                                                             method: 'post',
                                                             data: {
-                                                                ProjectID: strVal6.text()
+                                                                ProjectID: strVal7.text()
                                                             },
                                                             dataType: 'json',
                                                             success: function (data) {
@@ -356,33 +359,33 @@
                                                 //alert(strVal6.text());
 
 
-                                                $('#txtProfile').val(strVal13.text());
-                                                $('#datedelivery').val(strVal14.text());
-                                                $('#datefollowing').val(strVal15.text());
-                                                $('#txtQuantity').val(strVal16.text());
+                                                $('#txtProfile').val(strVal14.text());
+                                                $('#datedelivery').val(strVal15.text());
+                                                $('#datefollowing').val(strVal16.text());
+                                                $('#txtQuantity').val(strVal17.text());
 
-                                                if (strVal24.text() == '1') {
-                                                    $('#txtRefMcRf').val(strVal20.text());
-                                                    $('#txtContactMcRf').val(strVal21.text());
-                                                }
-                                                else if (strVal24.text() == '2') {
+                                                if (strVal25.text() == '1') {
                                                     $('#txtRefMcRf').val(strVal21.text());
                                                     $('#txtContactMcRf').val(strVal22.text());
                                                 }
-                                                else {
+                                                else if (strVal25.text() == '2') {
                                                     $('#txtRefMcRf').val(strVal22.text());
+                                                    $('#txtContactMcRf').val(strVal23.text());
+                                                }
+                                                else {
+                                                    $('#txtRefMcRf').val(strVal23.text());
                                                     //$('#txtContactMcRf').val(strVal22.text());
                                                 }
 
 
 
-                                                $('#txtRemark').val(strVal23.text());
+                                                $('#txtRemark').val(strVal24.text());
 
 
                                                 $.ajax({
                                                     url: 'DataServicesReporting.asmx/GetDataProjectHistory',
                                                     method: 'post',
-                                                    data: { ProjectID: strVal6.text() },
+                                                    data: { ProjectID: strVal7.text() },
                                                     dataType: 'json',
                                                     success: function (data) {
                                                         var trHTML2 = '';
@@ -466,6 +469,7 @@
                                 $(data).each(function (index, item) {
                                     trHTML += '<tr>' +
                                         '<td class="hidden">' + item.ID + '</td>' +
+                                        '<td class="">' + item.UserID + '</td>' +
                                         '<td class="hidden">' + item.WeekDate + '</td>' +
                                         '<td class="hidden">' + item.WeekTime + '</td>' +
                                         '<td>' + item.CompanyName + '</td>' +
@@ -959,10 +963,11 @@
 
                             <div id="divWeeklyReport">
                                 <div class="row">
-                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed"  style="width: 4000px">
                                         <thead>
                                             <tr>
                                                 <td class="hidden">ID</td>
+                                                <td class="">Port</td>
                                                 <td class="hidden">WeekDate</td>
                                                 <td class="hidden">WeekTime</td>
                                                 <td>CompanyName</td>

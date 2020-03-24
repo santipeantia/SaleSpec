@@ -16,5 +16,6 @@ namespace SaleSpec.pages.report
         public string level_desc { get; set; }
         public string isactive { get; set; }
         public string last_update { get; set; }
+        public string Port { get; set; }
     }
 }

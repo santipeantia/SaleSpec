@@ -345,6 +345,7 @@ namespace SaleSpec.pages.report
                                             "<td>" + DeliveryDate + "</td>" +
                                             "<td>" + Quantity + "</td>" +
                                             "<td>" + LastUpdate + "</td>" +
+                                            "<td>" + TypeID + "</td>" +
                                        "</tr> ";
                     }
 

@@ -49,11 +49,12 @@ namespace SaleSpec.pages.report
         {
             try
             {
-                ssql = "SELECT distinct b.ID, b.ArchitecID, b.CompanyID, b.Name, b.FirstName, b.LastName, b.NickName, " +
+                ssql = "SELECT distinct b.ID, b.ArchitecID, b.CompanyID, a.CompanyName, b.Name, b.FirstName, b.LastName, b.NickName, " +
                         "       b.Position, b.Address, b.Phone, b.Mobile, b.Email, b.StatusConID, b.CreatedDate, b.UpdatedDate, b.GradeID,  " +
                         "       c.ConDesc, c.ConDesc2,	d.PositionNameTH, d.PositionNameEN,	e.GradeDesc, e.GradeDetail, " +
                         "      (select top 1 ' in year '+ convert(nvarchar(10), inYear) from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as inYear, " +
                         "      (select top 1 level_desc from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as level_desc " +
+                        "       , b.SpecID as Port " +
                         "FROM adProjects a inner join " +
                         "       adArchitecture b on a.ArchitecID = b.ArchitecID left join " +
                         "       adStatusConfirm c on b.StatusConID = c.StatusConID left join " +
@@ -70,6 +71,7 @@ namespace SaleSpec.pages.report
                         string strID = dt.Rows[i]["ID"].ToString();
                         string strArchitecID = dt.Rows[i]["ArchitecID"].ToString();
                         string strCompanyID = dt.Rows[i]["CompanyID"].ToString();
+                        string strCompanyName = dt.Rows[i]["CompanyName"].ToString();
                         string strName = dt.Rows[i]["Name"].ToString();
                         string strFirstName = dt.Rows[i]["FirstName"].ToString();
                         string strLastName = dt.Rows[i]["LastName"].ToString();
@@ -91,16 +93,18 @@ namespace SaleSpec.pages.report
                         string strGradeDetail = dt.Rows[i]["GradeDetail"].ToString();
                         string strinYear = dt.Rows[i]["inYear"].ToString();
                         string strlevel_desc = dt.Rows[i]["level_desc"].ToString();
+                        string strPort = dt.Rows[i]["Port"].ToString();
 
 
                         strTblDetail += "<tr> " +
                                         "     <td class=\"hidden\">" + strID + "</td> " +
                                         "     <td class=\"hidden\">" + strArchitecID + "</td> " +
-                                        "     <td class=\"hidden\">" + strCompanyID + "</td> " +
+                                        
                                         "     <td class=\"hidden\">" + strName + "</td> " +
                                         "     <td>" + strFirstName + "</td> " +
                                         "     <td>" + strLastName + "</td> " +
                                         "     <td>" + strNickName + "</td> " +
+                                        "     <td class=\"\">" + strCompanyName + "</td> " +
                                         "     <td class=\"hidden\">" + strPosition + "</td> " +
                                         "     <td class=\"hidden\">" + strAddress + "</td> " +
                                         "     <td>" + strPhone + "</td> " +
@@ -116,6 +120,7 @@ namespace SaleSpec.pages.report
                                         "     <td class=\"hidden\">" + strPositionNameEN + "</td> " +
                                         "     <td>" + strGradeDesc + " : " + strlevel_desc + " " + strinYear + "</td> " +
                                         "     <td class=\"hidden\">" + strGradeDetail + "</td> " +
+                                        "     <td class=\"\">" + strPort + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
                                         "       <a href=\"../report/architectprofile.aspx?opt=rarc&id="+ strArchitecID + "\" target=\"_blank\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
                                         "</tr>";
