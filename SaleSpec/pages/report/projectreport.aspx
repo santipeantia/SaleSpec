@@ -968,7 +968,7 @@
 
                             <br />
                             <div class="row">
-                                <div id="divWeeklyReport" style="height: 600px; overflow: scroll">
+                                <div id="divWeeklyReport" style="height: 600px;  overflow: scroll">
                                     <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                         <thead>
                                             <tr>
