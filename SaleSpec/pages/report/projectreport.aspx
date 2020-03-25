@@ -31,7 +31,7 @@
              function successalert() {
                     Swal.fire({
                                 type: 'error',
-                                title: 'You do not have permission print all.',
+                                title: 'You do not have permission print all..!',
                                 text: 'Permission access denied.',
                                 footer: 'Please contact system administrator..'
                             })
