@@ -355,10 +355,10 @@ namespace SaleSpec.pages.trans
             }
             catch (Exception ex)
             {
-                //strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
-                //            "      <strong>Error rptPrintIntakeProjectReport..!</strong> " + ex.Message + " " +
-                //            "</div>";
-                //return;
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error rptPrintIntakeProjectReport..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
             }
         }
 

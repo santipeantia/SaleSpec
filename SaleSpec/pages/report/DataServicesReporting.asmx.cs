@@ -539,7 +539,11 @@ namespace SaleSpec.pages.report
                 }
                 catch (Exception ex)
                 {
-
+                    string strMsgAlert = "";
+                    strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error rptPrintIntakeProjectReport..!</strong> " + ex.Message + " " +
+                            "</div>";
+                    return;
                 }
 
                 
