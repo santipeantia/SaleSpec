@@ -436,26 +436,79 @@ namespace SaleSpec.pages.report
                 //string strQtyEnd = Request.Form["QtyEnd"];
                 //string strSearch = Request.Form["Search"];
 
-
-                string selectOption = Request.Form["selectReportOption"];
-                string strOptionName =  Request.Form["optionName"];
-                string datepickertrans = Request.Form["datepickertrans"];
-                string datepickerend = Request.Form["datepickerend"];
-                string selectSaleport = Request.Form["selectSalePort"];
-                string strqtystrat = Request.Form["QtyStart"];
-                string strqtyend = Request.Form["QtyEnd"];
-                string strsearch = Request.Form["Search"];
-
-                string empcode = Session["EmpCode"].ToString();
-
-                Conn = new SqlConnection();
-                Conn = dbConn.OpenConn();
-
-
-
-                if (selectSaleport == "SELECTED ALL")
+                string strUerID = Session["UserID"].ToString();
+                if ((strUerID == "Admin") || (strUerID == "Chanunnett") || (strUerID == "Chonticha") || (strUerID == "Treethep") || (strUerID == "Wanchai"))
                 {
-                    if (empcode == "118052" || empcode == "316010" || empcode == "506009")
+
+                    string selectOption = Request.Form["selectReportOption"];
+                    string strOptionName = Request.Form["optionName"];
+                    string datepickertrans = Request.Form["datepickertrans"];
+                    string datepickerend = Request.Form["datepickerend"];
+                    string selectSaleport = Request.Form["selectSalePort"];
+                    string strqtystrat = Request.Form["QtyStart"];
+                    string strqtyend = Request.Form["QtyEnd"];
+                    string strsearch = Request.Form["Search"];
+
+                    string empcode = Session["EmpCode"].ToString();
+
+                    Conn = new SqlConnection();
+                    Conn = dbConn.OpenConn();
+
+
+
+                    if (selectSaleport == "SELECTED ALL")
+                    {
+                        if (empcode == "118052" || empcode == "316010" || empcode == "506009")
+                        {
+                            Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
+                            Comm.CommandType = CommandType.StoredProcedure;
+
+                            SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
+                            SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = datepickertrans };
+                            SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = datepickerend };
+                            SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = selectSaleport };
+                            SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
+                            SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
+                            SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
+
+                            Comm.Parameters.Add(param1);
+                            Comm.Parameters.Add(param2);
+                            Comm.Parameters.Add(param3);
+                            Comm.Parameters.Add(param4);
+                            Comm.Parameters.Add(param5);
+                            Comm.Parameters.Add(param6);
+                            Comm.Parameters.Add(param7);
+
+                            //conn.Open();
+                            SqlDataAdapter adapter = new SqlDataAdapter();
+                            adapter.SelectCommand = Comm;
+                            dt = new DataTable();
+                            adapter.Fill(dt);
+                        }
+                        else
+                        {
+                            //string strWarning = "";
+                            //strWarning += "Swal.fire({ ";
+                            //strWarning += "     type: 'error', ";
+                            //strWarning += "     title: 'You do not have permission print all.', ";
+                            //strWarning += "     text: 'Permission access denied.', ";
+                            //strWarning += "     footer: 'Please contact system administrator..'})";
+
+                            //Response.Write("<script>successalert();</script>");
+
+                            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "myJsFn", "successalert();", true);
+
+                            //ScriptManager.RegisterStartupScript(this, GetType(), null, strWarning, true);
+
+                            //ClientScript.RegisterStartupScript(this.GetType(), "warning", "successalert()", true);
+
+                            //Response.Write(""+ strWarning  +"");
+
+                            GetDataSalePort();
+                            return;
+                        }
+                    }
+                    else
                     {
                         Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
                         Comm.CommandType = CommandType.StoredProcedure;
@@ -481,94 +534,50 @@ namespace SaleSpec.pages.report
                         adapter.SelectCommand = Comm;
                         dt = new DataTable();
                         adapter.Fill(dt);
+
                     }
-                    else
+
+
+
+
+                    GridView GridviewExport = new GridView();
+
+                    if (dt.Rows.Count != 0)
                     {
-                        //string strWarning = "";
-                        //strWarning += "Swal.fire({ ";
-                        //strWarning += "     type: 'error', ";
-                        //strWarning += "     title: 'You do not have permission print all.', ";
-                        //strWarning += "     text: 'Permission access denied.', ";
-                        //strWarning += "     footer: 'Please contact system administrator..'})";
 
-                        //Response.Write("<script>successalert();</script>");
+                        GridviewExport.DataSource = dt;
+                        GridviewExport.DataBind();
 
-                        //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "myJsFn", "successalert();", true);
+                        Response.Clear();
+                        Response.AddHeader("content-disposition", "attachment;filename=ExportReport_" + strOptionName + "_" + selectSaleport + ".xls");
+                        Response.ContentType = "application/ms-excel";
+                        Response.ContentEncoding = System.Text.Encoding.Unicode;
+                        Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
 
-                        //ScriptManager.RegisterStartupScript(this, GetType(), null, strWarning, true);
+                        System.IO.StringWriter sw = new System.IO.StringWriter();
+                        System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
 
-                        //ClientScript.RegisterStartupScript(this.GetType(), "warning", "successalert()", true);
+                        GridviewExport.RenderControl(hw);
+                        string style = @"<style> td { mso-number-format:\@;} </style>";
+                        Response.Write(style);
+                        Response.Write(sw.ToString());
+                        Response.End();
 
-                        //Response.Write(""+ strWarning  +"");
-
-                        GetDataSalePort();
-                        return;
                     }
+                    Response.Write("<script>alert('Data find not found please check...')</script>");
+                    GetDataSalePort();
                 }
                 else
                 {
-                    Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
-                    Comm.CommandType = CommandType.StoredProcedure;
-
-                    SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
-                    SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = datepickertrans };
-                    SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = datepickerend };
-                    SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = selectSaleport };
-                    SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
-                    SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
-                    SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
-
-                    Comm.Parameters.Add(param1);
-                    Comm.Parameters.Add(param2);
-                    Comm.Parameters.Add(param3);
-                    Comm.Parameters.Add(param4);
-                    Comm.Parameters.Add(param5);
-                    Comm.Parameters.Add(param6);
-                    Comm.Parameters.Add(param7);
-
-                    //conn.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    adapter.SelectCommand = Comm;
-                    dt = new DataTable();
-                    adapter.Fill(dt);
-
+                    Response.Write("<script>alert('Data find not found please check...')</script>");
+                    GetDataSalePort();
                 }
 
-
-               
-
-                GridView GridviewExport = new GridView();
-
-                if (dt.Rows.Count != 0)
-                {
-
-                    GridviewExport.DataSource = dt;
-                    GridviewExport.DataBind();
-
-                    Response.Clear();
-                    Response.AddHeader("content-disposition", "attachment;filename=ExportReport_" + strOptionName + "_"+ selectSaleport + ".xls");
-                    Response.ContentType = "application/ms-excel";
-                    Response.ContentEncoding = System.Text.Encoding.Unicode;
-                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
-
-                    System.IO.StringWriter sw = new System.IO.StringWriter();
-                    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
-
-                    GridviewExport.RenderControl(hw);
-                    string style = @"<style> td { mso-number-format:\@;} </style>";
-                    Response.Write(style);
-                    Response.Write(sw.ToString());
-                    Response.End();
-
-                }
-                Response.Write("<script>alert('Data find not found please check...')</script>");
-                GetDataSalePort();
+                
             }
             catch (Exception ex)
             {
-                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
-                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
-                              "</div>";
+               
             }
         }
     }

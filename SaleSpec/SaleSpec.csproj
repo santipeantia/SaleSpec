@@ -85,6 +85,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="alertifyjs\alertify.js" />
+    <Content Include="alertifyjs\alertify.min.js" />
+    <Content Include="alertifyjs\css\alertify.css" />
+    <Content Include="alertifyjs\css\alertify.min.css" />
+    <Content Include="alertifyjs\css\alertify.rtl.css" />
+    <Content Include="alertifyjs\css\alertify.rtl.min.css" />
+    <Content Include="alertifyjs\css\themes\bootstrap.css" />
+    <Content Include="alertifyjs\css\themes\bootstrap.min.css" />
+    <Content Include="alertifyjs\css\themes\bootstrap.rtl.css" />
+    <Content Include="alertifyjs\css\themes\bootstrap.rtl.min.css" />
+    <Content Include="alertifyjs\css\themes\default.css" />
+    <Content Include="alertifyjs\css\themes\default.min.css" />
+    <Content Include="alertifyjs\css\themes\default.rtl.css" />
+    <Content Include="alertifyjs\css\themes\default.rtl.min.css" />
+    <Content Include="alertifyjs\css\themes\semantic.css" />
+    <Content Include="alertifyjs\css\themes\semantic.min.css" />
+    <Content Include="alertifyjs\css\themes\semantic.rtl.css" />
+    <Content Include="alertifyjs\css\themes\semantic.rtl.min.css" />
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\AjaxControlToolkit.dll.refresh.mp3" />
     <Content Include="bin\AjaxControlToolkit.pdb" />

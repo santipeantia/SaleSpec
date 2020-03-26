@@ -34,6 +34,23 @@
 
 	<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.1/css/fixedColumns.dataTables.min.css"/>
+    
+    <link href="../../alertifyjs/css/alertify.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/alertify.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/alertify.rtl.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.rtl.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.rtl.min.css" rel="stylesheet" />
 
 
 	<!-- Google Font -->
@@ -145,6 +162,7 @@
 	    }
 
 	</style>
+
 </head>
 
 <body onselect="return true" onload="screenZoom()" class="hold-transition skin-blue-light sidebar-mini fixed ">
@@ -453,6 +471,10 @@
 		<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
 		<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="../../plugins/iCheck/icheck.min.js"></script>
+
+        <script src="../../alertifyjs/alertify.js"></script>
+        <script src="../../alertifyjs/alertify.min.js"></script>
+
 		<%--<script src="../../../../dist/2.7.3/Chart.bundle.js"></script>--%>
 		<script src="../../bower_components/Chart.js/Chart.js"></script>
             
