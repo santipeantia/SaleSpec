@@ -6533,6 +6533,10 @@
       <LastGenOutput>ChartData.cs</LastGenOutput>
     </Content>
     <Content Include="ClassConnection\dbConnectionSQL - Copy.txt" />
+    <Content Include="image\f0929.png" />
+    <Content Include="image\g0929.png" />
+    <Content Include="image\i0929.png" />
+    <Content Include="image\t0929.png" />
     <Content Include="index.html" />
     <Content Include="pages\CanvasJS.html" />
     <Content Include="pages\Charts.aspx" />
@@ -6547,7 +6551,10 @@
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\report\jquery.table2excel.js" />
     <Content Include="pages\report\newprojectreport.aspx" />
+    <Content Include="pages\report\sendmail.aspx" />
+    <Content Include="pages\report\sendmail.html" />
     <Content Include="pages\report\specintakeview.aspx" />
+    <Content Include="pages\report\verify-password-projectstatus.aspx" />
     <Content Include="pages\trans\DataServices.asmx" />
     <Content Include="pages\trans\jquery-1.11.2.min.js" />
     <Content Include="CSS\ui.all.css" />
@@ -7024,6 +7031,7 @@
     <Compile Include="Class\GetProductTypeUpdate.cs" />
     <Compile Include="Class\GetStatusUpdate.cs" />
     <Compile Include="Class\GetStepSpec.cs" />
+    <Compile Include="Class\Sendmail.cs" />
     <Compile Include="pages\Charts.aspx.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7204,12 +7212,26 @@
     <Compile Include="pages\report\newprojectreport.aspx.designer.cs">
       <DependentUpon>newprojectreport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\report\sendmail.aspx.cs">
+      <DependentUpon>sendmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\sendmail.aspx.designer.cs">
+      <DependentUpon>sendmail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\report\specintakeview.aspx.cs">
       <DependentUpon>specintakeview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages\report\specintakeview.aspx.designer.cs">
       <DependentUpon>specintakeview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\verify-password-projectstatus.aspx.cs">
+      <DependentUpon>verify-password-projectstatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\verify-password-projectstatus.aspx.designer.cs">
+      <DependentUpon>verify-password-projectstatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\GetInsertCompany.cs" />
     <Compile Include="pages\trans\GetArchitects.cs" />

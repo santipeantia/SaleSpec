@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
     <section class="content-header">
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="jquery-1.11.2.min.js"></script>
         <script src="jquery.table2excel.js"></script>
@@ -16,6 +17,14 @@
 
                     if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode=='113048' || empcode=='519023') {
 
+                        //sendMail();
+
+                        $("#myModalVerifyPassword").modal({ backdrop: false });
+                        $("#myModalVerifyPassword").modal("show");
+
+
+                        return;
+
                          document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
                     }
                     else {
@@ -24,7 +33,15 @@
                     }
                 }
                 else {
-                    if (empcode == '118052' || empcode == '316010' || empcode == '506009') {
+                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023') {
+
+                        //sendMail();
+
+                        $("#myModalVerifyPassword").modal({ backdrop: false });
+                        $("#myModalVerifyPassword").modal("show");
+
+                        return;
+
                         document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
                     }
                     else {
@@ -952,6 +969,7 @@
                                     <input type="hidden" id="optionName" name="optionName" value="">
 
                                     <label class="txtLabel">Report Options</label>
+                                    <input type="hidden" id="hidselectReportOption" name="hidselectReportOption" value="">
                                     <div class="txtLabel">
                                         <select id="selectReportOption" name="selectReportOption" class="form-control input-sm" style="width: 100%">
                                             <%--<%= strReportOption %>--%>
@@ -997,6 +1015,7 @@
 
                                 <div class="col-md-4">
                                     <label class="txtLabel">Sale Spec</label>
+                                    <input type="hidden" id="hidselectSalePort" name="hidselectSalePort" value="">
                                     <div class="txtLabel">
                                         <select id="selectSalePort" name="selectSalePort" class="form-control input-sm" style="width: 100%">
                                             <%= strPortOption %>
@@ -1050,6 +1069,7 @@
                                             <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click" type="button" class="btn btn-success btn-flat btn-block btn-sm hidden" data-toggle="tooltip" title="Print Excel">
                                                 <i class="fa fa-file-excel-o"></i> Print Excel</button>
 
+                                             <asp:Button  ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="hidden" />
                                         </span>
                                     </div>
                                 </div>
@@ -1060,7 +1080,7 @@
                                         <span class="">
                                             <button id="btnDownloadPDF" runat="server" type="button" class="btn btn-warning btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
                                                 <i class="fa fa-pdf-o"></i>Print PDF</button>
-                                           
+                                          
                                         </span>
                                     </div>
                                 </div>
@@ -1383,6 +1403,36 @@
             </div>
         </div>
 
+         <!-- /.modal myModalVerifyPassword -->
+        <div class="modal modal-default fade" id="myModalVerifyPassword">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Request Email</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="post clearfix">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Enter Your Email</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer clearfix">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                         
+                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server"  onclick="sendMail()">Submit Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             function ValidateUpdate() {
                 var str1 = document.getElementById("txtid").value;
@@ -1550,7 +1600,26 @@
                 }
             }
 
+            function sendMail() {
+
+              document.getElementById("<%= btnSendMail.ClientID %>").click();
+
+                //Email.send({
+                //    Host: "smtp.gmail.com",
+                //    Username: "peantia.w@gmail.com",
+                //    Password: "S@nti293024!",
+                //    To: 'santi@ampelite.co.th',
+                //    From: "peantia.w@gmail.com",
+                //    Subject: "This is the subject",
+                //    Body: "And this is the body"
+                //}).then(
+                //    message => alert(message)
+                //);
+            }
+
         </script>
 
     </section>
+
+  
 </asp:Content>

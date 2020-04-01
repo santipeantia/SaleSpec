@@ -40,6 +40,15 @@ namespace SaleSpec.pages.report {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadExcel;
         
         /// <summary>
+        /// btnSendMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSendMail;
+        
+        /// <summary>
         /// btnDownloadPDF control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,14 @@ namespace SaleSpec.pages.report {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnUpdateData;
+        
+        /// <summary>
+        /// btnConfirmed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmed;
     }
 }
