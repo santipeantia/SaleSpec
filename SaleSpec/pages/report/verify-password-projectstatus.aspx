@@ -44,15 +44,23 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: left; color: #00a0e9; font-size: 22px; padding: 0px 30px;">
-                           <input type="text" id="txtVerify" name="txtVerify" class="form-control text-center input-group-sm" />
+                        <td style="text-align: left; color: #00a0e9; font-size: 35px; padding: 0px 30px;">
+                           <input type="text" id="txtVerify" name="txtVerify" class="form-control text-center" style="font-size: 40px; font-weight: bold; color: orangered;" autocomplete="off" />
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: center; color: #00a0e9; font-size: 22px; padding: 5px 30px;">
                            <%--<input type="button" id="btnVerify" name="btnVerify" class="btn btn-success btn-block text-center" value="Verify and Download"/>--%>
-                            <asp:Button ID="btnVerify" runat="server" class="btn btn-success btn-block text-center" Text="Verify and Download" OnClick="btnVerify_Click" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="verify-password-projectstatus.aspx" class="btn btn-warning btn-block text-center">Reset Password</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <asp:Button ID="Button1" runat="server" class="btn btn-success btn-block text-center" Text="Verify and Download" OnClick="btnVerify_Click" />
+                                </div>
+                            </div>
                         </td>
+                       
                     </tr>
                 </tbody>
             </table>
