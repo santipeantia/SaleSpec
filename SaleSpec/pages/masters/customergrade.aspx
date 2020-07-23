@@ -30,7 +30,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed">
+                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%;">
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
@@ -276,6 +276,7 @@
             var table = document.getElementById("example1"), rIndex;
             for (var i = 1; i < table.rows.length; i++) {
                 for (var j = 0; j < table.rows[i].cells.length; j++) {
+
                     table.rows[i].cells[j].onclick = function () {
                         rIndex = this.parentElement.rowIndex;
                         cIndex = this.cellIndex;

@@ -841,7 +841,11 @@
                             <div class="col-md-12">
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-2 txtLabel">ProjectName </div>
-                                    <div class="col-md-10">
+					
+				    <div class="col-md-2">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="ProjectIDEdit" name="ProjectIDEdit" readonly value="" required>
+                                    </div>
+                                    <div class="col-md-8">
                                         <input type="text" class="form-control input input-sm txtLabel" id="ProjectNameEdit" name="ProjectNameEdit" placeholder="" value="" required>
                                     </div>
                                 </div>
@@ -1379,8 +1383,11 @@
                             var strVal20 = table.rows[rIndex].cells[20].innerHTML;
                             var strVal21 = table.rows[rIndex].cells[21].innerHTML;
                             var strVal22 = table.rows[rIndex].cells[22].innerHTML;
-
+				
+			    //alert(strVal0);
+			    document.getElementById("ProjectIDEdit").value = strVal0;
                             document.getElementById("ProjectNameEdit").value = strVal3;
+
                             //document.getElementById("selectCompanyIDEdit").value = strVal5;
                             $('#selectCompanyIDEdit').val(strVal5); 
                             $('#selectCompanyIDEdit').change();

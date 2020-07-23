@@ -377,13 +377,13 @@ namespace SaleSpec.pages.masters
                         "         where CompanyID = a.CompanyID and ArchitecID = a.ArchitecID " +
                         "         for xml path(''), TYPE " +
                         "        ).value('.[1]', 'nvarchar(max)'), 1, 1, '') " +
-                        "from(select distinct a.ArchitecID, a.FirstName, a.LastName, pj.CompanyID, cm.CompanyName, a.NickName, " +
+                        "from(select distinct a.ArchitecID, a.FirstName, a.LastName, a.CompanyID, cm.CompanyName, a.NickName, " +
                         "        a.Position, a.Address, a.Phone, a.Mobile, a.Email, b.ConDesc2, a.Birthday, " +
                         "        pj.TypeID as Port " +
                         "from adArchitecture as a left join " +
                         "        adStatusConfirm as b on a.StatusConID = b.StatusConID left join " +
                         "        adProjects as pj on a.ArchitecID = pj.ArchitecID left join " +
-                        "        adCompany as cm on pj.CompanyID = cm.CompanyID " +
+                        "        adCompany as cm on a.CompanyID = cm.CompanyID  " +
                          "       ) a ";
 
                 dt = new DataTable();

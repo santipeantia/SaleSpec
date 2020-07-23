@@ -362,10 +362,10 @@
 
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row hidden" style="margin-bottom: 5px">
+                            <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Architect ID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDEdit" name="txtArchitectIDEdit" placeholder="" value="" ></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDEdit" name="txtArchitectIDEdit" readonly placeholder="" value="" ></div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">

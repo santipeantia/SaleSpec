@@ -614,7 +614,7 @@ namespace SaleSpec.pages.report
 
                     mail.From = new MailAddress("no-reply@ampelite.co.th");
                     mail.To.Add(strEmail);
-                    mail.Bcc.Add("santi@ampelite.co.th,peantia.s@live.com");
+                    mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
 
                     mail.Subject = "Request Verify Password";
                     mail.Body = strMailBody;

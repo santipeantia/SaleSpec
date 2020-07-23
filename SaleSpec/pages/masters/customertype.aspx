@@ -31,7 +31,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed">
+                        <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%;">
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
