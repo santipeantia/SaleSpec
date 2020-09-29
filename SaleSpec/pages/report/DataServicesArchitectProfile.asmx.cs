@@ -95,7 +95,7 @@ namespace SaleSpec.pages.report
 
         [WebMethod]
         public void GetInsertRewardEvent(string event_id, string event_desc, string trans_date, string architect_id, string details, 
-                            string remark, string userid, string created_date, string lasted_date)
+                            string remark, string userid, string created_date, string lasted_date, string getagift)
         {
 
             using (SqlConnection conn = new SqlConnection(cs))
@@ -113,6 +113,7 @@ namespace SaleSpec.pages.report
                 comm.Parameters.AddWithValue("@userid", userid);
                 comm.Parameters.AddWithValue("@created_date", created_date);
                 comm.Parameters.AddWithValue("@lasted_date", lasted_date);
+                comm.Parameters.AddWithValue("@getagift", getagift);
                 comm.ExecuteNonQuery();
                 conn.Close();
             }

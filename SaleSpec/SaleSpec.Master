@@ -65,7 +65,7 @@
 		}
 
 		.table-condensed {
-			font-size: 12px;
+			font-size: 14px;
 		}
 
 		.loadingMessageFrame {
@@ -578,6 +578,21 @@
 					'ordering': true,
 					'info': true,
 					'autoWidth': false
+                })
+
+                $('#tableWeeklyReportx').DataTable({
+					'iDisplayLength': 10,
+					'paging': true,
+					'lengthChange': true,
+					'searching': true,
+					'ordering': true,
+					'info': true,
+                    'autoWidth': false,
+                    'columnDefs': [
+                            { "width": "50", "targets": 2 }
+                    ],
+                    'fixedColumns': true
+
                 })
 
                 

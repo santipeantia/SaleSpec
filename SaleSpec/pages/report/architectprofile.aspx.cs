@@ -397,6 +397,7 @@ namespace SaleSpec.pages.report
                         string id = dt.Rows[i]["id"].ToString();
                         string event_id = dt.Rows[i]["event_id"].ToString();
                         string event_desc = dt.Rows[i]["event_desc"].ToString();
+                        string getagift = dt.Rows[i]["getagift"].ToString();
                         string year4 = dt.Rows[i]["YEAR4"].ToString();
                         string year3 = dt.Rows[i]["YEAR3"].ToString();
                         string year2 = dt.Rows[i]["YEAR2"].ToString();
@@ -410,6 +411,7 @@ namespace SaleSpec.pages.report
                                             "<td class=\"hidden\"> " + id + "</td>" +
                                             "<td class=\"hidden\"> " + event_id + "</td>" +
                                             "<td> " + event_desc + "</td>" +
+                                            "<td> " + getagift + "</td>" +
                                             "<td>" + year4 + "</td>" +
                                             "<td>" + year3 + "</td>" +
                                             "<td>" + year2 + "</td>" +
@@ -417,9 +419,12 @@ namespace SaleSpec.pages.report
                                             "<td>" + year + "</td>" +
                                             "<td>" + trans_date + "</td>" +
                                             "<td>" + remark + "</td>" +
+                                            "<td class=\"hidden\" style=\"width: 50px; text-align: center;\"> " +
+                                            "       <i class=\"fa fa-edit text-green\"></td> " +
                                             "<td style=\"width: 50px; text-align: center;\"> " +
-                                        "       <i class=\"fa fa-trash text-red\"></td> " +
-                                       "</tr> ";
+                                            "       <i class=\"fa fa-trash text-red\"></td> " +
+
+                                           "</tr> ";
                     }
                 }
             }

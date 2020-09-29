@@ -23,82 +23,82 @@
                 datepickertrans.val(currentdate3);
                 //datepickerend.val(currentdate);
 
-
+                $("#divgift").hide();
 
                 var btnShowResult = $('#btnShowResult');
                 btnShowResult.click(function () {
                     $.ajax({
-                            url: 'DataServicesReporting.asmx/GetDataspGetProjectInfoByid2',
-                            method: 'post',
-                            data: {
-                                ArchitecID: $('#txtArchitectIDEdit').val(),
-                                StartYearDate: $('#datepickerstart').val(),
-                                EndYearDate: $('#datepickerend').val(),
-                                Search: $('#txtsearch').val()
-                            },
-                            dataType: 'json',
-                            success: function (data) {
+                        url: 'DataServicesReporting.asmx/GetDataspGetProjectInfoByid2',
+                        method: 'post',
+                        data: {
+                            ArchitecID: $('#txtArchitectIDEdit').val(),
+                            StartYearDate: $('#datepickerstart').val(),
+                            EndYearDate: $('#datepickerend').val(),
+                            Search: $('#txtsearch').val()
+                        },
+                        dataType: 'json',
+                        success: function (data) {
 
-                                //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+                            //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
 
-                                var trHTML = '';
-                                $('#tableProject tr:not(:first)').remove();
-                                $(data).each(function (index, item) {
-                                    trHTML += '<tr>' +
-                                       
-                                        '<td>' + item.No + '</td>' +
-                                        '<td>' + item.ProjectYear + '</td>' +
-                                        '<td>' + item.ProjectMonth + '</td>' +
-                                        '<td>' + item.ProjectID + '</td>' +
-                                        '<td>' + item.ProjectName + '</td>' +
-                                        '<td class="hidden">' + item.CompanyID + '</td>' +
-                                        '<td>' + item.CompanyName + '</td>' +
-                                        '<td class="hidden">' + item.Architect + '</td>' +
-                                        '<td class="hidden">' + item.Name + '</td>' +
-                                        '<td>' + item.Location + '</td>' +
-                                        '<td>' + item.ProdTypeNameEN + '</td>' +
-                                        '<td>' + item.ProdNameEN + '</td>' +
-                                        '<td>' + item.ProfNameEN + '</td>' +
-                                        '<td>' + item.StatusNameEn + '</td>' +
-                                        '<td>' + item.DeliveryDate + '</td>' +
-                                        '<td>' + item.Quantity + '</td>' +
-                                        '<td>' + item.LastUpdate + '</td>' +
-                                        '<td>' + item.TypeID + '</td>' +
-                                        '</tr > ';
-                                });
+                            var trHTML = '';
+                            $('#tableProject tr:not(:first)').remove();
+                            $(data).each(function (index, item) {
+                                trHTML += '<tr>' +
 
-                                $('#tableProject').append(trHTML);
+                                    '<td>' + item.No + '</td>' +
+                                    '<td>' + item.ProjectYear + '</td>' +
+                                    '<td>' + item.ProjectMonth + '</td>' +
+                                    '<td>' + item.ProjectID + '</td>' +
+                                    '<td>' + item.ProjectName + '</td>' +
+                                    '<td class="hidden">' + item.CompanyID + '</td>' +
+                                    '<td>' + item.CompanyName + '</td>' +
+                                    '<td class="hidden">' + item.Architect + '</td>' +
+                                    '<td class="hidden">' + item.Name + '</td>' +
+                                    '<td>' + item.Location + '</td>' +
+                                    '<td>' + item.ProdTypeNameEN + '</td>' +
+                                    '<td>' + item.ProdNameEN + '</td>' +
+                                    '<td>' + item.ProfNameEN + '</td>' +
+                                    '<td>' + item.StatusNameEn + '</td>' +
+                                    '<td>' + item.DeliveryDate + '</td>' +
+                                    '<td>' + item.Quantity + '</td>' +
+                                    '<td>' + item.LastUpdate + '</td>' +
+                                    '<td>' + item.TypeID + '</td>' +
+                                    '</tr > ';
+                            });
+
+                            $('#tableProject').append(trHTML);
 
 
-                                //********** Get Sum Quantity ***********//
-                                $.ajax({
-                                    url: 'DataServicesReporting.asmx/GetSumProjectInfoByid2',
-                                    method: 'post',
-                                    data: {
-                                        ArchitecID: $('#txtArchitectIDEdit').val(),
-                                        StartYearDate: $('#datepickerstart').val(),
-                                        EndYearDate: $('#datepickerend').val(),
-                                        Search: $('#txtsearch').val()
-                                    },
-                                    dataType: 'json',
-                                    success: function (data) {
+                            //********** Get Sum Quantity ***********//
+                            $.ajax({
+                                url: 'DataServicesReporting.asmx/GetSumProjectInfoByid2',
+                                method: 'post',
+                                data: {
+                                    ArchitecID: $('#txtArchitectIDEdit').val(),
+                                    StartYearDate: $('#datepickerstart').val(),
+                                    EndYearDate: $('#datepickerend').val(),
+                                    Search: $('#txtsearch').val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
 
-                                        var obj = jQuery.parseJSON(JSON.stringify(data));
-                                        if (obj != '') {
-                                            $.each(obj, function (key, inval) {
-                                                $('#test').text(inval["SumQuantity"]);
-                                                $('#txtSumQuantity').val(inval["SumQuantity"]);                                               
-                                            });
-                                        }
+                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                    if (obj != '') {
+                                        $.each(obj, function (key, inval) {
+                                            $('#test').text(inval["SumQuantity"]);
+                                            $('#txtSumQuantity').val(inval["SumQuantity"]);
+                                        });
                                     }
-                                });
-                            }
-                        });                  
+                                }
+                            });
+                        }
+                    });
                 });
-                                             
 
 
-                 //client click btnSaveEvent add new event to table
+
+                //client click btnSaveEvent add new event to table
                 var btnSaveEvent = $('#btnSaveEvent');
                 var txtdetails = $('#txtdetails');
                 btnSaveEvent.click(function () {
@@ -112,9 +112,8 @@
                             footer: 'Please contact system administrator..'
                         })
 
-                    } else if ($('textarea#txtremark').val() == "")
-                    {
-                         Swal.fire({
+                    } else if ($('textarea#txtremark').val() == "") {
+                        Swal.fire({
                             type: 'error',
                             title: '',
                             text: 'Remark is no empty...!',
@@ -138,6 +137,21 @@
 
                         var datepickertrans = $('#datepickertrans');
 
+                        var selectEvent = $('#selectEvent').val();
+                        var txtgift = $('#txtgift').val();
+
+                        if ((selectEvent == "6") && (txtgift == "")) {
+                            Swal.fire({
+                                type: 'error',
+                                title: '',
+                                text: 'Get a gift, find not found ..!',
+                                footer: 'Please check get a gift..'
+                            })
+                            $('#selectEvent').val('');
+                            return;
+                        }
+                                         
+
                         $.ajax({
                             url: 'DataServicesArchitectProfile.asmx/GetInsertRewardEvent',
                             method: 'POST',
@@ -150,12 +164,13 @@
                                 remark: $('#txtremark').val(),
                                 userid: userid,
                                 created_date: currentdate,
-                                lasted_date: currentdate
-                                },                
+                                lasted_date: currentdate,
+                                getagift: txtgift
+                            },
                             dataType: 'json',
                             success: function (data) {
 
-                            }                            
+                            }
                         });
 
                         Swal.fire({
@@ -163,7 +178,7 @@
                             title: 'Data saved successfully..',
                             text: 'Data has been saved.',
                             footer: 'Please contact system administrator..'
-                        })                
+                        })
 
                         $('#modal-event').modal('hide');
 
@@ -178,8 +193,8 @@
                         setTimeout(function () {
                             document.getElementById("<%= btnCallRewardEvent.ClientID %>").click();
                         }, 1000);
-                                              
-                       
+
+
                     }
                 });
 
@@ -189,7 +204,7 @@
                 $('#tableReward td').hover(function () {
                     rIndex = this.parentElement.rowIndex;
                     cIndex = this.cellIndex;
-                    if (rIndex != 0 & cIndex == 11) {
+                    if (rIndex != 0 & cIndex == 13) {
                         $(this).css('cursor', 'pointer');
                     }
                 });
@@ -200,7 +215,7 @@
                     rIndex = this.parentElement.rowIndex;
                     cIndex = this.cellIndex;
 
-                    if (rIndex != 0 & cIndex == 11) {
+                    if (rIndex != 0 & cIndex == 13) {
 
                         var strVal1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
                         //alert(strVal1.text());
@@ -211,11 +226,11 @@
                             method: 'POST',
                             data: {
                                 id: strVal1.text()
-                                },                
+                            },
                             dataType: 'json',
                             success: function (data) {
 
-                            }                            
+                            }
                         });
 
                         Swal.fire({
@@ -262,8 +277,28 @@
                             $('[id=modal-level]').modal('hide');
                         }
                     });
-                    
+
                 })
+
+
+                var selectEvent = $('#selectEvent');
+                selectEvent.change(function () {
+                    var strevent = $('#selectEvent').val();
+
+                    //alert(strevent);
+                    if (strevent == '6') {
+                        //alert('select Gift');
+                        //$("#divgift").attr('disabled', true);
+                        $("#divgift").show();
+                    }
+                    else {
+                        //alert('Not Gift');
+                        $("#divgift").hide();
+                    }
+
+                    
+
+                });
 
 
                 getLevelHistory();
@@ -310,8 +345,8 @@
                                 <br />
 
                                 <div class="row" style="margin-left: 35px;">
-                                    
-                                        <div class="col-md-6 offset-md-3">
+
+                                    <div class="col-md-6 offset-md-3">
                                         <div class="row hidden" style="margin-bottom: 5px">
                                             <div class="col-md-6">
                                                 <div class="col-md-4 txtLabel">Architect ID</div>
@@ -339,7 +374,7 @@
                                             <div class="col-md-4 txtLabel">LastName</div>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control input input-sm txtLabel" id="txtLastNameEdit" name="txtLastNameEdit" placeholder="" value="<%= LastName %>" required>
-                                            </div>                                            
+                                            </div>
                                         </div>
 
                                         <div class="row" style="margin-top: 5px; margin-bottom: 5px">
@@ -382,100 +417,103 @@
                                             </div>
                                         </div>
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-4 txtLabel">Address</div>
-                                                <div class="col-md-8">
-                                                    <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
-                                                </div>
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Address</div>
+                                            <div class="col-md-8">
+                                                <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
+                                                <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"><%= Address %></textarea>
                                             </div>
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-4 txtLabel">Birthday</div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtBirthday" name="txtBirthday" placeholder="" value="<%= Birthday %>" required>
-                                                </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Birthday</div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtBirthday" name="txtBirthday" placeholder="" value="<%= Birthday %>" required>
                                             </div>
+                                        </div>
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-4 txtLabel">Phone</div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="<%= Phone %>" required>
-                                                </div>
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Phone</div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtPhoneEdit" name="txtPhoneEdit" placeholder="" value="<%= Phone %>" required>
                                             </div>
+                                        </div>
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-4 txtLabel">Mobile</div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="<%= Mobile %>" required>
-                                                </div>
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Mobile</div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtMobileEdit" name="txtMobileEdit" placeholder="" value="<%= Mobile %>" required>
                                             </div>
+                                        </div>
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-4 txtLabel">Email</div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="<%= Email %>" required>
-                                                </div>
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-4 txtLabel">Email</div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input input-sm txtLabel" id="txtEmailEdit" name="txtEmailEdit" placeholder="" value="<%= Email %>" required>
                                             </div>
+                                        </div>
 
-                                            <div class="row" style="margin-top: 5px;">
-                                                <div class="col-md-4">
-                                                    <label class="txtLabel">StatusConID</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="txtLabel">
-                                                        <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
-                                                            <%= strStatus %>
-                                                        </select>
-                                                    </div>
+                                        <div class="row" style="margin-top: 5px;">
+                                            <div class="col-md-4">
+                                                <label class="txtLabel">StatusConID</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="txtLabel">
+                                                    <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
+                                                        <%= strStatus %>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                   
+                                    </div>
+
 
                                     <div class="col-md-6">
 
-                                      <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active txtLabel"><a href="#activity" data-toggle="tab">Level history</a></li>
-              <%--<li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active txtLabel"><a href="#activity" data-toggle="tab">Level history</a></li>
+                                                <%--<li><a href="#timeline" data-toggle="tab">Timeline</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li>--%>
-            </ul>
-            <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <!-- Post -->
-                  <div class="post">
-                      <div class="user-block">
-                          <img class="img-circle img-bordered-sm" src="../../dist/img/info.png" alt="user image">
-                          <span class="username">
-                              <a href="#"><label id="fullname" class="txtLabel"></label></a>
-                              <button id="Button3" runat="server" type="button" class="btn btn-success btn-sm pull-right"
-                                                    onclick="openLevel()" title="เพิ่มรายการ">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                          </span>
-                          <span class="description">good member history</span>
-                      </div>
-                      <!-- /.user-block -->
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="active tab-pane" id="activity">
+                                                    <!-- Post -->
+                                                    <div class="post">
+                                                        <div class="user-block">
+                                                            <img class="img-circle img-bordered-sm" src="../../dist/img/info.png" alt="user image">
+                                                            <span class="username">
+                                                                <a href="#">
+                                                                    <label id="fullname" class="txtLabel"></label>
+                                                                </a>
+                                                                <button id="Button3" runat="server" type="button" class="btn btn-success btn-sm pull-right"
+                                                                    onclick="openLevel()" title="เพิ่มรายการ">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </span>
+                                                            <span class="description">good member history</span>
+                                                        </div>
+                                                        <!-- /.user-block -->
 
 
-                      <p>
-                          <table id="tblLevelHistory" name="tblLevelHistory" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
-                              <thead>
-                                  <tr><td class="hidden">id</td>
-                                      <td>Year</td>
-                                      <td class="hidden">ArchitecID</td>
-                                      <td class="hidden">FirstName</td>
-                                      <td class="hidden">LastName</td>
-                                      <td class="hidden">Level</td>
-                                      <td>Description</td>
-                                      <td>Lasted</td>
-                                      <td>Port</td>
-                                      <td style="width: 50px; text-align: center;">#</td>  
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                 <%-- <%= strTblWeeklyReport %>--%>
-                                  <%--<tr>
+                                                        <p>
+                                                            <table id="tblLevelHistory" name="tblLevelHistory" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td class="hidden">id</td>
+                                                                        <td>Year</td>
+                                                                        <td class="hidden">ArchitecID</td>
+                                                                        <td class="hidden">FirstName</td>
+                                                                        <td class="hidden">LastName</td>
+                                                                        <td class="hidden">Level</td>
+                                                                        <td>Description</td>
+                                                                        <td>Lasted</td>
+                                                                        <td>Port</td>
+                                                                        <td style="width: 50px; text-align: center;">#</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <%-- <%= strTblWeeklyReport %>--%>
+                                                                    <%--<tr>
                                       <td>2018</td>
                                       <td>A</td>
                                       <td>Member is A level.</td>
@@ -502,23 +540,22 @@
                                           <a href="#" title="Edit"><i class="fa fa-pencil-square-o text-green"></i></a>
                                       </td>
                                   </tr>--%>
+                                                                </tbody>
+                                                            </table>
+                                                        </p>
 
-                              </tbody>
-                          </table>
-                      </p>
+                                                    </div>
+                                                    <!-- /.post -->
 
-                  </div>
-                <!-- /.post -->
-
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- /.nav-tabs-custom -->
-                                    </div>                                    
+                                                </div>
+                                                <!-- /.tab-pane -->
+                                            </div>
+                                            <!-- /.tab-content -->
+                                        </div>
+                                        <!-- /.nav-tabs-custom -->
+                                    </div>
                                 </div>
-                               
+
                                 <div class="row" style="margin-left: 30px;">
                                 </div>
                             </div>
@@ -535,37 +572,37 @@
                                     <span class="description">Details of all projecs</span>
                                 </div>
                                 <br />
-                                
+
 
                                 <div class="row" style="">
                                     <div class="row" style="margin-left: 0px;">
 
-                                    <div class="col-md-2">
-                                        <label class="txtLabel">From Date</label>
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerstart" name="datepickerstart" value="" autocomplete="off">
-                                            <div class="input-group-addon input-sm">
-                                                <i class="fa fa-calendar"></i>
+                                        <div class="col-md-2">
+                                            <label class="txtLabel">From Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerstart" name="datepickerstart" value="" autocomplete="off">
+                                                <div class="input-group-addon input-sm">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-2">
-                                        <label class="txtLabel">End Date</label>
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerend" name="datepickerend" value="" autocomplete="off">
-                                            <div class="input-group-addon input-sm">
-                                                <i class="fa fa-calendar"></i>
+                                        <div class="col-md-2">
+                                            <label class="txtLabel">End Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerend" name="datepickerend" value="" autocomplete="off">
+                                                <div class="input-group-addon input-sm">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-4">
-                                        <label class="txtLabel">Key Search [Enter your word need to know..]</label>
-                                        <div class="">
-                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="txtsearch" name="txtsearch" value="" autocomplete="off">
+                                        <div class="col-md-4">
+                                            <label class="txtLabel">Key Search [Enter your word need to know..]</label>
+                                            <div class="">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtsearch" name="txtsearch" value="" autocomplete="off">
+                                            </div>
                                         </div>
-                                    </div>
 
                                         <div class="clo-md-2">
                                             <label class="txtLabel">Show Data Result</label>
@@ -573,8 +610,8 @@
                                                 <button type="button" id="btnShowResult" name="btnShowResult" class="btn btn-primary">Show Result</button>
                                             </div>
                                         </div>
-                                </div>
-                                <br />
+                                    </div>
+                                    <br />
 
                                     <div class="">
                                         <table id="tableProject" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
@@ -607,16 +644,18 @@
                                     </div>
 
                                     <div class="row">
-                                        
-                                         <div class="col-md-8">
-                                           
+
+                                        <div class="col-md-8">
                                         </div>
                                         <div class="col-md-2">
                                             <label class="txtLabel">
-                                            Sum Total Quantity : </label>
+                                                Sum Total Quantity :
+                                            </label>
                                         </div>
                                         <div class="col-md-2">
-                                            <b><label id="test" class="txtLabel" style="margin-left: 40px"></label></b>
+                                            <b>
+                                                <label id="test" class="txtLabel" style="margin-left: 40px"></label>
+                                            </b>
                                             <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtSumQuantity" name="txtSumQuantity" value="" autocomplete="off" />
                                         </div>
                                     </div>
@@ -653,6 +692,7 @@
                                                     <td class="hidden">id</td>
                                                     <td class="hidden">event_id</td>
                                                     <td>Reward and Event</td>
+                                                    <td>Details & Get a Gift</td>
                                                     <td>Year <%= gyear4 %></td>
                                                     <td>Year <%= gyear3 %></td>
                                                     <td>Year <%= gyear2 %></td>
@@ -660,11 +700,12 @@
                                                     <td>Year <%= gyear %></td>
                                                     <td>Dated</td>
                                                     <td>Remark</td>
+                                                    <td class="hidden">#</td>
                                                     <td>#</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               <%= strTblReward %>
+                                                <%= strTblReward %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -716,136 +757,144 @@
         </div>
 
         <div class="modal fade" id="modal-event">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Reward and Event</h4>
-              </div>
-              <div class="modal-body">
-                <%--<p>One fine body&hellip;</p>--%>
-
-                <div class="row" style="padding-bottom: 5px">
-                    <div class="col-md-4 txtLabel">Reward/Event</div>
-                    <div class="col-md-8">
-                        <span class="txtLabel">
-                            <select class="form-control input-sm"  style="width: 100%" id="selectEvent" name="selectEvent">
-                            </select>
-                        </span>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Reward and Event</h4>
                     </div>
-                </div>
-                  <div class="row" style="padding-bottom: 5px">
-                    <div class="col-md-4 txtLabel">inYear</div>
-                    <div class="col-md-8">
-                        <%--<span class="txtLabel">
+                    <div class="modal-body">
+                        <%--<p>One fine body&hellip;</p>--%>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Reward/Event</div>
+                            <div class="col-md-8">
+                                <span class="txtLabel">
+                                    <select class="form-control input-sm" style="width: 100%" id="selectEvent" name="selectEvent">
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="divgift" class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Get a Gift..</div>
+                            <div class="col-md-8">                                
+                                <textarea class="form-control input-sm txtLabel" cols="40" rows="3" id="txtgift" name="txtgift"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">inYear</div>
+                            <div class="col-md-8">
+                                <%--<span class="txtLabel">
                             <select class="form-control input-sm" style="width: 100%" id="selectYear" name="selectYear">
                             </select>     
                                     
                         </span>--%>
 
-                        <div class="input-group date">
-                            <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickertrans" value="" autocomplete="off">
-                            <div class="input-group-addon input-sm">
-                                <i class="fa fa-calendar"></i>
+                                <div class="input-group date">
+                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickertrans" value="" autocomplete="off">
+                                    <div class="input-group-addon input-sm">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Details</div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm txtLabel" id="txtdetails" name="txtdetails" value="" />
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Remark</div>
+                            <div class="col-md-8">
+                                <textarea class="form-control input-sm txtLabel" cols="40" rows="3" id="txtremark" name="txtremark"></textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnSaveEvent" name="btnSaveEvent" class="btn btn-primary">Save changes</button>
+                        <button type="button" id="btnCallRewardEvent" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
                     </div>
                 </div>
-
-                  <div class="row" style="padding-bottom: 5px">
-                    <div class="col-md-4 txtLabel">Details</div>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control input-sm txtLabel" id="txtdetails" name="txtdetails" value="" />
-                    </div>
-                </div>
-
-                  <div class="row" style="padding-bottom: 5px">
-                    <div class="col-md-4 txtLabel">Remark</div>
-                    <div class="col-md-8">
-                        <textarea class="form-control input-sm txtLabel" cols="40" rows="3" id="txtremark" name="txtremark"></textarea>
-                    </div>
-                </div>
-
-
             </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSaveEvent" name="btnSaveEvent" class="btn btn-primary">Save changes</button>
-                <button type="button" id="btnCallRewardEvent" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
-              </div>
-            </div>
-          </div>
         </div>
 
 
         <div class="modal fade" id="modal-level">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Addnew Level</h4>
-              </div>
-              <div class="modal-body">
-                <%--<p>One fine body&hellip;</p>--%>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Addnew Level</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%--<p>One fine body&hellip;</p>--%>
 
-            <div class="row hidden" style="padding-bottom: 5px">
-                <div class="col-md-4 txtLabel">Architect Name</div>
-                <div class="col-md-8">
-                    <input type="text" class="form-control input-sm txtLabel" id="txtLevelArchitect" name="txtLevelArchitect" value="" />
+                        <div class="row hidden" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Architect Name</div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm txtLabel" id="txtLevelArchitect" name="txtLevelArchitect" value="" />
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Firstname</div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm txtLabel" id="txtLevelFirstname" name="txtLevelFirstname" value="" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Lastname</div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-sm txtLabel" id="txtLevelLastname" name="txtLevelLastname" value="" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Year</div>
+                            <div class="col-md-8">
+                                <span class="txtLabel">
+                                    <select class="form-control input-sm" style="width: 100%" id="selectLevelYear" name="selectLevelYear">
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Level</div>
+                            <div class="col-md-8">
+                                <span class="txtLabel">
+                                    <select class="form-control input-sm" style="width: 100%" id="selectLevel" name="selectLevel">
+                                    </select>
+
+
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnSaveLevel" name="btnSaveLevel" class="btn btn-primary">Save changes</button>
+                        <button type="button" id="Button2" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
+                    </div>
                 </div>
             </div>
-
-                  <div class="row" style="padding-bottom: 5px">
-                <div class="col-md-4 txtLabel">Firstname</div>
-                <div class="col-md-8">
-                    <input type="text" class="form-control input-sm txtLabel" id="txtLevelFirstname" name="txtLevelFirstname" value="" readonly />
-                </div>
-            </div>
-
-                  <div class="row" style="padding-bottom: 5px">
-                <div class="col-md-4 txtLabel">Lastname</div>
-                <div class="col-md-8">
-                    <input type="text" class="form-control input-sm txtLabel" id="txtLevelLastname" name="txtLevelLastname" value="" readonly />
-                </div>
-            </div>
-
-                  <div class="row" style="padding-bottom: 5px">
-                <div class="col-md-4 txtLabel">Year</div>
-                <div class="col-md-8">
-                    <span class="txtLabel">
-                        <select class="form-control input-sm" style="width: 100%" id="selectLevelYear" name="selectLevelYear">
-                        </select>
-                    </span>
-                </div>
-            </div>
-
-            <div class="row" style="padding-bottom: 5px">
-                <div class="col-md-4 txtLabel">Level</div>
-                <div class="col-md-8">
-                    <span class="txtLabel">
-                        <select class="form-control input-sm" style="width: 100%" id="selectLevel" name="selectLevel">
-                        </select>
-
-                       
-                    </span>
-                </div>
-            </div>
-
-            </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSaveLevel" name="btnSaveLevel" class="btn btn-primary">Save changes</button>
-                <button type="button" id="Button2" name="btnCallRewardEvent" runat="server" onserverclick="btnCallRewardEvent_click" class="btn btn-primary hidden">Call Reward Event</button>
-              </div>
-            </div>
-          </div>
         </div>
 
         <script>
             function openEvent() {
-                
+
                 var selectEventDDL = $('#selectEvent');
                 $.ajax({
                     url: 'DataServicesArchitectProfile.asmx/GetEventType',
@@ -871,8 +920,10 @@
             }
 
 
+
+
             function openLevel() {
-                
+
                 var selectLevelYear = $('#selectLevelYear');
                 $.ajax({
                     url: 'DataServicesArchitectProfile.asmx/GetDataPreviousYear',
@@ -882,7 +933,7 @@
                         selectLevelYear.empty();
                         $(data).each(function (index, item) {
                             selectLevelYear.append($('<option/>', { value: item.iYear, text: item.nYear }));
-                           
+
                         });
                     }
                 });
@@ -897,7 +948,7 @@
                         selectLevel.empty();
                         $(data).each(function (index, item) {
                             selectLevel.append($('<option/>', { value: item.level_id, text: item.level_desc }));
-                           
+
                         });
                     }
                 });
@@ -952,9 +1003,9 @@
                                 '<td class="">' + item.level_desc + '</td>' +
                                 '<td class="">' + item.last_update + '</td>' +
                                 '<td class="">' + item.Port + '</td>' +
-                                '<td style="width: 50px; text-align: center;"> <button  type="button" onClick="onDeleteLevel('+item.id+')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button></td>' +
+                                '<td style="width: 50px; text-align: center;"> <button  type="button" onClick="onDeleteLevel(' + item.id + ')" class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button></td>' +
                                 '</tr > ';
-                           
+
                         });
 
                         $('#tblLevelHistory').append(trHTML);
@@ -962,7 +1013,7 @@
                         getArchitectPortOwner(txtArchitectID.val());
                     }
                 })
-                
+
             }
 
             function getArchitectPortOwner(id) {
@@ -985,7 +1036,7 @@
 
 
             function onDeleteLevel(id) {
-               // alert(id);
+                // alert(id);
 
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');

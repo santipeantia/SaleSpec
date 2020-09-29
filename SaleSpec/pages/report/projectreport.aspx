@@ -8,24 +8,17 @@
         <script src="jquery-1.11.2.min.js"></script>
         <script src="jquery.table2excel.js"></script>
         <script>
-
             function validateExcel() {
                 var selectSaleport = $('#selectSalePort').val();
                 var empcode = '<%= Session["EmpCode"] %>';
 
                 if (selectSaleport == 'SELECTED ALL') {
-
-                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode=='113048' || empcode=='519023') {
-
+                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023') {
                         //sendMail();
-
                         $("#myModalVerifyPassword").modal({ backdrop: false });
                         $("#myModalVerifyPassword").modal("show");
-
-
                         return;
-
-                         document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
+                        document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
                     }
                     else {
                         successalert();
@@ -34,14 +27,10 @@
                 }
                 else {
                     if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023') {
-
                         //sendMail();
-
                         $("#myModalVerifyPassword").modal({ backdrop: false });
                         $("#myModalVerifyPassword").modal("show");
-
                         return;
-
                         document.getElementById("<%=  btnDownloadExcel.ClientID %>").click();
                     }
                     else {
@@ -49,136 +38,132 @@
                         return;
                     }
                 }
-
             }
 
-             function successalert() {
-                    Swal.fire({
-                                type: 'error',
-                                title: 'You do not have permission print all..!',
-                                text: 'Permission access denied.',
-                                footer: 'Please contact system administrator..'
-                            })
-            }
-
-            
-            function erroralert() {
-
+            function successalert() {
                 Swal.fire({
-                                type: 'error',
-                                title: 'Permission is protected..!',
-                                text: 'Permission access denied.',
-                                footer: 'Please contact system administrator..'
-                            })
+                    type: 'error',
+                    title: 'You do not have permission print all..!',
+                    text: 'Permission access denied.',
+                    footer: 'Please contact system administrator..'
+                })
+            }
+
+            function erroralert() {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Permission is protected..!',
+                    text: 'Permission access denied.',
+                    footer: 'Please contact system administrator..'
+                })
             }
 
             function exportexcel() {
-                    $("#tableHistory").table2excel({
-                        name: "Table2Excel",
-                        filename: "myFileName",
-                        fileext: ".xls"
-                    });
-            }  
+                $("#tableHistory").table2excel({
+                    name: "Table2Excel",
+                    filename: "myFileName",
+                    fileext: ".xls"
+                });
+            }
 
-            window.onload = function () {
-                document.addEventListener("contextmenu", function (e) {
-                    Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                    e.preventDefault();
-                }, false);
-                document.addEventListener("keydown", function (e) {
-                    //document.onkeydown = function(e) {
-                    // "C" key
-                    if (e.ctrlKey && e.keyCode == 67) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "I" key
-                    if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "J" key
-                    if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "S" key + macOS
-                    if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "U" key
-                    if (e.ctrlKey && e.keyCode == 85) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "V" key
-                    if (e.ctrlKey && e.keyCode == 86) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "F12" key
-                    if (event.keyCode == 123) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not open source tag.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                }, false);
-                function disabledEvent(e) {
-                    if (e.stopPropagation) {
-                        e.stopPropagation();
-                    } else if (window.event) {
-                        window.event.cancelBubble = true;
-                    }
-                    e.preventDefault();
-                    return false;
-                }
-            };
+            //window.onload = function () {
+            //    document.addEventListener("contextmenu", function (e) {
+            //        Swal.fire(
+            //            'This page is protected..!',
+            //            'Do not copy or export data.',
+            //            'error'
+            //        )
+            //        e.preventDefault();
+            //    }, false);
+            //    document.addEventListener("keydown", function (e) {
+            //        //document.onkeydown = function(e) {
+            //        // "C" key
+            //        if (e.ctrlKey && e.keyCode == 67) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not copy or export data.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //        // "I" key
+            //        if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not copy or export data.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //        // "J" key
+            //        if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not copy or export data.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //        // "S" key + macOS
+            //        if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not copy or export data.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //        // "U" key
+            //        if (e.ctrlKey && e.keyCode == 85) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not copy or export data.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //        // "V" key
+            //        if (e.ctrlKey && e.keyCode == 86) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not copy or export data.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //        // "F12" key
+            //        if (event.keyCode == 123) {
+            //            Swal.fire(
+            //                'This page is protected..!',
+            //                'Do not open source tag.',
+            //                'error'
+            //            )
+            //            disabledEvent(e);
+            //        }
+            //    }, false);
+
+            //    function disabledEvent(e) {
+            //        if (e.stopPropagation) {
+            //            e.stopPropagation();
+            //        } else if (window.event) {
+            //            window.event.cancelBubble = true;
+            //        }
+            //        e.preventDefault();
+            //        return false;
+            //    }
+            //};
 
         </script>
+        
         <script>
             $(document).ready(function () {
-
-               
-
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0');
                 var yyyy = today.getFullYear();
                 var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-                var firstdate = (yyyy-2) + '-' + mm + '-01';
+                var firstdate = (yyyy - 2) + '-' + mm + '-01';
                 var currentdate = yyyy + '-' + mm + '-' + dd;
 
                 var datepickertrans = $('#datepickertrans');
@@ -200,20 +185,20 @@
                 var txtRefDoc = $('#txtRefDoc');
                 selectStatus.change(function () {
                     //alert(selectStatus.val());
-                    if ((selectStatus.val() == 'S02') || (selectStatus.val() == 'S06')) {
+                    if ((selectStatus.val() == 'S02') || (selectStatus.val() == 'S06') || selectStatus.val() == null) {
 
                         //alert('Please enter reference invoice ');
-                        txtRefDoc.focus().select();
-                        txtRefDoc.css('background-color', '#00aaff');
-                        $('#txtRefDoc').prop('readonly', false);
+                        //txtRefDoc.focus().select();
+                        //txtRefDoc.css('background-color', '#00aaff');
+                        $('#btnRefInv').removeAttr('disabled');
                         //txtRefDoc.css('visibility', '');
-                        txtRefDoc.val('');
+                        //txtRefDoc.val('');
 
                     } else {
-                        txtRefDoc.css('background-color', '');
-                        $('#txtRefDoc').prop('readonly', true);
+                        //txtRefDoc.css('background-color', '');                        
+                        $('#btnRefInv').attr('disabled', 'disabled');
                         //txtRefDoc.css('visibility', 'hidden');
-                        txtRefDoc.val('');
+                        //txtRefDoc.val('');
                     }
                 })
 
@@ -229,12 +214,11 @@
 
                     var empcode = '<%= Session["EmpCode"] %>';
 
-                    //alert(selectSaleport);
+                    //alert(selectOption);
 
                     selectReportOptionDDL.change();
 
                     if (selectSaleport == 'SELECTED ALL') {
-
                         if (empcode == '118052' || empcode == '316010' || empcode == '506009') {
                             $.ajax({
                                 url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
@@ -290,8 +274,6 @@
                                     $('#tableWeeklyReportx').append(trHTML);
 
                                     $(function () {
-
-
                                         $('#tableWeeklyReportx td').hover(function () {
                                             rIndex = this.parentElement.rowIndex;
                                             cIndex = this.cellIndex;
@@ -299,8 +281,7 @@
                                                 $(this).css('cursor', 'pointer');
                                             }
                                         });
-
-
+                                        
                                         var table = $('#tableWeeklyReportx');
                                         $('#tableWeeklyReportx td').click(function () {
 
@@ -453,10 +434,10 @@
                                                         $(data).each(function (index, item) {
                                                             selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
                                                             //$('#selectStatus').val('S03');
-                                                            //$('#selectStatus').change();
+                                                            //$('#selectStatus').change();                                                           
                                                         })
-
-                                                         $.ajax({
+                                                       
+                                                        $.ajax({
                                                             url: '../trans/DataServices.asmx/GetStatusWithProject',
                                                             method: 'post',
                                                             data: {
@@ -469,17 +450,15 @@
                                                                 if (obj != '') {
                                                                     $.each(obj, function (key, inval) {
                                                                         $('#selectStatus').val(inval["StatusID"]);
-                                                                        $('#selectStatus').change();
+                                                                        $('#selectStatus').change();                                                                           
                                                                     });
                                                                 }
                                                             }
                                                         })
                                                     }
                                                 });
-
-
+                                                
                                                 //alert(strVal6.text());
-
 
                                                 $('#txtProfile').val(strVal14.text());
                                                 $('#datedelivery').val(strVal15.text());
@@ -498,12 +477,7 @@
                                                     $('#txtRefMcRf').val(strVal23.text());
                                                     //$('#txtContactMcRf').val(strVal22.text());
                                                 }
-
-
-
-                                                $('#txtRemark').val(strVal24.text());
-
-
+                                                $('#txtRemark').val(strVal24.text());                                                
                                                 $.ajax({
                                                     url: 'DataServicesReporting.asmx/GetDataProjectHistory',
                                                     method: 'post',
@@ -533,17 +507,11 @@
                                                     }
                                                 });
 
-
-
                                                 setTimeout(function () {
                                                     $("#myModalEdit").modal({ backdrop: false });
                                                     $("#myModalEdit").modal("show");
-                                                }, 1500);
-
-
+                                                }, 1500);                                              
                                             }
-
-
                                             //$('table tbody tr:not(:first)').on('click', function () {
 
                                             //    alert($(this).html()); // or .text()
@@ -617,14 +585,10 @@
                                         '<td>' + item.RefRemark + '</td>' +
                                         '<td class="hidden">' + item.StepID + '</td>' +
                                         '</tr > ';
-
                                 });
-
                                 $('#tableWeeklyReportx').append(trHTML);
 
                                 $(function () {
-
-
                                     $('#tableWeeklyReportx td').hover(function () {
                                         rIndex = this.parentElement.rowIndex;
                                         cIndex = this.cellIndex;
@@ -633,11 +597,8 @@
                                         }
                                     });
 
-
                                     var table = $('#tableWeeklyReportx');
                                     $('#tableWeeklyReportx td').click(function () {
-
-                                        
                                         rIndex = this.parentElement.rowIndex;
                                         cIndex = this.cellIndex;
 
@@ -654,7 +615,6 @@
                                             document.getElementById("divErrorQuantity").style.display = 'none';
                                             document.getElementById("divErrorRemark").style.display = 'none';
                                             document.getElementById("divErrorStatus").style.display = 'none';
-
 
                                             var strVal0 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(0)');  //ID
                                             var strVal1 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(1)');  //UserID
@@ -683,7 +643,6 @@
                                             var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
                                             var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
 
-                                                                                     
                                             document.getElementById("ProjectID").value = strVal7.text();
 
                                             $('#txtid').val(strVal0.text());
@@ -708,17 +667,13 @@
 
                                                         $('#selectArchitectName').val(strVal5.text());
                                                         $('#selectArchitectName').change();
-
                                                         //selectArchitectNameDDL.text = strVal4.text();
                                                         //selectArchitectNameDDL.change();
                                                     });
                                                 }
-
                                             });
-
                                             $('#txtProjectName').val(strVal8.text());
                                             $('#txtLocation').val(strVal9.text());
-
 
                                             //Get Product type such as Ampelite, Ampelram
                                             var selectProductTypeDDL = $('#selectProductType');
@@ -735,7 +690,6 @@
                                                     });
                                                 }
                                             });
-
 
                                             //When product type changed cascading of product
                                             var selectProductNameDDL = $('#selectProductName');
@@ -757,10 +711,6 @@
                                                 });
                                             });
 
-
-
-
-
                                             //Get Product type such as Ampelite, Ampelram
                                             var selectStepDDL = $('#selectStep');
                                             $.ajax({
@@ -773,15 +723,10 @@
                                                         selectStepDDL.append($('<option/>', { value: item.StepID, text: item.StepNameTh }));
                                                         $('#selectStep').val(strVal25.text());
                                                         $('#selectStep').change();
-                                                    });
-
-                                                    
+                                                    });                                                    
                                                 }
                                             });
 
-
-
-                                            
                                             //Get Product type such as Ampelite, Ampelram
                                             var selectStatusDDL = $('#selectStatus');
                                             $.ajax({
@@ -809,17 +754,17 @@
                                                             if (obj != '') {
                                                                 $.each(obj, function (key, inval) {
                                                                     $('#selectStatus').val(inval["StatusID"]);
-                                                                    $('#selectStatus').change();
+                                                                    $('#selectStatus').change();                                                 
                                                                 });
+
+                                                                alert(obj);
                                                             }
                                                         }
                                                     })
                                                 }
                                             });
 
-
-
-
+                                            //alert($('#selectStatus').val());
 
                                             $('#txtProfile').val(strVal14.text());
                                             $('#datedelivery').val(strVal15.text());
@@ -838,16 +783,8 @@
                                                 $('#txtRefMcRf').val(strVal22.text());
                                                 //$('#txtContactMcRf').val(strVal22.text());
                                             }
-
-
-
+                                                                                       
                                             $('#txtRemark').val(strVal24.text());
-
-
-                                            
-
-                                            
-
 
                                             $.ajax({
                                                 url: 'DataServicesReporting.asmx/GetDataProjectHistory',
@@ -894,7 +831,7 @@
                     }
 
 
-                   
+
                 });
 
                 $('#txtQuantity').keypress(function (event) {
@@ -919,7 +856,7 @@
 
 
 
-                
+
 
             })
         </script>
@@ -1064,12 +1001,12 @@
                                     <label class="txtLabel">Reporting</label>
                                     <div>
                                         <span class="">
-                                            <button type="button" id="alert" name="alert" class="btn btn-success btn-flat btn-block btn-sm " onclick="validateExcel();" ><i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                            <button type="button" id="alert" name="alert" class="btn btn-success btn-flat btn-block btn-sm " onclick="validateExcel();"><i class="fa fa-file-excel-o"></i>Print Excel</button>
 
                                             <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click" type="button" class="btn btn-success btn-flat btn-block btn-sm hidden" data-toggle="tooltip" title="Print Excel">
-                                                <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                                <i class="fa fa-file-excel-o"></i>Print Excel</button>
 
-                                             <asp:Button  ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="hidden" />
+                                            <asp:Button ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="hidden" />
                                         </span>
                                     </div>
                                 </div>
@@ -1080,7 +1017,7 @@
                                         <span class="">
                                             <button id="btnDownloadPDF" runat="server" type="button" class="btn btn-warning btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
                                                 <i class="fa fa-pdf-o"></i>Print PDF</button>
-                                          
+
                                         </span>
                                     </div>
                                 </div>
@@ -1091,7 +1028,7 @@
 
                             <br />
                             <div class="row">
-                                <div id="divWeeklyReport" style="height: 600px;  overflow: scroll">
+                                <div id="divWeeklyReport" style="height: 400px; overflow: scroll">
                                     <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                         <thead>
                                             <tr>
@@ -1140,7 +1077,7 @@
 
         <!-- /.modal myModalEdit -->
         <div class="modal modal-default fade" id="myModalEdit">
-            <div class="modal-dialog"  style="width: 60%">
+            <div class="modal-dialog" style="width: 60%">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -1191,7 +1128,7 @@
                                             <div class="row" style="margin-bottom: 5px">
                                                 <div class="col-md-4 txtLabel">Project Name</div>
                                                 <div class="col-md-8">
-                                                    
+
                                                     <input type="text" class="form-control input input-sm txtLabel hidden" id="ProjectID" name="ProjectID" readonly autocomplete="off" placeholder="" value="">
                                                     <input type="text" class="form-control input input-sm txtLabel" id="txtProjectName" name="txtProjectName" readonly autocomplete="off" placeholder="" value="">
                                                 </div>
@@ -1239,7 +1176,7 @@
                                                 </div>
                                             </div>
 
-                                           
+
 
                                             <div class="row" style="margin-bottom: 5px">
                                                 <div class="col-md-4 txtLabel">Profile</div>
@@ -1320,7 +1257,7 @@
                                                 <div class="col-md-4">
                                                     <label class="txtLabel">Status</label>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="txtLabel">
                                                         <select id="selectStatus" name="selectStatus" class="form-control input-sm" style="width: 100%">
                                                         </select>
@@ -1332,7 +1269,11 @@
                                                     <label class="txtLabel">Ref#Doc.</label>
                                                 </div>
                                                 <div class="col-md-3 ">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" style="color: white; text-transform: uppercase;" autocomplete="off" placeholder="" value="">
+                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" readonly text-transform: uppercase;" autocomplete="off" placeholder="" value="">
+                                                </div>
+                                                <div class="col-md-1 ">
+                                                    <input type="button"  id="btnRefInv" name="btnRefInv" class="btn btn-default btn-sm" value="Ref#Inv." />
+                                                  
                                                 </div>
                                             </div>
 
@@ -1344,7 +1285,7 @@
 
                                     <div class="tab-pane" id="history">
                                         <!-- Post -->
-                                       
+
 
                                         <div class="post clearfix">
                                             <div id="divWeeklyHistory">
@@ -1356,7 +1297,7 @@
                                                             <i class="fa fa-table"></i>
                                                         </button>
 
-                                                       
+
                                                     </span>
 
 
@@ -1403,9 +1344,9 @@
             </div>
         </div>
 
-         <!-- /.modal myModalVerifyPassword -->
+        <!-- /.modal myModalVerifyPassword -->
         <div class="modal modal-default fade" id="myModalVerifyPassword">
-            <div class="modal-dialog" >
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -1418,7 +1359,7 @@
                                 <div class="row" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">Enter Your Email</div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="" >
+                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="">
                                     </div>
                                 </div>
                             </div>
@@ -1426,8 +1367,8 @@
                     </div>
 
                     <div class="modal-footer clearfix">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                         
-                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server"  onclick="sendMail()">Submit Request</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server" onclick="sendMail()">Submit Request</button>
                     </div>
                 </div>
             </div>
@@ -1453,7 +1394,7 @@
                 var str16 = document.getElementById("txtRefMcRf").value;
                 var str17 = document.getElementById("txtContactMcRf").value;
                 var str18 = document.getElementById("selectStatus").value;
-                var str19 =  document.getElementById("txtRefDoc").value;
+                var str19 = document.getElementById("txtRefDoc").value;
 
                 var div1 = document.getElementById("divErrorArchitect");
                 var div2 = document.getElementById("divErrorLocation");
@@ -1522,7 +1463,7 @@
                         }
                         else { div6.style.display = "none"; }
 
-                        
+
                         var dateString2 = str12;
 
                         if (!dateString2.match(regEx)) {
@@ -1554,7 +1495,7 @@
                         else { div9.style.display = "none"; }
 
 
-                        
+
 
                         //Get update weekly report succeseed...
                         $.ajax({
@@ -1562,24 +1503,24 @@
                             method: 'POST',
                             data: {
                                 ID: str1,
-                                WeekDate:  str2,
-                                WeekTime:  str3,
-                                CompanyName:  str4,
+                                WeekDate: str2,
+                                WeekTime: str3,
+                                CompanyName: str4,
                                 ArchitecID: $('#selectArchitectName').val(),
-                                Name:  $('#selectArchitectName option:selected').text(),
-                                Location:  str7,
-                                ProdTypeID:  $('#selectProductType').val(),
-                                ProdTypeNameEN:  $('#selectProductType option:selected').text(),
-                                ProdID:  $('#selectProductName').val(),
-                                ProdNameEN:  $('#selectProductName option:selected').text(),
-                                ProfNameEN:  str10,
-                                DeliveryDate:  str11,
-                                NextVisitDate:  str12,
-                                Quantity:  str13,
-                                StepNameEn:  $('#selectStep option:selected').text(),
-                                Ref1:  str16,
-                                Ref2:  str17,
-                                Remark:  str14,
+                                Name: $('#selectArchitectName option:selected').text(),
+                                Location: str7,
+                                ProdTypeID: $('#selectProductType').val(),
+                                ProdTypeNameEN: $('#selectProductType option:selected').text(),
+                                ProdID: $('#selectProductName').val(),
+                                ProdNameEN: $('#selectProductName option:selected').text(),
+                                ProfNameEN: str10,
+                                DeliveryDate: str11,
+                                NextVisitDate: str12,
+                                Quantity: str13,
+                                StepNameEn: $('#selectStep option:selected').text(),
+                                Ref1: str16,
+                                Ref2: str17,
+                                Remark: str14,
                                 StepID: $('#selectStep').val(),
                                 StatusID: $('#selectStatus').val(),
                                 ProjectID: $('#ProjectID').val(),
@@ -1589,9 +1530,9 @@
                             complete: function (data) {
                                 alert('Update data succeseed please close and refresh..!');
                             }
-                        });                        
+                        });
 
-                       
+
 
                        <%--document.getElementById("<%= btnUpdateData.ClientID %>").click();--%>
 
@@ -1602,7 +1543,7 @@
 
             function sendMail() {
 
-              document.getElementById("<%= btnSendMail.ClientID %>").click();
+                document.getElementById("<%= btnSendMail.ClientID %>").click();
 
                 //Email.send({
                 //    Host: "smtp.gmail.com",
@@ -1621,5 +1562,5 @@
 
     </section>
 
-  
+
 </asp:Content>

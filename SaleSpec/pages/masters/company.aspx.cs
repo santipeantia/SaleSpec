@@ -447,7 +447,7 @@ namespace SaleSpec.pages.masters
                 if (dt.Rows.Count != 0)
                 {
                     rpt.Load(Server.MapPath("../reports/rptPrintCompany.rpt"));
-
+                    
                     reports.dsCompanies dsCompanies = new reports.dsCompanies();
                     dsCompanies.Merge(dt);
 
