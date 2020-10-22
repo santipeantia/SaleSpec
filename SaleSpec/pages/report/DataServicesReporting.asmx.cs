@@ -711,5 +711,101 @@ namespace SaleSpec.pages.report
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(project));
         }
+
+        [WebMethod]
+        public void GetActiviteEvent()
+        {
+            List<GetActivityEvent> data = new List<GetActivityEvent>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetActiviteEvent", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandTimeout = 600;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetActivityEvent datas = new GetActivityEvent();                    
+                    datas.architect_id = rdr["architect_id"].ToString();
+                    datas.Name = rdr["Name"].ToString();
+                    datas.NickName = rdr["NickName"].ToString();
+                    datas.Birthday = rdr["Birthday"].ToString();
+                    datas.Mobile = rdr["Mobile"].ToString();
+                    datas.CompanyID = rdr["CompanyID"].ToString();
+                    datas.CompanyName = rdr["CompanyName"].ToString();
+                    datas.id = rdr["id"].ToString();
+                    datas.event_id = rdr["event_id"].ToString();
+                    datas.event_desc = rdr["event_desc"].ToString();
+                    datas.title_id = rdr["title_id"].ToString();
+                    datas.title_desc = rdr["title_desc"].ToString();
+                    datas.trans_date = rdr["trans_date"].ToString();
+                    datas.details = rdr["details"].ToString();
+                    datas.inv_id = rdr["inv_id"].ToString();
+                    datas.inv_desc = rdr["inv_desc"].ToString();
+                    datas.attn_id = rdr["attn_id"].ToString();
+                    datas.attn_desc = rdr["attn_desc"].ToString();
+                    datas.remark = rdr["remark"].ToString();
+                    datas.userid = rdr["userid"].ToString();
+                    datas.created_date = rdr["created_date"].ToString();
+                    datas.lasted_date = rdr["lasted_date"].ToString();
+                    datas.isdelete = rdr["isdelete"].ToString();
+                    data.Add(datas);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(data));
+        }
+
+        [WebMethod]
+        public void GetActiviteReward()
+        {
+            List<GetActivityEvent> data = new List<GetActivityEvent>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetActiviteReward", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandTimeout = 600;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetActivityEvent datas = new GetActivityEvent();
+                    datas.architect_id = rdr["architect_id"].ToString();
+                    datas.Name = rdr["Name"].ToString();
+                    datas.NickName = rdr["NickName"].ToString();
+                    datas.Birthday = rdr["Birthday"].ToString();
+                    datas.Mobile = rdr["Mobile"].ToString();
+                    datas.CompanyID = rdr["CompanyID"].ToString();
+                    datas.CompanyName = rdr["CompanyName"].ToString();
+                    datas.id = rdr["id"].ToString();
+                    datas.event_id = rdr["event_id"].ToString();
+                    datas.event_desc = rdr["event_desc"].ToString();
+                    datas.title_id = rdr["title_id"].ToString();
+                    datas.title_desc = rdr["title_desc"].ToString();
+                    datas.trans_date = rdr["trans_date"].ToString();
+                    datas.details = rdr["details"].ToString();
+                    datas.inv_id = rdr["inv_id"].ToString();
+                    datas.inv_desc = rdr["inv_desc"].ToString();
+                    datas.attn_id = rdr["attn_id"].ToString();
+                    datas.attn_desc = rdr["attn_desc"].ToString();
+                    datas.remark = rdr["remark"].ToString();
+                    datas.userid = rdr["userid"].ToString();
+                    datas.created_date = rdr["created_date"].ToString();
+                    datas.lasted_date = rdr["lasted_date"].ToString();
+                    datas.isdelete = rdr["isdelete"].ToString();
+                    data.Add(datas);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(data));
+        }
     }
 }

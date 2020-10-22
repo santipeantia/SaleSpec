@@ -54,11 +54,16 @@
         routes.MapPageRoute("pages/report/specintakereport", "pages/report/specintakereport", "~/pages/report/specintakereport.aspx");
         routes.MapPageRoute("pages/report/specintakeview", "pages/report/specintakeview", "~/pages/report/specintakeview.aspx");
 
+        routes.MapPageRoute("pages/report/activity_event", "pages/report/activity_event", "~/pages/report/activity_event.aspx");
+        routes.MapPageRoute("pages/report/activity_reward", "pages/report/activity_reward", "~/pages/report/activity_reward.aspx");
+        
         
             
         routes.MapPageRoute("pages/activity/eventactivity", "pages/activity/eventactivity", "~/pages/activity/eventactivity.aspx");
         routes.MapPageRoute("pages/activity/premiumgift", "pages/activity/premiumgift", "~/pages/activity/premiumgift.aspx");
         routes.MapPageRoute("pages/activity/surprisegift", "pages/activity/surprisegift", "~/pages/activity/surprisegift.aspx");
+
+        
 
 
     }

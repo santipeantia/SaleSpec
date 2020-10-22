@@ -56,6 +56,10 @@ namespace SaleSpec
         public string strTextPremiumGift = "";
         public string strTextSurprise = "";
 
+        public string strActiveActivitiesReporting = "";
+        public string strTextReportEvent = "";
+        public string strTextReportReward = "";
+
         public string strSaleOnSpecActive = "";
         public string strTextSaleOnspec = "";
         public string strSaleOnSpecTrans = "";
@@ -175,8 +179,10 @@ namespace SaleSpec
                 if (strOpt == "preg") { strActiveActivity = "active"; strTextPremiumGift = "text-red"; return; } else { strActiveActivity = ""; strTextPremiumGift = ""; }
                 if (strOpt == "spg") { strActiveActivity = "active"; strTextSurprise = "text-red"; return; } else { strActiveActivity = ""; strTextSurprise = ""; }
 
+                if (strOpt == "actev") { strActiveActivity = "active"; strTextReportEvent = "text-red"; return; } else { strActiveActivity = ""; strTextReportEvent = ""; }
+                if (strOpt == "actre") { strActiveActivity = "active"; strTextReportReward = "text-red"; return; } else { strActiveActivity = ""; strTextReportReward = ""; }
 
-              
+
 
                 if (strOpt == "sos") { strSaleOnSpecActive = "active"; strTextSaleOnspec = "text-red"; return; } else { strSaleOnSpecActive = ""; strTextSaleOnspec = ""; }
 
@@ -194,6 +200,9 @@ namespace SaleSpec
 
                 
                 
+
+
+
 
 
             }
@@ -254,7 +263,7 @@ namespace SaleSpec
 
 
 
-                        if (xPage == "Activity") { mnuactivity.Visible = true; }
+                        if (xPage == "report/activity_event") { mnuactivity.Visible = true; }
                         
                         
                     }

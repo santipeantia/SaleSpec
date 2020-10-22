@@ -353,44 +353,15 @@
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class=" <%= strActiveActivity.ToString() %> treeview-menu">
                                 
-                                <li class="treeview">
-                                    <a href="#"><i class="fa fa-angle-right"></i>Event <span class="pull-right-container"></span></a>
-                                    <%--<ul class="treeview-menu">
-                                        <li class="treeview"><a href="#"><i class="fa fa-angle-right"></i>Title</a>
-                                            <ul class="treeview-menu">
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Wine Party</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Sport Day</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Movie Day</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Thank you Party</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="treeview"><a href="#"><i class="fa fa-angle-right"></i>Invitation</a>
-                                            <ul class="treeview-menu">
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>First</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Second</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Third</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Not Attending</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>--%>
+                                <li id="activityevent" runat="server" visible="true"  class="">
+                                    <a href="../../pages/report/activity_event?opt=actev"><i class="fa fa-angle-right <%= strTextReportEvent.ToString() %>"></i><span class="txtLabel <%= strTextReportEvent.ToString() %>">Event Report</span></a>                                   
                                 </li>
 
 
-                                <li class="treeview">
-                                    <a href="#"><i class="fa fa-angle-right"></i>Reward <span class="pull-right-container"></span></a>
-                                   <%-- <ul class="treeview-menu">
-                                        <li class="treeview"><a href="#"><i class="fa fa-angle-right"></i>Title</a>
-                                            <ul class="treeview-menu">
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Birthday Gift</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Surprise Gift</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>Gift Voucher</a></li>
-                                                <li><a href="#"><i class="fa fa-angle-right"></i>New Year Gift</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>--%>
+                                <li id="activityreward" runat="server" visible="true"  class="">
+                                    <a href="../../pages/report/activity_reward?opt=actre"><i class="fa fa-angle-right <%= strTextReportReward.ToString() %>"></i><span class="txtLabel <%= strTextReportReward.ToString() %>">Reward Report</span></a>                                   
                                 </li>
                             </ul>
                         </li>

@@ -6543,6 +6543,8 @@
     <Content Include="pages\home\default.aspx" />
     <Content Include="pages\home\PortChart.aspx" />
     <Content Include="pages\PortChart.aspx" />
+    <Content Include="pages\report\activity_event.aspx" />
+    <Content Include="pages\report\activity_reward.aspx" />
     <Content Include="pages\report\architectprofile.aspx" />
     <Content Include="pages\report\companyreportview.aspx" />
     <Content Include="pages\report\DataServicesArchitectProfile.asmx" />
@@ -7035,6 +7037,21 @@
     <Compile Include="Class\Sendmail.cs" />
     <Compile Include="Class\GetDataInvitation.cs" />
     <Compile Include="Class\GetDataAttendance.cs" />
+    <Compile Include="Class\GetActivityEvent.cs" />
+    <Compile Include="pages\report\activity_event.aspx.cs">
+      <DependentUpon>activity_event.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\activity_event.aspx.designer.cs">
+      <DependentUpon>activity_event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\activity_reward.aspx.cs">
+      <DependentUpon>activity_reward.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\activity_reward.aspx.designer.cs">
+      <DependentUpon>activity_reward.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\report\GetEventActivity.cs" />
     <Compile Include="pages\Charts.aspx.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
