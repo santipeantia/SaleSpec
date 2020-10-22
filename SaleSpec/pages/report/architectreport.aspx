@@ -1,11 +1,44 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="architectreport.aspx.cs" Inherits="SaleSpec.pages.report.architectreport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
+     <script src="jquery-1.11.2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {            
+                getHover();            
+        });
+
+
+        function getHover() {
+
+            $('#tableArchitectProfile td').hover(function () {
+                rIndex = this.parentElement.rowIndex;
+                cIndex = this.cellIndex;
+                if (rIndex != 0 & cIndex == 3 || cIndex == 4 || cIndex == 6) {
+                    $(this).css('cursor', 'pointer');
+                    $(this).css('color', 'red');
+                    $(this).css('font-weight', 'bold');
+                }
+            }, function () {
+                rIndex = this.parentElement.rowIndex;
+                cIndex = this.cellIndex;
+                if ((rIndex != 0 & cIndex == 3 || cIndex == 4 || cIndex == 6)) {
+                    $(this).css("color", "darkblue");
+                    $(this).css('font-weight', 'normal');
+                }
+            });
+        }
+        
+       
+    </script>
+
+
     <section class="content-header">
         <h1>Architect Report
             <small>Control panel</small>
         </h1>
     </section>
+
 
 
     <section class="content">

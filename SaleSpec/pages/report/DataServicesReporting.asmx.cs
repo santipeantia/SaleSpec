@@ -103,7 +103,7 @@ namespace SaleSpec.pages.report
                     newproject.WeekTime = rdr["WeekTime"].ToString();
                     //newproject.CompanyID = rdr["CompanyID"].ToString();
                     newproject.CompanyName = rdr["CompanyName"].ToString();
-                    //newproject.ArchitecID = rdr["ArchitecID"].ToString();
+                    newproject.ArchitecID = rdr["ArchitecID"].ToString();
                     newproject.Name = rdr["Name"].ToString();
                     //newproject.ProjectID = rdr["ProjectID"].ToString();
                     newproject.ProjectName = rdr["ProjectName"].ToString();

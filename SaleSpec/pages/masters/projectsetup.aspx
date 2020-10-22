@@ -880,12 +880,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="row hidden" style="margin-bottom: 5px">
-                                    <div class="col-md-4 txtLabel">ProjectID</div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control input input-sm txtLabel" id="ProjectIDEdit" name="ProjectIDEdit" placeholder="" value="" required>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="row hidden" style="margin-bottom: 5px">
                                     <div class="col-md-4 txtLabel">ProjectYear</div>
@@ -1054,7 +1049,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitUpdate" class="btn btn-primary" onclick="ValidateUpdate()">Update Changes</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnUpdateData" onserverclick="btnUpdateData_click" runat="server" >Update Changes</button>
+                        <button type="button" class="btn btn-primary hidden " id="btnUpdateData" onserverclick="btnUpdateData_click" runat="server" >Update Changesxx</button>
+                       
                     </div>
                 </div>
             </div>

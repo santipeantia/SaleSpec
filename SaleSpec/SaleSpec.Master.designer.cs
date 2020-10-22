@@ -211,33 +211,6 @@ namespace SaleSpec {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl mnuactivity;
         
         /// <summary>
-        /// actevent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl actevent;
-        
-        /// <summary>
-        /// actpremium control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl actpremium;
-        
-        /// <summary>
-        /// actsurprise control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl actsurprise;
-        
-        /// <summary>
         /// transsaleonspec control.
         /// </summary>
         /// <remarks>

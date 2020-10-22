@@ -5,6 +5,29 @@
         <script>
             $(document).ready(function () {
 
+                 var example1 = $('#example1');
+                $('#example1 td').hover(function () {
+                    rIndex = this.parentElement.rowIndex;
+                    cIndex = this.cellIndex;
+                    if (rIndex != 0 & cIndex == 3 || cIndex == 7) {
+                        $(this).css('cursor', 'pointer');
+                    }
+                });
+
+                $('#example1 td').click(function () {
+                    rIndex = this.parentElement.rowIndex;
+                    cIndex = this.cellIndex;
+
+                    if (rIndex != 0 & cIndex == 3 || cIndex ==7) {
+
+                        var strarcid = $("#example1").find('tr:eq(' + rIndex + ')').find('td:eq(6)').text().replace(' ','');
+
+                        //alert(strarcid.text().replace(' ', ''));
+
+                        window.open("../report/architectprofile.aspx?opt=rarc&id="+strarcid+"", "_blank");
+                    }
+                });
+
 
 
             });
@@ -51,7 +74,7 @@
                                 <hr />
 
                                 <div class="box-body">
-                                    <table id="example1" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <table id="example1" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                         <%--pagination pagination-sm--%>
                                         <thead>
                                             <tr>

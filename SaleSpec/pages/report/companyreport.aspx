@@ -85,7 +85,7 @@
                            
                             <div id="divWeeklyReport">
                                 <div class="row">
-                                    <table id="tableWeeklyReport" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <table id="tableWeeklyReport" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <td>Port</td>

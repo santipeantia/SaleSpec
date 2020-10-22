@@ -255,9 +255,8 @@ namespace SaleSpec
 
 
                         if (xPage == "Activity") { mnuactivity.Visible = true; }
-                        if (xPage == "activity/eventactivity") { actevent.Visible = true; }
-                        if (xPage == "activity/premiumgift") { actpremium.Visible = true; }
-                        if (xPage == "activity/surprisegift") { actsurprise.Visible = true; }
+                        
+                        
                     }
                 }
             }

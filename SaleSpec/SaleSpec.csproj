@@ -7033,6 +7033,9 @@
     <Compile Include="Class\GetStatusUpdate.cs" />
     <Compile Include="Class\GetStepSpec.cs" />
     <Compile Include="Class\Sendmail.cs" />
+    <Compile Include="Class\GetDataInvitation.cs" />
+    <Compile Include="Class\GetDataAttendance.cs" />
+    <Compile Include="pages\report\GetEventActivity.cs" />
     <Compile Include="pages\Charts.aspx.cs">
       <DependentUpon>Charts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

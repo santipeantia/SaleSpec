@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="newprojectreport.aspx.cs" Inherits="SaleSpec.pages.report.newprojectreport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <script src="jquery-1.11.2.min.js"></script>
+    <style>
+        .myclass {
+            color: blue;
+        }
+    </style>
     <script>
         $(document).ready(function () {
 
@@ -40,42 +45,60 @@
                         strSearch: strsearch
                     },
                     dataType: 'json',
-                    success: function (data) {
+                    success: function (data) {                        
+                                               
+                        var table;
+                        table = $('#tableWeeklyReportx').DataTable();
+                        table.clear();
 
-                        //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+                        if (data != '') {
+                            $.each(data, function (i, item) {
+                                table.row.add([data[i].WeekDate, data[i].WeekTime, data[i].CompanyName, data[i].ArchitecID, data[i].Name, data[i].ProjectName, data[i].Location
+                                    , data[i].StatusNameEn, data[i].StepNameEn, data[i].Remark, data[i].Quantity, data[i].CreatedBy, data[i].CreatedDate]);
+                            });
+                        }
+                        table.draw();
+                        $('#tableWeeklyReportx td:nth-of-type(5)').addClass('myclass');
+                        $('#tableWeeklyReportx td:nth-child(4),th:nth-child(4)').hide();
 
-                        var trHTML = '';
-                        $('#tableWeeklyReportx tr:not(:first)').remove();
-                        $(data).each(function (index, item) {
-                            trHTML += '<tr>' +
-                                '<td>' + item.WeekDate + '</td>' +
-                                '<td> ' + item.WeekTime + '</td>' +
-                                //'<td>' + item.CompanyID + '</td>' +
-                                '<td>' + item.CompanyName + '</td>' +
-                                //'<td>' + item.ArchitecID + '</td>' +
-                                '<td>' + item.Name + '</td>' +
-                                //'<td>' + item.ProjectID + '</td>' +
-                                '<td>' + item.ProjectName + '</td>' +
-                                '<td>' + item.Location + '</td>' +
-                                //'<td class="hidden">' + item.StatusID + '</td>' +
-                                '<td>' + item.StatusNameEn + '</td>' +
-                                //'<td class="hidden">' + item.StepID + '</td>' +
-                                '<td>' + item.StepNameEn + '</td>' +
-                                
-                                '<td>' + item.Remark + '</td>' +
-                                '<td>' + item.Quantity + '</td>' +
-                                '<td>' + item.CreatedBy + '</td>' +
-                                '<td>' + item.CreatedDate + '</td>' +
-                                '</tr > ';
+                        var example1 = $('#tableWeeklyReportx');
+                        $('#tableWeeklyReportx td').hover(function () {
+                            rIndex = this.parentElement.rowIndex;
+                            cIndex = this.cellIndex;
+                            if (rIndex != 0 & cIndex == 4) {
+                                $(this).css('cursor', 'pointer');
+                                $(this).css('color', 'red');
+                                $(this).css('font-weight', 'bold');
+                            }
+                        }, function () {
+                            rIndex = this.parentElement.rowIndex;
+                            cIndex = this.cellIndex;
+                            if ((rIndex != 0 & cIndex == 4)) {
+                                $(this).css("color", "blue");
+                                $(this).css('font-weight', 'normal');
+                            }
                         });
 
-                        $('#tableWeeklyReportx').append(trHTML);
+                        $('#tableWeeklyReportx td').click(function () {
+                            rIndex = this.parentElement.rowIndex;
+                            cIndex = this.cellIndex;
+
+                            if (rIndex != 0 & cIndex == 4) {
+                                var strarcid = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)').text().replace(' ', '');
+                                //alert(strarcid);
+                                window.open("../report/architectprofile.aspx?opt=rarc&id=" + strarcid + "", "_blank");
+                            }
+                        });
+                        
+
+
                     }
                 });
             });
 
             //var btnExportExcel = $('#btnExportExcel');
-          
+           
+           
 
         })
     </script>
@@ -239,30 +262,29 @@
                             <div class="row">
                                 <div id="divWeeklyReport" style="height: 600px; overflow: scroll">
 
-                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th style="width: 70px;">Date</th>
                                                 <th>Time</th>
                                                 <%--<th>ComID</th>--%>
                                                 <th>ComName</th>
-                                                <%--<th>ArchID</th>--%>
-                                                <th>ArchName</th>
+                                                <th>ArchID</th>
+                                                <th>Architech</th>
                                                 <%--<th>ProjID</th>--%>
                                                 <th>ProjName</th>
-                                                <th>Location</th>
-                                                <th class="hidden">StatusID</th>
-                                                <th>Status</th>
-                                                <th class="hidden">StepID</th>
+                                                <th>Location</th>                                                
+                                                <th>Status</th>                                                
                                                 <th>StepNameEn</th>
                                                 <th>Details</th>
                                                 <th>Quantity</th>
                                                 <th>Updated</th>
                                                 <th>Lasted</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%= strTblDetail %>
+                                           <%-- <%= strTblDetail %>--%>
                                         </tbody>
                                     </table>
                                 </div>

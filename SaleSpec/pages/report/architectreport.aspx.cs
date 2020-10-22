@@ -49,17 +49,29 @@ namespace SaleSpec.pages.report
         {
             try
             {
-                ssql = "SELECT distinct b.ID, b.ArchitecID, b.CompanyID, a.CompanyName, b.Name, b.FirstName, b.LastName, b.NickName, " +
-                        "       b.Position, b.Address, b.Phone, b.Mobile, b.Email, b.StatusConID, b.CreatedDate, b.UpdatedDate, b.GradeID,  " +
-                        "       c.ConDesc, c.ConDesc2,	d.PositionNameTH, d.PositionNameEN,	e.GradeDesc, e.GradeDetail, " +
-                        "      (select top 1 ' in year '+ convert(nvarchar(10), inYear) from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as inYear, " +
-                        "      (select top 1 level_desc from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as level_desc " +
-                        "       , b.SpecID as Port " +
-                        "FROM adProjects a inner join " +
-                        "       adArchitecture b on a.ArchitecID = b.ArchitecID left join " +
-                        "       adStatusConfirm c on b.StatusConID = c.StatusConID left join " +
-                        "       adPositions d on b.Position = d.PositionID left join " +
-                        "       adGrade e on b.GradeID = e.GradeID ";
+                //ssql = "SELECT distinct b.ID, b.ArchitecID, b.CompanyID, a.CompanyName, b.Name, b.FirstName, b.LastName, b.NickName, " +
+                //        "       b.Position, b.Address, b.Phone, b.Mobile, b.Email, b.StatusConID, b.CreatedDate, b.UpdatedDate, b.GradeID,  " +
+                //        "       c.ConDesc, c.ConDesc2,	d.PositionNameTH, d.PositionNameEN,	e.GradeDesc, e.GradeDetail, " +
+                //        "      (select top 1 ' in year '+ convert(nvarchar(10), inYear) from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as inYear, " +
+                //        "      (select top 1 level_desc from adArchitectLevel al where b.ArchitecID=al.ArchitecID and al.isactive=1 order by inYear desc ) as level_desc " +
+                //        "       , b.SpecID as Port " +
+                //        "FROM adProjects a inner join " +
+                //        "       adArchitecture b on a.ArchitecID = b.ArchitecID left join " +
+                //        "       adStatusConfirm c on b.StatusConID = c.StatusConID left join " +
+                //        "       adPositions d on b.Position = d.PositionID left join " +
+                //        "       adGrade e on b.GradeID = e.GradeID ";
+
+                ssql = "select a.id, a.ArchitecID, a.CompanyID, cm.CompanyName, a.Name, a.FirstName, a.LastName, a.NickName, a.Position " +
+                        "	, a.Address, a.phone, a.Mobile, a.Email, a.StatusConID, a.CreatedDate, a.UpdatedDate, a.GradeID, cn.ConDesc " +
+                        "	, cn.ConDesc2,  ps.PositionNameTH, ps.PositionNameEN, gd.GradeDesc, gd.GradeDetail " +
+                        "	, (select top 1 ' in year ' + convert(nvarchar(10), inYear) from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as inYear,  " +
+                        "                            (select top 1 level_desc from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as level_desc " +
+                        "	, a.SpecID as Port  " +
+                        "from adArchitecture a  left    join " +
+                        "   adCompany cm on a.CompanyID = cm.CompanyID left join  " +
+                        "   adStatusConfirm cn on a.StatusConID = cn.ConDesc left join  " +
+                        "   adGrade gd on a.GradeID = gd.GradeID left join  " +
+                        "   adPositions ps on a.Position = ps.PositionID ";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
@@ -98,13 +110,15 @@ namespace SaleSpec.pages.report
 
                         strTblDetail += "<tr> " +
                                         "     <td class=\"hidden\">" + strID + "</td> " +
-                                        "     <td class=\"hidden\">" + strArchitecID + "</td> " +
-                                        
+                                        "     <td class=\"hidden\">" + strArchitecID + "</td> " +                                        
                                         "     <td class=\"hidden\">" + strName + "</td> " +
-                                        "     <td>" + strFirstName + "</td> " +
-                                        "     <td>" + strLastName + "</td> " +
+                                        "     <td class=\"text-green\">" + 
+                                        "       <a href=\"../report/architectprofile.aspx?opt=rarc&id=" + strArchitecID + "\" target=\"_blank\" title=\"view\"> " + strFirstName + "</a></td> " +
+                                        "     <td>" +
+                                        "       <a href=\"../report/architectprofile.aspx?opt=rarc&id=" + strArchitecID + "\" target=\"_blank\" title=\"view\"> " + strLastName + "</a></td> " +
                                         "     <td>" + strNickName + "</td> " +
-                                        "     <td class=\"\">" + strCompanyName + "</td> " +
+                                        "     <td class=\"text-green\">" +
+                                         "       <a href=\"../report/architectprofile.aspx?opt=rarc&id=" + strArchitecID + "\" target=\"_blank\" title=\"view\"> " + strCompanyName + "</a></td> " +
                                         "     <td class=\"hidden\">" + strPosition + "</td> " +
                                         "     <td class=\"hidden\">" + strAddress + "</td> " +
                                         "     <td>" + strPhone + "</td> " +
@@ -122,11 +136,12 @@ namespace SaleSpec.pages.report
                                         "     <td class=\"hidden\">" + strGradeDetail + "</td> " +
                                         "     <td class=\"\">" + strPort + "</td> " +
                                         "<td style=\"width: 20px; text-align: center;\"> " +
-                                        "       <a href=\"../report/architectprofile.aspx?opt=rarc&id="+ strArchitecID + "\" target=\"_blank\" title=\"Edit\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
+                                        "       <a href=\"../report/architectprofile.aspx?opt=rarc&id="+ strArchitecID + "\" target=\"_blank\" title=\"view\"><i class=\"fa fa-pencil-square-o text-green\"></i></a></td> " +
                                         "</tr>";
                     }
 
                     Session["datalist"] = strTblDetail;
+
                 }
             }
             catch (Exception ex)

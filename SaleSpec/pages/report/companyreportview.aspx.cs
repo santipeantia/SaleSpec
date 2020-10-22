@@ -98,11 +98,11 @@ namespace SaleSpec.pages.report
                                         "     <td class=\"hidden\">" + ProjectID + "</td> " +
                                         "     <td>" + ProjectYear + "</td> " +
                                         "     <td>" + ProjectMonth + "</td> " +
-                                        "     <td>" + ProjectName + "</td> " +
+                                        "     <td class=\"text-blue\">" + ProjectName + "</td> " +
                                         "     <td class=\"hidden\">" + CompanyID + "</td> " +
                                         "     <td>" + CompanyName + "</td> " +
                                         "     <td class=\"hidden\">" + ArchitecID + "</td> " +
-                                        "     <td>" + Name + "</td> " +
+                                        "     <td class=\"text-blue\">" + Name + "</td> " +
                                         "     <td>" + Location + "</td> " +
                                         "     <td>" + TurnKey + "</td> " +
                                         "     <td>" + MainCons + "</td> " +

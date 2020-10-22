@@ -397,7 +397,14 @@ namespace SaleSpec.pages.report
                         string id = dt.Rows[i]["id"].ToString();
                         string event_id = dt.Rows[i]["event_id"].ToString();
                         string event_desc = dt.Rows[i]["event_desc"].ToString();
-                        string getagift = dt.Rows[i]["getagift"].ToString();
+                        string title_id = dt.Rows[i]["title_id"].ToString();
+                        string title_desc = dt.Rows[i]["title_desc"].ToString();
+                        string xyear = dt.Rows[i]["xyear"].ToString();
+                        string architect_id = dt.Rows[i]["architect_id"].ToString();
+                        string inv_id = dt.Rows[i]["inv_id"].ToString();
+                        string inv_desc = dt.Rows[i]["inv_desc"].ToString();
+                        string attn_id = dt.Rows[i]["attn_id"].ToString();
+                        string attn_desc = dt.Rows[i]["attn_desc"].ToString();
                         string year4 = dt.Rows[i]["YEAR4"].ToString();
                         string year3 = dt.Rows[i]["YEAR3"].ToString();
                         string year2 = dt.Rows[i]["YEAR2"].ToString();
@@ -406,20 +413,26 @@ namespace SaleSpec.pages.report
                         string trans_date = dt.Rows[i]["trans_date"].ToString();
                         string remark = dt.Rows[i]["remark"].ToString();
 
+
                         strTblReward += "<tr> " +
                                             "<td>" + no + "</td>" +
                                             "<td class=\"hidden\"> " + id + "</td>" +
                                             "<td class=\"hidden\"> " + event_id + "</td>" +
-                                            "<td> " + event_desc + "</td>" +
-                                            "<td> " + getagift + "</td>" +
+                                            "<td class=\"text-blue\"> " + event_desc + "</td>" +
+                                            "<td class=\"hidden\"> " + title_id + "</td>" +
+                                            "<td class=\"text-blue\"> " + title_desc + "</td>" +
                                             "<td>" + year4 + "</td>" +
                                             "<td>" + year3 + "</td>" +
                                             "<td>" + year2 + "</td>" +
                                             "<td>" + year1 + "</td>" +
                                             "<td>" + year + "</td>" +
+                                            "<td class=\"hidden\">" + inv_id + "</td>" +
+                                            "<td>" + inv_desc + "</td>" +
+                                            "<td class=\"hidden\">" + attn_id + "</td>" +
+                                            "<td>" + attn_desc + "</td>" +
                                             "<td>" + trans_date + "</td>" +
-                                            "<td>" + remark + "</td>" +
-                                            "<td class=\"hidden\" style=\"width: 50px; text-align: center;\"> " +
+                                            "<td class=\"text-blue\">" + remark + "</td>" +
+                                            "<td class=\"\" style=\"width: 50px; text-align: center;\"> " +
                                             "       <i class=\"fa fa-edit text-green\"></td> " +
                                             "<td style=\"width: 50px; text-align: center;\"> " +
                                             "       <i class=\"fa fa-trash text-red\"></td> " +

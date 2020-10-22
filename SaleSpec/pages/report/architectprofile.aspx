@@ -8,6 +8,8 @@
         <script>
             $(document).ready(function () {
 
+                var strEvent = '0';
+
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -23,7 +25,7 @@
                 datepickertrans.val(currentdate3);
                 //datepickerend.val(currentdate);
 
-                $("#divgift").hide();
+                //$("#divgift").hide();
 
                 var btnShowResult = $('#btnShowResult');
                 btnShowResult.click(function () {
@@ -137,50 +139,68 @@
 
                         var datepickertrans = $('#datepickertrans');
 
+                        var selectActivity = $('#selectActivity').val()
                         var selectEvent = $('#selectEvent').val();
-                        var txtgift = $('#txtgift').val();
+                        var inv_id = $('#selectInvitation').val();
+                        var inv_desc = $('#selectInvitation option:selected').text();
+                        var attn_id = $('#selectAttendance').val();
+                        var attn_desc = $('#selectAttendance option:selected').text();
 
-                        if ((selectEvent == "6") && (txtgift == "")) {
-                            Swal.fire({
-                                type: 'error',
-                                title: '',
-                                text: 'Get a gift, find not found ..!',
-                                footer: 'Please check get a gift..'
-                            })
-                            $('#selectEvent').val('');
-                            return;
+                        if (selectActivity == "2") {
+                            inv_id = null;
+                            inv_desc = null;
+                            attn_id = null;
+                            attn_desc = null;
                         }
+
+                        //if ((selectEvent == "1") && (txtgift == "")) {
+                        //    Swal.fire({
+                        //        type: 'error',
+                        //        title: '',
+                        //        text: 'Get a gift, find not found ..!',
+                        //        footer: 'Please check get a gift..'
+                        //    })
+                        //    $('#selectEvent').val('');
+                        //    return;
+                        //}
                                          
 
                         $.ajax({
                             url: 'DataServicesArchitectProfile.asmx/GetInsertRewardEvent',
                             method: 'POST',
                             data: {
-                                event_id: $('#selectEvent').val(),
-                                event_desc: $('#selectEvent option:selected').text(),
+                                tran_id: $('#txtid').val(),
+                                event_id: $('#selectActivity').val(),
+                                event_desc: $('#selectActivity option:selected').text(),
+                                title_id: $('#selectEvent').val(),
+                                title_desc: $('#selectEvent option:selected').text(),
                                 trans_date: $('#datepickertrans').val(),
                                 architect_id: '<%= id %>',
                                 details: $('#txtdetails').val(),
+                                inv_id: inv_id,
+                                inv_desc: inv_desc,
+                                attn_id: attn_id,
+                                attn_desc: attn_desc,
                                 remark: $('#txtremark').val(),
                                 userid: userid,
                                 created_date: currentdate,
                                 lasted_date: currentdate,
-                                getagift: txtgift
+                                isdelete: '1'
                             },
                             dataType: 'json',
-                            success: function (data) {
-
+                            complete: function (data) {
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Data saved successfully..',
+                                    text: 'Data has been saved.',
+                                    footer: 'Please contact system administrator..'
+                                })
                             }
                         });
 
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Data saved successfully..',
-                            text: 'Data has been saved.',
-                            footer: 'Please contact system administrator..'
-                        })
+                        
 
-                        $('#modal-event').modal('hide');
+                       $('#modal-event').modal('hide');
 
                         //clear all data input
                         $('#txtdetails').val('');
@@ -200,11 +220,10 @@
 
 
                 var tableReward = $('#tableReward');
-
                 $('#tableReward td').hover(function () {
                     rIndex = this.parentElement.rowIndex;
                     cIndex = this.cellIndex;
-                    if (rIndex != 0 & cIndex == 13) {
+                    if (rIndex != 0 & cIndex == 3 || cIndex == 5 || cIndex == 16 || cIndex == 17 || cIndex == 18) {
                         $(this).css('cursor', 'pointer');
                     }
                 });
@@ -215,12 +234,140 @@
                     rIndex = this.parentElement.rowIndex;
                     cIndex = this.cellIndex;
 
-                    if (rIndex != 0 & cIndex == 13) {
+                    if (rIndex != 0 & cIndex == 3 || cIndex == 5 || cIndex == 16 || cIndex == 17) {
 
-                        var strVal1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
+                       //openEvent();                        
+                        
+                        var strval1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)'); //id
+                        var strval2 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(2)'); //event_id	
+                        var strval3 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(3)'); //event_desc	
+                        var strval4 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(4)'); //title_id	
+                        var strval5 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(5)'); //title_desc	
+                        var strval6 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(6)'); //xyear	
+                        var strval7 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(7)'); //architect_id	
+                        var strval8 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(8)'); //inv_id	
+                        var strval9 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(9)'); //inv_desc	
+                        var strval10 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(10)'); //attn_id	
+                        var strval11 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(11)'); //attn_desc	
+                        var strval12 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(12)'); //YEAR4	
+                        var strval13 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(13)'); //YEAR3	
+                        var strval14 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(14)'); //YEAR2	
+                        var strval15 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(15)'); //YEAR1	
+                        var strval16 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(16)'); //YEAR	
+                        var strval17 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(17)'); //trans_date	remark
+
+                        //console.log(strval1.text() + '\n' + strval2.text() + '\n' + strval3.text() + '\n' + strval4.text() + '\n' + strval5.text() + '\n' +strval6.text() + strval7.text() + '\n' + strval8.text() + '\n' + strval9.text() + '\n' + strval10.text() + '\n' + strval11.text() + strval12.text() + strval13.text() + '\n' + strval14.text() + '\n' + strval15.text() + '\n' + strval16.text() + '\n' + strval17.text());
+
+                        var selectActivity = $('#selectActivity');
+                        //strEvent = strval4.text().replace(' ', '');
+                        $('#txtid').val(strval1.text().replace(' ', ''));
+                        $('#txteventid').val(strval4.text().replace(' ', ''));
+
+                        var invid = strval11.text().replace(' ', '');
+                        var attid = strval13.text().replace(' ', '');
+
+
+                        //alert(strEvent.text());
+
+                        $.ajax({
+                            url: 'DataServicesArchitectProfile.asmx/GetEventActivity',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectActivity.empty();
+                                $(data).each(function (index, item) {
+                                    selectActivity.append($('<option/>', { value: item.act_id, text: item.act_desc }));
+                                    selectActivity.val(strval2.text().replace(' ', ''));
+                                    selectActivity.change();                                    
+                                });
+                            }
+                        });
+
+                        getAttendance();
+                       
+                        $('#txtdetails').val(strval6.text() + strval7.text() + strval8.text() + strval9.text() + strval10.text());
+                        $('#datepickertrans').val(strval15.text().replace(' ', ''));   
+                                               
+                        var selectInvitation = $('#selectInvitation');
+                        $.ajax({
+                            url: 'DataServicesArchitectProfile.asmx/GetInvitation',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectInvitation.empty();
+                                $(data).each(function (index, item) {
+                                    selectInvitation.append($('<option/>', { value: item.id, text: item.inv_desc }));
+                                    selectInvitation.val(invid);
+                                    selectInvitation.change();
+                                });
+                            }
+                        });
+
+                        var selectAttendance = $('#selectAttendance');
+                        $.ajax({
+                            url: 'DataServicesArchitectProfile.asmx/GetAttendance',
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (data) {
+                                selectAttendance.empty();
+                                $(data).each(function (index, item) {
+                                    selectAttendance.append($('<option/>', { value: item.id, text: item.attn_desc }));
+                                    selectAttendance.val(attid);
+                                    selectAttendance.change();
+                                });
+                            }
+                        });
+
+                        $('#txtremark').val(strval16.text().replace(' ', ''));
+
+
+                        //alert(attid);
+
+                        $("#modal-event").modal({ backdrop: false });
+                        $('[id=modal-event]').modal('show');
+                                              
+
+                
+
+
+                    } else if (rIndex != 0 & cIndex == 18) {
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.value) {
+
+                                var strVal1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
+                                $.ajax({
+                                    url: 'DataServicesArchitectProfile.asmx/GetRewardEventUpdate',
+                                    method: 'POST',
+                                    data: {
+                                        id: strVal1.text()
+                                    },
+                                    dataType: 'json',
+                                    complete: function (data) {
+                                        Swal.fire(
+                                            'Deleted!',
+                                            'Your file has been deleted.',
+                                            'success'
+                                        )
+
+                                        setTimeout(function () {
+                                            document.getElementById("<%= btnCallRewardEvent.ClientID %>").click();
+                                            }, 1000);
+                                        }
+                                    });
+                                
+                                }
+                            })
+                        <%--var strVal1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
                         //alert(strVal1.text());
-
-
                         $.ajax({
                             url: 'DataServicesArchitectProfile.asmx/GetRewardEventUpdate',
                             method: 'POST',
@@ -228,22 +375,18 @@
                                 id: strVal1.text()
                             },
                             dataType: 'json',
-                            success: function (data) {
+                            complete: function (data) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                )
 
+                                setTimeout(function () {
+                                    document.getElementById("<%= btnCallRewardEvent.ClientID %>").click();
+                                }, 1000);
                             }
-                        });
-
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Deleted successfully..',
-                            text: 'Data has been saved.',
-                            footer: 'Please contact system administrator..'
-                        })
-
-                        setTimeout(function () {
-                            document.getElementById("<%= btnCallRewardEvent.ClientID %>").click();
-                        }, 1000);
-
+                        });     --%>                                       
                     }
                 });
 
@@ -281,27 +424,49 @@
                 })
 
 
-                var selectEvent = $('#selectEvent');
-                selectEvent.change(function () {
-                    var strevent = $('#selectEvent').val();
+                var selectActivity = $('#selectActivity');
+                selectActivity.change(function () {
+                    var strid = $('#selectActivity').val();
+                    var streventid = $('#txteventid').val();
 
-                    //alert(strevent);
-                    if (strevent == '6') {
-                        //alert('select Gift');
-                        //$("#divgift").attr('disabled', true);
-                        $("#divgift").show();
-                    }
-                    else {
-                        //alert('Not Gift');
-                        $("#divgift").hide();
+                    //alert(strid);
+
+                    if (strid == 1) {
+                        $('#divinvite').fadeIn(300);
+                        $('#divattend').fadeIn(300);
+                        //$("#divinvite").show();
+                        //$("#divattend").show();                       
+                    } else {
+                        $('#divinvite').fadeOut(300);
+                        $('#divattend').fadeOut(300);
+                        //$("#divinvite").hide();
+                        //$("#divattend").hide();
                     }
 
-                    
+                    var selectEventDDL = $('#selectEvent');
+                    $.ajax({
+                        url: 'DataServicesArchitectProfile.asmx/GetEventTypeID',
+                        data: { strid: strid
+                        },
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            selectEventDDL.empty();
+                            $(data).each(function (index, item) {
+                                selectEventDDL.append($('<option/>', { value: item.id, text: item.event_desc }));
+                                selectEventDDL.val(streventid);
+                                selectEventDDL.change();
+                            });
+                        }
+                    });                   
 
                 });
 
 
-                getLevelHistory();
+                
+
+
+                //getLevelHistory();
             })
         </script>
 
@@ -614,7 +779,7 @@
                                     <br />
 
                                     <div class="">
-                                        <table id="tableProject" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                        <table id="tableProject" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
@@ -684,23 +849,28 @@
                                 </div>
                                 <br />
                                 <div class="row" style="top: 50px;">
-                                    <div class="">
-                                        <table id="tableReward" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <div class="box-body" style="overflow: scroll;">
+                                        <table id="tableReward" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
                                                     <td class="hidden">id</td>
                                                     <td class="hidden">event_id</td>
                                                     <td>Reward and Event</td>
-                                                    <td>Details & Get a Gift</td>
+                                                    <td class="hidden">title_id</td>
+                                                    <td>Title Description</td>
                                                     <td>Year <%= gyear4 %></td>
                                                     <td>Year <%= gyear3 %></td>
                                                     <td>Year <%= gyear2 %></td>
                                                     <td>Year <%= gyear1 %></td>
                                                     <td>Year <%= gyear %></td>
+                                                    <td class="hidden">inv_id</td>
+                                                    <td>Invitation</td>
+                                                    <td class="hidden">attn_id</td>
+                                                    <td>Attendance</td>
                                                     <td>Dated</td>
                                                     <td>Remark</td>
-                                                    <td class="hidden">#</td>
+                                                    <td class="">#</td>
                                                     <td>#</td>
                                                 </tr>
                                             </thead>
@@ -724,8 +894,8 @@
                                 </div>
                                 <br />
                                 <div class="row" style="top: 50px;">
-                                    <div class="">
-                                        <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <div class="box-body">
+                                        <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
@@ -768,19 +938,24 @@
                         <%--<p>One fine body&hellip;</p>--%>
 
                         <div class="row" style="padding-bottom: 5px">
-                            <div class="col-md-4 txtLabel">Reward/Event</div>
+                            <div class="col-md-4 txtLabel">Activities</div>
                             <div class="col-md-8">
                                 <span class="txtLabel">
-                                    <select class="form-control input-sm" style="width: 100%" id="selectEvent" name="selectEvent">
-                                    </select>
+                                    <select class="form-control input-sm" style="width: 100%" id="selectActivity" name="selectActivity">
+                                </select>
                                 </span>
                             </div>
                         </div>
 
                         <div id="divgift" class="row" style="padding-bottom: 5px">
-                            <div class="col-md-4 txtLabel">Get a Gift..</div>
-                            <div class="col-md-8">                                
-                                <textarea class="form-control input-sm txtLabel" cols="40" rows="3" id="txtgift" name="txtgift"></textarea>
+                            <div class="col-md-4 txtLabel">Title</div>
+                            <div class="col-md-8">
+                                <input type="text" class="hidden" id="txtid" name="txtid" value="" />
+                                <input type="text" class="hidden" id="txteventid" name="txteventid" value="" />
+                                <span class="txtLabel">
+                                    <select class="form-control input-sm" style="width: 100%" id="selectEvent" name="selectEvent">
+                                    </select>
+                                </span>
                             </div>
                         </div>
 
@@ -805,7 +980,28 @@
                         <div class="row" style="padding-bottom: 5px">
                             <div class="col-md-4 txtLabel">Details</div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control input-sm txtLabel" id="txtdetails" name="txtdetails" value="" />
+                                <%--<input type="text" class="form-control input-sm txtLabel" id="txtdetails" name="txtdetails" value="" />--%>
+                                <textarea class="form-control input-sm txtLabel" cols="40" rows="3" id="txtdetails" name="txtdetails"></textarea>
+                            </div>
+                        </div>
+
+                        <div id="divinvite" class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Invitation</div>
+                            <div class="col-md-8">
+                                <span class="txtLabel">
+                                    <select class="form-control input-sm" style="width: 100%" id="selectInvitation" name="selectInvitation">
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="divattend" class="row" style="padding-bottom: 5px">
+                            <div class="col-md-4 txtLabel">Attendance</div>
+                            <div class="col-md-8">
+                                <span class="txtLabel">
+                                    <select class="form-control input-sm" style="width: 100%" id="selectAttendance" name="selectAttendance">
+                                    </select>
+                                </span>
                             </div>
                         </div>
 
@@ -895,30 +1091,81 @@
         <script>
             function openEvent() {
 
-                var selectEventDDL = $('#selectEvent');
+                $('#txtid').val('');
+                $('#txtdetails').val('');
+                $('#txtremark').val('');
+                $('#datepickertrans').val('');
+
+                var selectActivity= $('#selectActivity');
                 $.ajax({
-                    url: 'DataServicesArchitectProfile.asmx/GetEventType',
+                    url: 'DataServicesArchitectProfile.asmx/GetEventActivity',
                     method: 'post',
                     dataType: 'json',
                     success: function (data) {
-                        selectEventDDL.empty();
+                        selectActivity.empty();
                         $(data).each(function (index, item) {
-                            selectEventDDL.append($('<option/>', { value: item.id, text: item.event_desc }));
-                            //$('#selectProductType').val(strVal9.text());
-                            //$('#selectProductType').change();
+                            selectActivity.append($('<option/>', { value: item.act_id, text: item.act_desc }));
+                            selectActivity.change();
                         });
-
-
                     }
                 });
 
 
+                getAttendance();
+
+
+
+                //var selectEventDDL = $('#selectEvent');
+                //$.ajax({
+                //    url: 'DataServicesArchitectProfile.asmx/GetEventType',
+                //    method: 'post',
+                //    dataType: 'json',
+                //    success: function (data) {
+                //        selectEventDDL.empty();
+                //        $(data).each(function (index, item) {
+                //            selectEventDDL.append($('<option/>', { value: item.id, text: item.event_desc }));
+                //            //$('#selectProductType').val(strVal9.text());
+                //            //$('#selectProductType').change();
+                //        });
+
+
+                //    }
+                //});
 
 
                 $("#modal-event").modal({ backdrop: false });
                 $('[id=modal-event]').modal('show');
             }
 
+            function getAttendance() {
+                var selectInvitation= $('#selectInvitation');
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetInvitation',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectInvitation.empty();
+                        $(data).each(function (index, item) {
+                            selectInvitation.append($('<option/>', { value: item.id, text: item.inv_desc }));
+                            //selectInvitation.change();
+                        });
+                    }
+                });
+
+                var selectAttendance= $('#selectAttendance');
+                $.ajax({
+                    url: 'DataServicesArchitectProfile.asmx/GetAttendance',
+                    method: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        selectAttendance.empty();
+                        $(data).each(function (index, item) {
+                            selectAttendance.append($('<option/>', { value: item.id, text: item.attn_desc }));
+                            //selectInvitation.change();
+                        });
+                    }
+                });
+            }
 
 
 

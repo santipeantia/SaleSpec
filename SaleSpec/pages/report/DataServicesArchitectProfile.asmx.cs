@@ -20,15 +20,37 @@ namespace SaleSpec.pages.report
     [System.Web.Script.Services.ScriptService]
     public class DataServicesArchitectProfile : System.Web.Services.WebService
     {
-
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World";
-        //}
-
+        //dbConnection conn = new dbConnection();
+       
         //string cs = "server=192.168.1.4;database=DB_SaleSpec;uid=ampel;pwd=Amp7896321;";
         string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
+
+
+        [WebMethod]
+        public void GetEventActivity()
+        {
+            List<GetEventActivity> objs = new List<GetEventActivity>();
+
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetDataEventActivity", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetEventActivity obj = new GetEventActivity();
+                    obj.act_id = rdr["act_id"].ToString();
+                    obj.act_desc = rdr["act_desc"].ToString();
+                    objs.Add(obj);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+        }
+
 
         //get attached
         [WebMethod]
@@ -67,6 +89,81 @@ namespace SaleSpec.pages.report
 
 
         [WebMethod]
+        public void GetEventTypeID(string strid) {
+            List<GetDataEventType> objs = new List<GetDataEventType>();
+
+
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetDataEventTypeID", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.Parameters.AddWithValue("@strid", strid);
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataEventType obj = new GetDataEventType();
+                    obj.id = rdr["id"].ToString();
+                    obj.event_desc = rdr["event_desc"].ToString();
+                    objs.Add(obj);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+        }
+
+        [WebMethod]
+        public void GetInvitation()
+        {
+            List<GetDataInvitation> objs = new List<GetDataInvitation>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetDataInvitation", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataInvitation obj = new GetDataInvitation();
+                    obj.id = rdr["id"].ToString();
+                    obj.inv_desc = rdr["inv_desc"].ToString();
+                    objs.Add(obj);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+        }
+
+        [WebMethod]
+        public void GetAttendance()
+        {
+            List<GetDataAttendance> objs = new List<GetDataAttendance>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetadAttendance", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetDataAttendance obj = new GetDataAttendance();
+                    obj.id = rdr["id"].ToString();
+                    obj.attn_desc = rdr["attn_desc"].ToString();
+                    objs.Add(obj);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+        }
+
+
+        [WebMethod]
         public void GetDataYearly()
         {
             List<GetDataYearly> objs = new List<GetDataYearly>();
@@ -94,8 +191,8 @@ namespace SaleSpec.pages.report
 
 
         [WebMethod]
-        public void GetInsertRewardEvent(string event_id, string event_desc, string trans_date, string architect_id, string details, 
-                            string remark, string userid, string created_date, string lasted_date, string getagift)
+        public void GetInsertRewardEvent(string tran_id, string event_id, string event_desc, string title_id, string title_desc, string trans_date, string architect_id, string details,
+                                string inv_id, string inv_desc, string attn_id, string attn_desc, string remark, string userid, string created_date, string lasted_date, string isdelete)
         {
 
             using (SqlConnection conn = new SqlConnection(cs))
@@ -103,17 +200,23 @@ namespace SaleSpec.pages.report
                 conn.Open();
                 SqlCommand comm = new SqlCommand("spInsertRewardEvent", conn);
                 comm.CommandType = CommandType.StoredProcedure;
-
+                comm.Parameters.AddWithValue("@tran_id", tran_id);
                 comm.Parameters.AddWithValue("@event_id", event_id);
                 comm.Parameters.AddWithValue("@event_desc", event_desc);
+                comm.Parameters.AddWithValue("@title_id", title_id);
+                comm.Parameters.AddWithValue("@title_desc", title_desc);
                 comm.Parameters.AddWithValue("@trans_date", trans_date);
                 comm.Parameters.AddWithValue("@architect_id", architect_id);
                 comm.Parameters.AddWithValue("@details", details);
+                comm.Parameters.AddWithValue("@inv_id", inv_id);
+                comm.Parameters.AddWithValue("@inv_desc", inv_desc);
+                comm.Parameters.AddWithValue("@attn_id", attn_id);
+                comm.Parameters.AddWithValue("@attn_desc", attn_desc);
                 comm.Parameters.AddWithValue("@remark", remark);
                 comm.Parameters.AddWithValue("@userid", userid);
                 comm.Parameters.AddWithValue("@created_date", created_date);
                 comm.Parameters.AddWithValue("@lasted_date", lasted_date);
-                comm.Parameters.AddWithValue("@getagift", getagift);
+                comm.Parameters.AddWithValue("@isdelete", isdelete);
                 comm.ExecuteNonQuery();
                 conn.Close();
             }

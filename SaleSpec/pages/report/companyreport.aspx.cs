@@ -165,18 +165,18 @@ namespace SaleSpec.pages.trans
 
                         strTblDetail += "<tr> " +
                                             "<td>" + strPort + "</td>" +
-                                            "<td>" + CompanyName + "</td>" +
+                                            "<td><a href=\"../report/companyreportview?opt=rcom&comid=" + CompanyID + "&portid=" + strPort + "\" target=\"_blank\" title=\"View\"> " + CompanyName +" </a></td>" +
                                             "<td class=\"hidden\"> " + CompanyName2 + "</td>" +
                                            
                                             "<td>" + Address + "</td>" +
                                             "<td>" + CustTypeID + "</td>" +
                                             "<td class=\"hidden\">" + CustTypeDesc + "</td>" +
                                             "<td class=\"hidden\">" + ProvinceID + "</td>" +
-                                            "<td>" + ContactName + "</td>" +
+                                            "<td><a href=\"../report/companyreportview?opt=rcom&comid=" + CompanyID + "&portid=" + strPort + "\" target=\"_blank\" title=\"View\"> " + ContactName + " </a></td>" +
                                             "<td class=\"hidden\">" + Phone + "</td>" +
                                             "<td>" + Mobile + "</td>" +
                                             "<td>" + Email + "</td>" +
-                                            "<td><a href=\"../report/companyreportview?opt=rcom&comid=" + CompanyID +"&portid="+ strPort +"\" title=\"View\"><i class=\"fa fa-search text-green\"></i></a></td>" +
+                                            "<td><a href=\"../report/companyreportview?opt=rcom&comid=" + CompanyID +"&portid="+ strPort + "\" target=\"_blank\" title=\"View\"><i class=\"fa fa-search text-green\"></i></a></td>" +
                                        "</tr> ";
                     }
 
