@@ -24,7 +24,7 @@ namespace SaleSpec.pages.report
 
         //get attached
         [WebMethod]
-        public void GetWeeklyReporting(string strUserID, string strStartDate, string strEndDate)
+        public void GetWeeklyReporting(string strUserID, string strStartDate, string strEndDate, string strsearch)
         {
             List<GetDataWeeklyReporting> weeks = new List<GetDataWeeklyReporting>();
             using (SqlConnection conn = new SqlConnection(cs))
@@ -35,10 +35,12 @@ namespace SaleSpec.pages.report
                 SqlParameter param1 = new SqlParameter() { ParameterName = "@UserID", Value = strUserID };
                 SqlParameter param2 = new SqlParameter() { ParameterName = "@StartDate", Value = strStartDate };
                 SqlParameter param3 = new SqlParameter() { ParameterName = "@EndDate", Value = strEndDate };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@Search", Value = strsearch };
 
                 comm.Parameters.Add(param1);
                 comm.Parameters.Add(param2);
                 comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
                 conn.Open();
 
                 SqlDataReader rdr = comm.ExecuteReader();

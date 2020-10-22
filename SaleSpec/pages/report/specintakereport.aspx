@@ -1,6 +1,56 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="specintakereport.aspx.cs" Inherits="SaleSpec.pages.report.specintakereport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
+
+    <style>
+        #overlay {
+                position: fixed;
+                top: 0;
+                z-index: 100;
+                width: 100%;
+                height: 100%;
+                display: none;
+                background: rgba(0,0,0,0.6);
+            }
+
+            .cv-spinner {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .spinner {
+                width: 40px;
+                height: 40px;
+                border: 4px #ddd solid;
+                border-top: 4px #2e93e6 solid;
+                border-radius: 50%;
+                animation: sp-anime 0.8s infinite linear;
+            }
+            @keyframes sp-anime {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .is-hide {
+                display: none;
+            }
+
+            .mypointer:hover {
+                cursor: pointer;
+                color: red;
+                font-weight: bold;
+            }
+
+            .mypointer {
+                cursor: pointer;
+                color: darkblue;
+                font-weight: normal;
+            }
+
+    </style>
     <section class="content-header">
         <script src="jquery-1.11.2.min.js"></script>
         <script>
@@ -35,142 +85,180 @@
 
                 if (selectSaleport != "SELECTED ALL") {
                     $.ajax({
-                    url: 'DataServicesReporting.asmx/GetDataProjectByPortStatus',
-                    method: 'post',
-                    data: {
-                        strUserID: selectSaleport,
-                        strStatus: strStatus,
-                        strStartDate: datepickertrans,
-                        strEndDate: datepickerend,
-                        strQtyStart: strqtystrat,
-                        strQtyEnd: strqtyend,
-                        strSearch: strsearch
-                    },
-                    dataType: 'json',
-                    success: function (data) {
+                        url: 'DataServicesReporting.asmx/GetDataProjectByPortStatus',
+                        method: 'post',
+                        beforeSend: function () {
+                            $("#overlay").show();
+                        },
+                        data: {
+                            strUserID: selectSaleport,
+                            strStatus: strStatus,
+                            strStartDate: datepickertrans,
+                            strEndDate: datepickerend,
+                            strQtyStart: strqtystrat,
+                            strQtyEnd: strqtyend,
+                            strSearch: strsearch
+                        },
+                        dataType: 'json',
+                        success: function (data) {
 
-                        //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+                            //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
 
-                        var trHTML = '';
-                        $('#tableWeeklyReportx tr:not(:first)').remove();
-                        $(data).each(function (index, item) {
-                            trHTML += '<tr>' +
-                                '<td>' + item.No + '</td>' +
-                                //'<td>' + item.ProjectID + '</td>' +
-                                '<td> ' + item.ProjectName + '</td>' +
-                                //'<td>' + item.CompanyID + '</td>' +
-                                '<td>' + item.CompanyName + '</td>' +
-                                //'<td>' + item.ArchitecID + '</td>' +
-                                '<td>' + item.Name + '</td>' +
-                                '<td>' + item.Location + '</td>' +
-                                '<td>' + item.ProdTypeNameEN + '</td>' +
-                                '<td>' + item.StepNameEn + '</td>' +
-                                '<td>' + item.StatusNameEn + '</td>' +
-                                '<td>' + item.DeliveryDate + '</td>' +
-                                '<td>' + item.Quantity + '</td>' +
-                                '<td>' + item.CreatedBy + '</td>' +
-                                '<td>' + item.CreatedDate + '</td>' +
-                                '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
-                                '</tr > ';
+                            //var trHTML = '';
+                            //$('#tableWeeklyReportx tr:not(:first)').remove();
+                            //$(data).each(function (index, item) {
+                            //    trHTML += '<tr>' +
+                            //        '<td>' + item.No + '</td>' +
+                            //        //'<td>' + item.ProjectID + '</td>' +
+                            //        '<td> ' + item.ProjectName + '</td>' +
+                            //        //'<td>' + item.CompanyID + '</td>' +
+                            //        '<td>' + item.CompanyName + '</td>' +
+                            //        //'<td>' + item.ArchitecID + '</td>' +
+                            //        '<td>' + item.Name + '</td>' +
+                            //        '<td>' + item.Location + '</td>' +
+                            //        '<td>' + item.ProdTypeNameEN + '</td>' +
+                            //        '<td>' + item.StepNameEn + '</td>' +
+                            //        '<td>' + item.StatusNameEn + '</td>' +
+                            //        '<td>' + item.DeliveryDate + '</td>' +
+                            //        '<td>' + item.Quantity + '</td>' +
+                            //        '<td>' + item.CreatedBy + '</td>' +
+                            //        '<td>' + item.CreatedDate + '</td>' +
+                            //        '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
+                            //        '</tr > ';
+                            //});
 
-                            //No
-                            //WeekDate
-                            //WeekTime
-                            //CompanyID
-                            //CompanyName
-                            //ArchitecID
-                            //Name
-                            //TransID
-                            //TransNameEN
-                            //ProjectID
-                            //ProjectName
-                            //Location
-                            //TurnKey
-                            //StepID
-                            //StepNameEn
-                            //BiddingName1
-                            //OwnerName1
-                            //BiddingName2
-                            //OwnerName2
-                            //BiddingName3
-                            //OwnerName3
-                            //AwardMC
-                            //ContactMC
-                            //AwardRF
-                            //ContactRF
-                            //ProdTypeID
-                            //ProdTypeNameEN
-                            //ProdID
-                            //ProdNameEN
-                            //ProfID
-                            //ProfNameEN
-                            //Quantity
-                            //DeliveryDate
-                            //NextVisitDate
-                            //StatusID
-                            //StatusNameEn
-                            //Remark
-                            //UserID
-                            //EmpCode
-                            //CreatedBy
-                            //CreatedDate
-                        });
+                            //$('#tableWeeklyReportx').append(trHTML);
 
-                        $('#tableWeeklyReportx').append(trHTML);
-                    }
-                });
+                            var table;
+                            table = $('#tableWeeklyReportx').DataTable();
+                            table.clear();
+
+                            if (data != '') {
+                                $.each(data, function (i, item) {
+                                    table.row.add([data[i].No, data[i].ProjectID, data[i].ProjectName, data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID, data[i].Name
+                                        , data[i].Location, data[i].ProdTypeNameEN, data[i].StepNameEn, data[i].StatusNameEn, data[i].DeliveryDate, data[i].Quantity
+                                        , data[i].CreatedBy, data[i].CreatedDate]);
+                                });
+                            }
+                            //table.column(25).nodes().to$().addClass('hidden');
+                            table.column(1).nodes().to$().addClass('mypointer');
+                            table.column(2).nodes().to$().addClass('mypointer');
+                            table.column(5).nodes().to$().addClass('mypointer');
+                            table.column(6).nodes().to$().addClass('mypointer');
+                            table.draw();
+
+
+                            $('#tableWeeklyReportx tbody').on('click', 'td', function (e) {
+                                e.preventDefault();
+                                var rowIndex = $(this).parent().children().eq(5).text(); //  $(this).closest('.mypointer').text();
+                                var rowValue = $(this).parent().children().eq(6).text();
+                                console.log(rowIndex + ':' + rowValue);
+
+                                rIndex = this.parentElement.rowIndex;
+                                cIndex = this.cellIndex;
+
+                                console.log('row : ' + rIndex + 'cell : ' + cIndex);
+
+                                if (rIndex != 0 & cIndex == 1 || cIndex == 2 || cIndex == 5 || cIndex == 6) {
+                                     window.open("../report/architectprofile.aspx?opt=rarc&id=" + rowIndex + "", "_blank");
+                                }
+                            });
+
+                            $("#overlay").hide();
+                        }
+                    });
                 } else {
                     //alert('You select Get Data All')
 
                     $.ajax({
-                    url: 'DataServicesReporting.asmx/GetDataProjectByPortStatusAll',
-                    method: 'post',
+                        url: 'DataServicesReporting.asmx/GetDataProjectByPortStatusAll',
+                        method: 'post',
+                        beforeSend: function () {
+                            $("#overlay").show();
+                        },
                         data: {
-                        strUserID: selectSaleport,
-                        strStatus: strStatus,
-                        strStartDate: datepickertrans,
-                        strEndDate: datepickerend,
-                        strQtyStart: strqtystrat,
-                        strQtyEnd: strqtyend,
-                        strSearch: strsearch
-                    },
-                    dataType: 'json',
-                    success: function (data) {
+                            strUserID: selectSaleport,
+                            strStatus: strStatus,
+                            strStartDate: datepickertrans,
+                            strEndDate: datepickerend,
+                            strQtyStart: strqtystrat,
+                            strQtyEnd: strqtyend,
+                            strSearch: strsearch
+                        },
+                        dataType: 'json',
+                        success: function (data) {
 
-                        //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
+                            //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
 
-                        var trHTML = '';
-                        $('#tableWeeklyReportx tr:not(:first)').remove();
-                        $(data).each(function (index, item) {
-                            trHTML += '<tr>' +
-                                '<td>' + item.No + '</td>' +
-                                //'<td>' + item.ProjectID + '</td>' +
-                                '<td> ' + item.ProjectName + '</td>' +
-                                //'<td>' + item.CompanyID + '</td>' +
-                                '<td>' + item.CompanyName + '</td>' +
-                                //'<td>' + item.ArchitecID + '</td>' +
-                                '<td>' + item.Name + '</td>' +
-                                '<td>' + item.Location + '</td>' +
-                                '<td>' + item.ProdTypeNameEN + '</td>' +
-                                '<td>' + item.StepNameEn + '</td>' +
-                                '<td>' + item.StatusNameEn + '</td>' +
-                                '<td>' + item.DeliveryDate + '</td>' +
-                                '<td>' + item.Quantity + '</td>' +
-                                '<td>' + item.CreatedBy + '</td>' +
-                                '<td>' + item.CreatedDate + '</td>' +
-                                '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
-                                '</tr > ';
-                        });
+                            //var trHTML = '';
+                            //$('#tableWeeklyReportx tr:not(:first)').remove();
+                            //$(data).each(function (index, item) {
+                            //    trHTML += '<tr>' +
+                            //        '<td>' + item.No + '</td>' +
+                            //        //'<td>' + item.ProjectID + '</td>' +
+                            //        '<td> ' + item.ProjectName + '</td>' +
+                            //        //'<td>' + item.CompanyID + '</td>' +
+                            //        '<td>' + item.CompanyName + '</td>' +
+                            //        //'<td>' + item.ArchitecID + '</td>' +
+                            //        '<td>' + item.Name + '</td>' +
+                            //        '<td>' + item.Location + '</td>' +
+                            //        '<td>' + item.ProdTypeNameEN + '</td>' +
+                            //        '<td>' + item.StepNameEn + '</td>' +
+                            //        '<td>' + item.StatusNameEn + '</td>' +
+                            //        '<td>' + item.DeliveryDate + '</td>' +
+                            //        '<td>' + item.Quantity + '</td>' +
+                            //        '<td>' + item.CreatedBy + '</td>' +
+                            //        '<td>' + item.CreatedDate + '</td>' +
+                            //        '<td><a href="../report/specintakeview?opt=itk&projid='+ item.ProjectID +'" title="View"><i class="fa fa-search text-green"></i></a></td>' +
+                            //        '</tr > ';
+                            //});
 
-                        $('#tableWeeklyReportx').append(trHTML);
-                    }
-                });
+                            //$('#tableWeeklyReportx').append(trHTML);
+
+                            var table;
+                            table = $('#tableWeeklyReportx').DataTable();
+                            table.clear();
+
+                            if (data != '') {
+                                $.each(data, function (i, item) {
+                                    table.row.add([data[i].No, data[i].ProjectID, data[i].ProjectName, data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID, data[i].Name
+                                        , data[i].Location, data[i].ProdTypeNameEN, data[i].StepNameEn, data[i].StatusNameEn, data[i].DeliveryDate, data[i].Quantity
+                                        , data[i].CreatedBy, data[i].CreatedDate]);
+                                });
+                            }
+                            //table.column(25).nodes().to$().addClass('hidden');
+                            table.column(1).nodes().to$().addClass('mypointer');
+                            table.column(2).nodes().to$().addClass('mypointer');
+                            table.column(5).nodes().to$().addClass('mypointer');
+                            table.column(6).nodes().to$().addClass('mypointer');
+                            table.draw();
+
+                            $('#tableWeeklyReportx tbody').on('click', 'td', function (e) {
+                                e.preventDefault();
+                                var rowIndex = $(this).parent().children().eq(5).text(); //  $(this).closest('.mypointer').text();
+                                var rowValue = $(this).parent().children().eq(6).text();
+                                console.log(rowIndex + ':' + rowValue);
+
+                                rIndex = this.parentElement.rowIndex;
+                                cIndex = this.cellIndex;
+
+                                console.log('row : ' + rIndex + 'cell : ' + cIndex);
+
+                                if (rIndex != 0 & cIndex == 1 || cIndex == 2 || cIndex == 5 || cIndex == 6) {
+                                    window.open("../report/architectprofile.aspx?opt=rarc&id=" + rowIndex + "", "_blank");
+                                }
+                            });
+
+                            $("#overlay").hide();
+
+                        }
+                    });
                 }
 
                 
             });
         })
-    </script>
+        </script>
 
 
 
@@ -181,6 +269,12 @@
     </section>
 
     <section class="content">
+        <div id="overlay">
+            <div class="cv-spinner" style="padding-right: 20%">
+                <span class="spinner"></span>
+            </div>
+        </div>
+
            <%= strMsgAlert %>
 
         <%-- Application Forms--%>
@@ -330,15 +424,15 @@
                             <hr />
                             <div id="divWeeklyReport">
                                 <div class="row">
-                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
+                                    <table id="tableWeeklyReportx" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <td>No</td>
-                                                <%--<td>ProjID</td>--%>
+                                                <td>ProjID</td>
                                                 <td>Project Name</td>
-                                                <%--<td>ComID</td>--%>
+                                                <td>ComID</td>
                                                 <td>Company Name</td>
-                                                <%--<td>Architec ID</td>--%>
+                                                <td>Architec ID</td>
                                                 <td>Architec Name</td>
                                                 <td>Location</td>
                                                 <td>ProdType</td>
@@ -347,12 +441,11 @@
                                                 <td>Delivery</td>
                                                 <td>Quantity</td>
                                                 <td>CreatedBy</td>
-                                                <td>LastUpdate</td>
-                                                <td>#</td>
+                                                <td>LastUpdate</td>               
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%= strTblDetail %>
+                                            <%--<%= strTblDetail %>--%>
                                         </tbody>
                                     </table>
                                 </div>
