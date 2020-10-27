@@ -65,6 +65,8 @@ namespace SaleSpec.pages.report
                     week.EmpCode = rdr["EmpCode"].ToString();
                     week.CreatedBy = rdr["CreatedBy"].ToString();
                     week.CreatedDate = rdr["CreatedDate"].ToString();
+                    week.TransID = rdr["TransID"].ToString();
+                    week.TransNameEN = rdr["TransNameEN"].ToString();
                     weeks.Add(week);
                 }
             }

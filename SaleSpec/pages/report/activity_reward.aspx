@@ -52,7 +52,7 @@
     </style>
 
     <section class="content-header">
-        <h1>Event Report
+        <h1>Reward Report
             <small>Control panel</small>
         </h1>
     </section>
@@ -147,7 +147,7 @@
                                 <div class="user-block">
                                     <img class="img-circle img-bordered-sm" src="../../dist/img/handshake.png" alt="User Image">
                                     <span class="username">
-                                        <a href="#">Event Report</a>
+                                        <a href="#">Reward Report</a>
                                         <span class="pull-right">
                                             <button type="button" class="btn btn-default btn-sm checkbox-toggle hidden" onclick="openModal()" data-toggle="tooltip" title="New Entry!">
                                                 <i class="fa fa-plus"></i>

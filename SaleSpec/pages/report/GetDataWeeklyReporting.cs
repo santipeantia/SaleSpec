@@ -25,5 +25,7 @@ namespace SaleSpec.pages.report
         public string EmpCode { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
+        public string TransID { get; set; }
+        public string TransNameEN { get; set; }
     }
 }

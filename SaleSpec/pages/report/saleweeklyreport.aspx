@@ -149,13 +149,14 @@
                                 table.row.add([data[i].WeekDate, data[i].WeekTime, data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID
                                     , data[i].Name, data[i].ProjectID, data[i].ProjectName
                                     , data[i].Location, data[i].StatusID, data[i].StatusNameEn, data[i].StepID, data[i].StepNameEn, data[i].Remark
-                                    , data[i].UserID, data[i].EmpCode, data[i].CreatedBy, data[i].CreatedDate]);
+                                    , data[i].UserID, data[i].EmpCode, data[i].CreatedBy, data[i].CreatedDate, data[i].TransID, data[i].TransNameEN]);
                             });
                         }
                         table.column(2).nodes().to$().addClass('hidden');
                         table.column(4).nodes().to$().addClass('hidden');
                         table.column(9).nodes().to$().addClass('hidden');
                         table.column(11).nodes().to$().addClass('hidden');
+                        table.column(18).nodes().to$().addClass('hidden');
                         //table.column(12).nodes().to$().addClass('hidden');
 
                         table.column(3).nodes().to$().addClass('mypointer');
@@ -397,7 +398,8 @@
                                                 <th class="">EmpCode</th>
                                                 <th class="">CreatedBy</th>
                                                 <th class="">CreatedDate</th>
-
+                                                <th class="hidden">TransID</th>
+                                                <th class="">TransNameEn</th>
                                             </tr>
                                         </thead>
                                         <tbody>
