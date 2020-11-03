@@ -3272,6 +3272,7 @@
     <Content Include="bower_components\datatables.net-bs\js\dataTables.bootstrap.js" />
     <Content Include="bower_components\datatables.net-bs\js\dataTables.bootstrap.min.js" />
     <Content Include="bower_components\datatables.net-bs\License.txt" />
+    <Content Include="bower_components\datatables.net\js\dataTables.checkboxes.min.js" />
     <Content Include="bower_components\datatables.net\js\jquery.dataTables.js" />
     <Content Include="bower_components\datatables.net\js\jquery.dataTables.min.js" />
     <Content Include="bower_components\datatables.net\License.txt" />
@@ -6533,6 +6534,7 @@
       <LastGenOutput>ChartData.cs</LastGenOutput>
     </Content>
     <Content Include="ClassConnection\dbConnectionSQL - Copy.txt" />
+    <Content Include="dist\css\dataTables.checkboxes.css" />
     <Content Include="image\f0929.png" />
     <Content Include="image\g0929.png" />
     <Content Include="image\i0929.png" />
@@ -6548,6 +6550,7 @@
     <Content Include="pages\report\architectprofile.aspx" />
     <Content Include="pages\report\companyreportview.aspx" />
     <Content Include="pages\report\DataServicesArchitectProfile.asmx" />
+    <Content Include="pages\report\DataServicesInvoiceList.asmx" />
     <Content Include="pages\report\DataServicesReporting.asmx" />
     <Content Include="pages\report\DataServicesSaleOnSpec.asmx" />
     <Content Include="pages\report\jquery-1.11.2.min.js" />
@@ -6983,6 +6986,7 @@
     <Compile Include="adCharts.cs">
       <DependentUpon>ChartData.tt</DependentUpon>
     </Compile>
+    <Compile Include="cGetInvoiceList.cs" />
     <Compile Include="ChartData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7051,6 +7055,10 @@
     </Compile>
     <Compile Include="pages\report\activity_reward.aspx.designer.cs">
       <DependentUpon>activity_reward.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\DataServicesInvoiceList.asmx.cs">
+      <DependentUpon>DataServicesInvoiceList.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\report\GetEventActivity.cs" />
     <Compile Include="pages\Charts.aspx.cs">

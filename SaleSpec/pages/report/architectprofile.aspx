@@ -114,14 +114,15 @@
                             footer: 'Please contact system administrator..'
                         })
 
-                    } else if ($('textarea#txtremark').val() == "") {
-                        Swal.fire({
-                            type: 'error',
-                            title: '',
-                            text: 'Remark is no empty...!',
-                            footer: 'Please contact system administrator..'
-                        })
                     }
+                    //else if ($('textarea#txtremark').val() == "") {
+                    //    Swal.fire({
+                    //        type: 'error',
+                    //        title: '',
+                    //        text: 'Remark is no empty...!',
+                    //        footer: 'Please contact system administrator..'
+                    //    })
+                    //}
                     else {
                         var userid = '<%= Session["UserID"]%>';
                         var firstname = '<%= Session["sEmpEngFirstName"] %>';
@@ -400,6 +401,8 @@
                     var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var currentdate = yyyy + '-' + mm + '-' + dd + ' ' + tt;
 
+                    //alert('click update..');
+
                     $.ajax({
                         url: 'DataServicesArchitectProfile.asmx/GetInsertHistoryLevel',
                         method: 'POST',
@@ -415,7 +418,7 @@
                         },
                         dataType: 'json',
                         complete: function (response) {
-                            //alert("Data was succesfully captured");
+                           // alert("Data was succesfully captured");
                             getLevelHistory();
                             $('[id=modal-level]').modal('hide');
                         }
@@ -462,11 +465,7 @@
 
                 });
 
-
-                
-
-
-                //getLevelHistory();
+                getLevelHistory();
             })
         </script>
 
@@ -778,7 +777,7 @@
                                     </div>
                                     <br />
 
-                                    <div class="">
+                                    <div class="box-body" style="overflow: scroll;">
                                         <table id="tableProject" class="table table-bordered table-striped table-hover table-condensed txtLabel" style="width: 100%">
                                             <thead>
                                                 <tr>
@@ -1222,7 +1221,7 @@
                 var txtArchitectID = $('#txtArchitectIDEdit');
                 var txtFirstName = $('#txtFirstNameEdit');
                 var txtLastName = $('#txtLastNameEdit');
-                var fullname = $('#fullname');
+                var fullname = $('#fullname');                
 
                 fullname.text(txtFirstName.val() + ' ' + txtLastName.val());
 

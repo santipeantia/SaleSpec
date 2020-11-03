@@ -7,6 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="jquery-1.11.2.min.js"></script>
         <script src="jquery.table2excel.js"></script>
+      
         <style>
             #overlay {
                 position: fixed;
@@ -33,6 +34,7 @@
                 border-radius: 50%;
                 animation: sp-anime 0.8s infinite linear;
             }
+
             @keyframes sp-anime {
                 100% {
                     transform: rotate(360deg);
@@ -59,6 +61,10 @@
                 cursor: pointer;
                 color: darkblue;
                 font-weight: normal;
+            }
+
+            .myposition {
+                text-align: right;
             }
         </style>
         <script>
@@ -455,7 +461,8 @@
         </script>
 
         <script>
-            $(document).ready(function () {
+            $(document).ready(function () {                
+
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -536,45 +543,6 @@
                                 },
                                 dataType: 'json',
                                 success: function (data) {
-
-                                    //alert(selectSaleport + ' ' + datepickertrans + ' ' + datepickerend);
-
-                                    //var trHTML = '';
-                                    //$('#tableWeeklyReportx tr:not(:first)').remove();
-                                    //$(data).each(function (index, item) {
-                                    //    trHTML += '<tr>' +
-                                    //        '<td class="hidden">' + item.ID + '</td>' +
-                                    //        '<td class="">' + item.UserID + '</td>' +
-                                    //        '<td class="hidden">' + item.WeekDate + '</td>' +
-                                    //        '<td class="hidden">' + item.WeekTime + '</td>' +
-                                    //        '<td>' + item.CompanyName + '</td>' +
-                                    //        '<td class="hidden">' + item.ArchitectID + '</td>' +
-                                    //        '<td>' + item.Name + '</td>' +
-                                    //        '<td class="hidden">' + item.ProjectID + '</td>' +
-                                    //        '<td class="text-blue">' + item.ProjectName + '</td>' +
-                                    //        '<td>' + item.Location + '</td>' +
-                                    //        '<td class="hidden">' + item.ProdTypeID + '</td>' +
-                                    //        '<td>' + item.ProdTypeNameEN + '</td>' +
-                                    //        '<td class="hidden">' + item.ProdID + '</td>' +
-                                    //        '<td>' + item.ProdNameEN + '</td>' +
-                                    //        '<td>' + item.ProfNameEN + '</td>' +
-                                    //        '<td>' + item.DeliveryDate + '</td>' +
-                                    //        '<td>' + item.NextVisitDate + '</td>' +
-                                    //        '<td>' + item.Quantity + '</td>' +
-                                    //        '<td>' + item.StepNameA + '</td>' +
-                                    //        '<td>' + item.StepNameB + '</td>' +
-                                    //        '<td>' + item.RefWeekDate + '</td>' +
-                                    //        '<td>' + item.Ref1 + '</td>' +
-                                    //        '<td>' + item.Ref2 + '</td>' +
-                                    //        '<td>' + item.Ref3 + '</td>' +
-                                    //        '<td>' + item.RefRemark + '</td>' +
-                                    //        '<td class="hidden">' + item.StepID + '</td>' +
-                                    //        '</tr > ';
-
-                                    //});
-
-                                    //$('#tableWeeklyReportx').append(trHTML);
-
                                     var table;
                                     table = $('#tableWeeklyReportx').DataTable();
                                     table.clear();
@@ -596,6 +564,7 @@
                                     table.column(12).nodes().to$().addClass('hidden');
                                     table.column(25).nodes().to$().addClass('hidden');
                                     table.column(8).nodes().to$().addClass('mypointer');
+                                    table.column(24).nodes().to$().addClass('mypointer');
                                     table.draw();
 
                                     $('#tableWeeklyReportx tbody').on('click', 'td', function (e) {
@@ -609,7 +578,7 @@
 
                                         console.log('row : ' + rIndex + 'cell : ' + cIndex);
 
-                                        if (rIndex != 0 & cIndex == 8) {
+                                        if (rIndex != 0 & cIndex == 8 || cIndex == 24) {
                                             //alert(rIndex + '' + cIndex);
 
                                             document.getElementById("divErrorArchitect").style.display = 'none';
@@ -649,7 +618,8 @@
                                             var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');    //Ref3
                                             var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
                                             var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
-                                            //alert(strVal6.text());
+
+                                            //alert(strVal7.text());
 
                                             //return;
 
@@ -658,7 +628,7 @@
                                             $('#txtVisitDate').val(strVal2.text());
                                             $('#txtTime').val(strVal3.text());
                                             $('#txtCompanyName').val(strVal4.text());
-                                            $('#ProjectID').val(strVal8.text());
+                                            $('#ProjectID').val(strVal7.text());
 
                                             var selectArchitectNameDDL = $('#selectArchitectName');
 
@@ -784,7 +754,7 @@
                                             $('#txtProfile').val(strVal14.text());
                                             $('#datedelivery').val(strVal15.text());
                                             $('#datefollowing').val(strVal16.text());
-                                            $('#txtQuantity').val(strVal18.text());
+                                            $('#txtQuantity').val(strVal17.text());
 
                                             if (strVal25.text() == '1') {
                                                 $('#txtRefMcRf').val(strVal21.text());
@@ -828,10 +798,12 @@
                                                 }
                                             });
 
+                                            $('#txtRefDoc').val('');
+
                                             setTimeout(function () {
                                                 $("#myModalEdit").modal({ backdrop: false });
                                                 $("#myModalEdit").modal("show");
-                                            }, 1500);
+                                            }, 1000);
                                         }
                                         //alert(table.cell(this).data());
 
@@ -862,8 +834,8 @@
                             url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
                             method: 'post',
                             beforeSend: function () {
-                                    $("#overlay").show();
-                                },
+                                $("#overlay").show();
+                            },
                             data: {
                                 strOption: selectOption,
                                 strDateStart: datepickertrans,
@@ -897,6 +869,7 @@
                                 table.column(12).nodes().to$().addClass('hidden');
                                 table.column(25).nodes().to$().addClass('hidden');
                                 table.column(8).nodes().to$().addClass('mypointer');
+                                table.column(24).nodes().to$().addClass('mypointer');
                                 table.draw();
 
                                 $('#tableWeeklyReportx tbody').on('click', 'td', function (e) {
@@ -910,7 +883,7 @@
 
                                     console.log('row : ' + rIndex + 'cell : ' + cIndex);
 
-                                    if (rIndex != 0 & cIndex == 8) {
+                                    if (rIndex != 0 & cIndex == 8 || cIndex == 24) {
                                         //alert(rIndex + '' + cIndex);
 
                                         document.getElementById("divErrorArchitect").style.display = 'none';
@@ -950,7 +923,8 @@
                                         var strVal23 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(23)');    //Ref3
                                         var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
                                         var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
-                                        //alert(strVal6.text());
+
+                                        //alert(strVal7.text());
 
                                         //return;
 
@@ -959,7 +933,7 @@
                                         $('#txtVisitDate').val(strVal2.text());
                                         $('#txtTime').val(strVal3.text());
                                         $('#txtCompanyName').val(strVal4.text());
-                                        $('#ProjectID').val(strVal8.text());
+                                        $('#ProjectID').val(strVal7.text());
 
                                         var selectArchitectNameDDL = $('#selectArchitectName');
 
@@ -1085,7 +1059,7 @@
                                         $('#txtProfile').val(strVal14.text());
                                         $('#datedelivery').val(strVal15.text());
                                         $('#datefollowing').val(strVal16.text());
-                                        $('#txtQuantity').val(strVal18.text());
+                                        $('#txtQuantity').val(strVal17.text());
 
                                         if (strVal25.text() == '1') {
                                             $('#txtRefMcRf').val(strVal21.text());
@@ -1099,7 +1073,9 @@
                                             $('#txtRefMcRf').val(strVal23.text());
                                             //$('#txtContactMcRf').val(strVal22.text());
                                         }
+
                                         $('#txtRemark').val(strVal24.text());
+
                                         $.ajax({
                                             url: 'DataServicesReporting.asmx/GetDataProjectHistory',
                                             method: 'post',
@@ -1129,10 +1105,12 @@
                                             }
                                         });
 
+                                        $('#txtRefDoc').val('');
+
                                         setTimeout(function () {
                                             $("#myModalEdit").modal({ backdrop: false });
                                             $("#myModalEdit").modal("show");
-                                        }, 1500);
+                                        }, 1000);
                                     }
                                     //alert(table.cell(this).data());
 
@@ -1169,11 +1147,133 @@
                 //        return false;
                 //    })
 
+                var btnRefInv = $('#btnRefInv');
+                btnRefInv.click(function () {
+                    //alert('test');
+                   
+                    $('#example-result').text('');
+                    getDataInvoiceList();
+
+                    $("#modal-refinvoice").modal({ backdrop: false });
+                    $("#modal-refinvoice").modal("show");
+
+
+                });
 
 
 
+                $("#tblemployee").on('click', '.btnSelect', function () {
+                    // get the current row
+                    var currentRow = $(this).closest("tr");
 
+                    var emp_id = currentRow.find("td:eq(0)").html(); // get current row 1st table cell td value
+                    var firstname = currentRow.find("td:eq(1)").html(); // get current row 2nd table cell td value
+                    var lastname = currentRow.find("td:eq(2)").html(); // get current row 3rd table cell  td value
+                    var data = emp_id + "\n" + firstname + "\n" + lastname;
+
+                    //alert(data);
+
+                    $('#emp_id').val(emp_id);
+                    $('#firstname').val(firstname);
+                    $('#lastname').val(lastname);
+
+                    //alert('Open Modal Member...1');
+
+                    //$('#modal-employee').modal({ backdrop: false });
+                    $('#modal-employee').modal("hide");
+                });
+
+
+                var btncheck = $('#btncheck');
+                btncheck.click(function () {
+
+                    // declare variable table for assign attribute
+                    var table = $('#tblemployee').DataTable();
+                    var arr = [];
+                    var checkedvalues = table.$('input:checked').each(function () {
+                        arr.push($(this).attr('id'))
+                    });
+                    // convert array to string                    
+
+                    arr = arr.toString();
+                    var empid = arr.split(",");
+
+                    //empid.forEach(getEmpid);
+
+                    //function getEmpid(item, index) {
+                    //    console.log(index + ':' + item)                        
+                    //}
+
+                    $('#example-result').text(empid);
+                    //table.$('input:checked').removeAttr('checked');  
+                    var xempid = $('#example-result').text();
+
+                    $('#txtRefDoc').val(xempid);
+                    $("#modal-refinvoice").modal("hide");
+                });
+                
+                var btnuncheck = $('#btnuncheck');
+                btnuncheck.click(function () {
+                    //alert('uncheck..');
+                    var table = $('#tblemployee').DataTable();                    
+                    var checkedvalues = table.$('input:checked').each(function () {
+                        $(this).prop("checked", false);
+                    });
+
+                    $('#example-result').text('');
+
+                });
+
+                var btncheckedall = $('#btncheckedall')
+                btncheckedall.click(function () {
+                    //alert('uncheck..');
+                    var table = $('#tblemployee').DataTable();    
+                    
+                    $("input", table.rows({ search: 'applied' }).nodes()).each(function () {
+                        $(this).prop("checked", true);
+                    });
+
+                    $('#example-result').text('');
+
+                    //var checkedvalues = table.$('input:checkbox').each(function () {
+                    //    $(this).prop("checked", true);
+                    //});
+
+                });
+                    //******************* End Of document.ready() *************************//
+                    //******************* End Of document.ready() *************************//
             })
+
+            function getDataInvoiceList() {
+                $.ajax({
+                    url: 'DataServicesInvoiceList.asmx/GetInvoiceList',
+                    method: 'post',
+                    beforeSend: function () {
+                        $('#tblemployee tr td').remove();
+                        $("#loademployee").show();
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var table;
+                        table = $('#tblemployee').DataTable();
+                        table.clear();
+                        if (data != '') {
+                            $.each(data, function (i, item) {
+                                table.row.add([data[i].InvNo, data[i].DocuDate, data[i].CustCode, data[i].CustName, data[i].EmpCode, data[i].SaleName, data[i].TotalPrice, data[i].chk]);
+                            });
+                        }
+                        else {
+                        }
+                        //finally draw into a table
+                        table.column(6).nodes().to$().addClass('myposition');
+                        table.draw();
+                        $("#loademployee").hide();
+                    }
+                });
+            };
+
+
+
         </script>
 
         <h1>Project Status
@@ -1601,18 +1701,19 @@
                                                 </div>
 
                                                 <div class="col-md-1 ">
-                                                    <label class="txtLabel">Ref#Doc.</label>
+                                                    <label class="txtLabel">Ref#Inv.</label>
                                                 </div>
-                                                <div class="col-md-3 ">
-                                                    <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" readonly autocomplete="off" placeholder="" value="">
-                                                </div>
-                                                <div class="col-md-1 ">
-                                                    <input type="button" id="btnRefInv" name="btnRefInv" class="btn btn-default btn-sm" value="Ref#Inv." />
-
+                                                <div class="col-md-4 ">
+                                                    <%-- <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" readonly autocomplete="off" placeholder="" value="">
+                                                    --%>
+                                                    <div class="input-group">
+                                                        <input type="text" id="txtRefDoc" name="txtRefDoc" readonly class="form-control  input ">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-info btn-flat" id="btnRefInv" name="btnRefInv">Go!</button>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                         <!-- /.post -->
                                     </div>
@@ -1708,6 +1809,55 @@
                 </div>
             </div>
         </div>
+
+        <%-- /.modal reference invoice--%>
+        <div class="modal modal-default fade" id="modal-refinvoice">
+            <div class="modal-dialog" style="width: 60%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Reference Invoice</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Post -->
+                        <div class="post">
+                            <table id="tblemployee" class="table table-striped table-bordered table-hover table-condensed" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>InvNo</th>
+                                        <th>DocuDate</th>
+                                        <th>CustCode</th>
+                                        <th>CustName</th>
+                                        <th>EmpCode</th>
+                                        <th>SaleName</th>
+                                        <th>TotalPrice</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                            <div id="loademployee">
+                                <div class="cv-spinner">
+                                    <span class="spinner"></span>
+                                </div>
+                            </div>
+
+                            <p>
+                                <button type="button" id="btnuncheck" name="btnuncheck" class="btn btn-warning btn-sm btn-flat">Clear All</button>
+                                <button type="button" id="btncheckedall" name="btncheckedall" class="btn btn-primary btn-sm btn-flat">Selected All</button>
+                                <button type="button" id="btncheck" name="btncheck" class="btn btn-success btn-sm btn-flat pull-right">Confirmed</button>
+                            </p>
+                            <p id="example-result"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <script>
             function ValidateUpdate() {
@@ -1829,8 +1979,58 @@
                         }
                         else { div9.style.display = "none"; }
 
+                        var strStatus = $('#selectStatus').val();
+                        if (strStatus == 'S02' && str19 == '') {
+                            
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Sold, Reference Invoice is not empty..!',                               
+                                footer: 'Please try again..'
+                            });
+                            return;
+                        } else if (strStatus == 'S03' && str19 == '') {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Finished, Reference Invoice is not empty..!',                               
+                                footer: 'Please try again..'
+                            });
+                            return;
+                        } else if (strStatus == 'S06' && str19 == '') {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'SOS, Reference Invoice is not empty..!',                               
+                                footer: 'Please try again..'
+                            });
+                            return;
+                        } else {
 
+                        }
 
+                        
+
+                        console.log('id: ' + str1 + '\n' +
+                            'WeekDate: ' + str2 + '\n' +
+                            'WeekTime: ' + str3 + '\n' +
+                            'CompanyName: ' + str4 + '\n' +
+                            'ArchitecID: ' + $('#selectArchitectName').val() + '\n' +
+                            'Name: ' + $('#selectArchitectName option:selected').text() + '\n' +
+                            'Location: ' + str7 + '\n' +
+                            'ProdTypeID: ' + $('#selectProductType').val() + '\n' +
+                            'ProdTypeNameEN: ' + $('#selectProductType option:selected').text() + '\n' +
+                            'ProdID: ' + $('#selectProductName').val() + '\n' +
+                            'ProdNameEN: ' + $('#selectProductName option:selected').text() + '\n' +
+                            'ProfNameEN: ' + str10 + '\n' +
+                            'DeliveryDate: ' + str11 + '\n' +
+                            'NextVisitDate: ' + str12 + '\n' +
+                            'Quantity: ' + str13 + '\n' + 
+                            'StepNameEn: ' + $('#selectStep option:selected').text() + '\n' + 
+                            'Ref1: ' + str16 + '\n' + 
+                            'Ref2: ' + str17 + '\n' + 
+                            'Remark: ' + str14 + '\n' + 
+                            'StepID: ' + $('#selectStep').val() + '\n' +
+                            'StatusID: ' + $('#selectStatus').val() + '\n' +
+                            'ProjectID: ' + $('#ProjectID').val() + '\n' +
+                            'RefDocuNo: ' + str19 + '\n');
 
                         //Get update weekly report succeseed...
                         $.ajax({
@@ -1859,11 +2059,13 @@
                                 StepID: $('#selectStep').val(),
                                 StatusID: $('#selectStatus').val(),
                                 ProjectID: $('#ProjectID').val(),
-                                RefDocuNo: str19
+                                RefDocuNo: str19+','
                             },
                             dataType: 'json',
                             complete: function (data) {
-                                alert('Update data succeseed please close and refresh..!');
+                                //alert('Update data succeseed please close and refresh..!');
+                                $('#btnJsonReport').click();
+                                $("#myModalEdit").modal("hide");
                             }
                         });
 
