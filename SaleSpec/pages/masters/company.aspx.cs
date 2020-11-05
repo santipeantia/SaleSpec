@@ -375,21 +375,30 @@ namespace SaleSpec.pages.masters
                 //        "        adCustomerType c on a.CustTypeID=c.CustTypeID " +
                 //        "WHERE a.CompanyID not in ('0') ";
 
-                ssql = "select CompanyID, CompanyName, CompanyName2, " +
-                        "        Port = stuff((select distinct ', ' + TypeID " +
-                        "         from adProjects " +
-                        "         where CompanyID = a.CompanyID " +
-                        "         for xml path(''), TYPE " +
-                        "        ).value('.[1]', 'nvarchar(max)'), 1, 1,''), " +
-                        "        CustTypeID, CustTypeDesc, Address, ProvinceID, ContactName, " +
-                        "        Phone, Mobile, Email,  ConDesc2 " +
-                        "from( " +
-                        "    SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.CustTypeID, c.CustTypeDesc, a.Address, a.ProvinceID, a.ContactName, " +
-                        "            a.Phone, a.Mobile, a.Email, b.ConDesc2 " +
-                        "    FROM    adCompany a LEFT OUTER JOIN " +
-                        "            adStatusConfirm AS b ON a.StatusConID = b.StatusConID  left join " +
-                        "            adCustomerType c on a.CustTypeID = c.CustTypeID " +
-                        "    WHERE a.CompanyID not in ('0')) a";
+                //ssql = "select CompanyID, CompanyName, CompanyName2, " +
+                //        "        Port = stuff((select distinct ', ' + TypeID " +
+                //        "         from adProjects " +
+                //        "         where CompanyID = a.CompanyID " +
+                //        "         for xml path(''), TYPE " +
+                //        "        ).value('.[1]', 'nvarchar(max)'), 1, 1,''), " +
+                //        "        CustTypeID, CustTypeDesc, Address, ProvinceID, ContactName, " +
+                //        "        Phone, Mobile, Email,  ConDesc2 " +
+                //        "from( " +
+                //        "    SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.CustTypeID, c.CustTypeDesc, a.Address, a.ProvinceID, a.ContactName, " +
+                //        "            a.Phone, a.Mobile, a.Email, b.ConDesc2 " +
+                //        "    FROM    adCompany a LEFT OUTER JOIN " +
+                //        "            adStatusConfirm AS b ON a.StatusConID = b.StatusConID  left join " +
+                //        "            adCustomerType c on a.CustTypeID = c.CustTypeID " +
+                //        "    WHERE a.CompanyID not in ('0')) a";
+
+                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, b.ArchitecID, b.name " +
+                       "        , b.SpecID as Port,	 a.CustTypeID, a.CustTypeDesc, a.Address " +
+                       "        , a.ProvinceID, a.ContactName, a.Phone, a.Mobile, a.Email " +
+                       "        , c.ConDesc, a.CreatedDate, a.UpdatedDate " +
+                       "FROM    adCompany a left join " +
+                       "        (select* from adArchitecture where ArchitecID is not null and SpecID is not null) b on a.CompanyID = b.CompanyID left join " +
+                       "        adStatusConfirm c on a.StatusConID = c.StatusConID " +
+                       "ORDER BY a.CompanyName";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);

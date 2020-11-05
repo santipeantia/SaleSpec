@@ -675,6 +675,7 @@
                                                 }
                                             });
 
+                                            //alert(strVal12.text());
 
                                             //When product type changed cascading of product
                                             var selectProductNameDDL = $('#selectProductName');
@@ -1472,7 +1473,7 @@
                                             <th>ProjectName</th>
                                             <th>Location</th>
                                             <th class="hidden">ProdTypeID</th>
-                                            <th>ProdType</th>
+                                            <th>ProdTypeName</th>
                                             <th class="hidden">ProdID</th>
                                             <th class="">ProdName</th>
                                             <th>Profile</th>
@@ -1480,7 +1481,7 @@
                                             <th>Following</th>
                                             <th>Quantity</th>
                                             <th>StepNameA</th>
-                                            <th>StepNameB</th>
+                                            <th>ProjMonth</th>
                                             <th>RefWeekDate</th>
                                             <th>BD</th>
                                             <th>MC</th>
