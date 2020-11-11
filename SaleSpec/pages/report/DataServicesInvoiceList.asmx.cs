@@ -59,8 +59,40 @@ namespace SaleSpec.pages.report
             js.MaxJsonLength = Int32.MaxValue;
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(objs));
+        }
+
+        [WebMethod]
+        public void GetInvoiceListSOS(string sdate, string edate)
+        {
+            List<cGetInvoiceList> objs = new List<cGetInvoiceList>();
+
+            SqlCommand comm = new SqlCommand("spGetInvoiceListSOS", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@sdate", sdate);
+            comm.Parameters.AddWithValue("@edate", edate);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetInvoiceList obj = new cGetInvoiceList();
+                obj.InvNo = rdr["InvNo"].ToString();
+                obj.DocuDate = rdr["DocuDate"].ToString();
+                obj.CustCode = rdr["CustCode"].ToString();
+                obj.CustName = rdr["CustName"].ToString();
+                obj.EmpCode = rdr["EmpCode"].ToString();
+                obj.SaleName = rdr["SaleName"].ToString();
+                obj.TotalPrice = rdr["TotalPrice"].ToString();
+                obj.chk = rdr["chk"].ToString();
+                objs.Add(obj);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
 
         }
+
     }
 }
 

@@ -619,6 +619,42 @@
                     'scrollX': true,
                     'autoWidth': true
                 })
+                                
+                $('#tableSaleOnSpec').DataTable({
+                    //'iDisplayLength': 10,
+                    'paging': false,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'scrollY': 500,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [5,6,8, 10, 12],
+                            className: "hide_column"
+                        }
+                    ]
+                })
+
+                $('#tableSaleOnSpec2').DataTable({
+                    //'iDisplayLength': 10,
+                    'paging': false,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'scrollY': 500,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [5,6,8, 10, 12],
+                            className: "hide_column"
+                        }
+                    ]
+                })
 
             })
         </script>

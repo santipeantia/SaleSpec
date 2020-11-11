@@ -20,49 +20,147 @@ namespace SaleSpec.pages.report
     [System.Web.Script.Services.ScriptService]
     public class DataServicesSaleOnSpec : System.Web.Services.WebService
     {
-        string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
+        //string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
+        dbConnection conn = new dbConnection();
 
 
         [WebMethod]
-        public void GetDataProjectWithInvoice(string strInvNo) {
-            List<GetDataProjectWithInvoice> projects = new List<GetDataProjectWithInvoice>();
-            using (SqlConnection conn = new SqlConnection(cs))
+        public void GetSaleOnSpecFinal(string sdate, string edate) {
+            List<cGetSaleOnSpecFinal> datas = new List<cGetSaleOnSpecFinal>();
+
+            SqlCommand comm = new SqlCommand("spSaleOnSpecFinal", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+
+            //SqlParameter param1 = new SqlParameter() { ParameterName = "@sdate", Value = sdate };
+            //SqlParameter param2 = new SqlParameter() { ParameterName = "@edate", Value = edate };
+            //comm.Parameters.Add(param1);
+            //comm.Parameters.Add(param2);
+
+            comm.Parameters.AddWithValue("@sdate", sdate);
+            comm.Parameters.AddWithValue("@edate", edate);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
             {
-                SqlCommand comm = new SqlCommand("spWeeklyReporting", conn);
-                comm.CommandType = CommandType.StoredProcedure;
+                cGetSaleOnSpecFinal data = new cGetSaleOnSpecFinal();
 
-                SqlParameter param1 = new SqlParameter() { ParameterName = "@strInvNo", Value = strInvNo };
-                comm.Parameters.Add(param1);
-                conn.Open();
-
-                SqlDataReader rdr = comm.ExecuteReader();
-                while (rdr.Read())
-                {
-                    GetDataProjectWithInvoice project = new GetDataProjectWithInvoice();
-                    project.docuno = rdr["WeekDate"].ToString();
-                    //weeks.WeekTime = rdr["WeekTime"].ToString();
-                    //week.CompanyID = rdr["CompanyID"].ToString();
-                    //week.CompanyName = rdr["CompanyName"].ToString();
-                    //week.ArchitecID = rdr["ArchitecID"].ToString();
-                    //week.Name = rdr["Name"].ToString();
-                    //week.ProjectID = rdr["ProjectID"].ToString();
-                    //week.ProjectName = rdr["ProjectName"].ToString();
-                    //week.Location = rdr["Location"].ToString();
-                    //week.StatusID = rdr["StatusID"].ToString();
-                    //week.StatusNameEn = rdr["StatusNameEn"].ToString();
-                    //week.StepID = rdr["StepID"].ToString();
-                    //week.StepNameEn = rdr["StepNameEn"].ToString();
-                    //week.Remark = rdr["Remark"].ToString();
-                    //week.UserID = rdr["UserID"].ToString();
-                    //week.EmpCode = rdr["EmpCode"].ToString();
-                    //week.CreatedBy = rdr["CreatedBy"].ToString();
-                    //week.CreatedDate = rdr["CreatedDate"].ToString();
-                    projects.Add(project);
-                }
+                data.CompanyID = rdr["CompanyID"].ToString();
+                data.CompanyName = rdr["CompanyName"].ToString();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.Name = rdr["Name"].ToString();
+                data.sosMonth = rdr["sosMonth"].ToString();
+                data.ProjectYear = rdr["ProjectYear"].ToString();
+                data.ProjectMonth = rdr["ProjectMonth"].ToString();
+                data.DocuNo = rdr["DocuNo"].ToString();
+                data.CustCode = rdr["CustCode"].ToString();
+                data.CustName = rdr["CustName"].ToString();
+                data.ProjectId = rdr["ProjectId"].ToString();
+                data.ProjectName = rdr["ProjectName"].ToString();
+                data.GoodID = rdr["GoodID"].ToString();
+                data.GoodName = rdr["GoodName"].ToString();
+                data.ActQty = rdr["ActQty"].ToString();
+                data.SpecQty = rdr["SpecQty"].ToString();
+                data.Amount = rdr["Amount"].ToString();
+                data.PerUnit = rdr["PerUnit"].ToString();
+                data.NetRF_B = rdr["NetRF_B"].ToString();
+                data.NetCom = rdr["NetCom"].ToString();
+                data.TotalSale = rdr["TotalSale"].ToString();
+                data.SaleCode = rdr["SaleCode"].ToString();
+                data.SaleName = rdr["SaleName"].ToString();
+                data.DocuDate = rdr["DocuDate"].ToString();
+                data.chkView = rdr["chkView"].ToString();
+                data.chkTrash = rdr["chkTrash"].ToString();
+                datas.Add(data);
             }
+
             JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = int.MaxValue;
             Context.Response.ContentType = "application/json";
-            Context.Response.Write(js.Serialize(projects));
+            Context.Response.Write(js.Serialize(datas));
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetSaleOnSpecFinalWithOutProject(string sdate, string edate)
+        {
+            List<cGetSaleOnSpecFinal> datas = new List<cGetSaleOnSpecFinal>();
+
+            SqlCommand comm = new SqlCommand("spSaleOnSpecFinalWithoutPort", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+
+            //SqlParameter param1 = new SqlParameter() { ParameterName = "@sdate", Value = sdate };
+            //SqlParameter param2 = new SqlParameter() { ParameterName = "@edate", Value = edate };
+            //comm.Parameters.Add(param1);
+            //comm.Parameters.Add(param2);
+
+            comm.Parameters.AddWithValue("@sdate", sdate);
+            comm.Parameters.AddWithValue("@edate", edate);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetSaleOnSpecFinal data = new cGetSaleOnSpecFinal();
+
+                data.CompanyID = rdr["CompanyID"].ToString();
+                data.CompanyName = rdr["CompanyName"].ToString();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.Name = rdr["Name"].ToString();
+                data.sosMonth = rdr["sosMonth"].ToString();
+                data.ProjectYear = rdr["ProjectYear"].ToString();
+                data.ProjectMonth = rdr["ProjectMonth"].ToString();
+                data.DocuNo = rdr["DocuNo"].ToString();
+                data.CustCode = rdr["CustCode"].ToString();
+                data.CustName = rdr["CustName"].ToString();
+                data.ProjectId = rdr["ProjectId"].ToString();
+                data.ProjectName = rdr["ProjectName"].ToString();
+                data.GoodID = rdr["GoodID"].ToString();
+                data.GoodName = rdr["GoodName"].ToString();
+                data.ActQty = rdr["ActQty"].ToString();
+                data.SpecQty = rdr["SpecQty"].ToString();
+                data.Amount = rdr["Amount"].ToString();
+                data.PerUnit = rdr["PerUnit"].ToString();
+                data.NetRF_B = rdr["NetRF_B"].ToString();
+                data.NetCom = rdr["NetCom"].ToString();
+                data.TotalSale = rdr["TotalSale"].ToString();
+                data.SaleCode = rdr["SaleCode"].ToString();
+                data.SaleName = rdr["SaleName"].ToString();
+                data.DocuDate = rdr["DocuDate"].ToString();
+                data.chkView = rdr["chkView"].ToString();
+                data.chkTrash = rdr["chkTrash"].ToString();
+                datas.Add(data);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = int.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(datas));
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetssProjectMappingUpdate(string projectid, string refdocno)
+        {
+            SqlCommand comm = new SqlCommand("spGetssProjectMappingUpdate", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@ProjectID", projectid);
+            comm.Parameters.AddWithValue("@RefDocuNo", refdocno);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+        }
+        
+        [WebMethod]
+        public void GetssProjectMappingDelete(string projectid, string refdocno)
+        {
+            SqlCommand comm = new SqlCommand("spGetssProjectMappingDelete", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@ProjectID", projectid);
+            comm.Parameters.AddWithValue("@RefDocuNo", refdocno);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
         }
     }
 }

@@ -6987,6 +6987,7 @@
       <DependentUpon>ChartData.tt</DependentUpon>
     </Compile>
     <Compile Include="cGetInvoiceList.cs" />
+    <Compile Include="cGetSaleOnSpecFinal.cs" />
     <Compile Include="ChartData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7042,6 +7043,18 @@
     <Compile Include="Class\GetDataInvitation.cs" />
     <Compile Include="Class\GetDataAttendance.cs" />
     <Compile Include="Class\GetActivityEvent.cs" />
+    <Compile Include="pages\reports\rptSalesOnSpec2.cs">
+      <DependentUpon>rptSalesOnSpec2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="pages\reports\rptSalesOnSpec.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptSalesOnSpec.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\report\activity_event.aspx.cs">
       <DependentUpon>activity_event.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8210,6 +8223,14 @@
     <EmbeddedResource Include="pages\reports\rptPrintWeeklyReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintWeeklyReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptSalesOnSpec2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSalesOnSpec2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptSalesOnSpec.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSalesOnSpec.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

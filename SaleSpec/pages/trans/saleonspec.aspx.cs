@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.IO;
 using System.Text;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Security.Cryptography;
 
 
 namespace SaleSpec.pages.trans
@@ -22,12 +24,15 @@ namespace SaleSpec.pages.trans
         SqlCommand Comm = new SqlCommand();
         SqlDataAdapter da = new SqlDataAdapter();
         SqlTransaction transac;
-
+        
         public string strMsgAlert = "";
         public string strTblDetail = "";
         public string strTblActive = "";
 
         dbConnection dbConn = new dbConnection();
+
+        ReportDocument rpt = new ReportDocument();
+
 
         public string sPage = "SaleOnSpec";
 
@@ -325,17 +330,76 @@ namespace SaleSpec.pages.trans
             }
         }
 
+        protected void btnExportPDF_click(object sender, EventArgs e)
+        {
+            try
+            {
+                //string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                string sdate = Request.Form["datepickertrans"];
+                string edate = Request.Form["datepickerend"];
+                string cmonth = Convert.ToDateTime(sdate).ToString("MM");
+                string cyear = Convert.ToDateTime(sdate).ToString("yyyy");
+
+                string namemonth = "";
+                string nameyear = "";
+
+                if (cmonth == "01") { namemonth = "มกราคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "02") { namemonth = "กุมภาพันธ์"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "03") { namemonth = "มีนาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "04") { namemonth = "เมษายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "05") { namemonth = "พฤษภาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "06") { namemonth = "มิถุนายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "07") { namemonth = "กรกฏาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "08") { namemonth = "สิงหาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "09") { namemonth = "กันยายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "10") { namemonth = "ตุลาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "11") { namemonth = "พฤศจิกายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else { namemonth = "ธันวาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+
+                rpt = new ReportDocument();
+                rpt.Load(Server.MapPath("../reports/rptSalesOnSpec.rpt"));
+                rpt.SetDatabaseLogon("sa", "AmpelCloud@2020", "203.154.45.40", "db_salespec");
+                rpt.SetParameterValue("@sdate", sdate);
+                rpt.SetParameterValue("@edate", edate);
+                rpt.SetParameterValue("namemonth", namemonth);
+                rpt.SetParameterValue("nameyear", nameyear);
+
+                rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, true, "SalesOnSpec-" + sdate + "-" + edate);
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error ExportExcel..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
+            }
+        }
+
         protected void btnExportExcel_click(object sender, EventArgs e)
         {
             try
             {
-                ssql = "SELECT ID, ArchitecID, CompanyID, FirstName, LastName, NickName, Position, Address, Phone, Mobile, Email FROM adArchitecture ";
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                string sdate = Request.Form["datepickertrans"];
+                string edate = Request.Form["datepickerend"];
+                //ssql = "exec spSaleOnSpecFinal_rpt " + sdate + ", " + edate + " ";
+
+                Comm = new SqlCommand("spSaleOnSpecFinal_excel", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+                Comm.Parameters.AddWithValue("@sdate", sdate);
+                Comm.Parameters.AddWithValue("@edate", edate);
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
                 dt = new DataTable();
-                dt = dbConn.GetDataTable(ssql);
+                da.Fill(dt);
+
+                //dt = dbConn.GetDataTable(ssql);
 
                 GridView GridviewExport = new GridView();
-
-                string strExportDate = DateTime.Now.ToString("yyyyMMddHHmmss");
 
                 if (dt.Rows.Count != 0)
                 {
@@ -344,7 +408,7 @@ namespace SaleSpec.pages.trans
                     GridviewExport.DataBind();
 
                     Response.Clear();
-                    Response.AddHeader("content-disposition", "attachment;filename=ArchitectExport" + strExportDate + ".xls");
+                    Response.AddHeader("content-disposition", "attachment;filename=SalesOnSpec"+sdate+"-"+edate+".xls");
                     Response.ContentType = "application/ms-excel";
                     Response.ContentEncoding = System.Text.Encoding.Unicode;
                     Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
@@ -353,7 +417,6 @@ namespace SaleSpec.pages.trans
                     System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
 
                     GridviewExport.RenderControl(hw);
-
                     string style = @"<style> td { mso-number-format:\@;} </style>";
                     Response.Write(style);
                     Response.Write(sw.ToString());
@@ -364,8 +427,112 @@ namespace SaleSpec.pages.trans
             catch (Exception ex)
             {
                 strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
-                              "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
-                              "</div>";
+                            "      <strong>Error ExportExcel..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
+            }
+        }
+
+        protected void btnExportPDF2_click(object sender, EventArgs e)
+        {
+            try
+            {
+                //string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                string sdate = Request.Form["datepickertrans"];
+                string edate = Request.Form["datepickerend"];
+                string cmonth = Convert.ToDateTime(sdate).ToString("MM");
+                string cyear = Convert.ToDateTime(sdate).ToString("yyyy");
+
+                string namemonth = "";
+                string nameyear = "";
+
+                if (cmonth == "01") { namemonth = "มกราคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "02") { namemonth = "กุมภาพันธ์"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "03") { namemonth = "มีนาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "04") { namemonth = "เมษายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "05") { namemonth = "พฤษภาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "06") { namemonth = "มิถุนายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "07") { namemonth = "กรกฏาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "08") { namemonth = "สิงหาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "09") { namemonth = "กันยายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "10") { namemonth = "ตุลาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else if (cmonth == "11") { namemonth = "พฤศจิกายน"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+                else { namemonth = "ธันวาคม"; nameyear = Convert.ToString(int.Parse(cyear) + 543); }
+
+                rpt = new ReportDocument();
+                rpt.Load(Server.MapPath("../reports/rptSalesOnSpec2.rpt"));
+                rpt.SetDatabaseLogon("sa", "AmpelCloud@2020", "203.154.45.40", "db_salespec");
+                rpt.SetParameterValue("@sdate", sdate);
+                rpt.SetParameterValue("@edate", edate);
+                rpt.SetParameterValue("namemonth", namemonth);
+                rpt.SetParameterValue("nameyear", nameyear);
+
+                rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, true, "SalesOnSpecUnidentifeid-" + sdate + "-" + edate);
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error ExportExcel..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
+            }
+        }
+
+        protected void btnExportExcel2_click(object sender, EventArgs e)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+
+                string sdate = Request.Form["datepickertrans"];
+                string edate = Request.Form["datepickerend"];
+                //ssql = "exec spSaleOnSpecFinal_rpt " + sdate + ", " + edate + " ";
+
+                Comm = new SqlCommand("spSaleOnSpecFinalWithoutPort_rpt", Conn);
+                Comm.CommandType = CommandType.StoredProcedure;
+                Comm.Parameters.AddWithValue("@sdate", sdate);
+                Comm.Parameters.AddWithValue("@edate", edate);
+
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Comm;
+                dt = new DataTable();
+                da.Fill(dt);
+
+                //dt = dbConn.GetDataTable(ssql);
+
+                GridView GridviewExport = new GridView();
+
+                if (dt.Rows.Count != 0)
+                {
+
+                    GridviewExport.DataSource = dt;
+                    GridviewExport.DataBind();
+
+                    Response.Clear();
+                    Response.AddHeader("content-disposition", "attachment;filename=SalesOnSpecUnidentifeid" + sdate + "-" + edate + ".xls");
+                    Response.ContentType = "application/ms-excel";
+                    Response.ContentEncoding = System.Text.Encoding.Unicode;
+                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                    System.IO.StringWriter sw = new System.IO.StringWriter();
+                    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                    GridviewExport.RenderControl(hw);
+                    string style = @"<style> td { mso-number-format:\@;} </style>";
+                    Response.Write(style);
+                    Response.Write(sw.ToString());
+                    Response.End();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                            "      <strong>Error ExportExcel..!</strong> " + ex.Message + " " +
+                            "</div>";
+                return;
             }
         }
     }

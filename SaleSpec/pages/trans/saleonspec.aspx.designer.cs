@@ -13,12 +13,39 @@ namespace SaleSpec.pages.trans {
     public partial class saleonspec {
         
         /// <summary>
-        /// btnExportExcel control.
+        /// btnSaleOnSpecPdf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaleOnSpecPdf;
+        
+        /// <summary>
+        /// btnSaleOnSpecExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaleOnSpecExcel;
+        
+        /// <summary>
+        /// btnSaleOnSpec2Pdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaleOnSpec2Pdf;
+        
+        /// <summary>
+        /// btnSaleOnSpec2Excel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSaleOnSpec2Excel;
     }
 }
