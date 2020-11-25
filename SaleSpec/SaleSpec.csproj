@@ -6544,6 +6544,9 @@
     <Content Include="pages\Charts.aspx" />
     <Content Include="pages\home\default.aspx" />
     <Content Include="pages\home\PortChart.aspx" />
+    <Content Include="pages\masters\sendmail_architectsetup.html" />
+    <Content Include="pages\masters\sendmail_companysetup.html" />
+    <Content Include="pages\masters\sendmail_projectsetup.html" />
     <Content Include="pages\PortChart.aspx" />
     <Content Include="pages\report\activity_event.aspx" />
     <Content Include="pages\report\activity_reward.aspx" />
@@ -6559,6 +6562,9 @@
     <Content Include="pages\report\sendmail.aspx" />
     <Content Include="pages\report\sendmail.html" />
     <Content Include="pages\report\specintakeview.aspx" />
+    <Content Include="pages\report\verify-password-architectsetup.aspx" />
+    <Content Include="pages\report\verify-password-companysetup.aspx" />
+    <Content Include="pages\report\verify-password-projectsetup.aspx" />
     <Content Include="pages\report\verify-password-projectstatus.aspx" />
     <Content Include="pages\trans\company_srv.asmx" />
     <Content Include="pages\trans\DataServices.asmx" />
@@ -7043,6 +7049,12 @@
     <Compile Include="Class\GetDataInvitation.cs" />
     <Compile Include="Class\GetDataAttendance.cs" />
     <Compile Include="Class\GetActivityEvent.cs" />
+    <Compile Include="pages\reports\rptPrintProjectSetup.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintProjectSetup.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\reports\rptSalesOnSpec2.cs">
       <DependentUpon>rptSalesOnSpec2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -7267,6 +7279,27 @@
     </Compile>
     <Compile Include="pages\report\specintakeview.aspx.designer.cs">
       <DependentUpon>specintakeview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\verify-password-architectsetup.aspx.cs">
+      <DependentUpon>verify-password-architectsetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\verify-password-architectsetup.aspx.designer.cs">
+      <DependentUpon>verify-password-architectsetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\verify-password-companysetup.aspx.cs">
+      <DependentUpon>verify-password-companysetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\verify-password-companysetup.aspx.designer.cs">
+      <DependentUpon>verify-password-companysetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\verify-password-projectsetup.aspx.cs">
+      <DependentUpon>verify-password-projectsetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\verify-password-projectsetup.aspx.designer.cs">
+      <DependentUpon>verify-password-projectsetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\report\verify-password-projectstatus.aspx.cs">
       <DependentUpon>verify-password-projectstatus.aspx</DependentUpon>
@@ -8219,6 +8252,10 @@
     <EmbeddedResource Include="pages\reports\rptPrintNewProjectReportWithOption.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintNewProjectReportWithOption.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptPrintProjectSetup.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintProjectSetup.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\reports\rptPrintWeeklyReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

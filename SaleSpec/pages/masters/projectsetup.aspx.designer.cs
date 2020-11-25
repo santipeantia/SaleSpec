@@ -13,24 +13,6 @@ namespace SaleSpec.pages.masters {
     public partial class projectsetup {
         
         /// <summary>
-        /// btnDownload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownload;
-        
-        /// <summary>
-        /// btnExportExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
-        
-        /// <summary>
         /// btnSaveNewData control.
         /// </summary>
         /// <remarks>
@@ -56,5 +38,23 @@ namespace SaleSpec.pages.masters {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnDeleteData;
+        
+        /// <summary>
+        /// btnSendmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSendmail;
+        
+        /// <summary>
+        /// btnConfirmed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmed;
     }
 }

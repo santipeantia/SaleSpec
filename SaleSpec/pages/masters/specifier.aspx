@@ -1,16 +1,161 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="specifier.aspx.cs" Inherits="SaleSpec.pages.masters.specifier" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <!-- Header content -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="../trans/jquery-1.11.2.min.js"></script>
+
+    <script>
+        document.addEventListener("keyup", function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+
+        function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+        function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+
+        setInterval("AccessClipboardData()", 300);
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                Swal.fire(
+                    'This page is protected..!',
+                    'Do not copy or export data.',
+                    'error'
+                )
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "C" key
+                if (e.ctrlKey && e.keyCode == 67) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+
+                // "F" key
+                if (e.altKey && e.keyCode == 70) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "P" key
+                if (e.ctrlKey && e.keyCode == 80) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "V" key
+                if (e.ctrlKey && e.keyCode == 86) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "F12" key
+                if (event.keyCode == 123) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not open source tag.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+
+    </script>
+
+    <!-- Header content -->
     <section class="content-header">
         <h1>Specifier Setup
             <small>Control panel</small>
         </h1>
     </section>
 
-            <!-- Main content -->
+    <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-         <%= strMsgAlert %>
+        <%= strMsgAlert %>
 
         <div class="row">
             <div class="col-xs-12">
@@ -39,7 +184,7 @@
                                     <td>FirstName</td>
                                     <td>LastName</td>
                                     <td>Description</td>
-                                    <td class="hidden">EmpCode</td> 
+                                    <td class="hidden">EmpCode</td>
                                     <th style="width: 20px; text-align: center;">#</th>
                                     <th style="width: 20px; text-align: center;">#</th>
                                 </tr>
@@ -69,7 +214,7 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4">SpecID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtSpecID" name="txtSpecID" placeholder="" value=""  required>
+                                    <input type="text" class="form-control input input-sm" id="txtSpecID" name="txtSpecID" placeholder="" value="" required>
                                 </div>
                             </div>
 
@@ -97,7 +242,7 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4">EmpCode</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtEmpCode" name="txtEmpCode" placeholder="" value="" >
+                                    <input type="text" class="form-control input input-sm" id="txtEmpCode" name="txtEmpCode" placeholder="" value="">
                                 </div>
                             </div>
 
@@ -128,7 +273,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnSaveNewData" onserverclick="btnSaveNewData_click" runat="server" >Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="btnSaveNewData" onserverclick="btnSaveNewData_click" runat="server">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -176,7 +321,7 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4">EmpCode</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtEmpCodeEdit" name="txtEmpCodeEdit" placeholder="" value="" >
+                                    <input type="text" class="form-control input input-sm" id="txtEmpCodeEdit" name="txtEmpCodeEdit" placeholder="" value="">
                                 </div>
                             </div>
 
@@ -207,7 +352,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitEdit" class="btn btn-primary" onclick="ValidateUpdate()">Save Changes</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnUpdateDate" onserverclick="btnUpdateData_click" runat="server" >Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="btnUpdateDate" onserverclick="btnUpdateData_click" runat="server">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -255,7 +400,7 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4">EmpCode</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm" id="txtEmpCodeDel" name="txtEmpCodeDel" placeholder="" value="" >
+                                    <input type="text" class="form-control input input-sm" id="txtEmpCodeDel" name="txtEmpCodeDel" placeholder="" value="">
                                 </div>
                             </div>
 
@@ -286,7 +431,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitDel" class="btn btn-danger" onclick="ValidateDelete()">Delete Confirm</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnDeleteData" onserverclick="btnDeleteData_click" runat="server" >Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="btnDeleteData" onserverclick="btnDeleteData_click" runat="server">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -302,20 +447,20 @@
                     </div>
                     <div class="modal-body">
 
-                                <table id="tableActiveNew" class="table table-bordered table-striped table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Descript</th>
-                                            <th>Details</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%= strTblActive %>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <table id="tableActiveNew" class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descript</th>
+                                    <th>Details</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%= strTblActive %>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -325,7 +470,7 @@
             </div>
         </div>
 
-         <!-- /.modal myModalActive not in use -->
+        <!-- /.modal myModalActive not in use -->
         <div class="modal modal-default fade" id="myModalActive">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -335,19 +480,19 @@
                     </div>
                     <div class="modal-body">
 
-                                <table id="tableActive" class="table table-bordered table-striped table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Descript</th>
-                                            <th>Details</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%= strTblActive %>
+                        <table id="tableActive" class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descript</th>
+                                    <th>Details</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%= strTblActive %>
 
-                                      <%--  <tr>
+                                <%--  <tr>
                                             <td>0</td>
                                             <td>Not Active</td>
                                             <td>Not in use or status is holding</td>
@@ -368,10 +513,10 @@
                                             <td style="width: 20px; text-align: center;">
                                                 <a href="#" data-toggle="modal" class="" title="แก้ไข"><span class='glyphicon glyphicon-edit text-green'></span></a></td>
                                         </tr>
-                                        --%>
-                                    </tbody>
-                                </table>
-                            </div>
+                                --%>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -455,7 +600,7 @@
                         console.log(rIndex + "  :  " + cIndex);
 
                         if (this.cellIndex == 3) {
-                            var strStatusID= tableActive.rows[rIndex].cells[0].innerHTML;
+                            var strStatusID = tableActive.rows[rIndex].cells[0].innerHTML;
                             var strStatusDesc = tableActive.rows[rIndex].cells[1].innerHTML;
                             var strDetail = tableActive.rows[rIndex].cells[2].innerHTML;
 
@@ -523,7 +668,7 @@
                 var str1 = document.getElementById("txtSpecID").value;
                 var str2 = document.getElementById("txtFirstName").value;
                 var str3 = document.getElementById("txtLastName").value;
-                if (str1 != '' && str2 != '' && str3 !='') {
+                if (str1 != '' && str2 != '' && str3 != '') {
                     document.getElementById("<%=  btnSaveNewData.ClientID %>").click();
                 }
             }
@@ -544,8 +689,8 @@
                 var str = document.getElementById("txtSpecIDDel").value;
                 if (str != '') {
                     document.getElementById("<%= btnDeleteData.ClientID %>").click();
-                    }
                 }
+            }
         </script>
     </section>
 

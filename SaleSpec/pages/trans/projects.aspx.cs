@@ -55,7 +55,7 @@ namespace SaleSpec.pages.trans
                 int eMonth = 12; // int.Parse(Convert.ToDateTime(datepickerend.Value).ToString("MM"));
 
                 ssql = "SELECT top(20) ProjectID, ProjectYear, ProjectMonth, ProjectName, CompanyName, Location, MainCons, RefRfDf, " +
-                       "        ProjStep, ProductType, RefProfile, Quantity, RefType, DeliveryDate, Drawing, Status, TypeID, SaleSpec " +
+                       "        ProjStep, ProductType, RefProfile, Quantity, RefType, DeliveryDate, Drawing, StatusID, TypeID, SaleSpec " +
                        "FROM    adProjects " +
                        "WHERE (ProjectYear >='" + sYear + "' and ProjectMonth >= '" + sMonth + "') and  (ProjectYear <='" + eYear + "' and ProjectMonth <= '" + eMonth + "') ";
 
@@ -74,7 +74,7 @@ namespace SaleSpec.pages.trans
                         string strLocation = dt.Rows[i]["Location"].ToString();
                         string strTypeID = dt.Rows[i]["TypeID"].ToString();
                         string strSaleSpec = dt.Rows[i]["SaleSpec"].ToString();
-                        string strStatus = dt.Rows[i]["Status"].ToString();
+                        string strStatus = dt.Rows[i]["StatusID"].ToString();
 
                         strTblDetail += "<tr> " +
                                         "     <td> "+ strProjectID + "-"+ i + " </td> " +

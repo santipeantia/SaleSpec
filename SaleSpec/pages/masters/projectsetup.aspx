@@ -1,6 +1,149 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="projectsetup.aspx.cs" Inherits="SaleSpec.pages.masters.projectsetup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="../trans/jquery-1.11.2.min.js"></script>
+
+    <script>
+        document.addEventListener("keyup", function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+
+        function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+        function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+
+        setInterval("AccessClipboardData()", 300);
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                Swal.fire(
+                    'This page is protected..!',
+                    'Do not copy or export data.',
+                    'error'
+                )
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "C" key
+                if (e.ctrlKey && e.keyCode == 67) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+
+                // "F" key
+                if (e.altKey && e.keyCode == 70) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "P" key
+                if (e.ctrlKey && e.keyCode == 80) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "V" key
+                if (e.ctrlKey && e.keyCode == 86) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "F12" key
+                if (event.keyCode == 123) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not open source tag.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+
+    </script>
+
     <script>
         $(document).ready(function () {
             // in case insert data new project
@@ -515,6 +658,26 @@
             // ** End in case insert data delete project
             //***********************************************//
 
+            var btnExportExcel = $('#btnExportExcel')
+            btnExportExcel.click(function () {
+
+                //$('#btnConfirmed').removeAttr('disabled');
+                $('#txtRepOpt').val('EXCEL');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
+
+            var btnExportPDF = $('#btnExportPDF')
+            btnExportPDF.click(function () {
+
+                //$('#btnConfirmed').removeAttr('disabled');
+                $('#txtRepOpt').val('PDF');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
+
 
         });
     </script>
@@ -542,9 +705,12 @@
                                 <i class="fa fa-plus"></i>
                             </button>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" id="btnDownload" runat="server" onserverclick="btnDownload_click" ><i class="fa fa-download"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click"><i class="fa fa-table"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" id="btnDownload" onclick="window.print()" ><i class="fa fa-download"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" id="btnExportPDF"><i class="fa fa-file-pdf-o"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" ><i class="fa fa-table"></i></button>
+                                
+                                <input type="text" class="form-control input input-sm txtLabel hidden" id="txtRepOpt" name="txtRepOpt" value="">
+                               
                             </div>
                         </div>
                     </div>
@@ -1340,6 +1506,41 @@
             </div>
         </div>
 
+
+        <!-- /.modal myModalVerifyPassword -->
+        <div class="modal modal-default fade" id="myModalVerifyPassword">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Request Email</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="post clearfix">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Enter Your Email</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer clearfix">
+                        <%--<asp:Button ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="" />--%>
+                        <button class="btn btn-default hidden" id="btnSendmail" runat="server" onserverclick="btnSendMail_Click" >Send Mail</button>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server" onclick="sendMail()">Submit Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <script>
             function openModal() {
 
@@ -1623,6 +1824,12 @@
                     }
                 }
             }
+
+            function sendMail() {
+                
+                document.getElementById("<%= btnSendmail.ClientID %>").click();
+                //$('#btnConfirmed').attr('disabled', 'disabled');
+             }
         </script>
     </section>
 

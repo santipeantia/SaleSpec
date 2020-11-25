@@ -166,6 +166,19 @@
         }
     </style>
 
+  <style media="print">
+        @page {
+            size: auto; /* auto is the current printer page size */
+            margin: 0mm; /* this affects the margin in the printer settings */
+        }
+
+        body {
+            background-color: #FFFFFF;
+            /*border: solid 1px black ;*/
+            margin-left: 1000px; /* the margin on the content before printing */
+        }
+    </style>
+
 </head>
 
 <body onselect="return true" onload="screenZoom()" class="hold-transition skin-blue-light sidebar-mini fixed ">

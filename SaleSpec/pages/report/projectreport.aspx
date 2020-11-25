@@ -371,92 +371,91 @@
 
             }
 
-            //window.onload = function () {
-            //    document.addEventListener("contextmenu", function (e) {
-            //        Swal.fire(
-            //            'This page is protected..!',
-            //            'Do not copy or export data.',
-            //            'error'
-            //        )
-            //        e.preventDefault();
-            //    }, false);
-            //    document.addEventListener("keydown", function (e) {
-            //        //document.onkeydown = function(e) {
-            //        // "C" key
-            //        if (e.ctrlKey && e.keyCode == 67) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not copy or export data.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //        // "I" key
-            //        if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not copy or export data.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //        // "J" key
-            //        if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not copy or export data.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //        // "S" key + macOS
-            //        if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not copy or export data.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //        // "U" key
-            //        if (e.ctrlKey && e.keyCode == 85) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not copy or export data.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //        // "V" key
-            //        if (e.ctrlKey && e.keyCode == 86) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not copy or export data.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //        // "F12" key
-            //        if (event.keyCode == 123) {
-            //            Swal.fire(
-            //                'This page is protected..!',
-            //                'Do not open source tag.',
-            //                'error'
-            //            )
-            //            disabledEvent(e);
-            //        }
-            //    }, false);
-
-            //    function disabledEvent(e) {
-            //        if (e.stopPropagation) {
-            //            e.stopPropagation();
-            //        } else if (window.event) {
-            //            window.event.cancelBubble = true;
-            //        }
-            //        e.preventDefault();
-            //        return false;
-            //    }
-            //};
+           window.onload = function () {
+                document.addEventListener("contextmenu", function (e) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    e.preventDefault();
+                }, false);
+                document.addEventListener("keydown", function (e) {
+                    //document.onkeydown = function(e) {
+                    // "C" key
+                    if (e.ctrlKey && e.keyCode == 67) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not copy or export data.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                    // "I" key
+                    if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not copy or export data.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                    // "J" key
+                    if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not copy or export data.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                    // "S" key + macOS
+                    if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not copy or export data.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                    // "U" key
+                    if (e.ctrlKey && e.keyCode == 85) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not copy or export data.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                    // "V" key
+                    if (e.ctrlKey && e.keyCode == 86) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not copy or export data.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                    // "F12" key
+                    if (event.keyCode == 123) {
+                        Swal.fire(
+                            'This page is protected..!',
+                            'Do not open source tag.',
+                            'error'
+                        )
+                        disabledEvent(e);
+                    }
+                }, false);
+                function disabledEvent(e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                    e.preventDefault();
+                    return false;
+                }
+            };
 
         </script>
 

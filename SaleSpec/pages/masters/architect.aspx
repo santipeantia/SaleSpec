@@ -1,6 +1,150 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="architect.aspx.cs" Inherits="SaleSpec.pages.masters.architect" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <script src="../trans/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="../trans/jquery-1.11.2.min.js"></script>
+
+    <script>
+        document.addEventListener("keyup", function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+
+        function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+        function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+
+        setInterval("AccessClipboardData()", 300);
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                Swal.fire(
+                    'This page is protected..!',
+                    'Do not copy or export data.',
+                    'error'
+                )
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "C" key
+                if (e.ctrlKey && e.keyCode == 67) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+
+                // "F" key
+                if (e.altKey && e.keyCode == 70) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "P" key
+                if (e.ctrlKey && e.keyCode == 80) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "V" key
+                if (e.ctrlKey && e.keyCode == 86) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "F12" key
+                if (event.keyCode == 123) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not open source tag.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+
+    </script>
+
     <script>
         $(document).ready(function () {
             var selectStatusConIDDDL = $('#selectStatusConID');
@@ -139,7 +283,23 @@
             });
 
 
-           
+             var btnExportExcel = $('#btnExportExcel')
+            btnExportExcel.click(function () {
+
+                $('#txtRepOpt').val('EXCEL');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
+
+            var btnExportPDF = $('#btnExportPDF')
+            btnExportPDF.click(function () {
+
+                $('#txtRepOpt').val('PDF');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
 
 
         });
@@ -151,10 +311,10 @@
         </h1>
     </section>
 
-        <!-- Main content -->
+    <!-- Main content -->
     <section class="content">
         <!-- Small boxes (Stat box) -->
-         <%= strMsgAlert %>
+        <%= strMsgAlert %>
 
         <div class="row">
             <div class="col-xs-12">
@@ -168,9 +328,12 @@
                             </button>
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" runat="server" onserverclick="btnDownload_click"><i class="fa fa-download"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click"><i class="fa fa-table"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download" id="btnDownload" onclick="window.print()" ><i class="fa fa-download"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" id="btnExportPDF"><i class="fa fa-file-pdf-o"></i></button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" ><i class="fa fa-table"></i></button>
+                                
+                                <input type="text" class="form-control input input-sm txtLabel hidden" id="txtRepOpt" name="txtRepOpt" value="">
+
                             </div>
                         </div>
                     </div>
@@ -202,7 +365,6 @@
                             <tbody>
 
                                 <%= strTblDetail %>
-
                             </tbody>
 
                         </table>
@@ -226,7 +388,8 @@
                             <div class="row hidden" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Architect ID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectID" name="txtArchitectID" placeholder="" value="" ></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectID" name="txtArchitectID" placeholder="" value="">
+                                </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
@@ -245,10 +408,11 @@
 
                             <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                                 <div class="col-md-4">
-                                    <label class="txtLabel">Company</label></div>
+                                    <label class="txtLabel">Company</label>
+                                </div>
                                 <div class="col-md-8">
                                     <div class="txtLabel">
-                                        <select id="selectCompany" name="selectCompany" class="form-control input-sm"  style="width: 100%">
+                                        <select id="selectCompany" name="selectCompany" class="form-control input-sm" style="width: 100%">
                                         </select>
                                     </div>
                                 </div>
@@ -284,7 +448,7 @@
                                 <div class="col-md-4 txtLabel">Address</div>
                                 <div class="col-md-8">
                                     <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" ></textarea>
+                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress"></textarea>
                                 </div>
                             </div>
 
@@ -323,10 +487,11 @@
 
                             <div class="row" style="margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label class="txtLabel">StatusConID</label></div>
+                                    <label class="txtLabel">StatusConID</label>
+                                </div>
                                 <div class="col-md-8">
                                     <div class="txtLabel">
-                                        <select id="selectStatusConID" name="selectStatusConID" class="form-control input-sm"  style="width: 100%">
+                                        <select id="selectStatusConID" name="selectStatusConID" class="form-control input-sm" style="width: 100%">
                                         </select>
                                     </div>
                                 </div>
@@ -335,7 +500,7 @@
                             <div class="row" style="margin-top: 5px">
                                 <div class="col-md-4 txtLabel">Port</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPort" name="txtPort" placeholder="" value="" >
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPort" name="txtPort" placeholder="" value="">
                                 </div>
                             </div>
 
@@ -345,7 +510,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitNew" class="btn btn-primary" onclick="ValidateSave()">Save Changes</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnSaveNewData" onserverclick="btnSaveNewData_click" runat="server" >Save Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="btnSaveNewData" onserverclick="btnSaveNewData_click" runat="server">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -365,7 +530,8 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Architect ID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDEdit" name="txtArchitectIDEdit" readonly placeholder="" value="" ></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDEdit" name="txtArchitectIDEdit" readonly placeholder="" value="">
+                                </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
@@ -384,10 +550,11 @@
 
                             <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                                 <div class="col-md-4">
-                                    <label class="txtLabel">Company</label></div>
+                                    <label class="txtLabel">Company</label>
+                                </div>
                                 <div class="col-md-8">
                                     <div class="txtLabel">
-                                        <select id="selectCompanyEdit" name="selectCompanyEdit" class="form-control input-sm"  style="width: 100%">
+                                        <select id="selectCompanyEdit" name="selectCompanyEdit" class="form-control input-sm" style="width: 100%">
                                         </select>
                                     </div>
                                 </div>
@@ -415,7 +582,7 @@
                             <div class="row" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Position</div>
                                 <div class="col-md-8">
-                                    
+
                                     <input type="text" class="form-control input input-sm txtLabel" id="txtPositionEdit" name="txtPositionEdit" placeholder="" value="" required>
                                 </div>
                             </div>
@@ -424,7 +591,7 @@
                                 <div class="col-md-4 txtLabel">Address</div>
                                 <div class="col-md-8">
                                     <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit" ></textarea>
+                                    <textarea cols="40" rows="2" class="form-control input input-sm txtLabel" id="txtAddressEdit" name="txtAddressEdit"></textarea>
                                 </div>
                             </div>
 
@@ -463,19 +630,20 @@
 
                             <div class="row" style="margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label class="txtLabel">StatusConID</label></div>
+                                    <label class="txtLabel">StatusConID</label>
+                                </div>
                                 <div class="col-md-8">
                                     <div class="txtLabel">
-                                        <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm"  style="width: 100%">
+                                        <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
-                             <div class="row" style="margin-top: 5px">
+                            <div class="row" style="margin-top: 5px">
                                 <div class="col-md-4 txtLabel">Port</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPortEdit" name="txtPortEdit" placeholder="" value="" >
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPortEdit" name="txtPortEdit" placeholder="" value="">
                                 </div>
                             </div>
                         </div>
@@ -484,7 +652,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitUpdate" class="btn btn-primary" onclick="ValidateUpdate()">Update Changes</button>
-                        <button type="button" class="btn btn-primary hidden" id="btnUpdateData" onserverclick="btnUpdateData_click" runat="server" >Update Changes</button>
+                        <button type="button" class="btn btn-primary hidden" id="btnUpdateData" onserverclick="btnUpdateData_click" runat="server">Update Changes</button>
                     </div>
                 </div>
             </div>
@@ -504,7 +672,8 @@
                             <div class="row hidden" style="margin-bottom: 5px">
                                 <div class="col-md-4 txtLabel">Architect ID</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDDel" name="txtArchitectIDDel" placeholder="" value="" ></div>
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtArchitectIDDel" name="txtArchitectIDDel" placeholder="" value="">
+                                </div>
                             </div>
 
                             <div class="row" style="margin-bottom: 5px">
@@ -523,7 +692,8 @@
 
                             <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                                 <div class="col-md-4">
-                                    <label class="txtLabel">Company</label></div>
+                                    <label class="txtLabel">Company</label>
+                                </div>
                                 <div class="col-md-8">
                                     <div class="txtLabel">
                                         <select id="selectCompanyDel" name="selectCompanyDel" class="form-control input-sm" disabled style="width: 100%">
@@ -562,7 +732,7 @@
                                 <div class="col-md-4 txtLabel">Address</div>
                                 <div class="col-md-8">
                                     <%--<input type="text" class="form-control input input-sm txtLabel" id="txtAddress" name="txtAddress" placeholder="" value="" required>--%>
-                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddressDel" disabled name="txtAddressDel" ></textarea>
+                                    <textarea cols="40" rows="3" class="form-control input input-sm txtLabel" id="txtAddressDel" disabled name="txtAddressDel"></textarea>
                                 </div>
                             </div>
 
@@ -589,7 +759,8 @@
 
                             <div class="row" style="margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label class="txtLabel">StatusConID</label></div>
+                                    <label class="txtLabel">StatusConID</label>
+                                </div>
                                 <div class="col-md-8">
                                     <div class="txtLabel">
                                         <select id="selectStatusConIDDel" name="selectStatusConIDDel" class="form-control input-sm" disabled style="width: 100%">
@@ -598,10 +769,10 @@
                                 </div>
                             </div>
 
-                             <div class="row" style="margin-top: 5px">
+                            <div class="row" style="margin-top: 5px">
                                 <div class="col-md-4 txtLabel">Port</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPortDel" name="txtPortDel" placeholder="" value="" readonly >
+                                    <input type="text" class="form-control input input-sm txtLabel" id="txtPortDel" name="txtPortDel" placeholder="" value="" readonly>
                                 </div>
                             </div>
 
@@ -611,7 +782,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="btnSubmitDelete" class="btn btn-danger" onclick="ValidateDelete()">Delete Confirme</button>
-                        <button type="button" class="btn btn-danger hidden" id="btnDeleteData" onserverclick="btnDeleteData_click" runat="server" >Delete Confirme</button>
+                        <button type="button" class="btn btn-danger hidden" id="btnDeleteData" onserverclick="btnDeleteData_click" runat="server">Delete Confirme</button>
                     </div>
                 </div>
             </div>
@@ -627,20 +798,20 @@
                     </div>
                     <div class="modal-body">
 
-                                <table id="tableActiveNew" class="table table-bordered table-striped table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Descript</th>
-                                            <th>Details</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%= strTblActive %>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <table id="tableActiveNew" class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descript</th>
+                                    <th>Details</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%= strTblActive %>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -650,7 +821,7 @@
             </div>
         </div>
 
-         <!-- /.modal myModalActive not in use -->
+        <!-- /.modal myModalActive not in use -->
         <div class="modal modal-default fade" id="myModalActive">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -660,19 +831,19 @@
                     </div>
                     <div class="modal-body">
 
-                                <table id="tableActive" class="table table-bordered table-striped table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Descript</th>
-                                            <th>Details</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%= strTblActive %>
+                        <table id="tableActive" class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descript</th>
+                                    <th>Details</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%= strTblActive %>
 
-                                      <%--  <tr>
+                                <%--  <tr>
                                             <td>0</td>
                                             <td>Not Active</td>
                                             <td>Not in use or status is holding</td>
@@ -693,16 +864,49 @@
                                             <td style="width: 20px; text-align: center;">
                                                 <a href="#" data-toggle="modal" class="" title="แก้ไข"><span class='glyphicon glyphicon-edit text-green'></span></a></td>
                                         </tr>
-                                        --%>
-                                    </tbody>
-                                </table>
-                            </div>
+                                --%>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
+            </div>
+        </div>
+
+        <!-- /.modal myModalVerifyPassword -->
+        <div class="modal modal-default fade" id="myModalVerifyPassword">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Request Email</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="post clearfix">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Enter Your Email</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer clearfix">
+                        <%--<asp:Button ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="" />--%>
+                        <button class="btn btn-default hidden" id="btnSendmail" runat="server" onserverclick="btnSendMail_Click" >Send Mail</button>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server" onclick="sendMail()">Submit Request</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -739,10 +943,10 @@
                             var strVal16 = table.rows[rIndex].cells[16].innerHTML; //Port
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
-                            $('#selectCompanyEdit').val(strVal0); 
+                            $('#selectCompanyEdit').val(strVal0);
                             $('#selectCompanyEdit').change();
 
-                            $('#selectGradeIDEdit').val(strVal12); 
+                            $('#selectGradeIDEdit').val(strVal12);
                             $('#selectGradeIDEdit').change();
 
                             document.getElementById("txtArchitectIDEdit").value = strVal1;
@@ -759,7 +963,7 @@
 
                             document.getElementById("datebirthdayedit").value = strVal15;
 
-                            $('#selectStatusConIDEdit').val(strVal10); 
+                            $('#selectStatusConIDEdit').val(strVal10);
                             $('#selectStatusConIDEdit').change();
 
                             document.getElementById("txtPortEdit").value = strVal16;
@@ -787,10 +991,10 @@
                             var strVal16 = table.rows[rIndex].cells[16].innerHTML; //Port
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
-                            $('#selectCompanyDel').val(strVal0); 
+                            $('#selectCompanyDel').val(strVal0);
                             $('#selectCompanyDel').change();
 
-                            $('#selectGradeIDDel').val(strVal12); 
+                            $('#selectGradeIDDel').val(strVal12);
                             $('#selectGradeIDDel').change();
 
                             document.getElementById("txtArchitectIDDel").value = strVal1;
@@ -803,7 +1007,7 @@
                             document.getElementById("txtMobileDel").value = strVal8;
                             document.getElementById("txtEmailDel").value = strVal9;
 
-                            $('#selectStatusConIDDel').val(strVal10); 
+                            $('#selectStatusConIDDel').val(strVal10);
                             $('#selectStatusConIDDel').change();
 
                             document.getElementById("txtPortDel").value = strVal16;
@@ -828,7 +1032,7 @@
                         console.log(rIndex + "  :  " + cIndex);
 
                         if (this.cellIndex == 3) {
-                            var strStatusID= tableActive.rows[rIndex].cells[0].innerHTML;
+                            var strStatusID = tableActive.rows[rIndex].cells[0].innerHTML;
                             var strStatusDesc = tableActive.rows[rIndex].cells[1].innerHTML;
                             var strDetail = tableActive.rows[rIndex].cells[2].innerHTML;
 
@@ -875,7 +1079,7 @@
 
                 //alert(str1);
 
-                if (str1 != '' && str2 != '' && str3 !='') {
+                if (str1 != '' && str2 != '' && str3 != '') {
                     document.getElementById("<%=  btnSaveNewData.ClientID %>").click();
                 }
             }
@@ -884,7 +1088,7 @@
                 var str1 = document.getElementById("txtArchitectIDEdit").value;
                 //var str2 = document.getElementById("txtGradeDescEdit").value;
                 //var str3 = document.getElementById("txtGradeDetailEdit").value;
-                if (str1 != '' ) {
+                if (str1 != '') {
                     {
                         document.getElementById("<%= btnUpdateData.ClientID %>").click();
                     }
@@ -896,8 +1100,12 @@
                 var str = document.getElementById("txtArchitectIDDel").value;
                 if (str != '') {
                     document.getElementById("<%= btnDeleteData.ClientID %>").click();
-                    }
                 }
+            }
+
+            function sendMail() {                
+                document.getElementById("<%= btnSendmail.ClientID %>").click();
+             }
         </script>
     </section>
 

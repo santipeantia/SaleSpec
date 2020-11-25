@@ -1,5 +1,149 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="companyreport.aspx.cs" Inherits="SaleSpec.pages.trans.companyreport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="../trans/jquery-1.11.2.min.js"></script>
+
+    <script>
+        document.addEventListener("keyup", function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+
+        function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+        function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+
+        setInterval("AccessClipboardData()", 300);
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                Swal.fire(
+                    'This page is protected..!',
+                    'Do not copy or export data.',
+                    'error'
+                )
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "C" key
+                if (e.ctrlKey && e.keyCode == 67) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+
+                // "F" key
+                if (e.altKey && e.keyCode == 70) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "P" key
+                if (e.ctrlKey && e.keyCode == 80) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "V" key
+                if (e.ctrlKey && e.keyCode == 86) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "F12" key
+                if (event.keyCode == 123) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not open source tag.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+
+    </script>
+
     <!-- Header content -->
     <section class="content-header">
         <h1>Company Report

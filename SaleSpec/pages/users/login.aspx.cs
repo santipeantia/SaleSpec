@@ -43,12 +43,13 @@ public partial class pages_users_login : System.Web.UI.Page
     {
         try
             {
-                string strUserName = Request.Form["inpUserName"];
-                string strPassWord = Request.Form["inpPassWord"];
+            string strUserName = Request.Form["inpUserName"];
+            string strPassWord = Request.Form["inpPassWord"];
 
-                string encassword = encryptpass(strPassWord);
+            string encassword = encryptpass(strPassWord);
+            //string decassword = Decryptdata(strPassWord);
 
-                ssql = "SELECT	a.UserID, a.EmpCode, a.Password, b.id, b.sEmpID, b.sEmpOrgLevel2, c.sEngName, " +
+            ssql = "SELECT	a.UserID, a.EmpCode, a.Password, b.id, b.sEmpID, b.sEmpOrgLevel2, c.sEngName, " +
                         "        b.sEmpNamePrefix, b.sEmpFirstName, b.sEmpLastName, b.sEmpEngNamePrefix,  " +
                         "        b.sEmpEngFirstName, b.sEmpEngLastName, b.sEmpNickName " +
                         "FROM    adUserLogin a left join " +
@@ -124,17 +125,17 @@ public partial class pages_users_login : System.Web.UI.Page
     //    return strmsg;
     //}
 
-    //public static string Decryptdata(string encryptpwd)
-    //{
-    //    string decryptpwd = string.Empty;
-    //    UTF8Encoding encodepwd = new UTF8Encoding();
-    //    Decoder Decode = encodepwd.GetDecoder();
-    //    byte[] todecode_byte = Convert.FromBase64String(encryptpwd);
-    //    int charCount = Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
-    //    char[] decoded_char = new char[charCount];
-    //    Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
-    //    decryptpwd = new String(decoded_char);
-    //    return decryptpwd;
-    //}
+    public static string Decryptdata(string encryptpwd)
+    {
+        string decryptpwd = string.Empty;
+        UTF8Encoding encodepwd = new UTF8Encoding();
+        Decoder Decode = encodepwd.GetDecoder();
+        byte[] todecode_byte = Convert.FromBase64String(encryptpwd);
+        int charCount = Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+        char[] decoded_char = new char[charCount];
+        Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+        decryptpwd = new String(decoded_char);
+        return decryptpwd;
+    }
 
 }
