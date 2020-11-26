@@ -64,14 +64,16 @@ namespace SaleSpec.pages.report
                 ssql = "select a.id, a.ArchitecID, a.CompanyID, cm.CompanyName, a.Name, a.FirstName, a.LastName, a.NickName, a.Position " +
                         "	, a.Address, a.phone, a.Mobile, a.Email, a.StatusConID, a.CreatedDate, a.UpdatedDate, a.GradeID, cn.ConDesc " +
                         "	, cn.ConDesc2,  ps.PositionNameTH, ps.PositionNameEN, gd.GradeDesc, gd.GradeDetail " +
-                        "	, (select top 1 ' in year ' + convert(nvarchar(10), inYear) from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as inYear,  " +
-                        "                            (select top 1 level_desc from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as level_desc " +
-                        "	, (select Port from vw_ArchitectPortOwner p where p.ArchitecID=a.ArchitecID) as Port  " +
+                        "	, (select top 1 ' in year ' + convert(nvarchar(10), inYear) from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as inYear " +
+                        "   , (select top 1 level_desc from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as level_desc " +
+                        //"	, (select Port from vw_ArchitectPortOwner p where p.ArchitecID=a.ArchitecID) as Port  " +
+                        "   , p.port as Port " +
                         "from adArchitecture a  left    join " +
                         "   adCompany cm on a.CompanyID = cm.CompanyID left join  " +
                         "   adStatusConfirm cn on a.StatusConID = cn.ConDesc left join  " +
                         "   adGrade gd on a.GradeID = gd.GradeID left join  " +
-                        "   adPositions ps on a.Position = ps.PositionID ";
+                        "   adPositions ps on a.Position = ps.PositionID left join " +
+                        "   vw_ArchitectPortOwner p on a.ArchitecID=p.ArchitecID ";
 
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);

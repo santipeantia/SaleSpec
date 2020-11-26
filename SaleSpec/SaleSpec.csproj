@@ -6559,6 +6559,7 @@
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\report\jquery.table2excel.js" />
     <Content Include="pages\report\newprojectreport.aspx" />
+    <Content Include="pages\report\sendmail_saleweeklyreport.html" />
     <Content Include="pages\report\sendmail.aspx" />
     <Content Include="pages\report\sendmail.html" />
     <Content Include="pages\report\specintakeview.aspx" />

@@ -493,8 +493,8 @@ namespace SaleSpec.pages.masters
 
                     mail.From = new MailAddress("no-reply@ampelite.co.th");
                     mail.To.Add(strEmail);
-                    mail.Bcc.Add("santi@ampelite.co.th");
-                    //mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
+                    //mail.Bcc.Add("santi@ampelite.co.th");
+                    mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
 
                     mail.Subject = "Request Verify Password for Architecture Setup Report";
                     mail.Body = strMailBody;
