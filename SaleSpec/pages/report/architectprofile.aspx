@@ -1,6 +1,151 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SaleSpec.Master" AutoEventWireup="true" CodeBehind="architectprofile.aspx.cs" Inherits="SaleSpec.pages.report.architectprofile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script>
+        document.addEventListener("keyup", function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+
+        function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+        function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+
+        setInterval("AccessClipboardData()", 300);
+
+        window.onload = function () {
+            document.addEventListener("contextmenu", function (e) {
+                Swal.fire(
+                    'This page is protected..!',
+                    'Do not copy or export data.',
+                    'error'
+                )
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "C" key
+                if (e.ctrlKey && e.keyCode == 67) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+
+                // "F" key
+                if (e.altKey && e.keyCode == 70) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "P" key
+                if (e.ctrlKey && e.keyCode == 80) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "V" key
+                if (e.ctrlKey && e.keyCode == 86) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "F12" key
+                if (event.keyCode == 123) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not open source tag.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        };
+
+    </script>
+
+
     <!-- Header content -->
     <section class="content-header">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
@@ -164,7 +309,7 @@
                         //    $('#selectEvent').val('');
                         //    return;
                         //}
-                                         
+
 
                         $.ajax({
                             url: 'DataServicesArchitectProfile.asmx/GetInsertRewardEvent',
@@ -199,9 +344,9 @@
                             }
                         });
 
-                        
 
-                       $('#modal-event').modal('hide');
+
+                        $('#modal-event').modal('hide');
 
                         //clear all data input
                         $('#txtdetails').val('');
@@ -237,8 +382,8 @@
 
                     if (rIndex != 0 & cIndex == 3 || cIndex == 5 || cIndex == 16 || cIndex == 17) {
 
-                       //openEvent();                        
-                        
+                        //openEvent();                        
+
                         var strval1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)'); //id
                         var strval2 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(2)'); //event_id	
                         var strval3 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(3)'); //event_desc	
@@ -279,16 +424,16 @@
                                 $(data).each(function (index, item) {
                                     selectActivity.append($('<option/>', { value: item.act_id, text: item.act_desc }));
                                     selectActivity.val(strval2.text().replace(' ', ''));
-                                    selectActivity.change();                                    
+                                    selectActivity.change();
                                 });
                             }
                         });
 
                         getAttendance();
-                       
+
                         $('#txtdetails').val(strval6.text() + strval7.text() + strval8.text() + strval9.text() + strval10.text());
-                        $('#datepickertrans').val(strval15.text().replace(' ', ''));   
-                                               
+                        $('#datepickertrans').val(strval15.text().replace(' ', ''));
+
                         var selectInvitation = $('#selectInvitation');
                         $.ajax({
                             url: 'DataServicesArchitectProfile.asmx/GetInvitation',
@@ -326,9 +471,9 @@
 
                         $("#modal-event").modal({ backdrop: false });
                         $('[id=modal-event]').modal('show');
-                                              
 
-                
+
+
 
 
                     } else if (rIndex != 0 & cIndex == 18) {
@@ -364,7 +509,7 @@
                                             }, 1000);
                                         }
                                     });
-                                
+
                                 }
                             })
                         <%--var strVal1 = $("#tableReward").find('tr:eq(' + rIndex + ')').find('td:eq(1)');
@@ -418,7 +563,7 @@
                         },
                         dataType: 'json',
                         complete: function (response) {
-                           // alert("Data was succesfully captured");
+                            // alert("Data was succesfully captured");
                             getLevelHistory();
                             $('[id=modal-level]').modal('hide');
                         }
@@ -449,7 +594,8 @@
                     var selectEventDDL = $('#selectEvent');
                     $.ajax({
                         url: 'DataServicesArchitectProfile.asmx/GetEventTypeID',
-                        data: { strid: strid
+                        data: {
+                            strid: strid
                         },
                         method: 'post',
                         dataType: 'json',
@@ -461,7 +607,7 @@
                                 selectEventDDL.change();
                             });
                         }
-                    });                   
+                    });
 
                 });
 
@@ -941,7 +1087,7 @@
                             <div class="col-md-8">
                                 <span class="txtLabel">
                                     <select class="form-control input-sm" style="width: 100%" id="selectActivity" name="selectActivity">
-                                </select>
+                                    </select>
                                 </span>
                             </div>
                         </div>
@@ -1095,7 +1241,7 @@
                 $('#txtremark').val('');
                 $('#datepickertrans').val('');
 
-                var selectActivity= $('#selectActivity');
+                var selectActivity = $('#selectActivity');
                 $.ajax({
                     url: 'DataServicesArchitectProfile.asmx/GetEventActivity',
                     method: 'post',
@@ -1137,7 +1283,7 @@
             }
 
             function getAttendance() {
-                var selectInvitation= $('#selectInvitation');
+                var selectInvitation = $('#selectInvitation');
                 $.ajax({
                     url: 'DataServicesArchitectProfile.asmx/GetInvitation',
                     method: 'post',
@@ -1151,7 +1297,7 @@
                     }
                 });
 
-                var selectAttendance= $('#selectAttendance');
+                var selectAttendance = $('#selectAttendance');
                 $.ajax({
                     url: 'DataServicesArchitectProfile.asmx/GetAttendance',
                     method: 'post',
@@ -1221,7 +1367,7 @@
                 var txtArchitectID = $('#txtArchitectIDEdit');
                 var txtFirstName = $('#txtFirstNameEdit');
                 var txtLastName = $('#txtLastNameEdit');
-                var fullname = $('#fullname');                
+                var fullname = $('#fullname');
 
                 fullname.text(txtFirstName.val() + ' ' + txtLastName.val());
 

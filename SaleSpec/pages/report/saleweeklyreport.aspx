@@ -62,7 +62,7 @@
         }
     </style>
 
-  <%--  <script>
+    <script>
         document.addEventListener("keyup", function (e) {
             var keyCode = e.keyCode ? e.keyCode : e.which;
             if (keyCode == 44) {
@@ -201,7 +201,7 @@
             }
         };
 
-    </script>--%>
+    </script>
 
     <script>
        
