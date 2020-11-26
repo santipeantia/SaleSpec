@@ -36,6 +36,7 @@ namespace SaleSpec.pages.report
         public string strTblDetail = "";
         public string strPortOption = "";
         public string strStatus = "";
+        public string swid = "";
 
         public string strUser = "sa";
         public string strPassword = "AmpelCloud@2020";
@@ -44,7 +45,13 @@ namespace SaleSpec.pages.report
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                //swid = Request.QueryString["wid"].ToString();
+            }
+            catch
+            {
+            }
         }
 
         protected void btnVerify_Click(object sender, EventArgs e)

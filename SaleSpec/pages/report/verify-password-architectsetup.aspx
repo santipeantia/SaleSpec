@@ -45,7 +45,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left; color: #00a0e9; font-size: 35px; padding: 0px 30px;">
-                           <input type="text" id="txtVerify" name="txtVerify" class="form-control text-center" style="font-size: 40px; font-weight: bold; color: orangered;" autocomplete="off" />
+                           <input type="text" id="txtVerify" name="txtVerify" value="<%= swid %>" class="form-control text-center" style="font-size: 40px; font-weight: bold; color: orangered;" autocomplete="off" />
                         </td>
                     </tr>
                     <tr>

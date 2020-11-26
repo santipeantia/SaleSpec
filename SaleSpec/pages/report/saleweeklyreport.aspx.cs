@@ -64,7 +64,14 @@ namespace SaleSpec.pages.report
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spGetDataSaleSpec", Conn);
+                if (Session["EmpCode"].ToString() == "118052" || Session["UserID"].ToString() == "316010" || Session["UserID"].ToString() == "506009" || Session["UserID"].ToString() == "519012")
+                {
+                    Comm = new SqlCommand("spGetDataSaleSpec", Conn);
+                }
+                else {
+                    Comm = new SqlCommand("spGetDataSaleSpecOwner", Conn);
+                }
+                    
                 Comm.CommandType = CommandType.StoredProcedure;
                 Comm.Parameters.AddWithValue("@SpecID", Session["EmpCode"].ToString());
 
@@ -679,14 +686,19 @@ namespace SaleSpec.pages.report
                 string strRepType = "EXCEL";
                 string strUserID = Session["UserID"].ToString();
                 string strEmpCode = Session["EmpCode"].ToString();
-                string strOpt = Request.Form["txtRepOpt"];
+                string strOpt = "EXCEL";
                 string strOptName = "Sales Weekly Report";
 
+                string strPort = Request.Form["selectSalePort"];
+                string strSdate = Request.Form["datepickertrans"];
+                string strEdate = Request.Form["datepickerend"];
+                string strSearch = Request.Form["Search"];
+                
                 string strVerifyCode = GenerateVerfifyCode();
 
                 string strFinalVerifyCode = GenerateVerfifyCode();
 
-                string strMailBody = GetMailBodyTempleate(strEmail, strRepType, strUserID, strEmpCode, strOpt, strOptName, strVerifyCode);
+                string strMailBody = GetMailBodyTempleate(strEmail, strRepType, strUserID, strEmpCode, strOpt, strOptName, strPort, strSdate, strEdate, strSearch, strVerifyCode);
 
                 //Response.Write("<script>alert('" + strRepType +":"+  strUserID + ":" + strEmpCode + ":" + strOpt + ":" + strOptName + ":" + strFrom + ":" + strEnd + ":" + strPort + ":" + strQty + ":" + strQtyTo + ":" + strSearch + ":" + strVerifyCode + "')</script>");
 
@@ -696,10 +708,10 @@ namespace SaleSpec.pages.report
 
                     mail.From = new MailAddress("no-reply@ampelite.co.th");
                     mail.To.Add(strEmail);
-                    mail.Bcc.Add("santi@ampelite.co.th");
-                    //mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
+                    //mail.Bcc.Add("santi@ampelite.co.th");
+                    mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
 
-                    mail.Subject = "Request Verify Password for Architecture Setup Report";
+                    mail.Subject = "Request Verify Password for Sale Weekly Report";
                     mail.Body = strMailBody;
                     mail.IsBodyHtml = true;
                     SmtpClient smtp = new SmtpClient("mail.ampelite.co.th");
@@ -713,14 +725,15 @@ namespace SaleSpec.pages.report
                 {
                 }
 
-                saveVerifyPassword(strEmail, strUserID, strEmpCode, strOpt, strOptName, strVerifyCode, strFullName, strRequestDate, strExpireDate);
+                saveVerifyPassword(strEmail, strUserID, strEmpCode, strOpt, strOptName, strPort, strSdate, strEdate, strSearch, strVerifyCode, strFullName, strRequestDate, strExpireDate);
 
                 Response.Write("<script>alert('Password timeout within 10 minute please check your email : " + strEmail + " ')</script>");
 
+                GetDataSalePort();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Response.Write("<script>alert('" + ex.Message + "')</script>");
             }
 
         }
@@ -737,7 +750,7 @@ namespace SaleSpec.pages.report
             return strFinalVerifyCode;
         }
 
-        protected string GetMailBodyTempleate(string strEmail, string strRepType, string strUserID, string strEmpCode, string strOpt, string strOptName, string strVerifyCode)
+        protected string GetMailBodyTempleate(string strEmail, string strRepType, string strUserID, string strEmpCode, string strOpt, string strOptName, string strPort, string sSdate, string sEdate, string sSearch,  string strVerifyCode)
         {
 
             //StringBuilder strBodyBuilder = new StringBuilder;
@@ -755,30 +768,42 @@ namespace SaleSpec.pages.report
             strBodyMail = strBodyMail.Replace("{strEmail}", strEmail);
             strBodyMail = strBodyMail.Replace("{strRepType}", strRepType);
             strBodyMail = strBodyMail.Replace("{strOptName}", strOptName);
+
+            strBodyMail = strBodyMail.Replace("{strFrom}", sSdate);
+            strBodyMail = strBodyMail.Replace("{strEnd}", sEdate);
+            strBodyMail = strBodyMail.Replace("{strPort}", strPort);
+            strBodyMail = strBodyMail.Replace("{strSearch}", sSearch);
+
             strBodyMail = strBodyMail.Replace("{strVerifyCode}", strVerifyCode);
             strBodyMail = strBodyMail.Replace("{strFullName}", strFullName);
             strBodyMail = strBodyMail.Replace("{strRequestDate}", strRequestDate);
             strBodyMail = strBodyMail.Replace("{strExpireDate}", strExpireDate);
 
-
-
             return strBodyMail;
         }
 
-        protected void saveVerifyPassword(string sEmail, string sUserID, string sEmpCode, string sRepOpt, string sRepOptName, string sVerifyCode, string sRequestedBy, string sRequestedDate, string sExpirationDate)
+        protected void saveVerifyPassword(string sEmail, string sUserID, string sEmpCode, string sRepOpt, string sRepOptName, 
+                                          string strPort, string strSdate, string strEdate, string strSearch,
+                                          string sVerifyCode, string sRequestedBy, string sRequestedDate, string sExpirationDate)
         {
             try
             {
                 Conn = new SqlConnection();
                 Conn = dbConn.OpenConn();
 
-                Comm = new SqlCommand("spVerifyReportArchitectSetup", Conn);
+                Comm = new SqlCommand("spVerifyReportSaleWeeklyReport", Conn);
                 Comm.CommandType = CommandType.StoredProcedure;
                 Comm.Parameters.AddWithValue("@Email", sEmail);
                 Comm.Parameters.AddWithValue("@UserID", sUserID);
                 Comm.Parameters.AddWithValue("@EmpCode", sEmpCode);
                 Comm.Parameters.AddWithValue("@RepOpt", sRepOpt);
                 Comm.Parameters.AddWithValue("@RepOptName", sRepOptName);
+
+                Comm.Parameters.AddWithValue("@sPort", strPort);
+                Comm.Parameters.AddWithValue("@sdate", strSdate);
+                Comm.Parameters.AddWithValue("@edate", strEdate);
+                Comm.Parameters.AddWithValue("@sSearch", strSearch);
+
                 Comm.Parameters.AddWithValue("@VerifyCode", sVerifyCode);
                 Comm.Parameters.AddWithValue("@RequestedBy", sRequestedBy);
                 Comm.Parameters.AddWithValue("@RequestedDate", sRequestedDate);

@@ -36,10 +36,17 @@ namespace SaleSpec.pages.report
         public string strTblDetail = "";
         public string strPortOption = "";
         public string strStatus = "";
+        public string swid = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                //swid = Request.QueryString["wid"].ToString();
+            }
+            catch
+            {
+            }
         }
 
         protected void btnVerify_Click(object sender, EventArgs e)

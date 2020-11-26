@@ -6563,6 +6563,7 @@
     <Content Include="pages\report\sendmail.aspx" />
     <Content Include="pages\report\sendmail.html" />
     <Content Include="pages\report\specintakeview.aspx" />
+    <Content Include="pages\report\verify-password-salesweeklyreport.aspx" />
     <Content Include="pages\report\verify-password-architectsetup.aspx" />
     <Content Include="pages\report\verify-password-companysetup.aspx" />
     <Content Include="pages\report\verify-password-projectsetup.aspx" />
@@ -7280,6 +7281,13 @@
     </Compile>
     <Compile Include="pages\report\specintakeview.aspx.designer.cs">
       <DependentUpon>specintakeview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\verify-password-salesweeklyreport.aspx.cs">
+      <DependentUpon>verify-password-salesweeklyreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\verify-password-salesweeklyreport.aspx.designer.cs">
+      <DependentUpon>verify-password-salesweeklyreport.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\report\verify-password-architectsetup.aspx.cs">
       <DependentUpon>verify-password-architectsetup.aspx</DependentUpon>
