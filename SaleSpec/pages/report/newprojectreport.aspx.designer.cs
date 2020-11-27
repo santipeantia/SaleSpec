@@ -13,39 +13,21 @@ namespace SaleSpec.pages.report {
     public partial class newprojectreport {
         
         /// <summary>
-        /// btnDownload control.
+        /// btnSendmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownload;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnSendmail;
         
         /// <summary>
-        /// btnExportExcel control.
+        /// btnConfirmed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
-        
-        /// <summary>
-        /// btnDownloadPDF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadPDF;
-        
-        /// <summary>
-        /// btnDownloadExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDownloadExcel;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmed;
     }
 }

@@ -7,6 +7,24 @@
             color: blue;
             
         }
+
+        .mypointer {
+            cursor: pointer;
+            color: darkblue;
+            font-weight: normal;
+        }
+
+        .mypointer:hover {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+        }
+
+        .mypointerid {
+            cursor: pointer;
+            color: darkblue;
+            font-weight: normal;
+        }
     </style>
 
    
@@ -40,114 +58,114 @@
         }
 
         setInterval("AccessClipboardData()", 300);
-        
+
         window.onload = function () {
-                document.addEventListener("contextmenu", function (e) {
+            document.addEventListener("contextmenu", function (e) {
+                Swal.fire(
+                    'This page is protected..!',
+                    'Do not copy or export data.',
+                    'error'
+                )
+                e.preventDefault();
+            }, false);
+            document.addEventListener("keydown", function (e) {
+                //document.onkeydown = function(e) {
+                // "C" key
+                if (e.ctrlKey && e.keyCode == 67) {
                     Swal.fire(
                         'This page is protected..!',
                         'Do not copy or export data.',
                         'error'
                     )
-                    e.preventDefault();
-                }, false);
-                document.addEventListener("keydown", function (e) {
-                    //document.onkeydown = function(e) {
-                    // "C" key
-                    if (e.ctrlKey && e.keyCode == 67) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-
-                   
-                    // "F" key
-                    if (e.altKey && e.keyCode==70) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "I" key
-                    if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "J" key
-                    if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-
-                     // "P" key
-                    if (e.ctrlKey && e.keyCode == 80) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-
-                    // "S" key + macOS
-                    if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "U" key
-                    if (e.ctrlKey && e.keyCode == 85) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                    // "V" key
-                    if (e.ctrlKey && e.keyCode == 86) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not copy or export data.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }                   
-
-                    // "F12" key
-                    if (event.keyCode == 123) {
-                        Swal.fire(
-                            'This page is protected..!',
-                            'Do not open source tag.',
-                            'error'
-                        )
-                        disabledEvent(e);
-                    }
-                }, false);
-                function disabledEvent(e) {
-                    if (e.stopPropagation) {
-                        e.stopPropagation();
-                    } else if (window.event) {
-                        window.event.cancelBubble = true;
-                    }
-                    e.preventDefault();
-                    return false;
+                    disabledEvent(e);
                 }
+
+
+                // "F" key
+                if (e.altKey && e.keyCode == 70) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "I" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "J" key
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "P" key
+                if (e.ctrlKey && e.keyCode == 80) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "S" key + macOS
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "U" key
+                if (e.ctrlKey && e.keyCode == 85) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+                // "V" key
+                if (e.ctrlKey && e.keyCode == 86) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not copy or export data.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+
+                // "F12" key
+                if (event.keyCode == 123) {
+                    Swal.fire(
+                        'This page is protected..!',
+                        'Do not open source tag.',
+                        'error'
+                    )
+                    disabledEvent(e);
+                }
+            }, false);
+            function disabledEvent(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                e.preventDefault();
+                return false;
+            }
         };
 
         $(document).ready(function () {
@@ -160,7 +178,7 @@
 
             var firstdate = yyyy + '-' + mm + '-01';
             var currentdate = yyyy + '-' + mm + '-' + dd;
-           
+
 
             var datepickertrans = $('#datepickertrans');
             var datepickerend = $('#datepickerend');
@@ -188,8 +206,8 @@
                         strSearch: strsearch
                     },
                     dataType: 'json',
-                    success: function (data) {                        
-                                               
+                    success: function (data) {
+
                         var table;
                         table = $('#tableWeeklyReportx').DataTable();
                         table.clear();
@@ -202,45 +220,61 @@
                         }
                         table.column(3).nodes().to$().addClass('hidden');
 
-                        table.column(2).nodes().to$().addClass('myclass');
-                        table.column(4).nodes().to$().addClass('myclass');
-                        table.column(5).nodes().to$().addClass('myclass');
-                        table.column(10).nodes().to$().addClass('myclass');
+                        table.column(2).nodes().to$().addClass('mypointer');
+                        table.column(4).nodes().to$().addClass('mypointer');
+                        table.column(5).nodes().to$().addClass('mypointer');
+                        table.column(10).nodes().to$().addClass('mypointer');
 
                         table.draw();
                         //$('#tableWeeklyReportx td:nth-of-type(5)').addClass('myclass');
                         //$('#tableWeeklyReportx td:nth-of-type(6)').addClass('myclass');
                         // $('#tableWeeklyReportx td:nth-child(4),th:nth-child(4)').hide();
 
-                        var example1 = $('#tableWeeklyReportx');
-                        $('#tableWeeklyReportx td').hover(function () {
-                            rIndex = this.parentElement.rowIndex;
-                            cIndex = this.cellIndex;
-                            if (rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10) {
-                                $(this).css('cursor', 'pointer');
-                                $(this).css('color', 'red');
-                                $(this).css('font-weight', 'bold');
-                            }
-                        }, function () {
-                            rIndex = this.parentElement.rowIndex;
-                            cIndex = this.cellIndex;
-                            if ((rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10)) {
-                                $(this).css("color", "blue");
-                                $(this).css('font-weight', 'normal');
-                            }
-                        });
+                        //var example1 = $('#tableWeeklyReportx');
+                        //$('#tableWeeklyReportx td').hover(function () {
+                        //    rIndex = this.parentElement.rowIndex;
+                        //    cIndex = this.cellIndex;
+                        //    if (rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10) {
+                        //        $(this).css('cursor', 'pointer');
+                        //        $(this).css('color', 'red');
+                        //        $(this).css('font-weight', 'bold');
+                        //    }
+                        //}, function () {
+                        //    rIndex = this.parentElement.rowIndex;
+                        //    cIndex = this.cellIndex;
+                        //    if ((rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10)) {
+                        //        $(this).css("color", "blue");
+                        //        $(this).css('font-weight', 'normal');
+                        //    }
+                        //});
 
-                        $('#tableWeeklyReportx td').click(function () {
+                        //$('#tableWeeklyReportx td').click(function () {
+                        //    rIndex = this.parentElement.rowIndex;
+                        //    cIndex = this.cellIndex;
+
+                        //    if (rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10) {
+                        //        var strarcid = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)').text().replace(' ', '');
+                        //        //alert(strarcid);
+                        //        window.open("../report/architectprofile.aspx?opt=rarc&id=" + strarcid + "", "_blank");
+                        //    }
+                        //});
+
+                         $('#tableWeeklyReportx tbody').on('click', 'td', function (e) {
+                            e.preventDefault();
+                            var rowIndex = $(this).parent().children().eq(4).text(); //  $(this).closest('.mypointer').text();
+                            var rowValue = $(this).parent().children().eq(5).text();
+                            console.log(rowIndex + ':' + rowValue);
+
                             rIndex = this.parentElement.rowIndex;
                             cIndex = this.cellIndex;
 
-                            if (rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10) {
+                            console.log('row : ' + rIndex + 'cell : ' + cIndex);
+
+                             if (rIndex != 0 & cIndex == 2 || cIndex == 4 || cIndex == 5 || cIndex == 10) {
                                 var strarcid = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(3)').text().replace(' ', '');
-                                //alert(strarcid);
                                 window.open("../report/architectprofile.aspx?opt=rarc&id=" + strarcid + "", "_blank");
                             }
                         });
-                        
 
 
                     }
@@ -248,8 +282,24 @@
             });
 
             //var btnExportExcel = $('#btnExportExcel');
-           
-           
+            var btnExportExcel = $('#btnExportExcel')
+            btnExportExcel.click(function () {
+
+                $('#txtRepOpt').val('EXCEL');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
+
+             var btnExportPDF = $('#btnExportPDF')
+            btnExportPDF.click(function () {
+
+                $('#txtRepOpt').val('PDF');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
+
 
         })
     </script>
@@ -282,9 +332,11 @@
                                             <i class="fa fa-plus"></i>
                                         </button>
                                         <span class="btn-group">
-                                            <button id="btnDownload" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF"><i class="fa fa-download"></i></button>
+                                            <%--<button id="btnDownload" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF"><i class="fa fa-download"></i></button>
                                             <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
                                             <button id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel"><i class="fa fa-table"></i></button>
+                                        --%>
+
                                         </span>
                                     </span>
 
@@ -396,10 +448,10 @@
                                         <label class="txtLabel">Reporting</label>
                                         <div>
                                             <span class="btn-group">
-                                                <button id="btnDownloadPDF" runat="server" onserverclick="btnDownloadPDF_click" type="button" class="btn btn-danger btn-flat btn-sm " style="width: 50%" data-toggle="tooltip" title="Print PDF">
+                                                <button id="btnExportPDF" type="button" class="btn btn-danger btn-flat btn-sm " style="width: 50%" title="Print PDF">
                                                     <i class="fa fa-file-pdf-o"></i> Print PDF</button>
-                                                <button id="btnDownloadExcel" runat="server" onserverclick="btnDownloadExcel_click" type="button" class="btn btn-success btn-flat btn-sm " style="width: 50%" data-toggle="tooltip" title="Print Excel">
-                                                    <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                               <button id="btnExportExcel" type="button" class="btn btn-success btn-flat btn-block btn-sm " style="width: 50%" title="Print Excel">
+                                                <i class="fa fa-file-excel-o"></i>Print Excel</button>
                                             </span>
                                         </div>
                                     </div>
@@ -447,6 +499,46 @@
                 </div>
             </div>
         </div>
+
+        <!-- /.modal myModalVerifyPassword -->
+        <div class="modal modal-default fade" id="myModalVerifyPassword">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Request Email</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="post clearfix">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Enter Your Email</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer clearfix">
+                        <input type="text" id="txtRepOpt" name="txtRepOpt" class="hidden" value="" />
+                        <%--<asp:Button ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="" />--%>
+                        <button class="btn btn-default hidden" id="btnSendmail" runat="server" onserverclick="btnSendMail_Click" >Send Mail</button>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server" onclick="sendMail()">Submit Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+             function sendMail() {                
+                document.getElementById("<%= btnSendmail.ClientID %>").click();
+             }
+        </script>
     </section>
 
     

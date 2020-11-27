@@ -6559,10 +6559,12 @@
     <Content Include="pages\report\jquery-1.11.2.min.js" />
     <Content Include="pages\report\jquery.table2excel.js" />
     <Content Include="pages\report\newprojectreport.aspx" />
+    <Content Include="pages\report\sendmail_newprojectreport.html" />
     <Content Include="pages\report\sendmail_saleweeklyreport.html" />
     <Content Include="pages\report\sendmail.aspx" />
     <Content Include="pages\report\sendmail.html" />
     <Content Include="pages\report\specintakeview.aspx" />
+    <Content Include="pages\report\verify-password-newprojectreport.aspx" />
     <Content Include="pages\report\verify-password-salesweeklyreport.aspx" />
     <Content Include="pages\report\verify-password-architectsetup.aspx" />
     <Content Include="pages\report\verify-password-companysetup.aspx" />
@@ -7281,6 +7283,13 @@
     </Compile>
     <Compile Include="pages\report\specintakeview.aspx.designer.cs">
       <DependentUpon>specintakeview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\report\verify-password-newprojectreport.aspx.cs">
+      <DependentUpon>verify-password-newprojectreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\report\verify-password-newprojectreport.aspx.designer.cs">
+      <DependentUpon>verify-password-newprojectreport.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\report\verify-password-salesweeklyreport.aspx.cs">
       <DependentUpon>verify-password-salesweeklyreport.aspx</DependentUpon>

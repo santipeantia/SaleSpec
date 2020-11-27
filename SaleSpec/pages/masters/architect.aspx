@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="../trans/jquery-1.11.2.min.js"></script>
 
-    <script>
+   <%-- <script>
         document.addEventListener("keyup", function (e) {
             var keyCode = e.keyCode ? e.keyCode : e.which;
             if (keyCode == 44) {
@@ -143,7 +143,7 @@
             }
         };
 
-    </script>
+    </script>--%>
 
     <script>
         $(document).ready(function () {
