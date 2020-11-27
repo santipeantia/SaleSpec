@@ -145,6 +145,8 @@
     </script>
 
 
+
+
     <!-- Header content -->
 
     <style>
@@ -398,10 +400,20 @@
 
                         }
                     });
-                }
-
-                
+                }                
             });
+
+            //var btnExportExcel = $('#btnExportExcel');
+            var btnExportExcel = $('#btnExportExcel')
+            btnExportExcel.click(function () {
+
+                $('#txtRepOpt').val('EXCEL');
+
+                $("#myModalVerifyPassword").modal({ backdrop: false });
+                $("#myModalVerifyPassword").modal("show");
+            });
+
+
         })
         </script>
 
@@ -439,9 +451,9 @@
                                             <i class="fa fa-plus"></i>
                                         </button>
                                         <span class="btn-group">
-                                            <button id="btnDownload" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF"><i class="fa fa-download"></i></button>
+                                            <%--<button id="btnDownload" runat="server" onserverclick="btnDownload_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF"><i class="fa fa-download"></i></button>
                                             <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
-                                            <button id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel"><i class="fa fa-table"></i></button>
+                                            <button id="btnExportExcel" runat="server" onserverclick="btnExportExcel_click" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel"><i class="fa fa-table"></i></button>--%>
                                         </span>
                                     </span>
 
@@ -551,10 +563,12 @@
                                     <div class="col-md-2">
                                         <label class="txtLabel">Reporting</label>
                                         <div>
-                                            <span class="">
-                                               
-                                                <button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click"  type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
-                                                    <i class="fa fa-file-excel-o"></i> Print Excel</button>
+                                            <span class="">                                               
+                                                <%--<button id="btnDownloadExcel" runat="server" onserverclick="btnExportExcelOption_click"  type="button" class="btn btn-success btn-flat btn-block btn-sm " data-toggle="tooltip" title="Print Excel">
+                                                    <i class="fa fa-file-excel-o"></i> Print Excel</button>--%>
+
+                                                <button id="btnExportExcel" type="button" class="btn btn-success btn-flat btn-block btn-sm " style="width: 50%" title="Print Excel">
+                                                <i class="fa fa-file-excel-o"></i>Print Excel</button>
                                             </span>
                                         </div>
                                     </div>
@@ -601,6 +615,47 @@
                 </div>
             </div>
         </div>
+
+        <!-- /.modal myModalVerifyPassword -->
+        <div class="modal modal-default fade" id="myModalVerifyPassword">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Request Email</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="post clearfix">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-md-4 txtLabel">Enter Your Email</div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input input-sm txtLabel" id="txtConfirmEmail" name="txtConfirmEmail" autocomplete="off" placeholder="" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer clearfix">
+                        <input type="text" id="txtRepOpt" name="txtRepOpt" class="hidden" value="" />
+                        <%--<asp:Button ID="btnSendMail" runat="server" Text="btnSendMail" OnClick="btnSendMail_Click" CssClass="" />--%>
+                        <button class="btn btn-default hidden" id="btnSendmail" runat="server" onserverclick="btnSendMail_Click" >Send Mail</button>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server" onclick="sendMail()">Submit Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+             function sendMail() {                
+                document.getElementById("<%= btnSendmail.ClientID %>").click();
+             }
+        </script>
+
     </section>
 
 </asp:Content>
