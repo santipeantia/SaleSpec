@@ -797,9 +797,11 @@
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
 
+                            var strRep2 = strVal2.replace(/&amp;/g, "&");
+
                             document.getElementById("txtCompanyIDEdit").value = strVal0;
                             document.getElementById("txtCompanyNameEdit").value = strVal1;
-                            document.getElementById("txtCompanyName2Edit").value = strVal2;
+                            document.getElementById("txtCompanyName2Edit").value = strRep2;
 
                             $('#selectCustTypeIDEdit').val(strVal3); 
                             $('#selectCustTypeIDEdit').change();
@@ -834,10 +836,11 @@
                             var strVal10 = table.rows[rIndex].cells[10].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
+                            var strRep2 = strVal2.replace(/&amp;/g, "&");
 
                             document.getElementById("txtCompanyIDDel").value = strVal0;
                             document.getElementById("txtCompanyNameDel").value = strVal1;
-                            document.getElementById("txtCompanyName2Del").value = strVal2;
+                            document.getElementById("txtCompanyName2Del").value = strRep2;
 
                             $('#selectCustTypeIDDel').val(strVal3); 
                             $('#selectCustTypeIDDel').change();
