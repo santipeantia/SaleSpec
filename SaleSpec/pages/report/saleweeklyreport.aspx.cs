@@ -727,7 +727,7 @@ namespace SaleSpec.pages.report
 
                 saveVerifyPassword(strEmail, strUserID, strEmpCode, strOpt, strOptName, strPort, strSdate, strEdate, strSearch, strVerifyCode, strFullName, strRequestDate, strExpireDate);
 
-                Response.Write("<script>alert('Password timeout within 10 minute please check your email : " + strEmail + " ')</script>");
+                Response.Write("<script>alert('Password timeout within 90 minute please check your email : " + strEmail + " ')</script>");
 
                 GetDataSalePort();
             }
@@ -763,7 +763,7 @@ namespace SaleSpec.pages.report
 
             strFullName = Session["sEmpEngFirstName"].ToString() + "  " + Session["sEmpEngLastName"].ToString();
             strRequestDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
-            strExpireDate = DateTime.Now.AddMinutes(10).ToString("yyyy-MM-dd HH:mm:ss tt");
+            strExpireDate = DateTime.Now.AddMinutes(90).ToString("yyyy-MM-dd HH:mm:ss tt");
 
             strBodyMail = strBodyMail.Replace("{strEmail}", strEmail);
             strBodyMail = strBodyMail.Replace("{strRepType}", strRepType);

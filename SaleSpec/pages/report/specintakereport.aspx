@@ -43,6 +43,13 @@
                 e.preventDefault();
             }, false);
             document.addEventListener("keydown", function (e) {
+                if (e.keyCode === 13) {
+                       // Cancel the default action, if needed
+                       e.preventDefault();
+                       // Trigger the button element with a click
+                       document.getElementById("btnJsonReport").click();
+                }
+
                 //document.onkeydown = function(e) {
                 // "C" key
                 if (e.ctrlKey && e.keyCode == 67) {
