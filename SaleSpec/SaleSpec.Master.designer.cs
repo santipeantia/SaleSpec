@@ -229,6 +229,15 @@ namespace SaleSpec {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl activityreward;
         
         /// <summary>
+        /// sosprojectmapping control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sosprojectmapping;
+        
+        /// <summary>
         /// transsaleonspec control.
         /// </summary>
         /// <remarks>
@@ -236,6 +245,15 @@ namespace SaleSpec {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl transsaleonspec;
+        
+        /// <summary>
+        /// sosfinalfilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sosfinalfilter;
         
         /// <summary>
         /// form1 control.

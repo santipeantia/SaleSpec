@@ -93,6 +93,44 @@ namespace SaleSpec.pages.report
 
         }
 
+        [WebMethod]
+        public void GetInvoiceListSOSMapping(string sdate)
+        {
+            List<cGetInvoiceListSOSMapping> objs = new List<cGetInvoiceListSOSMapping>();
+
+            SqlCommand comm = new SqlCommand("spGetInvoiceListSOS_R2", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@sdate", sdate);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetInvoiceListSOSMapping obj = new cGetInvoiceListSOSMapping();
+                obj.ID = rdr["ID"].ToString();
+                obj.DocuNo = rdr["DocuNo"].ToString();
+                obj.DocuDate = rdr["DocuDate"].ToString();
+                obj.CustPONo = rdr["CustPONo"].ToString();
+                obj.CustCode = rdr["CustCode"].ToString();
+                obj.CustName = rdr["CustName"].ToString();
+                obj.JobName = rdr["JobName"].ToString();
+                obj.GoodCode = rdr["GoodCode"].ToString();
+                obj.Model = rdr["Model"].ToString();
+                obj.EmpCode = rdr["EmpCode"].ToString();
+                obj.SaleName = rdr["SaleName"].ToString();
+                obj.Amount = rdr["Amount"].ToString();
+                obj.RentAmount = rdr["RentAmount"].ToString();
+                obj.TotalPrice = rdr["TotalPrice"].ToString();
+                obj.chk = rdr["chk"].ToString();
+                objs.Add(obj);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(objs));
+
+        }
+
     }
 }
 

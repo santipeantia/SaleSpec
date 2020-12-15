@@ -38,6 +38,9 @@
         routes.MapPageRoute("pages/trans/projects-update", "pages/trans/projects-update", "~/pages/trans/projects-update.aspx");
         routes.MapPageRoute("pages/trans/projects-update-status", "pages/trans/projects-update-status", "~/pages/trans/projects-update-status.aspx");
         routes.MapPageRoute("pages/trans/saleonspec", "pages/trans/saleonspec", "~/pages/trans/saleonspec.aspx");
+        routes.MapPageRoute("pages/trans/sosprojectmapping", "pages/trans/sosprojectmapping", "~/pages/trans/sosprojectmapping.aspx");
+        routes.MapPageRoute("pages/trans/saleonspecfilter", "pages/trans/saleonspecfilter", "~/pages/trans/saleonspecfilter.aspx");
+        
 
         routes.MapPageRoute("pages/report/saleweeklyreport", "pages/report/saleweeklyreport", "~/pages/report/saleweeklyreport.aspx");
         routes.MapPageRoute("pages/report/newprojectreport", "pages/report/newprojectreport", "~/pages/report/newprojectreport.aspx");

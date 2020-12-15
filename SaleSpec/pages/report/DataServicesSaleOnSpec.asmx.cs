@@ -69,7 +69,6 @@ namespace SaleSpec.pages.report
                 data.SaleCode = rdr["SaleCode"].ToString();
                 data.SaleName = rdr["SaleName"].ToString();
                 data.DocuDate = rdr["DocuDate"].ToString();
-                data.chkView = rdr["chkView"].ToString();
                 data.chkTrash = rdr["chkTrash"].ToString();
                 datas.Add(data);
             }
@@ -127,7 +126,6 @@ namespace SaleSpec.pages.report
                 data.SaleCode = rdr["SaleCode"].ToString();
                 data.SaleName = rdr["SaleName"].ToString();
                 data.DocuDate = rdr["DocuDate"].ToString();
-                data.chkView = rdr["chkView"].ToString();
                 data.chkTrash = rdr["chkTrash"].ToString();
                 datas.Add(data);
             }
@@ -159,6 +157,69 @@ namespace SaleSpec.pages.report
             comm.CommandTimeout = 1200;
             comm.Parameters.AddWithValue("@ProjectID", projectid);
             comm.Parameters.AddWithValue("@RefDocuNo", refdocno);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetssProjectMappingExcept(string docuno, string empid, string empname)
+        {
+            SqlCommand comm = new SqlCommand("spGetssProjectMappingExcept", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@docuno", docuno);
+            comm.Parameters.AddWithValue("@empid", empid);
+            comm.Parameters.AddWithValue("@empname", empname);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetssProjectMappingFilter()
+        {
+            List<cGetssProjectMappingFilter> datas = new List<cGetssProjectMappingFilter>();
+
+            SqlCommand comm = new SqlCommand("spGetssProjectMappingFilter", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetssProjectMappingFilter data = new cGetssProjectMappingFilter();
+
+                data.id = rdr["id"].ToString();
+                data.DocuNo = rdr["DocuNo"].ToString();
+                data.DocuDate = rdr["DocuDate"].ToString();
+                data.SendDate = rdr["SendDate"].ToString();
+                data.GoodCode = rdr["GoodCode"].ToString();
+                data.GoodName = rdr["GoodName"].ToString();
+                data.StockQty = rdr["StockQty"].ToString();
+                data.GoodPrice2 = rdr["GoodPrice2"].ToString();
+                data.GoodAmnt = rdr["GoodAmnt"].ToString();
+                data.CustCode = rdr["CustCode"].ToString();
+                data.CustName = rdr["CustName"].ToString();
+                data.ContactName = rdr["ContactName"].ToString();
+                data.EmpCode = rdr["EmpCode"].ToString();
+                data.EmpName = rdr["EmpName"].ToString();
+                data.chkTrash = rdr["chkTrash"].ToString();
+                datas.Add(data);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = int.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(datas));
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetssProjectFilterDelete(string docuno)
+        {
+            SqlCommand comm = new SqlCommand("spGetssProjectFilterDelete", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@docuno", docuno);
             comm.ExecuteNonQuery();
             conn.CloseConn();
         }

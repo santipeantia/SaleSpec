@@ -2,11 +2,17 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>--%>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <%--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>--%>
+    <%--<script src="jquery-1.11.2.min.js"></script>--%>
 
+    <%--<script src="https://smtpjs.com/v3/smtp.js"></script>--%>
+    <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>--%>
+    <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>--%>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="jquery-1.11.2.min.js"></script>
+    
     <style>
         .hide_column {
             display: none;
@@ -15,6 +21,16 @@
         #tblprojectlists i:hover {
             cursor: pointer;
         }
+
+         #tableSaleOnSpecFinal tr:hover {
+                color: red;
+                font-weight: bold;
+            }
+
+         #tableSaleOnSpec2 tr:hover {
+                color: red;
+                font-weight: bold;
+            }
 
         #tbltranswithoutsalesconsignee i:hover {
             cursor: pointer;
@@ -69,13 +85,12 @@
             color: blue;
             cursor: pointer;
         }
-         .myblue:hover {
+
+            .myblue:hover {
                 cursor: pointer;
                 color: red;
                 font-weight: bold;
             }
-
-
     </style>
 
     <script>
@@ -96,84 +111,84 @@
 
             });
 
-             var btnConfirm = $('#btnConfirm');
-                btnConfirm.click(function () {
-                    //alert('button confirm click');
-                    // declare variable table for assign attribute
-                    var table = $('#tblemployee').DataTable();
-                    var arr = [];
-                    var checkedvalues = table.$('input:checked').each(function () {
-                        arr.push($(this).attr('id'))
-                    });
-                    // convert array to string                    
+            var btnConfirm = $('#btnConfirm');
+            btnConfirm.click(function () {
+                //alert('button confirm click');
+                // declare variable table for assign attribute
+                var table = $('#tblemployee').DataTable();
+                var arr = [];
+                var checkedvalues = table.$('input:checked').each(function () {
+                    arr.push($(this).attr('id'))
+                });
+                // convert array to string                    
 
-                    arr = arr.toString();
-                    var empid = arr.split(",");
+                arr = arr.toString();
+                var empid = arr.split(",");
 
-                    $('#example-result').text(empid);
-                    //table.$('input:checked').removeAttr('checked');  
-                    var refdocno = $('#example-result').text();
-                    var projecid = $('#txtProjectId').val();
+                $('#example-result').text(empid);
+                //table.$('input:checked').removeAttr('checked');  
+                var refdocno = $('#example-result').text();
+                var projecid = $('#txtProjectId').val();
 
-                    
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, Go ahead..!'
-                    }).then((result) => {
-                        if (result.value) {                           
-                            $.ajax({
-                                url: '../report/DataServicesSaleOnSpec.asmx/GetssProjectMappingUpdate',
-                                method: 'POST',
-                                data: {
-                                    projectid: projecid,
-                                    refdocno: refdocno+','
-                                },
-                                dataType: 'json',
-                                complete: function (data) {
-                                    Swal.fire(
-                                        'Success!',
-                                        'Your data has been updated.',
-                                        'success')                                    
-                                }
-                            });
-                            //$('#txtRefDoc').val(xempid);
 
-                            $("#modal-refinvoice").modal("hide");
-                            
-                        }
-                    })                    
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Go ahead..!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: '../report/DataServicesSaleOnSpec.asmx/GetssProjectMappingUpdate',
+                            method: 'POST',
+                            data: {
+                                projectid: projecid,
+                                refdocno: refdocno + ','
+                            },
+                            dataType: 'json',
+                            complete: function (data) {
+                                Swal.fire(
+                                    'Success!',
+                                    'Your data has been updated.',
+                                    'success')
+                            }
+                        });
+                        //$('#txtRefDoc').val(xempid);
+
+                        $("#modal-refinvoice").modal("hide");
+
+                    }
+                })
+            });
+
+
+
+            var btnuncheck = $('#btnuncheck');
+            btnuncheck.click(function () {
+                //alert('uncheck..');
+                var table = $('#tblemployee').DataTable();
+                var checkedvalues = table.$('input:checked').each(function () {
+                    $(this).prop("checked", false);
                 });
 
+                $('#example-result').text('');
 
+            });
 
-                var btnuncheck = $('#btnuncheck');
-                btnuncheck.click(function () {
-                    //alert('uncheck..');
-                    var table = $('#tblemployee').DataTable();                    
-                    var checkedvalues = table.$('input:checked').each(function () {
-                        $(this).prop("checked", false);
-                    });
+            var btncheckedall = $('#btncheckedall')
+            btncheckedall.click(function () {
+                //alert('uncheck..');
+                var table = $('#tblemployee').DataTable();
 
-                    $('#example-result').text('');
-
+                $("input", table.rows({ search: 'applied' }).nodes()).each(function () {
+                    $(this).prop("checked", true);
                 });
 
-                var btncheckedall = $('#btncheckedall')
-                btncheckedall.click(function () {
-                    //alert('uncheck..');
-                    var table = $('#tblemployee').DataTable();    
-                    
-                    $("input", table.rows({ search: 'applied' }).nodes()).each(function () {
-                        $(this).prop("checked", true);
-                    });
-
-                    $('#example-result').text('');
-                });
+                $('#example-result').text('');
+            });
 
         });
 
@@ -190,34 +205,34 @@
                 },
                 datatype: 'json',
                 beforeSend: function () {
-                    $('#tableSaleOnSpec tr td').remove();
+                    $('#tableSaleOnSpecFinal tr td').remove();
                     $('#divSaleOnSpec').show();
                 },
                 success: function (data) {
                     var table;
-                    table = $('#tableSaleOnSpec').DataTable();
+                    table = $('#tableSaleOnSpecFinal').DataTable();
                     table.clear();
 
                     if (data != '') {
                         $.each(data, function (i, item) {
                             table.row.add([data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID, data[i].Name, data[i].sosMonth, data[i].ProjectYear
                                 , data[i].ProjectMonth, data[i].DocuNo, data[i].CustCode, data[i].CustName, data[i].ProjectId, data[i].ProjectName, data[i].GoodID
-                                , data[i].chkView, data[i].chkTrash, data[i].GoodName, data[i].ActQty, data[i].SpecQty, data[i].Amount, data[i].PerUnit, data[i].NetRF_B, data[i].NetCom, data[i].TotalSale
-                                , data[i].SaleCode, data[i].SaleName, data[i].DocuDate]);                           
+                                , data[i].GoodName, data[i].ActQty, data[i].SpecQty, data[i].Amount, data[i].PerUnit, data[i].NetRF_B, data[i].NetCom, data[i].TotalSale
+                                , data[i].SaleCode, data[i].SaleName, data[i].DocuDate, data[i].chkTrash]);
                         });
-                    }                   
+                    }
 
-                    table.column(5).nodes().to$().addClass('myblue');
-                    table.column(6).nodes().to$().addClass('myblue');
-                    table.column(8).nodes().to$().addClass('myblue');
-                    table.column(11).nodes().to$().addClass('myblue');
-                    table.column(13).nodes().to$().addClass('myblue');
-                    table.column(14).nodes().to$().addClass('myblue');
+                    //table.column(5).nodes().to$().addClass('myblue');
+                    //table.column(6).nodes().to$().addClass('myblue');
+                    //table.column(8).nodes().to$().addClass('myblue');
+                    //table.column(11).nodes().to$().addClass('myblue');
+                    //table.column(13).nodes().to$().addClass('myblue');
+                    //table.column(14).nodes().to$().addClass('myblue');
 
                     table.draw();
                     $('#divSaleOnSpec').hide();
-             
-                    $('#tableSaleOnSpec tbody').on('click', 'td', function (e) {
+
+                    $('#tableSaleOnSpecFinal tbody').on('click', 'td', function (e) {
                         e.preventDefault();
                         //$('#tableSaleOnSpec td').click(function () {
                         rIndex = this.parentElement.rowIndex;
@@ -225,19 +240,20 @@
 
                         //alert(rIndex);
 
-                        if (rIndex != 0 & cIndex == 11 || cIndex == 13) {
-                            var companyid = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(0)').text();
-                            var companyname = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(1)').text();
-                            var architectid = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(2)').text();
-                            var architectname = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(3)').text();
-                            var projectdue = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(4)').text();
-                            var projectid = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(10)').text();
-                            var projectname = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(11)').text();
-                            var actqty = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(16)').text();
-                            var salqty = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(17)').text();
+                        if (rIndex != 0 & cIndex == 24 ) {
+                            var companyid = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(0)').text();
+                            var companyname = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(1)').text();
+                            var architectid = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(2)').text();
+                            var architectname = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(3)').text();
+                            var projectdue = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(4)').text();
+                            var refdocno = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(7)').text();
+                            var projectid = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(10)').text();
+                            var projectname = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(11)').text();
+                            var actqty = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(16)').text();
+                            var salqty = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(17)').text();
 
-                            var salecode = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(23)').text();
-                            var salename = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(24)').text();
+                            var salecode = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(23)').text();
+                            var salename = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(24)').text();
 
                             console.log("Update : " + companyid + ":" + companyname + ":" + architectid + ":" + architectname + ":" + projectid + ":" + projectname + ":" + salecode + ":" + salename + ":" + projectdue);
 
@@ -251,32 +267,8 @@
                             $('#txtProjectDue').val(projectdue);
                             $('#txtPortName').val(salecode + " : " + salename);
 
-                            getDataInvoiceList(sdate, edate);
-
-                            $("#modal-refinvoice").modal({ backdrop: false });
-                            $('[id=modal-refinvoice]').modal('show');
-
-
-
-                        } else if (rIndex != 0 & cIndex == 14) {
-                            //alert(cIndex);
-
-                            var companyid = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(0)').text();
-                            var companyname = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(1)').text();
-                            var architectid = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(2)').text();
-                            var architectname = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(3)').text();
-                            var projectdue = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(4)').text();
-                            var refdocno = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(7)').text();
-
-                            var projectid = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(10)').text();
-                            var projectname = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(11)').text();
-                            var salecode = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(23)').text();
-                            var salename = $("#tableSaleOnSpec").find('tr:eq(' + rIndex + ')').find('td:eq(24)').text();
-
-                            console.log("Delete : " + companyid + ":" + companyname + ":" + architectid + ":" + architectname + ":" + projectid + ":" + projectname + ":" + salecode + ":" + salename + ":" + projectdue+":"+refdocno);
-
                             Swal.fire({
-                                title: 'Are you sure?',
+                                title: 'Delete '+ refdocno +', Are you sure..?',
                                 text: "You won't be able to revert this!",
                                 type: 'info',
                                 showCancelButton: true,
@@ -305,11 +297,12 @@
 
                                 }
                             })
-                        }
+                        }                         
                     });
                 }
             })
         };
+
 
         function getSaleOnSpecWithProject2(sdate, edate) {
 
@@ -336,17 +329,72 @@
                         $.each(data, function (i, item) {
                             table.row.add([data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID, data[i].Name, data[i].sosMonth, data[i].ProjectYear
                                 , data[i].ProjectMonth, data[i].DocuNo, data[i].CustCode, data[i].CustName, data[i].ProjectId, data[i].ProjectName, data[i].GoodID
-                                , data[i].chkView, data[i].chkTrash, data[i].GoodName, data[i].ActQty, data[i].SpecQty, data[i].Amount, data[i].PerUnit, data[i].NetRF_B, data[i].NetCom, data[i].TotalSale
-                                , data[i].SaleCode, data[i].SaleName, data[i].DocuDate]);
+                                , data[i].GoodName, data[i].ActQty, data[i].SpecQty, data[i].Amount, data[i].PerUnit, data[i].NetRF_B, data[i].NetCom, data[i].TotalSale
+                                , data[i].SaleCode, data[i].SaleName, data[i].DocuDate, data[i].chkTrash]);
                         });
                     }
 
                     table.draw();
-                    $('#tableSaleOnSpec2 td:nth-of-type(6)').addClass('myclassblue');  //ProjectYear
-                    $('#tableSaleOnSpec2 td:nth-of-type(7)').addClass('myclassblue');  //ProjectMonth
-                    $('#tableSaleOnSpec2 td:nth-of-type(9)').addClass('myclassblue');  //CustCode
-                    $('#tableSaleOnSpec2 td:nth-of-type(12)').addClass('myblue');  //ProjectId
-                    $('#tableSaleOnSpec2 td:nth-of-type(13)').addClass('myclassblue');  // GoodID
+                    //$('#tableSaleOnSpec2 td:nth-of-type(6)').addClass('myclassblue');  //ProjectYear
+                    //$('#tableSaleOnSpec2 td:nth-of-type(7)').addClass('myclassblue');  //ProjectMonth
+                    //$('#tableSaleOnSpec2 td:nth-of-type(9)').addClass('myclassblue');  //CustCode
+                    //$('#tableSaleOnSpec2 td:nth-of-type(12)').addClass('myblue');  //ProjectId
+                    //$('#tableSaleOnSpec2 td:nth-of-type(13)').addClass('myclassblue');  // GoodID
+
+
+                    $('#tableSaleOnSpec2 tbody').on('click', 'td', function (e) {
+                        e.preventDefault();
+                        //$('#tableSaleOnSpec td').click(function () {
+                        rIndex = this.parentElement.rowIndex;
+                        cIndex = this.cellIndex;
+
+                        //alert(rIndex);
+
+                        if (rIndex != 0 & cIndex == 24) {
+
+                          
+                            var firstname = '<%= Session["sEmpEngFirstName"] %>';
+                            var lastname = '<%= Session["sEmpEngLastName"] %>';
+                            var fullname = firstname +' '+ lastname;
+                           
+                            var empcode = '<%= Session["EmpCode"] %>';
+                            var refdocno = $("#tableSaleOnSpec2").find('tr:eq(' + rIndex + ')').find('td:eq(7)').text();
+
+                            console.log(firstname + ', ' + lastname + ', ' + refdocno)
+
+                             Swal.fire({
+                                title: 'Delete '+ refdocno +', Are you sure..?',
+                                text: "You won't be able to revert this!",
+                                type: 'info',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, Delete it..!'
+                            }).then((result) => {
+                                if (result.value) {
+                                    $.ajax({
+                                        url: '../report/DataServicesSaleOnSpec.asmx/GetssProjectMappingExcept',
+                                        method: 'POST',
+                                        data: {
+                                            docuno: refdocno,
+                                            empid: empcode,
+                                            empname: fullname
+                                        },
+                                        dataType: 'json',
+                                        complete: function (data) {
+                                            Swal.fire(
+                                                'Success!',
+                                                'Your data has been deleted..',
+                                                'success')
+                                        }
+                                    });
+
+                                    $('#btnReport').click();
+
+                                }
+                            })
+                        }
+                    })
 
                     $('#divSaleOnSpec2').hide();
                 }
@@ -354,36 +402,36 @@
         };
 
         function getDataInvoiceList(sdate, edate) {
-                $.ajax({
-                    url: '../report/DataServicesInvoiceList.asmx/GetInvoiceListSOS',
-                    method: 'post',
-                    data: {
-                        sdate: sdate,
-                        edate: edate
-                    },
-                    beforeSend: function () {
-                        $('#tblemployee tr td').remove();
-                        $("#loademployee").show();
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        var table;
-                        table = $('#tblemployee').DataTable();
-                        table.clear();
-                        if (data != '') {
-                            $.each(data, function (i, item) {
-                                table.row.add([data[i].InvNo, data[i].DocuDate, data[i].CustCode, data[i].CustName, data[i].EmpCode, data[i].SaleName, data[i].TotalPrice, data[i].chk]);
-                            });
-                        }
-                        else {
-                        }
-                        //finally draw into a table
-                        table.column(6).nodes().to$().addClass('myposition');
-                        table.draw();
-                        $("#loademployee").hide();
+            $.ajax({
+                url: '../report/DataServicesInvoiceList.asmx/GetInvoiceListSOS',
+                method: 'post',
+                data: {
+                    sdate: sdate,
+                    edate: edate
+                },
+                beforeSend: function () {
+                    $('#tblemployee tr td').remove();
+                    $("#loademployee").show();
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var table;
+                    table = $('#tblemployee').DataTable();
+                    table.clear();
+                    if (data != '') {
+                        $.each(data, function (i, item) {
+                            table.row.add([data[i].InvNo, data[i].DocuDate, data[i].CustCode, data[i].CustName, data[i].EmpCode, data[i].SaleName, data[i].TotalPrice, data[i].chk]);
+                        });
                     }
-                });
-            };
+                    else {
+                    }
+                    //finally draw into a table
+                    table.column(6).nodes().to$().addClass('myposition');
+                    table.draw();
+                    $("#loademployee").hide();
+                }
+            });
+        };
 
     </script>
 
@@ -413,8 +461,8 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print PDF" onclick="window.print()"><i class="fa fa-credit-card"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel" ><i class="fa fa-table"></i></button>
-                                
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print Excel" id="btnExportExcel"><i class="fa fa-table"></i></button>
+
                             </div>
                         </div>
                     </div>
@@ -473,8 +521,8 @@
                                                     <div class="cv-spinner" id="divSaleOnSpec">
                                                         <span class="spinner"></span>
                                                     </div>
-
-                                                    <table id="tableSaleOnSpec" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
+                                                   
+                                                    <table id="tableSaleOnSpecFinal" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
                                                         <thead>
                                                             <tr>
                                                                 <th>CompanyID</th>
@@ -489,9 +537,7 @@
                                                                 <th>CustName</th>
                                                                 <th>ProjectId</th>
                                                                 <th>ProjectName</th>
-                                                                <th>GoodID</th>
-                                                                <th style="width: 20px; text-align: center;">#</th>
-                                                                <th style="width: 20px; text-align: center;">#</th>
+                                                                <th>GoodID</th>                                                                
                                                                 <th>GoodName</th>
                                                                 <th>ActQty</th>
                                                                 <th>SpecQty</th>
@@ -503,12 +549,14 @@
                                                                 <th>SaleCode</th>
                                                                 <th>SaleName</th>
                                                                 <th>DocuDate</th>
+                                                                <th>#</th>
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         </tbody>
                                                     </table>
+                                                       
                                                 </div>
                                             </div>
                                         </div>
@@ -529,7 +577,7 @@
                                                     <div class="cv-spinner" id="divSaleOnSpec2">
                                                         <span class="spinner"></span>
                                                     </div>
-
+                                                   
                                                     <table id="tableSaleOnSpec2" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
                                                         <thead>
                                                             <tr>
@@ -545,9 +593,7 @@
                                                                 <th>CustName</th>
                                                                 <th>ProjectId</th>
                                                                 <th>ProjectName</th>
-                                                                <th>GoodID</th>
-                                                                <th style="width: 20px; text-align: center;">#</th>
-                                                                <th style="width: 20px; text-align: center;">#</th>
+                                                                <th>GoodID</th>                                                               
                                                                 <th>GoodName</th>
                                                                 <th>ActQty</th>
                                                                 <th>SpecQty</th>
@@ -559,11 +605,13 @@
                                                                 <th>SaleCode</th>
                                                                 <th>SaleName</th>
                                                                 <th>DocuDate</th>
+                                                                <th style="width: 20px; text-align: center;">#</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         </tbody>
                                                     </table>
+                                                        
                                                 </div>
                                             </div>
                                         </div>
@@ -638,10 +686,10 @@
                                                 </div>
                                             </div>
 
-                                        </div>                                        
-                                       
-                                         <br />
-                                        
+                                        </div>
+
+                                        <br />
+
                                         <div class="post">
                                             <table id="tblemployee" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
                                                 <thead>

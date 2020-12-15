@@ -6745,6 +6745,8 @@
     <Content Include="pages\trans\projects-update.aspx" />
     <Content Include="pages\trans\projects.aspx" />
     <Content Include="pages\trans\saleonspec.aspx" />
+    <Content Include="pages\trans\saleonspecfilter.aspx" />
+    <Content Include="pages\trans\sosprojectmapping.aspx" />
     <Content Include="pages\trans\WebForm1.aspx" />
     <Content Include="pages\trans\WebForm2.aspx" />
     <Content Include="pages\trans\WebForm3.aspx" />
@@ -7001,7 +7003,9 @@
       <DependentUpon>ChartData.tt</DependentUpon>
     </Compile>
     <Compile Include="cGetInvoiceList.cs" />
+    <Compile Include="cGetInvoiceListSOSMapping.cs" />
     <Compile Include="cGetSaleOnSpecFinal.cs" />
+    <Compile Include="cGetssProjectMappingFilter.cs" />
     <Compile Include="ChartData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7057,6 +7061,7 @@
     <Compile Include="Class\GetDataInvitation.cs" />
     <Compile Include="Class\GetDataAttendance.cs" />
     <Compile Include="Class\GetActivityEvent.cs" />
+    <Compile Include="GetSOSProjectMapping.cs" />
     <Compile Include="pages\reports\rptPrintProjectSetup.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7539,6 +7544,20 @@
     </Compile>
     <Compile Include="pages\trans\saleonspec.aspx.designer.cs">
       <DependentUpon>saleonspec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\saleonspecfilter.aspx.cs">
+      <DependentUpon>saleonspecfilter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\saleonspecfilter.aspx.designer.cs">
+      <DependentUpon>saleonspecfilter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\sosprojectmapping.aspx.cs">
+      <DependentUpon>sosprojectmapping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\sosprojectmapping.aspx.designer.cs">
+      <DependentUpon>sosprojectmapping.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

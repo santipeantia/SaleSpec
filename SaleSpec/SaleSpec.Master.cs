@@ -62,7 +62,9 @@ namespace SaleSpec
 
         public string strSaleOnSpecActive = "";
         public string strTextSaleOnspec = "";
+        public string strTextSOSMapping = "";
         public string strSaleOnSpecTrans = "";
+        public string strTextSaleOnspecFilter = "";
 
         //public string strTextPremiumGift = "";
         //public string strTextSurprise = "";
@@ -182,9 +184,10 @@ namespace SaleSpec
                 if (strOpt == "actev") { strActiveActivity = "active"; strTextReportEvent = "text-red"; return; } else { strActiveActivity = ""; strTextReportEvent = ""; }
                 if (strOpt == "actre") { strActiveActivity = "active"; strTextReportReward = "text-red"; return; } else { strActiveActivity = ""; strTextReportReward = ""; }
 
-
-
+                                
                 if (strOpt == "sos") { strSaleOnSpecActive = "active"; strTextSaleOnspec = "text-red"; return; } else { strSaleOnSpecActive = ""; strTextSaleOnspec = ""; }
+                if (strOpt == "sof") { strSaleOnSpecActive = "active"; strTextSaleOnspecFilter = "text-red"; return; } else { strSaleOnSpecActive = ""; strTextSaleOnspecFilter = ""; }
+                if (strOpt == "spm") { strSaleOnSpecActive = "active"; strTextSOSMapping = "text-red"; return; } else { strSaleOnSpecActive = ""; strTextSOSMapping = ""; }
 
 
                 if (strOpt == "rptswr") { strActiveReporting = "active"; strTextSaleWeeklyReport = "text-red"; return; } else { strActiveReporting = ""; strTextSaleWeeklyReport = ""; }
@@ -249,6 +252,8 @@ namespace SaleSpec
 
                        // if (xPage == "SaleOnSpec") { menusaleonspec.Visible = true; }
                         if (xPage == "trans/saleonspec") { transsaleonspec.Visible = true; }
+                        if (xPage == "trans/sosmapping") { sosprojectmapping.Visible = true; }
+                        if (xPage == "trans/saleonspecfilter") { sosfinalfilter.Visible = true; }
 
                         if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }
                         if (xPage == "report/newprojectreport") { reportnewproject.Visible = true; }

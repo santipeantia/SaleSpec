@@ -484,7 +484,7 @@ namespace SaleSpec.pages.report
                                             string Name, string Location, string ProdTypeID,
                                             string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate,
                                             string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2,
-                                            string Remark, string StepID, string StatusID, string ProjectID, string RefDocuNo)
+                                            string Remark, string StepID, string StatusID, string ProjectID, string RefDocuNo, string JobName)
         {
             //List<GetUpdateWeeklyReportViaSupervisor> companies = new List<GetUpdateWeeklyReportViaSupervisor>();
             using (SqlConnection conn = new SqlConnection(cs))
@@ -516,6 +516,7 @@ namespace SaleSpec.pages.report
                     SqlParameter param21 = new SqlParameter() { ParameterName = "@StatusID", Value = StatusID };
                     SqlParameter param22 = new SqlParameter() { ParameterName = "@ProjectID", Value = ProjectID };
                     SqlParameter param23 = new SqlParameter() { ParameterName = "@RefDocuNo", Value = RefDocuNo };
+                    SqlParameter param24 = new SqlParameter() { ParameterName = "@jobname", Value = JobName };
                     comm.Parameters.Add(param1);
                     comm.Parameters.Add(param2);
                     comm.Parameters.Add(param3);
@@ -539,6 +540,7 @@ namespace SaleSpec.pages.report
                     comm.Parameters.Add(param21);
                     comm.Parameters.Add(param22);
                     comm.Parameters.Add(param23);
+                    comm.Parameters.Add(param24);
                     comm.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -808,6 +810,73 @@ namespace SaleSpec.pages.report
             js.MaxJsonLength = Int32.MaxValue;
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(data));
+        }
+
+        [WebMethod]
+        public void GetSOSProjectMapping(string strOption, string strDateStart, string strDateEnd, string strUserID, string strQtyStart, string strQtyEnd, string strSearch)
+        {
+            List<GetSOSProjectMapping> projects = new List<GetSOSProjectMapping>();
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand comm = new SqlCommand("spGetSOSProjectMapping", conn);
+                comm.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = strOption };
+                SqlParameter param2 = new SqlParameter() { ParameterName = "@strDateStart", Value = strDateStart };
+                SqlParameter param3 = new SqlParameter() { ParameterName = "@strDateEnd", Value = strDateEnd };
+                SqlParameter param4 = new SqlParameter() { ParameterName = "@strUserID", Value = strUserID };
+                SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strQtyStart };
+                SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strQtyEnd };
+                SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strSearch };
+
+                comm.Parameters.Add(param1);
+                comm.Parameters.Add(param2);
+                comm.Parameters.Add(param3);
+                comm.Parameters.Add(param4);
+                comm.Parameters.Add(param5);
+                comm.Parameters.Add(param6);
+                comm.Parameters.Add(param7);
+
+                conn.Open();
+
+                SqlDataReader rdr = comm.ExecuteReader();
+                while (rdr.Read())
+                {
+                    GetSOSProjectMapping project = new GetSOSProjectMapping();
+
+                    project.ID = rdr["ID"].ToString();
+                    project.UserID = rdr["UserID"].ToString();
+                    project.WeekDate = rdr["WeekDate"].ToString();
+                    project.WeekTime = rdr["WeekTime"].ToString();
+                    project.CompanyName = rdr["CompanyName"].ToString();
+                    project.ArchitectID = rdr["ArchitecID"].ToString();
+                    project.Name = rdr["Name"].ToString();
+                    project.ProjectID = rdr["ProjectID"].ToString();
+                    project.ProjectName = rdr["ProjectName"].ToString();
+                    project.Location = rdr["Location"].ToString();
+                    project.ProdTypeID = rdr["ProdTypeID"].ToString();
+                    project.ProdTypeNameEN = rdr["ProdTypeNameEN"].ToString();
+                    project.ProdID = rdr["ProdID"].ToString();
+                    project.ProdNameEN = rdr["ProdNameEN"].ToString();
+                    project.ProfNameEN = rdr["ProfNameEN"].ToString();
+                    project.DeliveryDate = rdr["DeliveryDate"].ToString();
+                    project.NextVisitDate = rdr["NextVisitDate"].ToString();
+                    project.Quantity = rdr["Quantity"].ToString();
+                    project.StepNameA = rdr["StepNameA"].ToString();
+                    project.StepNameB = rdr["StepNameB"].ToString();
+                    project.RefWeekDate = rdr["RefWeekDate"].ToString();
+                    project.Ref1 = rdr["Ref1"].ToString();
+                    project.Ref2 = rdr["Ref2"].ToString();
+                    project.Ref3 = rdr["Ref3"].ToString();
+                    project.RefRemark = rdr["RefRemark"].ToString();
+                    project.StepID = rdr["StepID"].ToString();
+                    projects.Add(project);
+                }
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(projects));
         }
     }
 }

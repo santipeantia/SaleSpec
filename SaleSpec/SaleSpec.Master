@@ -389,9 +389,18 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li id="transsaleonspec" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
-                                    <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale on spec</span></a>
+                                <li id="sosprojectmapping" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/sosprojectmapping?opt=spm"><i class="fa fa-angle-right <%= strTextSOSMapping.ToString() %>"></i><span class="txtLabel <%= strTextSOSMapping.ToString() %>">SOS Project Mapping</span></a>
                                 </li>
+
+                                <li id="transsaleonspec" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale On Spec</span></a>
+                                </li>
+                                
+                                <li id="sosfinalfilter" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/saleonspecfilter?opt=sof"><i class="fa fa-angle-right <%= strTextSaleOnspecFilter.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspecFilter.ToString() %>">SOS Final Filter</span></a>
+                                </li>
+                                 
 
 
 
@@ -447,6 +456,7 @@
         <!-- ./wrapper -->
         <!-- jQuery 3 -->
         <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
         <!-- jQuery UI 1.11.4 -->
         <script src="../../bower_components/jquery-ui/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -632,6 +642,23 @@
                     'scrollX': true,
                     'autoWidth': true
                 })
+
+                $('#tblRefinvoice').DataTable({
+                    'iDisplayLength': 20,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [0, 4, 7, 9],
+                            className: "hide_column"
+                        }
+                    ]
+                })
                                 
                 $('#tableSaleOnSpec').DataTable({
                     //'iDisplayLength': 10,
@@ -664,6 +691,35 @@
                     'columnDefs': [
                         {
                             targets: [5,6,8, 10, 12],
+                            className: "hide_column"
+                        }
+                    ]
+                })
+
+                $('#tableSaleOnSpecFinal').DataTable({
+                    'iDisplayLength': 25,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true
+                })
+
+                
+                $('#tableSosProjectFilter').DataTable({
+                    'iDisplayLength': 25,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [3],
                             className: "hide_column"
                         }
                     ]
@@ -828,8 +884,12 @@
                 todayHighlight: true,
                 format: 'yyyy-mm-dd'
             });
-
-
+             $('#datesos').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            
 
 
 
