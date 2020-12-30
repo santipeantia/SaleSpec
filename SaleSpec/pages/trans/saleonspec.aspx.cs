@@ -30,6 +30,7 @@ namespace SaleSpec.pages.trans
         public string strTblActive = "";
 
         dbConnection dbConn = new dbConnection();
+        cGlobalVariable cryconn = new cGlobalVariable();
 
         ReportDocument rpt = new ReportDocument();
 
@@ -359,7 +360,7 @@ namespace SaleSpec.pages.trans
 
                 rpt = new ReportDocument();
                 rpt.Load(Server.MapPath("../reports/rptSalesOnSpec.rpt"));
-                rpt.SetDatabaseLogon("sa", "AmpelCloud@2020", "203.154.45.40", "db_salespec");
+                rpt.SetDatabaseLogon(cryconn.usrname,cryconn.usrpass, cryconn.servname, cryconn.sourcename);
                 rpt.SetParameterValue("@sdate", sdate);
                 rpt.SetParameterValue("@edate", edate);
                 rpt.SetParameterValue("namemonth", namemonth);
@@ -462,7 +463,7 @@ namespace SaleSpec.pages.trans
 
                 rpt = new ReportDocument();
                 rpt.Load(Server.MapPath("../reports/rptSalesOnSpec2.rpt"));
-                rpt.SetDatabaseLogon("sa", "AmpelCloud@2020", "203.154.45.40", "db_salespec");
+                rpt.SetDatabaseLogon(cryconn.usrname, cryconn.usrpass, cryconn.servname, cryconn.sourcename);
                 rpt.SetParameterValue("@sdate", sdate);
                 rpt.SetParameterValue("@edate", edate);
                 rpt.SetParameterValue("namemonth", namemonth);

@@ -2081,7 +2081,7 @@
 
                         }
                                                
-
+                        
                         console.log('id: ' + str1 + '\n' +
                             'WeekDate: ' + str2 + '\n' +
                             'WeekTime: ' + str3 + '\n' +
@@ -2105,7 +2105,7 @@
                             'StatusID: ' + $('#selectStatus').val() + '\n' +
                             'ProjectID: ' + $('#ProjectID').val() + '\n' +
                             'RefDocuNo: ' + str19 + '\n');
-
+                        //alert('get data service');
                         //Get update weekly report succeseed...
                         $.ajax({
                             url: '../report/DataServicesReporting.asmx/GetUpdateWeeklyReportViaSupervisor',

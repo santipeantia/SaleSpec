@@ -1685,7 +1685,7 @@
 
                                             <div class="row" style="margin-top: 5px;">
                                                 <div class="col-md-4">
-                                                    <label class="txtLabel">Process Step</label>
+                                                    <label class="txtLabel">Proess Step</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="txtLabel">
@@ -1708,10 +1708,10 @@
                                                     <div id="divErrorStatus" class="txtLabel text-red" style="display: none;">Please select at least one item..!</div>
                                                 </div>
 
-                                                <div class="col-md-1 hidden">
+                                                <div class="col-md-1 ">
                                                     <label class="txtLabel">Ref#Inv.</label>
                                                 </div>
-                                                <div class="col-md-4 hidden">
+                                                <div class="col-md-4 ">
                                                     <%-- <input type="text" class="form-control input input-sm txtLabel" id="txtRefDoc" name="txtRefDoc" readonly autocomplete="off" placeholder="" value="">
                                                     --%>
                                                     <div class="input-group">

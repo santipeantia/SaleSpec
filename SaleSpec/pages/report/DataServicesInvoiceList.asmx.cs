@@ -90,7 +90,6 @@ namespace SaleSpec.pages.report
             js.MaxJsonLength = Int32.MaxValue;
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(objs));
-
         }
 
         [WebMethod]

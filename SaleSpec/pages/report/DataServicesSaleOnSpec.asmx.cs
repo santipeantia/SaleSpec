@@ -23,11 +23,10 @@ namespace SaleSpec.pages.report
         //string cs = "server=203.154.45.40;database=DB_SaleSpec;uid=sa;pwd=AmpelCloud@2020;";
         dbConnection conn = new dbConnection();
 
-
         [WebMethod]
-        public void GetSaleOnSpecFinal(string sdate, string edate) {
+        public void GetSaleOnSpecFinal(string sdate, string edate)
+        {
             List<cGetSaleOnSpecFinal> datas = new List<cGetSaleOnSpecFinal>();
-
             SqlCommand comm = new SqlCommand("spSaleOnSpecFinal", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandTimeout = 1200;
@@ -44,7 +43,6 @@ namespace SaleSpec.pages.report
             while (rdr.Read())
             {
                 cGetSaleOnSpecFinal data = new cGetSaleOnSpecFinal();
-
                 data.CompanyID = rdr["CompanyID"].ToString();
                 data.CompanyName = rdr["CompanyName"].ToString();
                 data.ArchitecID = rdr["ArchitecID"].ToString();
@@ -68,7 +66,7 @@ namespace SaleSpec.pages.report
                 data.TotalSale = rdr["TotalSale"].ToString();
                 data.SaleCode = rdr["SaleCode"].ToString();
                 data.SaleName = rdr["SaleName"].ToString();
-                data.DocuDate = rdr["DocuDate"].ToString();
+                data.DocuDate = rdr["DocuDate"].ToString();           
                 data.chkTrash = rdr["chkTrash"].ToString();
                 datas.Add(data);
             }
@@ -84,7 +82,6 @@ namespace SaleSpec.pages.report
         public void GetSaleOnSpecFinalWithOutProject(string sdate, string edate)
         {
             List<cGetSaleOnSpecFinal> datas = new List<cGetSaleOnSpecFinal>();
-
             SqlCommand comm = new SqlCommand("spSaleOnSpecFinalWithoutPort", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandTimeout = 1200;
@@ -101,7 +98,6 @@ namespace SaleSpec.pages.report
             while (rdr.Read())
             {
                 cGetSaleOnSpecFinal data = new cGetSaleOnSpecFinal();
-
                 data.CompanyID = rdr["CompanyID"].ToString();
                 data.CompanyName = rdr["CompanyName"].ToString();
                 data.ArchitecID = rdr["ArchitecID"].ToString();
@@ -148,7 +144,7 @@ namespace SaleSpec.pages.report
             comm.ExecuteNonQuery();
             conn.CloseConn();
         }
-        
+
         [WebMethod]
         public void GetssProjectMappingDelete(string projectid, string refdocno)
         {

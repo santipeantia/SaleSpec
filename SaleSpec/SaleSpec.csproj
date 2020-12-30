@@ -7002,10 +7002,11 @@
     <Compile Include="adCharts.cs">
       <DependentUpon>ChartData.tt</DependentUpon>
     </Compile>
-    <Compile Include="cGetInvoiceList.cs" />
-    <Compile Include="cGetInvoiceListSOSMapping.cs" />
-    <Compile Include="cGetSaleOnSpecFinal.cs" />
-    <Compile Include="cGetssProjectMappingFilter.cs" />
+    <Compile Include="Class\cGetssProjectMappingFilter.cs" />
+    <Compile Include="Class\cGlobalVariable.cs" />
+    <Compile Include="Class\cGetInvoiceListSOSMapping.cs" />
+    <Compile Include="Class\cGetInvoiceList.cs" />
+    <Compile Include="Class\cGetSaleOnSpecFinal.cs" />
     <Compile Include="ChartData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7061,7 +7062,7 @@
     <Compile Include="Class\GetDataInvitation.cs" />
     <Compile Include="Class\GetDataAttendance.cs" />
     <Compile Include="Class\GetActivityEvent.cs" />
-    <Compile Include="GetSOSProjectMapping.cs" />
+    <Compile Include="Class\GetSOSProjectMapping.cs" />
     <Compile Include="pages\reports\rptPrintProjectSetup.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

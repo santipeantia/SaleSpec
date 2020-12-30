@@ -2,17 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Header content -->
-    <%--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>--%>
-    <%--<script src="jquery-1.11.2.min.js"></script>--%>
-
-    <%--<script src="https://smtpjs.com/v3/smtp.js"></script>--%>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>--%>
-    <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>--%>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 
-  
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="jquery-1.11.2.min.js"></script>
-    
     <style>
         .hide_column {
             display: none;
@@ -741,5 +735,4 @@
         </div>
 
     </section>
-
 </asp:Content>

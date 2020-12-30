@@ -47,7 +47,7 @@ public partial class pages_users_login : System.Web.UI.Page
             string strPassWord = Request.Form["inpPassWord"];
 
             string encassword = encryptpass(strPassWord);
-            //string decassword = Decryptdata("U0Q4MDQ1");
+            //string decassword = Decryptdata(strPassWord);
 
             ssql = "SELECT	a.UserID, a.EmpCode, a.Password, b.id, b.sEmpID, b.sEmpOrgLevel2, c.sEngName, " +
                         "        b.sEmpNamePrefix, b.sEmpFirstName, b.sEmpLastName, b.sEmpEngNamePrefix,  " +

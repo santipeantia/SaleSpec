@@ -31,7 +31,7 @@
 <body class="txtLabel" style="background: #f2f9fe; padding-bottom: 50px">
     <form id="form1" runat="server">
         <div style="max-width: 500px; margin: auto; padding: 22px 50px 22px 0; box-sizing: border-box">
-            <img src="http://203.154.45.40/salespec/image/Logo-ampel-Big.png" width="200px" />
+            <img src="http://147.50.150.243/salespec/image/Logo-ampel-Big.png" width="200px" />
         </div>
         <div style="background-color: #fff; max-width: 500px; box-sizing: border-box; padding-bottom: 35px; margin: auto;">
             <br />

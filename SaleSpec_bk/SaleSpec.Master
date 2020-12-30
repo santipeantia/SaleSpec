@@ -1,0 +1,933 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SaleSpec.master.cs" Inherits="SaleSpec.SaleSpec" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <%--<meta charset="tis-620" />--%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AMPS</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="../../plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="../../bower_components/select2/dist/css/select2.min.css">
+
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
+    <%--<link rel="stylesheet" href="../../bower_components/morris.js/morris.css">--%>
+
+    <link rel="stylesheet" href="../../bower_components/jvectormap/jquery-jvectormap.css">
+
+    <link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+    <link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.1/css/fixedColumns.dataTables.min.css" />
+
+    <link href="../../alertifyjs/css/alertify.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/alertify.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/alertify.rtl.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/default.rtl.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.min.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.rtl.css" rel="stylesheet" />
+    <link href="../../alertifyjs/css/themes/semantic.rtl.min.css" rel="stylesheet" />
+
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet">
+
+    <style>
+        .txtLabel {
+            font-family: 'Athiti', sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .table-condensed {
+            font-size: 14px;
+        }
+
+        .loadingMessageFrame {
+            background-color: #dcdcdc; /*#ffffff;*/
+            filter: alpha(opacity=40);
+            opacity: 0.4;
+            position: relative;
+            z-index: 500;
+            top: 0px;
+            left: 0px;
+            border-top: dashed 1px black;
+            border-bottom: dashed 1px black;
+            border-left: dashed 1px black;
+            border-right: dashed 1px black;
+        }
+
+        .Loading_Message {
+            font-size: medium;
+            font-weight: normal;
+            color: Maroon;
+        }
+
+        #loading {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            display: block;
+            opacity: 0.7;
+            background-color: #fff;
+            z-index: 99;
+            text-align: center;
+        }
+
+
+        div#spinner {
+            display: none;
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            background: url(spinner.gif) no-repeat center #fff;
+            text-align: center;
+            padding: 10px;
+            font: normal 16px Tahoma, Geneva, sans-serif;
+            border: 1px solid #666;
+            margin-left: -50px;
+            margin-top: -50px;
+            z-index: 2;
+            overflow: auto;
+        }
+
+
+        .loader {
+            position: fixed;
+            z-index: 99;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .loader > img {
+                width: 32px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 0.5s;
+                animation-fill-mode: forwards;
+            }
+
+        @keyframes fadeOut {
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .thumb {
+            height: 100px;
+            border: 1px solid black;
+            margin: 10px;
+        }
+
+        th, td {
+            white-space: nowrap;
+        }
+
+        div.dataTables_wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+
+  <style media="print">
+        @page {
+            size: auto; /* auto is the current printer page size */
+            margin: 0mm; /* this affects the margin in the printer settings */
+        }
+
+        body {
+            background-color: #FFFFFF;
+            /*border: solid 1px black ;*/
+            margin-left: 1000px; /* the margin on the content before printing */
+        }
+    </style>
+
+</head>
+
+<body onselect="return true" onload="screenZoom()" class="hold-transition skin-blue-light sidebar-mini fixed ">
+    <div class="loader">
+        <img src="../../dist/img/loader3.gif" alt="Loading..." />
+    </div>
+
+    <div id="dvMain" runat="server">
+        <div class="wrapper">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="../../default" class="logo">
+                    <span class="logo-mini"><b>SSP</b>S</span>
+                    <span class="logo-lg"><b>SALE SPEC</b></span>
+                </a>
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="../../dist/img/User_96px.png" class="user-image" alt="User Image" width="160" />
+                                    <span class="hidden-xs">
+                                        <label id="label2"></label>
+                                        <%= strFullName %></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <img src="../../dist/img/User_96px.png" class="img-circle" alt="User Image" width="160" />
+                                        <p>
+                                            <%= strFullName %>
+                                            <small>Department of : <%= strDept %></small>
+                                        </p>
+                                    </li>
+
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="../../pages/users/changepassword" class="btn btn-default btn-flat">Change Password</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="../../pages/users/login" class="btn btn-default btn-flat">Sign out</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header" style="text-align: center">
+                            <img src="../../image/Logo-ampel-Big.png" class="user-image" alt="User Image" width="120" /></li>
+
+
+                        <li id="mnuDashboard" runat="server" class="<%= strActiveDashboard.ToString() %>" style="border-top: 1px solid #dddddd;">
+                            <%--<a href="../../pages/dashboard?opt=dashboard">--%>
+                            <a href="../../pages/home/">
+                                <i class="fa fa-dashboard"></i>
+                                <span class="txtLabel <%= strTextRedDashboard.ToString() %>">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li id="mnuenterprise" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-gear treeview"></i><span class="txtLabel">Enterprise Master</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="mascusgrade" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/customergrade?opt=cusg"><i class="fa fa-angle-right <%= strTextCustomerGrade.ToString() %>"></i><span class="txtLabel <%= strTextCustomerGrade.ToString() %>">Customer Grade</span></a>
+                                </li>
+
+                                <li id="mascustype" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/customertype?opt=cus"><i class="fa fa-angle-right <%= strTextCustomerType.ToString() %>"></i><span class="txtLabel <%= strTextCustomerType.ToString() %>">Customer Type</span></a>
+                                </li>
+
+                                <li id="masprodgroup" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/productgroup?opt=prdg"><i class="fa fa-angle-right <%= strTextProductGroup.ToString() %>"></i><span class="txtLabel <%= strTextProductGroup.ToString() %>">Product Group</span></a>
+                                </li>
+
+                                <li id="masspecifier" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/specifier?opt=spc"><i class="fa fa-angle-right <%= strTextSpecifier.ToString() %>"></i><span class="txtLabel <%= strTextSpecifier.ToString() %>">Specifier Setup</span></a>
+                                </li>
+
+                                <li id="mascompany" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/company?opt=comp"><i class="fa fa-angle-right <%= strTextCustomers.ToString() %>"></i><span class="txtLabel <%= strTextCustomers.ToString() %>">Company Setup</span></a>
+                                </li>
+
+                                <li id="masarchitect" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/architect?opt=sarc"><i class="fa fa-angle-right <%= strTextArchitect.ToString() %>"></i><span class="txtLabel <%= strTextArchitect.ToString() %>">Architect Setup</span></a>
+                                </li>
+
+                                <li id="masprojsetup" runat="server" visible="false" class="<%= strActiveMasterSetup.ToString() %> ">
+                                    <a href="../../pages/masters/projectsetup?opt=prjs"><i class="fa fa-angle-right <%= strTextProjectsetup.ToString() %>"></i><span class="txtLabel <%= strTextProjectsetup.ToString() %>">Projects Setup</span></a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="<%= strActiveTransaction.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-group treeview"></i><span class="txtLabel">Transaction Entry</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="transwkr" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/weeklyreport?opt=wkr"><i class="fa fa-angle-right <%= strTextWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextWeeklyReport.ToString() %>">Weekly Report</span></a>
+                                </li>
+                                <li id="transproject" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/projects?opt=pjc"><i class="fa fa-angle-right <%= strTextProjectCenter.ToString() %>"></i><span class="txtLabel <%= strTextProjectCenter.ToString() %>">Project Update</span></a>
+                                </li>
+                                <li id="transappreqnew" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest-new?opt=reqf"><i class="fa fa-angle-right <%= strTextRequestForm.ToString() %>"></i><span class="txtLabel <%= strTextRequestForm.ToString() %>">Application Request</span></a>
+                                </li>
+                                <li id="transapprequest" runat="server" visible="false" class="<%= strActiveTransaction.ToString() %> ">
+                                    <a href="../../pages/trans/apprequest?opt=arc"><i class="fa fa-angle-right <%= strTextArchitectCenter.ToString() %>"></i><span class="txtLabel <%= strTextArchitectCenter.ToString() %>">Application Center</span></a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="<%= strActiveReporting.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview"></i><span class="txtLabel">Reporting</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="reportsalewrk" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/saleweeklyreport?opt=rptswr"><i class="fa fa-angle-right <%= strTextSaleWeeklyReport.ToString() %>"></i><span class="txtLabel <%= strTextSaleWeeklyReport.ToString() %>">Sale Weekly Report</span></a>
+                                </li>
+
+                                <li id="reportnewproject" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/newprojectreport?opt=rptnprj"><i class="fa fa-angle-right <%= strTextNewProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextNewProjectReport.ToString() %>">New Projects Report</span></a>
+                                </li>
+
+                                <li id="reportspecintake" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/specintakereport?opt=itk"><i class="fa fa-angle-right <%= strTextSaleIntake.ToString() %>"></i><span class="txtLabel <%= strTextSaleIntake.ToString() %>">Spec Intake Report</span></a>
+                                </li>
+
+                                <li id="reportcomreport" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/companyreport?opt=rcom"><i class="fa fa-angle-right <%= strTextCompanyReport.ToString() %>"></i><span class="txtLabel <%= strTextCompanyReport.ToString() %>">Company Report</span></a>
+                                </li>
+
+                                <li id="reportproject" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/projectreport?opt=rpjc"><i class="fa fa-angle-right <%= strTextProjectReport.ToString() %>"></i><span class="txtLabel <%= strTextProjectReport.ToString() %>">Project Status</span></a>
+                                </li>
+
+
+                                <li id="reportarchitect" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/architectreport?opt=rarc"><i class="fa fa-angle-right <%= strTextArchitectReport.ToString() %>"></i><span class="txtLabel <%= strTextArchitectReport.ToString() %>">Architect Profile</span></a>
+                                </li>
+
+
+                                <li id="reportforecasting" runat="server" visible="false" class="<%= strActiveReporting.ToString() %> ">
+                                    <a href="../../pages/report/forecastingreport?opt=rfoc"><i class="fa fa-angle-right <%= strTextReportForecasting.ToString() %>"></i><span class="txtLabel <%= strTextReportForecasting.ToString() %>">Forecasting Report</span></a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+
+                        <li id="mnuactivity" runat="server" visible="false" class="<%= strActiveActivity.ToString() %> treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-coffee treeview"></i><span class="txtLabel">Activities</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class=" <%= strActiveActivity.ToString() %> treeview-menu">
+                                
+                                <li id="activityevent" runat="server" visible="true"  class="">
+                                    <a href="../../pages/report/activity_event?opt=actev"><i class="fa fa-angle-right <%= strTextReportEvent.ToString() %>"></i><span class="txtLabel <%= strTextReportEvent.ToString() %>">Event Report</span></a>                                   
+                                </li>
+
+
+                                <li id="activityreward" runat="server" visible="true"  class="">
+                                    <a href="../../pages/report/activity_reward?opt=actre"><i class="fa fa-angle-right <%= strTextReportReward.ToString() %>"></i><span class="txtLabel <%= strTextReportReward.ToString() %>">Reward Report</span></a>                                   
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="<%= strSaleOnSpecActive.ToString() %>  treeview" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview "></i><span class="txtLabel">Sale On Spec</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="sosprojectmapping" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/sosprojectmapping?opt=spm"><i class="fa fa-angle-right <%= strTextSOSMapping.ToString() %>"></i><span class="txtLabel <%= strTextSOSMapping.ToString() %>">SOS Project Mapping</span></a>
+                                </li>
+
+                                <li id="transsaleonspec" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/saleonspec?opt=sos"><i class="fa fa-angle-right <%= strTextSaleOnspec.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspec.ToString() %>">Sale On Spec</span></a>
+                                </li>
+                                
+                                <li id="sosfinalfilter" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
+                                    <a href="../../pages/trans/saleonspecfilter?opt=sof"><i class="fa fa-angle-right <%= strTextSaleOnspecFilter.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspecFilter.ToString() %>">SOS Final Filter</span></a>
+                                </li>
+                                 
+
+
+
+                            </ul>
+                        </li>
+
+
+
+
+
+                        <li style="border-top: 1px solid #dddddd;">
+                            <a href="../../pages/help/salespec_guide.pdf" target="_blank">
+                                <i class="fa fa-question-circle"></i>
+                                <span class="txtLabel">Help</span>
+                            </a>
+                        </li>
+                        <%--<li style="border-top: 1px solid #dddddd;"></li>--%>
+
+                        <li style="border-top: 1px solid #dddddd;">
+                            <a href="../../pages/users/logout">
+                                <i class="fa fa-power-off"></i>
+                                <span class="txtLabel">Sign Out</span>
+                            </a>
+                        </li>
+                        <li style="border-top: 1px solid #dddddd;"></li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <form id="form1" runat="server">
+                    <div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </form>
+            </div>
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <div id="dvLoading" runat="server" class="loadingMessageFrame" style="height: 270px; display: none;">
+            <table style="height: 100%; width: 100%; table-layout: fixed;">
+                <tr>
+                    <td style="height: 100%;">
+                        <asp:Label ID="lblLoadingMessage" runat="server" Text="Loading..." CssClass="Loading_Message"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!-- ./wrapper -->
+        <!-- jQuery 3 -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- jQuery UI 1.11.4 -->
+        <script src="../../bower_components/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/select2/dist/js/select2.full.min.js"></script>
+        <script src="../../bower_components/raphael/raphael.min.js"></script>
+        <%--<script src="../../bower_components/morris.js/morris.min.js"></script>--%>
+        <script src="../../bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+        <script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="../../bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+        <script src="../../bower_components/moment/min/moment.min.js"></script>
+        <script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <%--<script src="../../dist/js/pages/dashboard.js"></script>--%>
+        <script src="../../dist/js/demo.js"></script>
+        <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="../../bower_components/moment/min/moment.min.js"></script>
+        <script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+        <script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../../plugins/iCheck/icheck.min.js"></script>
+
+        <script src="../../alertifyjs/alertify.js"></script>
+        <script src="../../alertifyjs/alertify.min.js"></script>
+
+        <%--<script src="../../../../dist/2.7.3/Chart.bundle.js"></script>--%>
+        <script src="../../bower_components/Chart.js/Chart.js"></script>
+
+        <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.1/js/dataTables.fixedColumns.min.js"></script>
+
+        <script>
+            window.addEventListener("load", function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
+
+
+
+
+        <script>
+
+            //$(document).ready(function () {
+            //    var oTable = $('#example1').dataTable({
+            //        "sScrollY": "4000px",
+            //        "sScrollX": "100%",
+            //        "sScrollXInner": "150%",
+            //        "bScrollCollapse": true,
+            //        "bPaginate": false
+            //    });
+            //    new $.fn.dataTable.FixedColumns(oTable);
+            //});
+
+
+            $(function () {
+                $('#example1').DataTable({
+                    //'paging': false,
+                    'iDisplayLength': 10,
+                    'autoWidth': true,
+                    'scrollY': "4000px",
+                    'scrollX': true,
+                    'scrollCollapse': true
+                    //'fixedColumns': { 'leftColumns': 6 }
+                })
+
+
+                $('#example2').DataTable({
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+
+
+                //$('#tableWeeklyReport').DataTable({
+                //    'paging': false,
+                //    'iDisplayLength': 10,
+                //    'autoWidth': true,
+                //    'scrollY': "4000px",
+                //    'scrollX': true,
+                //    'scrollCollapse': true
+                //    //'fixedColumns': { 'leftColumns': 6 }
+                //})
+            })
+        </script>
+
+        <script>
+            $(function () {
+                $('#table1').DataTable({
+                    'iDisplayLength': 25
+                })
+                $('#table2').DataTable({
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+                $('#tableActive').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+                $('#tableArchitect').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+
+                $('#tableWeeklyReport').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+
+                $('#tableWeeklyReportx').DataTable({
+                    'iDisplayLength': 10,
+                    'paging': true,
+                    'scrollX': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true
+                    //'autoWidth': false,
+                    //'columnDefs': [
+                    //    { "width": "50", "targets": 2 }
+                    //],
+                    //'fixedColumns': true
+
+                })
+
+
+
+
+                $('#tableArchitectProfile').DataTable({
+                    'iDisplayLength': 50,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false
+                })
+
+                
+                $('#tableSaleWeeklyReport').DataTable({
+                    'iDisplayLength': 25,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true
+                })
+
+                $('#tblRefinvoice').DataTable({
+                    'iDisplayLength': 20,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [0, 4, 7, 9],
+                            className: "hide_column"
+                        }
+                    ]
+                })
+                                
+                $('#tableSaleOnSpec').DataTable({
+                    //'iDisplayLength': 10,
+                    'paging': false,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'scrollY': 500,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [5,6,8, 10, 12],
+                            className: "hide_column"
+                        }
+                    ]
+                })
+
+                $('#tableSaleOnSpec2').DataTable({
+                    //'iDisplayLength': 10,
+                    'paging': false,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'scrollY': 500,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [5,6,8, 10, 12],
+                            className: "hide_column"
+                        }
+                    ]
+                })
+
+                $('#tableSaleOnSpecFinal').DataTable({
+                    'iDisplayLength': 25,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true
+                })
+
+                
+                $('#tableSosProjectFilter').DataTable({
+                    'iDisplayLength': 25,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'scrollX': true,
+                    'autoWidth': true,
+                    'columnDefs': [
+                        {
+                            targets: [3],
+                            className: "hide_column"
+                        }
+                    ]
+                })
+
+            })
+        </script>
+
+        <script>
+            $(function () {
+                //Initialize Select2 Elements
+                function formatResultMulti(data) {
+                    var city = $(data.element).data('city');
+                    var classAttr = $(data.element).attr('class');
+                    var hasClass = typeof classAttr != 'undefined';
+                    classAttr = hasClass ? ' ' + classAttr : '';
+
+                    var $result = $(
+                        '<div class="row">' +
+                        '<div class="col-md-6 col-xs-6' + classAttr + '">' + data.text + '</div>' +
+                        '<div class="col-md-6 col-xs-6' + classAttr + '">' + city + '</div>' +
+                        '</div>'
+                    );
+                    return $result;
+                }
+
+                $('.select2').select2({
+                    width: '100%',
+                    formatResult: formatResultMulti
+                })
+
+                //Datemask dd/mm/yyyy
+                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+                //Datemask2 mm/dd/yyyy
+                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+                //Money Euro
+                $('[data-mask]').inputmask()
+
+                //Date range picker
+                $('#reservation').daterangepicker()
+                //Date range picker with time picker
+                $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+
+                //$('#dateStartTime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+                //$('#dateStartTime').daterangepicker()
+
+                //Date range as a button
+                $('#daterange-btn').daterangepicker(
+                    {
+                        ranges: {
+                            'Today': [moment(), moment()],
+                            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        },
+                        startDate: moment().subtract(29, 'days'),
+                        endDate: moment()
+                    },
+                    function (start, end) {
+                        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                    }
+                )
+                //Date picker
+                $('#datepicker').datepicker({
+                    autoclose: true
+                })
+                //Date picker
+                $('#addIndentDatepicker').datepicker({
+                    autoclose: true
+                })
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                })
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                })
+                //Flat red color scheme for iCheck
+                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                    checkboxClass: 'icheckbox_flat-green',
+                    radioClass: 'iradio_flat-green'
+                })
+                //Colorpicker
+                $('.my-colorpicker1').colorpicker()
+                //color picker with addon
+                $('.my-colorpicker2').colorpicker()
+                //Timepicker
+                $('.timepicker').timepicker({
+                    showInputs: false
+                })
+                $('select:not(.normal)').each(function () {
+                    $(this).select2({
+                        dropdownParent: $(this).parent()
+                    });
+                });
+                function openModal() {
+                    function openModal() { $('#myModal').modal({ show: true }); }
+                }
+            })
+            $('#datepickertrans').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+
+            $('#datepickerdelivery').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datepickerstart').datepicker({
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datepickerend').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datevisit').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datebirthday').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datebirthdayedit').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+
+
+            $('#updatepickerdelivery').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#updatevisit').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datedelivery').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datefollowing').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+             $('#datesos').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            
+
+
+
+        </script>
+
+        <script type="text/javascript">
+            var spinnerVisible = false;
+            function showProgress() {
+                if (!spinnerVisible) {
+                    $("div#spinner").fadeIn("fast");
+                    spinnerVisible = true;
+                }
+            };
+            function hideProgress() {
+                if (spinnerVisible) {
+                    var spinner = $("div#spinner");
+                    spinner.stop();
+                    spinner.fadeOut("fast");
+                    spinnerVisible = false;
+                }
+            };
+
+            function screenZoom() {
+                var x = screen.width;
+                if (x <= 1366) {
+                    //document.body.style.zoom = "80%"
+                    window.parent.document.body.style.zoom = 0.8;
+                    //myIframeZoom();             
+                }
+            };
+
+            function myIframeZoom() {
+                var x = document.getElementById("ifmBody");
+                var y = (x.contentWindow || x.contentDocument);
+                if (y.document) y = y.document;
+                y.body.style.zoom = 0.8;
+            };
+        </script>
+    </div>
+</body>
+</html>
