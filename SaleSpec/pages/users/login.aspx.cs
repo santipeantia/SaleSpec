@@ -60,45 +60,46 @@ public partial class pages_users_login : System.Web.UI.Page
                 dt = new DataTable();
                 dt = dbConn.GetDataTable(ssql);
 
-                if (dt.Rows.Count != 0)
-                {
-                    Session["UserID"] = dt.Rows[0]["UserID"].ToString();
-                    Session["EmpCode"] = dt.Rows[0]["EmpCode"].ToString();
-                    Session["id"] = dt.Rows[0]["UserID"].ToString();
-                    Session["sEmpID"] = dt.Rows[0]["sEmpID"].ToString();
-                    Session["sEmpOrgLevel2"] = dt.Rows[0]["sEmpOrgLevel2"].ToString();
-                    Session["sEngName"] = dt.Rows[0]["sEngName"].ToString();
-                    Session["sEmpNamePrefix"] = dt.Rows[0]["sEmpNamePrefix"].ToString();
-                    Session["sEmpFirstName"] = dt.Rows[0]["sEmpFirstName"].ToString();
-                    Session["sEmpLastName"] = dt.Rows[0]["sEmpLastName"].ToString();
-                    Session["sEmpEngNamePrefix"] = dt.Rows[0]["sEmpEngNamePrefix"].ToString();
-                    Session["sEmpEngFirstName"] = dt.Rows[0]["sEmpEngFirstName"].ToString();
-                    Session["sEmpEngLastName"] = dt.Rows[0]["sEmpEngLastName"].ToString();
-                    Session["sEmpNickName"] = dt.Rows[0]["sEmpNickName"].ToString();
+            if (dt.Rows.Count != 0)
+            {
+                Session["Port"] = strUserName;
+                Session["UserID"] = dt.Rows[0]["UserID"].ToString();
+                Session["EmpCode"] = dt.Rows[0]["EmpCode"].ToString();
+                Session["id"] = dt.Rows[0]["UserID"].ToString();
+                Session["sEmpID"] = dt.Rows[0]["sEmpID"].ToString();
+                Session["sEmpOrgLevel2"] = dt.Rows[0]["sEmpOrgLevel2"].ToString();
+                Session["sEngName"] = dt.Rows[0]["sEngName"].ToString();
+                Session["sEmpNamePrefix"] = dt.Rows[0]["sEmpNamePrefix"].ToString();
+                Session["sEmpFirstName"] = dt.Rows[0]["sEmpFirstName"].ToString();
+                Session["sEmpLastName"] = dt.Rows[0]["sEmpLastName"].ToString();
+                Session["sEmpEngNamePrefix"] = dt.Rows[0]["sEmpEngNamePrefix"].ToString();
+                Session["sEmpEngFirstName"] = dt.Rows[0]["sEmpEngFirstName"].ToString();
+                Session["sEmpEngLastName"] = dt.Rows[0]["sEmpEngLastName"].ToString();
+                Session["sEmpNickName"] = dt.Rows[0]["sEmpNickName"].ToString();
 
-                    //Response.Redirect("../byksales/salesrecords?opt=salerec");
-                    Response.Redirect("../../pages/home/");
+                //Response.Redirect("../byksales/salesrecords?opt=salerec");
+                Response.Redirect("../../pages/home/");
 
-                }
-                else
-                {
+            }
+            else
+            {
 
                 Session["isLogin"] = Convert.ToInt32(Session["isLogin"].ToString()) + 1;
 
                 if (Convert.ToInt32(Session["isLogin"]) == 3)
-                    {
-                        strErorConn = " <div class=\"fad fad-in alert alert-danger input-sm\"> " +
-                                "   <strong>Warning!</strong><br />Password is wrong 3 times, this account is locked please contact administrator..!</div>";
-                    }
-                    else
-                    {
-                        strErorConn = " <div class=\"fad fad-in alert alert-danger input-sm\"> " +
-                                "   <strong>Warning!</strong><br />Incorrect username or password..!</div>";
-                    }
-
-                    return;
+                {
+                    strErorConn = " <div class=\"fad fad-in alert alert-danger input-sm\"> " +
+                            "   <strong>Warning!</strong><br />Password is wrong 3 times, this account is locked please contact administrator..!</div>";
                 }
+                else
+                {
+                    strErorConn = " <div class=\"fad fad-in alert alert-danger input-sm\"> " +
+                            "   <strong>Warning!</strong><br />Incorrect username or password..!</div>";
+                }
+
+                return;
             }
+        }
             catch (Exception ex)
             {
                 strErorConn = " <div class=\"fad fad-in alert alert-danger input-sm\"> " +

@@ -40,6 +40,7 @@ namespace SaleSpec
 
         public string strFullName = "";
         public string strDept = "";
+        public string strPort = "";
 
         public string strActiveReporting = "";
         public string strTextSaleWeeklyReport = "";
@@ -154,6 +155,7 @@ namespace SaleSpec
 
             strFullName = Session["sEmpEngFirstName"].ToString() + "  "  + Session["sEmpEngLastName"].ToString();
             strDept =  Session["sEngName"].ToString();
+            strPort = Session["Port"].ToString();
 
             try
             {

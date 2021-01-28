@@ -206,7 +206,7 @@
                                     <img src="../../dist/img/User_96px.png" class="user-image" alt="User Image" width="160" />
                                     <span class="hidden-xs">
                                         <label id="label2"></label>
-                                        <%= strFullName %></span>
+                                       <%= strPort %> : <%= strFullName %></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="user-header">

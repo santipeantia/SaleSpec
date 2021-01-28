@@ -288,6 +288,7 @@
                             <%--pagination pagination-sm--%>
                             <thead>
                                 <tr>
+                                    <td>Port</td>
                                     <td>CompanyID</td>
                                     <td>CompanyName</td>
                                     <td>CompanyName2</td>
@@ -782,18 +783,18 @@
                         cIndex = this.cellIndex;
                         console.log(rIndex + "  :  " + cIndex);
 
-                        if (this.cellIndex == 12) {
-                            var strVal0 = table.rows[rIndex].cells[0].innerHTML;
-                            var strVal1 = table.rows[rIndex].cells[1].innerHTML;
-                            var strVal2 = table.rows[rIndex].cells[2].innerHTML;
-                            var strVal3 = table.rows[rIndex].cells[3].innerHTML;
-                            var strVal4 = table.rows[rIndex].cells[4].innerHTML;
-                            var strVal5 = table.rows[rIndex].cells[5].innerHTML;
-                            var strVal6 = table.rows[rIndex].cells[6].innerHTML;
-                            var strVal7 = table.rows[rIndex].cells[7].innerHTML;
-                            var strVal8 = table.rows[rIndex].cells[8].innerHTML;
-                            var strVal9 = table.rows[rIndex].cells[9].innerHTML;
-                            var strVal10 = table.rows[rIndex].cells[10].innerHTML;
+                        if (this.cellIndex == 13) {
+                            var strVal0 = table.rows[rIndex].cells[1].innerHTML;
+                            var strVal1 = table.rows[rIndex].cells[2].innerHTML;
+                            var strVal2 = table.rows[rIndex].cells[3].innerHTML;
+                            var strVal3 = table.rows[rIndex].cells[4].innerHTML;
+                            var strVal4 = table.rows[rIndex].cells[5].innerHTML;
+                            var strVal5 = table.rows[rIndex].cells[6].innerHTML;
+                            var strVal6 = table.rows[rIndex].cells[7].innerHTML;
+                            var strVal7 = table.rows[rIndex].cells[8].innerHTML;
+                            var strVal8 = table.rows[rIndex].cells[9].innerHTML;
+                            var strVal9 = table.rows[rIndex].cells[10].innerHTML;
+                            var strVal10 = table.rows[rIndex].cells[11].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
 
@@ -822,18 +823,18 @@
 
                         }
 
-                        if (this.cellIndex == 13) {
-                            var strVal0 = table.rows[rIndex].cells[0].innerHTML;
-                            var strVal1 = table.rows[rIndex].cells[1].innerHTML;
-                            var strVal2 = table.rows[rIndex].cells[2].innerHTML;
-                            var strVal3 = table.rows[rIndex].cells[3].innerHTML;
-                            var strVal4 = table.rows[rIndex].cells[4].innerHTML;
-                            var strVal5 = table.rows[rIndex].cells[5].innerHTML;
-                            var strVal6 = table.rows[rIndex].cells[6].innerHTML;
-                            var strVal7 = table.rows[rIndex].cells[7].innerHTML;
-                            var strVal8 = table.rows[rIndex].cells[8].innerHTML;
-                            var strVal9 = table.rows[rIndex].cells[9].innerHTML;
-                            var strVal10 = table.rows[rIndex].cells[10].innerHTML;
+                        if (this.cellIndex == 14) {
+                            var strVal0 = table.rows[rIndex].cells[1].innerHTML;
+                            var strVal1 = table.rows[rIndex].cells[2].innerHTML;
+                            var strVal2 = table.rows[rIndex].cells[3].innerHTML;
+                            var strVal3 = table.rows[rIndex].cells[4].innerHTML;
+                            var strVal4 = table.rows[rIndex].cells[5].innerHTML;
+                            var strVal5 = table.rows[rIndex].cells[6].innerHTML;
+                            var strVal6 = table.rows[rIndex].cells[7].innerHTML;
+                            var strVal7 = table.rows[rIndex].cells[8].innerHTML;
+                            var strVal8 = table.rows[rIndex].cells[9].innerHTML;
+                            var strVal9 = table.rows[rIndex].cells[10].innerHTML;
+                            var strVal10 = table.rows[rIndex].cells[11].innerHTML;
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
                             var strRep2 = strVal2.replace(/&amp;/g, "&");

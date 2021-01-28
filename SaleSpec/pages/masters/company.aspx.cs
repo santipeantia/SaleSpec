@@ -114,7 +114,7 @@ namespace SaleSpec.pages.masters
             {
                 //CompanyID, CompanyName, CompanyName2, Address, ProvinceID, ArchitecName, Phone, Mobile, Email
 
-                ssql = "SELECT a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
+                ssql = "SELECT a.Createdby, a.CompanyID, a.CompanyName, a.CompanyName2, a.Address, a.ProvinceID, a.ContactName, " +
                        "    a.Phone, a.Mobile, a.Email, a.StatusConID, b.ConDesc2, CustTypeID " +
                        "FROM    adCompany a LEFT OUTER JOIN " +
                        "        adStatusConfirm AS b ON a.StatusConID = b.StatusConID " + 
@@ -126,6 +126,7 @@ namespace SaleSpec.pages.masters
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
+                        string strPort = dt.Rows[i]["Createdby"].ToString();
                         string strCompanyID = dt.Rows[i]["CompanyID"].ToString();
                         string strCompanyName = dt.Rows[i]["CompanyName"].ToString();
                         string strCompanyName2 = dt.Rows[i]["CompanyName2"].ToString();
@@ -153,6 +154,7 @@ namespace SaleSpec.pages.masters
                         }
 
                         strTblDetail += "<tr> " +
+                                        "     <td>" + strPort + "</td> " +
                                         "     <td>" + strCompanyID + "</td> " +
                                         "     <td>" + strCompanyName + "</td> " +
                                         "     <td>" + strCompanyName2 + "</td> " +
@@ -204,10 +206,12 @@ namespace SaleSpec.pages.masters
                 string strEmail = Request.Form["txtEmail"];
                 string strStatusConID = Request.Form["selectStatusConID"];
 
+                string strPort = Session["Port"].ToString();
+
                 if (strCompanyName != "" && strCompanyName2 != "")
                 {
-                    ssql = "insert into adCompany (CompanyName, CompanyName2, CustTypeID, Address, ProvinceID, ContactName, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate) " +
-                           "values    (@CompanyName, @CompanyName2, @CustTypeID, @Address, @ProvinceID, @ContactName, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate)  ";
+                    ssql = "insert into adCompany (CompanyName, CompanyName2, CustTypeID, Address, ProvinceID, ContactName, Phone, Mobile, Email, StatusConID, CreatedDate, UpdatedDate, Createdby) " +
+                           "values    (@CompanyName, @CompanyName2, @CustTypeID, @Address, @ProvinceID, @ContactName, @Phone, @Mobile, @Email, @StatusConID, @CreatedDate, @UpdatedDate, @Createdby)  ";
 
                     Comm = new SqlCommand();
                     Comm.CommandText = ssql;
@@ -226,8 +230,8 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
                     Comm.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
                     Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@Createdby", SqlDbType.NVarChar).Value = strPort;
                     Comm.ExecuteNonQuery();
-
                 }
                 else
                 {

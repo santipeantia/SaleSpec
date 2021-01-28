@@ -296,6 +296,9 @@
                     //todo something you coding
                 }
                 else {
+
+                    var strPort = '<%= Session["Port"] %>';
+
                     $.ajax({
                         url: 'DataServices.asmx/GetInsertCompanies',
                         method: 'POST',
@@ -308,7 +311,8 @@
                             Phone: $('#comPhone').val(),
                             Mobile: $('#comMobile').val(),
                             Email: $('#Email').val(),
-                            StatusConID: "1"
+                            StatusConID: "1",
+                            Port: strPort
                         },
                         dataType: 'json',
                         success: function (data) {

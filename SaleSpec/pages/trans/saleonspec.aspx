@@ -158,8 +158,6 @@
                 })
             });
 
-
-
             var btnuncheck = $('#btnuncheck');
             btnuncheck.click(function () {
                 //alert('uncheck..');
@@ -184,6 +182,13 @@
                 $('#example-result').text('');
             });
 
+            var btnDocExport = $('#btnDocExport');
+            btnDocExport.click(function () {
+                //alert('Doc Export');
+
+                $("#modal-exportdoc").modal({ backdrop: false });
+                $("#modal-exportdoc").modal("show");
+            });
         });
 
         function getSaleOnSpecWithProject(sdate, edate) {
@@ -506,6 +511,7 @@
                                                 <div class="box-header with-border">
                                                     <i class="fa fa-flag-checkered text-green"></i>
                                                     <span class="btn-group pull-right">
+                                                        <button type="button" id="btnDocExport" class="btn btn-default btn-sm" data-toggle="tooltip" title="Export"><i class="fa fa-plus text-green"></i></button>
                                                         <button type="button" id="btnSaleOnSpecPdf" runat="server" onserverclick="btnExportPDF_click" class="btn btn-default btn-sm" data-toggle="tooltip" title="PDF"><i class="fa fa-file-pdf-o text-orange"></i></button>
                                                         <button type="button" id="btnSaleOnSpecExcel" runat="server" onserverclick="btnExportExcel_click" class="btn btn-default btn-sm" data-toggle="tooltip" title="Excel"><i class="fa fa-table text-green"></i></button>
                                                     </span>
@@ -721,7 +727,46 @@
                             </div>
                         </div>
 
+                        <div class="modal modal-default fade" id="modal-exportdoc">
+                            <div class="modal-dialog" style="width: 60%">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Reference Invoice</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Post -->
 
+                                        <div class="row" style="background-color: lightblue; padding: 10px 5px 5px 5px; position: relative; top: -10px;">
+
+                                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                                <div class="col-md-2">
+                                                    <label class="txtLabel">Company :</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtId" name="txtCompanyId" value="" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtName" name="txtCompanyName" value="" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="txtLabel">ActQty/Spec:</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtQty" name="txtQuantity" value="" autocomplete="off">
+                                                </div>
+                                            </div>                                                                                       
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer clearfix">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="btnConfirmed" runat="server" onclick="sendMail()">Submit Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 

@@ -301,7 +301,7 @@ namespace SaleSpec.Class
 
         [WebMethod]
         public void GetInsertCompanies(string CompanyName, string CompanyName2, string Address, string ProvinceID, string ContactName,
-                                        string Phone, string Mobile, string Email, string StatusConID)
+                                        string Phone, string Mobile, string Email, string StatusConID, string Port)
         {
             List<GetInsertCompany> companies = new List<GetInsertCompany>();
             SqlCommand comm = new SqlCommand("spInsertCompany", conn.OpenConn());
@@ -316,6 +316,7 @@ namespace SaleSpec.Class
             comm.Parameters.AddWithValue("@Mobile", Mobile);
             comm.Parameters.AddWithValue("@Email", Email);
             comm.Parameters.AddWithValue("@StatusConID", StatusConID);
+            comm.Parameters.AddWithValue("@Port", Port);
             comm.ExecuteNonQuery();
             conn.CloseConn();
         }
