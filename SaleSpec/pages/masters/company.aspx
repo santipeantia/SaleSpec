@@ -883,7 +883,6 @@
 
                             //alert(strStatusID);
                         }
-
                     }
                 }
             }
