@@ -530,7 +530,7 @@ namespace SaleSpec.pages.report
                     mail.Subject = "Request Verify Password for New Project Report";
                     mail.Body = strMailBody;
                     mail.IsBodyHtml = true;
-                    SmtpClient smtp = new SmtpClient("mail.ampelite.co.th");
+                    SmtpClient smtp = new SmtpClient("ampelite.co.th");
 
                     NetworkCredential credential = new NetworkCredential("no-reply@ampelite.co.th", "Ampel@1234");
                     smtp.Credentials = credential;

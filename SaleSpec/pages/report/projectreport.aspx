@@ -626,7 +626,7 @@
                                             var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
                                             var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
 
-                                            //alert(strVal7.text());
+                                           console.log(strVal0.text() + ' : ' +strVal7.text() + ' : ' + strVal8.text());
 
                                             //return;
 
@@ -756,6 +756,7 @@
                                                     })
                                                 }
                                             });
+                                            
 
                                             //alert(strVal6.text());
 
@@ -2067,7 +2068,8 @@
                                 StepID: $('#selectStep').val(),
                                 StatusID: $('#selectStatus').val(),
                                 ProjectID: $('#ProjectID').val(),
-                                RefDocuNo: str19+','
+                                RefDocuNo: '',
+                                jobname : ''
                             },
                             dataType: 'json',
                             complete: function (data) {
