@@ -403,13 +403,13 @@ namespace SaleSpec.pages.trans
 
                     mail.From = new MailAddress("no-reply@ampelite.co.th");
                     mail.To.Add(strEmail);
-                    mail.Bcc.Add("santi@ampelite.co.th");
-                    //mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
+                   //mail.Bcc.Add("santi@ampelite.co.th");
+                    mail.Bcc.Add("santi@ampelite.co.th,chanunnett@ampelite.co.th");
 
                     mail.Subject = "Request Verify Password for Company Report";
                     mail.Body = strMailBody;
                     mail.IsBodyHtml = true;
-                    SmtpClient smtp = new SmtpClient("ampelite.co.th");
+                    SmtpClient smtp = new SmtpClient("mail.ampelite.co.th");
 
                     NetworkCredential credential = new NetworkCredential("no-reply@ampelite.co.th", "Ampel@1234");
                     smtp.Credentials = credential;

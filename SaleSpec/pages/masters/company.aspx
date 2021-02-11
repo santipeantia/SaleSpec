@@ -798,10 +798,11 @@
 
                             //console.log(rIndex + "  :  " + cIndex + " : " + strCustID + " : " + strDesc + " : " + strCustStatusID);
 
+                            var strRep1 = strVal1.replace(/&amp;/g, "&");
                             var strRep2 = strVal2.replace(/&amp;/g, "&");
 
                             document.getElementById("txtCompanyIDEdit").value = strVal0;
-                            document.getElementById("txtCompanyNameEdit").value = strVal1;
+                            document.getElementById("txtCompanyNameEdit").value = strRep1;
                             document.getElementById("txtCompanyName2Edit").value = strRep2;
 
                             $('#selectCustTypeIDEdit').val(strVal3); 

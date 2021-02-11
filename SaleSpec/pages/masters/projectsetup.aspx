@@ -1581,12 +1581,12 @@
                             var strVal21 = table.rows[rIndex].cells[21].innerHTML;
                             var strVal22 = table.rows[rIndex].cells[22].innerHTML;
 				
-			    //alert(strVal0);
-			    document.getElementById("ProjectIDEdit").value = strVal0;
+                            //alert(strVal0);
+                            document.getElementById("ProjectIDEdit").value = strVal0;
                             document.getElementById("ProjectNameEdit").value = strVal3;
 
                             //document.getElementById("selectCompanyIDEdit").value = strVal5;
-                            $('#selectCompanyIDEdit').val(strVal5); 
+                            $('#selectCompanyIDEdit').val(strVal5);
                             $('#selectCompanyIDEdit').change();
 
                             // raminder please check here when using select option cascade...
