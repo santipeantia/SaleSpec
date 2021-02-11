@@ -1016,5 +1016,84 @@ namespace SaleSpec.pages.report
                 return;
             }
         }
+
+        protected void btnUpdateData_click(object sender, EventArgs e)
+        {
+            try
+            {
+                Conn = new SqlConnection();
+                Conn = dbConn.OpenConn();
+                transac = Conn.BeginTransaction();
+
+                id = Request.QueryString["id"].ToString();
+
+                string strArchitectID = id;
+                string strFirstName = Request.Form["txtFirstNameEdit"];
+                string strLastName = Request.Form["txtLastNameEdit"];
+                string strCompany = Request.Form["selectCompanyEdit"];
+                string strNickName = Request.Form["txtNickNameEdit"];
+                string strPosition = Request.Form["txtPositionEdit"];
+                string strAddress = Request.Form["txtAddressEdit"];
+                string strPhone = Request.Form["txtPhoneEdit"];
+                string strMobile = Request.Form["txtMobileEdit"];
+                string strEmail = Request.Form["txtEmailEdit"];
+                string strStatusConID = Request.Form["selectStatusConIDEdit"];
+                string strGradeID = Request.Form["selectGradeIDEdit"];
+                string strDatebirthday = Request.Form["txtBirthday"];
+                string strSpecID = Request.Form["txtPortEdit"];
+
+                if (strFirstName != "" && strLastName != "")
+                {
+                    ssql = "update  adArchitecture set CompanyID=@CompanyID, Name=@Name, FirstName=@FirstName, LastName=@LastName, NickName=@NickName, Position=@Position, " +
+                           "       Address=@Address, Phone=@Phone, Mobile=@Mobile, Email=@Email, StatusConID=@StatusConID, UpdatedDate=@UpdatedDate, GradeID=@GradeID, Birthday=@Birthday, SpecID=@SpecID " +
+                           "where  ArchitecID=@ArchitecID ";
+
+                    Comm = new SqlCommand();
+                    Comm.CommandText = ssql;
+                    Comm.CommandType = CommandType.Text;
+                    Comm.Connection = Conn;
+                    Comm.Transaction = transac;
+                    Comm.Parameters.Add("@ArchitecID", SqlDbType.NVarChar).Value = strArchitectID;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompany;
+                    Comm.Parameters.Add("@Name", SqlDbType.NVarChar).Value = strFirstName;
+                    Comm.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = strFirstName;
+                    Comm.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = strLastName;
+                    Comm.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = strNickName;
+                    Comm.Parameters.Add("@Position", SqlDbType.NVarChar).Value = strPosition;
+                    Comm.Parameters.Add("@Address", SqlDbType.NVarChar).Value = strAddress;
+                    Comm.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = strPhone;
+                    Comm.Parameters.Add("@Mobile", SqlDbType.NVarChar).Value = strMobile;
+                    Comm.Parameters.Add("@Email", SqlDbType.NVarChar).Value = strEmail;
+                    Comm.Parameters.Add("@StatusConID", SqlDbType.NVarChar).Value = strStatusConID;
+                    Comm.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                    Comm.Parameters.Add("@GradeID", SqlDbType.NVarChar).Value = strGradeID;
+                    Comm.Parameters.Add("@Birthday", SqlDbType.NVarChar).Value = strDatebirthday;
+                    Comm.Parameters.Add("@SpecID", SqlDbType.NVarChar).Value = strSpecID;
+                    Comm.ExecuteNonQuery();
+
+                }
+                else
+                {
+                    strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                               "      <strong>Warning..!</strong> Details is not complete please check.. " +
+                               "</div>";
+                    return;
+                }
+
+                transac.Commit();
+                Conn.Close();
+
+                //GetInitialData();
+                GetArchitectProfile(id);
+            }
+            catch (Exception ex)
+            {
+                transac.Rollback();
+                strMsgAlert = "<div class=\"alert alert-danger box-title txtLabel\"> " +
+                             "      <strong>พบข้อผิดพลาด..!</strong> " + ex.Message + " " +
+                             "</div>";
+                return;
+            }
+        }
     }
 }

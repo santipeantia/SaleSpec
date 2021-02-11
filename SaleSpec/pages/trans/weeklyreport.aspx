@@ -185,7 +185,7 @@
                     datevisit.value = datepickerdelivery.value;
                     //datevisit.prop('disabled', true);
                 } else {
-                    datevisit.value = "";
+                    //datevisit.value = datepickerdelivery.value;
                     //datevisit.prop('disabled', false);
                 }
             });
@@ -618,7 +618,7 @@
 
 
                     $('#btnSaveHistoryNewProject').prop('disabled', false);
-
+                   
                     chkValidate = 'false';
                     return;
                 } else {
@@ -855,7 +855,7 @@
                     //}
 
                     if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
-
+                    //if (($('#selectTransEntry').val() == 1)) {
                         $.ajax({
                             url: 'DataServices.asmx/GetCountProject',
                             method: 'POST',
@@ -946,6 +946,7 @@
 
                     }
                     else {
+                         $('#btnSaveHistoryNewProject').prop('disabled', false);
                         //alert('Warning, \n\When you create new transaction must be select step design only..!');
                         Swal.fire({
                             type: 'error',

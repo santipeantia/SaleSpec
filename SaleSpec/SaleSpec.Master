@@ -862,6 +862,11 @@
                 todayHighlight: true,
                 format: 'yyyy-mm-dd'
             });
+             $('#txtBirthday').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
 
 
             $('#updatepickerdelivery').datepicker({

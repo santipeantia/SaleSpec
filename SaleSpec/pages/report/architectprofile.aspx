@@ -5,6 +5,30 @@
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="jquery-1.11.2.min.js"></script>
     <script>
+        $(document).ready(function () {
+            var userid = '<%= Session["UserID"]%>';
+            var empcode = '<%= Session["EmpCode"] %>';
+
+            //Admin	        118052
+            //Chanunnett	316010
+            //Wanchai	    506009
+            //Treethep	    519023
+            if (empcode == '118052' || empcode == '316010' || empcode == '519023') {
+                //alert(empcode + ' : ' + userid);
+
+                $('#btnSaveUpdateProfile').removeClass('hidden');
+            } else {
+                $('#btnSaveUpdateProfile').addClass('hidden');
+            }
+
+
+            var btnSaveUpdateProfile = $('#btnSaveUpdateProfile');
+            btnSaveUpdateProfile.click(function () {
+                document.getElementById("<%= btnUpdateData.ClientID %>").click();
+            })
+        });
+
+
         document.addEventListener("keyup", function (e) {
             var keyCode = e.keyCode ? e.keyCode : e.which;
             if (keyCode == 44) {
@@ -142,6 +166,8 @@
                 return false;
             }
         };
+
+
 
     </script>
 
@@ -736,8 +762,17 @@
                                         </div>
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-4 txtLabel">Birthday</div>
-                                            <div class="col-md-8">
+                                            <%--<div class="col-md-8">
                                                 <input type="text" class="form-control input input-sm txtLabel" id="txtBirthday" name="txtBirthday" placeholder="" value="<%= Birthday %>" required>
+                                            </div>--%>
+
+                                            <div class="col-md-8">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtBirthday" name="txtBirthday" value="<%= Birthday %>" autocomplete="off">
+                                                    <div class="input-group-addon input-sm">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -771,6 +806,18 @@
                                                     <select id="selectStatusConIDEdit" name="selectStatusConIDEdit" class="form-control input-sm" style="width: 100%">
                                                         <%= strStatus %>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 5px;">
+                                            <div class="col-md-4">
+                                                <label class="txtLabel"></label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="txtLabel">
+                                                    <button class="btn btn-primary btn-flat" id="btnSaveUpdateProfile" name="btnSaveUpdateProfile">Update Architect Profile</button>
+                                                    <button type="button" class="btn btn-primary hidden" id="btnUpdateData" onserverclick="btnUpdateData_click" runat="server">Update Changes</button>
                                                 </div>
                                             </div>
                                         </div>
