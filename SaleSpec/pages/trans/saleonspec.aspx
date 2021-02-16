@@ -206,6 +206,9 @@
 
             var btnDocExport = $('#btnDocExport');
             btnDocExport.click(function () {
+
+                $('#btnDeleteSOS').addClass("hidden");
+
                 //alert('Doc Export');
                 $('#txtExid').val('');                
                 $('#txtExProjecID').val('');
@@ -259,6 +262,7 @@
 
             var btnUpdateSOS = $('#btnUpdateSOS')
             btnUpdateSOS.click(function () {
+                              
 
                 var sdate = $('#datepickertrans').val();
                 var edate = $('#datepickerend').val();
@@ -631,6 +635,8 @@
                             }
                             else {
                                 //alert('export');
+
+                                 $('#btnDeleteSOS').removeClass("hidden");
 
                                 $('#txtExid').val(id);
                                 $('#txtExProjecID').val(projectid);
@@ -1239,7 +1245,7 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel " id="txtExid" name="txtExid" readonly value="" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExid" name="txtExid" readonly value="" autocomplete="off">
                                                     <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExProjecID" name="txtExProjecID" readonly value="" autocomplete="off">
                                                     <div class="input-group input-group-sm">
                                                         <span>

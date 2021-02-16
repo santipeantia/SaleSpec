@@ -67,7 +67,7 @@ namespace SaleSpec.pages.report
                         "	, (select top 1 ' in year ' + convert(nvarchar(10), inYear) from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as inYear " +
                         "   , (select top 1 level_desc from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as level_desc " +
                         //"	, (select Port from vw_ArchitectPortOwner p where p.ArchitecID=a.ArchitecID) as Port  " +
-                        "   , p.port as Port " +
+                        "   , a.SpecID as Port " +
                         "from adArchitecture a  left    join " +
                         "   adCompany cm on a.CompanyID = cm.CompanyID left join  " +
                         "   adStatusConfirm cn on a.StatusConID = cn.ConDesc left join  " +
