@@ -7002,6 +7002,7 @@
     <Compile Include="adCharts.cs">
       <DependentUpon>ChartData.tt</DependentUpon>
     </Compile>
+    <Compile Include="cGetDataProjectReferenceExport.cs" />
     <Compile Include="Class\cGetssProjectMappingFilter.cs" />
     <Compile Include="Class\cGlobalVariable.cs" />
     <Compile Include="Class\cGetInvoiceListSOSMapping.cs" />

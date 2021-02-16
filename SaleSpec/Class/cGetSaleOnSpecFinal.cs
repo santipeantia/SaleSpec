@@ -33,5 +33,7 @@ namespace SaleSpec
         public string DocuDate { get; set; }
         public string chkView { get; set; }
         public string chkTrash { get; set; }
+        public string RentCom { get; set; }
+        public string id { get; set; }
     }
 }

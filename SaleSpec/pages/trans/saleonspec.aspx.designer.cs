@@ -47,14 +47,5 @@ namespace SaleSpec.pages.trans {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnSaleOnSpec2Excel;
-        
-        /// <summary>
-        /// btnConfirmed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmed;
     }
 }

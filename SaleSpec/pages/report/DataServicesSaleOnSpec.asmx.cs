@@ -68,6 +68,8 @@ namespace SaleSpec.pages.report
                 data.SaleName = rdr["SaleName"].ToString();
                 data.DocuDate = rdr["DocuDate"].ToString();           
                 data.chkTrash = rdr["chkTrash"].ToString();
+                data.RentCom = rdr["RentCom"].ToString();
+                data.id = rdr["id"].ToString();
                 datas.Add(data);
             }
 
@@ -131,6 +133,49 @@ namespace SaleSpec.pages.report
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(datas));
             conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetUpdateProjectReferenceExport(string trn, string id, string companyid, string companyname, string architecid, string  name, string sosmonth, 
+                                                    string projectyear, string projectmonth, string    docuno, string custcode, string custname, string projectid, 
+                                                    string projectname, string goodid, string goodname, string actqty, string specqty, string amount,
+                                                    string perunit, string netrf_b, string netcom, string totalsale, string salecode, string salename, 
+                                                    string docudate, string chktrash, string rentcom)
+        {
+            SqlCommand comm = new SqlCommand("spGetUpdateProjectReferenceExport", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@trn", trn);
+            comm.Parameters.AddWithValue("@id", id);
+            comm.Parameters.AddWithValue("@companyid", companyid);
+            comm.Parameters.AddWithValue("@companyname", companyname);
+            comm.Parameters.AddWithValue("@architecid", architecid);
+            comm.Parameters.AddWithValue("@name", name);
+            comm.Parameters.AddWithValue("@sosmonth", sosmonth);
+            comm.Parameters.AddWithValue("@projectyear", projectyear);
+            comm.Parameters.AddWithValue("@projectmonth", projectmonth);
+            comm.Parameters.AddWithValue("@docuno", docuno);
+            comm.Parameters.AddWithValue("@custcode", custcode);
+            comm.Parameters.AddWithValue("@custname", custname);
+            comm.Parameters.AddWithValue("@projectid", projectid);
+            comm.Parameters.AddWithValue("@projectname", projectname);
+            comm.Parameters.AddWithValue("@goodid", goodid);
+            comm.Parameters.AddWithValue("@goodname", goodname);
+            comm.Parameters.AddWithValue("@actqty", actqty);
+            comm.Parameters.AddWithValue("@specqty", specqty);
+            comm.Parameters.AddWithValue("@amount", amount);
+            comm.Parameters.AddWithValue("@perunit", perunit);
+            comm.Parameters.AddWithValue("@netrf_b", netrf_b);
+            comm.Parameters.AddWithValue("@netcom", netcom);
+            comm.Parameters.AddWithValue("@totalsale", totalsale);
+            comm.Parameters.AddWithValue("@salecode", salecode);
+            comm.Parameters.AddWithValue("@salename", salename);
+            comm.Parameters.AddWithValue("@docudate", docudate);
+            comm.Parameters.AddWithValue("@chktrash", chktrash);
+            comm.Parameters.AddWithValue("@rentcom", rentcom);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+
         }
 
         [WebMethod]

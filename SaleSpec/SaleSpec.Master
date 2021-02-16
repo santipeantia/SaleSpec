@@ -704,7 +704,11 @@
                     'ordering': true,
                     'info': true,
                     'scrollX': true,
-                    'autoWidth': true
+                    'autoWidth': true,
+                    'columnDefs': [{
+                        targets: [25, 26],
+                            className: "hide_column"
+                    }]
                 })
 
                 
@@ -725,6 +729,20 @@
                     ]
                 })
 
+            })
+            $('#tblproject').DataTable({
+                'iDisplayLength': 10,
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'scrollX': true,
+                'autoWidth': true,
+                'columnDefs': [{
+                    targets: [0, 1, 13, 14],
+                    className: "hide_column"
+                }]
             })
         </script>
 
@@ -890,6 +908,24 @@
                 format: 'yyyy-mm-dd'
             });
              $('#datesos').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            
+             $('#datepickerexpsdate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            
+             $('#datepickerexpedate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+
+            $('#datepickerdocudate').datepicker({
                 autoclose: true,
                 todayHighlight: true,
                 format: 'yyyy-mm-dd'

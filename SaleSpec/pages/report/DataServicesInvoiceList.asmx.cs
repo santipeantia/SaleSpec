@@ -130,6 +130,42 @@ namespace SaleSpec.pages.report
 
         }
 
+        [WebMethod]
+        public void GetDataProjectReferenceExport(string sdate, string edate) {
+            List<cGetDataProjectReferenceExport> datas = new List<cGetDataProjectReferenceExport>();
+
+            SqlCommand comm = new SqlCommand("spGetReportProjectStatusExport", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@sdate", sdate);
+            comm.Parameters.AddWithValue("@edate", edate);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetDataProjectReferenceExport data = new cGetDataProjectReferenceExport();
+                data.ID = rdr["ID"].ToString();
+                data.WeekDate = rdr["WeekDate"].ToString();
+                data.CompanyID = rdr["CompanyID"].ToString();
+                data.CompanyName = rdr["CompanyName"].ToString();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.Name = rdr["Name"].ToString();
+                data.ProjectID = rdr["ProjectID"].ToString();
+                data.ProjectName = rdr["ProjectName"].ToString();
+                data.ProdNameEN = rdr["ProdNameEN"].ToString();
+                data.DeliveryDate = rdr["DeliveryDate"].ToString();
+                data.Quantity = rdr["Quantity"].ToString();
+                data.ProjYear = rdr["ProjYear"].ToString();
+                data.UserID = rdr["UserID"].ToString();
+                data.SosType = rdr["SosType"].ToString();
+                data.chkTrash = rdr["chkTrash"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(datas));
+            conn.CloseConn();
+        }
     }
 }
 
