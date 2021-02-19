@@ -139,7 +139,6 @@
                 }
 
 
-
                 //alert('click..');
                 // var table = $('#tableWeeklyReportx');
 
@@ -784,26 +783,38 @@
                                                 data: { ProjectID: strVal7.text() },
                                                 dataType: 'json',
                                                 success: function (data) {
-                                                    var trHTML2 = '';
-                                                    $('#tableHistory tr:not(:first)').remove();
+                                                    //var trHTML2 = '';
+                                                    //$('#tableHistory tr:not(:first)').remove();
 
-                                                    $(data).each(function (index, item) {
-                                                        trHTML2 += '<tr>' +
-                                                            '<td class="">' + item.WeekDate + '</td>' +
-                                                            '<td class="">' + item.WeekTime + '</td>' +
-                                                            '<td class="">' + item.NextVisitDate + '</td>' +
-                                                            '<td class="">' + item.TransNameEN + '</td>' +
-                                                            '<td class="">' + item.StepNameEn + '</td>' +
-                                                            '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
-                                                            '<td class="">' + item.ProdNameEN + '</td>' +
-                                                            '<td class="">' + item.BiddingName1 + '</td>' +
-                                                            '<td class="">' + item.AwardMC + '</td>' +
-                                                            '<td class="">' + item.AwardRF + '</td>' +
-                                                            '<td class="">' + item.Quantity + '</td>' +
-                                                            '<td class="">' + item.Remark + '</td>' +
-                                                            '</tr > ';
-                                                    });
-                                                    $('#tableHistory').append(trHTML2);
+                                                    //$(data).each(function (index, item) {
+                                                    //    trHTML2 += '<tr>' +
+                                                    //        '<td class="">' + item.WeekDate + '</td>' +
+                                                    //        '<td class="">' + item.WeekTime + '</td>' +
+                                                    //        '<td class="">' + item.NextVisitDate + '</td>' +
+                                                    //        '<td class="">' + item.TransNameEN + '</td>' +
+                                                    //        '<td class="">' + item.StepNameEn + '</td>' +
+                                                    //        '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
+                                                    //        '<td class="">' + item.ProdNameEN + '</td>' +
+                                                    //        '<td class="">' + item.BiddingName1 + '</td>' +
+                                                    //        '<td class="">' + item.AwardMC + '</td>' +
+                                                    //        '<td class="">' + item.AwardRF + '</td>' +
+                                                    //        '<td class="">' + item.Quantity + '</td>' +
+                                                    //        '<td class="">' + item.Remark + '</td>' +
+                                                    //        '</tr > ';
+                                                    //});
+                                                    //$('#tableHistory').append(trHTML2);
+
+                                                    var table;
+                                                    table = $('#tableHistory').DataTable();
+                                                    table.clear();
+
+                                                    if (data != '') {
+                                                        $.each(data, function (i, item) {
+                                                            table.row.add([data[i].WeekDate, data[i].WeekTime, data[i].NextVisitDate, data[i].TransNameEN, data[i].StepNameEn,
+                                                            data[i].ProdTypeNameEN, data[i].ProdNameEN, data[i].BiddingName1, data[i].AwardMC, data[i].AwardRF, data[i].Quantity, data[i].Remark]);
+                                                        });
+                                                    };
+                                                    table.draw();
                                                 }
                                             });
 
@@ -1091,26 +1102,38 @@
                                             data: { ProjectID: strVal7.text() },
                                             dataType: 'json',
                                             success: function (data) {
-                                                var trHTML2 = '';
-                                                $('#tableHistory tr:not(:first)').remove();
+                                                //var trHTML2 = '';
+                                                //$('#tableHistory tr:not(:first)').remove();
 
-                                                $(data).each(function (index, item) {
-                                                    trHTML2 += '<tr>' +
-                                                        '<td class="">' + item.WeekDate + '</td>' +
-                                                        '<td class="">' + item.WeekTime + '</td>' +
-                                                        '<td class="">' + item.NextVisitDate + '</td>' +
-                                                        '<td class="">' + item.TransNameEN + '</td>' +
-                                                        '<td class="">' + item.StepNameEn + '</td>' +
-                                                        '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
-                                                        '<td class="">' + item.ProdNameEN + '</td>' +
-                                                        '<td class="">' + item.BiddingName1 + '</td>' +
-                                                        '<td class="">' + item.AwardMC + '</td>' +
-                                                        '<td class="">' + item.AwardRF + '</td>' +
-                                                        '<td class="">' + item.Quantity + '</td>' +
-                                                        '<td class="">' + item.Remark + '</td>' +
-                                                        '</tr > ';
-                                                });
-                                                $('#tableHistory').append(trHTML2);
+                                                //$(data).each(function (index, item) {
+                                                //    trHTML2 += '<tr>' +
+                                                //        '<td class="">' + item.WeekDate + '</td>' +
+                                                //        '<td class="">' + item.WeekTime + '</td>' +
+                                                //        '<td class="">' + item.NextVisitDate + '</td>' +
+                                                //        '<td class="">' + item.TransNameEN + '</td>' +
+                                                //        '<td class="">' + item.StepNameEn + '</td>' +
+                                                //        '<td class="hidden">' + item.ProdTypeNameEN + '</td>' +
+                                                //        '<td class="">' + item.ProdNameEN + '</td>' +
+                                                //        '<td class="">' + item.BiddingName1 + '</td>' +
+                                                //        '<td class="">' + item.AwardMC + '</td>' +
+                                                //        '<td class="">' + item.AwardRF + '</td>' +
+                                                //        '<td class="">' + item.Quantity + '</td>' +
+                                                //        '<td class="">' + item.Remark + '</td>' +
+                                                //        '</tr > ';
+                                                //});
+                                                //$('#tableHistory').append(trHTML2);
+
+                                                var table;
+                                                    table = $('#tableHistory').DataTable();
+                                                    table.clear();
+
+                                                    if (data != '') {
+                                                        $.each(data, function (i, item) {
+                                                            table.row.add([data[i].WeekDate, data[i].WeekTime, data[i].NextVisitDate, data[i].TransNameEN, data[i].StepNameEn,
+                                                            data[i].ProdTypeNameEN, data[i].ProdNameEN, data[i].BiddingName1, data[i].AwardMC, data[i].AwardRF, data[i].Quantity, data[i].Remark]);
+                                                        });
+                                                    };
+                                                table.draw();                                            
                                             }
                                         });
 
@@ -1745,27 +1768,30 @@
 
                                                     </span>
 
-
+                                                    <div>
                                                     <table id="tableHistory" class="table table-bordered table-striped table-hover table-condensed" style="width: 100%">
                                                         <thead>
                                                             <tr>
-                                                                <td class="">WeekDate</td>
-                                                                <td class="">WeekTime</td>
-                                                                <td class="">Following</td>
-                                                                <td class="">TransName</td>
-                                                                <td class="">StepName</td>
-                                                                <td class="hidden">ProdType</td>
-                                                                <td class="">ProdName</td>
-                                                                <td class="">BiddingName</td>
-                                                                <td class="">AwardMC</td>
-                                                                <td class="">AwardRF</td>
-                                                                <td class="">Quantity</td>
-                                                                <td class="">Remark</td>
+                                                                <th>WeekDate</th>
+                                                                <th>WeekTime</th>
+                                                                <th>Following</th>
+                                                                <th>TransName</th>
+                                                                <th>StepName</th>
+                                                                <th>ProdType</th>
+                                                                <th>ProdName</th>
+                                                                <th>BiddingName</th>
+                                                                <th>AwardMC</th>
+                                                                <th>AwardRF</th>
+                                                                <th>Quantity</th>
+                                                                <th>Remark</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         </tbody>
                                                     </table>
+                                                   </div>
+                                                    
+
                                                 </div>
                                             </div>
 

@@ -61,12 +61,20 @@ namespace SaleSpec
         public string strTextReportEvent = "";
         public string strTextReportReward = "";
 
+        public string strSaleOnSpec = "hidden";
         public string strSaleOnSpecActive = "";
         public string strTextSaleOnspec = "";
         public string strTextSOSMapping = "";
         public string strSaleOnSpecTrans = "";
         public string strTextSaleOnspecFilter = "";
 
+        public string strMetre2MileActive = "";
+        public string strTextMMCondition = "";
+        public string strTextMMCustomer = "";
+        public string strTextMMProduct = "";
+        public string strTextMMReport = "";
+
+        public string strMMClass = "hidden";
         //public string strTextPremiumGift = "";
         //public string strTextSurprise = "";
 
@@ -203,8 +211,10 @@ namespace SaleSpec
                 if (strOpt == "rfoc") { strActiveReporting = "active"; strTextReportForecasting = "text-red"; return; } else { strActiveReporting = ""; strTextReportForecasting = ""; }
                 if (strOpt == "itk") { strActiveReporting = "active"; strTextSaleIntake = "text-red"; return; } else { strActiveReporting = ""; strTextSaleIntake = ""; }
 
-                
-                
+                if (strOpt == "mmc") { strMetre2MileActive = "active"; strTextMMCondition = "text-red"; return; } else { strMetre2MileActive = ""; strTextMMCondition = ""; }
+                if (strOpt == "mmg") { strMetre2MileActive = "active"; strTextMMCustomer = "text-red"; return; } else { strMetre2MileActive = ""; strTextMMCustomer = ""; }
+                if (strOpt == "mmp") { strMetre2MileActive = "active"; strTextMMProduct = "text-red"; return; } else { strMetre2MileActive = ""; strTextMMProduct = ""; }
+                if (strOpt == "mmr") { strMetre2MileActive = "active"; strTextMMReport = "text-red"; return; } else { strMetre2MileActive = ""; strTextMMReport = ""; }
 
 
 
@@ -252,10 +262,17 @@ namespace SaleSpec
                         if (xPage == "trans/apprequest") { transapprequest.Visible = true; }
 
 
-                       // if (xPage == "SaleOnSpec") { menusaleonspec.Visible = true; }
+                        if (xPage == "SaleOnSpec") { strSaleOnSpec = ""; }
                         if (xPage == "trans/saleonspec") { transsaleonspec.Visible = true; }
                         if (xPage == "trans/sosmapping") { sosprojectmapping.Visible = true; }
                         if (xPage == "trans/saleonspecfilter") { sosfinalfilter.Visible = true; }
+
+                        if (xPage == "trans/metre2mile") { strMMClass = ""; } 
+                        if (xPage == "trans/mmcondition") { mmcondition.Visible = true; }
+                        if (xPage == "trans/mmgoodcust") { mmgoodcust.Visible = true; }
+                        if (xPage == "trans/mmproduct") { mmproduct.Visible = true; }
+                        if (xPage == "trans/mmreport") { mmreport.Visible = true; }
+
 
                         if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }
                         if (xPage == "report/newprojectreport") { reportnewproject.Visible = true; }

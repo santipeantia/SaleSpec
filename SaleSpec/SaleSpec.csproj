@@ -6741,6 +6741,10 @@
     <Content Include="pages\trans\apprequest-new.aspx" />
     <Content Include="pages\trans\apprequest.aspx" />
     <Content Include="pages\report\companyreport.aspx" />
+    <Content Include="pages\trans\mmcondition.aspx" />
+    <Content Include="pages\trans\mmgoodcust.aspx" />
+    <Content Include="pages\trans\mmproducts.aspx" />
+    <Content Include="pages\trans\mmreport.aspx" />
     <Content Include="pages\trans\projects-update-status.aspx" />
     <Content Include="pages\trans\projects-update.aspx" />
     <Content Include="pages\trans\projects.aspx" />
@@ -7518,6 +7522,34 @@
     </Compile>
     <Compile Include="pages\trans\HandlerCS.ashx.cs">
       <DependentUpon>HandlerCS.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\mmcondition.aspx.cs">
+      <DependentUpon>mmcondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\mmcondition.aspx.designer.cs">
+      <DependentUpon>mmcondition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\mmgoodcust.aspx.cs">
+      <DependentUpon>mmgoodcust.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\mmgoodcust.aspx.designer.cs">
+      <DependentUpon>mmgoodcust.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\mmproducts.aspx.cs">
+      <DependentUpon>mmproducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\mmproducts.aspx.designer.cs">
+      <DependentUpon>mmproducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\mmreport.aspx.cs">
+      <DependentUpon>mmreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\mmreport.aspx.designer.cs">
+      <DependentUpon>mmreport.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\projects-update-status.aspx.cs">
       <DependentUpon>projects-update-status.aspx</DependentUpon>

@@ -256,6 +256,42 @@ namespace SaleSpec {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl sosfinalfilter;
         
         /// <summary>
+        /// mmcondition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mmcondition;
+        
+        /// <summary>
+        /// mmgoodcust control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mmgoodcust;
+        
+        /// <summary>
+        /// mmproduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mmproduct;
+        
+        /// <summary>
+        /// mmreport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mmreport;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>

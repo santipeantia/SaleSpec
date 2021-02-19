@@ -381,7 +381,7 @@
 
 
 
-                        <li class="<%= strSaleOnSpecActive.ToString() %>  treeview" style="border-top: 1px solid #dddddd;">
+                        <li class="<%= strSaleOnSpecActive.ToString() %>  treeview <%= strSaleOnSpec.ToString() %>" style="border-top: 1px solid #dddddd;">
                             <a href="#">
                                 <i class="fa fa-table treeview "></i><span class="txtLabel">Sale On Spec</span>
                                 <span class="pull-right-container">
@@ -399,17 +399,37 @@
                                 
                                 <li id="sosfinalfilter" runat="server" visible="false" class="<%= strSaleOnSpecActive.ToString() %> ">
                                     <a href="../../pages/trans/saleonspecfilter?opt=sof"><i class="fa fa-angle-right <%= strTextSaleOnspecFilter.ToString() %>"></i><span class="txtLabel <%= strTextSaleOnspecFilter.ToString() %>">SOS Final Filter</span></a>
-                                </li>
-                                 
-
-
+                                </li>                  
 
                             </ul>
                         </li>
 
+                        <li id="metretomile"  class="<%= strMetre2MileActive.ToString() %>  treeview  <%= strMMClass.ToString() %>" style="border-top: 1px solid #dddddd;">
+                            <a href="#">
+                                <i class="fa fa-table treeview "></i><span class="txtLabel">Metre to Mile</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="mmcondition" runat="server" visible="false" class="<%= strMetre2MileActive.ToString() %> ">
+                                    <a href="../../pages/trans/mmcondition?opt=mmc"><i class="fa fa-angle-right <%= strTextMMCondition.ToString() %>"></i><span class="txtLabel <%= strTextMMCondition.ToString() %>">Metre to Mile Conditions</span></a>
+                                </li>
 
+                                <li id="mmgoodcust" runat="server" visible="false" class="<%= strMetre2MileActive.ToString() %> ">
+                                    <a href="../../pages/trans/mmgoodcust?opt=mmg"><i class="fa fa-angle-right <%= strTextMMCustomer.ToString() %>"></i><span class="txtLabel <%= strTextMMCustomer.ToString() %>">Good Customers</span></a>
+                                </li>
+                                
+                                <li id="mmproduct" runat="server" visible="false" class="<%= strMetre2MileActive.ToString() %> ">
+                                    <a href="../../pages/trans/mmproducts?opt=mmp"><i class="fa fa-angle-right <%= strTextMMProduct.ToString() %>"></i><span class="txtLabel <%= strTextMMProduct.ToString() %>">Products</span></a>
+                                </li>  
+                                
+                                <li id="mmreport" runat="server" visible="false" class="<%= strMetre2MileActive.ToString() %> ">
+                                    <a href="../../pages/trans/mmreport?opt=mmr"><i class="fa fa-angle-right <%= strTextMMReport.ToString() %>"></i><span class="txtLabel <%= strTextMMReport.ToString() %>">Metre to Mile Report</span></a>
+                                </li>  
 
-
+                            </ul>
+                        </li>
 
                         <li style="border-top: 1px solid #dddddd;">
                             <a href="../../pages/help/salespec_guide.pdf" target="_blank">
@@ -618,7 +638,24 @@
 
                 })
 
+                
+                $('#tableHistory').DataTable({
+                    //'iDisplayLength': 10,
+                    'paging': false,
+                    'scrollX': true,
+                    'lengthChange': true,
+                    'searching': false,
+                    'ordering': false,
+                    'info': true,
+                    'autoWidth': true,
+                    'columnDefs': [{
+                        render: function (data, type, full, meta) {
+                            return "<div id='dvNotes' style='white-space: normal;width: 400px;'>" + data + "</div>";
+                        },
+                        targets: 11
+                    }]
 
+                })
 
 
                 $('#tableArchitectProfile').DataTable({
@@ -972,3 +1009,7 @@
     </div>
 </body>
 </html>
+
+
+
+

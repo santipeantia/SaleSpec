@@ -175,6 +175,8 @@
                     selectStatusDDL.append($('<option/>', { value: -1, text: 'Select status' }));
                     $(data).each(function (index, item) {
                         selectStatusDDL.append($('<option/>', { value: item.StatusID, text: item.StatusNameEn }));
+                        selectStatusDDL.val('S00');
+                        selectStatusDDL.change();
                     });
                 }
             });
@@ -854,8 +856,8 @@
                     //    return;
                     //}
 
-                    if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
-                    //if (($('#selectTransEntry').val() == 1)) {
+                    //if (($('#selectTransEntry').val() == 1) && ($('#selectProjectStep').val() == 0)) {
+                    if (($('#selectTransEntry').val() == 1)) {
                         $.ajax({
                             url: 'DataServices.asmx/GetCountProject',
                             method: 'POST',
@@ -959,6 +961,8 @@
                 }
                 else
                 {
+                    $('#btnSaveHistoryNewProject').prop('disabled', false);
+
                     //alert('Warnning, The data is not completed please check..!');
                     Swal.fire({
                         type: 'error',
