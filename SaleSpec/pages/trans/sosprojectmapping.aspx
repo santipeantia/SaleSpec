@@ -1302,7 +1302,7 @@
                         table.clear();
                         if (data != '') {
                             $.each(data, function (i, item) {
-                                table.row.add([data[i].ID, data[i].DocuNo, data[i].DocuDate, data[i].CustPONo, data[i].CustCode,
+                                table.row.add([data[i].DocID, data[i].DocuNo, data[i].DocuDate, data[i].CustPONo, data[i].CustCode,
                                     data[i].CustName, data[i].JobName, data[i].GoodCode, data[i].Model, data[i].EmpCode,
                                     data[i].SaleName, data[i].Amount, data[i].RentAmount, data[i].TotalPrice, data[i].chk]);                               
                             });

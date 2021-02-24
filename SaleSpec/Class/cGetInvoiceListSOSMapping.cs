@@ -8,6 +8,7 @@ namespace SaleSpec
     public class cGetInvoiceListSOSMapping
     {
         public string ID { get; set; }
+        public string DocID { get; set; }
         public string DocuNo { get; set; }
         public string DocuDate { get; set; }
         public string CustPONo { get; set; }
