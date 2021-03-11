@@ -408,6 +408,7 @@
                 var sdate = $('#datepickertrans').val();
                 var edate = $('#datepickerend').val();
 
+                var id = $('#txtExid').val();
                 var projectid = $('#txtExProjecID').val();
                 var docuno = $('#txtDocuNo').val();
 
@@ -425,6 +426,7 @@
                             url: '../report/DataServicesSaleOnSpec.asmx/GetssProjectMappingDelete',
                             method: 'POST',
                             data: {
+                                id: id,
                                 projectid: projectid,
                                 refdocno: docuno
                             },
@@ -556,7 +558,84 @@
                         timer: 1500
                     })
                 } else {
-                    alert('Okay save..');
+                    //alert('Okay save..');
+                    var sdate = $('#datepickertrans').val();
+                    var edate = $('#datepickerend').val();
+
+                    var id = $('#txtExid').val();
+                    var ownerqty = $('#txtOwnerQty').val();
+                    var owneramount = $('#txtOwnerAmount').val();
+                    var ownernetcom = $('#txtOwnerNetComm').val();
+                    var ownertotal = $('#txtOwnerTotal').val();
+                    var isshare = $('#txtSharePercen').val();
+                    var shareport = $('#txtSharePort').val();
+                    var shareqty = $('#txtShareQty').val();
+                    var shareamount = $('#txtShareAmount').val();
+                    var sharenetcom = $('#txtShareNetComm').val();
+                    var sharetotal = $('#txtShareTotal').val();
+                    console.log(id)
+
+                     Swal.fire({
+                        title: 'Sharing, Are you sure..?',
+                        text: "You won't be able to revert this!",
+                        type: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, Sharing..!'
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url: '../report/DataServicesSaleOnSpec.asmx/GetSaleOnSpecFinalShare',
+                                method: 'post',
+                                data: {
+                                    id: id,
+                                    ownerqty: ownerqty,
+                                    owneramount: owneramount,
+                                    ownernetcom: ownernetcom,
+                                    ownertotal: ownertotal,
+                                    isshare: isshare,
+                                    shareport: shareport,
+                                    shareqty: shareqty,
+                                    shareamount: shareamount,
+                                    sharenetcom: sharenetcom,
+                                    sharetotal: sharetotal
+                                },
+                                datatype: 'json',
+                                success: function (data) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Your work has been shared..',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+
+                                    getSaleOnSpecWithProject(sdate, edate);
+                                    $("#modal-exportdoc").modal("hide");
+                                },
+                                error: function (jqXHR, exception) {
+                                    var msg = '';
+                                    if (jqXHR.status === 0) {
+                                        msg = 'Not connect.\n Verify Network.';
+                                    } else if (jqXHR.status == 404) {
+                                        msg = 'Requested page not found. [404]';
+                                    } else if (jqXHR.status == 500) {
+                                        msg = 'Internal Server Error [500].';
+                                    } else if (exception === 'parsererror') {
+                                        msg = 'Requested JSON parse failed.';
+                                    } else if (exception === 'timeout') {
+                                        msg = 'Time out error.';
+                                    } else if (exception === 'abort') {
+                                        msg = 'Ajax request aborted.';
+                                    } else {
+                                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                                    }
+                                    alert('Error, ' + msg);
+                                }
+                            });
+                        }
+                    })
                 }
             });
 

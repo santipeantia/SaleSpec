@@ -191,11 +191,12 @@ namespace SaleSpec.pages.report
         }
 
         [WebMethod]
-        public void GetssProjectMappingDelete(string projectid, string refdocno)
+        public void GetssProjectMappingDelete(string id, string projectid, string refdocno)
         {
             SqlCommand comm = new SqlCommand("spGetssProjectMappingDelete", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@id", id);
             comm.Parameters.AddWithValue("@ProjectID", projectid);
             comm.Parameters.AddWithValue("@RefDocuNo", refdocno);
             comm.ExecuteNonQuery();
@@ -261,6 +262,28 @@ namespace SaleSpec.pages.report
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandTimeout = 1200;
             comm.Parameters.AddWithValue("@docuno", docuno);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetSaleOnSpecFinalShare(string id, string ownerqty, string owneramount, string ownernetcom, string ownertotal, string isshare, string shareport, string shareqty,
+            string shareamount, string sharenetcom, string sharetotal)
+        {
+            SqlCommand comm = new SqlCommand("spSaleOnSpecFinalShare", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+            comm.Parameters.AddWithValue("@id", id);
+            comm.Parameters.AddWithValue("@OwnerQty", ownerqty);
+            comm.Parameters.AddWithValue("@OwnerAmount", owneramount);
+            comm.Parameters.AddWithValue("@OwnerNetCom", ownernetcom);
+            comm.Parameters.AddWithValue("@OwnerTotal", ownertotal);
+            comm.Parameters.AddWithValue("@isShare", isshare);
+            comm.Parameters.AddWithValue("@SharePort", shareport);
+            comm.Parameters.AddWithValue("@ShareQty", shareqty);
+            comm.Parameters.AddWithValue("@ShareAmount", shareamount);
+            comm.Parameters.AddWithValue("@ShareNetCom", sharenetcom);
+            comm.Parameters.AddWithValue("@ShareTotal", sharetotal);
             comm.ExecuteNonQuery();
             conn.CloseConn();
         }
