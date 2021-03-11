@@ -16,27 +16,27 @@
             cursor: pointer;
         }
 
-         #tableSaleOnSpecFinal tr:hover {
-                color: red;
-                font-weight: bold;
-                cursor: pointer;
-            }
+        #tableSaleOnSpecFinal tr:hover {
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-         #tableSaleOnSpec2 tr:hover {
-                color: red;
-                font-weight: bold;
-                cursor: pointer;
-            }
+        #tableSaleOnSpec2 tr:hover {
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
         #tbltranswithoutsalesconsignee i:hover {
             cursor: pointer;
         }
 
-         #tblproject tr:hover {
-                color: red;
-                font-weight: bold;
-                cursor: pointer;
-            }
+        #tblproject tr:hover {
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
         #overlay {
             position: fixed;
@@ -208,9 +208,11 @@
             btnDocExport.click(function () {
 
                 $('#btnDeleteSOS').addClass("hidden");
+                $('#btnDeleteSOSEx').addClass("hidden");
+                $('#btnSharedSOS').addClass("hidden");
 
                 //alert('Doc Export');
-                $('#txtExid').val('');                
+                $('#txtExid').val('');
                 $('#txtExProjecID').val('');
                 $('#txtExProjectName').val('');
                 $('#txtProduct').val('');
@@ -262,7 +264,7 @@
 
             var btnUpdateSOS = $('#btnUpdateSOS')
             btnUpdateSOS.click(function () {
-                              
+
 
                 var sdate = $('#datepickertrans').val();
                 var edate = $('#datepickerend').val();
@@ -326,7 +328,7 @@
                     });
                     return;
                 }
-                
+
                 $.ajax({
                     url: '../report/DataServicesSaleOnSpec.asmx/GetUpdateProjectReferenceExport',
                     method: 'post',
@@ -337,28 +339,28 @@
                         companyname: companyname,
                         architecid: architectid,
                         name: architectname,
-                        sosmonth: sosmonth, 
+                        sosmonth: sosmonth,
                         projectyear: 'Export',
                         projectmonth: 'Export',
                         docuno: docuno,
                         custcode: '',
                         custname: custname,
-                        projectid: projectid, 
+                        projectid: projectid,
                         projectname: projectname,
                         goodid: '',
                         goodname: product,
-                        actqty: actqyt.replace(',',''),
-                        specqty: specqty.replace(',',''),
-                        amount: amount.replace(',',''),
-                        perunit: perunit.replace(',',''),
-                        netrf_b: netrf.replace(',',''),
-                        netcom: netcom.replace(',',''),
-                        totalsale: totalsale.replace(',',''),
+                        actqty: actqyt.replace(',', ''),
+                        specqty: specqty.replace(',', ''),
+                        amount: amount.replace(',', ''),
+                        perunit: perunit.replace(',', ''),
+                        netrf_b: netrf.replace(',', ''),
+                        netcom: netcom.replace(',', ''),
+                        totalsale: totalsale.replace(',', ''),
                         salecode: portname,
-                        salename: portname, 
+                        salename: portname,
                         docudate: docudate,
                         chktrash: '',
-                        rentcom: rencom.replace(',','')
+                        rentcom: rencom.replace(',', '')
 
                     },
                     datatype: 'json',
@@ -402,6 +404,46 @@
 
             var btnDeleteSOS = $('#btnDeleteSOS');
             btnDeleteSOS.click(function () {
+
+                var sdate = $('#datepickertrans').val();
+                var edate = $('#datepickerend').val();
+
+                var projectid = $('#txtExProjecID').val();
+                var docuno = $('#txtDocuNo').val();
+
+                Swal.fire({
+                    title: 'Delete ' + docuno + ', Are you sure..?',
+                    text: "You won't be able to revert this!",
+                    icon: 'Question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Delete it..!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: '../report/DataServicesSaleOnSpec.asmx/GetssProjectMappingDelete',
+                            method: 'POST',
+                            data: {
+                                projectid: projectid,
+                                refdocno: docuno
+                            },
+                            dataType: 'json',
+                            complete: function (data) {
+                                Swal.fire(
+                                    'Success!',
+                                    'Your data has been deleted..',
+                                    'success')
+                            }
+                        });
+                        $('#btnReport').click();
+                        $("#modal-exportdoc").modal("hide");
+                    }
+                })
+            })
+
+            var btnDeleteSOSEx = $('#btnDeleteSOSEx');
+            btnDeleteSOSEx.click(function () {
 
                 var sdate = $('#datepickertrans').val();
                 var edate = $('#datepickerend').val();
@@ -491,6 +533,33 @@
                 }
             });
 
+            var btnSharedSOS = $('#btnSharedSOS');
+            btnSharedSOS.click(function () {
+                var sharePort = $('#txtSharePort').val();
+                var shareQty = $('#txtShareQty').val();
+                //alert(sharePort);
+                if (sharePort == "") {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Port sharing is not found..!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return;
+                } else if ((parseFloat(shareQty) == 0)) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Quantity sharing cannot be equal to zero..!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    alert('Okay save..');
+                }
+            });
+
             $(".allownumericwithdecimal").on("keypress keyup blur", function (event) {
 
                 $(this).val(function (index, value) {
@@ -500,14 +569,106 @@
                 if ($(this).val() === '') {
                     //alert('null');
                     $(this).val('0.00');
-                }
+                } 
 
                 if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
                     event.preventDefault();
                 }
 
+                var fname = $(this).attr("name");
+                if (fname == 'txtSharePercen') {
+
+                    var percent = $(this).val();
+
+                    var shareQty ;
+                    var shareAmount;
+                    var shareNetComm;
+                    var shareTotal ;
+
+                    var actqty = $('#txtActQty').val().replace(',','');
+                    var specqty = $('#txtSpecQty').val().replace(',','');
+                    var examount = $('#txtExpAmount').val().replace(',','');
+                    var perunit = $('#txtExPerUnit').val().replace(',','');
+                    var netrf = $('#txtExpNetRF').val().replace(',','');
+                    var netcom = $('#txtExNetComm').val().replace(',','');
+                    var rencom = $('#txtExpRenComm').val().replace(',','');
+                    var totalsale = $('#txtExTotalSale').val().replace(',','');
+
+                    shareQty = (parseFloat(actqty.replace(',','')) * parseFloat(percent)) / 100;
+                    $('#txtShareQty').val(parseFloat(shareQty).toFixed(2));
+                    $('#txtShareQty').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',','')));
+                    $('#txtShareAmount').val(parseFloat(shareAmount).toFixed(2));
+                    $('#txtShareAmount').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    shareNetComm = (parseFloat(netcom.replace(',','')) * parseFloat(percent)) / 100;
+                    $('#txtShareNetComm').val(parseFloat(shareNetComm).toFixed(2));
+                    $('#txtShareNetComm').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    shareTotal = (parseFloat(shareAmount) - parseFloat(shareNetComm));
+                    $('#txtShareTotal').val(parseFloat(shareTotal).toFixed(2));
+                    $('#txtShareTotal').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    var ownerQty;
+                    var ownerAmount;
+                    var ownerNetComm;
+                    var ownerTotal;
+
+                    ownerQty = parseFloat(actqty) - parseFloat(shareQty);
+                    $('#txtOwnerQty').val(parseFloat(ownerQty).toFixed(2));
+                    $('#txtOwnerQty').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    ownerAmount = parseFloat(examount) - parseFloat(shareAmount);
+                    $('#txtOwnerAmount').val(parseFloat(ownerAmount).toFixed(2));
+                    $('#txtOwnerAmount').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    console.log(examount, shareAmount, ownerAmount);
+
+
+                    ownerNetComm = parseFloat(netcom) - parseFloat(shareNetComm);
+                    $('#txtOwnerNetComm').val(parseFloat(ownerNetComm).toFixed(2));
+                    $('#txtOwnerNetComm').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+
+                    ownerTotal = parseFloat(totalsale) - parseFloat(shareTotal);
+                    $('#txtOwnerTotal').val(parseFloat(ownerTotal).toFixed(2));
+                    $('#txtOwnerTotal').val(function (index, value) {
+                        return value
+                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    });
+                }                       
             });
         });
+
+        function getFunctionDicimal() {
+            var sharePercen = $('#txtSharePercen').val();
+            if (sharePercen != '') {
+                var numPercent = parseFloat(sharePercen).toFixed(2);
+                $('#txtSharePercen').val(numPercent);
+                //console.log(numPercent);
+            }
+        }
 
         function getSaleOnSpecWithProject(sdate, edate) {
 
@@ -557,9 +718,9 @@
 
                         //alert(rIndex);
 
-                       
+
                         //& cIndex == 24
-                        if (rIndex != 0  ) {
+                        if (rIndex != 0) {
                             var companyid = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(0)').text();
                             var companyname = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(1)').text();
                             var architecid = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(2)').text();
@@ -588,7 +749,7 @@
                             var rentcom = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(25)').text();
                             var id = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(26)').text();
 
-
+                            console.log(id);
                             //console.log("Update : " + companyid + ":" + companyname + ":" + architectid + ":" + architectname + ":" + projectid + ":" + projectname + ":" + salecode + ":" + salename + ":" + projectdue);
 
                             //$('#txtCompanyId').val(companyid);
@@ -602,41 +763,36 @@
                             //$('#txtPortName').val(salecode + " : " + salename);
 
                             if (projectyear != 'Export') {
-                                Swal.fire({
-                                    title: 'Delete ' + docuno + ', Are you sure..?',
-                                    text: "You won't be able to revert this!",
-                                    type: 'info',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'Yes, Delete it..!'
-                                }).then((result) => {
-                                    if (result.value) {
-                                        $.ajax({
-                                            url: '../report/DataServicesSaleOnSpec.asmx/GetssProjectMappingDelete',
-                                            method: 'POST',
-                                            data: {
-                                                projectid: projectid,
-                                                refdocno: docuno
-                                            },
-                                            dataType: 'json',
-                                            complete: function (data) {
-                                                Swal.fire(
-                                                    'Success!',
-                                                    'Your data has been deleted..',
-                                                    'success')
-                                            }
-                                        });
 
-                                        $('#btnReport').click();
 
-                                    }
-                                })
-                            }
-                            else {
-                                //alert('export');
+                                $('#btnDeleteSOS').removeClass("hidden");
+                                $('#btnSharedSOS').removeClass("hidden");
 
-                                 $('#btnDeleteSOS').removeClass("hidden");
+                                $('#btnDeleteSOSEx').addClass("hidden");
+                                $('#btnUpdateSOS').addClass("hidden");
+
+                                $('#divShare').removeClass("hidden");
+                                
+                                $('#btnRefProj').attr('disabled', true);
+                                $('#txtExProjectName').attr('readonly', true);
+                                $('#txtProduct').attr('readonly', true);
+                                $('#txtExCompany').attr('readonly', true);
+                                $('#txtExArchitect').attr('readonly', true);
+
+                                $('#txtActQty').attr('readonly', true);
+                                $('#txtSpecQty').attr('readonly', true);
+                                $('#txtExpAmount').attr('readonly', true);
+                                $('#txtExPerUnit').attr('readonly', true);
+                                $('#txtExpNetRF').attr('readonly', true);
+                                $('#txtExNetComm').attr('readonly', true);
+                                $('#txtExpRenComm').attr('readonly', true);
+                                $('#txtExTotalSale').attr('readonly', true);
+                                $('#txtSosMonth').attr('readonly', true);
+                                $('#txtExPortName').attr('readonly', true);
+                                $('#txtDocuNo').attr('readonly', true);
+                                $('#datepickerdocudate').attr('disabled', true);
+                                $('#txtExCustName').attr('readonly', true);
+
 
                                 $('#txtExid').val(id);
                                 $('#txtExProjecID').val(projectid);
@@ -660,6 +816,90 @@
                                 $('#datepickerdocudate').val(docudate);
                                 $('#txtExCustName').val(custname);
 
+                                $('#txtSharePercen').val('0.00');
+                                $('#txtSharePort').val('');
+                                $('#txtShareQty').val('0.00');
+                                $('#txtShareAmount').val('0.00');
+                                $('#txtShareNetComm').val('0.00');
+                                $('#txtShareTotal').val('0.00');
+
+                                $('#txtOwnerQty').val('0.00');
+                                $('#txtOwnerAmount').val('0.00');
+                                $('#txtOwnerNetComm').val('0.00');
+                                $('#txtOwnerTotal').val('0.00');
+
+                                $('#modal-exportdoc').modal({ backdrop: true });
+                                $('#modal-exportdoc').modal('show');
+
+
+
+
+                            }
+                            else {
+                                //alert('export');
+
+                                $('#btnDeleteSOS').addClass("hidden");
+                                $('#btnSharedSOS').addClass("hidden");
+
+                                $('#btnDeleteSOSEx').removeClass("hidden");
+                                $('#btnUpdateSOS').removeClass("hidden");
+
+                                $('#divShare').addClass("hidden");
+
+                                $('#btnRefProj').attr('disabled', false);
+                                $('#txtExProjectName').attr('readonly', false);
+                                $('#txtProduct').attr('readonly', false);
+                                $('#txtExCompany').attr('readonly', false);
+                                $('#txtExArchitect').attr('readonly', false);
+
+                                $('#txtActQty').attr('readonly', false);
+                                $('#txtSpecQty').attr('readonly', false);
+                                $('#txtExpAmount').attr('readonly', false);
+                                $('#txtExPerUnit').attr('readonly', false);
+                                $('#txtExpNetRF').attr('readonly', false);
+                                $('#txtExNetComm').attr('readonly', false);
+                                $('#txtExpRenComm').attr('readonly', false);
+                                $('#txtExTotalSale').attr('readonly', false);
+                                $('#txtSosMonth').attr('readonly', false);
+                                $('#txtExPortName').attr('readonly', false);
+                                $('#txtDocuNo').attr('readonly', false);
+                                $('#datepickerdocudate').attr('disabled', false);
+                                $('#txtExCustName').attr('readonly', false);
+
+                                $('#txtExid').val(id);
+                                $('#txtExProjecID').val(projectid);
+                                $('#txtExProjectName').val(projectname);
+                                $('#txtProduct').val(goodname);
+                                $('#txtExCompanyID').val(companyid);
+                                $('#txtExCompany').val(companyname);
+                                $('#txtExArchitectID').val(architecid);
+                                $('#txtExArchitect').val(name);
+                                $('#txtActQty').val(actqty);
+                                $('#txtSpecQty').val(specqty);
+                                $('#txtExpAmount').val(amount);
+                                $('#txtExPerUnit').val(perunit);
+                                $('#txtExpNetRF').val(netrf_b);
+                                $('#txtExNetComm').val(netcom);
+                                $('#txtExpRenComm').val(rentcom);
+                                $('#txtExTotalSale').val(totalsale);
+                                $('#txtSosMonth').val(sosmonth);
+                                $('#txtExPortName').val(salecode);
+                                $('#txtDocuNo').val(docuno);
+                                $('#datepickerdocudate').val(docudate);
+                                $('#txtExCustName').val(custname);
+
+                                $('#txtSharePercen').val('0.00');
+                                $('#txtSharePort').val('');
+                                $('#txtShareQty').val('0.00');
+                                $('#txtShareAmount').val('0.00');
+                                $('#txtShareNetComm').val('0.00');
+                                $('#txtShareTotal').val('0.00');
+
+                                $('#txtOwnerQty').val('0.00');
+                                $('#txtOwnerAmount').val('0.00');
+                                $('#txtOwnerNetComm').val('0.00');
+                                $('#txtOwnerTotal').val('0.00');
+
                                 $('#modal-exportdoc').modal({ backdrop: true });
                                 $('#modal-exportdoc').modal('show');
 
@@ -667,8 +907,8 @@
 
                             }
 
-                            
-                        }                         
+
+                        }
                     });
                 }
             })
@@ -723,18 +963,18 @@
 
                         if (rIndex != 0 & cIndex == 24) {
 
-                          
+
                             var firstname = '<%= Session["sEmpEngFirstName"] %>';
                             var lastname = '<%= Session["sEmpEngLastName"] %>';
-                            var fullname = firstname +' '+ lastname;
-                           
+                            var fullname = firstname + ' ' + lastname;
+
                             var empcode = '<%= Session["EmpCode"] %>';
                             var refdocno = $("#tableSaleOnSpec2").find('tr:eq(' + rIndex + ')').find('td:eq(7)').text();
 
                             console.log(firstname + ', ' + lastname + ', ' + refdocno)
 
-                             Swal.fire({
-                                title: 'Delete '+ refdocno +', Are you sure..?',
+                            Swal.fire({
+                                title: 'Delete ' + refdocno + ', Are you sure..?',
                                 text: "You won't be able to revert this!",
                                 type: 'info',
                                 showCancelButton: true,
@@ -824,8 +1064,8 @@
                     if (data != '') {
                         $.each(data, function (i, item) {
                             table.row.add([data[i].ID, data[i].WeekDate, data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID,
-                                data[i].Name, data[i].ProjectID, data[i].ProjectName, data[i].ProdNameEN, data[i].DeliveryDate,
-                                data[i].Quantity, data[i].ProjYear, data[i].UserID, data[i].SosType, data[i].chkTrash])
+                            data[i].Name, data[i].ProjectID, data[i].ProjectName, data[i].ProdNameEN, data[i].DeliveryDate,
+                            data[i].Quantity, data[i].ProjYear, data[i].UserID, data[i].SosType, data[i].chkTrash])
                         });
 
                         table.draw();
@@ -836,7 +1076,7 @@
 
                         $('#tblproject tbody').on('click', 'td', function (e) {
                             e.preventDefault();
-                            
+
                             //var id = $(this).parent().children().eq(0).text();
                             var weekdate = $(this).parent().children().eq(1).text();
                             var companyid = $(this).parent().children().eq(2).text();
@@ -880,7 +1120,7 @@
                                 $('#txtExPerUnit').keypress();
 
                                 $('#txtExpNetRF').val('0.00');
-                                $('#txtExpNetRF').keypress();                                
+                                $('#txtExpNetRF').keypress();
 
                                 $('#txtExNetComm').val('0.00');
                                 $('#txtExNetComm').keypress();
@@ -899,31 +1139,27 @@
 
                                 $('#modal-project').modal('hide');
                             }
-
                         });
-
-
-
-                    }                   
+                    }
                 },
                 error: function (jqXHR, exception) {
                     var msg = '';
-                        if (jqXHR.status === 0) {
-                            msg = 'Not connect.\n Verify Network.';
-                        } else if (jqXHR.status == 404) {
-                            msg = 'Requested page not found. [404]';
-                        } else if (jqXHR.status == 500) {
-                            msg = 'Internal Server Error [500].';
-                        } else if (exception === 'parsererror') {
-                            msg = 'Requested JSON parse failed.';
-                        } else if (exception === 'timeout') {
-                            msg = 'Time out error.';
-                        } else if (exception === 'abort') {
-                            msg = 'Ajax request aborted.';
-                        } else {
-                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                        }
-                        alert('Error, ' + msg);
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert('Error, ' + msg);
                 }
             });
 
@@ -1018,7 +1254,7 @@
                                                     <div class="cv-spinner" id="divSaleOnSpec">
                                                         <span class="spinner"></span>
                                                     </div>
-                                                   
+
                                                     <table id="tableSaleOnSpecFinal" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
                                                         <thead>
                                                             <tr>
@@ -1034,7 +1270,7 @@
                                                                 <th>CustName</th>
                                                                 <th>ProjectId</th>
                                                                 <th>ProjectName</th>
-                                                                <th>GoodID</th>                                                                
+                                                                <th>GoodID</th>
                                                                 <th>GoodName</th>
                                                                 <th>ActQty</th>
                                                                 <th>SpecQty</th>
@@ -1055,7 +1291,7 @@
                                                         <tbody>
                                                         </tbody>
                                                     </table>
-                                                       
+
                                                 </div>
                                             </div>
                                         </div>
@@ -1076,7 +1312,7 @@
                                                     <div class="cv-spinner" id="divSaleOnSpec2">
                                                         <span class="spinner"></span>
                                                     </div>
-                                                   
+
                                                     <table id="tableSaleOnSpec2" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
                                                         <thead>
                                                             <tr>
@@ -1092,7 +1328,7 @@
                                                                 <th>CustName</th>
                                                                 <th>ProjectId</th>
                                                                 <th>ProjectName</th>
-                                                                <th>GoodID</th>                                                               
+                                                                <th>GoodID</th>
                                                                 <th>GoodName</th>
                                                                 <th>ActQty</th>
                                                                 <th>SpecQty</th>
@@ -1110,7 +1346,7 @@
                                                         <tbody>
                                                         </tbody>
                                                     </table>
-                                                        
+
                                                 </div>
                                             </div>
                                         </div>
@@ -1227,226 +1463,313 @@
                         </div>
 
                         <div class="modal modal-default fade" id="modal-exportdoc">
-                            <div class="modal-dialog" style="width: 40%" >
+                            <div class="modal-dialog" style="width: 40%">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title">Export Order</h4>
+                                        <h4 class="modal-title">SOS Order Details</h4>
                                     </div>
 
                                     <div class="modal-body">
                                         <!-- Post -->
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">Project :</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExid" name="txtExid" readonly value="" autocomplete="off">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExProjecID" name="txtExProjecID" readonly value="" autocomplete="off">
-                                                    <div class="input-group input-group-sm">
-                                                        <span>
-                                                            <input type="text" class="form-control input-sm input-flat pull-left txtLabel" id="txtExProjectName" name="txtExProjectName" value="" autocomplete="off">
-                                                        </span>
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">Project :</label>
+                                            </div>
+                                            <div class="col-md-8">
 
-                                                        <span class="input-group-btn">
-                                                            <button type="button" id="btnRefProj" class="btn btn-info ">Go!</button>
-                                                        </span>
-                                                    </div>
-                                                    
+                                                <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExid" name="txtExid" readonly value="" autocomplete="off">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExProjecID" name="txtExProjecID" readonly value="" autocomplete="off">
+                                                <div class="input-group input-group-sm">
+                                                    <span>
+                                                        <input type="text" class="form-control input-sm input-flat pull-left txtLabel" id="txtExProjectName" name="txtExProjectName" value="" autocomplete="off">
+                                                    </span>
 
-                                                    <%-- <div class="input-group input-group-sm">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" id="btnRefProj" class="btn btn-info ">Go!</button>
+                                                    </span>
+                                                </div>
+
+
+                                                <%-- <div class="input-group input-group-sm">
                                                     <input type="text" class="form-control">
                                                     <span class="input-group-addon"><i class="fa fa-check"></i></span>
                                                 </div>--%>
-                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">Product :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtProduct" name="txtProduct" value="" autocomplete="off">
                                             </div>
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                 <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">Product :</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtProduct" name="txtProduct" value="" autocomplete="off">
-                                                </div>
-                                                
-                                            </div>
+                                        </div>
 
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">Company :</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="input-group col-md-12">
-                                                        <span class="txtLabel">
-                                                            <%--<select id="selectCompany" class="form-control input input-sm " style="width: 100%;">
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">Company :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group col-md-12">
+                                                    <span class="txtLabel">
+                                                        <%--<select id="selectCompany" class="form-control input input-sm " style="width: 100%;">
                                                         </select>--%>
-                                                            <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExCompanyID" name="txtExCompanyID" readonly value="" autocomplete="off">
-                                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExCompany" name="txtExCompany" value="" autocomplete="off">
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                 
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">Architect :</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="input-group col-md-12">
-                                                        <span class="txtLabel">
-                                                            <%--<select id="selectArchitect" class="form-control input input-sm " style="width: 100%;">
-                                                        </select>--%>
-                                                            <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExArchitectID" name="txtExArchitectID" readonly value="" autocomplete="off">
-                                                            <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExArchitect" name="txtExArchitect" value="" autocomplete="off">
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                 
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">ActQty :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" id="txtActQty" name="txtActQty" value="" autocomplete="off">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="txtLabel">SpecQty :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" id="txtSpecQty" name="txtSpecQty" value="" autocomplete="off">
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">Amount :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" id="txtExpAmount" name="txtExpAmount" value="" autocomplete="off">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="txtLabel">PerUnit :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" id="txtExPerUnit" name="txtExPerUnit" value="" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">NetRF :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExpNetRF" name="txtExpNetRF" value="" autocomplete="off">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="txtLabel">NetComm :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExNetComm" name="txtExNetComm" value="" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">RenComm :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" id="txtExpRenComm" name="txtExpRenComm" value="" autocomplete="off">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="txtLabel">TotalSale :</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" id="txtExTotalSale" name="txtExTotalSale" value="" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">SOS Type :</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtSosMonth" name="txtSosMonth" value="" readonly autocomplete="off">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExPortName" name="txtExPortName" value="" autocomplete="off">
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">DocuNo :</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtDocuNo" name="txtDocuNo" value="" autocomplete="off">
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <div class="input-group date">
-                                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdocudate" name="datepickerdocudate" value="" autocomplete="off">
-                                                        <div class="input-group-addon input-sm">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>                                           
-
-                                            <div class="row" style="margin-bottom: 5px">
-                                                <div class="col-md-1">
-                                                    </div>
-                                                <div class="col-md-3">
-                                                    <label class="txtLabel">Customer :</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExCustName" name="txtExCustName" value="" autocomplete="off">
+                                                        <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExCompanyID" name="txtExCompanyID" readonly value="" autocomplete="off">
+                                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExCompany" name="txtExCompany" value="" autocomplete="off">
+                                                    </span>
                                                 </div>
                                             </div>
 
                                         </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">Architect :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="input-group col-md-12">
+                                                    <span class="txtLabel">
+                                                        <%--<select id="selectArchitect" class="form-control input input-sm " style="width: 100%;">
+                                                        </select>--%>
+                                                        <input type="text" class="form-control input-sm pull-left txtLabel hidden" id="txtExArchitectID" name="txtExArchitectID" readonly value="" autocomplete="off">
+                                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExArchitect" name="txtExArchitect" value="" autocomplete="off">
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">SOS Type :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtSosMonth" name="txtSosMonth" value="" readonly autocomplete="off">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">Port Owner :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExPortName" name="txtExPortName" value="" autocomplete="off">
+                                            </div>
+                                        </div>                                        
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">ActQty :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" style="text-align: right" id="txtActQty" name="txtActQty" value="" autocomplete="off">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">SpecQty :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" style="text-align: right" id="txtSpecQty" name="txtSpecQty" value="" autocomplete="off">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">PerUnit :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" style="text-align: right" id="txtExPerUnit" name="txtExPerUnit" value="" autocomplete="off">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">Amount :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" style="text-align: right" id="txtExpAmount" name="txtExpAmount" value="" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">NetRF :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right" id="txtExpNetRF" name="txtExpNetRF" value="" autocomplete="off">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">NetComm :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right" id="txtExNetComm" name="txtExNetComm" value="" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">RenComm :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" style="text-align: right" id="txtExpRenComm" name="txtExpRenComm" value="" autocomplete="off">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="txtLabel">TotalSale :</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" style="text-align: right" id="txtExTotalSale" name="txtExTotalSale" value="" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <div class="" id="divShare">
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">Qty Owner</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #D0FA58;" readonly id="txtOwnerQty" name="txtOwnerQty" value="0.00" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="txtLabel">Amount Owner</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #D0FA58;" readonly id="txtOwnerAmount" name="txtOwnerAmount" value="0.00" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">NetComm Owner</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #D0FA58;" readonly id="txtOwnerNetComm" name="txtOwnerNetComm" value="0.00" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="txtLabel">Total Owner</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #D0FA58;" readonly id="txtOwnerTotal" name="txtOwnerTotal" value="0.00" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">Percentage(%):<span class="text-red">**</span></label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" onfocusout="getFunctionDicimal()" style="text-align: right; background-color: #a1f0bd;" id="txtSharePercen" name="txtSharePercen" value="0.00" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="txtLabel">Port Sharing<span class="text-red">**</span></label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: left; background-color: #a1f0bd;" id="txtSharePort" name="txtSharePort" value="" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">Qty Sharing</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #a1f0bd;" readonly id="txtShareQty" name="txtShareQty" value="0.00" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="txtLabel">Amount Sharing</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #a1f0bd;" readonly id="txtShareAmount" name="txtShareAmount" value="0.00" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">NetComm Sharing</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #a1f0bd;" readonly id="txtShareNetComm" name="txtShareNetComm" value="0.00" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="txtLabel">Total Sharing</label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #a1f0bd;" readonly id="txtShareTotal" name="txtShareTotal" value="0.00" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">DocuNo :</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtDocuNo" name="txtDocuNo" value="" autocomplete="off">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdocudate" name="datepickerdocudate" value="" autocomplete="off">
+                                                    <div class="input-group-addon input-sm">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">Customer :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExCustName" name="txtExCustName" value="" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                     <div class="modal-footer clearfix">
-                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-danger" id="btnDeleteSOS" name="btnDeleteSOS">Confirm Delete..!</button>
-                                            <button type="button" class="btn btn-primary" id="btnUpdateSOS" name="btnUpdateSOS">Save Change</button>
-                                        </div>
-                                    
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" id="btnDeleteSOS" name="btnDeleteSOS">Confirm Delete..!</button>
+                                        <button type="button" class="btn btn-primary" id="btnSharedSOS" name="btnSharedSOS">Update Sales Sharing</button>
+
+                                        <button type="button" class="btn btn-danger" id="btnDeleteSOSEx" name="btnDeleteSOSEx">Confirm Delete Exp..!</button>
+                                        <button type="button" class="btn btn-primary" id="btnUpdateSOS" name="btnUpdateSOS">Save Change</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -1503,26 +1826,26 @@
 
                             <div class="row" style="margin-bottom: 5px; border: thin green">
                                 <div class="cv-spinner" id="loadproject">
-                                        <span class="spinner"></span>
-                                    </div>
+                                    <span class="spinner"></span>
+                                </div>
 
                                 <div class="col-md-12">
-                                    
+
                                     <table id="tblproject" class="table table-striped table-bordered table-hover table-condensed txtLabel" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>WeekDate</th>	
-                                                <th>CompanyID</th>	
+                                                <th>WeekDate</th>
+                                                <th>CompanyID</th>
                                                 <th>CompanyName</th>
                                                 <th>ArchitecID</th>
                                                 <th>Name</th>
                                                 <th>ProjectID</th>
                                                 <th>ProjectName</th>
                                                 <th>ProdNameEN</th>
-                                                <th>DeliveryDate</th>	
+                                                <th>DeliveryDate</th>
                                                 <th>Quantity</th>
-                                                <th>ProjYear</th>	
+                                                <th>ProjYear</th>
                                                 <th>UserID</th>
                                                 <th>SosType</th>
                                                 <th>#</th>
