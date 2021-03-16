@@ -66,10 +66,15 @@ namespace SaleSpec.pages.report
                 data.TotalSale = rdr["TotalSale"].ToString();
                 data.SaleCode = rdr["SaleCode"].ToString();
                 data.SaleName = rdr["SaleName"].ToString();
-                data.DocuDate = rdr["DocuDate"].ToString();           
+                data.DocuDate = rdr["DocuDate"].ToString();
                 data.chkTrash = rdr["chkTrash"].ToString();
                 data.RentCom = rdr["RentCom"].ToString();
                 data.id = rdr["id"].ToString();
+                data.isShare = rdr["isShare"].ToString();
+                data.RemActQty = rdr["RemActQty"].ToString();
+                data.RemAmount = rdr["RemAmount"].ToString();
+                data.RemNetCom = rdr["RemNetCom"].ToString();
+                data.RemTotalSale = rdr["RemTotalSale"].ToString();
                 datas.Add(data);
             }
 

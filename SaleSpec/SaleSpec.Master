@@ -743,7 +743,7 @@
                     'scrollX': true,
                     'autoWidth': true,
                     'columnDefs': [{
-                        targets: [25, 26],
+                        targets: [25, 26, 27, 28, 29, 30, 31],
                             className: "hide_column"
                     }]
                 })

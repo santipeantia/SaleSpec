@@ -538,7 +538,8 @@
             var btnSharedSOS = $('#btnSharedSOS');
             btnSharedSOS.click(function () {
                 var sharePort = $('#txtSharePort').val();
-                var shareQty = $('#txtShareQty').val();
+                var shareQty = $('#txtShareQty').val();              
+                
                 //alert(sharePort);
                 if (sharePort == "") {
                     Swal.fire({
@@ -574,6 +575,15 @@
                     var sharenetcom = $('#txtShareNetComm').val();
                     var sharetotal = $('#txtShareTotal').val();
                     console.log(id)
+
+                    // var isShare = $('#txtisShare').val();
+
+                    //if (isShare == '' || parseFloat(isShare) < 0) {
+                    //    alert('Can you sharing..');
+                    //}
+
+                    //return;
+
 
                      Swal.fire({
                         title: 'Sharing, Are you sure..?',
@@ -635,7 +645,10 @@
                                 }
                             });
                         }
-                    })
+                        })
+
+
+
                 }
             });
 
@@ -659,35 +672,57 @@
 
                     var percent = $(this).val();
 
-                    var shareQty ;
+                    var shareQty;
                     var shareAmount;
                     var shareNetComm;
-                    var shareTotal ;
+                    var shareTotal;
 
-                    var actqty = $('#txtActQty').val().replace(',','');
-                    var specqty = $('#txtSpecQty').val().replace(',','');
-                    var examount = $('#txtExpAmount').val().replace(',','');
-                    var perunit = $('#txtExPerUnit').val().replace(',','');
-                    var netrf = $('#txtExpNetRF').val().replace(',','');
-                    var netcom = $('#txtExNetComm').val().replace(',','');
-                    var rencom = $('#txtExpRenComm').val().replace(',','');
-                    var totalsale = $('#txtExTotalSale').val().replace(',','');
+                    var actqty = $('#txtActQty').val().replace(',', '');
+                    var specqty = $('#txtSpecQty').val().replace(',', '');
+                    var examount = $('#txtExpAmount').val().replace(',', '');
+                    var perunit = $('#txtExPerUnit').val().replace(',', '');
+                    var netrf = $('#txtExpNetRF').val().replace(',', '');
+                    var netcom = $('#txtExNetComm').val().replace(',', '');
+                    var rencom = $('#txtExpRenComm').val().replace(',', '');
+                    var totalsale = $('#txtExTotalSale').val().replace(',', '');
 
-                    shareQty = (parseFloat(actqty.replace(',','')) * parseFloat(percent)) / 100;
+                    var isShare = $('#txtisShare').val();
+                    var RemActQty = $('#txtRemActQty').val();
+                    var RemAmount = $('#txtRemAmount').val();
+                    var RemNetCom = $('#txtRemNetCom').val();
+                    var RemTotalSale = $('#txtRemTotalSale').val();
+
+                    if (isShare == '' || isShare < 0) {
+                        shareQty = (parseFloat(RemActQty.replace(',','')) * parseFloat(percent)) / 100;
+                    }
+                    else {
+                        shareQty = (parseFloat(actqty.replace(',','')) * parseFloat(percent)) / 100;
+                    }                    
                     $('#txtShareQty').val(parseFloat(shareQty).toFixed(2));
                     $('#txtShareQty').val(function (index, value) {
                         return value
                             .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     });
 
-                    shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',','')));
+                    if (isShare == '' || isShare < 0) {
+                        shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',','')));
+                    }
+                    else {
+                        shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',','')));
+                    }                    
                     $('#txtShareAmount').val(parseFloat(shareAmount).toFixed(2));
                     $('#txtShareAmount').val(function (index, value) {
                         return value
                             .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     });
 
-                    shareNetComm = (parseFloat(netcom.replace(',','')) * parseFloat(percent)) / 100;
+                    if (isShare == '' || isShare < 0) {
+                        shareNetComm = (parseFloat(RemNetCom.replace(',','')) * parseFloat(percent)) / 100;
+                    }
+                    else {
+                        shareNetComm = (parseFloat(netcom.replace(',','')) * parseFloat(percent)) / 100;
+                    }
+                    
                     $('#txtShareNetComm').val(parseFloat(shareNetComm).toFixed(2));
                     $('#txtShareNetComm').val(function (index, value) {
                         return value
@@ -706,7 +741,12 @@
                     var ownerNetComm;
                     var ownerTotal;
 
-                    ownerQty = parseFloat(actqty) - parseFloat(shareQty);
+                    if (isShare == '' || isShare < 0) {
+                        ownerQty = parseFloat(actqty) - parseFloat(shareQty);
+                    }
+                    else {
+                        ownerQty = parseFloat(actqty) - parseFloat(shareQty);
+                    }                    
                     $('#txtOwnerQty').val(parseFloat(ownerQty).toFixed(2));
                     $('#txtOwnerQty').val(function (index, value) {
                         return value
@@ -775,7 +815,8 @@
                             table.row.add([data[i].CompanyID, data[i].CompanyName, data[i].ArchitecID, data[i].Name, data[i].sosMonth, data[i].ProjectYear
                                 , data[i].ProjectMonth, data[i].DocuNo, data[i].CustCode, data[i].CustName, data[i].ProjectId, data[i].ProjectName, data[i].GoodID
                                 , data[i].GoodName, data[i].ActQty, data[i].SpecQty, data[i].Amount, data[i].PerUnit, data[i].NetRF_B, data[i].NetCom, data[i].TotalSale
-                                , data[i].SaleCode, data[i].SaleName, data[i].DocuDate, data[i].chkTrash, data[i].RentCom, data[i].id]);
+                                , data[i].SaleCode, data[i].SaleName, data[i].DocuDate, data[i].chkTrash, data[i].RentCom, data[i].id
+                                , data[i].isShare, data[i].RemActQty, data[i].RemAmount, data[i].RemNetCom, data[i].RemTotalSale]);
                         });
                     }
 
@@ -827,6 +868,17 @@
                             var chktrash = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(24)').text();
                             var rentcom = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(25)').text();
                             var id = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(26)').text();
+                            var isShare = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(27)').text();
+                            var RemActQty = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(28)').text();
+                            var RemAmount = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(29)').text();
+                            var RemNetCom = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(30)').text();
+                            var RemTotalSale = $("#tableSaleOnSpecFinal").find('tr:eq(' + rIndex + ')').find('td:eq(31)').text();
+
+                            $('#txtisShare').val(isShare);
+                            $('#txtRemActQty').val(RemActQty);
+                            $('#txtRemAmount').val(RemAmount);
+                            $('#txtRemNetCom').val(RemNetCom);
+                            $('#txtRemTotalSale').val(RemTotalSale);
 
                             console.log(id);
                             //console.log("Update : " + companyid + ":" + companyname + ":" + architectid + ":" + architectname + ":" + projectid + ":" + projectname + ":" + salecode + ":" + salename + ":" + projectdue);
@@ -842,7 +894,7 @@
                             //$('#txtPortName').val(salecode + " : " + salename);
 
                             if (projectyear != 'Export') {
-
+                                
 
                                 $('#btnDeleteSOS').removeClass("hidden");
                                 $('#btnSharedSOS').removeClass("hidden");
@@ -910,9 +962,20 @@
                                 $('#modal-exportdoc').modal({ backdrop: true });
                                 $('#modal-exportdoc').modal('show');
 
-
-
-
+                                if (isShare == '' || isShare < 0) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'info',
+                                        title: 'รายการนี้สามารถทำรายการแบ่งยอดบางส่วนได้ ระบบจะคำนวนโดยอ้างอิงจากข้อมูลหลัก..!',
+                                        showConfirmButton: true
+                                        //timer: 3000
+                                    })
+                                    $('#btnSharedSOS').removeClass("hidden");
+                                }
+                                else {
+                                    $('#btnSharedSOS').addClass("hidden");
+                                }
+                                //return;
                             }
                             else {
                                 //alert('export');
@@ -1364,6 +1427,11 @@
                                                                 <th>#</th>
                                                                 <th>RentCom</th>
                                                                 <th>id</th>
+                                                                <th>isShare</th>
+                                                                <th>RemActQty</th>
+                                                                <th>RemAmount</th>
+                                                                <th>RemNetCom</th>
+                                                                <th>RemTotalSale</th>
 
                                                             </tr>
                                                         </thead>
@@ -1838,6 +1906,12 @@
                                     </div>
 
                                     <div class="modal-footer clearfix">
+                                        <input type="hidden" id="txtisShare" name="txtisShare" value="" />
+                                        <input type="hidden" id="txtRemActQty" name="txtRemActQty" value="" />
+                                        <input type="hidden" id="txtRemAmount" name="txtRemAmount" value="" />
+                                        <input type="hidden" id="txtRemNetCom" name="txtRemNetCom" value="" />
+                                        <input type="hidden" id="txtRemTotalSale" name="txtRemTotalSale" value="" />
+
                                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-danger" id="btnDeleteSOS" name="btnDeleteSOS">Confirm Delete..!</button>
                                         <button type="button" class="btn btn-primary" id="btnSharedSOS" name="btnSharedSOS">Update Sales Sharing</button>

@@ -35,5 +35,10 @@ namespace SaleSpec
         public string chkTrash { get; set; }
         public string RentCom { get; set; }
         public string id { get; set; }
+        public string isShare { get; set; }
+        public string RemActQty { get; set; }
+        public string RemAmount { get; set; }
+        public string RemNetCom { get; set; }
+        public string RemTotalSale { get; set; }
     }
 }
