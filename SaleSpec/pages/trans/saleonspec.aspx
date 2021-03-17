@@ -100,6 +100,7 @@
             $('#divSaleOnSpec').hide();
             $('#divSaleOnSpec2').hide();
             $('#loadproject').hide();
+            $('#divSOSharing').hide();
 
 
             var today = new Date();
@@ -113,6 +114,103 @@
 
             $('#datepickerexpsdate').val(lastdate);
             $('#datepickerexpedate').val(currentdate);
+
+            var selectPortDDL = $('#selectPort');
+            var selectArchitectDDL = $('#selectArchitect');
+            var selectCompanyDDL = $('#selectCompany');
+
+            var userid0 = '<%= Session["UserID"]%>';
+
+            var userid= userid0;
+
+            $.ajax({
+                url: 'DataServices.asmx/GetSpecPort',
+                method: 'post',
+                data: {
+                    TypeID: userid
+                },
+                dataType: 'json',
+                success: function (data) {
+                    selectPortDDL.empty();
+                    selectPortDDL.append($('<option/>', { value: -1, text: 'Select Port...' }));
+                    selectArchitectDDL.empty();
+                    selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect...' }));
+                    selectCompanyDDL.empty();
+                    selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Company Name...' }));
+                    $(data).each(function (index, item) {
+                        selectPortDDL.append($('<option/>', { value: item.SpecID, text: item.FullName }));
+                    });
+                }
+            });
+
+            selectPortDDL.change(function () {
+                var strport = $('#selectPort').val();
+                //alert(strport);
+                var selectArchitectDDL = $('#selectArchitect');
+                var selectCompanyDDL = $('#selectCompany');
+
+                $.ajax({
+                    url: 'DataServices.asmx/GetSpecWithArchitect',
+                    method: 'post',
+                    data: {
+                        port: strport
+                    },
+                    beforeSend: function () {
+                        //$('#divSOSharing').show();
+                        //Swal.fire({
+                        //    position: 'center',
+                        //    icon: 'success',
+                        //    title: 'Your work has been saved',
+                        //    showConfirmButton: false,
+                        //    timer: 600
+                        //})
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        selectArchitectDDL.empty();
+                        selectArchitectDDL.append($('<option/>', { value: -1, text: 'Select Architect...' }));
+                        selectCompanyDDL.empty();
+                        selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Company Name...' }));
+                        $(data).each(function (index, item) {
+                            selectArchitectDDL.append($('<option/>', { value: item.ArchitecID, text: item.FullName }));
+                        });
+                    }
+                });
+                //$('#divSOSharing').hide();
+            });
+
+
+            var selectArchitectDDL = $('#selectArchitect');
+            selectArchitectDDL.change(function () {
+                var selectPortDDL = $('#selectPort');
+                var selectCompanyDDL = $('#selectCompany');
+
+                var strport = selectPortDDL.val();
+                var architectid = selectArchitectDDL.val();
+                //alert(architectid);
+
+                 $.ajax({
+                    url: 'DataServices.asmx/GetSpecWithCompany',
+                    method: 'post',
+                     data: {                       
+                        architectid: architectid
+                    },
+                    beforeSend: function () {
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        selectCompanyDDL.empty();
+                        selectCompanyDDL.append($('<option/>', { value: -1, text: 'Select Company Name...' }));
+                        $(data).each(function (index, item) {
+                            selectCompanyDDL.append($('<option/>', { value: item.CompanyID, text: item.CompanyName }));
+                        });
+                    }
+                });
+
+            });          
+
+
+
 
             var btnReport = $('#btnReport');
             btnReport.click(function () {
@@ -537,11 +635,19 @@
 
             var btnSharedSOS = $('#btnSharedSOS');
             btnSharedSOS.click(function () {
-                var sharePort = $('#txtSharePort').val();
+                var sharePort = $('#selectPort').val();
+                var sharePortName = $('#selectPort option:selected').text();
+                var shareArchitect = $('#selectArchitect').val();
+                var shareArchitectName = $('#selectArchitect option:selected').text();               
+                var shareCompany = $('#selectCompany').val();
+                var shareCompanyName = $('#selectCompany option:selected').text();
+                var shareProjMonth = $('#txtSosShareMonth').val();
+                
+
                 var shareQty = $('#txtShareQty').val();              
                 
                 //alert(sharePort);
-                if (sharePort == "") {
+                if (sharePort == "-1" || sharePort == null) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -550,7 +656,38 @@
                         timer: 1500
                     })
                     return;
-                } else if ((parseFloat(shareQty) == 0)) {
+                }
+                else if (shareArchitect == "-1" || shareArchitect == null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Architect sharing is not found..!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return;
+                }
+                else if (shareCompany == "-1" || shareCompany == null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Company sharing is not found..!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return;
+                } 
+                 else if (shareProjMonth == "") {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Project month sharing is not found..!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return;
+                }
+                else if ((parseFloat(shareQty) == 0)) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -558,6 +695,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    return;
                 } else {
                     //alert('Okay save..');
                     var sdate = $('#datepickertrans').val();
@@ -569,7 +707,7 @@
                     var ownernetcom = $('#txtOwnerNetComm').val();
                     var ownertotal = $('#txtOwnerTotal').val();
                     var isshare = $('#txtSharePercen').val();
-                    var shareport = $('#txtSharePort').val();
+                    var shareport = $('#selectPort').val();
                     var shareqty = $('#txtShareQty').val();
                     var shareamount = $('#txtShareAmount').val();
                     var sharenetcom = $('#txtShareNetComm').val();
@@ -585,7 +723,7 @@
                     //return;
 
 
-                     Swal.fire({
+                    Swal.fire({
                         title: 'Sharing, Are you sure..?',
                         text: "You won't be able to revert this!",
                         type: 'question',
@@ -609,7 +747,14 @@
                                     shareqty: shareqty,
                                     shareamount: shareamount,
                                     sharenetcom: sharenetcom,
-                                    sharetotal: sharetotal
+                                    sharetotal: sharetotal,
+
+                                    sharePortName: sharePortName,
+                                    shareArchitect: shareArchitect,
+                                    shareArchitectName: shareArchitectName,
+                                    shareCompany: shareCompany,
+                                    shareCompanyName: shareCompanyName,
+                                    shareProjMonth: shareProjMonth
                                 },
                                 datatype: 'json',
                                 success: function (data) {
@@ -645,7 +790,7 @@
                                 }
                             });
                         }
-                        })
+                    })
 
 
 
@@ -948,7 +1093,7 @@
                                 $('#txtExCustName').val(custname);
 
                                 $('#txtSharePercen').val('0.00');
-                                $('#txtSharePort').val('');
+                                $('#selectPort').val('');
                                 $('#txtShareQty').val('0.00');
                                 $('#txtShareAmount').val('0.00');
                                 $('#txtShareNetComm').val('0.00');
@@ -958,6 +1103,9 @@
                                 $('#txtOwnerAmount').val('0.00');
                                 $('#txtOwnerNetComm').val('0.00');
                                 $('#txtOwnerTotal').val('0.00');
+
+                                $('#selectPort').val('-1');
+                                $('#selectPort').change();
 
                                 $('#modal-exportdoc').modal({ backdrop: true });
                                 $('#modal-exportdoc').modal('show');
@@ -1031,7 +1179,7 @@
                                 $('#txtExCustName').val(custname);
 
                                 $('#txtSharePercen').val('0.00');
-                                $('#txtSharePort').val('');
+                                $('#selectPort').val('');
                                 $('#txtShareQty').val('0.00');
                                 $('#txtShareAmount').val('0.00');
                                 $('#txtShareNetComm').val('0.00');
@@ -1055,8 +1203,7 @@
                 }
             })
         };
-
-
+        
         function getSaleOnSpecWithProject2(sdate, edate) {
 
             // alert(sdate + ":" + edate);
@@ -1611,6 +1758,7 @@
 
                         <div class="modal modal-default fade" id="modal-exportdoc">
                             <div class="modal-dialog" style="width: 40%">
+
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -1619,6 +1767,10 @@
 
                                     <div class="modal-body">
                                         <!-- Post -->
+                                        <div class="cv-spinner" id="divSOSharing">
+                                            <span class="spinner"></span>
+                                        </div>
+
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-1">
@@ -1702,7 +1854,7 @@
                                             <div class="col-md-1">
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="txtLabel">SOS Type :</label>
+                                                <label class="txtLabel">ProjMonth :</label>
                                             </div>
                                             <div class="col-md-3">
                                                 <input type="text" class="form-control input-sm pull-left txtLabel" id="txtSosMonth" name="txtSosMonth" value="" readonly autocomplete="off">
@@ -1713,7 +1865,7 @@
                                             <div class="col-md-3">
                                                 <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExPortName" name="txtExPortName" value="" autocomplete="off">
                                             </div>
-                                        </div>                                        
+                                        </div>
 
                                         <div class="row" style="margin-bottom: 5px">
                                             <div class="col-md-1">
@@ -1829,11 +1981,61 @@
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" onfocusout="getFunctionDicimal()" style="text-align: right; background-color: #a1f0bd;" id="txtSharePercen" name="txtSharePercen" value="0.00" autocomplete="off">
                                                 </div>
-                                                <div class="col-md-2">
+                                                <%-- <div class="col-md-2">
                                                     <label class="txtLabel">Port Sharing<span class="text-red">**</span></label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: left; background-color: #a1f0bd;" id="txtSharePort" name="txtSharePort" value="" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: left; background-color: #a1f0bd;" id="selectPort" name="selectPort" value="" autocomplete="off">
+                                                    
+                                                </div>--%>
+                                            </div>
+                                            <%--sharing company, port, architect month--%>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">ProjMonth :<span class="text-red">**</span></label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtSosShareMonth" name="txtSosShareMonth" style="text-align: left; background-color: #a1f0bd;" value="" autocomplete="off">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="txtLabel">Port<span class="text-red">**</span></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <span class="txtLabel">
+                                                        <select id="selectPort" name="selectPort" class="form-control input input-sm " style="width: 100%; background-color: #a1f0bd;">
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">Architect<span class="text-red">**</span></label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span class="txtLabel">
+                                                        <select id="selectArchitect" class="form-control input input-sm " style="width: 100%; background-color: #a1f0bd;">
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 5px">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="txtLabel">Company<span class="text-red">**</span></label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span class="txtLabel">
+                                                        <select id="selectCompany" name="selectCompany" class="form-control input input-sm " style="width: 100%;">
+                                                        </select>
+                                                    </span>
                                                 </div>
                                             </div>
 
@@ -1853,6 +2055,9 @@
                                                     <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #a1f0bd;" readonly id="txtShareAmount" name="txtShareAmount" value="0.00" autocomplete="off">
                                                 </div>
                                             </div>
+
+
+
 
                                             <div class="row" style="margin-bottom: 5px">
                                                 <div class="col-md-1">

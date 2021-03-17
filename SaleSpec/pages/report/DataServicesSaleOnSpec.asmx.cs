@@ -273,7 +273,7 @@ namespace SaleSpec.pages.report
 
         [WebMethod]
         public void GetSaleOnSpecFinalShare(string id, string ownerqty, string owneramount, string ownernetcom, string ownertotal, string isshare, string shareport, string shareqty,
-            string shareamount, string sharenetcom, string sharetotal)
+            string shareamount, string sharenetcom, string sharetotal, string sharePortName, string shareArchitect, string shareArchitectName, string shareCompany, string shareCompanyName, string shareProjMonth)
         {
             SqlCommand comm = new SqlCommand("spSaleOnSpecFinalShare", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
@@ -289,6 +289,14 @@ namespace SaleSpec.pages.report
             comm.Parameters.AddWithValue("@ShareAmount", shareamount);
             comm.Parameters.AddWithValue("@ShareNetCom", sharenetcom);
             comm.Parameters.AddWithValue("@ShareTotal", sharetotal);
+
+            comm.Parameters.AddWithValue("@sharePortName", sharePortName);
+            comm.Parameters.AddWithValue("@shareArchitect", shareArchitect);
+            comm.Parameters.AddWithValue("@shareArchitectName", shareArchitectName);
+            comm.Parameters.AddWithValue("@shareCompany", shareCompany);
+            comm.Parameters.AddWithValue("@shareCompanyName", shareCompanyName);
+            comm.Parameters.AddWithValue("@shareProjMonth", shareProjMonth);
+
             comm.ExecuteNonQuery();
             conn.CloseConn();
         }

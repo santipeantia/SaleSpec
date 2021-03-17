@@ -1049,6 +1049,53 @@ namespace SaleSpec.Class
         }
 
         [WebMethod]
+        public void GetSpecWithArchitect(string port)
+        {
+            List<cGetSpecWithArchitect> datas = new List<cGetSpecWithArchitect>();
+            SqlCommand comm = new SqlCommand("spGetssSpecWithArchitect", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlParameter param = new SqlParameter() { ParameterName = "@port", Value = port };
+            comm.Parameters.Add(param);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetSpecWithArchitect data = new cGetSpecWithArchitect();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.FullName = rdr["FullName"].ToString();
+                datas.Add(data);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(datas));
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetSpecWithCompany(string architectid)
+        {
+            List<cGetSpecWithCompany> datas = new List<cGetSpecWithCompany>();
+            SqlCommand comm = new SqlCommand("spGetssSpecWithCompany", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;           
+            comm.Parameters.AddWithValue("@architectid", architectid);
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetSpecWithCompany data = new cGetSpecWithCompany();
+                data.CompanyID = rdr["CompanyID"].ToString();
+                data.CompanyName = rdr["CompanyName"].ToString();
+                datas.Add(data);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(datas));
+            conn.CloseConn();
+        }
+
+        [WebMethod]
         public void GetCustomerType()
         {
             List<GetDataCustomerType> customers = new List<GetDataCustomerType>();
