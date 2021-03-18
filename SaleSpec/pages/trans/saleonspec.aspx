@@ -121,7 +121,7 @@
 
             var userid0 = '<%= Session["UserID"]%>';
 
-            var userid= userid0;
+            var userid = userid0;
 
             $.ajax({
                 url: 'DataServices.asmx/GetSpecPort',
@@ -189,10 +189,10 @@
                 var architectid = selectArchitectDDL.val();
                 //alert(architectid);
 
-                 $.ajax({
+                $.ajax({
                     url: 'DataServices.asmx/GetSpecWithCompany',
                     method: 'post',
-                     data: {                       
+                    data: {
                         architectid: architectid
                     },
                     beforeSend: function () {
@@ -207,7 +207,7 @@
                     }
                 });
 
-            });          
+            });
 
 
 
@@ -331,6 +331,34 @@
                 $('#txtDocuNo').val('');
                 $('#datepickerdocudate').val('');
                 $('#txtExCustName').val('');
+
+
+                $('#txtExProjecID').attr("readonly", false);
+                $('#txtExProjectName').attr("readonly", false);
+                $('#txtProduct').attr("readonly", false);
+                $('#txtExCompanyID').attr("readonly", false);
+                $('#txtExCompany').attr("readonly", false);
+                $('#txtExArchitectID').attr("readonly", false);
+                $('#txtExArchitect').attr("readonly", false);
+                $('#txtActQty').attr("readonly", false);
+                $('#txtSpecQty').attr("readonly", false);
+                $('#txtExpAmount').attr("readonly", false);
+                $('#txtExPerUnit').attr("readonly", false);
+                $('#txtExpNetRF').attr("readonly", false);
+                $('#txtExNetComm').attr("readonly", false);
+                $('#txtExpRenComm').attr("readonly", false);
+                $('#txtExTotalSale').attr("readonly", false);
+                $('#txtSosMonth').attr("readonly", false);
+                $('#txtExPortName').attr("readonly", false);
+                $('#txtDocuNo').attr("readonly", false);
+                $('#datepickerdocudate').attr("readonly", false);
+                $('#txtExCustName').attr("readonly", false);
+                $('#btnRefProj').attr('disabled', false);
+
+                $('#divShare').addClass("hidden");
+                $('#datepickerdocudate').attr('disabled', false);
+                $('#btnUpdateSOS').removeClass('hidden');
+
 
                 $("#modal-exportdoc").modal({ backdrop: false });
                 $("#modal-exportdoc").modal("show");
@@ -638,14 +666,25 @@
                 var sharePort = $('#selectPort').val();
                 var sharePortName = $('#selectPort option:selected').text();
                 var shareArchitect = $('#selectArchitect').val();
-                var shareArchitectName = $('#selectArchitect option:selected').text();               
+                var shareArchitectName = $('#selectArchitect option:selected').text();
                 var shareCompany = $('#selectCompany').val();
                 var shareCompanyName = $('#selectCompany option:selected').text();
                 var shareProjMonth = $('#txtSosShareMonth').val();
-                
 
-                var shareQty = $('#txtShareQty').val();              
-                
+                var ownerQty = $('#txtOwnerQty').val();
+                var shareQty = $('#txtShareQty').val();
+
+                if (parseFloat(ownerQty) <= 0) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'ไม่สามารถทำรายการได้, จำนวนยอดที่แบ่งต้องเหลือมากกว่าศูนย์..!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    return;
+                }
+
                 //alert(sharePort);
                 if (sharePort == "-1" || sharePort == null) {
                     Swal.fire({
@@ -676,8 +715,8 @@
                         timer: 1500
                     })
                     return;
-                } 
-                 else if (shareProjMonth == "") {
+                }
+                else if (shareProjMonth == "") {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -799,6 +838,8 @@
 
             $(".allownumericwithdecimal").on("keypress keyup blur", function (event) {
 
+                var fname = $(this).attr("name");
+               
                 $(this).val(function (index, value) {
                     return value.replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 });
@@ -806,16 +847,15 @@
                 if ($(this).val() === '') {
                     //alert('null');
                     $(this).val('0.00');
-                } 
+                }
 
                 if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
                     event.preventDefault();
                 }
-
-                var fname = $(this).attr("name");
+                                
                 if (fname == 'txtSharePercen') {
 
-                    var percent = $(this).val();
+                    var percent = $(this).val().replace(',','');
 
                     var shareQty;
                     var shareAmount;
@@ -838,11 +878,11 @@
                     var RemTotalSale = $('#txtRemTotalSale').val();
 
                     if (isShare == '' || isShare < 0) {
-                        shareQty = (parseFloat(RemActQty.replace(',','')) * parseFloat(percent)) / 100;
+                        shareQty = (parseFloat(RemActQty.replace(',', '')) * parseFloat(percent)) / 100;
                     }
                     else {
-                        shareQty = (parseFloat(actqty.replace(',','')) * parseFloat(percent)) / 100;
-                    }                    
+                        shareQty = (parseFloat(actqty.replace(',', '')) * parseFloat(percent)) / 100;
+                    }
                     $('#txtShareQty').val(parseFloat(shareQty).toFixed(2));
                     $('#txtShareQty').val(function (index, value) {
                         return value
@@ -850,11 +890,11 @@
                     });
 
                     if (isShare == '' || isShare < 0) {
-                        shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',','')));
+                        shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',', '')));
                     }
                     else {
-                        shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',','')));
-                    }                    
+                        shareAmount = (parseFloat(shareQty) * parseFloat(perunit.replace(',', '')));
+                    }
                     $('#txtShareAmount').val(parseFloat(shareAmount).toFixed(2));
                     $('#txtShareAmount').val(function (index, value) {
                         return value
@@ -862,12 +902,12 @@
                     });
 
                     if (isShare == '' || isShare < 0) {
-                        shareNetComm = (parseFloat(RemNetCom.replace(',','')) * parseFloat(percent)) / 100;
+                        shareNetComm = (parseFloat(RemNetCom.replace(',', '')) * parseFloat(percent)) / 100;
                     }
                     else {
-                        shareNetComm = (parseFloat(netcom.replace(',','')) * parseFloat(percent)) / 100;
+                        shareNetComm = (parseFloat(netcom.replace(',', '')) * parseFloat(percent)) / 100;
                     }
-                    
+
                     $('#txtShareNetComm').val(parseFloat(shareNetComm).toFixed(2));
                     $('#txtShareNetComm').val(function (index, value) {
                         return value
@@ -888,15 +928,19 @@
 
                     if (isShare == '' || isShare < 0) {
                         ownerQty = parseFloat(actqty) - parseFloat(shareQty);
+                        //console.log('Qty Owner: ', ownerQty, parseFloat(actqty), parseFloat(shareQty));
+                        //console.log(parseFloat(5) - parseFloat(10));
                     }
                     else {
                         ownerQty = parseFloat(actqty) - parseFloat(shareQty);
-                    }                    
+                        //console.log('Qty Owner: ', ownerQty, parseFloat(actqty), parseFloat(shareQty));
+                        //console.log(parseFloat(5) - parseFloat(10));
+                    }
                     $('#txtOwnerQty').val(parseFloat(ownerQty).toFixed(2));
-                    $('#txtOwnerQty').val(function (index, value) {
-                        return value
-                            .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    });
+                    //$('#txtOwnerQty').val(function (index, value) {
+                    //    return value
+                    //        .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //});
 
                     ownerAmount = parseFloat(examount) - parseFloat(shareAmount);
                     $('#txtOwnerAmount').val(parseFloat(ownerAmount).toFixed(2));
@@ -905,8 +949,7 @@
                             .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     });
 
-                    console.log(examount, shareAmount, ownerAmount);
-
+                    //console.log(examount, shareAmount, ownerAmount);
 
                     ownerNetComm = parseFloat(netcom) - parseFloat(shareNetComm);
                     $('#txtOwnerNetComm').val(parseFloat(ownerNetComm).toFixed(2));
@@ -921,7 +964,7 @@
                         return value
                             .replace(/(?!\.)\D/g, "").replace(/(?<=\..*)\./g, "").replace(/(?<=\.\d\d).*/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     });
-                }                       
+                }
             });
         });
 
@@ -1025,7 +1068,7 @@
                             $('#txtRemNetCom').val(RemNetCom);
                             $('#txtRemTotalSale').val(RemTotalSale);
 
-                            console.log(id);
+                            //console.log(id, isShare);
                             //console.log("Update : " + companyid + ":" + companyname + ":" + architectid + ":" + architectname + ":" + projectid + ":" + projectname + ":" + salecode + ":" + salename + ":" + projectdue);
 
                             //$('#txtCompanyId').val(companyid);
@@ -1039,7 +1082,7 @@
                             //$('#txtPortName').val(salecode + " : " + salename);
 
                             if (projectyear != 'Export') {
-                                
+
 
                                 $('#btnDeleteSOS').removeClass("hidden");
                                 $('#btnSharedSOS').removeClass("hidden");
@@ -1047,8 +1090,13 @@
                                 $('#btnDeleteSOSEx').addClass("hidden");
                                 $('#btnUpdateSOS').addClass("hidden");
 
-                                $('#divShare').removeClass("hidden");
-                                
+                                if (parseFloat(isShare) > 0) {
+                                     $('#divShare').addClass("hidden");
+                                } else {
+                                     $('#divShare').removeClass("hidden");
+                                }
+                               
+
                                 $('#btnRefProj').attr('disabled', true);
                                 $('#txtExProjectName').attr('readonly', true);
                                 $('#txtProduct').attr('readonly', true);
@@ -1203,7 +1251,7 @@
                 }
             })
         };
-        
+
         function getSaleOnSpecWithProject2(sdate, edate) {
 
             // alert(sdate + ":" + edate);
@@ -1936,6 +1984,37 @@
                                             </div>
                                         </div>
 
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">DocuNo :</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtDocuNo" name="txtDocuNo" value="" autocomplete="off">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdocudate" name="datepickerdocudate" value="" autocomplete="off">
+                                                    <div class="input-group-addon input-sm">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 5px">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="txtLabel">Customer :</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExCustName" name="txtExCustName" value="" autocomplete="off">
+                                            </div>
+                                        </div>
+
                                         <div class="" id="divShare">
                                             <div class="row" style="margin-bottom: 5px">
                                                 <div class="col-md-1">
@@ -1969,7 +2048,8 @@
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control input-sm pull-left txtLabel" style="text-align: right; background-color: #D0FA58;" readonly id="txtOwnerTotal" name="txtOwnerTotal" value="0.00" autocomplete="off">
                                                 </div>
-                                            </div>
+                                            </div>                                          
+
                                             <hr />
 
                                             <div class="row" style="margin-bottom: 5px">
@@ -1979,7 +2059,7 @@
                                                     <label class="txtLabel">Percentage(%):<span class="text-red">**</span></label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" onfocusout="getFunctionDicimal()" style="text-align: right; background-color: #a1f0bd;" id="txtSharePercen" name="txtSharePercen" value="0.00" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel allownumericwithdecimal" onfocusout="getFunctionDicimal()" style="text-align: right;" id="txtSharePercen" name="txtSharePercen" value="0.00" autocomplete="off">
                                                 </div>
                                                 <%-- <div class="col-md-2">
                                                     <label class="txtLabel">Port Sharing<span class="text-red">**</span></label>
@@ -1998,7 +2078,7 @@
                                                     <label class="txtLabel">ProjMonth :<span class="text-red">**</span></label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtSosShareMonth" name="txtSosShareMonth" style="text-align: left; background-color: #a1f0bd;" value="" autocomplete="off">
+                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="txtSosShareMonth" name="txtSosShareMonth" style="text-align: left;" value="" autocomplete="off">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="txtLabel">Port<span class="text-red">**</span></label>
@@ -2077,36 +2157,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-1">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="txtLabel">DocuNo :</label>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtDocuNo" name="txtDocuNo" value="" autocomplete="off">
-                                            </div>
 
-                                            <div class="col-md-4">
-                                                <div class="input-group date">
-                                                    <input type="text" class="form-control input-sm pull-left txtLabel" id="datepickerdocudate" name="datepickerdocudate" value="" autocomplete="off">
-                                                    <div class="input-group-addon input-sm">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row" style="margin-bottom: 5px">
-                                            <div class="col-md-1">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="txtLabel">Customer :</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control input-sm pull-left txtLabel" id="txtExCustName" name="txtExCustName" value="" autocomplete="off">
-                                            </div>
-                                        </div>
 
                                     </div>
 
