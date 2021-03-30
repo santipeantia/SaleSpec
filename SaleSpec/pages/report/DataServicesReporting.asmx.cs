@@ -332,6 +332,7 @@ namespace SaleSpec.pages.report
                 project.Ref3 = rdr["Ref3"].ToString();
                 project.RefRemark = rdr["RefRemark"].ToString();
                 project.StepID = rdr["StepID"].ToString();
+                project.StatusNameEn = rdr["StatusNameEn"].ToString();
                 projects.Add(project);
             }
             JavaScriptSerializer js = new JavaScriptSerializer();

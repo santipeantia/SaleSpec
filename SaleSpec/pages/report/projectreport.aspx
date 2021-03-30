@@ -558,7 +558,7 @@
                                             table.row.add([data[i].ID, data[i].UserID, data[i].WeekDate, data[i].WeekTime, data[i].CompanyName, data[i].ArchitectID, data[i].Name
                                                 , data[i].ProjectID, data[i].ProjectName, data[i].Location, data[i].ProdTypeID, data[i].ProdTypeNameEN, data[i].ProdID
                                                 , data[i].ProdNameEN, data[i].ProfNameEN, data[i].DeliveryDate, data[i].NextVisitDate, data[i].Quantity, data[i].StepNameA
-                                                , data[i].StepNameB, data[i].RefWeekDate, data[i].Ref1, data[i].Ref2, data[i].Ref3, data[i].RefRemark, data[i].StepID]);
+                                                , data[i].StepNameB, data[i].StatusNameEn, data[i].RefWeekDate, data[i].Ref2, data[i].Ref3, data[i].RefRemark, data[i].StepID]);
                                         });
                                     }
                                     table.column(0).nodes().to$().addClass('hidden');
@@ -567,6 +567,7 @@
                                     table.column(5).nodes().to$().addClass('hidden');
                                     table.column(7).nodes().to$().addClass('hidden');
                                     table.column(10).nodes().to$().addClass('hidden');
+                                    table.column(11).nodes().to$().addClass('hidden');
                                     table.column(12).nodes().to$().addClass('hidden');
                                     table.column(25).nodes().to$().addClass('hidden');
                                     table.column(8).nodes().to$().addClass('mypointer');
@@ -877,7 +878,7 @@
                                         table.row.add([data[i].ID, data[i].UserID, data[i].WeekDate, data[i].WeekTime, data[i].CompanyName, data[i].ArchitectID, data[i].Name
                                             , data[i].ProjectID, data[i].ProjectName, data[i].Location, data[i].ProdTypeID, data[i].ProdTypeNameEN, data[i].ProdID
                                             , data[i].ProdNameEN, data[i].ProfNameEN, data[i].DeliveryDate, data[i].NextVisitDate, data[i].Quantity, data[i].StepNameA
-                                            , data[i].StepNameB, data[i].RefWeekDate, data[i].Ref1, data[i].Ref2, data[i].Ref3, data[i].RefRemark, data[i].StepID]);
+                                            , data[i].StepNameB, data[i].StatusNameEn, data[i].RefWeekDate,  data[i].Ref2, data[i].Ref3, data[i].RefRemark, data[i].StepID]);
                                     });
                                 }
                                 table.column(0).nodes().to$().addClass('hidden');
@@ -886,6 +887,7 @@
                                 table.column(5).nodes().to$().addClass('hidden');
                                 table.column(7).nodes().to$().addClass('hidden');
                                 table.column(10).nodes().to$().addClass('hidden');
+                                table.column(11).nodes().to$().addClass('hidden');
                                 table.column(12).nodes().to$().addClass('hidden');
                                 table.column(25).nodes().to$().addClass('hidden');
                                 table.column(8).nodes().to$().addClass('mypointer');
@@ -1504,7 +1506,7 @@
                                             <th>ProjectName</th>
                                             <th>Location</th>
                                             <th class="hidden">ProdTypeID</th>
-                                            <th>ProdTypeName</th>
+                                            <th class="hidden">ProdTypeName</th>
                                             <th class="hidden">ProdID</th>
                                             <th class="">ProdName</th>
                                             <th>Profile</th>
@@ -1513,7 +1515,7 @@
                                             <th>Quantity</th>
                                             <th>StepNameA</th>
                                             <th>ProjMonth</th>
-                                            <th>RefWeekDate</th>
+                                            <th>Status</th>
                                             <th>BD</th>
                                             <th>MC</th>
                                             <th>RF</th>

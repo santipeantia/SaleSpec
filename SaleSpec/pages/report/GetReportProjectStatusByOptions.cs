@@ -33,6 +33,7 @@ namespace SaleSpec.pages.report
         public string Ref3 { get; set; }
         public string RefRemark { get; set; }
         public string StepID { get; set; }
+        public string StatusNameEn { get; set; }
 
     }
 }
