@@ -629,12 +629,14 @@
                     'lengthChange': true,
                     'searching': true,
                     'ordering': true,
-                    'info': true
-                    //'autoWidth': false,
-                    //'columnDefs': [
-                    //    { "width": "50", "targets": 2 }
-                    //],
-                    //'fixedColumns': true
+                    'info': true,
+                    'autoWidth': true,
+                    'columnDefs': [{
+                        render: function (data, type, full, meta) {
+                            return "<div id='dvNotes' style='white-space: normal;width: 400px;'>" + data + "</div>";
+                        },
+                        targets: 24
+                    }]
 
                 })
 

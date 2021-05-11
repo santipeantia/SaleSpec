@@ -9,6 +9,28 @@
         <script src="jquery.table2excel.js"></script>
       
         <style>
+
+            #rcornersbidding {
+                border-radius: 0 0 10px 10px;
+                background: #d4ebfc;
+                border: 1px solid #339eeb;
+                padding: 20px 0 20px 0;
+            }
+
+            #rcornersmc {
+                border-radius: 0 0 10px 10px;
+                background: #d4ebfc;
+                border: 1px solid #339eeb;
+                padding: 20px 0 20px 0;
+            }
+
+            #rcornersrf {
+                border-radius: 0 0 10px 10px;
+                background: #d4ebfc;
+                border: 1px solid #339eeb;
+                padding: 20px 0 20px 0;
+            }
+
             #overlay {
                 position: fixed;
                 top: 0;
@@ -46,6 +68,12 @@
             }
 
             .mypointer:hover {
+                cursor: pointer;
+                color: red;
+                font-weight: bold;
+            }
+
+            #tableWeeklyReportx tbody tr:hover {
                 cursor: pointer;
                 color: red;
                 font-weight: bold;
@@ -467,7 +495,7 @@
         </script>
 
         <script>
-            $(document).ready(function () {                
+            $(document).ready(function () {
 
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
@@ -585,6 +613,13 @@
 
                                         console.log('row : ' + rIndex + 'cell : ' + cIndex);
 
+                                        if (rIndex != 0 & cIndex == 6) {
+                                            var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');  //ArchitectID
+                                            // alert(rIndex + ':' + cIndex + ':' + strVal5.text());
+
+                                            window.open("../report/architectprofile.aspx?opt=rarc&id=" + strVal5.text());
+                                        }
+
                                         if (rIndex != 0 & cIndex == 8 || cIndex == 24) {
                                             //alert(rIndex + '' + cIndex);
 
@@ -626,9 +661,51 @@
                                             var strVal24 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(24)');    //RefRemark
                                             var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
 
-                                           console.log(strVal0.text() + ' : ' +strVal7.text() + ' : ' + strVal8.text());
+                                            console.log(strVal0.text() + ' : ' + strVal7.text() + ' : ' + strVal8.text());
+                                            
+                                            $('#updatebiddingname1').val();
+                                            $('#updateowner1').val();
+                                            $('#updatebiddingname2').val();
+                                            $('#updateowner2').val();
+                                            $('#updatebiddingname3').val();
+                                            $('#updateowner3').val();
+
+                                            $('#updateawardmc').val();
+                                            $('#updatecontactmc').val();
+
+                                            $('#updateawardrf').val();
+                                            $('#updatecontactrf').val();
 
                                             //return;
+                                            $.ajax({
+                                                url: '../Trans/DataServices.asmx/GetProjectLastUdate',
+                                                method: 'POST',
+                                                data: {
+                                                    ProjectID: strVal7.text()
+                                                },
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                                    if (obj != '') {
+                                                        $.each(obj, function (key, inval) {
+
+                                                            $('#updatebiddingname1').val(inval["BiddingName1"]);
+                                                            $('#updateowner1').val(inval["OwnerName1"]);
+                                                            $('#updatebiddingname2').val(inval["BiddingName2"]);
+                                                            $('#updateowner2').val(inval["OwnerName2"]);
+                                                            $('#updatebiddingname3').val(inval["BiddingName3"]);
+                                                            $('#updateowner3').val(inval["OwnerName3"]);
+
+                                                            $('#updateawardmc').val(inval["AwardMC"]);
+                                                            $('#updatecontactmc').val(inval["ContactMC"]);
+                                                            $('#updateawardrf').val(inval["AwardRF"]);
+                                                            $('#updatecontactrf').val(inval["ContactRF"]);
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+                                            //alert($('#updatebiddingname1').val());
 
                                             //document.getElementById("txtid").value = strVal0.text();
                                             $('#txtid').val(strVal0.text());
@@ -756,7 +833,7 @@
                                                     })
                                                 }
                                             });
-                                            
+
 
                                             //alert(strVal6.text());
 
@@ -850,7 +927,6 @@
                         return;
                     }
                     else {
-
                         $.ajax({
                             url: 'DataServicesReporting.asmx/GetDataProjectByPortByOption',
                             method: 'post',
@@ -878,7 +954,7 @@
                                         table.row.add([data[i].ID, data[i].UserID, data[i].WeekDate, data[i].WeekTime, data[i].CompanyName, data[i].ArchitectID, data[i].Name
                                             , data[i].ProjectID, data[i].ProjectName, data[i].Location, data[i].ProdTypeID, data[i].ProdTypeNameEN, data[i].ProdID
                                             , data[i].ProdNameEN, data[i].ProfNameEN, data[i].DeliveryDate, data[i].NextVisitDate, data[i].Quantity, data[i].StepNameA
-                                            , data[i].StepNameB, data[i].StatusNameEn, data[i].RefWeekDate,  data[i].Ref2, data[i].Ref3, data[i].RefRemark, data[i].StepID]);
+                                            , data[i].StepNameB, data[i].StatusNameEn, data[i].RefWeekDate, data[i].Ref2, data[i].Ref3, data[i].RefRemark, data[i].StepID]);
                                     });
                                 }
                                 table.column(0).nodes().to$().addClass('hidden');
@@ -947,8 +1023,47 @@
                                         var strVal25 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(25)');    //StepID
 
                                         //alert(strVal7.text());
+                                        $('#updatebiddingname1').val();
+                                        $('#updateowner1').val();
+                                        $('#updatebiddingname2').val();
+                                        $('#updateowner2').val();
+                                        $('#updatebiddingname3').val();
+                                        $('#updateowner3').val();
+
+                                        $('#updateawardmc').val();
+                                        $('#updatecontactmc').val();
+
+                                        $('#updateawardrf').val();
+                                        $('#updatecontactrf').val();
 
                                         //return;
+                                         $.ajax({
+                                                url: '../Trans/DataServices.asmx/GetProjectLastUdate',
+                                                method: 'POST',
+                                                data: {
+                                                    ProjectID: strVal7.text()
+                                                },
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    var obj = jQuery.parseJSON(JSON.stringify(data));
+                                                    if (obj != '') {
+                                                        $.each(obj, function (key, inval) {
+
+                                                            $('#updatebiddingname1').val(inval["BiddingName1"]);
+                                                            $('#updateowner1').val(inval["OwnerName1"]);
+                                                            $('#updatebiddingname2').val(inval["BiddingName2"]);
+                                                            $('#updateowner2').val(inval["OwnerName2"]);
+                                                            $('#updatebiddingname3').val(inval["BiddingName3"]);
+                                                            $('#updateowner3').val(inval["OwnerName3"]);
+
+                                                            $('#updateawardmc').val(inval["AwardMC"]);
+                                                            $('#updatecontactmc').val(inval["ContactMC"]);
+                                                            $('#updateawardrf').val(inval["AwardRF"]);
+                                                            $('#updatecontactrf').val(inval["ContactRF"]);
+                                                        });
+                                                    }
+                                                }
+                                            });
 
                                         //document.getElementById("txtid").value = strVal0.text();
                                         $('#txtid').val(strVal0.text());
@@ -1126,16 +1241,16 @@
                                                 //$('#tableHistory').append(trHTML2);
 
                                                 var table;
-                                                    table = $('#tableHistory').DataTable();
-                                                    table.clear();
+                                                table = $('#tableHistory').DataTable();
+                                                table.clear();
 
-                                                    if (data != '') {
-                                                        $.each(data, function (i, item) {
-                                                            table.row.add([data[i].WeekDate, data[i].WeekTime, data[i].NextVisitDate, data[i].TransNameEN, data[i].StepNameEn,
-                                                            data[i].ProdTypeNameEN, data[i].ProdNameEN, data[i].BiddingName1, data[i].AwardMC, data[i].AwardRF, data[i].Quantity, data[i].Remark]);
-                                                        });
-                                                    };
-                                                table.draw();                                            
+                                                if (data != '') {
+                                                    $.each(data, function (i, item) {
+                                                        table.row.add([data[i].WeekDate, data[i].WeekTime, data[i].NextVisitDate, data[i].TransNameEN, data[i].StepNameEn,
+                                                        data[i].ProdTypeNameEN, data[i].ProdNameEN, data[i].BiddingName1, data[i].AwardMC, data[i].AwardRF, data[i].Quantity, data[i].Remark]);
+                                                    });
+                                                };
+                                                table.draw();
                                             }
                                         });
 
@@ -1156,9 +1271,6 @@
                             }
                         });
                     }
-
-
-
                 });
 
                 $('#txtQuantity').keypress(function (event) {
@@ -1184,7 +1296,7 @@
                 var btnRefInv = $('#btnRefInv');
                 btnRefInv.click(function () {
                     //alert('test');
-                   
+
                     $('#example-result').text('');
                     getDataInvoiceList();
 
@@ -1245,11 +1357,11 @@
                     $('#txtRefDoc').val(xempid);
                     $("#modal-refinvoice").modal("hide");
                 });
-                
+
                 var btnuncheck = $('#btnuncheck');
                 btnuncheck.click(function () {
                     //alert('uncheck..');
-                    var table = $('#tblemployee').DataTable();                    
+                    var table = $('#tblemployee').DataTable();
                     var checkedvalues = table.$('input:checked').each(function () {
                         $(this).prop("checked", false);
                     });
@@ -1261,8 +1373,8 @@
                 var btncheckedall = $('#btncheckedall')
                 btncheckedall.click(function () {
                     //alert('uncheck..');
-                    var table = $('#tblemployee').DataTable();    
-                    
+                    var table = $('#tblemployee').DataTable();
+
                     $("input", table.rows({ search: 'applied' }).nodes()).each(function () {
                         $(this).prop("checked", true);
                     });
@@ -1274,8 +1386,14 @@
                     //});
 
                 });
-                    //******************* End Of document.ready() *************************//
-                    //******************* End Of document.ready() *************************//
+
+                //var selectStep = $('#selectStep');
+                //selectStep.change(function () {
+                //    alert('change');
+                //});
+
+                //******************* End Of document.ready() *************************//
+                //******************* End Of document.ready() *************************//
             })
 
             function getDataInvoiceList() {
@@ -1306,7 +1424,18 @@
                 });
             };
 
+            function getProjectStep(step) {
+                var s = step.value;
 
+                var dv1 = document.getElementById("divBidding");
+                var dv2 = document.getElementById("divAwardMC");
+                var dv3 = document.getElementById("divAwardRF");
+
+                if (s == "1") { dv1.style.display = "block"; } else { dv1.style.display = "none"; }
+                if (s == "2") { dv2.style.display = "block"; } else { dv2.style.display = "none"; }
+                if (s == "3") { dv3.style.display = "block"; } else { dv3.style.display = "none"; }
+                //alert(s);
+            }
 
         </script>
 
@@ -1711,16 +1840,105 @@
 
                                             <div class="row" style="margin-top: 5px;">
                                                 <div class="col-md-4">
-                                                    <label class="txtLabel">Proess Step</label>
+                                                    <label class="txtLabel">Process Step</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="txtLabel">
-                                                        <select id="selectStep" name="selectStep" class="form-control input-sm" style="width: 100%">
+                                                        <select id="selectStep" name="selectStep" onchange="getProjectStep(this)" class="form-control input-sm" style="width: 100%">
                                                         </select>
                                                     </div>
                                                     <div id="divErrorStep" class="txtLabel text-red" style="display: none;">Please select at least one item..!</div>
+
+                                                    <div id="divBidding" class="" style="display: none;">
+                                                        <div id="rcornersbidding">
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-md-offset-1">
+                                                                    <label class="txtLabel">Bidding Name No.1</label>
+                                                                    <div class="input-group col-md-12">
+                                                                        <input type="text" id="updatebiddingname1" name="updatebiddingname1" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="txtLabel">Owner</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="updateowner1" name="updateowner1" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-md-offset-1">
+                                                                    <label class="txtLabel">Bidding Name No.2</label>
+                                                                    <div class="input-group col-md-12">
+                                                                        <input type="text" id="updatebiddingname2" name="updatebiddingname2" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="txtLabel">Owner</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="updateowner2" name="updateowner2" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-md-offset-1">
+                                                                    <label class="txtLabel">Bidding Name No.3</label>
+                                                                    <div class="input-group col-md-12">
+                                                                        <input type="text" id="updatebiddingname3" name="updatebiddingname3" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="txtLabel">Owner</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="updateowner3" name="updateowner3" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="divAwardMC" class="" style="display: none;">
+                                                        <div id="rcornersmc">
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-md-offset-1">
+                                                                    <label class="txtLabel">Award Main Constructor</label>
+                                                                    <div class="input-group col-md-12">
+                                                                        <input type="text" id="updateawardmc" name="updateawardmc" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="txtLabel">Contact</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="updatecontactmc" name="updatecontactmc" class="form-control input input-sm">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="divAwardRF" class="" style="display: none;">
+                                                        <div id="rcornersrf">
+                                                            <div class="row">
+                                                            <div class="col-md-6 col-md-offset-1">
+                                                                <label class="txtLabel">Award Roll Former</label>
+                                                                <div class="input-group col-md-12">
+                                                                    <input type="text" id="updateawardrf" name="updateawardrf" class="form-control input input-sm">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <label class="txtLabel">Contact</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" id="updatecontactrf" name="updatecontactrf" class="form-control input input-sm">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                            </div>
+                                            </div>                                            
+                                           
+
+
 
                                             <div class="row" style="margin-top: 5px;">
                                                 <div class="col-md-4">
@@ -1918,6 +2136,19 @@
                 var str18 = document.getElementById("selectStatus").value;
                 var str19 = document.getElementById("txtRefDoc").value;
 
+                var strbiding1 = document.getElementById("updatebiddingname1").value;
+                var strbidname1 = document.getElementById("updateowner1").value;
+                var strbiding2 = document.getElementById("updatebiddingname2").value;
+                var strbidname2 = document.getElementById("updateowner2").value;
+                var strbiding3 = document.getElementById("updatebiddingname3").value;
+                var strbidname3 = document.getElementById("updateowner3").value;
+
+                var strawardmc = document.getElementById("updateawardmc").value;
+                var strawardname = document.getElementById("updatecontactmc").value;
+
+                var strawardrf = document.getElementById("updateawardrf").value;
+                var strawardrfname = document.getElementById("updatecontactrf").value;
+
                 var div1 = document.getElementById("divErrorArchitect");
                 var div2 = document.getElementById("divErrorLocation");
                 var div3 = document.getElementById("divErrorProductType");
@@ -2097,7 +2328,17 @@
                                 StatusID: $('#selectStatus').val(),
                                 ProjectID: $('#ProjectID').val(),
                                 RefDocuNo: '',
-                                jobname : ''
+                                jobname: '',
+                                bidding1: strbiding1,
+                                biddingname1: strbidname1,
+                                bidding2: strbiding2,
+                                biddingname2: strbidname2,
+                                bidding3: strbiding3,
+                                biddingname3: strbidname3,
+                                awardmc: strawardmc,
+                                awardmcname: strawardname,
+                                awardrf: strawardrf,
+                                awardrfname: strawardrfname
                             },
                             dataType: 'json',
                             complete: function (data) {

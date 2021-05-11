@@ -382,7 +382,9 @@ namespace SaleSpec.pages.report
                                             string Name, string Location, string ProdTypeID,
                                             string ProdTypeNameEN, string ProdID, string ProdNameEN, string ProfNameEN, string DeliveryDate,
                                             string NextVisitDate, string Quantity, string StepNameEn, string Ref1, string Ref2,
-                                            string Remark, string StepID, string StatusID, string ProjectID, string RefDocuNo, string jobname)
+                                            string Remark, string StepID, string StatusID, string ProjectID, string RefDocuNo, string jobname,
+                                            string bidding1, string biddingname1, string bidding2, string biddingname2, string bidding3, string biddingname3,
+                                            string awardmc, string awardmcname, string awardrf, string awardrfname)
         {
             SqlCommand comm = new SqlCommand("spGetUpdateWeeklyReportViaSupervisor", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
@@ -412,6 +414,20 @@ namespace SaleSpec.pages.report
                 SqlParameter param22 = new SqlParameter() { ParameterName = "@ProjectID", Value = ProjectID };
                 SqlParameter param23 = new SqlParameter() { ParameterName = "@RefDocuNo", Value = RefDocuNo };
                 SqlParameter param24 = new SqlParameter() { ParameterName = "@jobname", Value = jobname };
+
+                SqlParameter param25 = new SqlParameter() { ParameterName = "@bidding1", Value = bidding1 };
+                SqlParameter param26 = new SqlParameter() { ParameterName = "@biddingname1", Value = biddingname1 };
+                SqlParameter param27 = new SqlParameter() { ParameterName = "@bidding2", Value = bidding2 };
+                SqlParameter param28 = new SqlParameter() { ParameterName = "@biddingname2", Value = biddingname2 };
+                SqlParameter param29 = new SqlParameter() { ParameterName = "@bidding3", Value = bidding3 };
+                SqlParameter param30 = new SqlParameter() { ParameterName = "@biddingname3", Value = biddingname3 };
+
+                SqlParameter param31 = new SqlParameter() { ParameterName = "@awardmc", Value = awardmc };
+                SqlParameter param32 = new SqlParameter() { ParameterName = "@awardmcname", Value = awardmcname };
+
+                SqlParameter param33 = new SqlParameter() { ParameterName = "@awardrf", Value = awardrf };
+                SqlParameter param34 = new SqlParameter() { ParameterName = "@awardrfname", Value = awardrfname };
+
                 comm.Parameters.Add(param1);
                 comm.Parameters.Add(param2);
                 comm.Parameters.Add(param3);
@@ -436,6 +452,16 @@ namespace SaleSpec.pages.report
                 comm.Parameters.Add(param22);
                 comm.Parameters.Add(param23);
                 comm.Parameters.Add(param24);
+                comm.Parameters.Add(param25);
+                comm.Parameters.Add(param26);
+                comm.Parameters.Add(param27);
+                comm.Parameters.Add(param28);
+                comm.Parameters.Add(param29);
+                comm.Parameters.Add(param30);
+                comm.Parameters.Add(param31);
+                comm.Parameters.Add(param32);
+                comm.Parameters.Add(param33);
+                comm.Parameters.Add(param34);
                 comm.ExecuteNonQuery();
             }
             catch (Exception ex)

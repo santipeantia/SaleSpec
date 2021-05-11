@@ -296,6 +296,17 @@ namespace SaleSpec.pages.masters
                     Comm.Parameters.Add("@SpecID", SqlDbType.NVarChar).Value = strSpecID;
                     Comm.ExecuteNonQuery();
 
+                    ssql = "";
+                    ssql = "update adCompany set Createdby=@SpecID  where CompanyID=@CompanyID ";
+                    Comm = new SqlCommand();
+                    Comm.CommandText = ssql;
+                    Comm.CommandType = CommandType.Text;
+                    Comm.Connection = Conn;
+                    Comm.Transaction = transac;
+                    Comm.Parameters.Add("@CompanyID", SqlDbType.NVarChar).Value = strCompany;
+                    Comm.Parameters.Add("@SpecID", SqlDbType.NVarChar).Value = strSpecID;
+                    Comm.ExecuteNonQuery();
+
                 }
                 else
                 {
