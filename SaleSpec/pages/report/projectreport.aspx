@@ -598,6 +598,7 @@
                                     table.column(11).nodes().to$().addClass('hidden');
                                     table.column(12).nodes().to$().addClass('hidden');
                                     table.column(25).nodes().to$().addClass('hidden');
+                                    table.column(6).nodes().to$().addClass('mypointer');
                                     table.column(8).nodes().to$().addClass('mypointer');
                                     table.column(24).nodes().to$().addClass('mypointer');
                                     table.draw();
@@ -617,7 +618,8 @@
                                             var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');  //ArchitectID
                                             // alert(rIndex + ':' + cIndex + ':' + strVal5.text());
 
-                                            window.open("../report/architectprofile.aspx?opt=rarc&id=" + strVal5.text());
+                                            window.open("../report/architectprofile.aspx?opt=rarc&id=" + strVal5.text(), "_blank");
+                                            //window.location("../report/architectprofile.aspx?opt=rarc&id=" + strVal5.text(), "_bank");
                                         }
 
                                         if (rIndex != 0 & cIndex == 8 || cIndex == 24) {

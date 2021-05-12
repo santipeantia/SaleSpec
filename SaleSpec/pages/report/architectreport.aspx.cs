@@ -120,7 +120,7 @@ namespace SaleSpec.pages.report
                                         "       <a href=\"../report/architectprofile.aspx?opt=rarc&id=" + strArchitecID + "\" target=\"_blank\" title=\"view\"> " + strLastName + "</a></td> " +
                                         "     <td>" + strNickName + "</td> " +
                                         "     <td class=\"text-green\">" +
-                                         "       <a href=\"../report/architectprofile.aspx?opt=rarc&id=" + strArchitecID + "\" target=\"_blank\" title=\"view\"> " + strCompanyName + "</a></td> " +
+                                         "       <a href=\"../report/companyreportview?opt=rcom&comid="+ strCompanyID + "&portid="+ strPort + "\" target=\"_blank\" title=\"view\"> " + strCompanyName + "</a></td> " +
                                         "     <td class=\"hidden\">" + strPosition + "</td> " +
                                         "     <td class=\"hidden\">" + strAddress + "</td> " +
                                         "     <td>" + strPhone + "</td> " +
