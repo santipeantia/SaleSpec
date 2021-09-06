@@ -324,7 +324,8 @@
                                                 <td>FirstName</td>
                                                 <td>LastName</td>
                                                 <td>NickName</td>
-                                                <td class="">CompanyName</td>
+                                                <td class="">ComNameTH</td>
+                                                <td class="">ComNameEN</td>
                                                 <td class="hidden">strPosition</td>
                                                 <td class="hidden">strAddress</td>
                                                 <td>Phone</td>

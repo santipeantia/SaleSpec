@@ -2134,7 +2134,17 @@
                                 StatusID: $('#selectStatus').val(),
                                 ProjectID: $('#ProjectID').val(),
                                 RefDocuNo: str19 + ',',
-                                JobName: str20
+                                jobname: str20,
+                                bidding1: null,
+                                biddingname1: null,
+                                bidding2: null,
+                                biddingname2: null,
+                                bidding3: null,
+                                biddingname3: null,
+                                awardmc: null,
+                                awardmcname: null,
+                                awardrf: null,
+                                awardrfname: null
                             },
                             dataType: 'json',
                             complete: function (data) {

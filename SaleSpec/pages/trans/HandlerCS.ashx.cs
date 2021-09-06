@@ -6,7 +6,7 @@ using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
 
-namespace SaleSpec.pages.trans
+namespace aapgroup.pages.trans
 {
     /// <summary>
     /// Summary description for HandlerCS

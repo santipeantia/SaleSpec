@@ -61,7 +61,7 @@ namespace SaleSpec.pages.report
                 //        "       adPositions d on b.Position = d.PositionID left join " +
                 //        "       adGrade e on b.GradeID = e.GradeID ";
 
-                ssql = "select a.id, a.ArchitecID, a.CompanyID, cm.CompanyName, a.Name, a.FirstName, a.LastName, a.NickName, a.Position " +
+                ssql = "select a.id, a.ArchitecID, a.CompanyID, cm.CompanyName, cm.CompanyName2, a.Name, a.FirstName, a.LastName, a.NickName, a.Position " +
                         "	, a.Address, a.phone, a.Mobile, a.Email, a.StatusConID, a.CreatedDate, a.UpdatedDate, a.GradeID, cn.ConDesc " +
                         "	, cn.ConDesc2,  ps.PositionNameTH, ps.PositionNameEN, gd.GradeDesc, gd.GradeDetail " +
                         "	, (select top 1 ' in year ' + convert(nvarchar(10), inYear) from adArchitectLevel al where a.ArchitecID = al.ArchitecID and al.isactive = 1 order by inYear desc ) as inYear " +
@@ -86,6 +86,7 @@ namespace SaleSpec.pages.report
                         string strArchitecID = dt.Rows[i]["ArchitecID"].ToString();
                         string strCompanyID = dt.Rows[i]["CompanyID"].ToString();
                         string strCompanyName = dt.Rows[i]["CompanyName"].ToString();
+                        string strCompanyName2 = dt.Rows[i]["CompanyName2"].ToString();
                         string strName = dt.Rows[i]["Name"].ToString();
                         string strFirstName = dt.Rows[i]["FirstName"].ToString();
                         string strLastName = dt.Rows[i]["LastName"].ToString();
@@ -120,7 +121,9 @@ namespace SaleSpec.pages.report
                                         "       <a href=\"../report/architectprofile.aspx?opt=rarc&id=" + strArchitecID + "\" target=\"_blank\" title=\"view\"> " + strLastName + "</a></td> " +
                                         "     <td>" + strNickName + "</td> " +
                                         "     <td class=\"text-green\">" +
-                                         "       <a href=\"../report/companyreportview?opt=rcom&comid="+ strCompanyID + "&portid="+ strPort + "\" target=\"_blank\" title=\"view\"> " + strCompanyName + "</a></td> " +
+                                        "       <a href=\"../report/companyreportview?opt=rcom&comid="+ strCompanyID + "&portid="+ strPort + "\" target=\"_blank\" title=\"view\"> " + strCompanyName + "</a></td> " +
+                                        "     <td class=\"text-green\">" +
+                                        "       <a href=\"../report/companyreportview?opt=rcom&comid=" + strCompanyID + "&portid=" + strPort + "\" target=\"_blank\" title=\"view\"> " + strCompanyName2 + "</a></td> " +
                                         "     <td class=\"hidden\">" + strPosition + "</td> " +
                                         "     <td class=\"hidden\">" + strAddress + "</td> " +
                                         "     <td>" + strPhone + "</td> " +
