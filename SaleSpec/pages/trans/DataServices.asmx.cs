@@ -1138,5 +1138,190 @@ namespace SaleSpec.Class
             Context.Response.Write(js.Serialize(grades));
             conn.CloseConn();
         }
+
+
+
+        [WebMethod]
+        public void GetadGoodCustomer()
+        {
+            List<CGetGoodCustomer> datas = new List<CGetGoodCustomer>();
+            SqlCommand comm = new SqlCommand("spGet_adGoodCustomer", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                CGetGoodCustomer data = new CGetGoodCustomer();
+                data.id = rdr["id"].ToString();
+                data.xno = rdr["xno"].ToString();
+                data.inYear = rdr["inYear"].ToString();
+                data.AAList = rdr["No_AAList"].ToString();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.CompanyID = rdr["CompanyID"].ToString();
+                data.FirstName = rdr["FirstName"].ToString();
+                data.LastName = rdr["LastName"].ToString();
+                data.CustName = rdr["CustName"].ToString();
+                data.Name = rdr["Name"].ToString();
+                data.CompanyName = rdr["CompanyName"].ToString();
+                data.SpecID = rdr["SpecID"].ToString();  
+                data.level_desc = rdr["level_desc"].ToString();
+                data.Salename = rdr["Salename"].ToString();
+                data.urlview = rdr["urlview"].ToString();
+                data.urldelete = rdr["urldelete"].ToString();
+                datas.Add(data);
+
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+
+
+        [WebMethod]
+        public void GetDataYearly()
+        {
+            List<GetDataYearlym2m> datas = new List<GetDataYearlym2m>();
+            SqlCommand comm = new SqlCommand("spGetDataYearly_m2m", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                GetDataYearlym2m data = new GetDataYearlym2m();
+                data.id = rdr["id"].ToString();
+                data.year_desc = rdr["year_desc"].ToString();
+                data.urlview = rdr["urlview"].ToString();
+                datas.Add(data);
+
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+
+
+
+
+        [WebMethod]
+        public void GetadArchitecture()
+        {
+            List<CGetadArchitecture> datas = new List<CGetadArchitecture>();
+            SqlCommand comm = new SqlCommand("spGet_adArchitecture", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                CGetadArchitecture data = new CGetadArchitecture();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.CompanyID = rdr["CompanyID"].ToString();  
+                data.FirstName = rdr["FirstName"].ToString();
+                data.LastName = rdr["LastName"].ToString();
+                data.Name = rdr["Name"].ToString();
+                data.SpecID = rdr["SpecID"].ToString();   
+                data.urlview = rdr["urlview"].ToString();
+                datas.Add(data);
+
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+
+
+
+        [WebMethod]
+        public void spsave_adGoodCustomer(string typeupdate, string id, string InYear ,string AACLUB, string strName , string strFirstName , string strLastName 
+                                          , string strArchitecID ,string strCompanyID ,string strSpecID, string created_by ,string create_date
+                                          , string update_by ,string update_date)
+        {
+
+            SqlCommand comm = new SqlCommand("spsave_adGoodCustomer", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@typeupdate", typeupdate);
+            comm.Parameters.AddWithValue("@id", id);         
+            comm.Parameters.AddWithValue("@InYear", InYear);
+            comm.Parameters.AddWithValue("@AACLUB", AACLUB);
+            comm.Parameters.AddWithValue("@strName", strName);
+            comm.Parameters.AddWithValue("@strFirstName", strFirstName);
+            comm.Parameters.AddWithValue("@strLastName", strLastName);
+            comm.Parameters.AddWithValue("@strArchitecID", strArchitecID);
+            comm.Parameters.AddWithValue("@strCompanyID", strCompanyID);
+            comm.Parameters.AddWithValue("@strSpecID", strSpecID);
+            comm.Parameters.AddWithValue("@created_by", created_by);
+            comm.Parameters.AddWithValue("@create_date", create_date);
+            comm.Parameters.AddWithValue("@update_by", update_by);
+            comm.Parameters.AddWithValue("@update_date", update_date);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+
+        }
+
+
+
+        [WebMethod]
+        public void check_GoodCustomer(string ArchitecID, string inYear ,string id)
+        {
+            List<Ccheck_GoodCustomer> datas = new List<Ccheck_GoodCustomer>();
+            SqlCommand comm = new SqlCommand("check_GoodCustomer", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+            comm.Parameters.AddWithValue("@inYear", inYear);
+            comm.Parameters.AddWithValue("@id", id);
+            conn.OpenConn();
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                Ccheck_GoodCustomer data = new Ccheck_GoodCustomer();
+                data.ArchitecID = rdr["ArchitecID"].ToString();
+                data.xcount = rdr["xcount"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+
+            // comm.ExecuteNonQuery();
+            conn.CloseConn();
+
+        }
+
+
+
+        [WebMethod]
+        public void spsave_mmProjectcontract(string typeupdate, string DocuDate, string DocuNo, string QAmount, string net, string netcheck
+                                  , string ArchitecID,string CustCode,string Name, string CustName, string GoodName, string NetRF_B
+                                  , string SaleCode, string SaleName,string created_by,string create_date)
+        {
+
+
+            SqlCommand comm = new SqlCommand("spsave_mmProjectcontract", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@typeupdate", typeupdate);
+            comm.Parameters.AddWithValue("@DocuDate", DocuDate);
+            comm.Parameters.AddWithValue("@DocuNo", DocuNo);
+            comm.Parameters.AddWithValue("@QAmount", QAmount);
+            comm.Parameters.AddWithValue("@net", net);
+            comm.Parameters.AddWithValue("@netcheck", netcheck);
+            comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
+            comm.Parameters.AddWithValue("@CustCode", CustCode);            
+            comm.Parameters.AddWithValue("@Name", Name);
+            comm.Parameters.AddWithValue("@CustName", CustName);
+            comm.Parameters.AddWithValue("@GoodName", GoodName);
+            comm.Parameters.AddWithValue("@NetRF_B", NetRF_B);
+            comm.Parameters.AddWithValue("@SaleCode", SaleCode);
+            comm.Parameters.AddWithValue("@SaleName", SaleName);
+            comm.Parameters.AddWithValue("@created_by", created_by);
+            comm.Parameters.AddWithValue("@create_date", create_date);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+
+        }
+
+
     }
 }

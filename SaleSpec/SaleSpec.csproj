@@ -6744,6 +6744,7 @@
     <Content Include="pages\trans\mmcondition.aspx" />
     <Content Include="pages\trans\mmgoodcust.aspx" />
     <Content Include="pages\trans\mmproducts.aspx" />
+    <Content Include="pages\trans\mmprojectcontact.aspx" />
     <Content Include="pages\trans\mmreport.aspx" />
     <Content Include="pages\trans\projects-update-status.aspx" />
     <Content Include="pages\trans\projects-update.aspx" />
@@ -6985,6 +6986,17 @@
     <Content Include="pages\reports\dsWeeklyReport.xss">
       <DependentUpon>dsWeeklyReport.xsd</DependentUpon>
     </Content>
+    <Content Include="pages\reports\DtMetreToMile.xsc">
+      <DependentUpon>DtMetreToMile.xsd</DependentUpon>
+    </Content>
+    <None Include="pages\reports\DtMetreToMile.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DtMetreToMile1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="pages\reports\DtMetreToMile.xss">
+      <DependentUpon>DtMetreToMile.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.3.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.3.2.js" />
@@ -7007,7 +7019,10 @@
       <DependentUpon>ChartData.tt</DependentUpon>
     </Compile>
     <Compile Include="cGetSpecWithCompany.cs" />
+    <Compile Include="Class\Ccheck_GoodCustomer.cs" />
+    <Compile Include="Class\CGetadArchitecture.cs" />
     <Compile Include="Class\cGetDataProjectReferenceExport.cs" />
+    <Compile Include="Class\CGetGoodCustomer.cs" />
     <Compile Include="Class\cGetSpecWithArchitect.cs" />
     <Compile Include="Class\cGetssProjectMappingFilter.cs" />
     <Compile Include="Class\cGlobalVariable.cs" />
@@ -7053,6 +7068,7 @@
     <Compile Include="Class\GetDataTransEntry.cs" />
     <Compile Include="Class\GetDataWeeklyReporting.cs" />
     <Compile Include="Class\GetDataYearly.cs" />
+    <Compile Include="Class\GetDataYearlym2m.cs" />
     <Compile Include="Class\GetDocAttached.cs" />
     <Compile Include="Class\GetInsertArchitect.cs" />
     <Compile Include="Class\GetInsertWeeklyReport.cs" />
@@ -7070,6 +7086,47 @@
     <Compile Include="Class\GetDataAttendance.cs" />
     <Compile Include="Class\GetActivityEvent.cs" />
     <Compile Include="Class\GetSOSProjectMapping.cs" />
+    <Compile Include="pages\reports\DtMetreToMile1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DtMetreToMile.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="pages\reports\rptMetreToMile1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMetreToMile.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptMetreToMileVCA1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMetreToMileVCA.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptMetreToMileVCB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMetreToMileVCB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptMetreToMileVCC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMetreToMileVCC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptMetreToMileVCD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMetreToMileVCD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\reports\rptMetreToMileVCE.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMetreToMileVCE.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\reports\rptPrintProjectSetup.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7545,6 +7602,13 @@
     </Compile>
     <Compile Include="pages\trans\mmproducts.aspx.designer.cs">
       <DependentUpon>mmproducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\trans\mmprojectcontact.aspx.cs">
+      <DependentUpon>mmprojectcontact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\trans\mmprojectcontact.aspx.designer.cs">
+      <DependentUpon>mmprojectcontact.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\trans\mmreport.aspx.cs">
       <DependentUpon>mmreport.aspx</DependentUpon>
@@ -8300,6 +8364,30 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="pages\reports\rptMetreToMile.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMetreToMile1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptMetreToMileVCA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMetreToMileVCA1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptMetreToMileVCB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMetreToMileVCB.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptMetreToMileVCC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMetreToMileVCC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptMetreToMileVCD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMetreToMileVCD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\reports\rptMetreToMileVCE.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMetreToMileVCE.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\reports\rptPrintArchitect.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptPrintArchitect.cs</LastGenOutput>

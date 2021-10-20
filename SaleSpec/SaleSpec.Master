@@ -428,6 +428,10 @@
                                     <a href="../../pages/trans/mmreport?opt=mmr"><i class="fa fa-angle-right <%= strTextMMReport.ToString() %>"></i><span class="txtLabel <%= strTextMMReport.ToString() %>">Metre to Mile Report</span></a>
                                 </li>  
 
+                                <li id="mnuprojectcontact" runat="server" visible="false" class="<%= strProjectContactActive.ToString() %> ">
+                                    <a href="../../pages/trans/mmprojectcontact?opt=mmpjc"><i class="fa fa-angle-right <%= strTextPJCReport.ToString() %>"></i><span class="txtLabel <%= strTextPJCReport.ToString() %>">Project Contact</span></a>
+                                </li>  
+
                             </ul>
                         </li>
 
@@ -748,6 +752,275 @@
                         targets: [25, 26, 27, 28, 29, 30, 31],
                             className: "hide_column"
                     }]
+                })
+
+
+
+                $('#tblM2MVCA').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true, 
+                    'scrollX': true,                 
+                    'scrollCollapse': true,
+                    
+                })
+
+
+                $('#tblM2MVCB').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true, 
+                    'scrollX': true,                 
+                    'scrollCollapse': true,
+                    
+                })
+
+
+                $('#tblM2MVCC').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true, 
+                    'scrollX': true,                 
+                    'scrollCollapse': true,
+                    
+                })
+
+
+                $('#tblM2MVCD').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true, 
+                    'scrollX': true,                 
+                    'scrollCollapse': true,
+                    
+                })
+
+
+
+                $('#tblM2MVCE').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true, 
+                    'scrollX': true,                 
+                    'scrollCollapse': true,
+                    
+                })
+
+                
+
+                $('#tblEmpGood').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true,
+
+                     'columnDefs': [                     
+                        { className: 'text-left', targets: [8,10,12] },                  
+                        { className: 'hide_column', targets: [0,6,7,9] },
+                     ]
+
+
+                    
+                })
+
+
+
+                $('#tblprojectcontact').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    //'columnDefs': [
+                    //    {
+                    //        targets: [0],
+                    //        className: "hide_column"
+                    //    }
+                    //]
+                })
+
+
+                  $('#tblProductAmpelFlow').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                  $('#tblProductAmperam').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                 $('#tblProductAmpel').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                $('#tblProductWebglas').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                 $('#tblProductWonderCooLIR').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                $('#tblProductCoolLite').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+
+                  $('#tblProductChemBlock').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                  $('#tblProductSupraGlas').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                   $('#tblProductSealex').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                  $('#tblProductDLite').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   'autoWidth':true,                 
+                    'scrollY': "4000px",
+                    'scrollX': true,                 
+                    'scrollCollapse': true
+                    
+                })
+
+                
+                $('#tbladArchitecture').DataTable({
+					'iDisplayLength': 10,
+					'paging': true,
+					'lengthChange': true,
+					'searching': true,
+					'ordering': false,
+					'info': true,
+					'autoWidth': true
                 })
 
                 

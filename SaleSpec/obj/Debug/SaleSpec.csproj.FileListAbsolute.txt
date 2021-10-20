@@ -33,3 +33,31 @@ D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\bin\stdole.dll
 D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
 D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete
 D:\Source\Repos\santipeantia\easytimemanagement\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+F:\project salespec\SaleSpec\bin\SaleSpec.dll.config
+F:\project salespec\SaleSpec\bin\SaleSpec.dll
+F:\project salespec\SaleSpec\bin\SaleSpec.pdb
+F:\project salespec\SaleSpec\bin\CrystalDecisions.CrystalReports.Engine.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportSource.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.Shared.dll
+F:\project salespec\SaleSpec\bin\EntityFramework.dll
+F:\project salespec\SaleSpec\bin\EntityFramework.SqlServer.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+F:\project salespec\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+F:\project salespec\SaleSpec\bin\stdole.dll
+F:\project salespec\SaleSpec\bin\EntityFramework.xml
+F:\project salespec\SaleSpec\bin\EntityFramework.SqlServer.xml
+F:\project salespec\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+F:\project salespec\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+F:\project salespec\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete
+F:\project salespec\SaleSpec\obj\Debug\SaleSpec.dll
+F:\project salespec\SaleSpec\obj\Debug\SaleSpec.pdb

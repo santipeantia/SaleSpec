@@ -31,7 +31,6 @@ namespace SaleSpec.pages.trans
 
         dbConnection dbConn = new dbConnection();
         cGlobalVariable cryconn = new cGlobalVariable();
-
         ReportDocument rpt = new ReportDocument();
 
 

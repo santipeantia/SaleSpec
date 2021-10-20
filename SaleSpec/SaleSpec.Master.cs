@@ -73,6 +73,9 @@ namespace SaleSpec
         public string strTextMMCustomer = "";
         public string strTextMMProduct = "";
         public string strTextMMReport = "";
+        public string strTextPJCReport = "";
+
+        public string strProjectContactActive = "";
 
         public string strMMClass = "hidden";
         //public string strTextPremiumGift = "";
@@ -216,6 +219,8 @@ namespace SaleSpec
                 if (strOpt == "mmp") { strMetre2MileActive = "active"; strTextMMProduct = "text-red"; return; } else { strMetre2MileActive = ""; strTextMMProduct = ""; }
                 if (strOpt == "mmr") { strMetre2MileActive = "active"; strTextMMReport = "text-red"; return; } else { strMetre2MileActive = ""; strTextMMReport = ""; }
 
+                if (strOpt == "mmpjc") { strMetre2MileActive = "active"; strTextPJCReport = "text-red"; return; } else { strMetre2MileActive = ""; strTextPJCReport = ""; }
+                
 
 
 
@@ -272,7 +277,7 @@ namespace SaleSpec
                         if (xPage == "trans/mmgoodcust") { mmgoodcust.Visible = true; }
                         if (xPage == "trans/mmproduct") { mmproduct.Visible = true; }
                         if (xPage == "trans/mmreport") { mmreport.Visible = true; }
-
+                        if (xPage == "trans/mmprojectcontact") { mnuprojectcontact.Visible = true; }
 
                         if (xPage == "report/saleweeklyreport") { reportsalewrk.Visible = true; }
                         if (xPage == "report/newprojectreport") { reportnewproject.Visible = true; }
