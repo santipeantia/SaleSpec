@@ -600,11 +600,12 @@ namespace SaleSpec.pages.report
                 string strQty = Request.Form["QtyStart"];
                 string strQtyTo = Request.Form["QtyEnd"];
                 string strSearch =  Request.Form["Search"];
+                string strSearch2 = Request.Form["Search2"];
                 string strVerifyCode = GenerateVerfifyCode();
 
                 string strFinalVerifyCode = GenerateVerfifyCode();
 
-                string strMailBody =  GetMailBodyTempleate(strEmail, strRepType,  strUserID,  strEmpCode,  strOpt,  strOptName,  strFrom,  strEnd,  strPort,  strQty,  strQtyTo,  strSearch,  strVerifyCode);
+                string strMailBody =  GetMailBodyTempleate(strEmail, strRepType,  strUserID,  strEmpCode,  strOpt,  strOptName,  strFrom,  strEnd,  strPort,  strQty,  strQtyTo,  strSearch, strSearch2,  strVerifyCode);
                 
                 //Response.Write("<script>alert('" + strRepType +":"+  strUserID + ":" + strEmpCode + ":" + strOpt + ":" + strOptName + ":" + strFrom + ":" + strEnd + ":" + strPort + ":" + strQty + ":" + strQtyTo + ":" + strSearch + ":" + strVerifyCode + "')</script>");
                 
@@ -631,7 +632,7 @@ namespace SaleSpec.pages.report
                 }
                 
                 saveVerifyPassword(strEmail, strUserID, strEmpCode, strOpt, strOptName, strFrom, strEnd, strPort,
-                                   strQty, strQtyTo, strSearch, strVerifyCode, strFullName, strRequestDate, strExpireDate);
+                                   strQty, strQtyTo, strSearch, strSearch2, strVerifyCode, strFullName, strRequestDate, strExpireDate);
 
                 Response.Write("<script>alert('Password timeout within 90 minute please check your email : "+ strEmail +" ')</script>");
 
@@ -659,7 +660,7 @@ namespace SaleSpec.pages.report
         }
 
         protected string GetMailBodyTempleate(string strEmail, string strRepType, string strUserID, string strEmpCode, string strOpt, string strOptName, 
-                                              string strFrom, string strEnd, string strPort, string strQty, string strQtyTo, string strSearch, string strVerifyCode)
+                                              string strFrom, string strEnd, string strPort, string strQty, string strQtyTo, string strSearch, string strSearch2, string strVerifyCode)
         {
 
             //StringBuilder strBodyBuilder = new StringBuilder;
@@ -976,7 +977,7 @@ namespace SaleSpec.pages.report
         }
 
         protected void saveVerifyPassword(string sEmail, string sUserID, string sEmpCode, string sRepOpt, string sRepOptName, string sFromDate, string sEndDate, 
-                                          string sSpecPort, string sQtyFrom, string sQtyTo, string sRefSearch, string sVerifyCode, string sRequestedBy, string sRequestedDate, string sExpirationDate)
+                                          string sSpecPort, string sQtyFrom, string sQtyTo, string sRefSearch, string sRefSearch2, string sVerifyCode, string sRequestedBy, string sRequestedDate, string sExpirationDate)
         {
             try
             {
@@ -996,6 +997,7 @@ namespace SaleSpec.pages.report
                 Comm.Parameters.AddWithValue("@QtyFrom", sQtyFrom);
                 Comm.Parameters.AddWithValue("@QtyTo", sQtyTo);
                 Comm.Parameters.AddWithValue("@RefSearch", sRefSearch);
+                Comm.Parameters.AddWithValue("@RefSearch2", sRefSearch2);
                 Comm.Parameters.AddWithValue("@VerifyCode", sVerifyCode);
                 Comm.Parameters.AddWithValue("@RequestedBy", sRequestedBy);
                 Comm.Parameters.AddWithValue("@RequestedDate", sRequestedDate);

@@ -93,8 +93,9 @@ namespace SaleSpec.pages.report
                     string strQty = dt.Rows[0]["QtyFrom"].ToString();
                     string strQtyTo = dt.Rows[0]["QtyTo"].ToString();
                     string strSearch = dt.Rows[0]["RefSearch"].ToString();
+                    string strSearch2 = dt.Rows[0]["RefSearch2"].ToString();
 
-                    exportExcelReport(strUserID, strEmpCode, strOpt, strOptName, strFrom, strEnd, strPort, strQty, strQtyTo, strSearch);
+                    exportExcelReport(strUserID, strEmpCode, strOpt, strOptName, strFrom, strEnd, strPort, strQty, strQtyTo, strSearch, strSearch2);
                 }
                 else
                 {
@@ -108,7 +109,7 @@ namespace SaleSpec.pages.report
             }
         }
 
-        protected void exportExcelReport(string strUserID, string strEmpCode, string strOpt, string strOptName, string strFrom, string strEnd, string strPort, string strQty, string strQtyTo, string strSearch)
+        protected void exportExcelReport(string strUserID, string strEmpCode, string strOpt, string strOptName, string strFrom, string strEnd, string strPort, string strQty, string strQtyTo, string strSearch, string strSearch2)
         {
             try
             {
@@ -124,6 +125,7 @@ namespace SaleSpec.pages.report
                     string strqtystrat = strQty;        // Request.Form["QtyStart"];
                     string strqtyend = strQtyTo;        // Request.Form["QtyEnd"];
                     string strsearch = strSearch;       // Request.Form["Search"];
+                    string strsearch2 = strSearch2;
 
                     string empcode = strEmpCode;
 
@@ -135,7 +137,7 @@ namespace SaleSpec.pages.report
                     {
                         if (empcode == "118052" || empcode == "316010" || empcode == "506009")
                         {
-                            Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
+                            Comm = new SqlCommand("spGetReportProjectStatusByOption22", Conn);
                             Comm.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
@@ -145,6 +147,7 @@ namespace SaleSpec.pages.report
                             SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
                             SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
                             SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
+                            SqlParameter param8 = new SqlParameter() { ParameterName = "@strSearch2", Value = strsearch2 };
 
                             Comm.Parameters.Add(param1);
                             Comm.Parameters.Add(param2);
@@ -153,6 +156,7 @@ namespace SaleSpec.pages.report
                             Comm.Parameters.Add(param5);
                             Comm.Parameters.Add(param6);
                             Comm.Parameters.Add(param7);
+                            Comm.Parameters.Add(param8);
 
                             //conn.Open();
                             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -167,7 +171,7 @@ namespace SaleSpec.pages.report
                     }
                     else
                     {
-                        Comm = new SqlCommand("spGetReportProjectStatusByOption2", Conn);
+                        Comm = new SqlCommand("spGetReportProjectStatusByOption22", Conn);
                         Comm.CommandType = CommandType.StoredProcedure;
 
                         SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = selectOption };
@@ -177,6 +181,7 @@ namespace SaleSpec.pages.report
                         SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strqtystrat };
                         SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strqtyend };
                         SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strsearch };
+                        SqlParameter param8 = new SqlParameter() { ParameterName = "@strSearch2", Value = strsearch2 };
 
                         Comm.Parameters.Add(param1);
                         Comm.Parameters.Add(param2);
@@ -185,6 +190,7 @@ namespace SaleSpec.pages.report
                         Comm.Parameters.Add(param5);
                         Comm.Parameters.Add(param6);
                         Comm.Parameters.Add(param7);
+                        Comm.Parameters.Add(param8);
 
                         //conn.Open();
                         SqlDataAdapter adapter = new SqlDataAdapter();

@@ -40,7 +40,7 @@ namespace SaleSpec.pages.report
 
         public string strUser = "sa";
         public string strPassword = "AmpelCloud@2020";
-        public string strServer = "203.154.45.40";
+        public string strServer = "147.50.150.243";
         public string strSource = "DB_SaleSpec";
 
         protected void Page_Load(object sender, EventArgs e)

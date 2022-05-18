@@ -280,11 +280,11 @@ namespace SaleSpec.pages.report
         }
 
         [WebMethod]
-        public void GetDataProjectByPortByOption(string strOption, string strDateStart, string strDateEnd, string strUserID, string strQtyStart, string strQtyEnd, string strSearch)
+        public void GetDataProjectByPortByOption(string strOption, string strDateStart, string strDateEnd, string strUserID, string strQtyStart, string strQtyEnd, string strSearch, string strSearch2)
         {
 
             List<GetReportProjectStatusByOptions> projects = new List<GetReportProjectStatusByOptions>();
-            SqlCommand comm = new SqlCommand("spGetReportProjectStatusByOption", conn.OpenConn());
+            SqlCommand comm = new SqlCommand("spGetReportProjectStatusByOption3", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
 
             SqlParameter param1 = new SqlParameter() { ParameterName = "@strOption", Value = strOption };
@@ -294,6 +294,7 @@ namespace SaleSpec.pages.report
             SqlParameter param5 = new SqlParameter() { ParameterName = "@strQtyStart", Value = strQtyStart };
             SqlParameter param6 = new SqlParameter() { ParameterName = "@strQtyEnd", Value = strQtyEnd };
             SqlParameter param7 = new SqlParameter() { ParameterName = "@strSearch", Value = strSearch };
+            SqlParameter param8 = new SqlParameter() { ParameterName = "@strSearch2", Value = strSearch2 };
             comm.Parameters.Add(param1);
             comm.Parameters.Add(param2);
             comm.Parameters.Add(param3);
@@ -301,6 +302,7 @@ namespace SaleSpec.pages.report
             comm.Parameters.Add(param5);
             comm.Parameters.Add(param6);
             comm.Parameters.Add(param7);
+            comm.Parameters.Add(param8);
 
             SqlDataReader rdr = comm.ExecuteReader();
             while (rdr.Read())

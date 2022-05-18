@@ -101,7 +101,7 @@
                 var empcode = '<%= Session["EmpCode"] %>';
 
                 if (selectSaleport == 'SELECTED ALL') {
-                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023') {
+                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023' || empcode == '521003') {
                         //sendMail();
                         $("#myModalVerifyPassword").modal({ backdrop: false });
                         $("#myModalVerifyPassword").modal("show");
@@ -114,7 +114,7 @@
                     }
                 }
                 else {
-                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023') {
+                    if (empcode == '118052' || empcode == '316010' || empcode == '506009' || empcode == '113048' || empcode == '519023' || empcode == '521003') {
                         //sendMail();
                         $("#myModalVerifyPassword").modal({ backdrop: false });
                         $("#myModalVerifyPassword").modal("show");
@@ -503,7 +503,7 @@
                 var yyyy = today.getFullYear();
                 var tt = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-                var firstdate = (yyyy - 2) + '-' + mm + '-01';
+                var firstdate = (yyyy - 6) + '-' + '01' + '-01';
                 var currentdate = yyyy + '-' + mm + '-' + dd;
 
                 var datepickertrans = $('#datepickertrans');
@@ -551,6 +551,7 @@
                     var strqtystrat = $('#QtyStart').val();
                     var strqtyend = $('#QtyEnd').val();
                     var strsearch = $('#Search').val();
+                    var strsearch2 = $('#Search2').val();
 
                     var empcode = '<%= Session["EmpCode"] %>';
 
@@ -573,7 +574,8 @@
                                     strUserID: selectSaleport,
                                     strQtyStart: strqtystrat,
                                     strQtyEnd: strqtyend,
-                                    strSearch: strsearch
+                                    strSearch: strsearch,
+                                    strSearch2: strsearch2
                                 },
                                 dataType: 'json',
                                 success: function (data) {
@@ -598,6 +600,7 @@
                                     table.column(11).nodes().to$().addClass('hidden');
                                     table.column(12).nodes().to$().addClass('hidden');
                                     table.column(25).nodes().to$().addClass('hidden');
+                                    table.column(4).nodes().to$().addClass('mypointer');
                                     table.column(6).nodes().to$().addClass('mypointer');
                                     table.column(8).nodes().to$().addClass('mypointer');
                                     table.column(24).nodes().to$().addClass('mypointer');
@@ -613,6 +616,14 @@
                                         cIndex = this.cellIndex;
 
                                         console.log('row : ' + rIndex + 'cell : ' + cIndex);
+
+                                        if (rIndex != 0 & cIndex == 4) {
+                                            var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');  //ArchitectID
+                                            // alert(rIndex + ':' + cIndex + ':' + strVal5.text());
+
+                                            window.open("../report/architectprofile.aspx?opt=rarc&id=" + strVal5.text(), "_blank");
+                                            //window.location("../report/architectprofile.aspx?opt=rarc&id=" + strVal5.text(), "_bank");
+                                        }
 
                                         if (rIndex != 0 & cIndex == 6) {
                                             var strVal5 = $("#tableWeeklyReportx").find('tr:eq(' + rIndex + ')').find('td:eq(5)');  //ArchitectID
@@ -942,7 +953,8 @@
                                 strUserID: selectSaleport,
                                 strQtyStart: strqtystrat,
                                 strQtyEnd: strqtyend,
-                                strSearch: strsearch
+                                strSearch: strsearch,
+                                strSearch2: strsearch2
                             },
                             dataType: 'json',
                             success: function (data) {
@@ -1569,12 +1581,20 @@
 
 
 
-                                <div class="col-md-6">
-                                    <label class="txtLabel">Search</label>
+                                <div class="col-md-3">
+                                    <label class="txtLabel">Search1 <span style="color: red"> (First Priority)</span></label>
                                     <div class="txtLabel">
-                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="Search" name="Search" value="" autocomplete="off" placeholder="Can you search data in here..">
+                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="Search" name="Search" value="" autocomplete="off" placeholder="">
                                     </div>
                                     <div id="divErrorSearch" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="txtLabel">Search2 <span style="color: red"> (Second Priority)</span></label>
+                                    <div class="txtLabel">
+                                        <input type="text" class="form-control input-sm pull-left txtLabel" id="Search2" name="Search2" value="" autocomplete="off" placeholder="">
+                                    </div>
+                                    <div id="divErrorSearch2" class="txtLabel text-red" style="display: none;">Please select a owner...!</div>
                                 </div>
 
                                 <div class="col-md-2">
