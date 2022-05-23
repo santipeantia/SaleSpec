@@ -1145,7 +1145,7 @@ namespace SaleSpec.Class
         public void GetadGoodCustomer()
         {
             List<CGetGoodCustomer> datas = new List<CGetGoodCustomer>();
-            SqlCommand comm = new SqlCommand("spGet_adGoodCustomer", conn.OpenConn());
+            SqlCommand comm = new SqlCommand("spGet_adGoodCustomer_detail", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
             SqlDataReader rdr = comm.ExecuteReader();
             while (rdr.Read())
@@ -1200,7 +1200,27 @@ namespace SaleSpec.Class
             conn.CloseConn();
         }
 
+        [WebMethod]
+        public void GetmmSteptype()
+        {
+            List<CGetdatasteptype> datas = new List<CGetdatasteptype>();
+            SqlCommand comm = new SqlCommand("spGetDataSteptype_m2m", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                CGetdatasteptype data = new CGetdatasteptype();
+                data.id = rdr["id"].ToString();
+                data.steptype = rdr["steptype"].ToString();
+                data.urlview = rdr["urlview"].ToString();
+                datas.Add(data);
 
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
 
 
 
@@ -1263,14 +1283,13 @@ namespace SaleSpec.Class
 
 
         [WebMethod]
-        public void check_GoodCustomer(string ArchitecID, string inYear ,string id)
+        public void check_GoodCustomer(string ArchitecID, string inYear)
         {
             List<Ccheck_GoodCustomer> datas = new List<Ccheck_GoodCustomer>();
             SqlCommand comm = new SqlCommand("check_GoodCustomer", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.AddWithValue("@ArchitecID", ArchitecID);
-            comm.Parameters.AddWithValue("@inYear", inYear);
-            comm.Parameters.AddWithValue("@id", id);
+            comm.Parameters.AddWithValue("@inYear", inYear);          
             conn.OpenConn();
 
             SqlDataReader rdr = comm.ExecuteReader();
@@ -1321,6 +1340,120 @@ namespace SaleSpec.Class
             conn.CloseConn();
 
         }
+
+
+
+
+
+
+
+
+        [WebMethod]
+        public void spsave_mmpointmaster(string typeupdate,string id,string InYear, string steptype, string pointmin, string pointmax, string descvoucher
+                                         , string remark, string create_by, string create_date,string update_by, string update_date)
+        {
+
+            SqlCommand comm = new SqlCommand("spsave_mmpointmaster", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@typeupdate", typeupdate);
+            comm.Parameters.AddWithValue("@id",id);
+            comm.Parameters.AddWithValue("@InYear", InYear);
+            comm.Parameters.AddWithValue("@step_type", steptype);
+            comm.Parameters.AddWithValue("@pointmin", pointmin);
+            comm.Parameters.AddWithValue("@pointmax", pointmax);
+            comm.Parameters.AddWithValue("@descvoucher", descvoucher);
+            comm.Parameters.AddWithValue("@remark", remark);       
+            comm.Parameters.AddWithValue("@create_by", create_by);
+            comm.Parameters.AddWithValue("@create_date", create_date);
+            comm.Parameters.AddWithValue("@update_by", update_by);
+            comm.Parameters.AddWithValue("@update_date", update_date);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+
+        }
+
+
+
+
+
+        [WebMethod]
+        public void check_Pointmaster(string stepetype, string inYear)
+        {
+            List<Ccheck_GoodCustomer> datas = new List<Ccheck_GoodCustomer>();
+            SqlCommand comm = new SqlCommand("check_pointmaster", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@stepetype", stepetype);
+            comm.Parameters.AddWithValue("@inYear", inYear);
+            conn.OpenConn();
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                Ccheck_GoodCustomer data = new Ccheck_GoodCustomer();           
+                data.xcount = rdr["xcount"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+
+            // comm.ExecuteNonQuery();
+            conn.CloseConn();
+
+        }
+
+
+
+
+
+        [WebMethod]
+        public void GetmmSteptypeoption()
+        {
+            List<CGetsteptypeoption> datas = new List<CGetsteptypeoption>();
+            SqlCommand comm = new SqlCommand("spGetStepoption_m2m", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                CGetsteptypeoption data = new CGetsteptypeoption();
+                data.id = rdr["id"].ToString();               
+                data.steptype = rdr["step_type"].ToString();
+                data.descvoucher = rdr["descvoucher"].ToString();
+                data.InYear = rdr["InYear"].ToString();
+                data.urlview = rdr["urlview"].ToString();
+                datas.Add(data);
+
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+
+
+        [WebMethod]
+        public void Getmmoptionmaster()
+        {
+            List<CGetoption> datas = new List<CGetoption>();
+            SqlCommand comm = new SqlCommand("spGetmmoptionmaster", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                CGetoption data = new CGetoption();
+                data.option_id = rdr["option_id"].ToString();
+                data.optiondetail = rdr["optiondetail"].ToString();      
+                datas.Add(data);
+
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+      
+
 
 
     }

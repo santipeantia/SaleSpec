@@ -181,6 +181,7 @@
 
 </head>
 
+
 <body onselect="return true" onload="screenZoom()" class="hold-transition skin-blue-light sidebar-mini fixed ">
     <div class="loader">
         <img src="../../dist/img/loader3.gif" alt="Loading..." />
@@ -840,14 +841,26 @@
                     'scrollX': true,                 
                     'scrollCollapse': true,
 
-                     'columnDefs': [                     
+                   'columnDefs': [                     
                         { className: 'text-left', targets: [8,10,12] },                  
                         { className: 'hide_column', targets: [0,6,7,9] },
                      ]
 
-
                     
                 })
+
+
+
+
+                   $('#tblpoinmaster').DataTable({
+                      'iDisplayLength': 25,
+                      'paging': true,                
+                      'ordering': false,             
+                    
+                   })
+
+
+
 
 
 
@@ -1012,6 +1025,24 @@
                     
                 })
 
+
+
+                 $('#tblpoinoption').DataTable({
+                  'iDisplayLength': 25,
+                   'paging': true,
+                   'lengthChange': true,
+                   'searching': true,
+                   'ordering': false,
+                   'info': true,
+                   //'autoWidth':true,                 
+                   'scrollY': "4000px",
+                   'scrollX': true,                 
+                   'scrollCollapse': true
+                    
+                })
+
+
+
                 
                 $('#tbladArchitecture').DataTable({
 					'iDisplayLength': 10,
@@ -1022,6 +1053,43 @@
 					'info': true,
 					'autoWidth': true
                 })
+
+
+                  
+                $('#tblYearly').DataTable({
+					'iDisplayLength': 10,
+					'paging': true,
+					'lengthChange': true,
+					'searching': true,
+					'ordering': false,
+					'info': true,
+					'autoWidth': true
+                })
+
+
+                 $('#tblYearlyoption').DataTable({
+					'iDisplayLength': 10,
+					'paging': true,
+					'lengthChange': true,
+					'searching': true,
+					'ordering': false,
+					'info': true,
+					'autoWidth': true
+                })
+
+
+        
+
+                 $('#tblStepNewOption').DataTable({
+					'iDisplayLength': 10,
+					'paging': true,
+					'lengthChange': true,
+					'searching': true,
+					'ordering': false,
+					'info': true,
+					'autoWidth': true
+                })
+
 
                 
                 $('#tableSosProjectFilter').DataTable({

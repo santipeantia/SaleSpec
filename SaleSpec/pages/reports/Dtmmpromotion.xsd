@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Dtmmpromotion" targetNamespace="http://tempuri.org/Dtmmpromotion.xsd" xmlns:mstns="http://tempuri.org/Dtmmpromotion.xsd" xmlns="http://tempuri.org/Dtmmpromotion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Dtmmpromotion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Dtmmpromotion" msprop:Generator_UserDSName="Dtmmpromotion">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Dtmmpromotion" msprop:Generator_TableClassName="DtmmpromotionDataTable" msprop:Generator_TableVarName="tableDtmmpromotion" msprop:Generator_RowChangedName="DtmmpromotionRowChanged" msprop:Generator_TablePropName="_Dtmmpromotion" msprop:Generator_RowDeletingName="DtmmpromotionRowDeleting" msprop:Generator_RowChangingName="DtmmpromotionRowChanging" msprop:Generator_RowEvHandlerName="DtmmpromotionRowChangeEventHandler" msprop:Generator_RowDeletedName="DtmmpromotionRowDeleted" msprop:Generator_RowClassName="DtmmpromotionRow" msprop:Generator_UserTableName="Dtmmpromotion" msprop:Generator_RowEvArgName="DtmmpromotionRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InYear" msprop:Generator_ColumnVarNameInTable="columnInYear" msprop:Generator_ColumnPropNameInRow="InYear" msprop:Generator_ColumnPropNameInTable="InYearColumn" msprop:Generator_UserColumnName="InYear" type="xs:string" minOccurs="0" />
+              <xs:element name="step_type" msprop:Generator_ColumnVarNameInTable="columnstep_type" msprop:Generator_ColumnPropNameInRow="step_type" msprop:Generator_ColumnPropNameInTable="step_typeColumn" msprop:Generator_UserColumnName="step_type" type="xs:string" minOccurs="0" />
+              <xs:element name="step" msprop:Generator_ColumnVarNameInTable="columnstep" msprop:Generator_ColumnPropNameInRow="step" msprop:Generator_ColumnPropNameInTable="stepColumn" msprop:Generator_UserColumnName="step" type="xs:string" minOccurs="0" />
+              <xs:element name="Pname_option1" msprop:Generator_ColumnVarNameInTable="columnPname_option1" msprop:Generator_ColumnPropNameInRow="Pname_option1" msprop:Generator_ColumnPropNameInTable="Pname_option1Column" msprop:Generator_UserColumnName="Pname_option1" type="xs:string" minOccurs="0" />
+              <xs:element name="Pname_option2" msprop:Generator_ColumnVarNameInTable="columnPname_option2" msprop:Generator_ColumnPropNameInRow="Pname_option2" msprop:Generator_ColumnPropNameInTable="Pname_option2Column" msprop:Generator_UserColumnName="Pname_option2" type="xs:string" minOccurs="0" />
+              <xs:element name="Cost" msprop:Generator_ColumnVarNameInTable="columnCost" msprop:Generator_ColumnPropNameInRow="Cost" msprop:Generator_ColumnPropNameInTable="CostColumn" msprop:Generator_UserColumnName="Cost" type="xs:string" minOccurs="0" />
+              <xs:element name="remark" msprop:Generator_ColumnVarNameInTable="columnremark" msprop:Generator_ColumnPropNameInRow="remark" msprop:Generator_ColumnPropNameInTable="remarkColumn" msprop:Generator_UserColumnName="remark" type="xs:string" minOccurs="0" />
+              <xs:element name="cost_option1" msprop:Generator_ColumnVarNameInTable="columncost_option1" msprop:Generator_ColumnPropNameInRow="cost_option1" msprop:Generator_ColumnPropNameInTable="cost_option1Column" msprop:Generator_UserColumnName="cost_option1" type="xs:string" minOccurs="0" />
+              <xs:element name="cost_option2" msprop:Generator_ColumnVarNameInTable="columncost_option2" msprop:Generator_ColumnPropNameInRow="cost_option2" msprop:Generator_ColumnPropNameInTable="cost_option2Column" msprop:Generator_UserColumnName="cost_option2" type="xs:string" minOccurs="0" />
+              <xs:element name="typeoption1" msprop:Generator_ColumnVarNameInTable="columntypeoption1" msprop:Generator_ColumnPropNameInRow="typeoption1" msprop:Generator_ColumnPropNameInTable="typeoption1Column" msprop:Generator_UserColumnName="typeoption1" type="xs:string" minOccurs="0" />
+              <xs:element name="typeoption2" msprop:Generator_ColumnVarNameInTable="columntypeoption2" msprop:Generator_ColumnPropNameInRow="typeoption2" msprop:Generator_ColumnPropNameInTable="typeoption2Column" msprop:Generator_UserColumnName="typeoption2" type="xs:string" minOccurs="0" />
+              <xs:element name="images1" msprop:Generator_ColumnVarNameInTable="columnimages1" msprop:Generator_ColumnPropNameInRow="images1" msprop:Generator_ColumnPropNameInTable="images1Column" msprop:Generator_UserColumnName="images1" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="images2" msprop:Generator_ColumnVarNameInTable="columnimages2" msprop:Generator_ColumnPropNameInRow="images2" msprop:Generator_ColumnPropNameInTable="images2Column" msprop:Generator_UserColumnName="images2" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

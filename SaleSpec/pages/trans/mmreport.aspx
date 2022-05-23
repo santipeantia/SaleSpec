@@ -67,17 +67,7 @@
                 <div class="box box-primary" style="height: 100%;">
                     <div class="box-header">
                         <div class="box-body">
-                            <div class="col-md-2">
-
-                              <%--  <div class="form-group">
-                                    <label class="txtLabel">Year</label>
-                                    <div class="txtLabel">
-                                        <select id="selectTextInYear" name="selectTextInYear" class="form-control input-sm col-md-2">
-                                        </select>
-                                    </div>
-                                </div>--%>
-
-
+                            <div class="col-md-2">  
                                  <div class="form-group">
                                     <label class="txtLabel">Year</label>
                                                     <div class="txtLabel">
@@ -99,7 +89,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title">Selected Employee</h4>
+                                            <h4 class="modal-title">Selected Year</h4>
                                         </div>
                                         <div class="modal-body">
                                             <table id="tbladArchitecture" class="table table-bordered table-striped table-hover table-condensed">
@@ -139,6 +129,19 @@
                                 <div class="form-group">
                                     <label class="txtLabel">report</label>
                                     <button class="btn btn-danger btn-sm btn-flat btn-block txtLabel col-md-2" id="Button2" runat="server" onserverclick="btnDownloadPDF_click">Export PDF</button>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                               <div class="col-md-2">
+
+                                <div class="form-group">
+                                    <label class="txtLabel">report</label>
+                                    <button class="btn btn-success btn-sm btn-flat btn-block txtLabel col-md-2" id="Button3" runat="server" onserverclick="btnExportExcel_click">Export Excel</button>
 
                                 </div>
 

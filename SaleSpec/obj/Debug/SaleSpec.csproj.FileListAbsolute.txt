@@ -61,3 +61,87 @@ F:\project salespec\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
 F:\project salespec\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete
 F:\project salespec\SaleSpec\obj\Debug\SaleSpec.dll
 F:\project salespec\SaleSpec\obj\Debug\SaleSpec.pdb
+F:\project salespecm2m\SaleSpec\bin\SaleSpec.dll.config
+F:\project salespecm2m\SaleSpec\bin\SaleSpec.dll
+F:\project salespecm2m\SaleSpec\bin\SaleSpec.pdb
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.CrystalReports.Engine.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportSource.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.Shared.dll
+F:\project salespecm2m\SaleSpec\bin\EntityFramework.dll
+F:\project salespecm2m\SaleSpec\bin\EntityFramework.SqlServer.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+F:\project salespecm2m\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+F:\project salespecm2m\SaleSpec\bin\stdole.dll
+F:\project salespecm2m\SaleSpec\bin\EntityFramework.xml
+F:\project salespecm2m\SaleSpec\bin\EntityFramework.SqlServer.xml
+F:\project salespecm2m\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+F:\project salespecm2m\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+F:\project salespecm2m\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete
+F:\project salespecm2m\SaleSpec\obj\Debug\SaleSpec.dll
+F:\project salespecm2m\SaleSpec\obj\Debug\SaleSpec.pdb
+F:\projectsalespec15112021\SaleSpec\bin\SaleSpec.dll.config
+F:\projectsalespec15112021\SaleSpec\bin\SaleSpec.dll
+F:\projectsalespec15112021\SaleSpec\bin\SaleSpec.pdb
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.CrystalReports.Engine.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportSource.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.Shared.dll
+F:\projectsalespec15112021\SaleSpec\bin\EntityFramework.dll
+F:\projectsalespec15112021\SaleSpec\bin\EntityFramework.SqlServer.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+F:\projectsalespec15112021\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+F:\projectsalespec15112021\SaleSpec\bin\stdole.dll
+F:\projectsalespec15112021\SaleSpec\bin\EntityFramework.xml
+F:\projectsalespec15112021\SaleSpec\bin\EntityFramework.SqlServer.xml
+F:\projectsalespec15112021\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+F:\projectsalespec15112021\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+F:\projectsalespec15112021\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete
+F:\projectsalespec15112021\SaleSpec\obj\Debug\SaleSpec.dll
+F:\projectsalespec15112021\SaleSpec\obj\Debug\SaleSpec.pdb
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\SaleSpec.dll.config
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\SaleSpec.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\SaleSpec.pdb
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportSource.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.Shared.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\EntityFramework.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\EntityFramework.SqlServer.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\stdole.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\EntityFramework.xml
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\bin\EntityFramework.SqlServer.xml
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\obj\Debug\SaleSpec.csprojAssemblyReference.cache
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\obj\Debug\SaleSpec.csproj.CoreCompileInputs.cache
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\obj\Debug\SaleSpec.csproj.CopyComplete
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\obj\Debug\SaleSpec.dll
+D:\Source\Repos\santipeantia\projectsalespec190565\SaleSpec\obj\Debug\SaleSpec.pdb

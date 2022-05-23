@@ -114,7 +114,7 @@ namespace SaleSpec.pages.report
             try
             {
                 string userid = strUserID;
-                if ((userid == "Admin") || (userid == "Chanunnett") || (userid == "Chonticha") || (userid == "Treethep") || (userid == "Wanchai"))
+                if ((userid == "Admin") || (userid == "Chanunnett") || (userid == "Chonticha") || (userid == "Treethep") || (userid == "Wanchai") || (userid == "Patomporn"))
                 {
 
                     string selectOption = strOpt;       // Request.Form["selectReportOption"];

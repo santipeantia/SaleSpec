@@ -428,7 +428,7 @@ namespace SaleSpec.pages.report
                 //return;
             }
         }
-        
+
         protected void btnExportExcelOption_click(object sender, EventArgs e)
         {
             try
@@ -576,11 +576,11 @@ namespace SaleSpec.pages.report
                 {
                     Response.Write("<script>alert('Data find not found please check...')</script>");
                     GetDataSalePort();
-                }                
+                }
             }
             catch (Exception ex)
             {
-               
+
             }
         }
 
@@ -599,16 +599,16 @@ namespace SaleSpec.pages.report
                 string strPort = Request.Form["selectSalePort"];
                 string strQty = Request.Form["QtyStart"];
                 string strQtyTo = Request.Form["QtyEnd"];
-                string strSearch =  Request.Form["Search"];
+                string strSearch = Request.Form["Search"];
                 string strSearch2 = Request.Form["Search2"];
                 string strVerifyCode = GenerateVerfifyCode();
 
                 string strFinalVerifyCode = GenerateVerfifyCode();
 
-                string strMailBody =  GetMailBodyTempleate(strEmail, strRepType,  strUserID,  strEmpCode,  strOpt,  strOptName,  strFrom,  strEnd,  strPort,  strQty,  strQtyTo,  strSearch, strSearch2,  strVerifyCode);
-                
+                string strMailBody = GetMailBodyTempleate(strEmail, strRepType, strUserID, strEmpCode, strOpt, strOptName, strFrom, strEnd, strPort, strQty, strQtyTo, strSearch, strSearch2, strVerifyCode);
+
                 //Response.Write("<script>alert('" + strRepType +":"+  strUserID + ":" + strEmpCode + ":" + strOpt + ":" + strOptName + ":" + strFrom + ":" + strEnd + ":" + strPort + ":" + strQty + ":" + strQtyTo + ":" + strSearch + ":" + strVerifyCode + "')</script>");
-                
+
                 if (strEmail != "")
                 {
                     MailMessage mail = new MailMessage();
@@ -630,11 +630,11 @@ namespace SaleSpec.pages.report
                 else
                 {
                 }
-                
+
                 saveVerifyPassword(strEmail, strUserID, strEmpCode, strOpt, strOptName, strFrom, strEnd, strPort,
                                    strQty, strQtyTo, strSearch, strSearch2, strVerifyCode, strFullName, strRequestDate, strExpireDate);
 
-                Response.Write("<script>alert('Password timeout within 90 minute please check your email : "+ strEmail +" ')</script>");
+                Response.Write("<script>alert('Password timeout within 90 minute please check your email : " + strEmail + " ')</script>");
 
 
                 GetDataSalePort();
@@ -644,7 +644,7 @@ namespace SaleSpec.pages.report
             {
 
             }
-           
+
         }
 
         protected string GenerateVerfifyCode()
@@ -659,7 +659,7 @@ namespace SaleSpec.pages.report
             return strFinalVerifyCode;
         }
 
-        protected string GetMailBodyTempleate(string strEmail, string strRepType, string strUserID, string strEmpCode, string strOpt, string strOptName, 
+        protected string GetMailBodyTempleate(string strEmail, string strRepType, string strUserID, string strEmpCode, string strOpt, string strOptName,
                                               string strFrom, string strEnd, string strPort, string strQty, string strQtyTo, string strSearch, string strSearch2, string strVerifyCode)
         {
 
@@ -675,7 +675,7 @@ namespace SaleSpec.pages.report
             strRequestDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
             strExpireDate = DateTime.Now.AddMinutes(90).ToString("yyyy-MM-dd HH:mm:ss tt");
 
-            strBodyMail = strBodyMail.Replace("{strEmail}", strEmail);            
+            strBodyMail = strBodyMail.Replace("{strEmail}", strEmail);
             strBodyMail = strBodyMail.Replace("{strRepType}", strRepType);
             strBodyMail = strBodyMail.Replace("{strOptName}", strOptName);
             strBodyMail = strBodyMail.Replace("{strFrom}", strFrom);
@@ -687,7 +687,7 @@ namespace SaleSpec.pages.report
             strBodyMail = strBodyMail.Replace("{strVerifyCode}", strVerifyCode);
             strBodyMail = strBodyMail.Replace("{strFullName}", strFullName);
             strBodyMail = strBodyMail.Replace("{strRequestDate}", strRequestDate);
-            strBodyMail = strBodyMail.Replace("{strExpireDate}", strExpireDate);             
+            strBodyMail = strBodyMail.Replace("{strExpireDate}", strExpireDate);
 
             #region MyRegion
 
@@ -976,7 +976,7 @@ namespace SaleSpec.pages.report
             return strBodyMail;
         }
 
-        protected void saveVerifyPassword(string sEmail, string sUserID, string sEmpCode, string sRepOpt, string sRepOptName, string sFromDate, string sEndDate, 
+        protected void saveVerifyPassword(string sEmail, string sUserID, string sEmpCode, string sRepOpt, string sRepOptName, string sFromDate, string sEndDate,
                                           string sSpecPort, string sQtyFrom, string sQtyTo, string sRefSearch, string sRefSearch2, string sVerifyCode, string sRequestedBy, string sRequestedDate, string sExpirationDate)
         {
             try
@@ -1009,7 +1009,7 @@ namespace SaleSpec.pages.report
             {
                 Response.Write("<script>alert('" + ex.Message + "')</script>");
             }
-           
+
         }
     }
 }
